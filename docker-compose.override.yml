@@ -1,6 +1,22 @@
+networks:
+  traefik:
+    external: true
+    name: traefik-net
+
 services:
   app:
+    networks:
+      - traefik
+    labels:
+      - "traefik.http.routers.app.entrypoints=websecure"
+      - "traefik.http.routers.app.tls=true"
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`juntas.frba.utn.edu.ar`)"
     ports:
       - 8009:80
     volumes:
       - ./junta:/var/www/html
+
+  db:
+    networks:
+     - traefik

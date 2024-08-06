@@ -1,16 +1,16 @@
 <?php
 
 class User{
-    private $dbHost     = "localhost";
-    private $dbUsername = "boga";
-    private $dbPassword = "30153846";
+    private $dbHost     = "db";
+    private $dbUsername = "SA";
+    private $dbPassword = '"asd123"';
     private $dbName     = "junta";
     private $userTbl    = "usuarios";
     
     public function __construct(){
         if(!isset($this->db)){
             // Connection to the database
-            $connectionInfo = array("Database"=>$this->dbName, "UID"=>$this->dbUsername, "PWD"=>$this->dbPassword);
+            $connectionInfo = array("Database"=>$this->dbName, "UID"=>$this->dbUsername, "PWD"=>$this->dbPassword,"TrustServerCertificate"=>true);
             $conn = sqlsrv_connect($this->dbHost, $connectionInfo);
             if($conn === false){
                 die(print_r(sqlsrv_errors(), true));

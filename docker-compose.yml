@@ -5,15 +5,13 @@ services:
     container_name: php-apache
 
   db:
-    container_name: db-frba-bis
-    image: mariadb
-    expose: [ 3306 ]
-    ports: [ "3322:3306" ]
+    container_name: db-sqlserver
+    user: root
+    image: mcr.microsoft.com/mssql/server:2022-CU13-ubuntu-22.04
     environment:
-      MYSQL_DATABASE: junta
-      MYSQL_USER: boga
-      MYSQL_PASSWORD: 30153846
-      MYSQL_ROOT_PASSWORD: dsidev123
-    restart: unless-stopped
+      - SA_PASSWORD="asd123"
+      - ACCEPT_EULA="Y"
+    ports:
+      - "1433:1433"
     volumes:
-      - ./backup_base_datos:/docker-entrypoint-initdb.d
+      - ./data:/var/opt/mssql/data
