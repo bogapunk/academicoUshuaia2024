@@ -1,0 +1,13 @@
+networks:
+  traefik:
+    external: true
+    name: traefik-net
+
+services:
+  app:
+    container_name: academico-ushuaia-juntas
+    labels:
+      - "traefik.http.routers.amigos-cole.entrypoints=websecure"
+      - "traefik.http.routers.amigos-cole.tls=true"
+      - "traefik.enable=true"
+      - "traefik.http.routers.amigos-cole.rule=Host(`vm-1.dev.adini.com.ar`) && PathPrefix(`/juntas`)"

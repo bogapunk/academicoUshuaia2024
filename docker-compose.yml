@@ -1,0 +1,19 @@
+services:
+  app:
+    build:
+      context: .
+    container_name: php-apache
+
+  db:
+    container_name: db-frba-bis
+    image: mariadb
+    expose: [ 3306 ]
+    ports: [ "3322:3306" ]
+    environment:
+      MYSQL_DATABASE: junta
+      MYSQL_USER: boga
+      MYSQL_PASSWORD: 30153846
+      MYSQL_ROOT_PASSWORD: dsidev123
+    restart: unless-stopped
+    volumes:
+      - ./backup_base_datos:/docker-entrypoint-initdb.d

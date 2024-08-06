@@ -1,0 +1,6 @@
+services:
+  app:
+    ports:
+      - 8009:80
+    volumes:
+      - ./juntas:/var/www/html
