@@ -3,4 +3,4 @@ services:
     ports:
       - 8009:80
     volumes:
-      - ./juntas:/var/www/html
+      - ./junta:/var/www/html

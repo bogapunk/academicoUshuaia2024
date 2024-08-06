@@ -32,4 +32,4 @@ RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash - \
     && rm -rf /var/lib/apt/lists/* \
     && npm install -g yarn
 
-COPY juntas /var/www/html
+COPY junta /var/www/html
