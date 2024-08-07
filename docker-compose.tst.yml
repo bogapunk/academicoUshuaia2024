@@ -5,9 +5,16 @@ networks:
 
 services:
   app:
+    networks:
+      - traefik
     container_name: academico-ushuaia-juntas
     labels:
       - "traefik.http.routers.app.entrypoints=websecure"
       - "traefik.http.routers.app.tls=true"
       - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`vm-1.dev.adini.com.ar`) && PathPrefix(`/juntas`)"
+      - "traefik.http.routers.app.rule=Host(`vm-2.dev.adini.com.ar`)"
+  db:
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
