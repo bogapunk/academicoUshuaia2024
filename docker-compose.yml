@@ -15,3 +15,4 @@ services:
       - "1433:1433"
     volumes:
       - ./data:/var/opt/mssql/data
+      - ./backup_base_datos/usuarios.sql:/var/opt/mssql/backup/usuarios.sql
