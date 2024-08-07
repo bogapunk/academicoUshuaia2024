@@ -64,7 +64,6 @@ if(isset($_POST['signupSubmit'])){
             $sessData['userLoggedIn'] = TRUE;
             $sessData['userID'] = $userData['id'];
             $sessData['estado']['type'] = 'success';
-            $sessData['estado']['msg'] = 'Bienvenido '.$userData['first_name'].'!';
         }else{
             $sessData['estado']['type'] = 'error';
             $sessData['estado']['msg'] = 'Email o contraseña incorrectos, por favor intente de nuevo.'; 
@@ -76,7 +75,13 @@ if(isset($_POST['signupSubmit'])){
 	//store login estado into the session
     $_SESSION['sessData'] = $sessData;
 	//redirect to the home page
-    header("Location:index.php");
+    if ($userData['rol']=='admin'){
+        header("Location: views/panel2.php");
+    }else if ($userData['rol']=='otro'){
+        header("Location: views/panel1.php");
+    }elseif ($userData['rol']=='comun') {
+        header("Location: views/panel1.php");
+    }
 }elseif(isset($_POST['forgotSubmit'])){
 	//check whether email is empty
     if(!empty($_POST['email'])){

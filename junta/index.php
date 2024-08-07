@@ -1,4 +1,5 @@
 <?php
+include('./Usuarios_Conexion_Sqlserver.php');
 session_start();
 $sessData = !empty($_SESSION['sessData'])?$_SESSION['sessData']:'';
 if(!empty($sessData['estado']['msg'])){
@@ -36,7 +37,6 @@ include('header.php');
     <h2><b><u>Sistemas De Juntas </u></b></h2>
     <?php
         if(!empty($sessData['userLoggedIn']) && !empty($sessData['userID'])){
-            include 'Usuarios_conexion_Sqlserver.php';//acceso mediante sql server
             
             $user = new User();
             $conditions['where'] = array(

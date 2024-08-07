@@ -42,7 +42,7 @@ tr:nth-child(even) {
 * {
     margin: 0;
     padding: 0;
-    border: o none;
+    border: none;
     position: relative;
 }
 #menu_gral {
@@ -188,13 +188,13 @@ if (<?php echo isset($_SESSION['message']) ? 'true' : 'false'; ?>) {
 //$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); //conexion mysql
 
 // Conexión a SQL Server
-$serverName = "localhost"; // o la dirección IP del servidor
+$serverName = "db"; // o la dirección IP del servidor
 $database = "junta";
-$username = "boga"; // Reemplaza con tu usuario
-$password = "30153846"; // Reemplaza con tu contraseña
+$username = "SA"; // Reemplaza con tu usuario
+$password = '"asd123"'; // Reemplaza con tu contraseña
 
 try {
-    $link = new PDO("sqlsrv:server=$serverName;Database=$database", $username, $password);
+    $link = new PDO("sqlsrv:server=$serverName;Database=$database;TrustServerCertificate=yes", $username, $password);
     // Establecer el modo de error de PDO a excepción
     $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Conexión exitosa a SQL Server";
@@ -278,7 +278,7 @@ try {
 </tbody>
 </div>
 </div>
-</table>
+</div>
 
 <script>
   

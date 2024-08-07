@@ -37,3 +37,7 @@ CREATE TABLE usuarios (
 );
 END
 GO
+
+ALTER TABLE usuarios
+    ADD rol NVARCHAR(50) NULL;
+GO

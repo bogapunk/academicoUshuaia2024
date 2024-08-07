@@ -70,7 +70,7 @@ body{
 * {
     margin: 0;
     padding: 0;
-    border: o none;
+    border: none;
     position: relative;
 }
 #menu_gral {
@@ -156,7 +156,7 @@ loader {
 <link rel="shortcut icon" href="../imagenes/favicon.svg" type="image/x-icon"/>  
 </head>
 
-</head>
+</html>
 
 <!--<center><img src="../imagenes/fondoCabecera.jpg"></center> anterior
 -->
@@ -204,7 +204,7 @@ loader {
     </li>
      <li>
        <div class="card-body d-flex justify-content-between align-items-center">
-       <a href="Usuarios/listarUsuarios.php"   class="btn btn-primary" class="logout">Usuarios</a>
+       <a href="Usuarios/ListarUsuarios.php"   class="btn btn-primary" class="logout">Usuarios</a>
        </div>
     </li>
    </ul>
