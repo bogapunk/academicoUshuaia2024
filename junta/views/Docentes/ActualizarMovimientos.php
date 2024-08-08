@@ -1,8 +1,8 @@
 <?php
 // Conectar a la base de datos
-define('HOST', 'localhost'); // Host de la base de datos
+define('HOST', 'db'); // Host de la base de datos
 define('BD', 'junta'); // Nombre de la base de datos
-define('DB_USER', 'boga'); // Usuario de la base de datos
+define('DB_USER', 'SA'); // Usuario de la base de datos
 define('PASS', '30153846'); // Contraseña de la base de datos
 define('CHARSET', 'utf8'); // Juego de caracteres de la base de datos
 

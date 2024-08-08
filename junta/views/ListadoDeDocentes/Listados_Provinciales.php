@@ -5,7 +5,7 @@ ob_start();
 require('fpdf.php'); // Ajusta esta ruta según sea necesario
 function traeesc($cod, $legdoc, $anio) {
     try {
-        $conexion = new Cconexion("localhost", "junta", "boga", "30153846");
+        $conexion = new Cconexion("db", "junta", "SA", '"asd123"');
         $conn = $conexion->conectar2();
 
         $sql = "SELECT j_dep.nomdep 
@@ -32,7 +32,7 @@ function traeesc($cod, $legdoc, $anio) {
 
 function traenombremod($cod) {
     try {
-        $conexion = new Cconexion("localhost", "junta", "boga", "30153846");
+        $conexion = new Cconexion("db", "junta", "SA", '"asd123"');
         $conn = $conexion->conectar2();
 
         $sql = "SELECT nommod FROM [Junta].[dbo].[_junta_modalidades] WHERE codmod = :codmod";
@@ -111,7 +111,7 @@ $legdoc = isset($_POST['legdoc']) ? $_POST['legdoc'] : '';
 if (!empty($prov)) {
     $sql_listado_generales = "SELECT modalidades, ciudad FROM [Junta].[dbo].[_junta_listadosgenerales] WHERE id = :prov";
 
-    $conexion = new Cconexion("localhost", "junta", "boga", "30153846");
+    $conexion = new Cconexion("db", "junta", "SA", '"asd123"');
 
     try {
         $conn = $conexion->conectar2();
@@ -149,7 +149,7 @@ $codmod = (int)$codmod;
 $anio = (int)$anio;
 
 try {
-    $conexion = new Cconexion("localhost", "junta", "boga", "30153846");
+    $conexion = new Cconexion("localhost", "junta", "SA", '"asd123"');
     $conn = $conexion->conectar2();
 
     $query = "SELECT DISTINCT

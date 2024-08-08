@@ -18,7 +18,7 @@ $tope=$_POST['tope'];
 //$link = new PDO('mysql:host=localhost;dbname=junta2022', 'root', ''); // el campo 
 
 // DB CREDENCIALES DE USUARIO.
-define('DB_HOST','localhost');
+define('DB_HOST','db');
 define('DB_USER','root');
 define('DB_PASS','');
 define('DB_NAME','junta');

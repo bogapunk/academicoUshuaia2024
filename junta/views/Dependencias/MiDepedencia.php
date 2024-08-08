@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-define('DB_HOST', 'localhost');
-define('DB_USER', 'boga');
+define('DB_HOST', 'db');
+define('DB_USER', 'SA');
 define('DB_PASS', '30153846');
 define('DB_NAME', 'junta');
 

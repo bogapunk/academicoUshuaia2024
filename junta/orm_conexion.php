@@ -144,11 +144,11 @@ class ORM {
 
 
 // MySQL Database Connection
-$mysqlDb = new Database('mysql', 'localhost', 'junta', 'root', '');
+$mysqlDb = new Database('mysql', 'db', 'junta', 'root', '');
 $mysqlOrm = new ORM($mysqlDb->getConnection());
 
 // SQL Server Database Connection
-$sqlsrvDb = new Database('sqlsrv', 'localhost', 'junta', 'root', '');
+$sqlsrvDb = new Database('sqlsrv', 'db', 'junta', 'root', '');
 $sqlsrvOrm = new ORM($sqlsrvDb->getConnection());
 
 // Insert Example

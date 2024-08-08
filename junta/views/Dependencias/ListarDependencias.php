@@ -279,11 +279,11 @@ tr:nth-child(even) {
 <?php
 // Te recomiendo utilizar esta conección, la que utilizas ya no es la recomendada. 
 /* conexion anterior
-$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password. 
+$link = new PDO('mysql:host=db;dbname=junta', 'root', ''); // el campo vaciío es para la password.
 */
 
 try {
-  $link = new PDO('sqlsrv:Server=localhost;Database=junta', 'boga', '30153846');
+  $link = new PDO('sqlsrv:Server=localhost;Database=junta', 'SA', '30153846');
   // Configura los atributos de PDO
   $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   echo "Conexión exitosa";

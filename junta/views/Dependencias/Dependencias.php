@@ -1,7 +1,7 @@
 <?php
 /* conexion anterior mysql
 class Dependencia{
-    private $dbHost     = "localhost";
+    private $dbHost     = "db";
     private $dbUsername = "root";
     private $dbPassword = "";
     private $dbName     = "junta";
@@ -132,9 +132,9 @@ class Dependencia{
 
 */
 class Dependencia {
-    private $serverName = "localhost";
-    private $username = "boga"; // Reemplaza con tu usuario de SQL Server
-    private $password = "30153846"; // Reemplaza con tu contraseña de SQL Server
+    private $serverName = "db";
+    private $username = "SA"; // Reemplaza con tu usuario de SQL Server
+    private $password = '"asd123"'; // Reemplaza con tu contraseña de SQL Server
     private $dbName = "junta";
     private $dependenciasTbl = "_junta_dependencias";
     private $conn;

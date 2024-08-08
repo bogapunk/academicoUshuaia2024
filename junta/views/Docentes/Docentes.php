@@ -137,9 +137,9 @@ class Docente{
 
 */
 class Docente {
-    private $dbHost = "localhost";
-    private $dbUsername = "boga"; // Update with your SQL Server username
-    private $dbPassword = "30153846"; // Update with your SQL Server password
+    private $dbHost = "db";
+    private $dbUsername = "SA"; // Update with your SQL Server username
+    private $dbPassword = '"asd123"'; // Update with your SQL Server password
     private $dbName = "junta";
     private $docentesTbl = "_junta_docentes";
     private $conn; // Property to hold the database connection

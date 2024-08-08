@@ -52,7 +52,7 @@ $establecimiento = (int)$establecimiento;
 $anio = (int)$anio;
 
 try {
-    $conexion = new Cconexion("localhost", "junta", "boga", "30153846");
+    $conexion = new Cconexion("db", "junta", "SA", '"asd123"');
     $conn = $conexion->conectar2();
     
     if ($conn) {

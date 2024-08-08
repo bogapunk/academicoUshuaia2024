@@ -371,12 +371,12 @@ class DocentesModel
         try
         {
             // Conexión a SQL Server
-            $serverName = "localhost"; // Servidor de SQL Server
+            $serverName = "db"; // Servidor de SQL Server
             $database = "junta"; // Nombre de la base de datos
-            $username = "boga"; // Usuario de la base de datos
-            $password = "30153846"; // Contraseña de la base de datos
+            $username = "SA"; // Usuario de la base de datos
+            $password = '"asd123"'; // Contraseña de la base de datos
 
-            $dsn = "sqlsrv:Server=$serverName;Database=$database";
+            $dsn = "sqlsrv:Server=$serverName;Database=$database;TrustServerCertificate=yes";
             $this->pdo = new PDO($dsn, $username, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }

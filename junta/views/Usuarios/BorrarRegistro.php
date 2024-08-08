@@ -7,10 +7,10 @@ session_start();
 // Include database connection
 require_once 'dbconect.php';
 class Connection {
-  private $serverName = "localhost"; // o la dirección IP del servidor
+  private $serverName = "db"; // o la dirección IP del servidor
   private $database = "junta";
-  private $username = "boga"; // Reemplaza con tu usuario
-  private $password = "30153846"; // Reemplaza con tu contraseña
+  private $username = "SA"; // Reemplaza con tu usuario
+  private $password = '"asd123"'; // Reemplaza con tu contraseña
   private $conn;
 
   public function open() {

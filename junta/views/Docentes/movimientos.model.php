@@ -652,10 +652,10 @@ class MovimientosModel
     {
         try
         {
-            $serverName = "localhost";
+            $serverName = "db";
             $database = "junta";
-            $username = "boga";
-            $password = "30153846";
+            $username = "SA";
+            $password = '"asd123"';
 
             $this->pdo = new PDO("sqlsrv:Server=$serverName;Database=$database", $username, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

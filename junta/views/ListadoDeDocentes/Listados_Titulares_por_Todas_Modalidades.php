@@ -77,7 +77,7 @@ $pagina = 1;
 $xmodalidad = 0;
 
 try {
-    $conexion = new Cconexion("localhost", "junta", "boga", "30153846");
+    $conexion = new Cconexion("localhost", "junta", "SA", '"asd123"');
     $conn = $conexion->conectar2();
 
 

@@ -2,7 +2,7 @@
 
 Class Connection{
  
-	private $server = "mysql:host=localhost;dbname=junta2022";
+	private $server = "mysql:host=db;dbname=junta2022";
 	private $username = "root";
 	private $password = "";
 	private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);

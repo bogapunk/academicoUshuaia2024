@@ -14,6 +14,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.app.rule=Host(`vm-2.dev.adini.com.ar`)"
   db:
+    ports:
+      - "9433:1433"
     networks:
       - traefik
     labels:

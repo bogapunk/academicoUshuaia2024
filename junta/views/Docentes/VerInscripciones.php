@@ -117,7 +117,7 @@ if(isset($_REQUEST['action']))
 function traenombremodalidad($cual) {
                 $sqlNroNota = "SELECT * FROM _junta_modalidades WHERE codmod = $cual ORDER BY 1";
 
-                $con = mysqli_connect("localhost", "root", "", "junta"); // Replace with your database connection details
+                $con = mysqli_connect("db", "root", "", "junta"); // Replace with your database connection details
                 if (!$con) {
                   die("Error connecting to database: " . mysqli_connect_error());
                 }
@@ -139,7 +139,7 @@ function traenombremodalidad($cual) {
               function traeestablecimiento($cual) {
                 $sqlNroNota = "SELECT * FROM _junta_dependencias WHERE coddep = $cual ORDER BY 1";
 
-                $con = mysqli_connect("localhost", "root", "", "junta"); // Replace with your database connection details
+                $con = mysqli_connect("db", "root", "", "junta"); // Replace with your database connection details
                 if (!$con) {
                   die("Error connecting to database: " . mysqli_connect_error());
                 }
@@ -161,7 +161,7 @@ function traenombremodalidad($cual) {
               function traenombredoc($doc) {
                 $sqlNroNota = "SELECT * FROM _junta_docentes WHERE legajo =$mov ORDER BY 1";
 
-                $con = mysqli_connect("localhost", "root", "", "junta"); // Replace with your database connection details
+                $con = mysqli_connect("db", "root", "", "junta"); // Replace with your database connection details
                 if (!$con) {
                   die("Error connecting to database: " . mysqli_connect_error());
                 }
@@ -183,7 +183,7 @@ function traenombremodalidad($cual) {
               function traepuntaje($anio, $modalidad,$mov, $esc, $eltipo) {
                 $sqlNroNota = "SELECT puntajetotal FROM _junta_movimientos WHERE legdoc =$mov AND anodoc = $anio AND codmod = $modalidad AND establecimiento = $esc AND tipo = '$eltipo' ORDER BY 1";
 
-                $con = mysqli_connect("localhost", "root", "", "junta"); // Replace with your database connection details
+                $con = mysqli_connect("db", "root", "", "junta"); // Replace with your database connection details
                 if (!$con) {
                   die("Error connecting to database: " . mysqli_connect_error());
                 }
@@ -420,10 +420,10 @@ tr:nth-child(even) {
 
 // Te recomiendo utilizar esta conexión, la que utilizas ya no es la recomendada. 
 //$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password. 
-$serverName = "localhost"; // Reemplaza con tu servidor SQL Server
+$serverName = "db"; // Reemplaza con tu servidor SQL Server
 $database = "junta"; // Reemplaza con tu nombre de base de datos
-$username = "boga"; // Reemplaza con tu nombre de usuario de SQL Server
-$password = "30153846"; // Reemplaza con tu contraseña de SQL Server (deja vacío si no hay contraseña)
+$username = "SA"; // Reemplaza con tu nombre de usuario de SQL Server
+$password = '"asd123"'; // Reemplaza con tu contraseña de SQL Server (deja vacío si no hay contraseña)
 
 try {
     $conn = new PDO("sqlsrv:Server=$serverName;Database=$database", $username, $password);
@@ -453,11 +453,11 @@ $legajo = $_GET['legajo'];
 
 // Connect to database
 // Database connection
-$serverName = "localhost"; // Replace with your SQL Server hostname
+$serverName = "db"; // Replace with your SQL Server hostname
 $connectionOptions = array(
     "Database" => "junta",       // Replace with your database name
-    "Uid"      => "boga",      // Replace with your SQL Server username
-    "PWD"      => "30153846",      // Replace with your SQL Server password
+    "Uid"      => "SA",      // Replace with your SQL Server username
+    "PWD"      => '"asd123"',      // Replace with your SQL Server password
     "CharacterSet" => "UTF-8" // Add this to support UTF-8 characters (important for accents)
 );
 
@@ -478,11 +478,11 @@ WHERE j_doc.legajo = '$legajo'
 ORDER BY j_mov.anodoc";
 
 // Establecer la conexión a SQL Server
-$serverName = "localhost"; // Reemplazar con el nombre de tu servidor SQL Server
+$serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
 $connectionInfo = array(
     "Database" => "junta", // Reemplazar con el nombre de tu base de datos
-    "UID" => "boga",
-    "PWD" => "30153846",
+    "UID" => "SA",
+    "PWD" => '"asd123"',
     "CharacterSet" => "UTF-8"
 );
 $conn = sqlsrv_connect($serverName, $connectionInfo);

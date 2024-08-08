@@ -8,7 +8,7 @@ class DependenciasModel
 	{
 		try
 		{
-			$this->pdo = new PDO('mysql:host=localhost;dbname=junta;charset=utf8', 'root', '');
+			$this->pdo = new PDO('mysql:host=db;dbname=junta;charset=utf8', 'root', '');
 			$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		        
 		}
 		catch(Exception $e)
@@ -166,7 +166,7 @@ class DependenciasModel
     {
         try
         {
-            $this->pdo = new PDO('sqlsrv:Server=localhost;Database=junta', 'boga', '30153846');
+            $this->pdo = new PDO('sqlsrv:Server=db;Database=junta', 'SA', '30153846');
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         catch(Exception $e)

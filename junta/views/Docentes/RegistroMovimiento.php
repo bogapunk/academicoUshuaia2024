@@ -434,8 +434,8 @@ tr:nth-child(even) {
 // Datos de conexión a la base de datos
 $serverName = "localhost"; // Servidor de SQL Server
 $database = "junta"; // Nombre de la base de datos
-$username = "boga"; // Usuario de la base de datos
-$password = "30153846"; // Contraseña de la base de datos
+$username = "SA"; // Usuario de la base de datos
+$password = '"asd123"'; // Contraseña de la base de datos
 
 // DSN para SQL Server
 $dsn = "sqlsrv:Server=$serverName;Database=$database";
@@ -473,8 +473,8 @@ $legajo = $_GET['legajo'];
 $serverName = "localhost"; // Cambia esto si tu servidor no es localhost
 $connectionOptions = array(
     "Database" => "junta",
-    "Uid" => "boga", // Cambia esto a tu usuario real
-    "PWD" => "30153846"     // Cambia esto a tu contraseña real
+    "Uid" => "SA", // Cambia esto a tu usuario real
+    "PWD" => '"asd123"'     // Cambia esto a tu contraseña real
 );
 
 // Establecer la conexión
@@ -603,8 +603,8 @@ function showDetails(legajo) {
 $serverName = "localhost"; // Cambia esto si tu servidor no es localhost
 $connectionOptions = array(
     "Database" => "junta",
-    "Uid" => "boga", // Cambia esto a tu usuario real
-    "PWD" => "30153846",     // Cambia esto a tu contraseña real
+    "Uid" => "SA", // Cambia esto a tu usuario real
+    "PWD" => '"asd123"',     // Cambia esto a tu contraseña real
     "CharacterSet" => 'UTF-8'
 );
 
@@ -680,8 +680,8 @@ sqlsrv_close($conn);
 $serverName = "localhost"; // Cambia esto si tu servidor no es localhost
 $connectionOptions = array(
     "Database" => "junta",
-    "Uid" => "boga", // Cambia esto a tu usuario real
-    "PWD" => "30153846",     // Cambia esto a tu contraseña real
+    "Uid" => "SA", // Cambia esto a tu usuario real
+    "PWD" => '"asd123"',     // Cambia esto a tu contraseña real
     "CharacterSet" => 'UTF-8'
 );
 
@@ -766,8 +766,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $serverName = "localhost"; // Nombre del servidor SQL Server
           $connectionOptions = array(
               "Database" => "junta", // Nombre de la base de datos
-              "Uid" => "boga", // Usuario de la base de datos
-              "PWD" => "30153846" // Contraseña de la base de datos
+              "Uid" => "SA", // Usuario de la base de datos
+              "PWD" => '"asd123"' // Contraseña de la base de datos
           );
 
           // Establecer la conexión
@@ -815,8 +815,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $serverName = "localhost"; // Cambia esto si tu servidor no es localhost
 $connectionOptions = array(
     "Database" => "junta",
-    "Uid" => "boga", // Cambia esto a tu usuario real
-    "PWD" => "30153846",     // Cambia esto a tu contraseña real
+    "Uid" => "SA", // Cambia esto a tu usuario real
+    "PWD" => '"asd123"',     // Cambia esto a tu contraseña real
     "CharacterSet" => "UTF-8" // para que lea los acentos y ñ
 );
 

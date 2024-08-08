@@ -4,7 +4,7 @@ function traenombremodalidad($cual) {
 
   try {
     // Database connection
-    $conn = new PDO("mysql:host=localhost;dbname=junta', 'root', '' ");
+    $conn = new PDO("mysql:host=db;dbname=junta', 'root', '' ");
 
     // Prepare statement with named parameter
     $stmt = $conn->prepare($sqlNroNota);
@@ -33,7 +33,7 @@ function traeestablecimiento($cual) {
 
   try {
     // ... (Similar connection and query execution logic as above)
-    $conn = new PDO("mysql:host=localhost;dbname=junta', 'root', '' ");
+    $conn = new PDO("mysql:host=db;dbname=junta', 'root', '' ");
     if ($stmt->rowCount() === 0) {
       return " - ";
     } else {
@@ -52,7 +52,7 @@ function traenombredoc($doc) {
 
   try {
     // ... (Similar connection and query execution logic as above)
-    $conn = new PDO("mysql:host=localhost;dbname=junta', 'root', '' ");
+    $conn = new PDO("mysql:host=db;dbname=junta', 'root', '' ");
     if ($stmt->rowCount() === 0) {
       return "No existe el docente :" . $doc;
     } else {
@@ -70,7 +70,7 @@ function traepuntaje($anio, $modalidad, $doc, $esc, $eltipo) {
   $sqlNroNota = "SELECT puntajetotal FROM _junta_movimientos WHERE legdoc = :doc AND anodoc = :anio AND codmod = :modalidad AND establecimiento = :esc AND tipo = :eltipo ORDER BY 1";
 
   try {
-    $conn = new PDO("mysql:host=localhost;dbname=junta', 'root', '' ");
+    $conn = new PDO("mysql:host=db;dbname=junta', 'root', '' ");
     // ... (Similar connection and query execution logic as above)
     if ($stmt->rowCount() === 0) {
       return "No existe el docente :" . $doc;

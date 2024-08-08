@@ -1,9 +1,9 @@
 <?php
 // Datos de conexión a SQL Server
-$serverName = "localhost"; // o la dirección IP del servidor
+$serverName = "db"; // o la dirección IP del servidor
 $database = "junta";
-$username = "boga"; // Reemplaza con tu usuario
-$password = "30153846"; // Reemplaza con tu contraseña
+$username = "SA"; // Reemplaza con tu usuario
+$password = '"asd123"'; // Reemplaza con tu contraseña
 
 try {
     // Crear una instancia de PDO para SQL Server

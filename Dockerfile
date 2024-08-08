@@ -32,4 +32,6 @@ RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash - \
     && rm -rf /var/lib/apt/lists/* \
     && npm install -g yarn
 
+RUN docker-php-ext-install pdo pdo_mysql
+
 COPY junta /var/www/html

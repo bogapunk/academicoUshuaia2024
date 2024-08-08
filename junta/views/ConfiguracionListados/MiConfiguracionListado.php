@@ -5,7 +5,7 @@ session_start();
 
 // Credenciales de la base de datos SQL Server
 define('DB_HOST', 'localhost'); // Cambia localhost por la dirección del servidor SQL Server
-define('DB_USER', 'boga'); // Cambia tu_usuario por el nombre de usuario de SQL Server
+define('DB_USER', 'SA'); // Cambia tu_usuario por el nombre de usuario de SQL Server
 define('DB_PASS', '30153846'); // Cambia tu_contraseña por la contraseña de SQL Server
 define('DB_NAME', 'junta'); // Nombre de la base de datos en SQL Server
 

@@ -276,8 +276,8 @@ function topFunction() {
 try {
   $serverName = "localhost";
   $databaseName = "junta";
-  $username = "boga"; // Reemplaza con tu nombre de usuario de SQL Server
-  $password = "30153846"; // Reemplaza con tu contraseña de SQL Server
+  $username = "SA"; // Reemplaza con tu nombre de usuario de SQL Server
+  $password = '"asd123"'; // Reemplaza con tu contraseña de SQL Server
 
   $pdo = new PDO("sqlsrv:Server=$serverName;Database=$databaseName", $username, $password);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

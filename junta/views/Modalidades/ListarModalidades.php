@@ -271,7 +271,7 @@ tr:nth-child(even) {
 $link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password. 
 */
 try {
-    $link = new PDO('sqlsrv:Server=localhost;Database=junta', 'boga', '30153846');
+    $link = new PDO('sqlsrv:Server=localhost;Database=junta', 'SA', '30153846');
     // Establecer el modo de error de PDO a excepción
     $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Conexión exitosa";

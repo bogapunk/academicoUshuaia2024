@@ -1,11 +1,11 @@
 <?php
-  define("USUARIO","boga");
+  define("USUARIO","SA");
 
-  define("PASSWORD", "30153846");
+  define("PASSWORD", '"asd123"');
 
   define("DATABASE", "Junta");
   
-  define("SERVIDOR", "boga");
+  define("SERVIDOR", "SA");
 
 
 

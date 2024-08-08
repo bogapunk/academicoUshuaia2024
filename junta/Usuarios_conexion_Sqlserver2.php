@@ -1,9 +1,9 @@
 <?php
 
 class UsuariosManager {
-    private $dbHost     = "localhost";
-    private $dbUsername = "boga";
-    private $dbPassword = "30153846";
+    private $dbHost     = "db";
+    private $dbUsername = "SA";
+    private $dbPassword = '"asd123"';
     private $dbName     = "junta";
     private $userTbl    = "usuarios";
     private $db; // Variable para almacenar la conexión

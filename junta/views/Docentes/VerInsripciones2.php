@@ -117,7 +117,7 @@ if(isset($_REQUEST['action']))
 function traenombremodalidad($cual) {
                 $sqlNroNota = "SELECT * FROM _junta_modalidades WHERE codmod = $cual ORDER BY 1";
 
-                $con = mysqli_connect("localhost", "root", "", "junta"); // Replace with your database connection details
+                $con = mysqli_connect("db", "root", "", "junta"); // Replace with your database connection details
                 if (!$con) {
                   die("Error connecting to database: " . mysqli_connect_error());
                 }
@@ -139,7 +139,7 @@ function traenombremodalidad($cual) {
               function traeestablecimiento($cual) {
                 $sqlNroNota = "SELECT * FROM _junta_dependencias WHERE coddep = $cual ORDER BY 1";
 
-                $con = mysqli_connect("localhost", "root", "", "junta"); // Replace with your database connection details
+                $con = mysqli_connect("db", "root", "", "junta"); // Replace with your database connection details
                 if (!$con) {
                   die("Error connecting to database: " . mysqli_connect_error());
                 }
@@ -161,7 +161,7 @@ function traenombremodalidad($cual) {
               function traenombredoc($doc) {
                 $sqlNroNota = "SELECT * FROM _junta_docentes WHERE legajo =$mov ORDER BY 1";
 
-                $con = mysqli_connect("localhost", "root", "", "junta"); // Replace with your database connection details
+                $con = mysqli_connect("db", "root", "", "junta"); // Replace with your database connection details
                 if (!$con) {
                   die("Error connecting to database: " . mysqli_connect_error());
                 }
@@ -183,7 +183,7 @@ function traenombremodalidad($cual) {
               function traepuntaje($anio, $modalidad,$mov, $esc, $eltipo) {
                 $sqlNroNota = "SELECT puntajetotal FROM _junta_movimientos WHERE legdoc =$mov AND anodoc = $anio AND codmod = $modalidad AND establecimiento = $esc AND tipo = '$eltipo' ORDER BY 1";
 
-                $con = mysqli_connect("localhost", "root", "", "junta"); // Replace with your database connection details
+                $con = mysqli_connect("db", "root", "", "junta"); // Replace with your database connection details
                 if (!$con) {
                   die("Error connecting to database: " . mysqli_connect_error());
                 }
@@ -391,7 +391,7 @@ tr:nth-child(even) {
 //iniciar la session
 
 // Te recomiendo utilizar esta conexión, la que utilizas ya no es la recomendada. 
-$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password. 
+$link = new PDO('mysql:host=db;dbname=junta', 'root', ''); // el campo vaciío es para la password.
 
 ?>
    <?php 
@@ -421,11 +421,11 @@ if (!$conn) {
 */
 
 // Database connection
-$serverName = "localhost"; // Replace with your SQL Server hostname
+$serverName = "db"; // Replace with your SQL Server hostname
 $connectionOptions = array(
     "Database" => "junta",       // Replace with your database name
-    "Uid"      => "boga",      // Replace with your SQL Server username
-    "PWD"      => "30153846",      // Replace with your SQL Server password
+    "Uid"      => "SA",      // Replace with your SQL Server username
+    "PWD"      => '"asd123"',      // Replace with your SQL Server password
     "CharacterSet" => "UTF-8" // Add this to support UTF-8 characters (important for accents)
 );
 
@@ -445,11 +445,11 @@ LEFT JOIN _junta_dependencias j_dep ON j_mov.establecimiento = j_dep.coddep
 WHERE j_doc.legajo = '$legajo'
 ORDER BY j_mov.fecha ASC";
 // Establecer la conexión a SQL Server
-$serverName = "localhost"; // Reemplazar con el nombre de tu servidor SQL Server
+$serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
 $connectionInfo = array(
     "Database" => "junta", // Reemplazar con el nombre de tu base de datos
-    "UID" => "boga",
-    "PWD" => "30153846",
+    "UID" => "SA",
+    "PWD" => '"asd123"',
     "CharacterSet" => "UTF-8"
 );
 $conn = sqlsrv_connect($serverName, $connectionInfo);

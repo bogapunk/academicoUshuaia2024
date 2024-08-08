@@ -335,9 +335,9 @@ tr:nth-child(even) {
 // Te recomiendo utilizar esta conexión, la que utilizas ya no es la recomendada. 
 //$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password. 
 try {
-  $dsn = "sqlsrv:server=localhost;database=junta";
-  $username = "boga";
-  $password = "30153846";
+  $dsn = "sqlsrv:server=db;database=junta;TrustServerCertificate=yes";
+  $username = "SA";
+  $password = '"asd123"';
   
   // Crear la conexión PDO
   $link = new PDO($dsn, $username, $password);

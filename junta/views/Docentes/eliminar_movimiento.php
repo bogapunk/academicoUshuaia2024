@@ -1,9 +1,9 @@
 <?php
 // Definir las constantes para la conexión a la base de datos
 define('BASE_URL', 'http://localhost/junta/'); // URL base de tu sistema
-define('HOST', 'localhost'); // Host de la base de datos SQL Server
+define('HOST', 'db'); // Host de la base de datos SQL Server
 define('BD', 'junta'); // Nombre de la base de datos
-define('DB_USER', 'boga'); // Usuario de la base de datos SQL Server
+define('DB_USER', 'SA'); // Usuario de la base de datos SQL Server
 define('PASS', '30153846'); // Contraseña de la base de datos SQL Server
 define('CHARSET', 'UTF-8'); // Juego de caracteres de la base de datos (para SQL Server no es necesario especificarlo así)
 

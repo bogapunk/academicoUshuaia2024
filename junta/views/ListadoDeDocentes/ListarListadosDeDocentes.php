@@ -1,8 +1,8 @@
 <?php 
 
 
-require_once '../modalidades/modalidades.entidad.php';
-require_once '../modalidades/modalidades.model.php';
+require_once '../Modalidades/modalidades.entidad.php';
+require_once '../Modalidades/modalidades.model.php';
 include('header2.php');
 
 
@@ -93,7 +93,7 @@ tr:nth-child(even) {
 * {
     margin: 0;
     padding: 0;
-    border: o none;
+    border: none;
     position: relative;
 }
 #menu_gral {
@@ -451,12 +451,13 @@ span {
 				  <option value="" style="width: 500px;">Seleccione</option>
           <?php
                // Database connection
-              $serverName = "localhost"; // Replace with your SQL Server hostname
+              $serverName = "db"; // Replace with your SQL Server hostname
               $connectionOptions = array(
                   "Database" => "junta", // Replace with your database name
-                  "Uid" => "boga", // Replace with your SQL Server username
-                  "PWD" => "30153846", // Replace with your SQL Server password
-                  "CharacterSet" => "UTF-8" // acentos
+                  "UID" => "SA", // Replace with your SQL Server username
+                  "PWD" => '"asd123"', // Replace with your SQL Server password
+                  "CharacterSet" => "UTF-8", // acentos
+                  "TrustServerCertificate"=>true
               );
 
               $conn = sqlsrv_connect($serverName, $connectionOptions);
@@ -560,12 +561,13 @@ span {
   <td><b>Establecimiento:</b>
   
 <?php
-      $serverName = "localhost"; // Replace with your SQL Server hostname
+      $serverName = "db"; // Replace with your SQL Server hostname
       $connectionOptions = array(
           "Database" => "junta", // Replace with your database name
-          "Uid" => "boga", // Replace with your SQL Server username
-          "PWD" => "30153846", // Replace with your SQL Server password
-          "CharacterSet" => "UTF-8" // Ensures UTF-8 character set
+          "UID" => "SA", // Replace with your SQL Server username
+          "PWD" => '"asd123"', // Replace with your SQL Server password
+          "CharacterSet" => "UTF-8", // Ensures UTF-8 character set
+          "TrustServerCertificate"=>true
       );
 
       $conn = sqlsrv_connect($serverName, $connectionOptions);
@@ -668,12 +670,13 @@ span {
 <div class="form-check-group" align="left">
 <b>Listado Provinciales:</b>
 <?php
-$serverName = "localhost"; // Nombre del servidor SQL Server
+$serverName = "db"; // Nombre del servidor SQL Server
 $connectionOptions = array(
     "Database" => "junta", // Nombre de la base de datos
-    "Uid" => "boga", // Nombre de usuario de SQL Server
-    "PWD" => "30153846", // Contraseña de SQL Server
-    "CharacterSet" => "UTF-8" // Ensures UTF-8 character set
+    "UID" => "SA", // Nombre de usuario de SQL Server
+    "PWD" => '"asd123"', // Contraseña de SQL Server
+    "CharacterSet" => "UTF-8", // Ensures UTF-8 character set
+    "TrustServerCertificate"=>true
 );
 
 $conn = sqlsrv_connect($serverName, $connectionOptions);
