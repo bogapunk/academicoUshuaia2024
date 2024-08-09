@@ -345,7 +345,6 @@ try {
   // Establecer el modo de error de PDO para que lance excepciones
   $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  echo "Conexión a SQL Server exitosa!";
 } catch (PDOException $e) {
   echo "Error en la conexión a SQL Server: " . $e->getMessage();
 }
@@ -390,7 +389,7 @@ try {
 
                         <tr>
                             <th style="text-align:left;">dni</th>
-                            <td><input type="text" name="dni" value="<?php echo $doc->__GET('dni'); ?>" class="form-control"/></td>
+                            <td><input type="number" name="dni" value="<?php echo $doc->__GET('dni'); ?>" class="form-control"/></td>
                         </tr>
                         <tr>
                             <th style="text-align:left;">domicilio</th>

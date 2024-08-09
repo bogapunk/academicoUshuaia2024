@@ -55,6 +55,6 @@ class Connection {
 		$_SESSION['message'] = 'Complete el formulario de edición';
 	}
 
-	header('location: listarUsuarios.php');
+	header('location: ListarUsuarios.php');
 
 ?>

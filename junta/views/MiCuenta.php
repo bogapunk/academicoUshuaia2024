@@ -79,7 +79,7 @@ if(isset($_POST['signupSubmit'])){
 	//store login estado into the session
     $_SESSION['sessData'] = $sessData;
 	//redirect to the home page
-    header("Location::Usuarios/listarUsuarios.php");
+    header("Location::Usuarios/ListarUsuarios.php");
 }elseif(isset($_POST['forgotSubmit'])){
 	//check whether email is empty
     if(!empty($_POST['email'])){
@@ -195,8 +195,8 @@ if(isset($_POST['signupSubmit'])){
     $sessData['estado']['msg'] = 'Has salido exitosamente de tu cuenta.';
     $_SESSION['sessData'] = $sessData;
 	//redirect to the home page
-    header("Location:Usuarios/listarUsuarios.php");
+    header("Location:Usuarios/ListarUsuarios.php");
 }else{
 	//redirect to the home page
-    header("Location:Usuarios/listarUsuarios.php");
+    header("Location:Usuarios/ListarUsuarios.php");
 }

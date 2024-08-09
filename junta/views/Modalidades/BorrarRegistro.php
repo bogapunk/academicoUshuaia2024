@@ -22,6 +22,6 @@
 		$_SESSION['message'] = 'Seleccionar la Modalidad para eliminar primero';
 	}
 
-	header('location: listarModalidades.php');
+	header('location: ListarModalidades.php');
 
 ?>

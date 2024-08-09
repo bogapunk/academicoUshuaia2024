@@ -149,7 +149,7 @@ if(isset($_POST['insertar'])){
         // Enlazar parámetros
         $stmt->bindParam(':legajo', $legajo, PDO::PARAM_INT);
         $stmt->bindParam(':apellidoynombre', $apellidoynombre, PDO::PARAM_STR);
-        $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+        $stmt->bindParam(':dni', $dni, PDO::PARAM_INT);
         $stmt->bindParam(':domicilio', $domicilio, PDO::PARAM_STR);
         $stmt->bindParam(':lugarinsc', $lugarinsc, PDO::PARAM_STR);
         $stmt->bindParam(':fechanacim', $fechanacim, PDO::PARAM_STR);

@@ -27,6 +27,6 @@ else{
 	$_SESSION['message'] = 'Llene el formulario';
 }
 
-header('location: listarUsuarios.php');
+header('location: ListarUsuarios.php');
 	
 ?>

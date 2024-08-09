@@ -189,9 +189,9 @@ loader {
           <div class="card-body d-flex justify-content-between align-items-center">
           <a href="#"  class="btn btn-primary">Administracion</a></div>
         <ul>
-          <li><a href="modalidades/listarModalidades.php"><font size="4">Modalidades</font></a></li>
-          <li><a href="Dependencias/listarDependencias.php"><font size="4">Dependencia</font></a></li>
-          <li><a href="ConfiguracionListados/listarConfiguracionListados.php"><font size="3">Configuracion Listados</font></a></li>
+          <li><a href="modalidades/ListarModalidades.php"><font size="4">Modalidades</font></a></li>
+          <li><a href="Dependencias/ListarDependencias.php"><font size="4">Dependencia</font></a></li>
+          <li><a href="ConfiguracionListados/ListarConfiguracionListados.php"><font size="3">Configuracion Listados</font></a></li>
         </ul>
     </li>
      <li>

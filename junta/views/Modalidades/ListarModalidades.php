@@ -304,7 +304,7 @@ try {
                     <table style="width:750px;" id="seleccion">
                         <tr>
                             <th style="text-align:left;">Modalidad</th>
-                            <td><input type="text" name="codmod" value="<?php echo $mod->__GET('codmod'); ?>"class="form-control" /></td>
+                            <td><input type="number" name="codmod" value="<?php echo $mod->__GET('codmod'); ?>"class="form-control" /></td>
                         </tr>
                         <tr>
                             <th style="text-align:left;">Descripcion</th>
@@ -326,7 +326,7 @@ try {
 
                         <tr>
                             <th style="text-align:left;">Tope</th>
-                            <td><input type="text" name="tope" value="<?php echo $mod->__GET('tope'); ?>" class="form-control" /></td>
+                            <td><input type="number" name="tope" value="<?php echo $mod->__GET('tope'); ?>" class="form-control" /></td>
                         </tr>
 
                         <tr>
