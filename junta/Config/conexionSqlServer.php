@@ -1,5 +1,5 @@
 <?php
-require "config2.php";
+require "Config2.php";
 
 class Conexion {
     public $cnx;

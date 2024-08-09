@@ -1,5 +1,5 @@
 <?php
-require "../Config/conexionSqlserver.php";
+require "../Config/conexionSqlServer.php";
 
 class Consulta4{
     private $_db;
