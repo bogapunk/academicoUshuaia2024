@@ -350,16 +350,55 @@ try {
               </center>
 
               <!--Script para la impresion de modalidad -->
-              <script language="Javascript">
-                function imprSelec(nombre) {
-                  var ficha = document.getElementById(nombre);
-                  var ventimp = window.open(' ', 'popimpr');
-                  ventimp.document.write( ficha.innerHTML );
-                  ventimp.document.close();
-                  ventimp.print( );
-                  ventimp.close();
-                }
-              </script>
+      <script language="Javascript">
+          function imprSelec(nombre) {
+              var codmod = document.querySelector('input[name="codmod"]').value;
+              var nommod = document.querySelector('input[name="nommod"]').value;
+              var titulo = document.querySelector('select[name="titulo"]').value;
+              var tope = document.querySelector('input[name="tope"]').value;
+
+              <!--Plantilla HTML -->
+              var plantilla = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Reporte</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                    }
+                    h1 {
+                        text-align: center;
+                    }
+                    p {
+                        font-size: 14px;
+                        margin: 5px 0;
+                    }
+                </style>
+            </head>
+            <body>
+                <h1>Reporte de Modalidad</h1>
+                <p><strong>Modalidad:</strong> {{codmod}}</p>
+                <p><strong>Descripción:</strong> {{nommod}}</p>
+                <p><strong>Título:</strong> {{titulo}}</p>
+                <p><strong>Tope:</strong> {{tope}}</p>
+            </body>
+            </html>
+        `;
+
+              plantilla = plantilla.replace('{{codmod}}', codmod);
+              plantilla = plantilla.replace('{{nommod}}', nommod);
+              plantilla = plantilla.replace('{{titulo}}', titulo);
+              plantilla = plantilla.replace('{{tope}}', tope);
+
+              var ventimp = window.open('', 'popimpr');
+              ventimp.document.write(plantilla);
+              ventimp.document.close();
+              ventimp.print();
+              ventimp.close();
+          }
+      </script>
+
 
 
 <div class="container-fluid">
@@ -463,7 +502,7 @@ function myConfirm2() {
 }
 //funcion descargar excel 
 function myConfirm3() {
-  var result = confirm("¿Desea descragra a excel las Modalidad?");
+  var result = confirm("¿Desea descargar a excel las Modalidades?");
   if (result==true) {
    return true;
 
