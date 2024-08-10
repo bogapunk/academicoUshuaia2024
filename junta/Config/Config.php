@@ -7,4 +7,3 @@
     const CHARSET = "charset=utf8";
 
 ?>
-
