@@ -279,7 +279,7 @@ try {
   $username = "SA"; // Reemplaza con tu nombre de usuario de SQL Server
   $password = '"asd123"'; // Reemplaza con tu contraseña de SQL Server
 
-  $pdo = new PDO("sqlsrv:Server=$serverName;Database=$databaseName", $username, $password);
+  $pdo = new PDO("sqlsrv:Server=$serverName;Database=$databaseName;TrustServerCertificate=true", $username, $password);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
   die("Error de conexión: " . $e->getMessage());

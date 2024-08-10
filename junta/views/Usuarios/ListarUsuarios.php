@@ -194,7 +194,7 @@ $username = "SA"; // Reemplaza con tu usuario
 $password = '"asd123"'; // Reemplaza con tu contraseña
 
 try {
-    $link = new PDO("sqlsrv:server=$serverName;Database=$database;TrustServerCertificate=yes", $username, $password);
+    $link = new PDO("sqlsrv:server=$serverName;Database=$database;TrustServerCertificate=true", $username, $password);
     // Establecer el modo de error de PDO a excepción
     $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {

@@ -12,7 +12,7 @@ class Conexion {
             );
 
             $this->cnx = new PDO(
-                "sqlsrv:Server=localhost;Database=" . BD,
+                "sqlsrv:Server=localhost;Database=junta;TrustServerCertificate=true" . BD,
                 DB_USER,
                 PASS,
                 $opciones
