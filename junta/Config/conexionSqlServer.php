@@ -12,11 +12,12 @@ class Conexion {
             );
 
             $this->cnx = new PDO(
-                "sqlsrv:Server=localhost;Database=junta;TrustServerCertificate=true" . BD,
+                "sqlsrv:Server=localhost;Database=" . BD . ";TrustServerCertificate=true",
                 DB_USER,
                 PASS,
                 $opciones
             );
+
 
             return $this->cnx;
         } catch (PDOException $e) {

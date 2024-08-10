@@ -15,7 +15,7 @@ class Consulta4{
         $this->_db->conectar();
 
 
-        $consulta = $this->_db->cnx->prepare("SELECT * FROM docentestespecialescompleto ORDER by Total DESC ");
+        $consulta = $this->_db->cnx->prepare("SELECT * FROM DocentestEspecialesCompleto ORDER by Total DESC ");
 
         $consulta->execute();
 
