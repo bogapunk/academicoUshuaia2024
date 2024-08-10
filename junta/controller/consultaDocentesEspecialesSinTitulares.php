@@ -1,5 +1,5 @@
 <?php
-require "../Config/conexionSqlserver.php";
+require "../Config/conexionSqlServer.php";
 
 class Consulta3{
     private $_db;
@@ -15,7 +15,7 @@ class Consulta3{
         $this->_db->conectar();
 
 
-        $consulta = $this->_db->cnx->prepare("SELECT * FROM docentesespecialessintitulares ORDER by Total DESC ");
+        $consulta = $this->_db->cnx->prepare("SELECT * FROM DocentesEspecialesSINTITULARES ORDER by Total DESC ");
 
         $consulta->execute();
 

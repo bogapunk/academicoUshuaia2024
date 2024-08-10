@@ -7,10 +7,9 @@ $password = '"asd123"'; // Reemplaza con tu contraseña
 
 try {
     // Crear una instancia de PDO para SQL Server
-    $link = new PDO("sqlsrv:server=$serverName;Database=$database", $username, $password);
+    $link = new PDO("sqlsrv:server=$serverName;Database=$database;TrustServerCertificate=true", $username, $password);
     // Establecer el modo de error de PDO a excepción
     $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Conexión exitosa a SQL Server";
 } catch (PDOException $e) {
     echo "Error en la conexión: " . $e->getMessage();
 }

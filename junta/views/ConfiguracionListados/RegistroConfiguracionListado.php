@@ -383,7 +383,7 @@ button:hover {
 			</form>
            
 		</div>
-         <center><a href="./listarConfiguracionListados.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
+         <center><a href="./ListarConfiguracionListados.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
 	</div>
     
     

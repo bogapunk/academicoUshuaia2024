@@ -33,6 +33,6 @@
 		$_SESSION['message'] = 'Complete el formulario de edición';
 	}
 
-	header('location: listarDependencias.php');
+	header('location: ListarDependencias.php');
 
 ?>

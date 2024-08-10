@@ -26,6 +26,6 @@ else{
 	$_SESSION['message'] = 'Llene el formulario';
 }
 
-header('location: listarModalidades.php');
+header('location: ListarModalidades.php');
 	
 ?>

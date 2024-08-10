@@ -179,13 +179,13 @@ body{
         <ul>
           <li><a href="../Modalidades/ListarModalidades.php"><font size="4">Modalidades</font></a></li>
           <li><a href="../Dependencias/ListarDependencias.php"><font size="4">Dependencia</font></a></li>
-          <li><a href="listarConfiguracionListados.php"><font size="4">Configuracion Listados</font></a></li>
+          <li><a href="ListarConfiguracionListados.php"><font size="4">Configuracion Listados</font></a></li>
         </ul>
     </li>
      <li>
       
        <div class="card-body d-flex justify-content-between align-items-center">
-    <a href="../Usuarios/listarUsuarios.php"   class="btn btn-primary" class="logout">Usuarios</a>
+    <a href="../Usuarios/ListarUsuarios.php"   class="btn btn-primary" class="logout">Usuarios</a>
 </div>
 
 

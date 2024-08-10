@@ -25,7 +25,7 @@ if(!empty($sessData['estado']['msg'])){
 						<label class="control-label" style="position:relative; top:7px;">CODIGO MODALIDAD:</label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="codmod">
+						<input type="number" class="form-control" name="codmod">
 					</div>
 				</div>
 				<div class="row form-group">

@@ -31,6 +31,6 @@
 		$_SESSION['message'] = 'Complete el formulario de edición';
 	}
 
-	header('location: listarConfiguracionListados.php');
+	header('location: ListarConfiguracionListados.php');
 
 ?>

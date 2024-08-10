@@ -174,7 +174,7 @@ body{
           <div class="card-body d-flex justify-content-between align-items-center">
           <a href="#"  class="btn btn-primary">Administracion</a></div>
         <ul>
-          <li><a href="listarModalidades.php"><font size="4">Modalidades</font></a></li>
+          <li><a href="ListarModalidades.php"><font size="4">Modalidades</font></a></li>
           <li><a href="#"><font size="4">Dependencia</font></a></li>
           <li><a href="#"><font size="3">Configuracion Listados</font></a></li>
         </ul>

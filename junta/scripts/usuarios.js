@@ -12,7 +12,7 @@ init();
       pagelenght: 10,
       responsive: true,
       processing: true,
-      ajax : "controller/usuarios.php?op=listar"
+      ajax : "controller/Usuarios.php?op=listar"
 
 
 

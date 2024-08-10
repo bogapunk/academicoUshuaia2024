@@ -1,5 +1,5 @@
 <?php
-require "config2.php";
+require "Config2.php";
 
 class Conexion {
     public $cnx;
@@ -12,11 +12,12 @@ class Conexion {
             );
 
             $this->cnx = new PDO(
-                "sqlsrv:Server=localhost;Database=" . BD,
+                "sqlsrv:Server=localhost;Database=" . BD . ";TrustServerCertificate=true",
                 DB_USER,
                 PASS,
                 $opciones
             );
+
 
             return $this->cnx;
         } catch (PDOException $e) {

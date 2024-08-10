@@ -64,4 +64,4 @@ if (isset($_GET['id'])) {
 }
 
 // Redirect to the list users page
-header('Location: listarUsuarios.php');
+header('Location: ListarUsuarios.php');

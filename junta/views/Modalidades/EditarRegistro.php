@@ -29,6 +29,6 @@
 		$_SESSION['message'] = 'Complete el formulario de edición';
 	}
 
-	header('location: listarModalidades.php');
+	header('location: ListarModalidades.php');
 
 ?>
