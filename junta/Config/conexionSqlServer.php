@@ -8,7 +8,8 @@ class Conexion {
         try {
             $opciones = array(
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::SQLSRV_ATTR_ENCODING => PDO::SQLSRV_ENCODING_UTF8
+                PDO::SQLSRV_ATTR_ENCODING => PDO::SQLSRV_ENCODING_UTF8,
+                
             );
 
             $this->cnx = new PDO(
