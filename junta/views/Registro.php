@@ -308,7 +308,6 @@ px
                 </center>
                     <?php 
 
-                       include 'Usuarios.php';
 						$user = new User();
 						
 						$conditions['return_type'] = 'single';

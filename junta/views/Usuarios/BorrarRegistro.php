@@ -1,8 +1,5 @@
 
 <?php
-// lo que hace aca me borra el usuario y me lo pone en null, para que este en la base de datos pero que no me los muestre 
-// Start session
-session_start();
 
 // Include database connection
 require_once 'dbconect.php';
@@ -64,4 +61,6 @@ if (isset($_GET['id'])) {
 }
 
 // Redirect to the list users page
-header('Location: ListarUsuarios.php');
+ob_start();
+header('Location: ./ListarUsuarios.php');
+ob_end_flush();

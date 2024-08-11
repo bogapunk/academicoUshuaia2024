@@ -263,7 +263,7 @@ try {
          </div>
     </td>
 
-    <?php include('BorrarEditarModal.php'); ?>
+    <?php ob_start(); include('BorrarEditarModal.php'); ob_end_flush(); ?>
 
 
 
