@@ -149,7 +149,6 @@ tr:nth-child(even) {
 
 </head>
 <body>
- 
 
 
   <script type="text/javascript">
@@ -258,10 +257,10 @@ try {
     <td><center style="font-size:1.3em"><?php echo $row['telefono'] ?></center></td>
     <td><center style="font-size:1.3em"><?php echo $row['rol'] ?></center></td>
     <td>
-        <center>
+        <div style="text-align: center;">
         <a href="#edit_<?php echo $row['id']; ?>" class="btn btn-success btn-sm" data-toggle="modal"><span class="glyphicon glyphicon-edit"></span> Editar</a>
         <a href="#delete_<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal"><span class="glyphicon glyphicon-trash"></span> Borrar</a>
-         </center>                                                            
+         </div>
     </td>
 
     <?php include('BorrarEditarModal.php'); ?>

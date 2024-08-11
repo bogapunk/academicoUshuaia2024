@@ -59,7 +59,6 @@ include('header2.php');
    
     <?php
 			if(!empty($sessData['userLoggedIn']) && !empty($sessData['userID'])){
-				include 'Usuarios.php';
 				$user = new User();
 				$conditions['where'] = array(
 					'id' => $sessData['userID'],

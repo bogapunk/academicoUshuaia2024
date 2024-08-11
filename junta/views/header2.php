@@ -1,3 +1,26 @@
+<?php
+ob_start();
+include("./Usuarios.php");
+ob_end_flush();
+$sessData = !empty($_SESSION['sessData'])?$_SESSION['sessData']:'';
+if(!empty($sessData['estado']['msg'])){
+    $statusMsg = $sessData['estado']['msg'];
+    $statusMsgType = $sessData['estado']['type'];
+    unset($_SESSION['sessData']['estado']);
+}
+
+if(!empty($sessData['userLoggedIn']) && !empty($sessData['userID'])){
+
+$user = new User();
+$conditions['where'] = array(
+    'id' => $sessData['userID'],
+
+);
+$conditions['return_type'] = 'single';
+$userData = $user->getRows($conditions);
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -202,11 +225,11 @@ loader {
           <li><a href="ConfiguracionListados/ListarConfiguracionListados.php"><font size="4">Configuracion Listados</font></a></li>
         </ul>
     </li>
-     <li>
+     <?php echo(($userData['rol']=='admin') ? ('<li>
        <div class="card-body d-flex justify-content-between align-items-center">
-       <a href="Usuarios/ListarUsuarios.php"   class="btn btn-primary" class="logout">Usuarios</a>
+       <a href="Usuarios/ListarUsuarios.php" class="btn btn-primary" class="logout">Usuarios</a>
        </div>
-    </li>
+    </li>') : ''); ob_end_flush(); ?>
    </ul>
 
 </nav>

@@ -300,10 +300,12 @@ px
 		<?php echo !empty($statusMsg)?'<p class="'.$statusMsgType.'">'.$statusMsg.'</p>':''; ?>
 		<div class="regisFrm">
 			<form action="MiCuenta.php" method="post">
-				<input type="text" name="nombres" placeholder="NOMBRES" required="">
-				<input type="text" name="apellidos" placeholder="APELLIDOS" required="">
-				<input type="email" name="email" placeholder="EMAIL" required="">
-				<input type="text" name="telefono" placeholder="TELEFONO" required="">
+                <center>
+                    <input style="margin: 7.5px" class="form-control" type="text" name="nombres" placeholder="Nombre" required="">
+                    <input style="margin: 7.5px" class="form-control" type="text" name="apellidos" placeholder="Apellido" required="">
+                    <input style="margin: 7.5px" class="form-control" type="text" name="email" placeholder="Email" required="">
+                    <input style="margin: 7.5px" class="form-control" type="text" name="telefono" placeholder="Telefono" required="">
+                </center>
                     <?php 
 
                        include 'Usuarios.php';
@@ -375,7 +377,7 @@ px
 					<input type="submit" name="signupSubmit" value="CREAR CUENTA">
 				</div>
 			</form>
-             <center><a href="http://localhost:8080/juntas/views/Usuarios/ListarUsuarios.php"> <button type="submit" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
+             <center><a href="<?php echo(stripos($_SERVER['SERVER_PROTOCOL'],'http') === 0 ? "https" : "http"); ?>://<?php echo($_SERVER['HTTP_HOST']);?>/views/Usuarios/ListarUsuarios.php"> <button type="submit" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
 		</div>
 	</div>
     

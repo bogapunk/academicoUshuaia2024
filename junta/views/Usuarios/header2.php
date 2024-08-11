@@ -1,3 +1,27 @@
+<?php
+session_start();
+ob_start();
+include("../Usuarios.php");
+ob_end_flush();
+$sessData = !empty($_SESSION['sessData'])?$_SESSION['sessData']:'';
+if(!empty($sessData['estado']['msg'])){
+    $statusMsg = $sessData['estado']['msg'];
+    $statusMsgType = $sessData['estado']['type'];
+    unset($_SESSION['sessData']['estado']);
+}
+
+if(!empty($sessData['userLoggedIn']) && !empty($sessData['userID'])){
+
+    $user = new User();
+    $conditions['where'] = array(
+        'id' => $sessData['userID'],
+
+    );
+    $conditions['return_type'] = 'single';
+    $userData = $user->getRows($conditions);
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -307,23 +331,11 @@ iniciarContadorInactividad();
           <li><a href="../ConfiguracionListados/ListarConfiguracionListados.php"><font size="3">Configuracion Listados</font></a></li>
         </ul>
     </li>
-     <li>
-      
-       <div class="card-body d-flex justify-content-between align-items-center"  >
-    <a href="ListarUsuarios.php"   class="btn btn-primary"  class="logout">Usuarios
-      <div id="preload-overlay">
-  <div class="loader"></div>
-</div>
-    </a>
-
-
-  </div>
-</div>
-
-
-
-
-  </li>
+      <?php echo(($userData['rol']=='admin') ? ('<li>
+       <div class="card-body d-flex justify-content-between align-items-center">
+       <a href="Usuarios/ListarUsuarios.php" class="btn btn-primary" class="logout">Usuarios</a>
+       </div>
+    </li>') : ''); ob_end_flush(); ?>
   </ul>
 
 </nav>

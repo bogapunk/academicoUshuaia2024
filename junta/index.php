@@ -1,5 +1,7 @@
 <?php
+ob_start();
 include('./Usuarios_Conexion_Sqlserver.php');
+ob_end_flush();
 session_start();
 $sessData = !empty($_SESSION['sessData'])?$_SESSION['sessData']:'';
 if(!empty($sessData['estado']['msg'])){
@@ -8,6 +10,7 @@ if(!empty($sessData['estado']['msg'])){
     unset($_SESSION['sessData']['estado']);
 }
 
+ob_start();
 include('header.php');
 ?>
 <style>
@@ -36,6 +39,7 @@ include('header.php');
                     
     <h2><b><u>Sistemas De Juntas 2024</u></b></h2>
     <?php
+    ob_start();
         if(!empty($sessData['userLoggedIn']) && !empty($sessData['userID'])){
             
             $user = new User();
@@ -85,7 +89,7 @@ include('header.php');
 <div class="col-sm-3 text wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;"></div>
 <br>
 
-<?php include('footer.php'); ?>
+<?php include('footer.php');ob_end_flush(); ?>
 
 <script>
     function showPreload() {

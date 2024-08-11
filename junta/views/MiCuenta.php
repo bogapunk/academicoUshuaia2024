@@ -48,7 +48,7 @@ if(isset($_POST['signupSubmit'])){
     }
 	//store signup estado into the session
     $_SESSION['sessData'] = $sessData;
-    $redirectURL = ($sessData['estado']['type'] == 'success')?'registro.php':'Registro.php';
+    $redirectURL = ($sessData['estado']['type'] == 'success')? 'Registro.php':'Registro.php';
 	//redirect to the home/registration page
     header("Location:".$redirectURL);
 }elseif(isset($_POST['loginSubmit'])){

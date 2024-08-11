@@ -1,4 +1,5 @@
 <?php
+ob_start();
 class Connection {
     private $serverName = "db"; // o la dirección IP del servidor
     private $database = "junta";
@@ -8,7 +9,7 @@ class Connection {
 
     public function open() {
         try {
-            $this->conn = new PDO("sqlsrv:server=$this->serverName;Database=$this->database", $this->username, $this->password);
+            $this->conn = new PDO("sqlsrv:server=$this->serverName;Database=$this->database;TrustServerCertificate=true", $this->username, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $this->conn;
         } catch (PDOException $e) {
@@ -56,5 +57,5 @@ class Connection {
 	}
 
 	header('location: ListarUsuarios.php');
-
+ob_end_flush();
 ?>
