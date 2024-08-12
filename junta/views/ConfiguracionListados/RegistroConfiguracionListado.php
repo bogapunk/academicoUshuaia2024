@@ -329,28 +329,29 @@ button:hover {
 
                         $conditions['return_type'] = 'single';
 
-                    $confLisData = $confLis->getRows4($conditions); ?>
+                    $confLisData = $confLis->getRows4($conditions); 
                           
-                  <center>    
-                    <select id="ciudad" class="form-control" name="ciudad">
+                          // Opciones del segundo select
+$opcionesCiudad = [
+    "RG" => "Rio Grande",
+    "TOL" => "Tolhuin",
+    "USH" => "Ushuaia"
+];
+$valorPorDefecto = "RG"; // Definir el valor por defecto para el segundo select
+// Verificar si se obtuvieron datos y asignar el valor seleccionado (si existe) para el segundo select
+$ciudadSeleccionada = isset($confLisData['ciudad']) ? $confLisData['ciudad'] : $valorPorDefecto;
 
-                                        <option value="RG " <?php if ($confLisData['ciudad'] == "Rio Grande") {
-                                                                            echo "selected";
-                                                                        } ?>>Rio Grande</option>
-                                        <option value="TOL" <?php if ($confLisData['ciudad'] == "Tolhuin") {
-                                                                        echo "selected";
-                                                                    } ?>>Tolhuin</option>
-                                                                         <option value="USH" <?php if ($confLisData['ciudad'] == "Ushuaia") {
-                                                                        echo "selected";
-                                                                    } ?>>Ushuaia</option>
-                                                                         
-                                    </select>
+?>
+                  <center>
+                            <select id="ciudad" class="form-control" name="ciudad">
+                                <?php foreach ($opcionesCiudad as $valor => $etiqueta): ?>
+                                    <option value="<?= $valor ?>" <?php if ($valor == $ciudadSeleccionada) echo "selected"; ?>>
+                                        <?= $etiqueta ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </center>
 
-                                    <!--ESTE CODIGO NOS ENCARGA DE GRABAR POR DEFECTO EL CAMPO TRIAL510 -->
-                                      <?php
-                                        $valorPorDefecto = "T";
-                                        ?>
- 
                       
                                <input type="hidden" name="trial510" value="<?php echo $valorPorDefecto; ?>">
 

@@ -373,7 +373,7 @@ button:hover {
                                 </center>
 
 			</form>
-            <center><a href="http://localhost:8080/juntas/views/Dependencias/ListarDependencias.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
+            <center><a href="http://localhost:8009/views/Dependencias/ListarDependencias.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
 		</div>
 	</div>
     

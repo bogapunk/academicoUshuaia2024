@@ -1,6 +1,6 @@
 <?php
     const BASE_URL = "http://localhost/juntas";//aca pongo el nombre del sistema
-    const HOST = "localhost";
+    const HOST = "192.168.18.207,1433";
     const BD = "junta";//base de datos de la junta
     const DB_USER = "SA";
     const PASS = '"asd123"';

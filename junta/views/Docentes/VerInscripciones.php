@@ -420,20 +420,23 @@ tr:nth-child(even) {
 
 // Te recomiendo utilizar esta conexión, la que utilizas ya no es la recomendada. 
 //$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password. 
-$serverName = "db"; // Reemplaza con tu servidor SQL Server
-$database = "junta"; // Reemplaza con tu nombre de base de datos
-$username = "SA"; // Reemplaza con tu nombre de usuario de SQL Server
-$password = '"asd123"'; // Reemplaza con tu contraseña de SQL Server (deja vacío si no hay contraseña)
+// Definir las credenciales de la base de datos
+define('DB_HOST', '192.168.18.207,1433');
+define('DB_USER', 'SA');
+define('DB_PASS', '"asd123"');
+define('DB_NAME', 'junta');
 
 try {
-    $conn = new PDO("sqlsrv:Server=$serverName;Database=$database", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "";
+    // Construir la cadena de conexión para SQL Server con TrustServerCertificate=true
+    $dsn = "sqlsrv:Server=" . DB_HOST . ";Database=" . DB_NAME . ";TrustServerCertificate=true";
+    $link = new PDO($dsn, DB_USER, DB_PASS);
+    $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
 } catch (PDOException $e) {
-    echo "Error en la conexión: " . $e->getMessage() . "<br>";
-    die();
+    exit("Error de conexión: " . $e->getMessage());
 }
 ?>
+
    <?php 
 
   if(isset($_SESSION['message'])){
@@ -453,11 +456,12 @@ $legajo = $_GET['legajo'];
 
 // Connect to database
 // Database connection
-$serverName = "db"; // Replace with your SQL Server hostname
+$serverName = "192.168.18.207,1433"; // Replace with your SQL Server hostname
 $connectionOptions = array(
     "Database" => "junta",       // Replace with your database name
     "Uid"      => "SA",      // Replace with your SQL Server username
     "PWD"      => '"asd123"',      // Replace with your SQL Server password
+    "TrustServerCertificate" => true, // Trust the server certificate
     "CharacterSet" => "UTF-8" // Add this to support UTF-8 characters (important for accents)
 );
 
@@ -476,23 +480,34 @@ LEFT JOIN _junta_modalidades j_mod ON j_mov.codmod = j_mod.codmod
 LEFT JOIN _junta_dependencias j_dep ON j_mov.establecimiento = j_dep.coddep
 WHERE j_doc.legajo = '$legajo'
 ORDER BY j_mov.anodoc";
-
 // Establecer la conexión a SQL Server
-$serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
-$connectionInfo = array(
+$serverName = "192.168.18.207,1433"; // Reemplazar con el nombre de tu servidor SQL Server
+$connectionOptions = array(
     "Database" => "junta", // Reemplazar con el nombre de tu base de datos
-    "UID" => "SA",
-    "PWD" => '"asd123"',
-    "CharacterSet" => "UTF-8"
+    "Uid" => "SA", // Usuario SQL Server
+    "PWD" => '"asd123"', // Contraseña del usuario SQL Server
+    "CharacterSet" => "UTF-8", // Para caracteres especiales
+    "TrustServerCertificate" => true // Confía en certificados autofirmados
 );
-$conn = sqlsrv_connect($serverName, $connectionInfo);
 
-if ($conn) {
-    echo "";
-} else {
+// Conectar al servidor SQL Server
+$conn = sqlsrv_connect($serverName, $connectionOptions);
+
+// Verificar la conexión
+if ($conn === false) {
     echo "Error en la conexión.<br>";
-    die(print_r(sqlsrv_errors(), true));
+    // Obtener y mostrar errores detallados
+    $errors = sqlsrv_errors();
+    foreach ($errors as $error) {
+        echo "SQLSTATE: " . $error['SQLSTATE'] . "<br>";
+        echo "Code: " . $error['code'] . "<br>";
+        echo "Message: " . $error['message'] . "<br>";
+    }
+} else {
+    //echo "Conexión exitosa.";
 }
+
+
 
 if (isset($_GET['legajo'])) {
     // Asignar el valor de legajo a la variable
@@ -562,12 +577,24 @@ if (isset($_GET['legajo'])) {
                       $encodedNomdep = urlencode($nomdep);
                     }
                                     echo "</td>";
-                echo "<td style='text-align: center;'>";
-                echo "<a class='btn btn-sm btn-danger movimientoBorrado' href='#' data-id2='" . $row['id2'] . "' title='Eliminar'><i class='glifo glifo-trash'></i> Eliminar</a>";
-                $encodedNomdep = urlencode($row['nomdep']);
-                $encodeObs = urlencode($row['obs']);
-                $encodedObs = urlencode($row['obs']); // Codificar la observación para pasarla en la URL
-                echo "<a href='Inscripcion.php?legajo=" . $legajo . "&codmod=" . $row['codmod'] . "&tipo=" . $row['tipo'] . "&nomdep=" . $encodedNomdep . "&obs=" . $encodedObs . "&horas=" . $row['horas'] . "&anodoc=" . $row['anodoc'] . "&id2=" . $row['id2'] . "&fecha=" . $encodedFecha . "' class='btn btn-success' title='Modificar'>";
+                                    echo "<td style='text-align: center;'>";
+                                    echo "<a class='btn btn-sm btn-danger movimientoBorrado' href='#' data-id2='" . htmlspecialchars($row['id2'], ENT_QUOTES, 'UTF-8') . "' title='Eliminar'><i class='glifo glifo-trash'></i> Eliminar</a>";
+                                    
+                                    // Asegúrate de que las variables sean cadenas antes de aplicar urlencode
+                                    $encodedNomdep = isset($row['nomdep']) ? urlencode((string) $row['nomdep']) : '';
+                                    $encodedObs = isset($row['obs']) ? urlencode((string) $row['obs']) : '';
+                                    $encodedFecha = isset($row['fecha']) ? urlencode((string) $row['fecha']) : ''; // Suponiendo que también necesitas codificar $row['fecha']
+                                    
+                                    // Codificar otros valores en la URL
+                                    $encodedLegajo = isset($legajo) ? urlencode((string) $legajo) : '';
+                                    $encodedCodmod = isset($row['codmod']) ? urlencode((string) $row['codmod']) : '';
+                                    $encodedTipo = isset($row['tipo']) ? urlencode((string) $row['tipo']) : '';
+                                    $encodedHoras = isset($row['horas']) ? urlencode((string) $row['horas']) : '';
+                                    $encodedAnodoc = isset($row['anodoc']) ? urlencode((string) $row['anodoc']) : '';
+                                    $encodedId2 = isset($row['id2']) ? urlencode((string) $row['id2']) : '';
+                                    
+                                    // El resto del código
+                                    echo "<a href='Inscripcion.php?legajo=" . $encodedLegajo . "&codmod=" . $encodedCodmod . "&tipo=" . $encodedTipo . "&nomdep=" . $encodedNomdep . "&obs=" . $encodedObs . "&horas=" . $encodedHoras . "&anodoc=" . $encodedAnodoc . "&id2=" . $encodedId2 . "&fecha=" . $encodedFecha . "' class='btn btn-success' title='Modificar'>";
                 
                 echo "<span class='glifo glifo-lápiz'></span> Modificar";
                 echo "</a>";

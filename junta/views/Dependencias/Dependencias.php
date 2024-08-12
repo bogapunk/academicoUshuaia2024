@@ -132,7 +132,7 @@ class Dependencia{
 
 */
 class Dependencia {
-    private $serverName = "db";
+    private $serverName = "192.168.18.207,1433";
     private $username = "SA"; // Reemplaza con tu usuario de SQL Server
     private $password = '"asd123"'; // Reemplaza con tu contraseña de SQL Server
     private $dbName = "junta";
@@ -144,7 +144,8 @@ class Dependencia {
             $connectionOptions = array(
                 "Database" => $this->dbName,
                 "Uid" => $this->username,
-                "PWD" => $this->password
+                "PWD" => $this->password,
+                "TrustServerCertificate" => true // Desactiva la verificación del certificado
             );
             $this->conn = sqlsrv_connect($this->serverName, $connectionOptions);
             if ($this->conn === false) {

@@ -1,14 +1,17 @@
 <?php
 session_start();
 
-define('DB_HOST', 'db');
+define('DB_HOST', '192.168.18.207,1433');
 define('DB_USER', 'SA');
-define('DB_PASS', '30153846');
+define('DB_PASS', '"asd123"');
 define('DB_NAME', 'junta');
 
 try {
-    $connect = new PDO("sqlsrv:Server=" . DB_HOST . ";Database=" . DB_NAME, DB_USER, DB_PASS);
+    // Construir la cadena de conexión para SQL Server con TrustServerCertificate=true
+    $dsn = "sqlsrv:Server=" . DB_HOST . ";Database=" . DB_NAME . ";TrustServerCertificate=true";
+    $connect = new PDO($dsn, DB_USER, DB_PASS);
     $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+   // echo "Conexión exitosa";
 } catch (PDOException $e) {
     exit("Error de conexión: " . $e->getMessage());
 }

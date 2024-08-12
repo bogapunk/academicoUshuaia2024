@@ -165,9 +165,9 @@ class DependenciasModel
     public function __CONSTRUCT()
     {
         try
-        {
-            $this->pdo = new PDO('sqlsrv:Server=db;Database=junta', 'SA', '30153846');
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		{
+            $this->pdo = new PDO('sqlsrv:Server=db;Database=junta;TrustServerCertificate=yes', 'SA', '"asd123"');
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);	
         }
         catch(Exception $e)
         {

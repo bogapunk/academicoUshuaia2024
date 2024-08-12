@@ -371,7 +371,7 @@ class DocentesModel
         try
         {
             // Conexión a SQL Server
-            $serverName = "db"; // Servidor de SQL Server
+            $serverName = "192.168.18.207,1433"; // Servidor de SQL Server
             $database = "junta"; // Nombre de la base de datos
             $username = "SA"; // Usuario de la base de datos
             $password = '"asd123"'; // Contraseña de la base de datos

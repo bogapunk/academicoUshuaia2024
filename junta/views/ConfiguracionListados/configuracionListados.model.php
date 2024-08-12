@@ -155,12 +155,8 @@ class ConfiguracionListadosModel
     {
         try
         {
-            // Configuración de conexión a SQL Server
-            $dsn = "sqlsrv:Server=localhost;Database=junta";
-            $user = 'SA'; // Cambia tu_usuario por el nombre de usuario de SQL Server
-            $pass = '30153846'; // Cambia tu_contraseña por la contraseña de SQL Server
-            $this->pdo = new PDO($dsn, $user, $pass);
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);	        
+            $this->pdo = new PDO('sqlsrv:Server=db;Database=junta;TrustServerCertificate=yes', 'SA', '"asd123"');
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);	
         }
         catch(Exception $e)
         {
