@@ -15,7 +15,7 @@ class ConsultaDocentes{
         $this->_db->conectar();
 
 
-        $consulta = $this->_db->cnx->prepare("SELECT * FROM _junta_docentes ORDER by legajo asc ");
+        $consulta = $this->_db->cnx->prepare("SELECT * FROM _junta_docentes ORDER by legajo asc");
 
         $consulta->execute();
 

@@ -32,16 +32,22 @@ class Conexion {
     public function buscar() {
         $this->conectar();
 
-        $consulta = $this->cnx->prepare("SELECT * FROM usuarios");
-        $consulta->execute();
+        try {
+            $consulta = $this->cnx->prepare("SELECT * FROM usuarios");
+            $consulta->execute();
 
-        $this->lista_usuarios = array();
-        while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
-            $this->lista_usuarios[] = $row;
+            $this->lista_usuarios = array();
+            while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
+                $this->lista_usuarios[] = $row;
+            }
+
+            $this->desconectar();
+            return $this->lista_usuarios;
+        } catch (PDOException $e) {
+            // Registrar el error de la consulta
+            error_log("Error en la consulta: " . $e->getMessage(), 0);
+            echo "Error en la consulta: " . $e->getMessage();
         }
-
-        $this->desconectar();
-        return $this->lista_usuarios;
     }
 }
 ?>

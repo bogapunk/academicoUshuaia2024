@@ -273,16 +273,20 @@ function topFunction() {
 <?php
 // Te recomiendo utilizar esta conección, la que utilizas ya no es la recomendada. 
 //$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password. 
-try {
-  $serverName = "localhost";
-  $databaseName = "junta";
-  $username = "SA"; // Reemplaza con tu nombre de usuario de SQL Server
-  $password = '"asd123"'; // Reemplaza con tu contraseña de SQL Server
+// Definir las credenciales de la base de datos
+define('DB_HOST', 'db');
+define('DB_USER', 'SA');
+define('DB_PASS', '"asd123"');
+define('DB_NAME', 'junta');
 
-  $pdo = new PDO("sqlsrv:Server=$serverName;Database=$databaseName;TrustServerCertificate=true", $username, $password);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+try {
+    // Construir la cadena de conexión para SQL Server con TrustServerCertificate=true
+    $dsn = "sqlsrv:Server=" . DB_HOST . ";Database=" . DB_NAME . ";TrustServerCertificate=true";
+    $link = new PDO($dsn, DB_USER, DB_PASS);
+    $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
 } catch (PDOException $e) {
-  die("Error de conexión: " . $e->getMessage());
+    exit("Error de conexión: " . $e->getMessage());
 }
 ?>
 
@@ -348,7 +352,7 @@ try {
                                 <button class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR">Limpiar Formulario</button>
                               &nbsp&nbsp&nbsp&nbsp
                               <button class="btn btn-info">
-                                <a href="javascript:imprSelec('seleccion')"  style="color: white;">Imprimir Modalalida</a></button>
+                                <a href="javascript:imprSelec('seleccion')"  style="color: white;">Imprimir Listado</a></button>
 
                             </td>
 

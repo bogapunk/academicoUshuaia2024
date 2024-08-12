@@ -297,6 +297,7 @@ $connectionOptions = array(
     "Database" => BD,
     "Uid" => DB_USER,
     "PWD" => PASS,
+    "TrustServerCertificate"=>True,
     "CharacterSet" => 'UTF-8'
 );
 

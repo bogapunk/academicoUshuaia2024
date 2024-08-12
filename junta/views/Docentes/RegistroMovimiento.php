@@ -432,13 +432,15 @@ tr:nth-child(even) {
 // Te recomiendo utilizar esta conexión, la que utilizas ya no es la recomendada.
 // conexion anterior $link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password.
 // Datos de conexión a la base de datos
-$serverName = "localhost"; // Servidor de SQL Server
+
+// Datos de conexión a la base de datos
+$serverName = "db"; // Servidor de SQL Server
 $database = "junta"; // Nombre de la base de datos
 $username = "SA"; // Usuario de la base de datos
-$password = '"asd123"'; // Contraseña de la base de datos
+$password = '"asd123"'; // Contraseña de la base de datos (eliminé las comillas innecesarias)
 
-// DSN para SQL Server
-$dsn = "sqlsrv:Server=$serverName;Database=$database";
+// DSN para SQL Server con TrustServerCertificate activado
+$dsn = "sqlsrv:Server=$serverName;Database=$database;TrustServerCertificate=true";
 
 try {
     // Crear una nueva conexión PDO
@@ -446,6 +448,7 @@ try {
 
     // Configurar el modo de error de PDO a excepción
     $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
 } catch (PDOException $e) {
     echo "Error de conexión: " . $e->getMessage();
@@ -466,22 +469,48 @@ if (isset($_SESSION['message'])) {
 
 
 <?php
+// Definir el parámetro legajo
+if (isset($_GET['legajo'])) {
+  $legajo = $_GET['legajo'];
+} else {
+  die("El parámetro 'legajo' no está presente en la URL.");
+}
 
-$legajo = $_GET['legajo'];
 // Configuración de la conexión a SQL Server
-$serverName = "localhost"; // Cambia esto si tu servidor no es localhost
+$serverName = "db"; // Dirección y puerto del servidor SQL Server
 $connectionOptions = array(
-    "Database" => "junta",
-    "Uid" => "SA", // Cambia esto a tu usuario real
-    "PWD" => '"asd123"'     // Cambia esto a tu contraseña real
+  "Database" => "junta",
+  "Uid" => "SA", // Usuario de la base de datos
+  "PWD" => '"asd123"', // Contraseña de la base de datos
+  "CharacterSet" => "UTF-8" // Para caracteres especiales
 );
+
+// Configuración de las opciones de conexión para manejar certificados auto-firmados
+$connectionOptions['TrustServerCertificate'] = true; // Ignorar problemas de certificados SSL
 
 // Establecer la conexión
 $conn = sqlsrv_connect($serverName, $connectionOptions);
 
 // Comprobar la conexión
 if ($conn === false) {
-    die(print_r(sqlsrv_errors(), true));
+  die("Error de conexión: " . print_r(sqlsrv_errors(), true));
+}
+
+// Consulta SQL
+$query = "SELECT legajo, apellidoynombre, fechanacim, titulobas, promediot, otrostit, cargosdocentes, fingreso FROM _junta_docentes WHERE legajo = ?";
+$params = array($legajo);
+$stmt = sqlsrv_query($conn, $query, $params);
+
+// Verificar si se encontraron docentes
+if ($stmt === false) {
+  die("Error en la consulta: " . print_r(sqlsrv_errors(), true));
+}
+
+// Aquí puedes procesar los resultados de la consulta
+while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+  echo "Legajo: " . htmlspecialchars($row['legajo']) . "<br>";
+  echo "Nombre: " . htmlspecialchars($row['apellidoynombre']) . "<br>";
+  // Agrega más campos según sea necesario
 }
 
 // Consulta SQL
@@ -681,6 +710,7 @@ $connectionOptions = array(
     "Database" => "junta",
     "Uid" => "SA", // Cambia esto a tu usuario real
     "PWD" => '"asd123"',     // Cambia esto a tu contraseña real
+    "TrustServerCertificate"=>True,
     "CharacterSet" => 'UTF-8'
 );
 

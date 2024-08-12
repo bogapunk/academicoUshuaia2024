@@ -327,22 +327,27 @@ button:hover {
                         
                         $conditions['return_type'] = 'single';
 
-                        $modalidadData = $modalidad->getRows2($conditions); ?>
-                  <center>    
-                    <select id="Titulo" class="form-control" name="titulo">
+                        $modalidadData = $modalidad->getRows3($conditions); 
+                                // Opciones del select
+$opciones = [
+    "DOCENTE" => "DOCENTE",
+    "HABILITANTE" => "HABILITANTE",
+    "SUPLETORIO" => "SUPLETORIO"
+];
 
-                                        <option value="DOCENTE" <?php if ($modalidadData['titulo'] == "DOCENTE") {
-                                                                            echo "selected";
-                                                                        } ?>>DOCENTE</option>
-                                        <option value="HABILITANTE" <?php if ($modalidadData['titulo'] == "HABILITANTE") {
-                                                                        echo "selected";
-                                                                    } ?>>HABILITANTE</option>
-                                                                         <option value="SUPLETORIO" <?php if ($modalidadData['titulo'] == "SUPLETORIO") {
-                                                                        echo "selected";
-                                                                    } ?>>SUPLETORIO</option>
-                                                                         
-                                    </select>
-               </center>
+// Verificar si se obtuvieron datos y asignar el valor seleccionado (si existe)
+$tituloSeleccionado = isset($modalidadData['titulo']) ? $modalidadData['titulo'] : null;
+?>
+
+<center> 
+    <select id="titulo" class="form-control" name="titulo">
+        <?php foreach ($opciones as $valor => $etiqueta): ?>
+            <option value="<?= $valor ?>" <?php if ($valor == $tituloSeleccionado) echo "selected"; ?>>
+                <?= $etiqueta ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</center>
 
 
 
@@ -363,7 +368,7 @@ button:hover {
 
 
 			</form>
-            <center><a href="http://localhost:8080/sistemajunta2024/views/Modalidades/ListarModalidades.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
+            <center><a href="http://localhost:8009/views/Modalidades/ListarModalidades.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
 
 
 

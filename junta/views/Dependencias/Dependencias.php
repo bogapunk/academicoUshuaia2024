@@ -144,7 +144,8 @@ class Dependencia {
             $connectionOptions = array(
                 "Database" => $this->dbName,
                 "Uid" => $this->username,
-                "PWD" => $this->password
+                "PWD" => $this->password,
+                "TrustServerCertificate" => true // Desactiva la verificación del certificado
             );
             $this->conn = sqlsrv_connect($this->serverName, $connectionOptions);
             if ($this->conn === false) {

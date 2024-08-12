@@ -3,21 +3,20 @@
 // Inicia la sesión
 session_start();
 
-// Credenciales de la base de datos SQL Server
-define('DB_HOST', 'localhost'); // Cambia localhost por la dirección del servidor SQL Server
-define('DB_USER', 'SA'); // Cambia tu_usuario por el nombre de usuario de SQL Server
-define('DB_PASS', '30153846'); // Cambia tu_contraseña por la contraseña de SQL Server
-define('DB_NAME', 'junta'); // Nombre de la base de datos en SQL Server
+// Definir las credenciales de la base de datos
+define('DB_HOST', 'db');
+define('DB_USER', 'SA');
+define('DB_PASS', '"asd123"');
+define('DB_NAME', 'junta');
 
 try {
-    // Intenta conectar con la base de datos SQL Server
-    $connect = new PDO("sqlsrv:Server=" . DB_HOST . ";Database=" . DB_NAME, DB_USER, DB_PASS);
+    // Construir la cadena de conexión para SQL Server con TrustServerCertificate=true
+    $dsn = "sqlsrv:Server=" . DB_HOST . ";Database=" . DB_NAME . ";TrustServerCertificate=true";
+    $connect = new PDO($dsn, DB_USER, DB_PASS);
     $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
 } catch (PDOException $e) {
     exit("Error de conexión: " . $e->getMessage());
 }
-
 // Verifica si se ha enviado el formulario
 if (isset($_POST['insertar'])) {
     // Obtiene los datos del formulario

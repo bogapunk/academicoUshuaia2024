@@ -282,18 +282,23 @@ tr:nth-child(even) {
 $link = new PDO('mysql:host=db;dbname=junta', 'root', ''); // el campo vaciío es para la password.
 */
 
+define('DB_HOST', 'db');
+define('DB_USER', 'SA');
+define('DB_PASS', '"asd123"');
+define('DB_NAME', 'junta');
+
 try {
-  $link = new PDO('sqlsrv:Server=localhost;Database=junta', 'SA', '30153846');
-  // Configura los atributos de PDO
-  $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  echo "Conexión exitosa";
+    // Construir la cadena de conexión para SQL Server con TrustServerCertificate=true
+    $dsn = "sqlsrv:Server=" . DB_HOST . ";Database=" . DB_NAME . ";TrustServerCertificate=true";
+    $link = new PDO($dsn, DB_USER, DB_PASS);
+    $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
 } catch (PDOException $e) {
-  echo "Error en la conexión: " . $e->getMessage();
+    exit("Error de conexión: " . $e->getMessage());
 }
-?>
 
     
-
+?>
 <?php 
 
   if(isset($_SESSION['message'])){

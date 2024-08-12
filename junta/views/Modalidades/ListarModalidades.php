@@ -270,13 +270,20 @@ tr:nth-child(even) {
 /* conexion anterior
 $link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password. 
 */
+// Definir las credenciales de la base de datos
+define('DB_HOST', 'db');
+define('DB_USER', 'SA');
+define('DB_PASS', '"asd123"');
+define('DB_NAME', 'junta');
+
 try {
-    $link = new PDO('sqlsrv:Server=localhost;Database=junta', 'SA', '30153846');
-    // Establecer el modo de error de PDO a excepción
+    // Construir la cadena de conexión para SQL Server con TrustServerCertificate=true
+    $dsn = "sqlsrv:Server=" . DB_HOST . ";Database=" . DB_NAME . ";TrustServerCertificate=true";
+    $link = new PDO($dsn, DB_USER, DB_PASS);
     $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Conexión exitosa";
+    
 } catch (PDOException $e) {
-    echo "Hubo un problema con la conexión: " . $e->getMessage();
+    exit("Error de conexión: " . $e->getMessage());
 }
 ?>
 
@@ -304,7 +311,7 @@ try {
                     <table style="width:750px;" id="seleccion">
                         <tr>
                             <th style="text-align:left;">Modalidad</th>
-                            <td><input type="number" name="codmod" value="<?php echo $mod->__GET('codmod'); ?>"class="form-control" /></td>
+                            <td><input type="text" name="codmod" value="<?php echo $mod->__GET('codmod'); ?>"class="form-control" /></td>
                         </tr>
                         <tr>
                             <th style="text-align:left;">Descripcion</th>
@@ -326,7 +333,7 @@ try {
 
                         <tr>
                             <th style="text-align:left;">Tope</th>
-                            <td><input type="number" name="tope" value="<?php echo $mod->__GET('tope'); ?>" class="form-control" /></td>
+                            <td><input type="text" name="tope" value="<?php echo $mod->__GET('tope'); ?>" class="form-control" /></td>
                         </tr>
 
                         <tr>
@@ -350,55 +357,16 @@ try {
               </center>
 
               <!--Script para la impresion de modalidad -->
-      <script language="Javascript">
-          function imprSelec(nombre) {
-              var codmod = document.querySelector('input[name="codmod"]').value;
-              var nommod = document.querySelector('input[name="nommod"]').value;
-              var titulo = document.querySelector('select[name="titulo"]').value;
-              var tope = document.querySelector('input[name="tope"]').value;
-
-              <!--Plantilla HTML -->
-              var plantilla = `
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>Reporte</title>
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                    }
-                    h1 {
-                        text-align: center;
-                    }
-                    p {
-                        font-size: 14px;
-                        margin: 5px 0;
-                    }
-                </style>
-            </head>
-            <body>
-                <h1>Reporte de Modalidad</h1>
-                <p><strong>Modalidad:</strong> {{codmod}}</p>
-                <p><strong>Descripción:</strong> {{nommod}}</p>
-                <p><strong>Título:</strong> {{titulo}}</p>
-                <p><strong>Tope:</strong> {{tope}}</p>
-            </body>
-            </html>
-        `;
-
-              plantilla = plantilla.replace('{{codmod}}', codmod);
-              plantilla = plantilla.replace('{{nommod}}', nommod);
-              plantilla = plantilla.replace('{{titulo}}', titulo);
-              plantilla = plantilla.replace('{{tope}}', tope);
-
-              var ventimp = window.open('', 'popimpr');
-              ventimp.document.write(plantilla);
-              ventimp.document.close();
-              ventimp.print();
-              ventimp.close();
-          }
-      </script>
-
+              <script language="Javascript">
+                function imprSelec(nombre) {
+                  var ficha = document.getElementById(nombre);
+                  var ventimp = window.open(' ', 'popimpr');
+                  ventimp.document.write( ficha.innerHTML );
+                  ventimp.document.close();
+                  ventimp.print( );
+                  ventimp.close();
+                }
+              </script>
 
 
 <div class="container-fluid">
@@ -502,7 +470,7 @@ function myConfirm2() {
 }
 //funcion descargar excel 
 function myConfirm3() {
-  var result = confirm("¿Desea descargar a excel las Modalidades?");
+  var result = confirm("¿Desea descragra a excel las Modalidad?");
   if (result==true) {
    return true;
 

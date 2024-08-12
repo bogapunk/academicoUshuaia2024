@@ -6,12 +6,11 @@ define('DB_USER', 'SA'); // Usuario de la base de datos
 define('PASS', '30153846'); // Contraseña de la base de datos
 define('CHARSET', 'utf8'); // Juego de caracteres de la base de datos
 
-$dsn = "sqlsrv:Server=" . HOST . ";Database=" . BD;
+$dsn = "sqlsrv:Server=" . HOST . ";Database=" . BD.";TrustServerCertificate=True";
 
 try {
     $conexion = new PDO($dsn, DB_USER, PASS);
     $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Conexión exitosa.<br>";
 
     // Función para validar y convertir valores numéricos
     function validate_numeric($value) {
