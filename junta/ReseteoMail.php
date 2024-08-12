@@ -21,7 +21,8 @@ class SqlServer {
         $connectionInfo = array(
             "Database" => $this->dbName,
             "UID" => $this->dbUsername,
-            "PWD" => $this->dbPassword
+            "PWD" => $this->dbPassword,
+            "TrustServerCertificate"=>true
         );
         $this->db = sqlsrv_connect($this->dbHost, $connectionInfo);
         if ($this->db === false) {
@@ -111,18 +112,19 @@ if (isset($_POST['forgotSubmit'])) {
             // Actualizar el token en la base de datos
             $usuarioModel->actualizarToken($userId, $token);
 
+
             // Enviar correo electrónico con el enlace de restablecimiento de contraseña usando PHPMailer
-            $resetLink = 'http://localhost:8080/juntas/ReiniciarPassword.php?token=' . $token;
+            $resetLink = stripos($_SERVER['SERVER_PROTOCOL'],'http') === 0 ? "https"."://".$_SERVER['HTTP_HOST'].'/ReiniciarPassword.php?token=' . $token : "http"."://".$_SERVER['HTTP_HOST'].'/ReiniciarPassword.php?token=' . $token;
 
             // Configurar PHPMailer
             $mail = new PHPMailer(true);
             try {
                 //Server settings
                 $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com';
+                $mail->Host = 'sandbox.smtp.mailtrap.io';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'bogarin1983@gmail.com'; // Tu correo Gmail
-                $mail->Password = 'Dbogarin30153846'; // Tu contraseña Gmail
+                $mail->Username = 'd042d602592f0b'; // Tu correo Gmail
+                $mail->Password = 'b5809fa388b86f'; // Tu contraseña Gmail
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
 

@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // Datos de conexión a SQL Server
 $serverName = "db"; // o la dirección IP del servidor
 $database = "junta";
@@ -13,4 +14,5 @@ try {
 } catch (PDOException $e) {
     echo "Error en la conexión: " . $e->getMessage();
 }
+ob_end_flush();
 ?>

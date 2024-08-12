@@ -41,3 +41,7 @@ GO
 ALTER TABLE usuarios
     ADD rol NVARCHAR(50) NULL;
 GO
+
+ALTER TABLE usuarios
+    ADD token NVARCHAR(65) NULL;
+GO
