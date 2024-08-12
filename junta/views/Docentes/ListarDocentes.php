@@ -425,7 +425,7 @@ try {
                         </tr>
                          <tr>
                             <th style="text-align:left;">telefono</th>
-                            <td><input type="number" name="telefonos" value="<?php echo $doc->__GET('telefonos'); ?>" class="form-control"/></td>
+                            <td><input type="text" name="telefonos" value="<?php echo $doc->__GET('telefonos'); ?>" class="form-control"/></td>
                         </tr>
                         <tr>
                             <th style="text-align:left;">Titulo Basico</th>

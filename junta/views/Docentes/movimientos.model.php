@@ -657,7 +657,7 @@ class MovimientosModel
             $username = "SA";
             $password = '"asd123"';
 
-            $this->pdo = new PDO("sqlsrv:Server=$serverName;Database=$database", $username, $password);
+            $this->pdo = new PDO("sqlsrv:Server=$serverName;Database=$database;TrustServerCertificate=True", $username, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         catch(Exception $e)

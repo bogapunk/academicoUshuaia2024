@@ -135,7 +135,7 @@ if(isset($_POST['insertar'])){
 
     try {
         // Establecer la conexión a la base de datos
-        $connect = new PDO("sqlsrv:Server=" . DB_HOST . ";Database=" . DB_NAME, DB_USER, DB_PASS);
+        $connect = new PDO("sqlsrv:Server=" . DB_HOST . ";Database=" . DB_NAME."TrustServerCertificate=True", DB_USER, DB_PASS);
         $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Preparar la consulta SQL

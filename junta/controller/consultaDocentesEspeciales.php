@@ -7,7 +7,7 @@ class Consulta2{
 
     public function __construct(){
         $this->_db = new Conexion();
-        
+
     }
 
     public function buscarDocentesEspeciales(){
@@ -15,7 +15,7 @@ class Consulta2{
         $this->_db->conectar();
 
 
-        $consulta = $this->_db->cnx->prepare("SELECT * FROM DocentesEspeciales ORDER by Total DESC");
+        $consulta = $this->_db->cnx->prepare("SELECT * FROM dbo.DocentesEspeciales ORDER by Total DESC");
 
         $consulta->execute();
 

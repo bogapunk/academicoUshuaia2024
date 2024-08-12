@@ -10,7 +10,7 @@ class Database {
             if ($dbType == 'mysql') {
                 $dsn = "mysql:host=$host;dbname=$dbname";
             } elseif ($dbType == 'sqlsrv') {
-                $dsn = "sqlsrv:Server=$host;Database=$dbname";
+                $dsn = "sqlsrv:Server=$host;Database=$dbname;TrustServerCertificate=True";
             }
             $this->pdo = new PDO($dsn, $username, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

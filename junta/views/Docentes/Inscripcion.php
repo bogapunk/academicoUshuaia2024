@@ -340,7 +340,7 @@ try {
   $password = '"asd123"'; // Password
 
   // Connection String (PDO SQL Server Format)
-  $conn = new PDO("sqlsrv:Server=$serverName;Database=$databaseName", $username, $password); 
+  $conn = new PDO("sqlsrv:Server=$serverName;Database=$databaseName;TrustServerCertificate=True", $username, $password);
 
   // Error Handling (Optional, but highly recommended)
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  

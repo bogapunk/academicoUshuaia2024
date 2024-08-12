@@ -426,7 +426,7 @@ $username = "SA"; // Reemplaza con tu nombre de usuario de SQL Server
 $password = '"asd123"'; // Reemplaza con tu contraseña de SQL Server (deja vacío si no hay contraseña)
 
 try {
-    $conn = new PDO("sqlsrv:Server=$serverName;Database=$database", $username, $password);
+    $conn = new PDO("sqlsrv:Server=$serverName;Database=$database;TrustServerCertificate=True", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "";
 } catch (PDOException $e) {

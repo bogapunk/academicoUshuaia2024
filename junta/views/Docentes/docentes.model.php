@@ -440,8 +440,8 @@ class DocentesModel
         SELECT * FROM (
             SELECT 
                 ROW_NUMBER() OVER (ORDER BY legajo) AS rownum, 
-                id2, legajo, ApellidoyNombre AS apellidoynombre, dni, domicilio, lugarinsc, 
-                CONVERT(VARCHAR, fechanacim, 103) AS fechanacim, promediot, telefonos, titulobas, 
+                id2, legajo, ApellidoyNombre AS apellidoynombre, CAST(dni AS INT) as dni, Domicilio as domicilio, lugarinsc, 
+                CONVERT(VARCHAR, fechanacim, 103) AS fechanacim, promediot, telefonos  as telefonos, titulobas, 
                 CONVERT(VARCHAR, fechatit, 103) AS fechatit, otorgadopor, 
                 CONVERT(VARCHAR, finicio, 103) AS finicio, otrostit, 
                 CONVERT(VARCHAR, fingreso, 103) AS fingreso, cargosdocentes, 
@@ -494,7 +494,7 @@ class DocentesModel
     {
         try
         {
-            $stm = $this->pdo->prepare("SELECT *, ApellidoyNombre AS apellidoynombre FROM _junta_docentes WHERE id2 = ?");
+            $stm = $this->pdo->prepare("SELECT id2,legajo, ApellidoyNombre AS apellidoynombre,Domicilio as domicilio,CAST(dni as INT) as dni,lugarinsc,fechanacim,promedioT,telefonos,Titulobas,fechatit,otorgadopor,finicio,otrostit,fingreso,cargosdocentes,faperturaleg,Nacionalidad,obsdoc FROM _junta_docentes WHERE id2 = ?");
             $stm->execute(array($id2));
             $r = $stm->fetch(PDO::FETCH_OBJ);
 
