@@ -2,7 +2,7 @@
 <?php
 
 // Include database connection
-require_once 'dbconect.php';
+include('dbconect.php');
 class Connection {
   private $serverName = "db"; // o la dirección IP del servidor
   private $database = "junta";
@@ -60,7 +60,11 @@ if (isset($_GET['id'])) {
   $_SESSION['message'] = "No se ha seleccionado un usuario para eliminar.";
 }
 
+$redirectURL = stripos($_SERVER['SERVER_PROTOCOL'],'http') === 0 ? 'https://'.$_SERVER['HTTP_HOST'].'/views/Usuarios/ListarUsuarios.php' : 'http://'.$_SERVER['HTTP_HOST'].'/views/Usuarios/ListarUsuarios.php';
+
 // Redirect to the list users page
-ob_start();
-header('Location: ./ListarUsuarios.php');
-ob_end_flush();
+echo('<script type="text/javascript">
+window.location.href="'.$redirectURL.'?message=El Usuario fue eliminado con exito"
+</script>')
+
+?>

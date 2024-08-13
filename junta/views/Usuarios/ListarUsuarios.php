@@ -153,9 +153,9 @@ tr:nth-child(even) {
 
   <script type="text/javascript">
   
-if (<?php echo isset($_SESSION['message']) ? 'true' : 'false'; ?>) {
+if (<?php echo isset($_REQUEST['message']) ? 'true' : 'false'; ?>) {
   // Get the message from the session
-  var message = "<?php echo $_SESSION['message']; ?>";
+  var message = "<?php echo $_REQUEST['message']; ?>";
 
   // Create a Bootstrap alert element based on the message type (success or error)
   var alertType = (message.includes("eliminado") || message.includes("éxito")) ? "success" : "danger";
@@ -165,7 +165,7 @@ if (<?php echo isset($_SESSION['message']) ? 'true' : 'false'; ?>) {
   $("#message-container").prepend(alertHtml);
 
   // Clear the message from the session
-  <?php unset($_SESSION['message']); ?>
+  <?php unset($_REQUEST['message']); ?>
 }
   
 </script>
