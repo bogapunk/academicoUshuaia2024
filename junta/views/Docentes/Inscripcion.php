@@ -860,7 +860,7 @@ echo "</script>";
                                               echo "</td>";
                                               echo"<th>";
 
-                                              $serverName = "localhost";
+                                              $serverName = "db";
                                               $connectionOptions = array(
                                                   "Database" => "junta",
                                                   "Uid" => "SA",

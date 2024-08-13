@@ -450,7 +450,7 @@ span {
             <option value="" style="width: 500px;">Seleccione</option>
             <?php
             // Database connection (assuming you have a separate connection file)
-            $conn = new mysqli("localhost", "root", "", "junta"); // Replace with your connection file path
+            $conn = new mysqli("db", "root", "", "junta"); // Replace with your connection file path
 
             // SQL query to retrieve modalities
             $sql_modality = "SELECT codmod, nommod FROM _junta_modalidades order by nommod";
@@ -588,7 +588,7 @@ $nombreLocalidades = array(
   
   <?php
 // Database connection para traer datos de la base de datos de los establecimientos
-$conn = new mysqli("localhost", "root", "", "junta");
+$conn = new mysqli("db", "root", "", "junta");
 
 // Check connection
 if ($conn->connect_error) {
@@ -687,7 +687,7 @@ $conn->close();
 
 <?php
 // Database connection aca me conecto para trer datos de los listados generales
- $conn = new mysqli("localhost", "root", "", "junta");
+ $conn = new mysqli("db", "root", "", "junta");
 
 // Check connection
 if ($conn->connect_error) {
@@ -807,7 +807,7 @@ function habilitarEstablecimiento(selectedValue) {
     
 <?php
 // Te recomiendo utilizar esta conección, la que utilizas ya no es la recomendada. 
-$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password. 
+$link = new PDO('mysql:host=db;dbname=junta', 'root', ''); // el campo vaciío es para la password.
 
 ?>
 

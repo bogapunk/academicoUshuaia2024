@@ -9,7 +9,7 @@ class Conexion{
                 PDO::ATTR_ERRMODE =>PDO::ERRMODE_EXCEPTION
             );
             $this->cnx = new PDO(
-                "mysql:host=localhost;
+                "mysql:host=db;
                 dbname=".BD,
                 DB_USER, 
                 PASS,

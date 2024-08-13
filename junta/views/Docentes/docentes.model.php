@@ -376,7 +376,7 @@ class DocentesModel
             $username = "SA"; // Usuario de la base de datos
             $password = '"asd123"'; // Contraseña de la base de datos
 
-            $dsn = "sqlsrv:Server=$serverName;Database=$database;TrustServerCertificate=yes";
+            $dsn = "sqlsrv:Server=$serverName;Database=$database;TrustServerCertificate=True";
             $this->pdo = new PDO($dsn, $username, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }

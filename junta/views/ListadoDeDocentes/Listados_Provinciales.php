@@ -149,7 +149,7 @@ $codmod = (int)$codmod;
 $anio = (int)$anio;
 
 try {
-    $conexion = new Cconexion("localhost", "junta", "SA", '"asd123"');
+    $conexion = new Cconexion("db", "junta", "SA", '"asd123"');
     $conn = $conexion->conectar2();
 
     $query = "SELECT DISTINCT

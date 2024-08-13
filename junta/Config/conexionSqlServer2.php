@@ -36,7 +36,7 @@ class Cconexion {
 }
 
 // Example of usage with arguments
-$conexion = new Cconexion('localhost', 'ventas', 'SA', '30153846');
+$conexion = new Cconexion('db', 'ventas', 'SA', '30153846');
 $conn = $conexion->conectar2();
 
 

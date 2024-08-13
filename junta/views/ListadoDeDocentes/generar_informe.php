@@ -6,7 +6,7 @@ require('fpdf.php'); // Ajusta esta ruta según sea necesario
 
 
 // Conexiรณn a la base de datos
-$servername = "localhost";
+$servername = "db";
 $username = "root";
 $password = "";
 $dbname = "junta"; // Asegรบrate de que este sea el nombre correcto de la base de datos

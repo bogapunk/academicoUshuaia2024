@@ -440,7 +440,7 @@ $username = "SA"; // Usuario de la base de datos
 $password = '"asd123"'; // Contraseña de la base de datos (eliminé las comillas innecesarias)
 
 // DSN para SQL Server con TrustServerCertificate activado
-$dsn = "sqlsrv:Server=$serverName;Database=$database;TrustServerCertificate=true";
+$dsn = "sqlsrv:Server=$serverName;Database=$database;TrustServerCertificate=True";
 
 try {
     // Crear una nueva conexión PDO
@@ -481,7 +481,8 @@ $serverName = "db"; // Dirección y puerto del servidor SQL Server
 $connectionOptions = array(
   "Database" => "junta",
   "Uid" => "SA", // Usuario de la base de datos
-  "PWD" => '"asd123"', // Contraseña de la base de datos
+  "PWD" => '"asd123"',
+    "TrustServerCertificate"=>true,    // Contraseña de la base de datos
   "CharacterSet" => "UTF-8" // Para caracteres especiales
 );
 
@@ -506,12 +507,6 @@ if ($stmt === false) {
   die("Error en la consulta: " . print_r(sqlsrv_errors(), true));
 }
 
-// Aquí puedes procesar los resultados de la consulta
-while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-  echo "Legajo: " . htmlspecialchars($row['legajo']) . "<br>";
-  echo "Nombre: " . htmlspecialchars($row['apellidoynombre']) . "<br>";
-  // Agrega más campos según sea necesario
-}
 
 // Consulta SQL
 $query = "SELECT legajo, apellidoynombre, fechanacim, titulobas, promediot, otrostit, cargosdocentes, fingreso FROM _junta_docentes WHERE legajo = ?";
@@ -628,11 +623,12 @@ function showDetails(legajo) {
 <?php
 // Consulta SQL para obtener todas las modalidades
 // Configuración de la conexión a SQL Server
-$serverName = "localhost"; // Cambia esto si tu servidor no es localhost
+$serverName = "db"; // Cambia esto si tu servidor no es localhost
 $connectionOptions = array(
     "Database" => "junta",
     "Uid" => "SA", // Cambia esto a tu usuario real
     "PWD" => '"asd123"',     // Cambia esto a tu contraseña real
+    "TrustServerCertificate"=>True,
     "CharacterSet" => 'UTF-8'
 );
 
@@ -705,7 +701,7 @@ sqlsrv_close($conn);
 <?php
 // Realiza la consulta para obtener los nombres y IDs de los establecimientos
 // Configuración de la conexión a SQL Server
-$serverName = "localhost"; // Cambia esto si tu servidor no es localhost
+$serverName = "db"; // Cambia esto si tu servidor no es localhost
 $connectionOptions = array(
     "Database" => "junta",
     "Uid" => "SA", // Cambia esto a tu usuario real
@@ -792,10 +788,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (!empty($nomdep)) {
       try {
           // Configuración de la conexión a SQL Server
-          $serverName = "localhost"; // Nombre del servidor SQL Server
+          $serverName = "db"; // Nombre del servidor SQL Server
           $connectionOptions = array(
               "Database" => "junta", // Nombre de la base de datos
               "Uid" => "SA", // Usuario de la base de datos
+              "TrustServerCertificate"=>True,
               "PWD" => '"asd123"' // Contraseña de la base de datos
           );
 
@@ -841,11 +838,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 // Consulta SQL para obtener los valores únicos de codloc desde _junta_movimientos
 // Configuración de la conexión a SQL Server
-$serverName = "localhost"; // Cambia esto si tu servidor no es localhost
+$serverName = "db"; // Cambia esto si tu servidor no es localhost
 $connectionOptions = array(
     "Database" => "junta",
     "Uid" => "SA", // Cambia esto a tu usuario real
-    "PWD" => '"asd123"',     // Cambia esto a tu contraseña real
+    "PWD" => '"asd123"',
+    "TrustServerCertificate"=>True,// Cambia esto a tu contraseña real
     "CharacterSet" => "UTF-8" // para que lea los acentos y ñ
 );
 
