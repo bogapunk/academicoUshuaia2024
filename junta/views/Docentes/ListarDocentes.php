@@ -420,7 +420,7 @@ try {
                          <tr>
                             <th style="text-align:left;">Promedio</th>
                             <td>
-                                <input type="number" name="promediot" value="<?php echo number_format($doc->__GET('promediot'), 2, '.', ''); ?>" step="0.01" class="form-control" />
+                                <input type="number" name="promediot" value="<?php echo number_format($doc->__GET('promedioT'), 2, '.', ''); ?>" step="0.01" class="form-control" />
                             </td>
                         </tr>
                          <tr>
@@ -798,6 +798,7 @@ if ($page < $total_pages) {
     echo '<li><a href="?page=' . ($page + 1) . '">Siguiente &raquo;</a></li>';
 }
 echo '</ul>';
+g
 echo '</nav>';
 ?>
 
