@@ -4,15 +4,15 @@ class Docente
 	private $id2;
 	private $legajo;
 	private $apellidoynombre;
-	private $nacionalidad;
+	private $Nacionalidad;
 	private $fechanacim;
 	private $dni;
 	private $domicilio;
 	private $telefonos;
-	private $titulobas;
+	private $Titulobas;
 	private $otorgadopor;
 	private $fechatit;
-    private $promediot;
+    private $promedioT;
     private $otrostit;
     private $cargosdocentes;
     private $obsdoc;

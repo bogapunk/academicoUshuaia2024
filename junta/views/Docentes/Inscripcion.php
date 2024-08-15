@@ -330,25 +330,30 @@ tr:nth-child(even) {
 <br>
 
 <?php
-// Te recomiendo utilizar esta conexión, la que utilizas ya no es la recomendada.
-//$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password.
-try {
-  // Connection Parameters (Replace placeholders with your actual values)
-  $serverName = "db"; // Server name or IP address
-  $databaseName = "junta"; // Database name
-  $username = "SA"; // Username (might be different from MySQL)
-  $password = '"asd123"'; // Password
+// Establecer la conexión a SQL Server
+$serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
+$connectionInfo = array(
+    "Database" => "junta", // Reemplazar con el nombre de tu base de datos
+    "Uid" => "SA", // Usuario SQL Server
+    "PWD" => '"asd123"', // Contraseña del usuario SQL Server
+    "CharacterSet" => "UTF-8", // Para caracteres especiales
+    "TrustServerCertificate" => true // Confía en certificados autofirmados
+);
+$conn = sqlsrv_connect($serverName, $connectionInfo);
 
-  // Connection String (PDO SQL Server Format)
-  $conn = new PDO("sqlsrv:Server=$serverName;Database=$databaseName;TrustServerCertificate=True", $username, $password);
-
-  // Error Handling (Optional, but highly recommended)
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
-
-  echo "";
-} catch(PDOException $e) {
-  die("Connection failed: " . $e->getMessage());
+if ($conn) {
+    echo "";
+} else {
+    echo "Error en la conexión.<br>";
+    // Obtener y mostrar errores detallados
+    $errors = sqlsrv_errors();
+    foreach ($errors as $error) {
+        echo "SQLSTATE: " . $error['SQLSTATE'] . "<br>";
+        echo "Code: " . $error['code'] . "<br>";
+        echo "Message: " . $error['message'] . "<br>";
+    }
 }
+    //echo "Conexión exitosa.";
 ?>
 <?php
 
@@ -380,22 +385,30 @@ $horas = isset($_GET['horas']) ? $_GET['horas'] : '';
 
 
 // Configuración de la conexión a SQL Server
-$serverName = "db"; // O el nombre de tu servidor SQL
-$connectionOptions = array(
-    "Database" => "junta", // Nombre de la base de datos
-    "Uid" => "SA", // Usuario de SQL Server
-    "PWD" => '"asd123"', // Contraseña de SQL Server
-    "CharacterSet" => "UTF-8" // para que lea las ñ y acentos
+// Establecer la conexión a SQL Server
+$serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
+$connectionInfo = array(
+    "Database" => "junta", // Reemplazar con el nombre de tu base de datos
+    "Uid" => "SA", // Usuario SQL Server
+    "PWD" => '"asd123"', // Contraseña del usuario SQL Server
+    "CharacterSet" => "UTF-8", // Para caracteres especiales
+    "TrustServerCertificate" => true // Confía en certificados autofirmados
 );
+$conn = sqlsrv_connect($serverName, $connectionInfo);
 
-// Conectar con SQL Server
-$conn = sqlsrv_connect($serverName, $connectionOptions);
-
-// Verificar conexión
-if ($conn === false) {
-    die(print_r(sqlsrv_errors(), true));
+if ($conn) {
+    echo "";
+} else {
+    echo "Error en la conexión.<br>";
+    // Obtener y mostrar errores detallados
+    $errors = sqlsrv_errors();
+    foreach ($errors as $error) {
+        echo "SQLSTATE: " . $error['SQLSTATE'] . "<br>";
+        echo "Code: " . $error['code'] . "<br>";
+        echo "Message: " . $error['message'] . "<br>";
+    }
 }
-
+    //echo "Conexión exitosa.";
 // Definir la consulta
 $query = "SELECT legajo, apellidoynombre, fechanacim, titulobas, promediot, otrostit, cargosdocentes, fingreso FROM _junta_docentes WHERE legajo = ?";
 
@@ -523,21 +536,30 @@ $horas = $_GET['horas'];
 $id2 = $_GET['id2'];
 $fecha = isset($_GET['fecha']) ? $_GET['fecha'] : ''; // Recibir la fecha
 
-// Configuración de la conexión a SQL Server
-$serverName = "db"; // Nombre del servidor
-$connectionOptions = array(
-    "Database" => "junta", // Nombre de la base de datos
-    "Uid" => "SA", // Usuario
-    "PWD" => '"asd123"' ,// Contraseña
-    "CharacterSet" => "UTF-8" 
+// Establecer la conexión a SQL Server
+$serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
+$connectionInfo = array(
+    "Database" => "junta", // Reemplazar con el nombre de tu base de datos
+    "Uid" => "SA", // Usuario SQL Server
+    "PWD" => '"asd123"', // Contraseña del usuario SQL Server
+    "CharacterSet" => "UTF-8", // Para caracteres especiales
+    "TrustServerCertificate" => true // Confía en certificados autofirmados
 );
+$conn = sqlsrv_connect($serverName, $connectionInfo);
 
-// Establecer la conexión
-$conn = sqlsrv_connect($serverName, $connectionOptions);
-
-if ($conn === false) {
-    die(print_r(sqlsrv_errors(), true));
+if ($conn) {
+    echo "";
+} else {
+    echo "Error en la conexión.<br>";
+    // Obtener y mostrar errores detallados
+    $errors = sqlsrv_errors();
+    foreach ($errors as $error) {
+        echo "SQLSTATE: " . $error['SQLSTATE'] . "<br>";
+        echo "Code: " . $error['code'] . "<br>";
+        echo "Message: " . $error['message'] . "<br>";
+    }
 }
+    //echo "Conexión exitosa.";
 
 // Consulta SQL para obtener todos los nombres de modalidad
 $queryModalidades = "SELECT nommod FROM _junta_modalidades";
@@ -618,13 +640,15 @@ if ($resultData === false) {
     die(print_r(sqlsrv_errors(), true));
 }
 
+echo "<table border='1'>";  
+echo "<form id='miFormulario'>";
+
 // Verifica si hay filas en el resultado de la consulta
 if (sqlsrv_has_rows($resultData)) {
     $row = sqlsrv_fetch_array($resultData, SQLSRV_FETCH_ASSOC);
     
     // Imprimir la tabla
-    echo "<table border='1'>";
-echo "<form id='miFormulario'>";
+   
     echo "<tr>";
     
     // Curso
@@ -860,22 +884,30 @@ echo "</script>";
                                               echo "</td>";
                                               echo"<th>";
 
-                                              $serverName = "db";
-                                              $connectionOptions = array(
-                                                  "Database" => "junta",
-                                                  "Uid" => "SA",
-                                                  "PWD" => '"asd123"',
-                                                  "CharacterSet" => "UTF-8" 
+                                                                                    // Establecer la conexión a SQL Server
+                                        $serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
+                                        $connectionInfo = array(
+                                            "Database" => "junta", // Reemplazar con el nombre de tu base de datos
+                                            "Uid" => "SA", // Usuario SQL Server
+                                            "PWD" => '"asd123"', // Contraseña del usuario SQL Server
+                                            "CharacterSet" => "UTF-8", // Para caracteres especiales
+                                            "TrustServerCertificate" => true // Confía en certificados autofirmados
+                                        );
+                                        $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-                                              );
-                                              
-                                              // Establecer la conexión
-                                              $conn = sqlsrv_connect($serverName, $connectionOptions);
-                                              
-                                              // Verificar la conexión
-                                              if ($conn === false) {
-                                                  die(print_r(sqlsrv_errors(), true));
-                                              }
+                                        if ($conn) {
+                                            echo "";
+                                        } else {
+                                            echo "Error en la conexión.<br>";
+                                            // Obtener y mostrar errores detallados
+                                            $errors = sqlsrv_errors();
+                                            foreach ($errors as $error) {
+                                                echo "SQLSTATE: " . $error['SQLSTATE'] . "<br>";
+                                                echo "Code: " . $error['code'] . "<br>";
+                                                echo "Message: " . $error['message'] . "<br>";
+                                            }
+                                        }
+                                            //echo "Conexión exitosa.";
                                               
                                               // Consulta SQL para obtener todos los motivos de exclusión
                                               $queryMotivos = "SELECT idexclu, motivo FROM _junta_motivosexclusion";
@@ -949,7 +981,7 @@ echo "</script>";
                                               
                                               echo "</select></th>";
                             
-                                              echo "<td>Observación: <input type='text' name='obs' style='width: 300px;' value='" . htmlspecialchars($obs) . "'></td>";
+                                              echo "<td>Observación: <input type='text' id='obs' name='obs' style='width: 300px;' value='" . htmlspecialchars($obs) . "'></td>";
                                               echo "<td>Horas: <input type='number' name='horas' style='width: 50px;' value='" . htmlspecialchars($horas) . "'></td>";
 
 
@@ -1008,8 +1040,8 @@ echo "<table id='tablaPermanenteConcursoInterino'>"; // Inicialmente oculta la t
 echo "<tr><td>";
 echo "<h3><u>CARGA COMUN</u> </h3>";
 echo "<br>";
-echo "<label for='puntaje_total' style='display: inline-block; width: 225px;'>Puntaje Total:</label>";
-echo "<input type='text' id='puntaje_total' name='puntajetotal' value='" . htmlspecialchars($row['puntajetotal']) . "'  size='10'>";
+echo "<label for='puntajetotal' style='display: inline-block; width: 225px;'>Puntaje Total:</label>";
+echo "<input type='text' id='puntajetotal' name='puntajetotal' value='" . htmlspecialchars($row['puntajetotal']) . "'  size='10'>";
 echo "<br><br>";
 
 echo "<label for='titulo' style='display: inline-block; width: 225px;'>1.- Título:</label>";
@@ -1066,7 +1098,7 @@ echo "<table id='tablaTitular'>";
 echo "<tr><td>";
 echo "<h3><u>CARGA TITULAR</u> </h3>";
 echo "<br>";
-echo "<label for='puntaje_total' style='display: inline-block; width: 225px;'>Puntaje Total:</label>";
+echo "<label for='puntajetotal' style='display: inline-block; width: 225px;'>Puntaje Total:</label>";
 echo "<input type='text' id='puntajetotal' name='puntajetotal' value='" . htmlspecialchars($row['puntajetotal']) . "' size='10'>";
 echo "<br><br>";
 
@@ -1282,7 +1314,7 @@ echo "</script>";
               
               <?php
 
-              echo " <input type='hidden' name='id2' id='id2'> ";
+              echo " <input type='hidden' name='id2' id='id2' value='" . $_GET['id2'] . "'> ";
               echo"<button type='button' id='btnActualizar'>Actualizar</button>";
              
               echo "</form>";
@@ -1297,19 +1329,40 @@ echo "</script>";
                 <?php include('footer2.php');?>
                 <script>
 $(document).ready(function() {
-    $('#btnActualizar').click(function() {
+    $('#btnActualizar').click(function(event) {
+        event.preventDefault(); // Evitar el envío tradicional del formulario
+
         var datos = $('#miFormulario').serialize(); // Serializa los datos del formulario
+        //console.log(datos);
+        var elementoEliminar = document.getElementById('id2');
+        console.log(elementoEliminar.value);
+
+        var archivo='ActualizarMovimientosPermanentes.php';
+        var tipoSelect = document.getElementById('tipo');
+        if (tipoSelect.value === 'permanente') {
+        }else if (tipoSelect.value === 'titulares'){
+          archivo='ActualizarMovimientosTitulares.php';
+        }else if (tipoSelect.value === 'transitoria'){
+          archivo='ActualizarMovimientosTransitoria.php';
+
+        }else if (tipoSelect.value === 'concurso'){
+          archivo='ActualizarMovimientosConcurso.php';
+        }
+
+
         $.ajax({
             type: 'POST',
-            url: 'ActualizarMovimientos.php', // Archivo PHP para procesar la actualización
+            url: archivo, // Archivo PHP para procesar la actualización
             data: datos,
             success: function(response) {
                 // Maneja la respuesta del servidor aquí
-                alert(response); // Muestra la respuesta del servidor (puedes ajustarla según tus necesidades)
+                console.log(response); // Muestra la respuesta en la consola para depuración
+                alert("Actualización exitosa: " + response);
             },
             error: function(xhr, status, error) {
                 // Maneja errores de la solicitud AJAX
-                console.error(xhr.responseText);
+                console.error("Error: " + xhr.responseText);
+                alert("Ocurrió un error durante la actualización: " + xhr.responseText);
             }
         });
     });

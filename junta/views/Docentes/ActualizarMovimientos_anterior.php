@@ -27,7 +27,7 @@ try {
     $codmod = validate_numeric($_POST['codmod']);
     $establecimiento = validate_numeric($_POST['establecimiento']);
     $titulo = validate_numeric($_POST['titulo']);
-    $promedio = validate_numeric($_POST['promedio']);
+    $promedioT = validate_numeric($_POST['promedioT']);
     $antiguedadgestion = validate_numeric($_POST['antiguedadgestion']);
     $antiguedadtitulo = validate_numeric($_POST['antiguedadtitulo']);
     $serviciosprovincia = validate_numeric($_POST['serviciosprovincia']);
@@ -78,7 +78,7 @@ try {
         'codmod' => $codmod,
         'establecimiento' => $coddep,
         'titulo' => $titulo,
-        'promedio' => $promedio,
+        'promedioT' => $promedioT,
         'antiguedadgestion' => $antiguedadgestion,
         'antiguedadtitulo' => $antiguedadtitulo,
         'serviciosprovincia' => $serviciosprovincia,
@@ -131,7 +131,7 @@ try {
         codmod = :codmod, 
         establecimiento = :establecimiento, 
         titulo = :titulo, 
-        promedio = :promedio, 
+        promedioT = :promedioT, 
         antiguedadgestion = :antiguedadgestion, 
         antiguedadtitulo = :antiguedadtitulo, 
         serviciosprovincia = :serviciosprovincia, 
@@ -184,7 +184,7 @@ try {
     $stmt->bindParam(':codmod', $codmod, PDO::PARAM_STR);
     $stmt->bindParam(':establecimiento', $coddep, PDO::PARAM_STR);
     $stmt->bindParam(':titulo', $titulo, PDO::PARAM_STR);
-    $stmt->bindParam(':promedio', $promedio, PDO::PARAM_STR);
+    $stmt->bindParam(':promedioT', $promedioT, PDO::PARAM_STR);
     $stmt->bindParam(':antiguedadgestion', $antiguedadgestion, PDO::PARAM_STR);
     $stmt->bindParam(':antiguedadtitulo', $antiguedadtitulo, PDO::PARAM_STR);
     $stmt->bindParam(':serviciosprovincia', $serviciosprovincia, PDO::PARAM_STR);

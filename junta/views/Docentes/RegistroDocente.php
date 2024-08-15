@@ -436,7 +436,7 @@ materialize-date{
 
                  </div>
             <div class="col col-sm-4">
-                   <input type="text" name="domicilio" placeholder="Domicilio" required="" class="materialize-input2">
+                   <input type="text" name="Domicilio" placeholder="Domicilio" required="" class="materialize-input2">
             </div>
      
                   
@@ -462,7 +462,7 @@ materialize-date{
                  <input type="date" name="fechanacim" placeholder="Fecha de nacimiento" required="" class="materialize-date">
                  </div>
             <div class="col col-sm-7">
-                 <input type="text" name="promediot" placeholder="Promedio" required="" class="materialize-input1">
+                 <input type="text" name="promedioT" placeholder="Promedio" required="" class="materialize-input1">
             </div>
    </div>
  </div>
@@ -472,7 +472,7 @@ materialize-date{
                  <input type="text" name="telefonos" placeholder="Telefonos" required="" class="materialize-input1">
               </div>
               <div class="col col-sm-6">
-                 <input type="text" name="titulobas" placeholder="Titulo Basico" required="" class="materialize-input1">
+                 <input type="text" name="Titulobas" placeholder="Titulo Basico" required="" class="materialize-input1">
              </div>
      </div>
  </div>
@@ -532,7 +532,7 @@ materialize-date{
 
              </div>
              <div class="col col-sm-6">
-                 <input type="text" name="nacionalidad" placeholder="Nacionalidad" required="" class="materialize-input1">
+                 <input type="text" name="Nacionalidad" placeholder="Nacionalidad" required="" class="materialize-input1">
              </div>
       </div>
 </div>
@@ -553,7 +553,7 @@ materialize-date{
             </form>
    </div>
 </div>
-           <center><a href="http://localhost:8080/juntas/views/docentes/ListarDocentes.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
+           <center><a href="http://localhost:8009/views/Docentes/ListarDocentes.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
 
 
 

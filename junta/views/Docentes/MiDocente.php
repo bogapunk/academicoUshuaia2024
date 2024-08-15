@@ -94,14 +94,14 @@ if(isset($_POST['insertar'])){
     $legajo = $_POST['legajo'];
     $apellidoynombre = $_POST['apellidoynombre'];
     $dni = $_POST['dni'];
-    $domicilio = $_POST['domicilio'];
+    $Domicilio = $_POST['Domicilio'];
     $lugarinsc = $_POST['lugarinsc'];
     
     $fechanacim = $_POST['fechanacim'];
    
-    $promediot = $_POST['promediot'];
+    $promedioT = $_POST['promedioT'];
     $telefonos = $_POST['telefonos'];
-    $titulobas = $_POST['titulobas'];
+    $Titulobas = $_POST['Titulobas'];
     $fechatit = $_POST['fechatit'];
     $otorgadopor = $_POST['otorgadopor'];
     $finicio = $_POST['finicio'];
@@ -109,7 +109,7 @@ if(isset($_POST['insertar'])){
     $fingreso = $_POST['fingreso'];
     $cargosdocentes = $_POST['cargosdocentes'];
     $faperturaleg = $_POST['faperturaleg'];
-    $nacionalidad = $_POST['nacionalidad'];
+    $Nacionalidad = $_POST['Nacionalidad'];
     $obsdoc = $_POST['obsdoc'];
    
     // Función para formatear la fecha
@@ -130,7 +130,7 @@ if(isset($_POST['insertar'])){
     // DB CREDENCIALES DE USUARIO.
     define('DB_HOST', 'db');
     define('DB_USER', 'SA');
-    define('DB_PASS', '30153846');
+    define('DB_PASS', '"asd123"');
     define('DB_NAME', 'junta');
 
     try {
@@ -142,7 +142,7 @@ if(isset($_POST['insertar'])){
         $sql = "INSERT INTO _junta_docentes 
                 (legajo, ApellidoyNombre, dni, Domicilio, lugarinsc, fechanacim, promedioT, telefonos, Titulobas, fechatit, otorgadopor, finicio, otrostit, fingreso, cargosdocentes, faperturaleg, Nacionalidad, obsdoc) 
                 VALUES 
-                (:legajo, :apellidoynombre, :dni, :domicilio, :lugarinsc, :fechanacim, :promediot, :telefonos, :titulobas, :fechatit, :otorgadopor, :finicio, :otrostit, :fingreso, :cargosdocentes, :faperturaleg, :nacionalidad, :obsdoc)";
+                (:legajo, :apellidoynombre, :dni, :Domicilio, :lugarinsc, :fechanacim, :promediot, :telefonos, :Titulobas, :fechatit, :otorgadopor, :finicio, :otrostit, :fingreso, :cargosdocentes, :faperturaleg, :Nacionalidad, :obsdoc)";
        
         $stmt = $connect->prepare($sql);
 
@@ -150,12 +150,12 @@ if(isset($_POST['insertar'])){
         $stmt->bindParam(':legajo', $legajo, PDO::PARAM_INT);
         $stmt->bindParam(':apellidoynombre', $apellidoynombre, PDO::PARAM_STR);
         $stmt->bindParam(':dni', $dni, PDO::PARAM_INT);
-        $stmt->bindParam(':domicilio', $domicilio, PDO::PARAM_STR);
+        $stmt->bindParam(':Domicilio', $Domicilio, PDO::PARAM_STR);
         $stmt->bindParam(':lugarinsc', $lugarinsc, PDO::PARAM_STR);
         $stmt->bindParam(':fechanacim', $fechanacim, PDO::PARAM_STR);
-        $stmt->bindParam(':promediot', $promediot, PDO::PARAM_STR);
+        $stmt->bindParam(':promedioT', $promedioT, PDO::PARAM_STR);
         $stmt->bindParam(':telefonos', $telefonos, PDO::PARAM_STR);
-        $stmt->bindParam(':titulobas', $titulobas, PDO::PARAM_STR);
+        $stmt->bindParam(':Titulobas', $Titulobas, PDO::PARAM_STR);
         $stmt->bindParam(':fechatit', $fechatit, PDO::PARAM_STR);
         $stmt->bindParam(':otorgadopor', $otorgadopor, PDO::PARAM_STR);
         $stmt->bindParam(':finicio', $finicio, PDO::PARAM_STR);
@@ -163,7 +163,7 @@ if(isset($_POST['insertar'])){
         $stmt->bindParam(':fingreso', $fingreso, PDO::PARAM_STR);
         $stmt->bindParam(':cargosdocentes', $cargosdocentes, PDO::PARAM_STR);
         $stmt->bindParam(':faperturaleg', $faperturaleg, PDO::PARAM_STR);
-        $stmt->bindParam(':nacionalidad', $nacionalidad, PDO::PARAM_STR);
+        $stmt->bindParam(':Nacionalidad', $Nacionalidad, PDO::PARAM_STR);
         $stmt->bindParam(':obsdoc', $obsdoc, PDO::PARAM_STR);
 
         // Ejecutar la consulta

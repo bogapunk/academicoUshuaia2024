@@ -156,27 +156,27 @@ body{
   <ul>
     <li>
      <div class="card-body d-flex justify-content-between align-items-center">
-      <a href="panel.php"  class="btn btn-primary">Inicio</a>
+      <a href="../panel.php"  class="btn btn-primary">Inicio</a>
       </div>
     </li>
     <li>
       <div class="card-body d-flex justify-content-between align-items-center">
       <a href="#" class="btn btn-primary">Legajos</a></div>
         <ul>
-           <li><a href="#"><font size="4">Listado de Docentes</font></b></a></li>
-          <li><a href="#"><font size="4">Editar Docentes</font></b></a></li>
-          <li><a href="../controller/exportar_docentes_especiales.php"><font size="3">Listado Docentes de Especial(Temporal)</font></a></li>
-          <li><a href="../controller/exportar_docentes_especiales_SinTitulares.php"><font size="2">Listado Docentes de Especial  SIN TITULARES (Temporal)</font></a></li>
-           <li><a href="../controller/exportar_docentes_especiales_completos.php"><font size="1">Listado Docentes de Especial(Interinos,suplentes y Titulares)</font></a></li>
+           <li><a href="../listadoDeDocentes/listarListadosDeDocentes.php"><font size="4">Listado de Docentes</font></b></a></li>
+          <li><a href="../Docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></b></a></li>
+          <li><a href="../../controller/exportar_docentes_especiales.php"><font size="3">Listado Docentes de Especial(Temporal)</font></a></li>
+          <li><a href="../../controller/exportar_docentes_especiales_SinTitulares.php"><font size="2">Listado Docentes de Especial  SIN TITULARES (Temporal)</font></a></li>
+           <li><a href="../../controller/exportar_docentes_especiales_completos.php"><font size="1">Listado Docentes de Especial(Interinos,suplentes y Titulares)</font></a></li>
         </ul>
     </li>
          <li>
           <div class="card-body d-flex justify-content-between align-items-center">
           <a href="#"  class="btn btn-primary">Administracion</a></div>
         <ul>
-          <li><a href="ListarModalidades.php"><font size="4">Modalidades</font></a></li>
-          <li><a href="#"><font size="4">Dependencia</font></a></li>
-          <li><a href="#"><font size="3">Configuracion Listados</font></a></li>
+          <li><a href="../Modalidades/listarModalidades.php"><font size="4">Modalidades</font></a></li>
+          <li><a href="../Dependencias/listarDependencias.php"><font size="4">Dependencia</font></a></li>
+          <li><a href="../ConfiguracionListados/listarConfiguracionListados.php"><font size="3">Configuracion Listados</font></a></li>
         </ul>
     </li>
      <li>

@@ -1,7 +1,7 @@
 <?php 
 
 
-include('./header2.php');
+include('header2.php');
 
 ?>
 
@@ -204,7 +204,6 @@ try {
 
 ?>
 
-    
 <div class="container-fluid">
 <div class="input-group">
   <b>Buscar:&nbsp</b> <div class="form-group pull-right">
@@ -257,13 +256,13 @@ try {
     <td><center style="font-size:1.3em"><?php echo $row['telefono'] ?></center></td>
     <td><center style="font-size:1.3em"><?php echo $row['rol'] ?></center></td>
     <td>
-        <div style="text-align: center;">
+        <center>
         <a href="#edit_<?php echo $row['id']; ?>" class="btn btn-success btn-sm" data-toggle="modal"><span class="glyphicon glyphicon-edit"></span> Editar</a>
         <a href="#delete_<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal"><span class="glyphicon glyphicon-trash"></span> Borrar</a>
-         </div>
+         </center>                                                            
     </td>
 
-    <?php ob_start(); include('BorrarEditarModal.php'); ob_end_flush(); ?>
+    <?php include('BorrarEditarModal.php'); ?>
 
 
 
@@ -276,7 +275,7 @@ try {
 </tbody>
 </div>
 </div>
-</div>
+</table>
 
 <script>
   
@@ -385,10 +384,11 @@ $(document).ready(function () {
 
 
 </body>
+<?php include('footer2.php');?>
 </html>
 <?php include('AgregarModal.php'); ?>
 <script src="../js/jquery.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
-<?php include('footer2.php');?>
+
 
 <!--modale ver usuario -->

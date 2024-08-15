@@ -2,8 +2,8 @@
 
 class Docente{
     private $dbHost     = "db";
-    private $dbUsername = "root";
-    private $dbPassword = "";
+    private $dbUsername = "SA";
+    private $dbPassword = '"asd123"';
     private $dbName     = "junta";
     private $userTbl    = "_junta_docentes";
     

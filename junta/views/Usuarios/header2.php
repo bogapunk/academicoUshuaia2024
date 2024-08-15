@@ -1,27 +1,3 @@
-<?php
-session_start();
-ob_start();
-include("../Usuarios.php");
-ob_end_flush();
-$sessData = !empty($_SESSION['sessData'])?$_SESSION['sessData']:'';
-if(!empty($sessData['estado']['msg'])){
-    $statusMsg = $sessData['estado']['msg'];
-    $statusMsgType = $sessData['estado']['type'];
-    unset($_SESSION['sessData']['estado']);
-}
-
-if(!empty($sessData['userLoggedIn']) && !empty($sessData['userID'])){
-
-    $user = new User();
-    $conditions['where'] = array(
-        'id' => $sessData['userID'],
-
-    );
-    $conditions['return_type'] = 'single';
-    $userData = $user->getRows($conditions);
-}
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -222,7 +198,7 @@ body{
 
 
 var base_url = '../../MiCuenta.php?logoutSubmit=1'; // Ruta base del sitio
-var tiempoInactividad = 3000; // Tiempo en milisegundos para detectar inactividad (3 segundos por defecto)
+var tiempoInactividad = 30000; // Tiempo en milisegundos para detectar inactividad (3 segundos por defecto)
 //var tiempoInactividad = 300000; // 5 minutos en milisegundos (300000 ms)
 var timeoutInactividad; // Variable para almacenar el timeout
 
@@ -327,15 +303,27 @@ iniciarContadorInactividad();
           <a href="#"  class="btn btn-primary">Administracion</a></div>
         <ul>
           <li><a href=../Modalidades/ListarModalidades.php><font size="4">Modalidades</font></a></li>
-          <li><a href="../Dependencias/ListarDependencias.php"><font size="4">Dependencia</font></a></li>
-          <li><a href="../ConfiguracionListados/ListarConfiguracionListados.php"><font size="3">Configuracion Listados</font></a></li>
+          <li><a href="../Dependencias/listarDependencias.php"><font size="4">Dependencia</font></a></li>
+          <li><a href="../configuracionListados/listarConfiguracionListados.php"><font size="3">Configuracion Listados</font></a></li>
         </ul>
     </li>
-      <?php echo(($userData['rol']=='admin') ? ('<li>
-       <div class="card-body d-flex justify-content-between align-items-center">
-       <a href="Usuarios/ListarUsuarios.php" class="btn btn-primary" class="logout">Usuarios</a>
-       </div>
-    </li>') : ''); ob_end_flush(); ?>
+     <li>
+      
+       <div class="card-body d-flex justify-content-between align-items-center"  >
+    <a href="ListarUsuarios.php"   class="btn btn-primary"  class="logout">Usuarios
+      <div id="preload-overlay">
+  <div class="loader"></div>
+</div>
+    </a>
+
+
+  </div>
+</div>
+
+
+
+
+  </li>
   </ul>
 
 </nav>

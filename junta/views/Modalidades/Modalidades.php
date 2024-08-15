@@ -1,21 +1,29 @@
 <?php
 
 class Modalidad{
-    private $dbHost     = "db";
-    private $dbUsername = "SA";
-    private $dbPassword = '"asd123"';
-    private $dbName     = "junta";
-    private $modalidadTbl    = "_junta_modalidades";
-    
-    public function __construct(){
-        if(!isset($this->db)){
-            // Conexion con la database
-            $conn = new mysqli($this->dbHost, $this->dbUsername, $this->dbPassword, $this->dbName);
-            if($conn->connect_error){
-                die("Falló la conexion con MySQL: " . $conn->connect_error);
-            }else{
-                $this->db = $conn;
+    private $dbHost = "db";
+    private $dbUsername = "SA"; // Actualiza con tu usuario de SQL Server
+    private $dbPassword = '"asd123"'; // Actualiza con tu contraseña de SQL Server
+    private $dbName = "junta";
+    private $modalidadTbl = "_junta_modalidades";
+    private $conn; // Propiedad para la conexión a la base de datos
+
+    public function __construct() {
+        try {
+            $connectionInfo = array(
+                "Database" => $this->dbName,
+                "UID" => $this->dbUsername,
+                "PWD" => $this->dbPassword,
+                "TrustServerCertificate" => true // Confiar en el certificado del servidor
+            );
+            $conn = sqlsrv_connect($this->dbHost, $connectionInfo);
+            if ($conn === false) {
+                throw new Exception("Error de conexión: " . print_r(sqlsrv_errors(), true));
+            } else {
+                $this->conn = $conn; // Asignar la conexión a la propiedad de la clase
             }
+        } catch (Exception $e) {
+            exit("Error: " . $e->getMessage());
         }
     }
 

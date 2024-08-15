@@ -166,8 +166,8 @@ body{
       <div class="card-body d-flex justify-content-between align-items-center">
       <a href="#" class="btn btn-primary">Legajos</a></div>
           <ul>
-           <li><a href="../ListadoDeDocentes/ListarListadosDeDocentes.php"><font size="4">Listado de Docentes</font></b></a></li>
-          <li><a href="#"><font size="4">Editar Docentes</font></b></a></li>
+           <li><a href=""><font size="4">Listado de Docentes</font></b></a></li>
+          <li><a href="../Docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></b></a></li>
           <li><a href="../../controller/exportar_docentes_especiales.php"><font size="3">Listado Docentes Especial(Temp)</font></a></li>
           <li><a href="../../controller/exportar_docentes_especiales_SinTitulares.php"><font size="3">Listado Docentes de Esp. SIN TITULARES(Temporal)</font></a></li>
            <li><a href="../../controller/exportar_docentes_especiales_completos.php"><font size="3">Listado Docentes de Esp.(Interino,supl.y Titulares)</font></a></li>
@@ -179,7 +179,7 @@ body{
         <ul>
           <li><a href="../Modalidades/ListarModalidades.php"><font size="4">Modalidades</font></a></li>
           <li><a href="../Dependencias/ListarDependencias.php"><font size="4">Dependencia</font></a></li>
-          <li><a href="../ConfiguracionListados/ListarConfiguracionListados.php"><font size="3">Configuracion Listados</font></a></li>
+          <li><a href="../ConfiguracionListados/ListarConfiguracionListados.php"><font size="4">Configuracion Listados</font></a></li>
         </ul>
     </li>
      <li>

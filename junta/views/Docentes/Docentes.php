@@ -138,29 +138,31 @@ class Docente{
 */
 class Docente {
     private $dbHost = "db";
-    private $dbUsername = "SA"; // Update with your SQL Server username
-    private $dbPassword = '"asd123"'; // Update with your SQL Server password
+    private $dbUsername = "SA"; // Actualiza con tu usuario de SQL Server
+    private $dbPassword = '"asd123"'; // Actualiza con tu contraseña de SQL Server
     private $dbName = "junta";
     private $docentesTbl = "_junta_docentes";
-    private $conn; // Property to hold the database connection
+    private $conn; // Propiedad para la conexión a la base de datos
 
     public function __construct() {
         try {
             $connectionInfo = array(
                 "Database" => $this->dbName,
                 "UID" => $this->dbUsername,
-                "PWD" => $this->dbPassword
+                "PWD" => $this->dbPassword,
+                "TrustServerCertificate" => true // Confiar en el certificado del servidor
             );
             $conn = sqlsrv_connect($this->dbHost, $connectionInfo);
             if ($conn === false) {
                 throw new Exception("Error de conexión: " . print_r(sqlsrv_errors(), true));
             } else {
-                $this->conn = $conn; // Assign connection to class property
+                $this->conn = $conn; // Asignar la conexión a la propiedad de la clase
             }
         } catch (Exception $e) {
             exit("Error: " . $e->getMessage());
         }
     }
+
 
     public function getNextLegajo() {
         try {

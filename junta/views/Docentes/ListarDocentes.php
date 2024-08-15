@@ -1,7 +1,9 @@
 <?php 
 require_once 'docentes.entidad.php';
 require_once 'docentes.model.php';
+
 include('header2.php');
+
 
 
 // Logica
@@ -25,9 +27,9 @@ if(isset($_REQUEST['action']))
       $fechanacim = !empty($_REQUEST['fechanacim']) ? date('Y-m-d H:i:s.000', strtotime($_REQUEST['fechanacim'])) : null;
       $doc->__SET('fechanacim', $fechanacim);
      
-      $doc->__SET('promediot', $_REQUEST['promediot']);
+      $doc->__SET('promedioT', $_REQUEST['promedioT']);
       $doc->__SET('telefonos', $_REQUEST['telefonos']);
-      $doc->__SET('titulobas', $_REQUEST['titulobas']);
+      $doc->__SET('Titulobas', $_REQUEST['Titulobas']);
       
       $fechatit = !empty($_REQUEST['fechatit']) ? date('Y-m-d H:i:s.000', strtotime($_REQUEST['fechatit'])) : null;
       $doc->__SET('fechatit', $fechatit);
@@ -47,7 +49,7 @@ if(isset($_REQUEST['action']))
       $faperturaleg = !empty($_REQUEST['faperturaleg']) ? date('Y-m-d H:i:s.000', strtotime($_REQUEST['faperturaleg'])) : null;
       $doc->__SET('faperturaleg', $faperturaleg);
       
-      $doc->__SET('nacionalidad', $_REQUEST['nacionalidad']);
+      $doc->__SET('Nacionalidad', $_REQUEST['Nacionalidad']);
       $doc->__SET('obsdoc', $_REQUEST['obsdoc']);
       
       $model->ActualizarDocente($doc);
@@ -64,9 +66,9 @@ if(isset($_REQUEST['action']))
       $fechanacim = !empty($_REQUEST['fechanacim']) ? date('Y-d-m H:i:s.000', strtotime($_REQUEST['fechanacim'])) : null;
       $doc->__SET('fechanacim', $fechanacim);
       
-      $doc->__SET('promediot', $_REQUEST['promediot']);
+      $doc->__SET('promedioT', $_REQUEST['promedioT']);
       $doc->__SET('telefonos', $_REQUEST['telefonos']);
-      $doc->__SET('titulobas', $_REQUEST['titulobas']);
+      $doc->__SET('Titulobas', $_REQUEST['Titulobas']);
 
       $fechatit = !empty($_REQUEST['fechatit']) ? date('Y-m-d H:i:s.000', strtotime($_REQUEST['fechatit'])) : null;
       $doc->__SET('fechatit', $fechatit);
@@ -86,7 +88,7 @@ if(isset($_REQUEST['action']))
       $faperturaleg = !empty($_REQUEST['faperturaleg']) ? date('Y-m-d H:i:s.000', strtotime($_REQUEST['faperturaleg'])) : null;
       $doc->__SET('faperturaleg', $faperturaleg);
       
-      $doc->__SET('nacionalidad', $_REQUEST['nacionalidad']);
+      $doc->__SET('Nacionalidad', $_REQUEST['Nacionalidad']);
       $doc->__SET('obsdoc', $_REQUEST['obsdoc']);
       
       $model->RegistrarDocente($doc);
@@ -420,7 +422,7 @@ try {
                          <tr>
                             <th style="text-align:left;">Promedio</th>
                             <td>
-                                <input type="number" name="promediot" value="<?php echo number_format($doc->__GET('promedioT'), 2, '.', ''); ?>" step="0.01" class="form-control" />
+                                <input type="number" name="promedioT" value="<?php echo number_format($doc->__GET('promedioT'), 2, '.', ''); ?>" step="0.01" class="form-control" />
                             </td>
                         </tr>
                          <tr>
@@ -429,7 +431,7 @@ try {
                         </tr>
                         <tr>
                             <th style="text-align:left;">Titulo Basico</th>
-                            <td><input type="text" name="titulobas" value="<?php echo $doc->__GET('titulobas') ?>" class="form-control" /></td>
+                            <td><input type="text" name="Titulobas" value="<?php echo $doc->__GET('Titulobas') ?>" class="form-control" /></td>
                         </tr>
                         <tr>
                             <th style="text-align:left;">Fecha Titulo</th>
@@ -473,7 +475,7 @@ try {
 
                          <tr>
                             <th style="text-align:left;">Nacionalidad</th>
-                            <td><input type="text" name="nacionalidad" value="<?php echo $doc->__GET('nacionalidad'); ?>" class="form-control" /></td>
+                            <td><input type="text" name="Nacionalidad" value="<?php echo $doc->__GET('Nacionalidad'); ?>" class="form-control" /></td>
                         </tr>
 
 
@@ -798,7 +800,7 @@ if ($page < $total_pages) {
     echo '<li><a href="?page=' . ($page + 1) . '">Siguiente &raquo;</a></li>';
 }
 echo '</ul>';
-g
+
 echo '</nav>';
 ?>
 

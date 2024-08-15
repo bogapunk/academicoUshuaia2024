@@ -4,7 +4,7 @@ define('BASE_URL', 'http://localhost/junta/'); // URL base de tu sistema
 define('HOST', 'db'); // Host de la base de datos SQL Server
 define('BD', 'junta'); // Nombre de la base de datos
 define('DB_USER', 'SA'); // Usuario de la base de datos SQL Server
-define('PASS', '30153846'); // Contraseña de la base de datos SQL Server
+define('PASS', '"asd123"'); // Contraseña de la base de datos SQL Server
 define('CHARSET', 'UTF-8'); // Juego de caracteres de la base de datos (para SQL Server no es necesario especificarlo así)
 
 // Crea una función para conectar a la base de datos utilizando las constantes definidas

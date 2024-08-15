@@ -376,7 +376,7 @@ px
 					<input type="submit" name="signupSubmit" value="CREAR CUENTA">
 				</div>
 			</form>
-             <center><a href="<?php echo(stripos($_SERVER['SERVER_PROTOCOL'],'http') === 0 ? "https" : "http"); ?>://<?php echo($_SERVER['HTTP_HOST']);?>/views/Usuarios/ListarUsuarios.php"> <button type="submit" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
+             <center><a href="http://localhost:8009/views/Usuarios/ListarUsuarios.php"> <button type="submit" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
 		</div>
 	</div>
     

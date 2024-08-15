@@ -99,11 +99,11 @@ body{
     line-height: 4rem;
     color: #fff;
 }
-#menu_gral2 li a:hover,
-#menu_gral2 li a:focus {
-    background-color: #cc7b55;
+#menu_gral li:hover a, #menu_gral li a:focus {
+    background: #e55916;
     color: #fff;
 }
+
 #menu_gral li ul {
     position: absolute;
     width: 0;
@@ -146,7 +146,6 @@ loader {
 }
 
 
-
 </style>
 <!--<link rel="icon" type="image/png" href="./imagenes/escudo-32x32.png">-->
 <link rel="shortcut icon" href="../imagenes/favicon.svg" type="image/x-icon"/>  
@@ -162,87 +161,69 @@ loader {
   <ul class="nav nav-pills">
    
     <li role="group">
-    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 
       </div>
   </li>
 
   <nav id="menu_gral">
-  <ul>
-    <li>
-     <div class="card-body d-flex justify-content-between align-items-center">
-      <a href="panel1.php"  class="btn btn-primary">Inicio</a>
-      </div>
-    </li>
-    <li>
-      <div class="card-body d-flex justify-content-between align-items-center">
-      <a href="#" class="btn btn-primary">Legajos</a></div>
-        <ul>
-           <li><a href="ListadoDeDocentes/ListarListadosDeDocentes.php"><font size="4">Listado de Docentes</font></b></a></li>
-          <li><a href="docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></b></a></li>
-          <li><a href="../controller/exportar_docentes_especiales.php"><font size="3">Listado Docentes de Especial(Temporal)</font></a></li>
-          <li><a href="../controller/exportar_docentes_especiales_SinTitulares.php"><font size="2">Listado Docentes de Especial  SIN TITULARES (Temporal)</font></a></li>
-           <li><a href="../controller/exportar_docentes_especiales_completos.php"><font size="1">Listado Docentes de Especial(Interinos,suplentes y Titulares)</font></a></li>
-        </ul>
-    </li>
-         <li>
-          <div class="card-body d-flex justify-content-between align-items-center">
-          <a href="#"  class="btn btn-primary">Administracion</a></div>
-        <ul>
-          <li><a href="modalidades/ListarModalidades.php"><font size="4">Modalidades</font></a></li>
-          <li><a href="Dependencias/ListarDependencias.php"><font size="4">Dependencia</font></a></li>
-          <li><a href="ConfiguracionListados/ListarConfiguracionListados.php"><font size="3">Configuracion Listados</font></a></li>
-        </ul>
-    </li>
-     <li>
-        <div class="card-body d-flex justify-content-between align-items-left">
-           <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-       Cerra Session
-        </a>
-     </li>
-  </ul>
+            <ul>
+              <li>
+              <div class="card-body d-flex justify-content-between align-items-center">
+                <a href="panel1.php"  class="btn btn-primary">Inicio</a>
+                </div>
+              </li>
+              <li>
+                <div class="card-body d-flex justify-content-between align-items-center">
+                <a href="#" class="btn btn-primary">Legajos</a></div>
+                  <ul>
+                    <li><a href="ListadoDeDocentes/ListarListadosDeDocentes.php"><font size="4">Listado de Docentes</font></b></a></li>
+                    <li><a href="docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></b></a></li>
+                    <li><a href="../controller/exportar_docentes_especiales.php"><font size="3">Listado Docentes de Especial(Temporal)</font></a></li>
+                    <li><a href="../controller/exportar_docentes_especiales_SinTitulares.php"><font size="2">Listado Docentes de Especial  SIN TITULARES (Temporal)</font></a></li>
+                    <li><a href="../controller/exportar_docentes_especiales_completos.php"><font size="1">Listado Docentes de Especial(Interinos,suplentes y Titulares)</font></a></li>
+                  </ul>
+              </li>
+                  <li>
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                    <a href="#"  class="btn btn-primary">Administracion</a></div>
+                  <ul>
+                    <li><a href="modalidades/listarModalidades.php"><font size="4">Modalidades</font></a></li>
+                    <li><a href="Dependencias/listarDependencias.php"><font size="4">Dependencia</font></a></li>
+                    <li><a href="ConfiguracionListados/listarConfiguracionListados.php"><font size="4">Configuracion Listados</font></a></li>
+                  </ul>
+              </li>
+              <li>
+                  <div class="card-body d-flex justify-content-between align-items-left">
+                    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Cerra Session
+                  </a>
+              </li>
+            </ul>
 
 </nav>
 
 
-<!--
-<li>
-
-  <div class="card-body d-flex justify-content-between align-items-center">
-  <a href="Registro.php" class="btn btn-primary" class="logout">Usuarios</a>
-</div>
-
-</li> -->
-<!-- 
-<li>
-  <div class="card-body d-flex justify-content-between align-items-center">
-  <a href="../MiCuenta.php?logoutSubmit=1"   class="btn btn-primary" class="logout">Cerrar Sesion</a>
-</div>
-
-</li> 
--->
-
-
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-             <div class="modal-header">
-                 <h4 class="modal-title" id="exampleModalLabel"><center>SALIR DEL SISTEMA</center></h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                       <span aria-hidden="true">&times;</span>
-                    </button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                          <h4 class="modal-title" id="exampleModalLabel"><center>SALIR DEL SISTEMA</center></h4>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                        </div>
+                      <div class="modal-body"><center>
+                              ¿Desea Salir del Sistema de Junta?</center>
+                    </div>
+              
+                <div class="modal-footer">
+                    <a href="../MiCuenta.php?logoutSubmit=1" class="btn btn-danger">Salir</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
               </div>
-            <div class="modal-body"><center>
-                    ¿Desea Salir del Sistema de Junta?</center>
-          </div>
-    
-      <div class="modal-footer">
-    <a href="../MiCuenta.php?logoutSubmit=1" class="btn btn-danger">Salir</a>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          
 </div>
- 
-</div>
-</div>
+
 </ul>
 
 

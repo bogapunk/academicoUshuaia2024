@@ -1,26 +1,3 @@
-<?php
-ob_start();
-include("./Usuarios.php");
-ob_end_flush();
-$sessData = !empty($_SESSION['sessData'])?$_SESSION['sessData']:'';
-if(!empty($sessData['estado']['msg'])){
-    $statusMsg = $sessData['estado']['msg'];
-    $statusMsgType = $sessData['estado']['type'];
-    unset($_SESSION['sessData']['estado']);
-}
-
-if(!empty($sessData['userLoggedIn']) && !empty($sessData['userID'])){
-
-$user = new User();
-$conditions['where'] = array(
-    'id' => $sessData['userID'],
-
-);
-$conditions['return_type'] = 'single';
-$userData = $user->getRows($conditions);
-}
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,7 +70,7 @@ body{
 * {
     margin: 0;
     padding: 0;
-    border: none;
+    border: o none;
     position: relative;
 }
 #menu_gral {
@@ -179,7 +156,7 @@ loader {
 <link rel="shortcut icon" href="../imagenes/favicon.svg" type="image/x-icon"/>  
 </head>
 
-</html>
+</head>
 
 <!--<center><img src="../imagenes/fondoCabecera.jpg"></center> anterior
 -->
@@ -210,7 +187,7 @@ loader {
       <a href="#" class="btn btn-primary">Legajos</a></div>
         <ul>
            <li><a href="ListadoDeDocentes/ListarListadosDeDocentes.php" text-align: right;><font size="4">Listado de Docentes</font></b></a></li>
-          <li><a href="Docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></b></a></li>
+          <li><a href="docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></b></a></li>
           <li ><a  href="../controller/exportar_docentes_especiales.php"><font size="4">Listado Docentes Especial(Temp)</font></a></li>
           <li ><a href="../controller/exportar_docentes_especiales_SinTitulares.php" ><font size="3">Listado Docentes de Esp. SINTITULARES(Temporal)</font></a></li>
            <li ><a  href="../controller/exportar_docentes_especiales_completos.php"><font   size="3">Listado Docentes de Esp.(Interino,supl.y Titulares)</font></a></li>
@@ -220,16 +197,16 @@ loader {
           <div class="card-body d-flex justify-content-between align-items-center">
           <a href="#"  class="btn btn-primary">Administracion</a></div>
         <ul>
-          <li><a href="Modalidades/ListarModalidades.php"><font size="4">Modalidades</font></a></li>
-          <li><a href="Dependencias/ListarDependencias.php"><font size="4">Dependencia</font></a></li>
-          <li><a href="ConfiguracionListados/ListarConfiguracionListados.php"><font size="4">Configuracion Listados</font></a></li>
+          <li><a href="./Modalidades/ListarModalidades.php"><font size="4">Modalidades</font></a></li>
+          <li><a href="./Dependencias/ListarDependencias.php"><font size="4">Dependencia</font></a></li>
+          <li><a href="./ConfiguracionListados/ListarConfiguracionListados.php"><font size="4">Configuracion Listados</font></a></li>
         </ul>
     </li>
-     <?php echo(($userData['rol']=='admin') ? ('<li>
+     <li>
        <div class="card-body d-flex justify-content-between align-items-center">
-       <a href="Usuarios/ListarUsuarios.php" class="btn btn-primary" class="logout">Usuarios</a>
+       <a href="./Usuarios/ListarUsuarios.php"   class="btn btn-primary" class="logout">Usuarios</a>
        </div>
-    </li>') : ''); ob_end_flush(); ?>
+    </li>
    </ul>
 
 </nav>

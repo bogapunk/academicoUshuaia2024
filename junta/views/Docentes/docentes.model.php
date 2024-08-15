@@ -406,9 +406,9 @@ class DocentesModel
                 $mod->__SET('domicilio', $r->domicilio);
                 $mod->__SET('lugarinsc', $r->lugarinsc);
                 $mod->__SET('fechanacim', $r->fechanacim);
-                $mod->__SET('promediot', $r->promediot);
+                $mod->__SET('promedioT', $r->promedioT);
                 $mod->__SET('telefonos', $r->telefonos);
-                $mod->__SET('titulobas', $r->titulobas);
+                $mod->__SET('Titulobas', $r->Titulobas);
                 $mod->__SET('fechatit', $r->fechatit);
                 $mod->__SET('otorgadopor', $r->otorgadopor);
                 $mod->__SET('finicio', $r->finicio);
@@ -416,7 +416,7 @@ class DocentesModel
                 $mod->__SET('fingreso', $r->fingreso);
                 $mod->__SET('cargosdocentes', $r->cargosdocentes);
                 $mod->__SET('faperturaleg', $r->faperturaleg);
-                $mod->__SET('nacionalidad', $r->nacionalidad);
+                $mod->__SET('Nacionalidad', $r->Nacionalidad);
                 $mod->__SET('obsdoc', $r->obsdoc);
 
                 $result[] = $mod;
@@ -441,11 +441,11 @@ class DocentesModel
             SELECT 
                 ROW_NUMBER() OVER (ORDER BY legajo) AS rownum, 
                 id2, legajo, ApellidoyNombre AS apellidoynombre, CAST(dni AS INT) as dni, Domicilio as domicilio, lugarinsc, 
-                CONVERT(VARCHAR, fechanacim, 103) AS fechanacim, promediot, telefonos  as telefonos, titulobas, 
+                CONVERT(VARCHAR, fechanacim, 103) AS fechanacim, promedioT, telefonos  as telefonos, Titulobas, 
                 CONVERT(VARCHAR, fechatit, 103) AS fechatit, otorgadopor, 
                 CONVERT(VARCHAR, finicio, 103) AS finicio, otrostit, 
                 CONVERT(VARCHAR, fingreso, 103) AS fingreso, cargosdocentes, 
-                CONVERT(VARCHAR, faperturaleg, 103) AS faperturaleg, nacionalidad, obsdoc 
+                CONVERT(VARCHAR, faperturaleg, 103) AS faperturaleg, Nacionalidad, obsdoc 
             FROM _junta_docentes
         ) AS sub
         WHERE sub.rownum BETWEEN :start AND :end
@@ -468,9 +468,9 @@ class DocentesModel
             $mod->__SET('dni', $r->dni);
             $mod->__SET('lugarinsc', $r->lugarinsc);
             $mod->__SET('fechanacim', $r->fechanacim);
-            $mod->__SET('promediot', $r->promediot);
+            $mod->__SET('promedioT', $r->promedioT);
             $mod->__SET('telefonos', $r->telefonos);
-            $mod->__SET('titulobas', $r->titulobas);
+            $mod->__SET('Titulobas', $r->Titulobas);
             $mod->__SET('fechatit', $r->fechatit);
             $mod->__SET('otorgadopor', $r->otorgadopor);
             $mod->__SET('finicio', $r->finicio);
@@ -478,7 +478,7 @@ class DocentesModel
             $mod->__SET('fingreso', $r->fingreso);
             $mod->__SET('cargosdocentes', $r->cargosdocentes);
             $mod->__SET('faperturaleg', $r->faperturaleg);
-            $mod->__SET('nacionalidad', $r->nacionalidad);
+            $mod->__SET('Nacionalidad', $r->Nacionalidad);
             $mod->__SET('obsdoc', $r->obsdoc);
 
             $result[] = $mod;
@@ -545,9 +545,9 @@ class DocentesModel
             $mod->__SET('domicilio', $r->domicilio);
             $mod->__SET('lugarinsc', $r->lugarinsc);
             $mod->__SET('fechanacim', $r->fechanacim);
-            $mod->__SET('promediot', $r->promediot);
+            $mod->__SET('promedioT', $r->promedioT);
             $mod->__SET('telefonos', $r->telefonos);
-            $mod->__SET('titulobas', $r->titulobas);
+            $mod->__SET('Titulobas', $r->Titulobas);
             $mod->__SET('fechatit', $r->fechatit);
             $mod->__SET('otorgadopor', $r->otorgadopor);
             $mod->__SET('finicio', $r->finicio);
@@ -555,7 +555,7 @@ class DocentesModel
             $mod->__SET('fingreso', $r->fingreso);
             $mod->__SET('cargosdocentes', $r->cargosdocentes);
             $mod->__SET('faperturaleg', $r->faperturaleg);
-            $mod->__SET('nacionalidad', $r->nacionalidad);
+            $mod->__SET('Nacionalidad', $r->Nacionalidad);
             $mod->__SET('obsdoc', $r->obsdoc);
 
             return $mod;
@@ -611,9 +611,9 @@ class DocentesModel
                         domicilio = ?, 
                         lugarinsc = ?, 
                         fechanacim = ?,
-                        promediot = ?, 
+                        promedioT = ?, 
                         telefonos = ?, 
-                        titulobas = ?, 
+                        Titulobas = ?, 
                         fechatit = ?, 
                         otorgadopor = ?, 
                         finicio = ?, 
@@ -621,7 +621,7 @@ class DocentesModel
                         fingreso = ?, 
                         cargosdocentes = ?, 
                         faperturaleg = ?, 
-                        nacionalidad = ?, 
+                        Nacionalidad = ?, 
                         obsdoc = ? 
                     WHERE id2 = ?";
     
@@ -635,9 +635,9 @@ class DocentesModel
                 $data->__GET('domicilio'),
                 $data->__GET('lugarinsc'),
                 $fechanacim_sql,
-                $data->__GET('promediot'),
+                $data->__GET('promedioT'),
                 $data->__GET('telefonos'),
-                $data->__GET('titulobas'),
+                $data->__GET('Titulobas'),
                 $fechatit_sql,
                 $data->__GET('otorgadopor'),
                 $finicio_sql,
@@ -645,7 +645,7 @@ class DocentesModel
                 $fingreso_sql,
                 $data->__GET('cargosdocentes'),
                 $faperturaleg_sql,
-                $data->__GET('nacionalidad'),
+                $data->__GET('Nacionalidad'),
                 $data->__GET('obsdoc'),
                 $data->__GET('id2')
             ]);
@@ -678,8 +678,8 @@ class DocentesModel
             // Preparar la consulta SQL
             $sql = "INSERT INTO _junta_docentes (
                         legajo, apellidoynombre, dni, domicilio, lugarinsc, fechanacim, 
-                        promediot, telefonos, titulobas, fechatit, otorgadopor, finicio, 
-                        otrostit, fingreso, cargosdocentes, faperturaleg, nacionalidad, obsdoc
+                        promedioT, telefonos, Titulobas, fechatit, otorgadopor, finicio, 
+                        otrostit, fingreso, cargosdocentes, faperturaleg, Nacionalidad, obsdoc
                     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
             // Preparar y ejecutar la consulta
@@ -692,9 +692,9 @@ class DocentesModel
                 $data->__GET('domicilio'),
                 $data->__GET('lugarinsc'),
                 $fechanacim_sql,
-                $data->__GET('promediot'),
+                $data->__GET('promedioT'),
                 $data->__GET('telefonos'),
-                $data->__GET('titulobas'),
+                $data->__GET('Titulobas'),
                 $fechatit_sql,
                 $data->__GET('otorgadopor'),
                 $finicio_sql,
@@ -702,7 +702,7 @@ class DocentesModel
                 $fingreso_sql,
                 $data->__GET('cargosdocentes'),
                 $faperturaleg_sql,
-                $data->__GET('nacionalidad'),
+                $data->__GET('Nacionalidad'),
                 $data->__GET('obsdoc')
             ]);
     

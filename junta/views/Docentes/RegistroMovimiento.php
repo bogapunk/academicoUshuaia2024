@@ -525,13 +525,21 @@ if (sqlsrv_has_rows($stmt)) {
     while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
         $legajo = $row['legajo'];
         $apellidoynombre = $row['apellidoynombre'];
-        $fechanacim = $row['fechanacim']->format('d/m/Y'); // Si `fechanacim` es un campo datetime
+        if ($row['fechanacim'] == null){
+          $fechanacim = $row['fechanacim'];
+        }else{
+          $fechanacim = $row['fechanacim']->format('d/m/Y'); 
+        } 
         $titulobas = $row['titulobas'];
         $promediot = $row['promediot'];
         $otrostit = $row['otrostit'];
         $cargosdocentes = $row['cargosdocentes'];
-        $fingreso = $row['fingreso']->format('d/m/Y'); // Si `fingreso` es un campo datetime
-
+       // $fingreso = $row['fingreso']->format('d/m/Y'); // Si `fingreso` es un campo datetime
+        if ($row['fingreso'] == null){
+          $fingreso = $row['fingreso'];
+        }else{
+          $fingreso = $row['fingreso']->format('d/m/Y'); 
+        } 
         echo "<tr>";
         echo "<td>{$legajo}</td>";
         echo "<td>{$apellidoynombre}</td>";
