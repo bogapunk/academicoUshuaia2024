@@ -14,7 +14,8 @@ function conectarBD() {
     $username = DB_USER;
     $password = PASS;
     
-    $dsn = "sqlsrv:Server=$serverName;Database=$database";
+    $dsn = "sqlsrv:Server=$serverName;Database=$database;TrustServerCertificate=yes";
+
     $opciones = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -33,24 +34,21 @@ $conexion = conectarBD();
 
 // Verifica si se recibió el ID2
 if (isset($_POST['id2'])) {
-    // Obtiene el ID2 enviado por la solicitud AJAX
     $id2 = $_POST['id2'];
+    error_log("ID2 recibido: " . $id2); // Agrega esto para depuración
 
     // Realiza la eliminación del movimiento en la base de datos
     $queryEliminar = "DELETE FROM _junta_movimientos WHERE id2 = :id2";
+    
     $stmt = $conexion->prepare($queryEliminar);
     $stmt->execute([':id2' => $id2]);
 
     // Verifica si la eliminación fue exitosa
     if ($stmt->rowCount() > 0) {
-        // Devuelve una respuesta de éxito
         echo "Movimiento eliminado correctamente.";
     } else {
-        // Devuelve un mensaje de error si la eliminación falla
         echo "Error al eliminar el movimiento.";
     }
 } else {
-    // Devuelve un mensaje de error si no se recibió el ID2
     echo "No se recibió el ID2 del movimiento a eliminar.";
 }
-?>

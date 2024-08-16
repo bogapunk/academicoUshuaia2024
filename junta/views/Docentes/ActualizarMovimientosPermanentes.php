@@ -6,7 +6,7 @@ define('DB_USER', 'SA');
 define('PASS', '"asd123"');
 define('CHARSET', 'utf8');
 
-$dsn = "sqlsrv:Server=" . HOST . ";Database=" . BD;
+$dsn = "sqlsrv:Server=" . HOST . ";Database=" . BD . ";TrustServerCertificate=yes";
 var_dump($_POST);
 //exit;
 try {
@@ -47,7 +47,7 @@ try {
     // Vincular parámetros
     $stmt->bindParam(':obs', $obs);
     $stmt->bindParam(':horas', $horas);
-    $stmt->bindParam(':puntajetotal', $puntajetotal);
+    $stmt->bindParam(':puntajetotal', $puntajetotal, is_null($puntajetotal) ? PDO::PARAM_NULL : PDO::PARAM_STR);
     $stmt->bindParam(':titulo', $titulo);
     $stmt->bindParam(':concepto', $concepto);
     $stmt->bindParam(':id2', $id2, PDO::PARAM_INT);

@@ -575,11 +575,15 @@ if (isset($_GET['legajo'])) {
                                     echo "<td style='text-align: center;'>";
                                     echo "<a class='btn btn-sm btn-danger movimientoBorrado' href='#' data-id2='" . htmlspecialchars($row['id2'], ENT_QUOTES, 'UTF-8') . "' title='Eliminar'><i class='glifo glifo-trash'></i> Eliminar</a>";
 
+
                                     // Asegúrate de que las variables sean cadenas antes de aplicar urlencode
                                     $encodedNomdep = isset($row['nomdep']) ? urlencode((string) $row['nomdep']) : '';
                                     $encodedObs = isset($row['obs']) ? urlencode((string) $row['obs']) : '';
-                                    $encodedFecha = isset($row['fecha']) ? urlencode((string) $row['fecha']) : ''; // Suponiendo que también necesitas codificar $row['fecha']
+                                    //$encodedFecha = isset($row['fecha']) ? urlencode((string) $row['fecha']) : ''; // Suponiendo que también necesitas codificar $row['fecha']
+                                      
+                                    $encodedFecha = isset($row['fecha']) && $row['fecha'] instanceof DateTime? urlencode($row['fecha']->format('Y-m-d H:i:s')) : '';
 
+                                     
                                     // Codificar otros valores en la URL
                                     $encodedLegajo = isset($legajo) ? urlencode((string) $legajo) : '';
                                     $encodedCodmod = isset($row['codmod']) ? urlencode((string) $row['codmod']) : '';
@@ -631,7 +635,7 @@ jQuery(document).ready(function($) {
               url: 'eliminar_movimiento.php', // Ruta al script PHP que maneja la eliminación
               data: { id2: id2 }, // Envía el ID2 al servidor
               success: function(response) {
-                  alert('El movimiento ha sido eliminado exitosamente.');
+                  alert(response); // Muestra el mensaje devuelto por el servidor
                   // Actualiza la página o realiza otras acciones si es necesario
                   location.reload(); // Recarga la página para reflejar los cambios
               },

@@ -1075,7 +1075,7 @@ echo "<label for='serv_prov' style='display: inline-block; width:  225px;'>7.1- 
 echo "<input type='text' id='serviciosprovincia' name='serviciosprovincia' value='" . htmlspecialchars($row['serviciosprovincia']) . "'  size='10'>";
 echo "<br>";
 
-echo "<label for='otros_serv' style='display: inline-block; width:  225px;'>7.2- Otros Servicios:</label>";
+echo "<label for='otrosservicios' style='display: inline-block; width:  225px;'>7.2- Otros Servicios:</label>";
 echo "<input type='text' id='otrosservicios' name='otrosservicios' value='" . htmlspecialchars($row['otrosservicios']) . "'  size='10'>";
 echo "<br>";
 
@@ -1109,6 +1109,11 @@ echo "<br>";
 echo "<label for='otrostit' style='display: inline-block; width:  225px;'>2.- Otros Título:</label>";
 echo "<input type='text' id='otrostit' name='otitulo' value='" . htmlspecialchars($row['otitulo']) . "' size='10'>";
 echo "<br>";
+
+echo "<label for='concepto' style='display: inline-block; width:  225px;'>3.- Conceptos:</label>";
+echo "<input type='text' id='concepto' name='concepto' value='" . htmlspecialchars($row['concepto']) . "'  size='10'>";
+echo "<br>";
+
 
 echo "<label for='promedio' style='display: inline-block; width:  225px;'>4.- Promedio:</label>";
 echo "<input type='text' id='promedio' name='promedio' value='" . htmlspecialchars($row['promedio']) . "' size='10'>";
@@ -1225,23 +1230,23 @@ echo "<br>";
 
 echo "<hr>";
 
-echo "<label for='otros_serv' style='display: inline-block; width:  225px;'>7.2- Otros Servicios:</label>";
-echo "<input type='text' id='otros_serv' name='otros_serv' value='" . htmlspecialchars($row['otrosservicios']) . "' size='10'>";
+echo "<label for='otrosservicios' style='display: inline-block; width:  225px;'>7.2- Otros Servicios:</label>";
+echo "<input type='text' id='otrosservicios' name='otrosservicios' value='" . htmlspecialchars($row['otrosservicios']) . "' size='10'>";
 echo "<br>";
 
-echo "<label for='otros_serv' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo A:</label>";
+echo "<label for='o_g_a' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo A:</label>";
 echo "<input type='text' id='o_g_a' name='o_g_a' value='" . htmlspecialchars($row['o_g_a']) . "' size='10'>";
 echo "<br>";
 
-echo "<label for='otros_serv' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo B:</label>";
+echo "<label for='o_g_b' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo B:</label>";
 echo "<input type='text' id='o_g_b' name='o_g_b' value='" . htmlspecialchars($row['o_g_b']) . "' size='10'>";
 echo "<br>";
 
-echo "<label for='otros_serv' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo C:</label>";
+echo "<label for='o_g_c' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo C:</label>";
 echo "<input type='text' id='o_g_c' name='o_g_c' value='" . htmlspecialchars($row['o_g_c']) . "' size='10'>";
 echo "<br>";
 
-echo "<label for='otros_serv' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo D:</label>";
+echo "<label for='o_g_d' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo D:</label>";
 echo "<input type='text' id='o_g_d' name='o_g_d' value='" . htmlspecialchars($row['o_g_d']) . "' size='10'>";
 echo "<br>";
 
@@ -1253,12 +1258,13 @@ echo "<label for='publicaciones' style='display: inline-block; width:  225px;'>9
 echo "<input type='text' id='publicaciones' name='publicaciones' value='" . htmlspecialchars($row['publicaciones']) . "' size='10'>";
 echo "<br>";
 
-echo "<label for='otros_antec' style='display: inline-block; width:  225px;'>10.- Otros Antecedentes:</label>";
-echo "<input type='text' id='otros_antec' name='otros_antec' value='" . htmlspecialchars($row['otrosantecedentes']) . "' size='10'>";
+echo "<label for='otrosantecedentes' style='display: inline-block; width:  225px;'>10.- Otros Antecedentes:</label>";
+echo "<input type='text' id='otrosantecedentes' name='otrosantecedentes' value='" . htmlspecialchars($row['otrosantecedentes']) . "' size='10'>";
 echo "<br>";
 echo "</td></tr>";
+
 echo "</table>";
-    
+echo"<button type='button' class='btn btn-info'  id='btnActualizar'>Actualizar</button>";
 // JavaScript para mostrar u ocultar las tablas según el tipo seleccionado
 echo "<script>";
 echo "document.addEventListener('DOMContentLoaded', function() {";
@@ -1286,8 +1292,7 @@ echo "    mostrarTablaSegunTipo();"; // Llamar a la función al cargar la págin
 echo "});";
 echo "</script>";
 
-                 echo"<br>";
-                echo"<br>";
+           
                 echo"<br>";
   
                
@@ -1315,7 +1320,7 @@ echo "</script>";
               <?php
 
               echo " <input type='hidden' name='id2' id='id2' value='" . $_GET['id2'] . "'> ";
-              echo"<button type='button' id='btnActualizar'>Actualizar</button>";
+             
              
               echo "</form>";
               echo "<center>";

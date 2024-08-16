@@ -684,7 +684,7 @@ class MovimientosModel
                 $mod->__SET('codmod', $r->codmod);
                 $mod->__SET('establecimiento', $r->establecimiento);
                 $mod->__SET('titulo', $r->titulo);
-                $mod->__SET('promedioT', $r->promedioT);
+                $mod->__SET('promedio', $r->promedio);
                 $mod->__SET('antiguedadgestion', $r->antiguedadgestion);
                 $mod->__SET('antiguedadtitulo', $r->antiguedadtitulo);
                 $mod->__SET('serviciosprovincia', $r->serviciosprovincia);
@@ -764,7 +764,7 @@ class MovimientosModel
                 $mod->__SET('codmod', $r->codmod);
                 $mod->__SET('establecimiento', $r->establecimiento);
                 $mod->__SET('titulo', $r->titulo);
-                $mod->__SET('promedioT', $r->promedioT);
+                $mod->__SET('promedio', $r->promedio);
                 $mod->__SET('antiguedadgestion', $r->antiguedadgestion);
                 $mod->__SET('antiguedadtitulo', $r->antiguedadtitulo);
                 $mod->__SET('serviciosprovincia', $r->serviciosprovincia);
@@ -853,7 +853,7 @@ class MovimientosModel
                     codmod= ?,
                     establecimiento= ?,
                     titulo= ?,
-                    promedioT= ?,
+                    promedio= ?,
 	                antiguedadgestion= ?,
 	                antiguedadtitulo= ?,
 	                serviciosprovincia= ?,
@@ -910,7 +910,7 @@ class MovimientosModel
                     $mod->__GET('codmod'),
                     $mod->__GET('establecimiento'),
                     $mod->__GET('titulo'),
-                    $mod->__GET('promedioT'),
+                    $mod->__GET('promedio'),
                     $mod->__GET('antiguedadgestion'),
                     $mod->__GET('antiguedadtitulo'),
                     $mod->__GET('serviciosprovincia'),
