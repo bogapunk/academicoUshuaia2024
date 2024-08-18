@@ -1,7 +1,7 @@
 <?php
 
 class User{
-    private $dbHost     = "181.30.21.220,9433";
+    private $dbHost     = "10.1.9.197";
     private $dbUsername = "SA";
     private $dbPassword = '"asd123"';
     private $dbName     = "junta";
