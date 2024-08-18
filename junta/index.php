@@ -37,7 +37,7 @@ include('header.php');
 
 <div class="col-sm-6 r-form-1-box wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
                     
-    <h2><b><u>Sistemas De Juntas 2024!!!!!</u></b></h2>
+    <h2><b><u>Sistemas De Juntas</u></b></h2>
     <?php
     ob_start();
         if(!empty($sessData['userLoggedIn']) && !empty($sessData['userID'])){
