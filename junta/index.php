@@ -64,7 +64,7 @@ include('header.php');
 </div>
 
 <?php }else{ ?>
-    <h2>Acceder</h2>
+    <h3>Acceder</h3>
     <?php echo !empty($statusMsg)?'<p class="'.$statusMsgType.'">'.$statusMsg.'</p>':''; ?>
    <center> <div class="login-form">
         <form id="loginForm" action="MiCuenta.php" method="post">
