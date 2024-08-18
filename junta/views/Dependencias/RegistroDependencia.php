@@ -14,22 +14,94 @@ include('header2.php');
     display: block;
     padding: 7px 15px;
 }
-body {
-    background-color: #FFFFFF;
-    color: #757575;
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
+
+thead{
+
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+table {
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
 }
 
-body a {
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
+th {
+  cursor: pointer;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+* {
+    margin: 0;
+    padding: 0;
+    border: o none;
+    position: relative;
+}
+#menu_gral {
+    font-family: verdana, sans sherif;
+    width: 80%;
+    margin: 1.5rem auto;
+}
+#menu_gral ul {
+    list-style-type: none; 
+    text-align: left;
+    font-size: 0;
+}
+#menu_gral > ul li {
+    display: inline-block;
+    width: 25%;
+    position: relative;
+    background: #ffffff;
+}
+#menu_gral li a {
+    display: block;
     text-decoration: none;
+    font-size: 2rem;
+    font-family: 'Roboto', sans-serif;
+    background-color: #2698f3;
+    font-size: 18px;
+    line-height: 4rem;
+    color: #fff;
+}
+#menu_gral li:hover a, #menu_gral li a:focus {
+    background: #e55916;
+    color: #fff;
 }
 
+#menu_gral li ul {
+    position: absolute;
+    width: 0;
+    overflow: hidden;
+}
+#menu_gral li:hover ul, #menu_gral li:focus ul {
+    width: 110%;
+    margin: 0 -4rem -4rem -4rem;
+    padding: 0 4rem 4rem 4rem;
+   
+    z-index: 5;
+}
+#menu_gral li li {
+    display: block;
+    width: 130%;
+}
+#menu_gral li:hover li a, #menu_gral li:focus li a {
+    font-family: monospace;
+    font-size: .9rem;
+    line-height: 1.7rem;
+    border-top: 1px solid #e5e5e5;
+    background: #e55916;
+}
+#menu_gral li li a:hover, #menu_gral li li a:focus {
+    background: #8AA9B8; 
+}
 input[type="button"], input[type="submit"] {
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
@@ -74,6 +146,14 @@ h2 {
     font-weight: 500;
     font-family: 'Roboto', sans-serif;
 }
+h2 {
+            font-size: 25px;
+            text-align: center;
+        }
+        h4 {
+            font-size: 20px;
+            text-align: center;
+        }
 
 .regisFrm textarea {
     height: 100px;
@@ -373,7 +453,7 @@ button:hover {
                                 </center>
 
 			</form>
-            <center><a href="http://localhost:8009/views/Dependencias/ListarDependencias.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
+            <center><a href="./ListarDependencias.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
 		</div>
 	</div>
     

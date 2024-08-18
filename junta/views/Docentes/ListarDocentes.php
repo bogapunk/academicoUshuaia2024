@@ -109,9 +109,6 @@ if(isset($_REQUEST['action']))
 
 <style type="text/css">
 
-
-  
-
 .nav>li>a {
     position: relative;
     display: block;
@@ -248,10 +245,6 @@ tr:nth-child(even) {
     right: 20px;
   }
 }
-
-
-
-
 
 
 </style>

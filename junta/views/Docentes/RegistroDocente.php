@@ -9,61 +9,102 @@ if(!empty($sessData['estado']['msg'])){
 include('header2.php');
 ?>
 <style type="text/css">
-    .nav>li>a {
+ .nav>li>a {
     position: relative;
     display: block;
     padding: 7px 15px;
 }
-body {
-    background-color: #FFFFFF;
-    color: #757575;
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
+
+thead{
+
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+table {
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
 }
 
-body a {
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-    text-decoration: none;
+th {
+  cursor: pointer;
 }
 
-input[type="button"], input[type="submit"] {
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
+th, td {
+  text-align: left;
+  padding: 16px;
 }
 
-h1 {
-    font-size: 40px;
-    margin: 50px auto;
-    letter-spacing: 3px;
+tr:nth-child(even) {
+  background-color: #f2f2f2
 }
-
-.container {
-    width: 40%;
-    margin: 0 auto;
-    background-color: #f7f7f7;
-    color: #757575;
-    font-family: 'Raleway', sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    border: o none;
+    position: relative;
+}
+#menu_gral {
+    font-family: verdana, sans sherif;
+    width: 80%;
+    margin: 1.5rem auto;
+}
+#menu_gral ul {
+    list-style-type: none; 
     text-align: left;
-    padding: 30px;
+    font-size: 0;
 }
-
-h2 {
-    font-size: 30px;
-    font-weight: 600;
-    margin-bottom: 10px;
+#menu_gral > ul li {
+    display: inline-block;
+    width: 25%;
+    position: relative;
+    background: #ffffff;
 }
-
-.container p {
+#menu_gral li a {
+    display: block;
+    text-decoration: none;
+    font-size: 2rem;
+    font-family: 'Roboto', sans-serif;
+    background-color: #2698f3;
     font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 20px;
+    line-height: 4rem;
+    color: #fff;
+}
+#menu_gral li:hover a, #menu_gral li a:focus {
+    background: #e55916;
+    color: #fff;
+}
+
+#menu_gral li ul {
+    position: absolute;
+    width: 0;
+    overflow: hidden;
+}
+#menu_gral li:hover ul, #menu_gral li:focus ul {
+    width: 110%;
+    margin: 0 -4rem -4rem -4rem;
+    padding: 0 4rem 4rem 4rem;
+   
+    z-index: 5;
+}
+#menu_gral li li {
+    display: block;
+    width: 130%;
+}
+#menu_gral li:hover li a, #menu_gral li:focus li a {
+    font-family: monospace;
+    font-size: .9rem;
+    line-height: 1.7rem;
+    border-top: 1px solid #e5e5e5;
+    background: #e55916;
+}
+#menu_gral li li a:hover, #menu_gral li li a:focus {
+    background: #8AA9B8; 
+}
+.results tr[visible='false'],
+.no-result{
+  display:none;
 }
 .regisFrm input[type="text"], .regisFrm input[type="email"] {
     width: 94.5%;
@@ -74,6 +115,14 @@ h2 {
     font-weight: 500;
     font-family: 'Roboto', sans-serif;
 }
+h2 {
+            font-size: 25px;
+            text-align: center;
+        }
+        h4 {
+            font-size: 20px;
+            text-align: center;
+        }
 
 .regisFrm textarea {
     height: 100px;
@@ -227,7 +276,9 @@ p.error{color:#EA4335;}
         padding: 20px;
     }
     h2 {
+
         font-size: 25px;
+        text-align: center;
     }
     .regisFrm input[type="text"], .regisFrm input[type="email"], .regisFrm input[type="password"] {
         width: 93%;
@@ -267,8 +318,9 @@ p.error{color:#EA4335;}
         line-height: 22px;
     }
     h2 {
-        font-size: 20px;
-    }
+            font-size: 25px;
+            text-align: center;
+        }
 }
 
 @media screen and (max-width: 360px) {
@@ -408,7 +460,7 @@ materialize-date{
                             $next_legajo = $docente->getNextLegajo();
 
                             // Usar $next_legajo en tu formulario o aplicación
-                            echo "Próximo legajo: $next_legajo";
+                            echo "<div style='text-align: center; font-size: 20px;'>Próximo legajo: $next_legajo</div>";
 
 
 
@@ -553,7 +605,7 @@ materialize-date{
             </form>
    </div>
 </div>
-           <center><a href="http://localhost:8009/views/Docentes/ListarDocentes.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
+           <center><a href="./ListarDocentes.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
 
 
 

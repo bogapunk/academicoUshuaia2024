@@ -114,10 +114,9 @@ if(isset($_POST['insertar'])){
    
     // Función para formatear la fecha
     function formatDate($date) {
-        $dateTime = DateTime::createFromFormat('Y-m-d', $date); // Intenta crear el objeto DateTime desde el formato recibido
-        return $dateTime ? $dateTime->format('Y-d-m') : null; // Formatea la fecha al formato esperado por SQL Server o retorna null si no se puede crear
+        $dateTime = DateTime::createFromFormat('Y-m-d', $date); 
+        return $dateTime ? $dateTime->format('Y-m-d H:i:s') : null; // Cambiamos el formato a 'Y-m-d H:i:s'
     }
-
     // Convertir las fechas
     $fechanacim = formatDate($fechanacim);
     $fechatit = formatDate($fechatit);
@@ -135,14 +134,14 @@ if(isset($_POST['insertar'])){
 
     try {
         // Establecer la conexión a la base de datos
-        $connect = new PDO("sqlsrv:Server=" . DB_HOST . ";Database=" . DB_NAME."TrustServerCertificate=True", DB_USER, DB_PASS);
+        $connect = new PDO("sqlsrv:Server=" . DB_HOST . ";Database=" . DB_NAME . ";TrustServerCertificate=True", DB_USER, DB_PASS);
         $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Preparar la consulta SQL
         $sql = "INSERT INTO _junta_docentes 
                 (legajo, ApellidoyNombre, dni, Domicilio, lugarinsc, fechanacim, promedioT, telefonos, Titulobas, fechatit, otorgadopor, finicio, otrostit, fingreso, cargosdocentes, faperturaleg, Nacionalidad, obsdoc) 
                 VALUES 
-                (:legajo, :apellidoynombre, :dni, :Domicilio, :lugarinsc, :fechanacim, :promediot, :telefonos, :Titulobas, :fechatit, :otorgadopor, :finicio, :otrostit, :fingreso, :cargosdocentes, :faperturaleg, :Nacionalidad, :obsdoc)";
+                (:legajo, :apellidoynombre, :dni, :Domicilio, :lugarinsc, :fechanacim, :promedioT, :telefonos, :Titulobas, :fechatit, :otorgadopor, :finicio, :otrostit, :fingreso, :cargosdocentes, :faperturaleg, :Nacionalidad, :obsdoc)";
        
         $stmt = $connect->prepare($sql);
 
