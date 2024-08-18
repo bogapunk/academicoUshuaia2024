@@ -187,7 +187,7 @@ loader {
       <a href="#" class="btn btn-primary">Legajos</a></div>
         <ul>
            <li><a href="ListadoDeDocentes/ListarListadosDeDocentes.php" text-align: right;><font size="4">Listado de Docentes</font></b></a></li>
-          <li><a href="docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></b></a></li>
+          <li><a href="Docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></b></a></li>
           <li ><a  href="../controller/exportar_docentes_especiales.php"><font size="4">Listado Docentes Especial(Temp)</font></a></li>
           <li ><a href="../controller/exportar_docentes_especiales_SinTitulares.php" ><font size="3">Listado Docentes de Esp. SINTITULARES(Temporal)</font></a></li>
            <li ><a  href="../controller/exportar_docentes_especiales_completos.php"><font   size="3">Listado Docentes de Esp.(Interino,supl.y Titulares)</font></a></li>
