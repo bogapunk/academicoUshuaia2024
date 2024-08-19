@@ -1,9 +1,9 @@
 <?php
 
 class User{
-    private $dbHost     = "10.1.9.113";
+    private $dbHost     = "181.30.21.220,9433";
     private $dbUsername = "SA";
-    private $dbPassword = 'Davinci2024#';
+    private $dbPassword = '"asd123"';
     private $dbName     = "junta";
     private $userTbl    = "usuarios";
     
