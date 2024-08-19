@@ -1,7 +1,7 @@
 <?php
 
 class Modalidad{
-    private $dbHost     = "db";
+    private $dbHost     = "10.1.9.113";
     private $dbUsername = "root";
     private $dbPassword = "";
     private $dbName     = "junta";

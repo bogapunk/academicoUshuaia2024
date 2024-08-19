@@ -1,11 +1,11 @@
 <?php
   define("USUARIO","SA");
 
-  define("PASSWORD", '"asd123"');
+  define("PASSWORD", 'Davinci2024#');
 
   define("DATABASE", "Junta");
   
-  define("SERVIDOR", "SA");
+  define("SERVIDOR", "10.1.9.113");
 
 
 

@@ -187,10 +187,10 @@ if (<?php echo isset($_REQUEST['message']) ? 'true' : 'false'; ?>) {
 //$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); //conexion mysql
 
 // Conexión a SQL Server
-$serverName = "db"; // o la dirección IP del servidor
+$serverName = "10.1.9.113"; // o la dirección IP del servidor
 $database = "junta";
 $username = "SA"; // Reemplaza con tu usuario
-$password = '"asd123"'; // Reemplaza con tu contraseña
+$password = 'Davinci2024#'; // Reemplaza con tu contraseña
 
 try {
     $link = new PDO("sqlsrv:server=$serverName;Database=$database;TrustServerCertificate=true", $username, $password);
