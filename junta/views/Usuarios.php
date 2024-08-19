@@ -3,7 +3,7 @@
 class User{
     private $dbHost     = "10.1.9.113";
     private $dbUsername = "SA";
-    private $dbPassword = 'Davinci2024#';
+    private $dbPassword = "Davinci2024#";
     private $dbName     = "junta";
     private $userTbl    = "usuarios";
     
