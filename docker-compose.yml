@@ -7,15 +7,15 @@ services:
      - "8009:80"
 
 
- db:
-   container_name: db-sqlserver
-   user: root
-   image: mcr.microsoft.com/mssql/server:2022-CU13-ubuntu-22.04
-   environment:
-    - SA_PASSWORD="asd123"
-    - ACCEPT_EULA="Y"
-   ports:
+  db:
+    container_name: db-sqlserver
+    user: root
+    image: mcr.microsoft.com/mssql/server:2022-CU13-ubuntu-22.04
+    environment:
+      - SA_PASSWORD="asd123"
+      - ACCEPT_EULA="Y"
+    ports:
       - "1433:1433"
-   volumes:
+    volumes:
       - ./data:/var/opt/mssql/data
       - ./backup_base_datos/usuarios.sql:/var/opt/mssql/backup/usuarios.sql
