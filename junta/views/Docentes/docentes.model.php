@@ -371,10 +371,10 @@ class DocentesModel
         try
         {
             // Conexión a SQL Server
-            $serverName = "10.1.9.113"; // Servidor de SQL Server
+            $serverName = "db"; // Servidor de SQL Server
             $database = "junta"; // Nombre de la base de datos
             $username = "SA"; // Usuario de la base de datos
-            $password = 'Davinci2024#'; // Contraseña de la base de datos
+            $password = '"asd123"'; // Contraseña de la base de datos
 
             $dsn = "sqlsrv:Server=$serverName;Database=$database;TrustServerCertificate=True";
             $this->pdo = new PDO($dsn, $username, $password);

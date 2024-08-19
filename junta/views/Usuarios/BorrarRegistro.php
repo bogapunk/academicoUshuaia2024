@@ -4,10 +4,10 @@
 // Include database connection
 include('dbconect.php');
 class Connection {
-  private $serverName = "10.1.9.113"; // o la dirección IP del servidor
+  private $serverName = "db"; // o la dirección IP del servidor
   private $database = "junta";
   private $username = "SA"; // Reemplaza con tu usuario
-  private $password = 'Davinci2024#'; // Reemplaza con tu contraseña
+  private $password = '"asd123"'; // Reemplaza con tu contraseña
   private $conn;
 
   public function open() {

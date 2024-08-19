@@ -1,9 +1,9 @@
 <?php
 
 class Movimiento{
-    private $dbHost     = "10.1.9.113";
+    private $dbHost     = "db";
     private $dbUsername = "sa";
-    private $dbPassword = "Davinci2024#";
+    private $dbPassword = ""asd123"";
     private $dbName     = "junta";
     private $MovimientoTbl    = "_junta_movimientos";
     

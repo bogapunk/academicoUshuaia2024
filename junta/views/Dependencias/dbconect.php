@@ -2,7 +2,7 @@
 
 Class ConnectionDependencia{
  
-	private $server = "mysql:host=10.1.9.113;dbname=junta";
+	private $server = "mysql:host=db;dbname=junta";
 	private $username = "root";
 	private $password = "";
 	private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);

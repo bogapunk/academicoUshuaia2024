@@ -12,7 +12,7 @@ services:
  #   user: root
  #   image: mcr.microsoft.com/mssql/server:2022-CU13-ubuntu-22.04
  #   environment:
- #     - SA_PASSWORD=Davinci2024#
+ #     - SA_PASSWORD="asd123"
  #     - ACCEPT_EULA="Y"
  #   ports:
  #     - "1433:1433"

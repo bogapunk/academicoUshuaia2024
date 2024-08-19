@@ -1,9 +1,9 @@
 <?php
 
 class Modalidad{
-    private $dbHost = "10.1.9.113";
+    private $dbHost = "db";
     private $dbUsername = "SA"; // Actualiza con tu usuario de SQL Server
-    private $dbPassword = 'Davinci2024#'; // Actualiza con tu contraseña de SQL Server
+    private $dbPassword = '"asd123"'; // Actualiza con tu contraseña de SQL Server
     private $dbName = "junta";
     private $modalidadTbl = "_junta_modalidades";
     private $conn; // Propiedad para la conexión a la base de datos

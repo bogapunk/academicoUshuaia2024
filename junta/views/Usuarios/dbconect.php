@@ -1,10 +1,10 @@
 <?php
 ob_start();
 // Datos de conexión a SQL Server
-$serverName = "10.1.9.113"; // o la dirección IP del servidor
+$serverName = "db"; // o la dirección IP del servidor
 $database = "junta";
 $username = "SA"; // Reemplaza con tu usuario
-$password = 'Davinci2024#'; // Reemplaza con tu contraseña
+$password = '"asd123"'; // Reemplaza con tu contraseña
 
 try {
     // Crear una instancia de PDO para SQL Server

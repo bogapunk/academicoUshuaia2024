@@ -132,9 +132,9 @@ class Dependencia{
 
 */
 class Dependencia {
-    private $serverName = "10.1.9.113";
+    private $serverName = "db";
     private $username = "SA"; // Reemplaza con tu usuario de SQL Server
-    private $password = 'Davinci2024#'; // Reemplaza con tu contraseña de SQL Server
+    private $password = '"asd123"'; // Reemplaza con tu contraseña de SQL Server
     private $dbName = "junta";
     private $dependenciasTbl = "_junta_dependencias";
     private $conn;

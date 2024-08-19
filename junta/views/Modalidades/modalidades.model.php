@@ -151,7 +151,7 @@ class ModalidadesModel
     {
         try
         {
-            $this->pdo = new PDO('sqlsrv:Server=10.1.9.113;Database=junta;TrustServerCertificate=yes', 'SA', 'Davinci2024#');
+            $this->pdo = new PDO('sqlsrv:Server=db;Database=junta;TrustServerCertificate=yes', 'SA', '"asd123"');
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);	
         }
         catch(Exception $e)

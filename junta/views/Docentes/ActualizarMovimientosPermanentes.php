@@ -1,9 +1,9 @@
 <?php
 // Configuraciones de conexión a la base de datos
-define('HOST', '10.1.9.113');
+define('HOST', 'db');
 define('BD', 'junta');
 define('DB_USER', 'SA');
-define('PASS', 'Davinci2024#');
+define('PASS', '"asd123"');
 define('CHARSET', 'utf8');
 
 $dsn = "sqlsrv:Server=" . HOST . ";Database=" . BD . ";TrustServerCertificate=yes";

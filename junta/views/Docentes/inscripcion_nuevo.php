@@ -334,10 +334,10 @@ tr:nth-child(even) {
 //$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password.
 try {
   // Connection Parameters (Replace placeholders with your actual values)
-  $serverName = "10.1.9.113"; // Server name or IP address
+  $serverName = "db"; // Server name or IP address
   $databaseName = "junta"; // Database name
   $username = "SA"; // Username (might be different from MySQL)
-  $password = 'Davinci2024#'; // Password
+  $password = '"asd123"'; // Password
 
   // Connection String (PDO SQL Server Format)
   $conn = new PDO("sqlsrv:Server=$serverName;Database=$databaseName", $username, $password); 
@@ -380,11 +380,11 @@ $horas = isset($_GET['horas']) ? $_GET['horas'] : '';
 
 
 // Configuración de la conexión a SQL Server
-$serverName = "10.1.9.113"; // O el nombre de tu servidor SQL
+$serverName = "db"; // O el nombre de tu servidor SQL
 $connectionOptions = array(
     "Database" => "junta", // Nombre de la base de datos
     "Uid" => "SA", // Usuario de SQL Server
-    "PWD" => 'Davinci2024#', // Contraseña de SQL Server
+    "PWD" => '"asd123"', // Contraseña de SQL Server
     "CharacterSet" => "UTF-8" // para que lea las ñ y acentos
 );
 
@@ -521,11 +521,11 @@ $obs = urldecode($_GET['obs']); // Si
 $horas= $_GET['horas'];
 
 // Configuración de la conexión a SQL Server
-$serverName = "10.1.9.113"; // Nombre del servidor
+$serverName = "db"; // Nombre del servidor
 $connectionOptions = array(
     "Database" => "junta", // Nombre de la base de datos
     "Uid" => "SA", // Usuario
-    "PWD" => 'Davinci2024#' ,// Contraseña
+    "PWD" => '"asd123"' ,// Contraseña
     "CharacterSet" => "UTF-8" 
 );
 
@@ -792,11 +792,11 @@ echo "</script>";
                 echo "</select></th>";
                                               echo"<th>";
 
-                                              $serverName = "10.1.9.113";
+                                              $serverName = "db";
                                               $connectionOptions = array(
                                                   "Database" => "junta",
                                                   "Uid" => "SA",
-                                                  "PWD" => 'Davinci2024#',
+                                                  "PWD" => '"asd123"',
                                                   "CharacterSet" => "UTF-8" 
 
                                               );

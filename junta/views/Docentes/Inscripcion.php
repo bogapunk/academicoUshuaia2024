@@ -331,11 +331,11 @@ tr:nth-child(even) {
 
 <?php
 // Establecer la conexión a SQL Server
-$serverName = "10.1.9.113"; // Reemplazar con el nombre de tu servidor SQL Server
+$serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
 $connectionInfo = array(
     "Database" => "junta", // Reemplazar con el nombre de tu base de datos
     "Uid" => "SA", // Usuario SQL Server
-    "PWD" => 'Davinci2024#', // Contraseña del usuario SQL Server
+    "PWD" => '"asd123"', // Contraseña del usuario SQL Server
     "CharacterSet" => "UTF-8", // Para caracteres especiales
     "TrustServerCertificate" => true // Confía en certificados autofirmados
 );
@@ -386,11 +386,11 @@ $horas = isset($_GET['horas']) ? $_GET['horas'] : '';
 
 // Configuración de la conexión a SQL Server
 // Establecer la conexión a SQL Server
-$serverName = "10.1.9.113"; // Reemplazar con el nombre de tu servidor SQL Server
+$serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
 $connectionInfo = array(
     "Database" => "junta", // Reemplazar con el nombre de tu base de datos
     "Uid" => "SA", // Usuario SQL Server
-    "PWD" => 'Davinci2024#', // Contraseña del usuario SQL Server
+    "PWD" => '"asd123"', // Contraseña del usuario SQL Server
     "CharacterSet" => "UTF-8", // Para caracteres especiales
     "TrustServerCertificate" => true // Confía en certificados autofirmados
 );
@@ -537,11 +537,11 @@ $id2 = $_GET['id2'];
 $fecha = isset($_GET['fecha']) ? $_GET['fecha'] : ''; // Recibir la fecha
 
 // Establecer la conexión a SQL Server
-$serverName = "10.1.9.113"; // Reemplazar con el nombre de tu servidor SQL Server
+$serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
 $connectionInfo = array(
     "Database" => "junta", // Reemplazar con el nombre de tu base de datos
     "Uid" => "SA", // Usuario SQL Server
-    "PWD" => 'Davinci2024#', // Contraseña del usuario SQL Server
+    "PWD" => '"asd123"', // Contraseña del usuario SQL Server
     "CharacterSet" => "UTF-8", // Para caracteres especiales
     "TrustServerCertificate" => true // Confía en certificados autofirmados
 );
@@ -885,11 +885,11 @@ echo "</script>";
                                               echo"<th>";
 
                                                                                     // Establecer la conexión a SQL Server
-                                        $serverName = "10.1.9.113"; // Reemplazar con el nombre de tu servidor SQL Server
+                                        $serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
                                         $connectionInfo = array(
                                             "Database" => "junta", // Reemplazar con el nombre de tu base de datos
                                             "Uid" => "SA", // Usuario SQL Server
-                                            "PWD" => 'Davinci2024#', // Contraseña del usuario SQL Server
+                                            "PWD" => '"asd123"', // Contraseña del usuario SQL Server
                                             "CharacterSet" => "UTF-8", // Para caracteres especiales
                                             "TrustServerCertificate" => true // Confía en certificados autofirmados
                                         );

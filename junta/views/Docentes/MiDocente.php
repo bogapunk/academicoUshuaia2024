@@ -127,9 +127,9 @@ if(isset($_POST['insertar'])){
    
 
     // DB CREDENCIALES DE USUARIO.
-    define('DB_HOST', '10.1.9.113');
+    define('DB_HOST', 'db');
     define('DB_USER', 'SA');
-    define('DB_PASS', 'Davinci2024#');
+    define('DB_PASS', '"asd123"');
     define('DB_NAME', 'junta');
 
     try {

@@ -450,7 +450,7 @@ span {
             <option value="" style="width: 500px;">Seleccione</option>
             <?php
             // Database connection (assuming you have a separate connection file)
-            $conn = new mysqli("10.1.9.113", "sa", "", "junta"); // Replace with your connection file path
+            $conn = new mysqli("db", "sa", "", "junta"); // Replace with your connection file path
 
             // SQL query to retrieve modalities
             $sql_modality = "SELECT codmod, nommod FROM _junta_modalidades order by nommod";

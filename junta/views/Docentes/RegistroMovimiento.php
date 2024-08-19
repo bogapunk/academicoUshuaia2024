@@ -434,10 +434,10 @@ tr:nth-child(even) {
 // Datos de conexión a la base de datos
 
 // Datos de conexión a la base de datos
-$serverName = "10.1.9.113"; // Servidor de SQL Server
+$serverName = "db"; // Servidor de SQL Server
 $database = "junta"; // Nombre de la base de datos
 $username = "SA"; // Usuario de la base de datos
-$password = 'Davinci2024#'; // Contraseña de la base de datos (eliminé las comillas innecesarias)
+$password = '"asd123"'; // Contraseña de la base de datos (eliminé las comillas innecesarias)
 
 // DSN para SQL Server con TrustServerCertificate activado
 $dsn = "sqlsrv:Server=$serverName;Database=$database;TrustServerCertificate=True";
@@ -477,11 +477,11 @@ if (isset($_GET['legajo'])) {
 }
 
 // Configuración de la conexión a SQL Server
-$serverName = "10.1.9.113"; // Dirección y puerto del servidor SQL Server
+$serverName = "db"; // Dirección y puerto del servidor SQL Server
 $connectionOptions = array(
   "Database" => "junta",
   "Uid" => "SA", // Usuario de la base de datos
-  "PWD" => 'Davinci2024#',
+  "PWD" => '"asd123"',
     "TrustServerCertificate"=>true,    // Contraseña de la base de datos
   "CharacterSet" => "UTF-8" // Para caracteres especiales
 );
@@ -631,11 +631,11 @@ function showDetails(legajo) {
 <?php
 // Consulta SQL para obtener todas las modalidades
 // Configuración de la conexión a SQL Server
-$serverName = "10.1.9.113"; // Cambia esto si tu servidor no es localhost
+$serverName = "db"; // Cambia esto si tu servidor no es localhost
 $connectionOptions = array(
     "Database" => "junta",
     "Uid" => "SA", // Cambia esto a tu usuario real
-    "PWD" => 'Davinci2024#',     // Cambia esto a tu contraseña real
+    "PWD" => '"asd123"',     // Cambia esto a tu contraseña real
     "TrustServerCertificate"=>True,
     "CharacterSet" => 'UTF-8'
 );
@@ -709,11 +709,11 @@ sqlsrv_close($conn);
 <?php
 // Realiza la consulta para obtener los nombres y IDs de los establecimientos
 // Configuración de la conexión a SQL Server
-$serverName = "10.1.9.113"; // Cambia esto si tu servidor no es localhost
+$serverName = "db"; // Cambia esto si tu servidor no es localhost
 $connectionOptions = array(
     "Database" => "junta",
     "Uid" => "SA", // Cambia esto a tu usuario real
-    "PWD" => 'Davinci2024#',     // Cambia esto a tu contraseña real
+    "PWD" => '"asd123"',     // Cambia esto a tu contraseña real
     "TrustServerCertificate"=>True,
     "CharacterSet" => 'UTF-8'
 );
@@ -796,12 +796,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (!empty($nomdep)) {
       try {
           // Configuración de la conexión a SQL Server
-          $serverName = "10.1.9.113"; // Nombre del servidor SQL Server
+          $serverName = "db"; // Nombre del servidor SQL Server
           $connectionOptions = array(
               "Database" => "junta", // Nombre de la base de datos
               "Uid" => "SA", // Usuario de la base de datos
               "TrustServerCertificate"=>True,
-              "PWD" => 'Davinci2024#' // Contraseña de la base de datos
+              "PWD" => '"asd123"' // Contraseña de la base de datos
           );
 
           // Establecer la conexión
@@ -846,11 +846,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 // Consulta SQL para obtener los valores únicos de codloc desde _junta_movimientos
 // Configuración de la conexión a SQL Server
-$serverName = "10.1.9.113"; // Cambia esto si tu servidor no es localhost
+$serverName = "db"; // Cambia esto si tu servidor no es localhost
 $connectionOptions = array(
     "Database" => "junta",
     "Uid" => "SA", // Cambia esto a tu usuario real
-    "PWD" => 'Davinci2024#',
+    "PWD" => '"asd123"',
     "TrustServerCertificate"=>True,// Cambia esto a tu contraseña real
     "CharacterSet" => "UTF-8" // para que lea los acentos y ñ
 );

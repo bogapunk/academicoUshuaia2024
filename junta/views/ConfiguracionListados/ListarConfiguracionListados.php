@@ -274,9 +274,9 @@ function topFunction() {
 // Te recomiendo utilizar esta conección, la que utilizas ya no es la recomendada. 
 //$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password. 
 // Definir las credenciales de la base de datos
-define('DB_HOST', '10.1.9.113');
+define('DB_HOST', 'db');
 define('DB_USER', 'SA');
-define('DB_PASS', 'Davinci2024#');
+define('DB_PASS', '"asd123"');
 define('DB_NAME', 'junta');
 
 try {
