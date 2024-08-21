@@ -1,13 +1,13 @@
 <?php
 // Configuraciones de conexión a la base de datos
-define('HOST', 'db');
+define('HOST', '10.1.9.113');
 define('BD', 'junta');
 define('DB_USER', 'SA');
-define('PASS', '"asd123"');
+define('PASS', 'Davinci2024#');
 define('CHARSET', 'utf8');
 
 $dsn = "sqlsrv:Server=" . HOST . ";Database=" . BD . ";TrustServerCertificate=yes";
-var_dump($_POST);
+//var_dump($_POST);
 //exit;
 try {
     // Conexión a la base de datos

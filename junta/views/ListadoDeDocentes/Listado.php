@@ -450,7 +450,7 @@ span {
             <option value="" style="width: 500px;">Seleccione</option>
             <?php
             // Database connection (assuming you have a separate connection file)
-            $conn = new mysqli("db", "sa", "", "junta"); // Replace with your connection file path
+            $conn = new mysqli("10.1.9.113", "sa", "Davinci2024#", "junta"); // Replace with your connection file path
 
             // SQL query to retrieve modalities
             $sql_modality = "SELECT codmod, nommod FROM _junta_modalidades order by nommod";
@@ -588,12 +588,17 @@ $nombreLocalidades = array(
   
   <?php
 // Database connection para traer datos de la base de datos de los establecimientos
-$conn = new mysqli("db", "root", "", "junta");
+$serverName = "10.1.9.113"; // Replace with your SQL Server hostname
+              $connectionOptions = array(
+                  "Database" => "junta", // Replace with your database name
+                  "UID" => "SA", // Replace with your SQL Server username
+                  "PWD" => 'Davinci2024#', // Replace with your SQL Server password
+                  "CharacterSet" => "UTF-8", // acentos
+                  "TrustServerCertificate"=>true
+              );
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+              $conn = sqlsrv_connect($serverName, $connectionOptions);
+
 
 // SQL query
 $sql = "SELECT  nomdep,coddep FROM _junta_dependencias order by nomdep";

@@ -137,9 +137,9 @@ class Docente{
 
 */
 class Docente {
-    private $dbHost = "db";
+    private $dbHost = "10.1.9.113";
     private $dbUsername = "SA"; // Actualiza con tu usuario de SQL Server
-    private $dbPassword = '"asd123"'; // Actualiza con tu contraseña de SQL Server
+    private $dbPassword = 'Davinci2024#'; // Actualiza con tu contraseña de SQL Server
     private $dbName = "junta";
     private $docentesTbl = "_junta_docentes";
     private $conn; // Propiedad para la conexión a la base de datos

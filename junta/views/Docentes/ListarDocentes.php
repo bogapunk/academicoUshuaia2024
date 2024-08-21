@@ -330,9 +330,9 @@ tr:nth-child(even) {
 // Te recomiendo utilizar esta conexión, la que utilizas ya no es la recomendada. 
 //$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password. 
 try {
-  $dsn = "sqlsrv:server=db;database=junta;TrustServerCertificate=yes";
+  $dsn = "sqlsrv:server=10.1.9.113;database=junta;TrustServerCertificate=yes";
   $username = "SA";
-  $password = '"asd123"';
+  $password = 'Davinci2024#';
   
   // Crear la conexión PDO
   $link = new PDO($dsn, $username, $password);
@@ -492,11 +492,10 @@ try {
                               
                                 <button class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR">Limpiar Formulario</button>
                               &nbsp&nbsp&nbsp&nbsp
-                              <button class="btn btn-info">
-                                <a href="javascript:imprSelec('seleccion')" style="color: white;" >Imprimir Docente</a></button>
+                            
 
 
-                            <center><?php echo $doc->__GET('legajo');// aca te faltaba poner los echo para que se muestre el valor de la variable.  ?></center>
+                            <center><b>Numero de Legajo:</b><?php echo $doc->__GET('legajo');// aca te faltaba poner los echo para que se muestre el valor de la variable.  ?></center>
                             <a href="VerInscripciones.php?legajo=<?php echo $doc->__GET('legajo'); ?>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span> Ver Inscripciones</a>
 
                         
@@ -509,6 +508,31 @@ try {
 
                     </table>
                 </form>
+                <form method="GET" action="generate_pdf.php">
+    <input type="hidden" name="legajo" value="<?php echo $doc->__GET('legajo'); ?>" />
+    <input type="hidden" name="apellidoynombre" value="<?php echo $doc->__GET('apellidoynombre'); ?>" />
+    <input type="hidden" name="dni" value="<?php echo $doc->__GET('dni'); ?>" />
+    <input type="hidden" name="domicilio" value="<?php echo $doc->__GET('domicilio'); ?>" />
+    <input type="hidden" name="lugarinsc" value="<?php echo $doc->__GET('lugarinsc'); ?>" />
+    <input type="hidden" name="fechanacim" value="<?php echo $doc->__GET('fechanacim'); ?>" />
+    <input type="hidden" name="promedioT" value="<?php echo number_format($doc->__GET('promedioT'), 2, '.', ''); ?>" />
+    <input type="hidden" name="telefonos" value="<?php echo $doc->__GET('telefonos'); ?>" />
+    <input type="hidden" name="Titulobas" value="<?php echo $doc->__GET('Titulobas'); ?>" />
+    <input type="hidden" name="fechatit" value="<?php echo !empty($doc->__GET('fechatit')) ? date('Y-m-d', strtotime($doc->__GET('fechatit'))) : ''; ?>" />
+    <input type="hidden" name="otorgadopor" value="<?php echo $doc->__GET('otorgadopor'); ?>" />
+    <input type="hidden" name="finicio" value="<?php echo !empty($doc->__GET('finicio')) ? date('Y-m-d', strtotime($doc->__GET('finicio'))) : ''; ?>" />
+    <input type="hidden" name="otrostit" value="<?php echo $doc->__GET('otrostit'); ?>" />
+    <input type="hidden" name="fingreso" value="<?php echo !empty($doc->__GET('fingreso')) ? date('Y-m-d', strtotime($doc->__GET('fingreso'))) : ''; ?>" />
+    <input type="hidden" name="cargosdocentes" value="<?php echo $doc->__GET('cargosdocentes'); ?>" />
+    <input type="hidden" name="faperturaleg" value="<?php echo !empty($doc->__GET('faperturaleg')) ? date('Y-m-d', strtotime($doc->__GET('faperturaleg'))) : ''; ?>" />
+    <input type="hidden" name="Nacionalidad" value="<?php echo $doc->__GET('Nacionalidad'); ?>" />
+    <input type="hidden" name="obsdoc" value="<?php echo $doc->__GET('obsdoc'); ?>" />
+
+    <!-- Resto del formulario aquí -->
+    <a href="generate_pdf.php?legajo=<?php echo urlencode($doc->__GET('legajo')); ?>&apellidoynombre=<?php echo urlencode($doc->__GET('apellidoynombre')); ?>&dni=<?php echo urlencode($doc->__GET('dni')); ?>&domicilio=<?php echo urlencode($doc->__GET('domicilio')); ?>&lugarinsc=<?php echo urlencode($doc->__GET('lugarinsc')); ?>&fechanacim=<?php echo urlencode($doc->__GET('fechanacim')); ?>&promedioT=<?php echo urlencode($doc->__GET('promedioT')); ?>&telefonos=<?php echo urlencode($doc->__GET('telefonos')); ?>&Titulobas=<?php echo urlencode($doc->__GET('Titulobas')); ?>&fechatit=<?php echo urlencode($doc->__GET('fechatit')); ?>&otorgadopor=<?php echo urlencode($doc->__GET('otorgadopor')); ?>&finicio=<?php echo urlencode($doc->__GET('finicio')); ?>&otrostit=<?php echo urlencode($doc->__GET('otrostit')); ?>&fingreso=<?php echo urlencode($doc->__GET('fingreso')); ?>&cargosdocentes=<?php echo urlencode($doc->__GET('cargosdocentes')); ?>&faperturaleg=<?php echo urlencode($doc->__GET('faperturaleg')); ?>&Nacionalidad=<?php echo urlencode($doc->__GET('Nacionalidad')); ?>&obsdoc=<?php echo urlencode($doc->__GET('obsdoc')); ?>" class="btn btn-info">
+    Descargar Docente
+</a>
+</form>
 
               </center>
 

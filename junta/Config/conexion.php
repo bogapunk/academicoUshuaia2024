@@ -5,7 +5,7 @@ class Conexion{
     public function conectar(){
         try {
             $this->cnx = new PDO(
-                "sqlsrv:Server=db;Database=junta;TrustServerCertificate=yes",
+                "sqlsrv:Server=10.1.9.113;Database=junta;TrustServerCertificate=yes",
                 DB_USER, 
                 PASS
             );

@@ -421,11 +421,11 @@ if (!$conn) {
 */
 
 // Database connection
-$serverName = "db"; // Replace with your SQL Server hostname
+$serverName = "10.1.9.113"; // Replace with your SQL Server hostname
 $connectionOptions = array(
     "Database" => "junta",       // Replace with your database name
     "Uid"      => "SA",      // Replace with your SQL Server username
-    "PWD"      => '"asd123"',      // Replace with your SQL Server password
+    "PWD"      => 'Davinci2024#',      // Replace with your SQL Server password
     "CharacterSet" => "UTF-8" // Add this to support UTF-8 characters (important for accents)
 );
 
@@ -445,11 +445,11 @@ LEFT JOIN _junta_dependencias j_dep ON j_mov.establecimiento = j_dep.coddep
 WHERE j_doc.legajo = '$legajo'
 ORDER BY j_mov.fecha ASC";
 // Establecer la conexión a SQL Server
-$serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
+$serverName = "10.1.9.113"; // Reemplazar con el nombre de tu servidor SQL Server
 $connectionInfo = array(
     "Database" => "junta", // Reemplazar con el nombre de tu base de datos
     "UID" => "SA",
-    "PWD" => '"asd123"',
+    "PWD" => 'Davinci2024#',
     "CharacterSet" => "UTF-8"
 );
 $conn = sqlsrv_connect($serverName, $connectionInfo);

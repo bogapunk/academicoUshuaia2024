@@ -434,10 +434,10 @@ tr:nth-child(even) {
 // Datos de conexión a la base de datos
 
 // Datos de conexión a la base de datos
-$serverName = "db"; // Servidor de SQL Server
+$serverName = "10.1.9.113"; // Servidor de SQL Server
 $database = "junta"; // Nombre de la base de datos
 $username = "SA"; // Usuario de la base de datos
-$password = '"asd123"'; // Contraseña de la base de datos (eliminé las comillas innecesarias)
+$password = 'Davinci2024#'; // Contraseña de la base de datos (eliminé las comillas innecesarias)
 
 // DSN para SQL Server con TrustServerCertificate activado
 $dsn = "sqlsrv:Server=$serverName;Database=$database;TrustServerCertificate=True";
@@ -477,11 +477,11 @@ if (isset($_GET['legajo'])) {
 }
 
 // Configuración de la conexión a SQL Server
-$serverName = "db"; // Dirección y puerto del servidor SQL Server
+$serverName = "10.1.9.113"; // Dirección y puerto del servidor SQL Server
 $connectionOptions = array(
   "Database" => "junta",
   "Uid" => "SA", // Usuario de la base de datos
-  "PWD" => '"asd123"',
+  "PWD" => 'Davinci2024#',
     "TrustServerCertificate"=>true,    // Contraseña de la base de datos
   "CharacterSet" => "UTF-8" // Para caracteres especiales
 );
@@ -631,11 +631,11 @@ function showDetails(legajo) {
 <?php
 // Consulta SQL para obtener todas las modalidades
 // Configuración de la conexión a SQL Server
-$serverName = "db"; // Cambia esto si tu servidor no es localhost
+$serverName = "10.1.9.113"; // Cambia esto si tu servidor no es localhost
 $connectionOptions = array(
     "Database" => "junta",
     "Uid" => "SA", // Cambia esto a tu usuario real
-    "PWD" => '"asd123"',     // Cambia esto a tu contraseña real
+    "PWD" => 'Davinci2024#',     // Cambia esto a tu contraseña real
     "TrustServerCertificate"=>True,
     "CharacterSet" => 'UTF-8'
 );
@@ -709,11 +709,11 @@ sqlsrv_close($conn);
 <?php
 // Realiza la consulta para obtener los nombres y IDs de los establecimientos
 // Configuración de la conexión a SQL Server
-$serverName = "db"; // Cambia esto si tu servidor no es localhost
+$serverName = "10.1.9.113"; // Cambia esto si tu servidor no es localhost
 $connectionOptions = array(
     "Database" => "junta",
     "Uid" => "SA", // Cambia esto a tu usuario real
-    "PWD" => '"asd123"',     // Cambia esto a tu contraseña real
+    "PWD" => 'Davinci2024#',     // Cambia esto a tu contraseña real
     "TrustServerCertificate"=>True,
     "CharacterSet" => 'UTF-8'
 );
@@ -796,12 +796,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (!empty($nomdep)) {
       try {
           // Configuración de la conexión a SQL Server
-          $serverName = "db"; // Nombre del servidor SQL Server
+          $serverName = "10.1.9.113"; // Nombre del servidor SQL Server
           $connectionOptions = array(
               "Database" => "junta", // Nombre de la base de datos
               "Uid" => "SA", // Usuario de la base de datos
               "TrustServerCertificate"=>True,
-              "PWD" => '"asd123"' // Contraseña de la base de datos
+              "PWD" => 'Davinci2024#' // Contraseña de la base de datos
           );
 
           // Establecer la conexión
@@ -846,11 +846,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 // Consulta SQL para obtener los valores únicos de codloc desde _junta_movimientos
 // Configuración de la conexión a SQL Server
-$serverName = "db"; // Cambia esto si tu servidor no es localhost
+$serverName = "10.1.9.113"; // Cambia esto si tu servidor no es localhost
 $connectionOptions = array(
     "Database" => "junta",
     "Uid" => "SA", // Cambia esto a tu usuario real
-    "PWD" => '"asd123"',
+    "PWD" => 'Davinci2024#',
     "TrustServerCertificate"=>True,// Cambia esto a tu contraseña real
     "CharacterSet" => "UTF-8" // para que lea los acentos y ñ
 );
@@ -931,54 +931,54 @@ document.getElementById('motivosExclusion').addEventListener('change', function(
             <h3><u>CARGA COMUN</u> </h3>
               <br>
                 <label for="comun_puntajetotal" style="display: inline-block; width: 225px;">Puntaje Total:</label>
-                <input type="number" name="puntajetotal" id="puntajetotal" class="materialize-input3" size="2">
+                <input type="number" name="puntajetotal2" id="puntajetotal2" class="materialize-input3"  size="10" step="0.01" >
                 <br><br>
 
                 <label for="titulo" style="display: inline-block; width: 225px;">1.- Título:</label>
-                <input type="number" id="titulo" name="titulo" class="materialize-input3" size="10">
+                <input type="number" id="titulo2" name="titulo2" class="materialize-input3" size="10"  step="0.01" >
                 <br>
 
                 <label for="otrostit" style="display: inline-block; width: 225px;">2.- Otros Título:</label>
-                <input type="number" id="otitulo" name="otitulo" class="materialize-input3" size="10">
+                <input type="number" id="otitulo2" name="otitulo2" class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="concepto" style="display: inline-block; width: 225px;">3.- Conceptos:</label>
-                <input type="number" id="concepto" name="concepto" class="materialize-input3" size="10">
+                <label for="concepto2" style="display: inline-block; width: 225px;">3.- Conceptos:</label>
+                <input type="number" id="concepto2" name="concepto2" class="materialize-input3" size="10" step="0.01" >
                 <br>
 
                 <label for="promedio" style="display: inline-block; width: 225px;">4.- Promedio:</label>
-                <input type="number" id="promedio" name="promedio" class="materialize-input3" size="10">
+                <input type="number" id="promedio2" name="promedio2" class="materialize-input3" size="10" step="0.01" >
                 <br>
 
                 <label for="ant_gestion" style="display: inline-block; width: 225px;">5.- Antigüedad Gestión:</label>
-                <input type="number" id="antiguedadgestion" name="antiguedadgestion" class="materialize-input3" size="10">
+                <input type="number" id="antiguedadgestion2" name="antiguedadgestion2" class="materialize-input3" size="10" step="0.01" >
                 <br>
 
                 <label for="ant_titulo" style="display: inline-block; width: 225px;">6.- Antigüedad Título:</label>
-                <input type="number" id="antiguedadtitulo" name="antiguedadtitulo" class="materialize-input3" size="10">
+                <input type="number" id="antiguedadtitulo2" name="antiguedadtitulo2" class="materialize-input3" size="10" step="0.01" >
                 <br>
 
                 <label for="servicios" style="display: inline-block; width: 225px;">7.- Servicios:</label>
                 <br>
 
                 <label for="serv_prov" style="display: inline-block; width: 225px;">7.1- En la Provincia:</label>
-                <input type="number" id="serviciosprovincia" name="serviciosprovincia" class="materialize-input3" size="10">
+                <input type="number" id="serviciosprovincia2" name="serviciosprovincia2" class="materialize-input3" size="10" step="0.01" >
                 <br>
 
-                <label for="otros_serv" style="display: inline-block; width: 225px;">7.2- Otros Servicios:</label>
-                <input type="number" id="otros_serv" name="otros_serv" class="materialize-input3" size="10">
+                <label for="otrosservicios2" style="display: inline-block; width: 225px;">7.2- Otros Servicios:</label>
+                <input type="number" id="otrosservicios2" name="otrosservicios2" class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="residencia" style="display: inline-block; width: 225px;">8.- Residencia:</label>
-                <input type="number" id="residencia" name="residencia" class="materialize-input3" size="10">
+                <input type="number" id="residencia2" name="residencia2" class="materialize-input3" size="10" step="0.01" >
                 <br>
 
                 <label for="publicaciones" style="display: inline-block; width: 225px;">9.- Publicaciones:</label>
-                <input type="number" id="publicaciones" name="publicaciones" class="materialize-input3" size="10">
+                <input type="number" id="publicaciones2" name="publicaciones2" class="materialize-input3" size="10" step="0.01" >
                 <br>
 
-                <label for="otros_antec" style="display: inline-block; width: 225px;">10.- Otros Antecedentes:</label>
-                <input type="number" id="otros_antec" name="otros_antec" class="materialize-input3" size="10">
+                <label for="otrosantecedentes2" style="display: inline-block; width: 225px;">10.- Otros Antecedentes:</label>
+                <input type="number" id="otrosantecedentes2" name="otrosantecedentes2" class="materialize-input3" size="10" step="0.01" >
                 <br>
             </td>
         </tr>
@@ -991,164 +991,164 @@ document.getElementById('motivosExclusion').addEventListener('change', function(
               <h3><u>CARGA TITULAR</u> </h3>
               <br>
                 <label for="puntajetotal" style="display: inline-block; width: 225px;">Puntaje Total:</label>
-                <input type="number" name="puntajetotal" id="puntajetotal" class="materialize-input3" size="2">
+                <input type="number" name="puntajetotal" id="puntajetotal" class="materialize-input3" size="10" step="0.01" >
                 <br><br>
 
                 <label for="titulo" style="display: inline-block; width: 225px;">1.- Título:</label>
-                <input type="number" id="titulo" name="titulo"  class="materialize-input3" size="10">
+                <input type="number" id="titulo" name="titulo"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="otrostit" style="display: inline-block; width: 225px;">2.- Otros Título:</label>
-                <input type="number" id="otrostit" name="otitulo"  class="materialize-input3" size="10">
+                <input type="number" id="otrostit" name="otitulo"  class="materialize-input3" size="10" step="0.01" >
                 <br>
                 <label for="concepto" style="display: inline-block; width: 225px;">3.- Conceptos:</label>
-                <input type="number" id="concepto" name="concepto" class="materialize-input3" size="10">
+                <input type="number" id="concepto" name="concepto" class="materialize-input3" size="10" step="0.01" >
                 <br>
                 <label for="promedio" style="display: inline-block; width: 225px;">4.- Promedio:</label>
-                <input type="number" id="promedio" name="promedio"  class="materialize-input3" size="10">
+                <input type="number" id="promedio" name="promedio"  class="materialize-input3" size="10" step="0.01" >
                 <br>
 
                 <label for="ant_gestion" style="display: inline-block; width: 225px;">5.- Antigüedad Gestión:</label>
-                <input type="number" id="antiguedadgestion" name="antiguedadgestion"  class="materialize-input3" size="10">
+                <input type="number" id="antiguedadgestion" name="antiguedadgestion"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="ant_titulo" style="display: inline-block; width: 225px;">6.- Antigüedad Título:</label>
-                <input type="number" id="antiguedadtitulo" name="antiguedadtitulo"  class="materialize-input3" size="10">
+                <input type="number" id="antiguedadtitulo" name="antiguedadtitulo"  class="materialize-input3" size="10" step="0.01" >
                 <br>
 
                 <label for="servicios" style="display: inline-block; width: 225px;">7.- Servicios:</label>
                 <br>
 
                 <label for="serv_prov" style="display: inline-block; width: 208px;margin-left: 20px; ">7.1- En la Provincia:</label>
-                <input type="number" id="serviciosprovincia" name="serviciosprovincia"  class="materialize-input3" size="10">
+                <input type="number" id="serviciosprovincia" name="serviciosprovincia"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="t_m_seccion" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;">Maestro de Sección:</label>
-                <input type="number" id="t_m_seccion" name="t_m_seccion"   class="materialize-input3" size="10">
+                <input type="number" id="t_m_seccion" name="t_m_seccion"   class="materialize-input3" size="10" step="0.01" >
                 <br>
 
                 <label for="t_m_anio" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Maestro de Año:</label>
-                <input type="number" id="t_m_anio" name="t_m_anio"  class="materialize-input3" size="10">
+                <input type="number" id="t_m_anio" name="t_m_anio"  class="materialize-input3" size="10" step="0.01" >
                 <br>
 
                 <label for="t_m_grupo" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Maestro de Grupo:</label>
-                <input type="number" id="t_m_grupo" name="t_m_grupo"  class="materialize-input3" size="10">
+                <input type="number" id="t_m_grupo" name="t_m_grupo"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="t_m_ciclo" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Maestro de Ciclo:</label>
-                <input type="number" id="t_m_ciclo" name="t_m_ciclo"  class="materialize-input3" size="10">
+                <input type="number" id="t_m_ciclo" name="t_m_ciclo"  class="materialize-input3" size="10" step="0.01" >
                 <br>
 
                 <label for="t_m_recupera" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Maestro Recuperador:</label>
-                <input type="number" id="t_m_recupera" name="t_m_recupera"  class="materialize-input3" size="10">
+                <input type="number" id="t_m_recupera" name="t_m_recupera"  class="materialize-input3" size="10" step="0.01" >
                 <br>
 
                 <label for="t_m_comple" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Maestro Complementario:</label>
-                <input type="number" id="t_m_comple" name="t_m_comple"  class="materialize-input3" size="10">
+                <input type="number" id="t_m_comple" name="t_m_comple"  class="materialize-input3" size="10" step="0.01" >
                 <br>
 
                 <label for="t_m_biblio" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Maestro Bibliotecario:</label>
-                <input type="number" id="t_m_biblio" name="t_m_biblio"  class="materialize-input3" size="10">
+                <input type="number" id="t_m_biblio" name="t_m_biblio"  class="materialize-input3" size="10" step="0.01" >
                 <br>
 
                 <label for="t_m_gabinete" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Gabinete:</label>
-                <input type="number" id="t_m_gabinete" name="t_m_gabinete"  class="materialize-input3" size="10">
+                <input type="number" id="t_m_gabinete" name="t_m_gabinete"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <hr>
 
                 <label for="t_m_sec1" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Secretaría 1º:</label>
-                <input type="number" id="t_m_sec1" name="t_m_sec1"  class="materialize-input3" size="10">
+                <input type="number" id="t_m_sec1" name="t_m_sec1"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="t_m_sec2" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Secretaría 2º:</label>
-                <input type="number" id="t_m_sec2" name="t_m_sec2"  class="materialize-input3" size="10">
+                <input type="number" id="t_m_sec2" name="t_m_sec2"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="t_m_viced" style="display: inline-block; width: 208px;margin-left: 20px; color:#0000FF;">Vice-Director:</label>
-                <input type="number" id="t_m_viced" name="t_m_viced"  class="materialize-input3" size="10">
+                <input type="number" id="t_m_viced" name="t_m_viced"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <hr>
 
                 <label for="t_d_pu" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Director Personal Único:</label>
-                <input type="number" id="t_d_pu" name="t_d_pu"  class="materialize-input3" size="10">
+                <input type="number" id="t_d_pu" name="t_d_pu"  class="materialize-input3" size="10"step="0.01">
                 <br>
 
                 <label for="t_d_3" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Director de 3º:</label>
-                <input type="number" id="t_d_3" name="t_d_3"  class="materialize-input3" size="10">
+                <input type="number" id="t_d_3" name="t_d_3"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="t_d_2" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Director de 2º:</label>
-                <input type="number" id="t_d_2" name="t_d_2"  class="materialize-input3"  size="10">
+                <input type="number" id="t_d_2" name="t_d_2"  class="materialize-input3"  size="10" step="0.01">
                 <br>
 
                 <label for="t_d_1" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Director de 1º:</label>
-                <input type="number" id="t_d_1" name="t_d_1"  class="materialize-input3" size="10">
+                <input type="number" id="t_d_1" name="t_d_1"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="t_d_biblio" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;  ">Director de Biblioteca:</label>
-                <input type="number" id="t_d_biblio" name="t_d_biblio"  class="materialize-input3" size="10">
+                <input type="number" id="t_d_biblio" name="t_d_biblio"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="t_d_gabi" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Director de Gabinete:</label>
-                <input type="number" id="t_d_gabi" name="t_d_gabi"  class="materialize-input3" size="10">
+                <input type="number" id="t_d_gabi" name="t_d_gabi"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <hr>
 
                 <label for="t_d_seccoortec" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Secretario Coord. Tec.:</label>
-                <input type="number" id="t_d_seccoortec" name="t_d_seccoortec"  class="materialize-input3" size="10">
+                <input type="number" id="t_d_seccoortec" name="t_d_seccoortec"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="t_d_supsectec" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Supe. Sec. Tec.:</label>
-                <input type="number" id="t_d_supsectec" name="t_d_supsectec"  class="materialize-input3" size="10">
+                <input type="number" id="t_d_supsectec" name="t_d_supsectec"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="t_d_supesc" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Sup. Escolar:</label>
-                <input type="number" id="t_d_supesc" name="t_d_supesc" class="materialize-input3" size="10">
+                <input type="number" id="t_d_supesc" name="t_d_supesc" class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="t_d_supgral" style="display: inline-block; width: 208px;margin-left: 20px; color:#0000FF;">Sup. General:</label>
-                <input type="number" id="t_d_supgral" name="t_d_supgral"  class="materialize-input3" size="10">
+                <input type="number" id="t_d_supgral" name="t_d_supgral"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="t_d_adic" style="display: inline-block; width: 208px; margin-left: 20px; color:#0000FF;">Adic.:</label>
-                <input type="number" id="t_d_adic" name="t_d_adic"  class="materialize-input3" size="10">
+                <input type="number" id="t_d_adic" name="t_d_adic"  class="materialize-input3" size="10"step="0.01">
                 <br>
 
                 <hr>
 
-                <label for="otros_serv" style="display: inline-block; width: 225px;">7.2- Otros Servicios:</label>
-                <input type="number" id="otros_serv" name="otros_serv" class="materialize-input3" size="10">
+                <label for="otrosservicios" style="display: inline-block; width: 225px;">7.2- Otros Servicios:</label>
+                <input type="number" id="otrosservicios" name="otrosservicios" class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="o_g_a" style="display: inline-block; width: 208px; margin-left: 20px; color:#0000FF;">Grupo A:</label>
-                <input type="number" id="o_g_a" name="o_g_a"  class="materialize-input3" size="10">
+                <input type="number" id="o_g_a" name="o_g_a"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="o_g_b" style="ddisplay: inline-block; width: 208px; margin-left: 20px; color:#0000FF;">Grupo B:</label>
-                <input type="number" id="o_g_b" name="o_g_b" class="materialize-input3"  size="10">
+                <input type="number" id="o_g_b" name="o_g_b" class="materialize-input3"  size="10" step="0.01" >
                 <br>
 
                 <label for="o_g_c" style="display: inline-block; width: 208px; margin-left: 20px; color:#0000FF;">Grupo C:</label>
-                <input type="number" id="o_g_c" name="o_g_c"   class="materialize-input3" size="10">
+                <input type="number" id="o_g_c" name="o_g_c"   class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="o_g_d" style="display: inline-block; width: 208px; margin-left: 20px; color:#0000FF;">Grupo D:</label>
-                <input type="number" id="o_g_d" name="o_g_d" class="materialize-input3" size="10">
+                <input type="number" id="o_g_d" name="o_g_d" class="materialize-input3" size="10" step="0.01" >
                 <br>
 
                 <label for="residencia" style="display: inline-block; width: 225px;">8.- Residencia:</label>
-                <input type="number" id="residencia" name="residencia"  class="materialize-input3" size="10">
+                <input type="number" id="residencia" name="residencia"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <label for="publicaciones" style="display: inline-block; width: 225px;">9.- Publicaciones:</label>
-                <input type="number" id="publicaciones" name="publicaciones"  class="materialize-input3" size="10">
+                <input type="number" id="publicaciones" name="publicaciones"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="otros_antec" style="display: inline-block; width: 225px;">10.- Otros Antecedentes:</label>
-                <input type="number" id="otros_antec" name="otros_antec" class="materialize-input3" size="10">
+                <label for="otrosantecedentes" style="display: inline-block; width: 225px;">10.- Otros Antecedentes:</label>
+                <input type="number" id="otrosantecedentes" name="otrosantecedentes" class="materialize-input3" size="10" step="0.01">
                 <br>
             </td>
         </tr>
@@ -1164,6 +1164,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var tipoSelect = document.getElementById('tipoc');
     var tablaPermanenteConcursoInterino = document.getElementById('tablaPermanenteConcursoInterino');
     var tablaTitular = document.getElementById('tablaTitular');
+
+
+
 
     function mostrarTablaSegunTipo() {
         var tipo = tipoSelect.value;

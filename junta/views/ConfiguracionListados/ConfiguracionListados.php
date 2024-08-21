@@ -1,9 +1,9 @@
 <?php
 
 class ConfiguracionListados{
-    private $serverName = "db";
+    private $serverName = "10.1.9.113";
     private $username = "SA";
-    private $password ='"asd123"';
+    private $password ='Davinci2024#';
     private $dbName = "junta";
     private $configuracionlistadoTbl    = "_junta_listadosgenerales";
     

@@ -1,23 +1,26 @@
 <?php
 
 class User{
-    private $dbHost     = "db";
-    private $dbUsername = "root";
-    private $dbPassword = "";
+    private $dbHost     = "10.1.9.113";
+    private $dbUsername = "SA";
+    private $dbPassword = 'Davinci2024#';
     private $dbName     = "junta";
     private $userTbl    = "usuarios";
+    private $db;
     
     public function __construct(){
         if(!isset($this->db)){
-            // Conexion con la database
-            $conn = new mysqli($this->dbHost, $this->dbUsername, $this->dbPassword, $this->dbName);
-            if($conn->connect_error){
-                die("Falló la conexion con MySQL: " . $conn->connect_error);
+            // Connection to the database
+            $connectionInfo = array("Database"=>$this->dbName, "UID"=>$this->dbUsername, "PWD"=>$this->dbPassword,"TrustServerCertificate"=>true);
+            $conn = sqlsrv_connect($this->dbHost, $connectionInfo);
+            if($conn === false){
+                die(print_r(sqlsrv_errors(), true));
             }else{
                 $this->db = $conn;
             }
         }
     }
+    
     
 
     public function getRows($conditions = array()){

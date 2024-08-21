@@ -374,6 +374,35 @@ button:hover {
     border-color: #42a5f5; /* Change border color to blue on focus */
   }
 }
+.materialize-input-titulobasico {
+  border: none; /* Remove default border */
+  border-bottom: 1px solid #ccc; /* Add underline border */
+  background-color: transparent; /* Transparent background */
+  padding: 0px 0px; /* Adjust padding for a comfortable fit */
+  font-size: 15px; /* Adjust font size if needed */
+  outline: none; /* Remove default outline */
+  width: 15%; /* Make the input element fill the container */
+  cursor: pointer;
+  /* Add the focus styling here */
+  &:focus {
+    border-color: #42a5f5; /* Change border color to blue on focus */
+  }
+}
+
+.materialize-input_number{
+  border: none; /* Remove default border */
+  border-bottom: 1px solid #ccc; /* Add underline border */
+  background-color: transparent; /* Transparent background */
+  padding: 0px 0px; /* Adjust padding for a comfortable fit */
+  font-size: 15px; /* Adjust font size if needed */
+  outline: none; /* Remove default outline */
+  width: 50%; /* Make the input element fill the container */
+  cursor: pointer;
+  /* Add the focus styling here */
+  &:focus {
+    border-color: #42a5f5; /* Change border color to blue on focus */
+  }
+}
 
 
 .materialize-select {
@@ -469,7 +498,7 @@ materialize-date{
  <div class="row">
        <div class="row" class="col-12" >
                   <div class="col col-sm-6">
-                    <input type="text" name="legajo" placeholder="Legajo" required="" class="materialize-input1">
+                    <input type="text" name="legajo" placeholder="Legajo" required="" class="materialize-input1" >
            
                   </div>
 
@@ -484,7 +513,18 @@ materialize-date{
 <div class="row">
        <div class="row"  class="col-12">
                 <div class="col col-sm-3">
-                <input type="text" name="dni" placeholder="DNI" required="" class="materialize-input1">
+                <input 
+    type="text" 
+    name="dni" 
+    id="dni" 
+    placeholder="DNI" 
+    required 
+    class="materialize-input1" 
+    maxlength="10" 
+    pattern="\d{1,10}" 
+    title="DNI debe tener hasta 10 dígitos" 
+    oninput="this.value = this.value.slice(0, 10);" 
+>
 
                  </div>
             <div class="col col-sm-4">
@@ -524,7 +564,7 @@ materialize-date{
                  <input type="text" name="telefonos" placeholder="Telefonos" required="" class="materialize-input1">
               </div>
               <div class="col col-sm-6">
-                 <input type="text" name="Titulobas" placeholder="Titulo Basico" required="" class="materialize-input1">
+                 <input type="text" name="Titulobas" placeholder="Titulo Basico" required="" class="materialize-input-titulobasico">
              </div>
      </div>
  </div>

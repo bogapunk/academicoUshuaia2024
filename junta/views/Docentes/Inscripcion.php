@@ -327,15 +327,16 @@ tr:nth-child(even) {
 <body>
   <div class="container">
     <center><h1>Inscripciones De Docentes</h1></center>
+    <center><h3>(Actualizacion)</h3></center>
 <br>
 
 <?php
 // Establecer la conexión a SQL Server
-$serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
+$serverName = "10.1.9.113"; // Reemplazar con el nombre de tu servidor SQL Server
 $connectionInfo = array(
     "Database" => "junta", // Reemplazar con el nombre de tu base de datos
     "Uid" => "SA", // Usuario SQL Server
-    "PWD" => '"asd123"', // Contraseña del usuario SQL Server
+    "PWD" => 'Davinci2024#', // Contraseña del usuario SQL Server
     "CharacterSet" => "UTF-8", // Para caracteres especiales
     "TrustServerCertificate" => true // Confía en certificados autofirmados
 );
@@ -386,11 +387,11 @@ $horas = isset($_GET['horas']) ? $_GET['horas'] : '';
 
 // Configuración de la conexión a SQL Server
 // Establecer la conexión a SQL Server
-$serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
+$serverName = "10.1.9.113"; // Reemplazar con el nombre de tu servidor SQL Server
 $connectionInfo = array(
     "Database" => "junta", // Reemplazar con el nombre de tu base de datos
     "Uid" => "SA", // Usuario SQL Server
-    "PWD" => '"asd123"', // Contraseña del usuario SQL Server
+    "PWD" => 'Davinci2024#', // Contraseña del usuario SQL Server
     "CharacterSet" => "UTF-8", // Para caracteres especiales
     "TrustServerCertificate" => true // Confía en certificados autofirmados
 );
@@ -537,11 +538,11 @@ $id2 = $_GET['id2'];
 $fecha = isset($_GET['fecha']) ? $_GET['fecha'] : ''; // Recibir la fecha
 
 // Establecer la conexión a SQL Server
-$serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
+$serverName = "10.1.9.113"; // Reemplazar con el nombre de tu servidor SQL Server
 $connectionInfo = array(
     "Database" => "junta", // Reemplazar con el nombre de tu base de datos
     "Uid" => "SA", // Usuario SQL Server
-    "PWD" => '"asd123"', // Contraseña del usuario SQL Server
+    "PWD" => 'Davinci2024#', // Contraseña del usuario SQL Server
     "CharacterSet" => "UTF-8", // Para caracteres especiales
     "TrustServerCertificate" => true // Confía en certificados autofirmados
 );
@@ -631,8 +632,8 @@ $queryData = "SELECT
     FROM _junta_docentes j_doc
     INNER JOIN _junta_movimientos j_mov ON j_mov.id2 = '$id2' AND j_doc.legajo = j_mov.legdoc
     INNER JOIN _junta_modalidades j_mod ON j_mov.codmod = j_mod.codmod
-    INNER JOIN _junta_dependencias j_dep ON j_mov.establecimiento = j_dep.coddep";
-
+    LEFT JOIN _junta_dependencias j_dep ON j_mov.establecimiento = j_dep.coddep";
+ 
 
 $resultData = sqlsrv_query($conn, $queryData);
 
@@ -646,7 +647,7 @@ echo "<form id='miFormulario'>";
 // Verifica si hay filas en el resultado de la consulta
 if (sqlsrv_has_rows($resultData)) {
     $row = sqlsrv_fetch_array($resultData, SQLSRV_FETCH_ASSOC);
-    
+   
     // Imprimir la tabla
    
     echo "<tr>";
@@ -657,7 +658,7 @@ if (sqlsrv_has_rows($resultData)) {
     } else {
         echo "<th>Curso: </th><th><input type='text' name='anodoc' value='' size='11'></th>"; 
     }
-
+    
     // Botones de acción
     echo "<th>";
     echo "<div style='text-align: center;'>";
@@ -843,6 +844,13 @@ jQuery(document).ready(function($) {
 </script>
 <?php
 
+if (!empty($fecha)) {
+    $fecha = date('Y-m-d', strtotime($fecha));
+} else {
+    $fecha = '';
+}
+
+
 
 echo "<tr id='fechaRow' style='display: none;'>"; // Inicialmente oculto
 echo "<th colspan='4'>Fecha: <input type='date' name='fecha' value='" . htmlspecialchars($fecha) . "'></th>";
@@ -885,11 +893,11 @@ echo "</script>";
                                               echo"<th>";
 
                                                                                     // Establecer la conexión a SQL Server
-                                        $serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
+                                        $serverName = "10.1.9.113"; // Reemplazar con el nombre de tu servidor SQL Server
                                         $connectionInfo = array(
                                             "Database" => "junta", // Reemplazar con el nombre de tu base de datos
                                             "Uid" => "SA", // Usuario SQL Server
-                                            "PWD" => '"asd123"', // Contraseña del usuario SQL Server
+                                            "PWD" => 'Davinci2024#', // Contraseña del usuario SQL Server
                                             "CharacterSet" => "UTF-8", // Para caracteres especiales
                                             "TrustServerCertificate" => true // Confía en certificados autofirmados
                                         );
@@ -927,7 +935,7 @@ echo "</script>";
                                                   while ($rowMotivo = sqlsrv_fetch_array($resultMotivos, SQLSRV_FETCH_ASSOC)) {
                                                       echo "<option value='" . $rowMotivo['idexclu'] . "'>" . $rowMotivo['motivo'] . "</option>";
                                                   }
-                                              
+                                                   
                                                   echo "</select>";
                                               
                                                   // Script para mostrar u ocultar el menú desplegable de motivos de exclusión según el estado del botón
@@ -1040,55 +1048,55 @@ echo "<table id='tablaPermanenteConcursoInterino'>"; // Inicialmente oculta la t
 echo "<tr><td>";
 echo "<h3><u>CARGA COMUN</u> </h3>";
 echo "<br>";
-echo "<label for='puntajetotal' style='display: inline-block; width: 225px;'>Puntaje Total:</label>";
-echo "<input type='text' id='puntajetotal' name='puntajetotal' value='" . htmlspecialchars($row['puntajetotal']) . "'  size='10'>";
+echo "<label for='puntajetotal2' style='display: inline-block; width: 225px;'>Puntaje Total:</label>";
+echo "<input type='number' id='puntajetotal2' name='puntajetotal2' value='" . htmlspecialchars($row['puntajetotal']) . "' step='0.01' size='5'>";
 echo "<br><br>";
 
-echo "<label for='titulo' style='display: inline-block; width: 225px;'>1.- Título:</label>";
-echo "<input type='text' id='titulo' name='titulo' value='" . htmlspecialchars($row['titulo']) . "'  size='10'>";
+echo "<label for='titulo2' style='display: inline-block; width: 225px;'>1.- Título:</label>";
+echo "<input type='number' id='titulo2' name='titulo2' value='" . htmlspecialchars($row['titulo']) . "' step='0.01' size='5'>";
 echo "<br>";
 
-echo "<label for='otrostit' style='display: inline-block; width:  225px;'>2.- Otros Título:</label>";
-echo "<input type='text' id='otrostit' name='otitulo' value='" . htmlspecialchars($row['otitulo']) . "' size='10'>";
+echo "<label for='otitulo2' style='display: inline-block; width:225px;'>2.- Otros Título:</label>";
+echo "<input type='number' id='otitulo2' name='otitulo2' value='" . htmlspecialchars($row['otitulo']) . "' step='0.01' size='5'>";
 echo "<br>";
 
-echo "<label for='concepto' style='display: inline-block; width:  225px;'>3.- Conceptos:</label>";
-echo "<input type='text' id='concepto' name='concepto' value='" . htmlspecialchars($row['concepto']) . "'  size='10'>";
+echo "<label for='concepto2' style='display: inline-block; width:  225px;'>3.- Conceptos:</label>";
+echo "<input type='number' id='concepto2' name='concepto2' value='" . htmlspecialchars($row['concepto']) . "' step='0.01' size='5'>";
 echo "<br>";
 
-echo "<label for='promedio' style='display: inline-block; width:  225px;'>4.- Promedio:</label>";
-echo "<input type='text' id='promedio' name='promedio' value='" . htmlspecialchars($row['promedio']) . "'  size='10'>";
+echo "<label for='promedio2' style='display: inline-block; width:  225px;'>4.- Promedio:</label>";
+echo "<input type='number' id='promedio2' name='promedio2' value='" . htmlspecialchars($row['promedio']) . "' step='0.01' size='5'>";
 echo "<br>";
 
-echo "<label for='ant_gestion' style='display: inline-block; width:  225px;'>5.- Antigüedad Gestión:</label>";
-echo "<input type='text' id='antiguedadgestion' name='antiguedadgestion' value='" . htmlspecialchars($row['antiguedadgestion']) . "'  size='10'>";
+echo "<label for='antiguedadgestion2' style='display: inline-block; width:  225px;'>5.- Antigüedad Gestión:</label>";
+echo "<input type='number' id='antiguedadgestion2' name='antiguedadgestion2' value='" . htmlspecialchars($row['antiguedadgestion']) . "' step='0.01' size='5'>";
 echo "<br>";
 
-echo "<label for='ant_titulo' style='display: inline-block; width:  225px;'>6.- Antigüedad Título:</label>";
-echo "<input type='text' id='antiguedadtitulo' name='antiguedadtitulo' value='" . htmlspecialchars($row['antiguedadtitulo']) . "'  size='10'>";
+echo "<label for='antiguedadtitulo2' style='display: inline-block; width:  225px;'>6.- Antigüedad Título:</label>";
+echo "<input type='number' id='antiguedadtitulo2' name='antiguedadtitulo2' value='" . htmlspecialchars($row['antiguedadtitulo']) ."' step='0.01' size='5'>";
 echo "<br>";
 
 echo "<label for='servicios' style='display: inline-block; width:  225px;'>7.- Servicios:</label>";
 echo "<br>";
 
-echo "<label for='serv_prov' style='display: inline-block; width:  225px;'>7.1- En la Provincia:</label>";
-echo "<input type='text' id='serviciosprovincia' name='serviciosprovincia' value='" . htmlspecialchars($row['serviciosprovincia']) . "'  size='10'>";
+echo "<label for='serviciosprovincia2' style='display: inline-block; width:  225px;'>7.1- En la Provincia:</label>";
+echo "<input type='number' id='serviciosprovincia2' name='serviciosprovincia2' value='" . htmlspecialchars($row['serviciosprovincia']) ."' step='0.01' size='5'>";
 echo "<br>";
 
-echo "<label for='otrosservicios' style='display: inline-block; width:  225px;'>7.2- Otros Servicios:</label>";
-echo "<input type='text' id='otrosservicios' name='otrosservicios' value='" . htmlspecialchars($row['otrosservicios']) . "'  size='10'>";
+echo "<label for='otrosservicios2' style='display: inline-block; width:  225px;'>7.2- Otros Servicios:</label>";
+echo "<input type='number' id='otrosservicios2' name='otrosservicios2' value='" . htmlspecialchars($row['otrosservicios']) . "' step='0.01' size='5'>";
 echo "<br>";
 
-echo "<label for='residencia' style='display: inline-block; width:  225px;'>8.- Residencia:</label>";
-echo "<input type='text' id='residencia' name='residencia' value='" . htmlspecialchars($row['residencia']) . "'  size='10'>";
+echo "<label for='residencia2' style='display: inline-block; width:  225px;'>8.- Residencia:</label>";
+echo "<input type='number' id='residencia2' name='residencia2' value='" . htmlspecialchars($row['residencia']) . "' step='0.01' size='5'>";
 echo "<br>";
 
-echo "<label for='publicaciones' style='display: inline-block; width:  225px;'>9.- Publicaciones:</label>";
-echo "<input type='text' id='publicaciones' name='publicaciones' value='" . htmlspecialchars($row['publicaciones']) . "'  size='10'>";
+echo "<label for='publicaciones2' style='display: inline-block; width:  225px;'>9.- Publicaciones:</label>";
+echo "<input type='number' id='publicaciones2' name='publicaciones2' value='" . htmlspecialchars($row['publicaciones']) . "' step='0.01' size='5'>";
 echo "<br>";
 
-echo "<label for='otrosantecedentes' style='display: inline-block; width:  225px;'>10.- Otros Antecedentes:</label>";
-echo "<input type='text' id='otrosantecedentes' name='otrosantecedentes' value='" . htmlspecialchars($row['otrosantecedentes']) . "'  size='10'>";
+echo "<label for='otrosantecedentes2' style='display: inline-block; width:  225px;'>10.- Otros Antecedentes:</label>";
+echo "<input type='number' id='otrosantecedentes2' name='otrosantecedentes2' value='" . htmlspecialchars($row['otrosantecedentes']) . "' step='0.01' size='5'>";
 echo "<br>";
 echo "</td></tr>";
 echo "</table>";
@@ -1099,167 +1107,167 @@ echo "<tr><td>";
 echo "<h3><u>CARGA TITULAR</u> </h3>";
 echo "<br>";
 echo "<label for='puntajetotal' style='display: inline-block; width: 225px;'>Puntaje Total:</label>";
-echo "<input type='text' id='puntajetotal' name='puntajetotal' value='" . htmlspecialchars($row['puntajetotal']) . "' size='10'>";
+echo "<input type='number' id='puntajetotal' name='puntajetotal' value='" . htmlspecialchars($row['puntajetotal']) . "' size='10'>";
 echo "<br><br>";
 
 echo "<label for='titulo' style='display: inline-block; width: 225px;'>1.- Título:</label>";
-echo "<input type='text' id='titulo' name='titulo' value='" . htmlspecialchars($row['titulo']) . "' size='10'>";
+echo "<input type='number' id='titulo' name='titulo' value='" . htmlspecialchars($row['titulo']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='otrostit' style='display: inline-block; width:  225px;'>2.- Otros Título:</label>";
-echo "<input type='text' id='otrostit' name='otitulo' value='" . htmlspecialchars($row['otitulo']) . "' size='10'>";
+echo "<input type='number' id='otrostit' name='otitulo' value='" . htmlspecialchars($row['otitulo']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='concepto' style='display: inline-block; width:  225px;'>3.- Conceptos:</label>";
-echo "<input type='text' id='concepto' name='concepto' value='" . htmlspecialchars($row['concepto']) . "'  size='10'>";
+echo "<input type='number' id='concepto' name='concepto' value='" . htmlspecialchars($row['concepto']) . "'  size='10'>";
 echo "<br>";
 
 
 echo "<label for='promedio' style='display: inline-block; width:  225px;'>4.- Promedio:</label>";
-echo "<input type='text' id='promedio' name='promedio' value='" . htmlspecialchars($row['promedio']) . "' size='10'>";
+echo "<input type='number' id='promedio' name='promedio' value='" . htmlspecialchars($row['promedio']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='ant_gestion' style='display: inline-block; width:  225px;'>5.- Antigüedad Gestión:</label>";
-echo "<input type='text' id='antiguedadgestion' name='antiguedadgestion' value='" . htmlspecialchars($row['antiguedadgestion']) . "' size='10'>";
+echo "<input type='number' id='antiguedadgestion' name='antiguedadgestion' value='" . htmlspecialchars($row['antiguedadgestion']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='ant_titulo' style='display: inline-block; width:  225px;'>6.- Antigüedad Título:</label>";
-echo "<input type='text' id='antiguedadtitulo' name='antiguedadtitulo' value='" . htmlspecialchars($row['antiguedadtitulo']) . "' size='10'>";
+echo "<input type='number' id='antiguedadtitulo' name='antiguedadtitulo' value='" . htmlspecialchars($row['antiguedadtitulo']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='servicios' style='display: inline-block; width:  225px;'>7.- Servicios:</label>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width:  225px;'>7.1- En la Provincia:</label>";
-echo "<input type='text' id='serviciosprovincia' name='serviciosprovincia' value='" . htmlspecialchars($row['serviciosprovincia']) . "' size='10'>";
+echo "<input type='number' id='serviciosprovincia' name='serviciosprovincia' value='" . htmlspecialchars($row['serviciosprovincia']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro de Sección:</label>";
-echo "<input type='text' id='t_m_seccion' name='t_m_seccion' value='" . htmlspecialchars($row['t_m_seccion']) . "' size='10'>";
+echo "<input type='number' id='t_m_seccion' name='t_m_seccion' value='" . htmlspecialchars($row['t_m_seccion']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro de Año:</label>";
-echo "<input type='text' id='t_m_anio' name='t_m_anio' value='" . htmlspecialchars($row['t_m_anio']) . "' size='10'>";
+echo "<input type='number' id='t_m_anio' name='t_m_anio' value='" . htmlspecialchars($row['t_m_anio']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro de Grupo:</label>";
-echo "<input type='text' id='t_m_grupo' name='t_m_grupo' value='" . htmlspecialchars($row['t_m_grupo']) . "' size='10'>";
+echo "<input type='number' id='t_m_grupo' name='t_m_grupo' value='" . htmlspecialchars($row['t_m_grupo']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro de Ciclo:</label>";
-echo "<input type='text' id='t_m_ciclo' name='t_m_ciclo' value='" . htmlspecialchars($row['t_m_ciclo']) . "' size='10'>";
+echo "<input type='number' id='t_m_ciclo' name='t_m_ciclo' value='" . htmlspecialchars($row['t_m_ciclo']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro Recuperado:</label>";
-echo "<input type='text' id='t_m_recupera' name='t_m_recupera' value='" . htmlspecialchars($row['t_m_recupera']) . "' size='10'>";
+echo "<input type='number' id='t_m_recupera' name='t_m_recupera' value='" . htmlspecialchars($row['t_m_recupera']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro Complementario:</label>";
-echo "<input type='text' id='t_m_comple' name='t_m_comple' value='" . htmlspecialchars($row['t_m_comple']) . "' size='10'>";
+echo "<input type='number' id='t_m_comple' name='t_m_comple' value='" . htmlspecialchars($row['t_m_comple']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro Bibliotecario:</label>";
-echo "<input type='text' id='t_m_biblio' name='t_m_biblio' value='" . htmlspecialchars($row['t_m_biblio']) . "' size='10'>";
+echo "<input type='number' id='t_m_biblio' name='t_m_biblio' value='" . htmlspecialchars($row['t_m_biblio']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Gabinete:</label>";
-echo "<input type='text' id='T_m_gabinete' name='t_m_gabinete' value='" . htmlspecialchars($row['t_m_gabinete']) . "' size='10'>";
+echo "<input type='number' id='T_m_gabinete' name='t_m_gabinete' value='" . htmlspecialchars($row['t_m_gabinete']) . "' size='10'>";
 echo "<br>";
 
 echo "<hr>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Secretaria 1º:</label>";
-echo "<input type='text' id='T_m_sec1' name='t_m_sec1' value='" . htmlspecialchars($row['t_m_sec1']) . "' size='10'>";
+echo "<input type='number' id='T_m_sec1' name='t_m_sec1' value='" . htmlspecialchars($row['t_m_sec1']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Secretaria 2º:</label>";
-echo "<input type='text' id='t_m_sec2' name='t_m_sec2' value='" . htmlspecialchars($row['t_m_sec2']) . "' size='10'>";
+echo "<input type='number' id='t_m_sec2' name='t_m_sec2' value='" . htmlspecialchars($row['t_m_sec2']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Vice-Director:</label>";
-echo "<input type='text' id='t_m_viced' name='t_m_viced' value='" . htmlspecialchars($row['t_m_viced']) . "' size='10'>";
+echo "<input type='number' id='t_m_viced' name='t_m_viced' value='" . htmlspecialchars($row['t_m_viced']) . "' size='10'>";
 echo "<br>";
 
 echo "<hr>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director Personal Único:</label>";
-echo "<input type='text' id='t_d_pu' name='t_d_pu' value='" . htmlspecialchars($row['t_d_pu']) . "' size='10'>";
+echo "<input type='number' id='t_d_pu' name='t_d_pu' value='" . htmlspecialchars($row['t_d_pu']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director de 3º:</label>";
-echo "<input type='text' id='t_d_3' name='t_d_3' value='" . htmlspecialchars($row['t_d_3']) . "' size='10'>";
+echo "<input type='number' id='t_d_3' name='t_d_3' value='" . htmlspecialchars($row['t_d_3']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director de 2º:</label>";
-echo "<input type='text' id='t_d_2' name='t_d_2' value='" . htmlspecialchars($row['t_d_2']) . "' size='10'>";
+echo "<input type='number' id='t_d_2' name='t_d_2' value='" . htmlspecialchars($row['t_d_2']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director de 1º:</label>";
-echo "<input type='text' id='t_d_1' name='t_d_1' value='" . htmlspecialchars($row['t_d_1']) . "' size='10'>";
+echo "<input type='number' id='t_d_1' name='t_d_1' value='" . htmlspecialchars($row['t_d_1']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director de Biblioteca:</label>";
-echo "<input type='text' id='t_d_biblio' name='t_d_biblio' value='" . htmlspecialchars($row['t_d_biblio']) . "' size='10'>";
+echo "<input type='number' id='t_d_biblio' name='t_d_biblio' value='" . htmlspecialchars($row['t_d_biblio']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director de Gabinete:</label>";
-echo "<input type='text' id='t_d_gabi' name='t_d_gabi' value='" . htmlspecialchars($row['t_d_gabi']) . "' size='10'>";
+echo "<input type='number' id='t_d_gabi' name='t_d_gabi' value='" . htmlspecialchars($row['t_d_gabi']) . "' size='10'>";
 echo "<br>";
 
 echo "<hr>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Secretario Coord. Tec.:</label>";
-echo "<input type='text' id='t_d_seccoortec' name='t_d_seccoortec' value='" . htmlspecialchars($row['t_d_seccoortec']) . "' size='10'>";
+echo "<input type='number' id='t_d_seccoortec' name='t_d_seccoortec' value='" . htmlspecialchars($row['t_d_seccoortec']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Sup. Sec. Tec.:</label>";
-echo "<input type='text' id='t_d_supsectec' name='t_d_supsectec' value='" . htmlspecialchars($row['t_d_supsectec']) . "' size='10'>";
+echo "<input type='number' id='t_d_supsectec' name='t_d_supsectec' value='" . htmlspecialchars($row['t_d_supsectec']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Sup. Escolar:</label>";
-echo "<input type='text' id='t_d_supesc' name='t_d_supesc' value='" . htmlspecialchars($row['t_d_supesc']) . "' size='10'>";
+echo "<input type='number' id='t_d_supesc' name='t_d_supesc' value='" . htmlspecialchars($row['t_d_supesc']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Sup. General:</label>";
-echo "<input type='text' id='t_d_supgral' name='t_d_supgral' value='" . htmlspecialchars($row['t_d_supgral']) . "' size='10'>";
+echo "<input type='number' id='t_d_supgral' name='t_d_supgral' value='" . htmlspecialchars($row['t_d_supgral']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Adic.:</label>";
-echo "<input type='text' id='t_d_adic' name='t_d_adic' value='" . htmlspecialchars($row['t_d_adic']) . "' size='10'>";
+echo "<input type='number' id='t_d_adic' name='t_d_adic' value='" . htmlspecialchars($row['t_d_adic']) . "' size='10'>";
 echo "<br>";
 
 echo "<hr>";
 
 echo "<label for='otrosservicios' style='display: inline-block; width:  225px;'>7.2- Otros Servicios:</label>";
-echo "<input type='text' id='otrosservicios' name='otrosservicios' value='" . htmlspecialchars($row['otrosservicios']) . "' size='10'>";
+echo "<input type='number' id='otrosservicios' name='otrosservicios' value='" . htmlspecialchars($row['otrosservicios']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='o_g_a' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo A:</label>";
-echo "<input type='text' id='o_g_a' name='o_g_a' value='" . htmlspecialchars($row['o_g_a']) . "' size='10'>";
+echo "<input type='number' id='o_g_a' name='o_g_a' value='" . htmlspecialchars($row['o_g_a']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='o_g_b' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo B:</label>";
-echo "<input type='text' id='o_g_b' name='o_g_b' value='" . htmlspecialchars($row['o_g_b']) . "' size='10'>";
+echo "<input type='number' id='o_g_b' name='o_g_b' value='" . htmlspecialchars($row['o_g_b']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='o_g_c' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo C:</label>";
-echo "<input type='text' id='o_g_c' name='o_g_c' value='" . htmlspecialchars($row['o_g_c']) . "' size='10'>";
+echo "<input type='number' id='o_g_c' name='o_g_c' value='" . htmlspecialchars($row['o_g_c']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='o_g_d' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo D:</label>";
-echo "<input type='text' id='o_g_d' name='o_g_d' value='" . htmlspecialchars($row['o_g_d']) . "' size='10'>";
+echo "<input type='number' id='o_g_d' name='o_g_d' value='" . htmlspecialchars($row['o_g_d']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='residencia' style='display: inline-block; width:  225px;'>8.- Residencia:</label>";
-echo "<input type='text' id='residencia' name='residencia' value='" . htmlspecialchars($row['residencia']) . "' size='10'>";
+echo "<input type='number' id='residencia' name='residencia' value='" . htmlspecialchars($row['residencia']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='publicaciones' style='display: inline-block; width:  225px;'>9.- Publicaciones:</label>";
-echo "<input type='text' id='publicaciones' name='publicaciones' value='" . htmlspecialchars($row['publicaciones']) . "' size='10'>";
+echo "<input type='number' id='publicaciones' name='publicaciones' value='" . htmlspecialchars($row['publicaciones']) . "' size='10'>";
 echo "<br>";
 
 echo "<label for='otrosantecedentes' style='display: inline-block; width:  225px;'>10.- Otros Antecedentes:</label>";
-echo "<input type='text' id='otrosantecedentes' name='otrosantecedentes' value='" . htmlspecialchars($row['otrosantecedentes']) . "' size='10'>";
+echo "<input type='number' id='otrosantecedentes' name='otrosantecedentes' value='" . htmlspecialchars($row['otrosantecedentes']) . "' size='10'>";
 echo "<br>";
 echo "</td></tr>";
 

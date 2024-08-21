@@ -1,9 +1,9 @@
 <?php
 
 class Docente{
-    private $dbHost     = "db";
+    private $dbHost     = "10.1.9.113";
     private $dbUsername = "SA";
-    private $dbPassword = '"asd123""';
+    private $dbPassword = 'Davinci2024#';
     private $dbName     = "junta";
     private $userTbl    = "_junta_docentes";
     

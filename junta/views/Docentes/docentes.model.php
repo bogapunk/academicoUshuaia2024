@@ -371,10 +371,10 @@ class DocentesModel
         try
         {
             // Conexión a SQL Server
-            $serverName = "db"; // Servidor de SQL Server
+            $serverName = "10.1.9.113"; // Servidor de SQL Server
             $database = "junta"; // Nombre de la base de datos
             $username = "SA"; // Usuario de la base de datos
-            $password = '"asd123"'; // Contraseña de la base de datos
+            $password = 'Davinci2024#'; // Contraseña de la base de datos
 
             $dsn = "sqlsrv:Server=$serverName;Database=$database;TrustServerCertificate=True";
             $this->pdo = new PDO($dsn, $username, $password);
@@ -597,11 +597,11 @@ class DocentesModel
     {
         try {
             // Convertir las fechas al formato adecuado para SQL Server
-            $fechanacim_sql = $data->__GET('fechanacim') ? date('Y-d-m H:i:s', strtotime($data->__GET('fechanacim'))) : null;
-            $fechatit_sql = $data->__GET('fechatit') ? date('Y-d-m H:i:s', strtotime($data->__GET('fechatit'))) : null;
-            $finicio_sql = $data->__GET('finicio') ? date('Y-d-m H:i:s', strtotime($data->__GET('finicio'))) : null;
-            $fingreso_sql = $data->__GET('fingreso') ? date('Y-d-m H:i:s', strtotime($data->__GET('fingreso'))) : null;
-            $faperturaleg_sql = $data->__GET('faperturaleg') ? date('Y-d-m H:i:s', strtotime($data->__GET('faperturaleg'))) : null;
+            $fechanacim_sql = $data->__GET('fechanacim') ? date('Y-m-d', strtotime($data->__GET('fechanacim'))) : null;
+            $fechatit_sql = $data->__GET('fechatit') ? date('Y-m-d', strtotime($data->__GET('fechatit'))) : null;
+            $finicio_sql = $data->__GET('finicio') ? date('Y-m-d', strtotime($data->__GET('finicio'))) : null;
+            $fingreso_sql = $data->__GET('fingreso') ? date('Y-m-d', strtotime($data->__GET('fingreso'))) : null;
+            $faperturaleg_sql = $data->__GET('faperturaleg') ? date('Y-m-d', strtotime($data->__GET('faperturaleg'))) : null;
     
             // Preparar la consulta SQL
             $sql = "UPDATE _junta_docentes SET 
@@ -656,11 +656,17 @@ class DocentesModel
             } else {
                 return false; // No se actualizó ningún registro
             }
+        } catch (PDOException $e) {
+            // Manejo de errores de PDO
+            echo "Error: " . $e->getMessage();
+            return false;
         } catch (Exception $e) {
-            die($e->getMessage()); // Manejo básico de errores, considera mejorar esta parte
+            // Manejo de errores genéricos
+            echo "Error: " . $e->getMessage();
+            return false;
         }
     }
-
+    
     
 
 

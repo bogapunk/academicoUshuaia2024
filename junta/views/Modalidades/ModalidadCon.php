@@ -1,9 +1,9 @@
 <?php
 
 class Modalidad{
-    private $dbHost     = "db";
-    private $dbUsername = "root";
-    private $dbPassword = "";
+    private $dbHost     = "10.1.9.113";
+    private $dbUsername = "sa";
+    private $dbPassword = "Davinci2024#";
     private $dbName     = "junta";
     private $modalidadTbl    = "_junta_modalidades";
     

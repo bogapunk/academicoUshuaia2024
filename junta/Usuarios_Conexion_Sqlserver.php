@@ -1,25 +1,30 @@
 <?php
 
-class User{
-    private $dbHost     = "db";
+class User {
+    private $dbHost     = "10.1.9.113";
     private $dbUsername = "SA";
-    private $dbPassword = '"asd123"';
-    private $dbName     = "junta";
+    private $dbPassword = 'Davinci2024#';
+    private $dbName     = "Junta";
     private $userTbl    = "usuarios";
     
-    public function __construct(){
-        if(!isset($this->db)){
-            // Connection to the database
-            $connectionInfo = array("Database"=>$this->dbName, "UID"=>$this->dbUsername, "PWD"=>$this->dbPassword,"TrustServerCertificate"=>true);
+
+    public function __construct() {
+        if (!isset($this->db)) {
+            // Conexión a la base de datos
+            $connectionInfo = array(
+                "Database" => $this->dbName,
+                "UID" => $this->dbUsername,
+                "PWD" => $this->dbPassword,
+                "TrustServerCertificate" => true
+            );
             $conn = sqlsrv_connect($this->dbHost, $connectionInfo);
-            if($conn === false){
-                die(print_r(sqlsrv_errors(), true));
-            }else{
+            if ($conn === false) {
+                throw new Exception('Error de conexión a la base de datos: ' . print_r(sqlsrv_errors(), true));
+            } else {
                 $this->db = $conn;
             }
         }
     }
-    
 
     public function getRows($conditions = array()){
         $sql = 'SELECT ';

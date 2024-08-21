@@ -287,10 +287,10 @@ $excluido = '';
 
 
 // Definición de constantes
-define('HOST', 'db'); // Host de la base de datos
+define('HOST', '10.1.9.113'); // Host de la base de datos
 define('BD', 'junta'); // Nombre de la base de datos
 define('DB_USER', 'SA'); // Usuario de la base de datos
-define('PASS', '"asd123"'); // Contraseña de la base de datos
+define('PASS', 'Davinci2024#'); // Contraseña de la base de datos
 
 $serverName = HOST;
 $connectionOptions = array(
@@ -328,17 +328,17 @@ try {
 
             // Variables específicas para tipo de carga 'transitorio', 'permanente' o 'Concurso de Titularidad'
             if ($tipoc === 'transitorio' || $tipoc === 'permanente' || $tipoc === 'Concurso de Titularidad') {
-                $titulo = isset($_POST['titulo']) ? floatval($_POST['titulo']) : 0;
-                $promedio = isset($_POST['promedio']) ? floatval($_POST['promedio']) : 0;
-                $antiguedadgestion = isset($_POST['antiguedadgestion']) ? floatval($_POST['antiguedadgestion']) : 0;
-                $antiguedadtitulo = isset($_POST['antiguedadtitulo']) ? floatval($_POST['antiguedadtitulo']) : 0;
-                $serviciosprovincia = isset($_POST['serviciosprovincia']) ? floatval($_POST['serviciosprovincia']) : 0;
-                $otrosservicios = isset($_POST['otrosservicios']) ? floatval($_POST['otrosservicios']) : 0;
-                $residencia = isset($_POST['residencia']) ? floatval($_POST['residencia']) : 0;
-                $publicaciones = isset($_POST['publicaciones']) ? floatval($_POST['publicaciones']) : 0;
-                $otrosantecedentes = isset($_POST['otrosantecedentes']) ? floatval($_POST['otrosantecedentes']) : 0;
-                $puntajetotal = isset($_POST['puntajetotal']) ? floatval($_POST['puntajetotal']) : 0;
-                $concepto = isset($_POST['concepto']) ? floatval($_POST['concepto']) : 0;
+                $titulo = isset($_POST['titulo2']) ? floatval($_POST['titulo2']) : 0;
+                $promedio = isset($_POST['promedio2']) ? floatval($_POST['promedio2']) : 0;
+                $antiguedadgestion = isset($_POST['antiguedadgestion2']) ? floatval($_POST['antiguedadgestion2']) : 0;
+                $antiguedadtitulo = isset($_POST['antiguedadtitulo2']) ? floatval($_POST['antiguedadtitulo2']) : 0;
+                $serviciosprovincia = isset($_POST['serviciosprovincia2']) ? floatval($_POST['serviciosprovincia2']) : 0;
+                $otrosservicios = isset($_POST['otrosservicios2']) ? floatval($_POST['otrosservicios2']) : 0;
+                $residencia = isset($_POST['residencia2']) ? floatval($_POST['residencia2']) : 0;
+                $publicaciones = isset($_POST['publicaciones2']) ? floatval($_POST['publicaciones2']) : 0;
+                $otrosantecedentes = isset($_POST['otrosantecedentes2']) ? floatval($_POST['otrosantecedentes2']) : 0;
+                $puntajetotal = isset($_POST['puntajetotal2']) ? floatval($_POST['puntajetotal2']) : 0;
+                $concepto = isset($_POST['concepto2']) ? floatval($_POST['concepto2']) : 0;
                 $otitulo = isset($_POST['otitulo']) ? floatval($_POST['otitulo']) : 0;
                 $T_m_comple = isset($_POST['T_m_comple']) ? floatval($_POST['T_m_comple']) : 0;
                 $T_m_biblio = isset($_POST['T_m_biblio']) ? floatval($_POST['T_m_biblio']) : 0;
@@ -348,7 +348,8 @@ try {
                 $obs = isset($_POST['obs']) ? $_POST['obs'] : '';
                 $horas = isset($_POST['horas']) ? floatval($_POST['horas']) : 0;
                 $fecha = isset($_POST['fecha']) ? $_POST['fecha'] : '';
-
+                $otitulo = isset($_POST['otitulo2']) ? floatval($_POST['otitulo2']) : 0;
+                $concepto = isset($_POST['concepto2']) ? floatval($_POST['concepto2']) : 0;
                 // Convertir fecha al formato esperado por SQL Server (ejemplo: 'Y-m-d')
                 if (!empty($fecha)) {
                     // Primero intentar crear un objeto DateTime desde el formato ISO (YYYY-MM-DD)
@@ -368,49 +369,71 @@ try {
 
                 // Definir la consulta SQL de inserción
                 $sql_insert = "INSERT INTO _junta_movimientos 
-                        (anodoc, legdoc, codmod, establecimiento, titulo, promedio, antiguedadgestion, antiguedadtitulo, serviciosprovincia, otrosservicios, residencia, publicaciones, otrosantecedentes, puntajetotal, codloc, tipo, T_m_comple, T_m_biblio, T_m_sec1, T_m_sec2, T_m_viced, obs, horas, fecha) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CAST(? AS date))";
+                        (anodoc, legdoc, codmod, establecimiento, titulo, promedio, antiguedadgestion, antiguedadtitulo, serviciosprovincia, otrosservicios, residencia, publicaciones, otrosantecedentes, puntajetotal, codloc, tipo, T_m_comple, T_m_biblio, T_m_sec1, T_m_sec2, T_m_viced, obs, horas, fecha,otitulo,concepto) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CAST(? AS date),?,?)";
 
                 $params_insert = array(
-                    $anodoc, $legajo, $codmod, $establecimiento, $titulo, $promedio, $antiguedadgestion, $antiguedadtitulo, $serviciosprovincia, $otrosservicios, $residencia, $publicaciones, $otrosantecedentes, $puntajetotal, $codloc, $tipoc, $T_m_comple, $T_m_biblio, $T_m_sec1, $T_m_sec2, $T_m_viced, $obs, $horas, $fecha
+                    $anodoc, $legajo, $codmod, $establecimiento, $titulo, $promedio, $antiguedadgestion, $antiguedadtitulo, $serviciosprovincia, $otrosservicios, $residencia, $publicaciones, $otrosantecedentes, $puntajetotal, $codloc, $tipoc, $T_m_comple, $T_m_biblio, $T_m_sec1, $T_m_sec2, $T_m_viced, $obs, $horas, $fecha,$otitulo,$concepto
                 );
-
+                   
             } elseif ($tipoc === 'titulares') { // Variables específicas para tipo de carga 'titulares'
                 $puntajetotal = isset($_POST['puntajetotal']) ? floatval($_POST['puntajetotal']) : 0;
                 $promedio = isset($_POST['promedio']) ? floatval($_POST['promedio']) : 0;
-                $T_m_anio = isset($_POST['T_m_anio']) ? floatval($_POST['T_m_anio']) : 0;
-                $T_m_seccion = isset($_POST['T_m_seccion']) ? floatval($_POST['T_m_seccion']) : 0;
-                $T_m_grupo = isset($_POST['T_m_grupo']) ? floatval($_POST['T_m_grupo']) : 0;
-                $T_m_ciclo = isset($_POST['T_m_ciclo']) ? floatval($_POST['T_m_ciclo']) : 0;
-                $T_m_recupera = isset($_POST['T_m_recupera']) ? floatval($_POST['T_m_recupera']) : 0;
-                $T_d_pu = isset($_POST['T_d_pu']) ? floatval($_POST['T_d_pu']) : 0;
-                $T_d_3 = isset($_POST['T_d_3']) ? floatval($_POST['T_d_3']) : 0;
-                $T_d_2 = isset($_POST['T_d_2']) ? floatval($_POST['T_d_2']) : 0;
-                $T_d_1 = isset($_POST['T_d_1']) ? floatval($_POST['T_d_1']) : 0;
-                $T_d_biblio = isset($_POST['T_d_biblio']) ? floatval($_POST['T_d_biblio']) : 0;
-                $T_d_gabi = isset($_POST['T_d_gabi']) ? floatval($_POST['T_d_gabi']) : 0;
-                $T_d_seccoortec = isset($_POST['T_d_seccoortec']) ? floatval($_POST['T_d_seccoortec']) : 0;
-                $T_d_supsectec = isset($_POST['T_d_supsectec']) ? floatval($_POST['T_d_supsectec']) : 0;
-                $T_d_supesc = isset($_POST['T_d_supesc']) ? floatval($_POST['T_d_supesc']) : 0;
-                $T_d_supgral = isset($_POST['T_d_supgral']) ? floatval($_POST['T_d_supgral']) : 0;
-                $T_d_adic = isset($_POST['T_d_adic']) ? floatval($_POST['T_d_adic']) : 0;
-                $O_g_a = isset($_POST['O_g_a']) ? floatval($_POST['O_g_a']) : 0;
-                $O_g_b = isset($_POST['O_g_b']) ? floatval($_POST['O_g_b']) : 0;
-                $O_g_c = isset($_POST['O_g_c']) ? floatval($_POST['O_g_c']) : 0;
-                $O_g_d = isset($_POST['O_g_d']) ? floatval($_POST['O_g_d']) : 0;
+                $T_m_anio = isset($_POST['t_m_anio']) ? floatval($_POST['t_m_anio']) : 0;
+                $T_m_seccion = isset($_POST['t_m_seccion']) ? floatval($_POST['t_m_seccion']) : 0;
+                $T_m_grupo = isset($_POST['t_m_grupo']) ? floatval($_POST['t_m_grupo']) : 0;
+                $T_m_ciclo = isset($_POST['t_m_ciclo']) ? floatval($_POST['t_m_ciclo']) : 0;
+                $T_m_recupera = isset($_POST['t_m_recupera']) ? floatval($_POST['t_m_recupera']) : 0;
+                $T_d_pu = isset($_POST['t_d_pu']) ? floatval($_POST['t_d_pu']) : 0;
+                $T_d_3 = isset($_POST['t_d_3']) ? floatval($_POST['t_d_3']) : 0;
+                $T_d_2 = isset($_POST['t_d_2']) ? floatval($_POST['t_d_2']) : 0;
+                $T_d_1 = isset($_POST['t_d_1']) ? floatval($_POST['t_d_1']) : 0;
+                $T_d_biblio = isset($_POST['t_d_biblio']) ? floatval($_POST['t_d_biblio']) : 0;
+                $T_d_gabi = isset($_POST['t_d_gabi']) ? floatval($_POST['t_d_gabi']) : 0;
+                $T_d_seccoortec = isset($_POST['t_d_seccoortec']) ? floatval($_POST['t_d_seccoortec']) : 0;
+                $T_d_supsectec = isset($_POST['t_d_supsectec']) ? floatval($_POST['t_d_supsectec']) : 0;
+                $T_d_supesc = isset($_POST['t_d_supesc']) ? floatval($_POST['t_d_supesc']) : 0;
+                $T_d_supgral = isset($_POST['t_d_supgral']) ? floatval($_POST['t_d_supgral']) : 0;
+                $T_d_adic = isset($_POST['t_d_adic']) ? floatval($_POST['t_d_adic']) : 0;
+                $O_g_a = isset($_POST['o_g_a']) ? floatval($_POST['o_g_a']) : 0;
+                $O_g_b = isset($_POST['o_g_b']) ? floatval($_POST['o_g_b']) : 0;
+                $O_g_c = isset($_POST['o_g_c']) ? floatval($_POST['o_g_c']) : 0;
+                $O_g_d = isset($_POST['o_g_d']) ? floatval($_POST['o_g_d']) : 0;
+                $obs = isset($_POST['obs']) ? $_POST['obs'] : '';
+                $horas = isset($_POST['horas']) ? floatval($_POST['horas']) : 0;
+                $otitulo = isset($_POST['otitulo']) ? floatval($_POST['otitulo']) : 0;
+                $concepto = isset($_POST['concepto']) ? floatval($_POST['concepto']) : 0;
+                $antiguedadgestion = isset($_POST['antiguedadgestion']) ? floatval($_POST['antiguedadgestion']) : 0;
+                $antiguedadtitulo = isset($_POST['antiguedadtitulo']) ? floatval($_POST['antiguedadtitulo']) : 0;
+                $titulo = isset($_POST['titulo']) ? floatval($_POST['titulo']) : 0;
+                 
+                $serviciosprovincia =isset($_POST['serviciosprovincia']) ? floatval($_POST['serviciosprovincia']) : 0;
+                $T_m_comple = isset($_POST['t_m_comple']) ? floatval($_POST['t_m_comple']) : 0;
+                $T_m_biblio = isset($_POST['t_m_biblio']) ? floatval($_POST['t_m_biblio']) : 0;
+                $T_m_gabinete = isset($_POST['t_m_gabinete']) ? floatval($_POST['t_m_gabinete']) : 0;
+                $T_m_sec1 = isset($_POST['t_m_sec1']) ? floatval($_POST['t_m_sec1']) : 0;
+
+                $T_m_sec2 = isset($_POST['t_m_sec2']) ? floatval($_POST['t_m_sec2']) : 0;
+                $T_m_viced = isset($_POST['t_m_viced']) ? floatval($_POST['t_m_viced']) : 0;
+                $otrosservicios = isset($_POST['otrosservicios']) ? floatval($_POST['otrosservicios']) : 0;
+                $residencia = isset($_POST['residencia']) ? floatval($_POST['residencia']) : 0;
+                $publicaciones = isset($_POST['publicaciones']) ? floatval($_POST['publicaciones']) : 0;
+                $otrosantecedentes = isset($_POST['otrosantecedentes']) ? floatval($_POST['otrosantecedentes']) : 0;
 
                 // Definir la consulta SQL de inserción
                 $sql_insert = "INSERT INTO _junta_movimientos 
-                        (anodoc, legdoc, codmod, establecimiento, puntajetotal, promedio, T_m_anio, T_m_seccion, T_m_grupo, T_m_ciclo, T_m_recupera, T_d_pu, T_d_3, T_d_2, T_d_1, T_d_biblio, T_d_gabi, T_d_seccoortec, T_d_supsectec, T_d_supesc, T_d_supgral, T_d_adic, O_g_a, O_g_b, O_g_c, O_g_d, codloc, tipo) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        (anodoc, legdoc, codmod, establecimiento, puntajetotal, promedio, T_m_anio, T_m_seccion, T_m_grupo, T_m_ciclo, T_m_recupera, T_d_pu, T_d_3, T_d_2, T_d_1, T_d_biblio, T_d_gabi, T_d_seccoortec, T_d_supsectec, T_d_supesc, T_d_supgral, T_d_adic, O_g_a, O_g_b, O_g_c, O_g_d, codloc, tipo,obs,horas,otitulo,concepto,antiguedadgestion,antiguedadtitulo,titulo,serviciosprovincia,t_m_comple,t_m_biblio,t_m_gabinete,t_m_sec1,t_m_sec2,t_m_viced,otrosservicios,residencia,publicaciones,otrosantecedentes) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,? ,? ,? ,? ,? ,? ,? ,?, ?, ?)";
 
                 $params_insert = array(
-                    $anodoc, $legajo, $codmod, $establecimiento, $puntajetotal, $promedio, $T_m_anio, $T_m_seccion, $T_m_grupo, $T_m_ciclo, $T_m_recupera, $T_d_pu, $T_d_3, $T_d_2, $T_d_1, $T_d_biblio, $T_d_gabi, $T_d_seccoortec, $T_d_supsectec, $T_d_supesc, $T_d_supgral, $T_d_adic, $O_g_a, $O_g_b, $O_g_c, $O_g_d, $codloc, $tipoc
+                    $anodoc, $legajo, $codmod, $establecimiento, $puntajetotal, $promedio, $T_m_anio, $T_m_seccion, $T_m_grupo, $T_m_ciclo, $T_m_recupera, $T_d_pu, $T_d_3, $T_d_2, $T_d_1, $T_d_biblio, $T_d_gabi, $T_d_seccoortec, $T_d_supsectec, $T_d_supesc, $T_d_supgral, $T_d_adic, $O_g_a, $O_g_b, $O_g_c, $O_g_d, $codloc, $tipoc,$obs,$horas,$otitulo,$concepto,$antiguedadgestion,$antiguedadtitulo,$titulo,$serviciosprovincia, $T_m_comple, $T_m_biblio,$T_m_gabinete,$T_m_sec1,$T_m_sec2,$T_m_viced,$otrosservicios,$residencia,$publicaciones,$otrosantecedentes
                 );
+
+               
             } else {
                 throw new Exception("Tipo de carga inválido.");
             }
-
+           
             // Ejecutar la consulta de inserción
             $stmt_insert = sqlsrv_query($conn, $sql_insert, $params_insert);
             if ($stmt_insert === false) {
@@ -425,7 +448,7 @@ try {
                          setTimeout(function() {
                              alert('Los datos se han insertado correctamente.');
                              // Redireccionar a la página deseada
-                             window.location.href = 'http://localhost:8080/juntas/views/Docentes/VerInscripciones.php';
+                             window.location.href = './VerInscripciones.php?legajo=".$legajo."';
                          }, 5000); // 3000 milisegundos = 3 segundos
                        </script>";
             }

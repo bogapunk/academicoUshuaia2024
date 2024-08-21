@@ -451,11 +451,11 @@ span {
 				  <option value="" style="width: 500px;">Seleccione</option>
           <?php
                // Database connection
-              $serverName = "db"; // Replace with your SQL Server hostname
+              $serverName = "10.1.9.113"; // Replace with your SQL Server hostname
               $connectionOptions = array(
                   "Database" => "junta", // Replace with your database name
                   "UID" => "SA", // Replace with your SQL Server username
-                  "PWD" => '"asd123"', // Replace with your SQL Server password
+                  "PWD" => 'Davinci2024#', // Replace with your SQL Server password
                   "CharacterSet" => "UTF-8", // acentos
                   "TrustServerCertificate"=>true
               );
@@ -561,11 +561,11 @@ span {
   <td><b>Establecimiento:</b>
   
 <?php
-      $serverName = "db"; // Replace with your SQL Server hostname
+      $serverName = "10.1.9.113"; // Replace with your SQL Server hostname
       $connectionOptions = array(
           "Database" => "junta", // Replace with your database name
           "UID" => "SA", // Replace with your SQL Server username
-          "PWD" => '"asd123"', // Replace with your SQL Server password
+          "PWD" => 'Davinci2024#', // Replace with your SQL Server password
           "CharacterSet" => "UTF-8", // Ensures UTF-8 character set
           "TrustServerCertificate"=>true
       );
@@ -670,11 +670,11 @@ span {
 <div class="form-check-group" align="left">
 <b>Listado Provinciales:</b>
 <?php
-$serverName = "db"; // Nombre del servidor SQL Server
+$serverName = "10.1.9.113"; // Nombre del servidor SQL Server
 $connectionOptions = array(
     "Database" => "junta", // Nombre de la base de datos
     "UID" => "SA", // Nombre de usuario de SQL Server
-    "PWD" => '"asd123"', // Contraseña de SQL Server
+    "PWD" => 'Davinci2024#', // Contraseña de SQL Server
     "CharacterSet" => "UTF-8", // Ensures UTF-8 character set
     "TrustServerCertificate"=>true
 );

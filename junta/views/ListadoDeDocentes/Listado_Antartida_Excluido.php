@@ -62,7 +62,7 @@ $establecimiento =(int)$establecimiento;// Si es numérico
 $anio = (int)$anio; // Si es numérico
 try {
     // Crear una instancia de la clase Cconexion
-    $conexion = new Cconexion("db", "junta", "SA", '"asd123"');
+    $conexion = new Cconexion("10.1.9.113", "junta", "SA", 'Davinci2024#');
     // Obtener la conexión usando el método conectar2()
 
     

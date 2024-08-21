@@ -77,7 +77,7 @@ $pagina = 1;
 $xmodalidad = 0;
 
 try {
-    $conexion = new Cconexion("db", "junta", "SA", '"asd123"');
+    $conexion = new Cconexion("10.1.9.113", "junta", "SA", 'Davinci2024#');
     $conn = $conexion->conectar2();
 
 

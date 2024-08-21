@@ -420,10 +420,10 @@ tr:nth-child(even) {
 
 // Te recomiendo utilizar esta conexión, la que utilizas ya no es la recomendada. 
 //$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password. 
-$serverName = "db"; // Reemplaza con tu servidor SQL Server
+$serverName = "10.1.9.113"; // Reemplaza con tu servidor SQL Server
 $database = "junta"; // Reemplaza con tu nombre de base de datos
 $username = "SA"; // Reemplaza con tu nombre de usuario de SQL Server
-$password = '"asd123"'; // Reemplaza con tu contraseña de SQL Server (deja vacío si no hay contraseña)
+$password = 'Davinci2024#'; // Reemplaza con tu contraseña de SQL Server (deja vacío si no hay contraseña)
 
 try {
     $conn = new PDO("sqlsrv:Server=$serverName;Database=$database;TrustServerCertificate=True", $username, $password);
@@ -453,11 +453,11 @@ $legajo = $_GET['legajo'];
 
 // Connect to database
 // Database connection
-$serverName = "db"; // Replace with your SQL Server hostname
+$serverName = "10.1.9.113"; // Replace with your SQL Server hostname
 $connectionOptions = array(
     "Database" => "junta",       // Replace with your database name
     "Uid"      => "SA",      // Replace with your SQL Server username
-    "PWD"      => '"asd123"',      // Replace with your SQL Server password
+    "PWD"      => 'Davinci2024#',      // Replace with your SQL Server password
     "TrustServerCertificate" => true, // Trust the server certificate
     "CharacterSet" => "UTF-8" // Add this to support UTF-8 characters (important for accents)
 );
@@ -479,11 +479,11 @@ WHERE j_doc.legajo = '$legajo'
 ORDER BY j_mov.anodoc";
 
 // Establecer la conexión a SQL Server
-$serverName = "db"; // Reemplazar con el nombre de tu servidor SQL Server
+$serverName = "10.1.9.113"; // Reemplazar con el nombre de tu servidor SQL Server
 $connectionInfo = array(
     "Database" => "junta", // Reemplazar con el nombre de tu base de datos
     "Uid" => "SA", // Usuario SQL Server
-    "PWD" => '"asd123"', // Contraseña del usuario SQL Server
+    "PWD" => 'Davinci2024#', // Contraseña del usuario SQL Server
     "CharacterSet" => "UTF-8", // Para caracteres especiales
     "TrustServerCertificate" => true // Confía en certificados autofirmados
 );
@@ -523,6 +523,8 @@ if (isset($_GET['legajo'])) {
         if ($resultData === false) {
             die(print_r(sqlsrv_errors(), true)); // Imprimir errores si la consulta falla
         }
+        echo "<a href='javascript:void(0);' onclick='history.go(-1); location.reload();' class='btn btn-success'>Actualizar</a>";
+
         // Ejecutar la consulta original y mostrar los resultados en la tabla
         if (sqlsrv_has_rows($resultData)) {
             echo "<table border='1'>";
@@ -692,9 +694,11 @@ function determinarColor($tipo) {
 
 
 <center>
-  <a href="javascript:history.back()" class="btn btn-success">Volver atrás</a>
+  <a href="./ListarDocentes.php" class="btn btn-success">Volver atrás</a>
 </center>
 
   <?php include('footer2.php');?>
 </body>
 </html>
+
+./ListarDependencias.php

@@ -6,9 +6,9 @@ require('fpdf.php'); // Ajusta esta ruta según sea necesario
 
 
 // Conexiรณn a la base de datos
-$servername = "db";
+$servername = "10.1.9.113";
 $username = "sa";
-$password = ""asd123"";
+$password = "Davinci2024#";
 $dbname = "junta"; // Asegรบrate de que este sea el nombre correcto de la base de datos
 
 $conn = new mysqli($servername, $username, $password, $dbname);

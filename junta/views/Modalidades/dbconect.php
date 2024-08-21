@@ -27,9 +27,9 @@ Class ConnectionModalidad{
 */ 
 class ConnectionModalidad {
  
-    private $server = "sqlsrv:server=db;database=junta;TrustServerCertificate=yes";
+    private $server = "sqlsrv:server=10.1.9.113;database=junta;TrustServerCertificate=yes";
     private $username = "SA"; // Actualiza con tu usuario de SQL Server
-    private $password = '"asd123"'; // Actualiza con tu contraseña de SQL Server
+    private $password = 'Davinci2024#'; // Actualiza con tu contraseña de SQL Server
     private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
     protected $conn;
      

@@ -8,9 +8,10 @@ if(!empty($sessData['estado']['msg'])){
 }
 
 include('header2.php');
+include_once('Usuarios.php');
 ?>
 <style type="text/css">
-	.nav>li>a {
+    .nav>li>a {
     position: relative;
     display: block;
     padding: 7px 15px;
@@ -296,10 +297,10 @@ px
 
 <div class="col-sm-6 r-form-1-box wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
     <h2><b><u><FONT COLOR="Black">CREAR USUARIO</FONT></u></b></h2>
-		<h4>Nueva Cuenta</h4>
-		<?php echo !empty($statusMsg)?'<p class="'.$statusMsgType.'">'.$statusMsg.'</p>':''; ?>
-		<div class="regisFrm">
-			<form action="MiCuenta.php" method="post">
+        <h4>Nueva Cuenta</h4>
+        <?php echo !empty($statusMsg)?'<p class="'.$statusMsgType.'">'.$statusMsg.'</p>':''; ?>
+        <div class="regisFrm">
+            <form action="MiCuenta.php" method="post">
                 <center>
                     <input style="margin: 7.5px" class="form-control" type="text" name="nombres" placeholder="Nombre" required="">
                     <input style="margin: 7.5px" class="form-control" type="text" name="apellidos" placeholder="Apellido" required="">
@@ -308,9 +309,9 @@ px
                 </center>
                     <?php 
 
-						$user = new User();
-						
-						$conditions['return_type'] = 'single';
+                        $user = new User();
+                        
+                        $conditions['return_type'] = 'single';
 
                     $userData = $user->getRows($conditions); ?>
             <center>     <select id="rol" class="form-control" name="rol"  >
@@ -327,7 +328,7 @@ px
                                     </select>
                  </center>
 
-			
+            
                         <center>
                                 <input type="password" class="form-control" id="password" name="password"  placeholder="Ingrese Password">
                            
@@ -372,13 +373,13 @@ px
 
 
 
-				<div class="send-button">
-					<input type="submit" name="signupSubmit" value="CREAR CUENTA">
-				</div>
-			</form>
-             <center><a href="http://localhost:8009/views/Usuarios/ListarUsuarios.php"> <button type="submit" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
-		</div>
-	</div>
+                <div class="send-button">
+                    <input type="submit" name="signupSubmit" value="CREAR CUENTA">
+                </div>
+            </form>
+             <center><a href="http://localhost:8080/juntas2024/junta/views/Usuarios/ListarUsuarios.php"> <button type="submit" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
+        </div>
+    </div>
     
     
 <!--Inicia columna 7-->

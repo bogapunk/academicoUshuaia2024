@@ -1,13 +1,13 @@
-
 <?php
 
 // Include database connection
 include('dbconect.php');
+
 class Connection {
-  private $serverName = "db"; // o la dirección IP del servidor
+  private $serverName = "10.1.9.113"; // o la dirección IP del servidor
   private $database = "junta";
   private $username = "SA"; // Reemplaza con tu usuario
-  private $password = '"asd123"'; // Reemplaza con tu contraseña
+  private $password = 'Davinci2024#'; // Reemplaza con tu contraseña
   private $conn;
 
   public function open() {
@@ -24,6 +24,7 @@ class Connection {
       $this->conn = null;
   }
 }
+
 // Check if user ID is provided in the URL
 if (isset($_GET['id'])) {
   $userId = $_GET['id'];
@@ -33,8 +34,7 @@ if (isset($_GET['id'])) {
   $db = $database->open();
 
   try {
-    // Prepare and execute the DELETE query
-    //$sql = "DELETE FROM usuarios WHERE id = :id"; este lo borra 
+    // Prepare and execute the UPDATE query
     $sql = "UPDATE usuarios SET estado = 0 WHERE id = :id;";
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':id', $userId);
@@ -60,8 +60,10 @@ if (isset($_GET['id'])) {
   $_SESSION['message'] = "No se ha seleccionado un usuario para eliminar.";
 }
 
-$redirectURL = stripos($_SERVER['SERVER_PROTOCOL'],'http') === 0 ? 'https://'.$_SERVER['HTTP_HOST'].'/views/Usuarios/ListarUsuarios.php' : 'http://'.$_SERVER['HTTP_HOST'].'/views/Usuarios/ListarUsuarios.php';
+$redirectURL = dirname($_SERVER['PHP_SELF']) . '/ListarUsuarios.php';
 
+// Redirige al usuario a la página de listado
+header("Location: $redirectURL");
 // Redirect to the list users page
 echo('<script type="text/javascript">
 window.location.href="'.$redirectURL.'?message=El Usuario fue eliminado con exito"
