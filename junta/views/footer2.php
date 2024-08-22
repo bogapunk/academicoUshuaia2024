@@ -143,7 +143,7 @@ body{
 <!-- Button trigger modal -->
 
 <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
- Cerra Session
+ Cerrar Session
 </a>
 
 <!-- Modal -->

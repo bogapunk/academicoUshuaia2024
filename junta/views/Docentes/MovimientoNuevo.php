@@ -326,8 +326,8 @@ try {
             $establecimiento = isset($_POST['establecimiento']) ? $_POST['establecimiento'] : '';
             $codloc = isset($_POST['codloc']) ? $_POST['codloc'] : '';
 
-            // Variables específicas para tipo de carga 'transitorio', 'permanente' o 'Concurso de Titularidad'
-            if ($tipoc === 'transitorio' || $tipoc === 'permanente' || $tipoc === 'Concurso de Titularidad') {
+            // Variables específicas para tipo de carga 'Interinatos y Suplencias', 'permanente' o 'Concurso de Titularidad'
+            if ($tipoc === 'Interinatos' || $tipoc === 'permanente' || $tipoc === 'Concurso de Titularidad') {
                 $titulo = isset($_POST['titulo2']) ? floatval($_POST['titulo2']) : 0;
                 $promedio = isset($_POST['promedio2']) ? floatval($_POST['promedio2']) : 0;
                 $antiguedadgestion = isset($_POST['antiguedadgestion2']) ? floatval($_POST['antiguedadgestion2']) : 0;
@@ -337,7 +337,7 @@ try {
                 $residencia = isset($_POST['residencia2']) ? floatval($_POST['residencia2']) : 0;
                 $publicaciones = isset($_POST['publicaciones2']) ? floatval($_POST['publicaciones2']) : 0;
                 $otrosantecedentes = isset($_POST['otrosantecedentes2']) ? floatval($_POST['otrosantecedentes2']) : 0;
-                $puntajetotal = isset($_POST['puntajetotal2']) ? floatval($_POST['puntajetotal2']) : 0;
+               // $puntajetotal = isset($_POST['puntajetotal2']) ? floatval($_POST['puntajetotal2']) : 0;
                 $concepto = isset($_POST['concepto2']) ? floatval($_POST['concepto2']) : 0;
                 $otitulo = isset($_POST['otitulo']) ? floatval($_POST['otitulo']) : 0;
                 $T_m_comple = isset($_POST['T_m_comple']) ? floatval($_POST['T_m_comple']) : 0;
@@ -350,6 +350,10 @@ try {
                 $fecha = isset($_POST['fecha']) ? $_POST['fecha'] : '';
                 $otitulo = isset($_POST['otitulo2']) ? floatval($_POST['otitulo2']) : 0;
                 $concepto = isset($_POST['concepto2']) ? floatval($_POST['concepto2']) : 0;
+
+                // Calcular el puntaje total sumando los campos relevantes
+                $puntajetotal = $titulo + $otitulo + $concepto + $promedio + $antiguedadgestion + $antiguedadtitulo + $serviciosprovincia + $otrosservicios + $residencia + $publicaciones + $otrosantecedentes;
+                   
                 // Convertir fecha al formato esperado por SQL Server (ejemplo: 'Y-m-d')
                 if (!empty($fecha)) {
                     // Primero intentar crear un objeto DateTime desde el formato ISO (YYYY-MM-DD)
@@ -377,7 +381,7 @@ try {
                 );
                    
             } elseif ($tipoc === 'titulares') { // Variables específicas para tipo de carga 'titulares'
-                $puntajetotal = isset($_POST['puntajetotal']) ? floatval($_POST['puntajetotal']) : 0;
+                //$puntajetotal = isset($_POST['puntajetotal']) ? floatval($_POST['puntajetotal']) : 0;
                 $promedio = isset($_POST['promedio']) ? floatval($_POST['promedio']) : 0;
                 $T_m_anio = isset($_POST['t_m_anio']) ? floatval($_POST['t_m_anio']) : 0;
                 $T_m_seccion = isset($_POST['t_m_seccion']) ? floatval($_POST['t_m_seccion']) : 0;
@@ -419,6 +423,11 @@ try {
                 $residencia = isset($_POST['residencia']) ? floatval($_POST['residencia']) : 0;
                 $publicaciones = isset($_POST['publicaciones']) ? floatval($_POST['publicaciones']) : 0;
                 $otrosantecedentes = isset($_POST['otrosantecedentes']) ? floatval($_POST['otrosantecedentes']) : 0;
+                 
+               // Calcular el puntaje total sumando los campos relevantes
+                $puntajetotal = $titulo + $otitulo + $concepto + $promedio + $antiguedadgestion + $antiguedadtitulo + $serviciosprovincia + $otrosservicios + $residencia + $publicaciones + $otrosantecedentes + $T_m_anio + $T_m_seccion + $T_m_grupo + $T_m_ciclo + $T_m_recupera + $T_d_pu + $T_d_3 + $T_d_2 + $T_d_1 + $T_d_biblio + $T_d_gabi + $T_d_seccoortec + $T_d_supsectec + $T_d_supesc + $T_d_supgral + $T_d_adic + $O_g_a + $O_g_b + $O_g_c + $O_g_d + $T_m_comple + $T_m_biblio + $T_m_gabinete + $T_m_sec1 + $T_m_sec2 + $T_m_viced;
+
+               
 
                 // Definir la consulta SQL de inserción
                 $sql_insert = "INSERT INTO _junta_movimientos 

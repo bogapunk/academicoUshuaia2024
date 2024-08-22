@@ -198,7 +198,7 @@ body{
 
 
 var base_url = '../../MiCuenta.php?logoutSubmit=1'; // Ruta base del sitio
-var tiempoInactividad = 30000; // Tiempo en milisegundos para detectar inactividad (3 segundos por defecto)
+var tiempoInactividad =  900000; // Tiempo en milisegundos para detectar inactividad (3 segundos por defecto)
 //var tiempoInactividad = 300000; // 5 minutos en milisegundos (300000 ms)
 var timeoutInactividad; // Variable para almacenar el timeout
 

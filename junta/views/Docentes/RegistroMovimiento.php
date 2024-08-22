@@ -649,7 +649,7 @@ if ($conn === false) {
 }
 
 // Consulta SQL para obtener todas las modalidades
-$queryModalidades = "SELECT codmod, nommod FROM _junta_modalidades";
+$queryModalidades = "SELECT codmod, nommod FROM _junta_modalidades WHERE codmod >= 100 ORDER BY codmod ASC;";
 $stmt = sqlsrv_query($conn, $queryModalidades);
 
 $modalidades = array(); // Array para almacenar los datos de modalidades
@@ -680,7 +680,8 @@ sqlsrv_close($conn);
                 <select name='codmod' class="materialize-select3" id='nommod' >
                 <?php 
                         foreach ($modalidades as $codmod => $nommod) {
-                          echo "<option value='$codmod'>$nommod</option>";
+                          echo "<option value='$codmod'>$codmod-$nommod</option>";
+                          
                         }
                         ?>
                 </select>
@@ -689,7 +690,7 @@ sqlsrv_close($conn);
                     <option value=""><strong>Selecione</strong></option>
                     <option value="permanente"><strong>Permanente</strong></option>
                     <option value="titulares"><strong>Titulares</strong></option>
-                    <option value="transitorio"><strong>Interinatos y Suplencias</strong></option>
+                    <option value="Interinatos"><strong>Interinatos y Suplencias</strong></option>
                     <option value="Concurso de Titularidad"><strong>Concurso de Titularidad</strong></option>
                   </select>
   
@@ -1170,7 +1171,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function mostrarTablaSegunTipo() {
         var tipo = tipoSelect.value;
-        tablaPermanenteConcursoInterino.style.display = (tipo === 'permanente' || tipo === 'Concurso de Titularidad' || tipo === 'transitorio') ? 'table' : 'none';
+        tablaPermanenteConcursoInterino.style.display = (tipo === 'permanente' || tipo === 'Concurso de Titularidad' || tipo === 'Interinatos') ? 'table' : 'none';
         tablaTitular.style.display = (tipo === 'titulares') ? 'table' : 'none';
     }
 

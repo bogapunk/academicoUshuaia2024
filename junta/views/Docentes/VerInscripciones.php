@@ -663,7 +663,7 @@ function determinarColor($tipo) {
     switch ($tipo) {
         case 'titulares':
             return '#FFF4DD';
-        case 'transitorio':
+        case 'Interino y Suple.':
             return '#E8FCFF';
         case 'permanente':
             return '#CEFFEF';

@@ -3,7 +3,7 @@
 session_start();
 
 // Load and initialize user class
-include_once('Usuarios.php');
+include 'Usuarios.php';
 $user = new User();
 
 function setSessionState($type, $msg) {

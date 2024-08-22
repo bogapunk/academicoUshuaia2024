@@ -6,6 +6,7 @@ if(!empty($sessData['estado']['msg'])){
     $statusMsgType = $sessData['estado']['type'];
     unset($_SESSION['sessData']['estado']);
 }
+
 include('header.php');
 ?>
 

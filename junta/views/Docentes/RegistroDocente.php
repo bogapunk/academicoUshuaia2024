@@ -489,7 +489,7 @@ materialize-date{
                             $next_legajo = $docente->getNextLegajo();
 
                             // Usar $next_legajo en tu formulario o aplicación
-                            echo "<div style='text-align: center; font-size: 20px;'>Próximo legajo: $next_legajo</div>";
+                            echo "<div style='text-align: center; font-size: 20px;'> Legajo a Cargar---> $next_legajo</div>";
 
 
 
@@ -546,17 +546,19 @@ materialize-date{
      
 <div class="row">
    
-        <div class="row" class="col-12" >
-            <div class="col col-sm-5">
-            
-                <br>
-                <label><strong>Fecha de nacimiento:<strong></label>
-                 <input type="date" name="fechanacim" placeholder="Fecha de nacimiento" required="" class="materialize-date">
-                 </div>
-            <div class="col col-sm-7">
-                 <input type="text" name="promedioT" placeholder="Promedio" required="" class="materialize-input1">
-            </div>
-   </div>
+<div class="row col-12">
+    <div class="col col-sm-6">
+        <label for="fechanacim"><strong>Fecha de nacimiento:</strong></label>
+        <input type="date" id="fechanacim" name="fechanacim" placeholder="Fecha de nacimiento" required class="materialize-date">
+    </div>
+    
+    <div class="col col-sm-6" style="margin-left: 590px;">
+        <label for="promedioT"><strong>Promedio:</strong></label>
+        <input type="number" id="promedioT" name="promedioT" placeholder="Promedio" required class="materialize-input1"  style="width: 30%;" step="0.01">
+    </div>
+</div>
+
+
  </div>
  <div class="row">
      <div class="row" class="col-12" >

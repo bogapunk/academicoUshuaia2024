@@ -8,7 +8,7 @@ if(!empty($sessData['estado']['msg'])){
 }
 
 include('header2.php');
-include_once('Usuarios.php');
+include("Usuarios.php");
 ?>
 <style type="text/css">
     .nav>li>a {

@@ -196,7 +196,7 @@ loader {
               <li>
                   <div class="card-body d-flex justify-content-between align-items-left">
                     <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Cerra Session
+                Cerrar Session
                   </a>
               </li>
             </ul>
