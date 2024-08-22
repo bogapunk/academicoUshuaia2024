@@ -5,7 +5,8 @@ services:
     container_name: php-apache
     ports:
      - "8009:80"
-
+    volumes:
+     - ./junta:/var/www/html
 
   #db:
     #container_name: db-sqlserver
