@@ -129,7 +129,7 @@ body{
 <div class="panel panel-default">
 <div class="panel-heading">
   <ul class="nav nav-pills">
-<center><div class="panel-footer"><a href="" target="_blank">Agencia de Inovaciona</a>
+<center><div class="panel-footer"><a href="" target="_blank">Agencia de innovaciona</a>
 <center><img src="../../imagenes/pie_footer.png" width="50" height="50"></center>
 
 </div>
