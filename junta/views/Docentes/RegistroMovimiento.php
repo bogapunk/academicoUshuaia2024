@@ -424,7 +424,7 @@ tr:nth-child(even) {
 </head>
 <body>
   <div class="container">
-   <center> <h1><u>Movimiento Nuevo****</u></h1></center>
+   <center> <h1><u>Movimiento Nuevo</u></h1></center>
   <br>
   <br>
 
