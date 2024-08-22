@@ -377,7 +377,7 @@ px
                     <input type="submit" name="signupSubmit" value="CREAR CUENTA">
                 </div>
             </form>
-             <center><a href="./Usuarios/ListarUsuarios.php"> <button type="submit" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
+             <center><a href="./ListarUsuarios.php"> <button type="submit" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
         </div>
     </div>
     
