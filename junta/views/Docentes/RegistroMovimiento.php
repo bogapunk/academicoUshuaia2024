@@ -763,7 +763,7 @@ echo "</select></th>";
 sqlsrv_free_stmt($stmt);
 sqlsrv_close($conn);
 
-echo "</select></th>"; // Cierra el campo de selección
+echo "</select></th>"; // Cierra el campo de selección'''''''
 
 
 // Campo oculto para enviar el coddep seleccionado

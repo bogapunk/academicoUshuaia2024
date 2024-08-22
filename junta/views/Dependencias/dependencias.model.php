@@ -181,7 +181,7 @@ class DependenciasModel
         {
             $result = array();
 
-            $stm = $this->pdo->prepare("SELECT * FROM _junta_dependencias ORDER BY nomdep ASC");
+            $stm = $this->pdo->prepare("SELECT * FROM _junta_dependencias ORDER BY iddep ASC");
             $stm->execute();
 
             foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r)
