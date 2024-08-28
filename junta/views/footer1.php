@@ -128,7 +128,7 @@ body{
 <div class="panel panel-default">
 <div class="panel-heading">
   <ul class="nav nav-pills">
-  <center><div class="panel-footer"><a href="https://www.aif.gob.ar/" target="_blank">Agencia de Innovacion</a>
+  <center><div class="panel-footer"><a href="https://www.aif.gob.ar/" target="_blank">Agencia de innovacion</a>
 <center><img src="../imagenes/pie_footer.png" width="50" height="50"></center>
  <nav id="menu_gral2">
  

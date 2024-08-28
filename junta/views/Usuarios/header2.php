@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Agencia de Innovacion</title>
+<title>Agencia de innovacion</title>
 <link rel="stylesheet" href="style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900"  type="text/css" media="all">
 <!-- Último minificado bootstrap css -->

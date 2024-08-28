@@ -1,6 +1,6 @@
 </div><!--Cierra row-->
 </div>
-<div class="panel-footer"><a href="https://www.aif.gob.ar/" target="_blank">Agencia de Innovacion</a>
+<div class="panel-footer"><a href="https://www.aif.gob.ar/" target="_blank">Agencia de innovacion</a>
     <center><img src="./imagenes/pie_footer.png" width="50" height="50"></center>
     </div>
   

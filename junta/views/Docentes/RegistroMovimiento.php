@@ -395,7 +395,7 @@ tr:nth-child(even) {
 <html lang="en">
 
 <head>
-  <title>Agencia de Innovacion</title>
+  <title>Agencia de innovacion</title>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <!--  esto son los archivos de exportacion -->

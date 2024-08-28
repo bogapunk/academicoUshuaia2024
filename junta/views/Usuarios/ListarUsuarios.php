@@ -123,7 +123,7 @@ tr:nth-child(even) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Agencia de Innovacion</title>
+  <title>Agencia de innovacion</title>
 
 
   <meta charset="utf-8">

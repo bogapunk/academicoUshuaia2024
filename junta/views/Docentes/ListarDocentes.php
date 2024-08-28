@@ -253,7 +253,7 @@ tr:nth-child(even) {
 <html lang="en">
 
 <head>
-  <title>Agencia de Innovacion</title>
+  <title>Agencia de innovacion</title>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <!--  esto son los archivos de exportacion -->
@@ -681,7 +681,17 @@ if ($legajo != '' || $dni != '' || $ApellidoyNombre != '') {
                     <td><center style="font-size:1em"><?= htmlspecialchars($row['Legajo']) ?></center></td>
                     <td><center style="font-size:1em"><?= htmlspecialchars($row['dni']) ?></center></td>
                     <td><center style="font-size:1em"><?= htmlspecialchars($row['ApellidoyNombre']) ?></center></td>
-                    <td><center style="font-size:1em"><?= htmlspecialchars($row['lugarinsc']) ?></center></td>
+                    <td>
+                        <center style="font-size:1em">
+                            <?php 
+                            if (is_null($row['lugarinsc']) || trim($row['lugarinsc']) === '') {
+                                echo "<span style='color: red;'>Localidad de Inscripción no disponible</span>";
+                            } else {
+                                echo htmlspecialchars($row['lugarinsc']);
+                            }
+                            ?>
+                        </center>
+                    </td>
                     <td>
                         <center>
                             <a class="btn btn-sm btn-success" href="?action=editar&id2=<?= htmlspecialchars($row['id2']) ?>" title="Editar">
