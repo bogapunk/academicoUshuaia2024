@@ -490,6 +490,8 @@ class DocentesModel
         return array('error' => 'Error en buscar docentes: ' . $e->getMessage());
     }
 }
+
+
     public function ObtenerDocente($id2)
     {
         try
@@ -727,6 +729,14 @@ class DocentesModel
 
 
 
+
+
+
+
+    
+
+
+
     public function ListarMovimientos()
     {
         try
@@ -755,3 +765,5 @@ class DocentesModel
         }
     }
 }
+
+

@@ -347,12 +347,12 @@ try {
 
                             <td colspan="2">
                              <br>
-                             <center>  <button type="submit" class="btn btn-success" onclick="return myConfirm();">Guardar</button>&nbsp&nbsp&nbsp&nbsp
+                             <center>  <button type="submit" class="btn btn-success" onclick="return myConfirm();"><i class="glyphicon glyphicon-floppy-saved"> Guardar </i></button>&nbsp&nbsp&nbsp&nbsp
                               
-                                <button class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR">Limpiar Formulario</button>
+                                <button class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR"><i class="glyphicon glyphicon-erase"> Limpiar </i></button>
                               &nbsp&nbsp&nbsp&nbsp
                               <button class="btn btn-info">
-                                <a href="javascript:imprSelec('seleccion')"  style="color: white;">Imprimir Listado</a></button>
+                                <a href="javascript:imprSelec('seleccion')"  style="color: white;"><i class="glyphicon glyphicon-print"> Imprimir </i></a></button>
 
                             </td>
 

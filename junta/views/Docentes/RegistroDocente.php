@@ -489,7 +489,7 @@ materialize-date{
                             $next_legajo = $docente->getNextLegajo();
 
                             // Usar $next_legajo en tu formulario o aplicación
-                            echo "<div style='text-align: center; font-size: 20px;'> Legajo a Cargar---> $next_legajo</div>";
+                         //  echo "<div style='text-align: center; font-size: 20px;'> Legajo a Cargar---> $next_legajo</div>";
 
 
 
@@ -498,12 +498,15 @@ materialize-date{
  <div class="row">
        <div class="row" class="col-12" >
                   <div class="col col-sm-6">
-                    <input type="text" name="legajo" placeholder="Legajo" required="" class="materialize-input1" >
+                  <label for="legajo">Legajo:</label>
+                    <input type="text" name="legajo" id="legajo" placeholder="Legajo" required="" class="materialize-input1"  style="width: 50%;">
+                    <button type="button" id="checkLegajo" class="btn btn-info">Verificar Legajo</button>
+                    <span id="legajoStatus"></span>
            
                   </div>
 
                   <div class="col col-sm-6">
-                    <input type="text" name="apellidoynombre" placeholder="Apellido y Nombre" required="" class="materialize-input1">
+                    <input type="text" name="apellidoynombre" id="apellidoynombre" placeholder="Apellido y Nombre" required="" class="materialize-input1">
                  
                   </div>
             </div>
@@ -527,8 +530,8 @@ materialize-date{
 >
 
                  </div>
-            <div class="col col-sm-4">
-                   <input type="text" name="Domicilio" placeholder="Domicilio" required="" class="materialize-input2">
+            <div class="col col-sm-5">
+                   <input type="text" name="Domicilio" id="Domicilio" placeholder="Domicilio" required="" class="materialize-input2">
             </div>
      
                   
@@ -542,98 +545,98 @@ materialize-date{
           </div>    
          
 </div>
-
+<br>
      
 <div class="row">
    
-<div class="row col-12">
-    <div class="col col-sm-6">
+  <div class="row col-12">
+    <div class="col col-sm-7">
         <label for="fechanacim"><strong>Fecha de nacimiento:</strong></label>
         <input type="date" id="fechanacim" name="fechanacim" placeholder="Fecha de nacimiento" required class="materialize-date">
     </div>
     
-    <div class="col col-sm-6" style="margin-left: 590px;">
-        <label for="promedioT"><strong>Promedio:</strong></label>
-        <input type="number" id="promedioT" name="promedioT" placeholder="Promedio" required class="materialize-input1"  style="width: 30%;" step="0.01">
-    </div>
-</div>
-
+    <div class="col col-sm-4">
+            
+                <label for="promedioT"><strong>Promedio:</strong></label>
+                <input type="number" id="promedioT" name="promedioT" placeholder="Promedio" required class="materialize-input1"  style="width: 50%;" step="0.01">
+            </div>
+     </div>
 
  </div>
  <div class="row">
      <div class="row" class="col-12" >
                <div class="col col-sm-6">
-                 <input type="text" name="telefonos" placeholder="Telefonos" required="" class="materialize-input1">
+                 <input type="text" name="telefonos" id="telefonos" placeholder="Telefonos" required="" class="materialize-input1">
               </div>
               <div class="col col-sm-6">
-                 <input type="text" name="Titulobas" placeholder="Titulo Basico" required="" class="materialize-input-titulobasico">
+                 <input type="text" name="Titulobas" id="Titulobas" placeholder="Titulo Basico" required="" class="materialize-input-titulobasico">
              </div>
      </div>
  </div>
 
 <div class="row">
      <div class="row" class="col-12" >
-               <div class="col col-sm-5">
+               <div class="col col-sm-7">
                 <br>
 
-             <label><strong>Fecha Titular:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong></label></strong>
-                 <input type="date" name="fechatit" placeholder="Fecha de Titular" required="" class="materialize-date">
+             <label><strong>Fecha Titular:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong></label></strong>
+                 <input type="date" name="fechatit" id="fechatit" placeholder="Fecha de Titular" required="" class="materialize-date">
              </div>
-           <div class="col col-sm-7">
-                 <input type="text" name="otorgadopor" placeholder="Otorgado por" required="" class="materialize-input1">
+           <div class="col col-sm-5">
+                 <input type="text" name="otorgadopor" id="otorgadopor" placeholder="Otorgado por" required="" class="materialize-input1">
           </div>
       </div>
 </div>
 <div class="row">
      <div class="row" class="col-12" >
-               <div class="col col-sm-5">
+               <div class="col col-sm-7">
                 <br>
             
-             <label><strong>Fecha Inicio Docencia:<strong></label></strong>
+             <label><strong>Fecha Inicio Docencia: <strong></label></strong>
 
-                 <input type="date" name="finicio" placeholder="Fec Ini. Docencia" required="" class="materialize-date">
+                 <input type="date" name="finicio" id="finicio" placeholder="Fec Ini. Docencia" required="" class="materialize-date">
               </div>
 
-              <div class="col col-sm-7">
-                <input type="text" name="otrostit" placeholder="Otros Titulos" required="" class="materialize-input1">
+              <div class="col col-sm-5">
+                <input type="text" name="otrostit"  id="otrostit" placeholder="Otros Titulos" required="" class="materialize-input1">
               </div>
         </div>
 </div>
 
 <div class="row">
      <div class="row" class="col-12" >
-               <div class="col col-sm-5">
+               <div class="col col-sm-7">
                   <br>
 
             
-                 <label><strong>Residencia:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong></label></strong>
+                 <label><strong>Residencia:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong></label></strong>
 
-                 <input type="date" name="fingreso" placeholder="Residencia" required="" class="materialize-date">
+                 <input type="date" name="fingreso" id="fingreso" placeholder="Residencia" required="" class="materialize-date">
                </div>
-               <div class="col col-sm-7">
-                 <input type="text" name="cargosdocentes" placeholder="Cargos Docentes" required="" class="materialize-input1">
+               <div class="col col-sm-5">
+                 <input type="text" name="cargosdocentes" id="cargosdocentes" placeholder="Cargos Docentes" required="" class="materialize-input1">
              </div>
          </div>
 </div>
 <div class="row">
      <div class="row" class="col-12" >
-               <div class="col col-sm-5">
+               <div class="col col-sm-7">
  
                  <br>
                   <label><strong>Fecha apertura Legajo:<strong></label></strong>
 
-                 <input type="date" name="faperturaleg" placeholder="Fec. apertura Leg." required="" class="materialize-date">
+                 <input type="date" name="faperturaleg" id="faperturaleg" placeholder="Fec. apertura Leg." required="" class="materialize-date">
 
              </div>
-             <div class="col col-sm-6">
-                 <input type="text" name="Nacionalidad" placeholder="Nacionalidad" required="" class="materialize-input1">
+             <div class="col col-sm-5">
+                 <input type="text" name="Nacionalidad" id="Nacionalidad" placeholder="Nacionalidad" required="" class="materialize-input1">
              </div>
       </div>
 </div>
 
  <div class="row" >
                <div class="col col-sm-19">
-                 <input type="text" name="obsdoc" placeholder="Observaciones" required="" class="materialize-input1">
+                 <input type="text" name="obsdoc" id="obsdoc" placeholder="Observaciones" required="" class="materialize-input1">
             </div>
         </div>
      </div>
@@ -645,6 +648,184 @@ materialize-date{
  
 
             </form>
+            <script>
+            $(document).ready(function() {
+            // Función para formatear la fecha de año-mes-día a día-mes-año
+            function formatDate(dateString) {
+                    if (!dateString) return ''; // Si dateString es nulo o vacío, devolver una cadena vacía
+                    
+                    // Divide la cadena por espacio para separar la fecha de la hora
+                    var datePart = dateString.split(' ')[0];
+                    
+                    // Divide la parte de la fecha por guiones
+                    var parts = datePart.split('-');
+                    
+                    if (parts.length === 3) {
+                        return parts[2] + '-' + parts[1] + '-' + parts[0]; // Cambia a día-mes-año
+                    }
+                    
+                    return datePart; // Devuelve la fecha sin cambios si no está en el formato esperado
+                }
+
+            // Función para formatear el número a dos decimales
+            function formatNumber(number) {
+                return parseFloat(number).toFixed(2);
+            }
+
+            // Función para limpiar los campos del formulario
+            function clearFormFields() {
+                $('#apellidoynombre').val('');
+                $('#dni').val('');
+                $('#Domicilio').val('');
+                $('#lugarinsc').val('');
+                $('#fechanacim').val('');
+                $('#promedioT').val('');
+                $('#telefonos').val('');
+                $('#Titulobas').val('');
+                $('#fechatit').val('');
+                $('#otorgadopor').val('');
+                $('#finicio').val('');
+                $('#otrostit').val('');
+                $('#fingreso').val('');
+                $('#cargosdocentes').val('');
+                $('#faperturaleg').val('');
+                $('#Nacionalidad').val('');
+                $('#obsdoc').val('');
+            }
+
+            // Función para deshabilitar los campos del formulario
+            function disableFormFields() {
+                $('#apellidoynombre').prop('disabled', true);
+                $('#dni').prop('disabled', true);
+                $('#Domicilio').prop('disabled', true);
+                $('#lugarinsc').prop('disabled', true);
+                $('#fechanacim').prop('disabled', true);
+                $('#promedioT').prop('disabled', true);
+                $('#telefonos').prop('disabled', true);
+                $('#Titulobas').prop('disabled', true);
+                $('#fechatit').prop('disabled', true);
+                $('#otorgadopor').prop('disabled', true);
+                $('#finicio').prop('disabled', true);
+                $('#otrostit').prop('disabled', true);
+                $('#fingreso').prop('disabled', true);
+                $('#cargosdocentes').prop('disabled', true);
+                $('#faperturaleg').prop('disabled', true);
+                $('#Nacionalidad').prop('disabled', true);
+                $('#obsdoc').prop('disabled', true);
+            }
+
+            // Función para habilitar los campos del formulario
+            function enableFormFields() {
+                $('#apellidoynombre').prop('disabled', false);
+                $('#dni').prop('disabled', false);
+                $('#Domicilio').prop('disabled', false);
+                $('#lugarinsc').prop('disabled', false);
+                $('#fechanacim').prop('disabled', false);
+                $('#promedioT').prop('disabled', false);
+                $('#telefonos').prop('disabled', false);
+                $('#Titulobas').prop('disabled', false);
+                $('#fechatit').prop('disabled', false);
+                $('#otorgadopor').prop('disabled', false);
+                $('#finicio').prop('disabled', false);
+                $('#otrostit').prop('disabled', false);
+                $('#fingreso').prop('disabled', false);
+                $('#cargosdocentes').prop('disabled', false);
+                $('#faperturaleg').prop('disabled', false);
+                $('#Nacionalidad').prop('disabled', false);
+                $('#obsdoc').prop('disabled', false);
+            }
+
+            // Función para verificar si el legajo ya existe
+            $('#checkLegajo').click(function() {
+                var legajo = $('#legajo').val();
+
+                if (legajo === '') {
+                    $('#legajoStatus').html('<span style="color: red;">Por favor, ingrese un legajo.</span>');
+                    return;
+                }
+
+                $.ajax({
+                    url: 'check_legajo.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { legajo: legajo },
+                    success: function(response) {
+                        if (response.status === 'exists') {
+                            $('#legajoStatus').html('<span style="color: red;">El legajo ya existe.</span>');
+                            
+                            // Mostrar y completar los datos del docente si el legajo ya existe
+                            $('#docenteInfo').show();
+                            
+                            // Actualiza todos los campos con la información del docente
+                            $('#apellidoynombre').val(response.docente.ApellidoyNombre);
+                            $('#dni').val(response.docente.dni);
+                            $('#Domicilio').val(response.docente.Domicilio);
+                            $('#lugarinsc').val(response.docente.lugarinsc);
+                           
+                            var formattedDate = formatDate(response.docente.fechanacim);
+                            $('#fechanacim').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
+                            $('#promedioT').val(formatNumber(response.docente.promedioT));
+                            $('#telefonos').val(response.docente.telefonos);
+                            $('#Titulobas').val(response.docente.Titulobas);
+
+                            var formattedDate = formatDate(response.docente.fechatit);
+                            $('#fechatit').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
+                            $('#otorgadopor').val(response.docente.otorgadopor);
+ 
+                            var formattedDate = formatDate(response.docente.finicio);
+                            $('#finicio').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
+                            $('#otrostit').val(response.docente.otrostit);
+
+                            var formattedDate = formatDate(response.docente.fingreso);
+                            $('#fingreso').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
+                            $('#cargosdocentes').val(response.docente.cargosdocentes);
+
+                            var formattedDate = formatDate(response.docente.faperturaleg);
+                            $('#faperturaleg').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
+                            $('#Nacionalidad').val(response.docente.Nacionalidad);
+                            $('#obsdoc').val(response.docente.obsdoc);
+
+                            // Deshabilita los campos para que no se puedan editar
+                            disableFormFields();
+                        } else if (response.status === 'available') {
+                            $('#legajoStatus').html('<span style="color: green;">El legajo está disponible.</span>');
+                            $('#docenteInfo').hide();
+                            
+                            // Limpia y habilita los campos si el legajo está disponible
+                            clearFormFields();
+                            enableFormFields();
+                        } else {
+                            $('#legajoStatus').html('<span style="color: red;">Error al verificar el legajo.</span>');
+                        }
+                    },
+                    error: function() {
+                        $('#legajoStatus').html('<span style="color: red;">Error en la solicitud.</span>');
+                    }
+                });
+            });
+
+            // Validación del formulario antes de enviarlo
+            $('#registroForm').submit(function(event) {
+                if (!validateForm()) {
+                    event.preventDefault();
+                }
+            });
+
+            // Función para validar el formulario
+            function validateForm() {
+                var legajoStatus = $('#legajoStatus').text();
+
+                if (legajoStatus.includes('El legajo ya existe')) {
+                    alert('El legajo ingresado ya existe. Por favor, elija otro.');
+                    return false;
+                }
+                return true;
+            }
+        });
+    </script>
+
+
+
    </div>
 </div>
            <center><a href="./ListarDocentes.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>

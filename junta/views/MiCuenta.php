@@ -33,7 +33,7 @@ if (isset($_POST['signupSubmit'])) {
                     'nombres' => $_POST['nombres'],
                     'apellidos' => $_POST['apellidos'],
                     'email' => $_POST['email'],
-                    'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                    'password' => md5($_POST['password']), // Hash de la contraseña con md5
                     'telefono' => $_POST['telefono'],
                     'rol' => $_POST['rol'],
                     'estado' => '1'

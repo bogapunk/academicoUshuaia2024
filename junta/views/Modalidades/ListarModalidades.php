@@ -340,13 +340,13 @@ try {
 
                             <td colspan="2">
 <br>
-                             <center>  <button type="submit" class="btn btn-success" onclick="return myConfirm2();">Guardar</button>&nbsp&nbsp&nbsp&nbsp
+                             <center>  <button type="submit" class="btn btn-success" onclick="return myConfirm2();"><i class="glyphicon glyphicon-floppy-saved"> Guardar </i></button>&nbsp&nbsp&nbsp&nbsp
                                 
 
-                                <button class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR">Limpiar Formulario</button>
+                                <button class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR"><i class="glyphicon glyphicon-erase"> Limpiar Formulario</i></button>
                               &nbsp&nbsp&nbsp&nbsp
                               <button class="btn btn-info">
-                                <a href="javascript:imprSelec('seleccion')" style="color: white;">Imprimir Modalalida</a></button>
+                                <a href="javascript:imprSelec('seleccion')" style="color: white;"><i class="glyphicon glyphicon-print"> Imprimir Modalalida </i></a></button>
 
                             </td>
 

@@ -485,18 +485,14 @@ try {
 
 
                         <tr>
-
+              
                             <td colspan="2">
-<br>
-                             <center>  <button type="submit" class="btn btn-success" onclick="return myConfirm();">Cargar</button>&nbsp&nbsp&nbsp&nbsp
-                              
-                                <button class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR">Limpiar Formulario</button>
-                              &nbsp&nbsp&nbsp&nbsp
+                             <center><button type="submit" class="btn btn-primary" onclick="return myConfirm();"><i class="glyphicon glyphicon-floppy-saved"> Cargar</i></button>&nbsp;&nbsp;
                             
-
-
+                                <button class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR"><i class="glyphicon glyphicon-erase"> Limpiar</i></button>
+                            
                             <center><b>Numero de Legajo:</b><?php echo $doc->__GET('legajo');// aca te faltaba poner los echo para que se muestre el valor de la variable.  ?></center>
-                            <a href="VerInscripciones.php?legajo=<?php echo $doc->__GET('legajo'); ?>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span> Ver Inscripciones</a>
+                            <a href="VerInscripciones.php?legajo=<?php echo $doc->__GET('legajo'); ?>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span>  Ver Inscripciones</a>
 
                         
                             </td>
@@ -530,7 +526,7 @@ try {
 
     <!-- Resto del formulario aquí -->
     <a href="generate_pdf.php?legajo=<?php echo urlencode($doc->__GET('legajo')); ?>&apellidoynombre=<?php echo urlencode($doc->__GET('apellidoynombre')); ?>&dni=<?php echo urlencode($doc->__GET('dni')); ?>&domicilio=<?php echo urlencode($doc->__GET('domicilio')); ?>&lugarinsc=<?php echo urlencode($doc->__GET('lugarinsc')); ?>&fechanacim=<?php echo urlencode($doc->__GET('fechanacim')); ?>&promedioT=<?php echo urlencode($doc->__GET('promedioT')); ?>&telefonos=<?php echo urlencode($doc->__GET('telefonos')); ?>&Titulobas=<?php echo urlencode($doc->__GET('Titulobas')); ?>&fechatit=<?php echo urlencode($doc->__GET('fechatit')); ?>&otorgadopor=<?php echo urlencode($doc->__GET('otorgadopor')); ?>&finicio=<?php echo urlencode($doc->__GET('finicio')); ?>&otrostit=<?php echo urlencode($doc->__GET('otrostit')); ?>&fingreso=<?php echo urlencode($doc->__GET('fingreso')); ?>&cargosdocentes=<?php echo urlencode($doc->__GET('cargosdocentes')); ?>&faperturaleg=<?php echo urlencode($doc->__GET('faperturaleg')); ?>&Nacionalidad=<?php echo urlencode($doc->__GET('Nacionalidad')); ?>&obsdoc=<?php echo urlencode($doc->__GET('obsdoc')); ?>" class="btn btn-info">
-    Descargar Docente
+    <i class="glyphicon glyphicon-save"> Descargar Docente</i> 
 </a>
 </form>
 
@@ -547,19 +543,49 @@ try {
                   ventimp.close();
                 }
               </script>
-
-
+       <div>
+         <a href="RegistroDocente.php" class="btn btn-primary">
+                          <span class="glyphicon glyphicon-plus"></span> Nuevo Docente
+                      </a>
+              </div>              
 <div class="container-fluid">
 <div class="input-group">
-  <b>Buscar:&nbsp</b> <div class="form-group pull-right">
-    <input type="text" class="search form-control" placeholder="¿Buscar Docente?">
-</div>
-</div>
-<a href="RegistroDocente.php" class="btn btn-primary" > <span class="glyphicon glyphicon-plus"></span> Nuevo Docente</a>&nbsp&nbsp
- <a href="../../controller/exportar_docentes.php" class="btn btn-info btn-sm" onclick="return myConfirm3();" >
+<div class="container mt-4">
+    <h2><u>Buscador de Datos</u></h2>
+    <form method="GET" action="">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="legajo">Legajo</label>
+                <input type="text" class="form-control" id="legajo" name="legajo" placeholder="Ingrese Legajo">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="dni">DNI</label>
+                <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese DNI">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="apellido">Apellido y Nombre</label>
+                <input type="text" class="form-control" id="apellido" name="ApellidoyNombre" placeholder="Ingrese Apellido y Nombre">
+            </div>
+        </div>
+      <center>
+                  <div class="container mt-4">
+                  <div class="header-buttons">
+                      <form method="GET" action="" class="form-inline">
+                          <div class="form-group">
+                              <button type="submit" class="btn btn-warning">
+                                  <i class="glyphicon glyphicon-search"></i> Buscar
+                              </button>
+                          </div>
+                      </form>
+                     
+                  </div>
+              </form>
+</div></center>
+
+ <!--<a href="../../controller/exportar_docentes.php" class="btn btn-info btn-sm" onclick="return myConfirm3();" >
           <span class="glyphicon glyphicon-download-alt"></span> Descargar
         </a>
-</div>
+</div>-->
 
 
     <script>
@@ -571,14 +597,13 @@ try {
     </script>
 
 
-
+<!--
 <div class="container-fluid">
  <table class="table table-hover table-bordered results" id="example">
 
     <thead class="thead-dark" >
         <thead class="buscar">
         <tr>
-            
             <th><center style="font-size:1em"; onclick="sortTable(3)" >LEGAJO</center></th>
             <th><center style="font-size:1em";>APELLIDO Y NOMBRE </center></th>
             <th><center style="font-size:1em"; onclick="sortTable(4)">FECHA DE NAC.</center></th>
@@ -590,57 +615,105 @@ try {
 
     </thead>
   </thead>
-
+-->
 <tbody>
 <?php
-// Parámetros de paginación
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$limit = 1000; // Cantidad de registros por página
-$offset = ($page - 1) * $limit; // Cálculo del desplazamiento
+// Incluye la conexión a la base de datos aquí
+$serverName = "10.1.9.113";
+$connectionOptions = array(
+    "Database" => "Junta",
+    "Uid" => "SA",
+    "PWD" => "Davinci2024#",
+    "TrustServerCertificate" => true
+);
 
-// Llamada a la función Listar_docentes con los parámetros de paginación
-$docentes = $model->Listar_docentes($offset, $limit);
+// Conexión con SQL Server
+$conn = sqlsrv_connect($serverName, $connectionOptions);
 
-foreach ($docentes as $r) {
-    if ($r instanceof Docente) {
-        ?>
-        <tr>
-            <td><center style="font-size:1em"><?php echo $r->legajo; ?></center></td>
-            <td><center style="font-size:1em"><?php echo $r->apellidoynombre; ?></center></td>
-            <td><center style="font-size:1em"><?php echo $r->fechanacim; ?></center></td>
-            <td><center style="font-size:1em"><?php echo $r->telefonos; ?></center></td>
-            <td><center style="font-size:1em"><?php echo $r->lugarinsc; ?></center></td>
-            <td><center style="font-size:1em"><?php echo $r->dni; ?></center></td>
-            <td>
-                <center>
-                    <a class="btn btn-sm btn-success" id="Docentes" href="?action=editar&id2=<?php echo $r->id2; ?>" title="Editar" data-id="<?php echo $r->id2; ?>"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                    <a class="btn btn-sm btn-danger" id="docentes" href="?action=eliminar&id2=<?php echo $r->id2; ?>" title="Borrar" onclick="return myConfirm4();"><i class="glyphicon glyphicon-trash"></i> Borrar</a>
-                </center>
-            </td>
-        </tr>
-        <?php
-    } else {
-        // Manejo de casos donde $r no es un objeto Docente
-        echo "<pre>";
-        var_dump($r);
-        echo "</pre>";
-    }
+if ($conn === false) {
+    die(print_r(sqlsrv_errors(), true));
 }
 
+$legajo = isset($_GET['legajo']) ? $_GET['legajo'] : '';
+$dni = isset($_GET['dni']) ? $_GET['dni'] : '';
+$ApellidoyNombre = isset($_GET['ApellidoyNombre']) ? $_GET['ApellidoyNombre'] : '';
+
+// Solo ejecutar la consulta si alguno de los campos tiene un valor
+if ($legajo != '' || $dni != '' || $ApellidoyNombre != '') {
+    $params = [];
+    // Incluir id2 en la selección
+    $sql = "SELECT id2, Legajo, dni, ApellidoyNombre,lugarinsc FROM _junta_docentes WHERE 1=1";
+
+    if ($legajo != '') {
+        $sql .= " AND Legajo = ?";
+        $params[] = $legajo;
+    }
+    if ($dni != '') {
+        $sql .= " AND dni = ?";
+        $params[] = $dni;
+    }
+    if ($ApellidoyNombre != '') {
+        $sql .= " AND ApellidoyNombre LIKE ?";
+        $params[] = "%$ApellidoyNombre%";
+    }
+
+    $stmt = sqlsrv_query($conn, $sql, $params);
+
+    if ($stmt === false) {
+        die(print_r(sqlsrv_errors(), true));
+    }
+?>
+<div class="container mt-4">
+    <h2>Resultados de la Búsqueda</h2>
+    <table id="resultTable" class="display table table-bordered">
+        <thead>
+            <tr>
+                <th><center style="font-size:1em">Legajo</center></th>
+                <th><center style="font-size:1em">DNI</center></th>
+                <th><center style="font-size:1em">Apellido y Nombre</center></th>
+                <th><center style="font-size:1em">Localidad de Inscripcion</center></th>
+                <th><center style="font-size:1em">Acciones</center></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)): ?>
+                <tr>
+                    <td><center style="font-size:1em"><?= htmlspecialchars($row['Legajo']) ?></center></td>
+                    <td><center style="font-size:1em"><?= htmlspecialchars($row['dni']) ?></center></td>
+                    <td><center style="font-size:1em"><?= htmlspecialchars($row['ApellidoyNombre']) ?></center></td>
+                    <td><center style="font-size:1em"><?= htmlspecialchars($row['lugarinsc']) ?></center></td>
+                    <td>
+                        <center>
+                            <a class="btn btn-sm btn-success" href="?action=editar&id2=<?= htmlspecialchars($row['id2']) ?>" title="Editar">
+                                <i class="glyphicon glyphicon-edit"></i> Editar
+                            </a>
+                            <a class="btn btn-sm btn-danger" href="?action=eliminar&id2=<?= htmlspecialchars($row['id2']) ?>" title="Borrar" onclick="return myConfirm4();">
+                                <i class="glyphicon glyphicon-trash"></i> Borrar
+                            </a>
+                        </center>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+</div>
+<?php
+}
 ?>
 
-</tbody>
-
-</div>
-</div>
-</table>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<!-- Include jQuery, DataTables, and other necessary scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script>
+    $(document).ready(function() {
+        $('#resultTable').DataTable();
+    });
+
+    function myConfirm4() {
+        return confirm("¿Desea borrar al docente?");
+    }
+
+
   $("#limpiar").click(function(event) {
     $("#formulario_transaccion")[0].reset();
   });
@@ -651,188 +724,6 @@ foreach ($docentes as $r) {
       .find("input[type=text], input[type=number], input[type=date],textarea")
       .val("");
   });
-
-  // borrar datos de los docentes
- function myConfirm() {
-  var result = confirm("¿Desea Actulizar el docente?");
-  if (result==true) {
-   return true;
-
-  } else {
-   return false;
-  }
-}
-
-//funcion de guardar datos de docentes
-function myConfirm2() {
-  var result = confirm("¿Desea Guardar Modificacion Del Docente?");
-  if (result==true) {
-   return true;
-
-  } else {
-   return false;
-  }
-}
-//funcion descargar excel  de decoentes
-function myConfirm3() {
-  var result = confirm("¿Desea descargar a excel de los docentes?");
-  if (result==true) {
-   return true;
-
-  } else {
-   return false;
-  }
-}
-//funcion eliminar docnetes
-function myConfirm4() {
-  var result = confirm("¿Desea borrar al docente?");
-  if (result==true) {
-   return true;
-
-  } else {
-   return false;
-  }
-}
-
-
-
-
-
-  //*/
-</script>
-<ul class="pager">
-  <li class="previous disabled"><a href="#">&larr; Anterior</a></li>
-  <li class="next"><a href="#">Siguiente &rarr;</a></li>
-</ul>
-
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="../bootstrap/js/bootstrap.min.js"></script>
-<script src="../Assets/swal2/sweetalert2.min.js"></script>
-   <script>
-function sortTable(n) {
-  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("myTable");
-  switching = true;
-  //Set the sorting direction to ascending:
-  dir = "asc"; 
-  /*Make a loop that will continue until
-  no switching has been done:*/
-  while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    rows = table.rows;
-    /*Loop through all table rows (except the
-    first, which contains table headers):*/
-    for (i = 1; i < (rows.length - 1); i++) {
-      //start by saying there should be no switching:
-      shouldSwitch = false;
-      /*Get the two elements you want to compare,
-      one from current row and one from the next:*/
-      x = rows[i].getElementsByTagName("TD")[n];
-      y = rows[i + 1].getElementsByTagName("TD")[n];
-      /*check if the two rows should switch place,
-      based on the direction, asc or desc:*/
-      if (dir == "asc") {
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch= true;
-          break;
-        }
-      } else if (dir == "desc") {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch = true;
-          break;
-        }
-      }
-    }
-    if (shouldSwitch) {
-      /*If a switch has been marked, make the switch
-      and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-      //Each time a switch is done, increase this count by 1:
-      switchcount ++;      
-    } else {
-      /*If no switching has been done AND the direction is "asc",
-      set the direction to "desc" and run the while loop again.*/
-      if (switchcount == 0 && dir == "asc") {
-        dir = "desc";
-        switching = true;
-      }
-    }
-  }
-}
-
-$(document).ready(function() {
-  $(".search").keyup(function () {
-    var searchTerm = $(".search").val();
-    var listItem = $('.results tbody').children('tr');
-    var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
-    
-  $.extend($.expr[':'], {'containsi': function(elem, i, match, array){
-        return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
-    }
-  });
-    
-  $(".results tbody tr").not(":containsi('" + searchSplit + "')").each(function(e){
-    $(this).attr('visible','false');
-  });
-
-  $(".results tbody tr:containsi('" + searchSplit + "')").each(function(e){
-    $(this).attr('visible','true');
-  });
-
-  var jobCount = $('.results tbody tr[visible="true"]').length;
-    $('.counter').text(jobCount + ' item');
-
-  if(jobCount == '0') {$('.no-result').show();}
-    else {$('.no-result').hide();}
-      });
-});
-
 </script>
 
-<?php
-// Enlaces de paginación
-$total_records = 10000; // Supón que tienes una forma de obtener el número total de registros.
-$total_pages = ceil($total_records / $limit);
-
-echo '<nav>';
-echo '<ul class="pagination">';
-if ($page > 1) {
-    echo '<li><a href="?page=' . ($page - 1) . '">&laquo; Anterior</a></li>';
-}
-
-for ($i = 1; $i <= $total_pages; $i++) {
-    if ($i == $page) {
-        echo '<li class="active"><a href="?page=' . $i . '">' . $i . '</a></li>';
-    } else {
-        echo '<li><a href="?page=' . $i . '">' . $i . '</a></li>';
-    }
-}
-
-if ($page < $total_pages) {
-    echo '<li><a href="?page=' . ($page + 1) . '">Siguiente &raquo;</a></li>';
-}
-echo '</ul>';
-
-echo '</nav>';
-?>
-
-
-
-
-
-</body>
-</html>
-<!-- < ?php include('AgregarModal.php'); ?>-->
-
-<script src="../js/jquery.min.js"></script>
-<script src="../bootstrap/js/bootstrap.min.js"></script>
 <?php include('footer2.php');?>
-
-
-
-

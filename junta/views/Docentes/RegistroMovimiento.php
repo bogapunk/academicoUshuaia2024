@@ -728,7 +728,7 @@ if ($conn === false) {
 }
 
 // Consulta SQL para obtener todos los establecimientos
-$queryEstablecimientos = "SELECT iddep, nomdep, coddep FROM _junta_dependencias";
+$queryEstablecimientos = "SELECT iddep, nomdep, coddep FROM _junta_dependencias order by coddep";
 $stmt = sqlsrv_query($conn, $queryEstablecimientos);
 
 if ($stmt === false) {
