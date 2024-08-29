@@ -1079,7 +1079,7 @@ function procesarFormulario(event) {
   let url = 'ListarListadosDeDocentes.php'; // URL por defecto
 
   if (!chkExcluidos && chkNormal && selectProvinciales === '' && selectLocalidad !== '' && selectLocalidad !== 'Antartida') {
-    url = 'listados_Normales.php';
+    url = './listados_Normales.php';
 } else if (!chkExcluidos && chkNormal && selectProvinciales === '' && selectLocalidad === 'Antartida') {
     url = 'listados_Antartida.php';
 } else if (!chkExcluidos && chkTodasModalidadesTitulares && selectProvinciales === '') {

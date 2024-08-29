@@ -1,6 +1,10 @@
 <?php 
 require_once 'configuracionListados.entidad.php';
 require_once 'configuracionListados.model.php';
+
+
+
+
 include('header2.php');
 
 // Logica
