@@ -467,7 +467,7 @@ span {
               }
 
               // SQL query to retrieve modalities
-              $sql_modality = "SELECT codmod, nommod FROM _junta_modalidades";
+              $sql_modality = "SELECT codmod, nommod FROM _junta_modalidades order by codmod asc";
 
               // Execute query
               $result_modality = sqlsrv_query($conn, $sql_modality);
@@ -1079,9 +1079,9 @@ function procesarFormulario(event) {
   let url = 'ListarListadosDeDocentes.php'; // URL por defecto
 
   if (!chkExcluidos && chkNormal && selectProvinciales === '' && selectLocalidad !== '' && selectLocalidad !== 'Antartida') {
-    url = './listados_Normales.php';
+    url = 'Listados_Normales.php';
 } else if (!chkExcluidos && chkNormal && selectProvinciales === '' && selectLocalidad === 'Antartida') {
-    url = 'listados_Antartida.php';
+    url = 'Listados_Antartida.php';
 } else if (!chkExcluidos && chkTodasModalidadesTitulares && selectProvinciales === '') {
     url = 'Listados_Titulares_por_Todas_Modalidades.php';
 } else if (!chkExcluidos && chkModalidadCiudadUnificada && selectProvinciales === '') {

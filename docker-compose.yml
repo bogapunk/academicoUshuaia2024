@@ -7,6 +7,7 @@ services:
      - "8009:80"
     volumes:
      - ./junta:/var/www/html
+     #- ./junta/.htaccess:/var/www/html/.htaccess
 
   #db:
     #container_name: db-sqlserver

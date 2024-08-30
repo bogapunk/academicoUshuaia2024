@@ -22,7 +22,7 @@ class Cconexion {
 
     public function conectar2() {
         try {
-            $conn = new PDO("sqlsrv:Server=$this->host;Database=$this->dbname", $this->username, $this->password);
+            $conn = new PDO("sqlsrv:Server=$this->host;Database=$this->dbname;TrustServerCertificate=true", $this->username, $this->password);
             $conn->setAttribute(PDO::SQLSRV_ATTR_ENCODING, PDO::SQLSRV_ENCODING_UTF8);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $conn;
@@ -76,7 +76,7 @@ try {
             [Junta].[dbo].[_junta_docentes] j_doc ON j_mov.legdoc = j_doc.legajo
         WHERE
             j_mov.excluido = '23' and codmod= '$codmod' and tipo = '$tipo' and anodoc ='$anio' and codloc='$localidad' ";
-
+       
          if ($tipo == 'titulares') {
             $query .= " AND establecimiento = $establecimiento order by j_mov.puntajetotal desc, totalodn1 desc, j_mov.concepto desc, j_mov.serviciosprovincia desc, j_mov.promedio desc, j_mov.antiguedadgestion desc, j_mov.antiguedadtitulo desc, J_doc.fechatit desc";
          
@@ -85,6 +85,8 @@ try {
             $query .= " ORDER BY j_mov.puntajetotal DESC, j_mov.serviciosprovincia DESC, j_mov.promedio DESC, j_mov.antiguedadgestion DESC, j_mov.antiguedadtitulo DESC, j_doc.fechatit DESC";
           
         }
+        var_dump($query);
+        exit;
         // Preparar la consulta
         $stmt = $conn->prepare($query);
         

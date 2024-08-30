@@ -600,34 +600,36 @@ function showDetails(legajo) {
 </script>
 <!--aca coloco el script del tipo si me habilita o no los campos observacion y horas si es del tipo titular -->
 <script>
-     function
-      habilitarTipo(value) {
-        var fechaCampo = document.getElementById('fechaCampo');
-        var observacionTipo = document.getElementById("observacionTipo");
-        var horasTipo = document.getElementById("horasTipo");
-        var thObservaciones = document.getElementById("thObservaciones");
-        var thHoras = document.getElementById("thHoras");
+        function habilitarTipo(value) {
+            var fechaCampo = document.getElementById('fechaCampo');
+            var observacionTipo = document.getElementById("observacionTipo");
+            var horasTipo = document.getElementById("horasTipo");
+            var thObservaciones = document.getElementById("thObservaciones");
+            var thHoras = document.getElementById("thHoras");
+            
+          
+            // Mostrar/ocultar campos según el valor del select
+            if (value === 'permanente') {
+                fechaCampo.style.display = 'table-row';
+            } else {
+                fechaCampo.style.display = 'none';
+            }
 
-        if (value === 'permanente') {
-            fechaCampo.style.display = 'table-row';
-        } else {
-            fechaCampo.style.display = 'none';
-        }
+            if (value === "titulares") {
+                thObservaciones.style.display = "table-row";
+                thHoras.style.display = "table-row";
+                observacionTipo.style.display = "table-cell";
+                horasTipo.style.display = "table-cell";
+            } else {
+                thObservaciones.style.display = "none";
+                thHoras.style.display = "none";
+                observacionTipo.style.display = "none";
+                horasTipo.style.display = "none";
+            }
 
-        if (value === "titulares") {
-            thObservaciones.style.display = "table-row";
-            thHoras.style.display = "table-row";
-            observacionTipo.style.display = "table-cell";
-            horasTipo.style.display = "table-cell";
-        } else {
-            thObservaciones.style.display = "none";
-            thHoras.style.display = "none";
-            observacionTipo.style.display = "none";
-            horasTipo.style.display = "none";
+           
         }
-    }
 </script>
-
 <?php
 // Consulta SQL para obtener todas las modalidades
 // Configuración de la conexión a SQL Server
@@ -687,12 +689,12 @@ sqlsrv_close($conn);
                 </select>
                 <td> <b>Tipo de Listado:</b>
                 <select name="tipoc" id="tipoc" class="materialize-select4" onchange="habilitarTipo(this.value)" style='width: 200px;'>
-                    <option value=""><strong>Selecione</strong></option>
-                    <option value="permanente"><strong>Permanente</strong></option>
-                    <option value="titulares"><strong>Titulares</strong></option>
-                    <option value="Interinatos"><strong>Interinatos y Suplencias</strong></option>
-                    <option value="Concurso de Titularidad"><strong>Concurso de Titularidad</strong></option>
-                  </select>
+                          <option value=""><strong>Seleccione</strong></option>
+                          <option value="permanente"><strong>Permanente</strong></option>
+                          <option value="titulares"><strong>Titulares</strong></option>
+                          <option value="Interinatos"><strong>Interinatos y Suplencias</strong></option>
+                          <option value="Concurso de Titularidad"><strong>Concurso de Titularidad</strong></option>
+                      </select>
   
                  </td>
             </th>
@@ -943,10 +945,12 @@ document.getElementById('motivosExclusion').addEventListener('change', function(
                 <input type="number" id="otitulo2" name="otitulo2" class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="concepto2" style="display: inline-block; width: 225px;">3.- Conceptos:</label>
-                <input type="number" id="concepto2" name="concepto2" class="materialize-input3" size="10" step="0.01" >
-                <br>
-
+             <!-- Campo Conceptos -->
+                    <div id="conceptoField" style="display: none;">
+                        <label for="concepto2" style="display: inline-block; width: 225px;">3.- Conceptos:</label>
+                        <input type="number" id="concepto2" name="concepto2" class="materialize-input3" size="10" step="0.01">
+                        <br>
+                    </div>
                 <label for="promedio" style="display: inline-block; width: 225px;">4.- Promedio:</label>
                 <input type="number" id="promedio2" name="promedio2" class="materialize-input3" size="10" step="0.01" >
                 <br>
@@ -1165,20 +1169,33 @@ document.addEventListener('DOMContentLoaded', function() {
     var tipoSelect = document.getElementById('tipoc');
     var tablaPermanenteConcursoInterino = document.getElementById('tablaPermanenteConcursoInterino');
     var tablaTitular = document.getElementById('tablaTitular');
-
-
-
+    var conceptoField = document.getElementById('conceptoField'); // Campo de Conceptos
 
     function mostrarTablaSegunTipo() {
         var tipo = tipoSelect.value;
+        
+        // Mostrar/ocultar tablas según el tipo
         tablaPermanenteConcursoInterino.style.display = (tipo === 'permanente' || tipo === 'Concurso de Titularidad' || tipo === 'Interinatos') ? 'table' : 'none';
         tablaTitular.style.display = (tipo === 'titulares') ? 'table' : 'none';
+        
+        // Mostrar/ocultar campo de conceptos según el tipo
+        if (conceptoField) {
+            conceptoField.style.display = (tipo === 'Interinatos') ? 'none' : 'block';
+        } else {
+            console.error('Elemento con ID "conceptoField" no encontrado.');
+        }
     }
 
-    tipoSelect.addEventListener('change', mostrarTablaSegunTipo);
-    mostrarTablaSegunTipo(); // Llamar a la función al cargar la página
-});
+    // Añadir event listener para el cambio en el select
+    if (tipoSelect) {
+        tipoSelect.addEventListener('change', mostrarTablaSegunTipo);
+    } else {
+        console.error('Elemento con ID "tipoc" no encontrado.');
+    }
 
+    // Llamar a la función al cargar la página
+    mostrarTablaSegunTipo();
+});
 </script>
 
 
@@ -1219,4 +1236,3 @@ function toggleMotivosExclusion(checkbox) {
 
 </th>
 <?php include('footer2.php');?>
-

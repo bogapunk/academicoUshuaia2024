@@ -744,84 +744,114 @@ materialize-date{
                     return;
                 }
 
+               
                 $.ajax({
-                    url: 'check_legajo.php',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: { legajo: legajo },
-                    success: function(response) {
-                        if (response.status === 'exists') {
-                            $('#legajoStatus').html('<span style="color: red;">El legajo ya existe.</span>');
-                            
-                            // Mostrar y completar los datos del docente si el legajo ya existe
-                            $('#docenteInfo').show();
-                            
-                            // Actualiza todos los campos con la información del docente
-                            $('#apellidoynombre').val(response.docente.ApellidoyNombre);
-                            $('#dni').val(response.docente.dni);
-                            $('#Domicilio').val(response.docente.Domicilio);
-                            $('#lugarinsc').val(response.docente.lugarinsc);
-                           
-                            var formattedDate = formatDate(response.docente.fechanacim);
-                            $('#fechanacim').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
-                            $('#promedioT').val(formatNumber(response.docente.promedioT));
-                            $('#telefonos').val(response.docente.telefonos);
-                            $('#Titulobas').val(response.docente.Titulobas);
+            url: 'check_legajo.php',
+            type: 'POST',
+            dataType: 'json',
+            data: { legajo: legajo },
+            success: function(response) {
+                if (response.status === 'exists') {
+                    $('#legajoStatus').html('<span style="color: red;">El legajo ya existe!!!</span>');
 
-                            var formattedDate = formatDate(response.docente.fechatit);
-                            $('#fechatit').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
-                            $('#otorgadopor').val(response.docente.otorgadopor);
- 
-                            var formattedDate = formatDate(response.docente.finicio);
-                            $('#finicio').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
-                            $('#otrostit').val(response.docente.otrostit);
+                    // Mostrar y completar los datos del docente si el legajo ya existe
+                    $('#docenteInfo').show();
+                    
+                    // Actualiza todos los campos con la información del docente
+                    $('#apellidoynombre').val(response.docente.ApellidoyNombre);
+                    $('#dni').val(response.docente.dni);
+                    $('#Domicilio').val(response.docente.Domicilio);
+                    $('#lugarinsc').val(response.docente.lugarinsc);
 
-                            var formattedDate = formatDate(response.docente.fingreso);
-                            $('#fingreso').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
-                            $('#cargosdocentes').val(response.docente.cargosdocentes);
+                    var formattedDate = formatDate(response.docente.fechanacim);
+                    $('#fechanacim').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
+                    $('#promedioT').val(formatNumber(response.docente.promedioT));
+                    $('#telefonos').val(response.docente.telefonos);
+                    $('#Titulobas').val(response.docente.Titulobas);
 
-                            var formattedDate = formatDate(response.docente.faperturaleg);
-                            $('#faperturaleg').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
-                            $('#Nacionalidad').val(response.docente.Nacionalidad);
-                            $('#obsdoc').val(response.docente.obsdoc);
+                    formattedDate = formatDate(response.docente.fechatit);
+                    $('#fechatit').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
+                    $('#otorgadopor').val(response.docente.otorgadopor);
 
-                            // Deshabilita los campos para que no se puedan editar
-                            disableFormFields();
-                        } else if (response.status === 'available') {
-                            $('#legajoStatus').html('<span style="color: green;">El legajo está disponible.</span>');
-                            $('#docenteInfo').hide();
-                            
-                            // Limpia y habilita los campos si el legajo está disponible
-                            clearFormFields();
-                            enableFormFields();
-                        } else {
-                            $('#legajoStatus').html('<span style="color: red;">Error al verificar el legajo.</span>');
-                        }
-                    },
-                    error: function() {
-                        $('#legajoStatus').html('<span style="color: red;">Error en la solicitud.</span>');
-                    }
-                });
-            });
+                    formattedDate = formatDate(response.docente.finicio);
+                    $('#finicio').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
+                    $('#otrostit').val(response.docente.otrostit);
 
-            // Validación del formulario antes de enviarlo
-            $('#registroForm').submit(function(event) {
-                if (!validateForm()) {
-                    event.preventDefault();
+                    formattedDate = formatDate(response.docente.fingreso);
+                    $('#fingreso').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
+                    $('#cargosdocentes').val(response.docente.cargosdocentes);
+
+                    formattedDate = formatDate(response.docente.faperturaleg);
+                    $('#faperturaleg').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
+                    $('#Nacionalidad').val(response.docente.Nacionalidad);
+                    $('#obsdoc').val(response.docente.obsdoc);
+
+                    // Deshabilita los campos para que no se puedan editar
+                    disableFormFields();
+
+                    // Deshabilita el botón de guardar
+                    disableSaveButton();
+                    showMessage('El legajo ya existe. El botón de guardar está deshabilitado.');
+                } else if (response.status === 'available') {
+                    $('#legajoStatus').html('<span style="color: green;">El legajo está disponible!!!.</span>');
+                    $('#docenteInfo').hide();
+                    
+                    // Limpia y habilita los campos si el legajo está disponible
+                    clearFormFields();
+                    enableFormFields();
+
+                    // Habilita el botón de guardar
+                    enableSaveButton();
+                    hideMessage();
+                } else {
+                    $('#legajoStatus').html('<span style="color: red;">Error al verificar el legajo.</span>');
                 }
-            });
-
-            // Función para validar el formulario
-            function validateForm() {
-                var legajoStatus = $('#legajoStatus').text();
-
-                if (legajoStatus.includes('El legajo ya existe')) {
-                    alert('El legajo ingresado ya existe. Por favor, elija otro.');
-                    return false;
-                }
-                return true;
+            },
+            error: function() {
+                $('#legajoStatus').html('<span style="color: red;">Error en la solicitud.</span>');
             }
         });
+    });
+
+    // Función para deshabilitar el botón de guardar
+    function disableSaveButton() {
+        $('button[name="insertar"]').prop('disabled', true);
+    }
+
+    // Función para habilitar el botón de guardar
+    function enableSaveButton() {
+        $('button[name="insertar"]').prop('disabled', false);
+    }
+
+    // Función para mostrar el mensaje
+    function showMessage(message) {
+        $('#messageText').text(message);
+        $('#messageContainer').show();
+    }
+
+    // Función para ocultar el mensaje
+    function hideMessage() {
+        $('#messageContainer').hide();
+    }
+
+    // Validación del formulario antes de enviarlo
+    $('#registroForm').submit(function(event) {
+        if (!validateForm()) {
+            event.preventDefault();
+        }
+    });
+
+    // Función para validar el formulario
+    function validateForm() {
+        var legajoStatus = $('#legajoStatus').text();
+
+        if (legajoStatus.includes('El legajo ya existe')) {
+            alert('El legajo ingresado ya existe. Por favor, elija otro.');
+            return false;
+        }
+        return true;
+    }
+});
     </script>
 
 

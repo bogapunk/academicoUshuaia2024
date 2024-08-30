@@ -145,6 +145,10 @@ loader {
   100% { transform: rotate(360deg); }
 }
 
+        .left-aligned-list {
+            text-align: left;
+        }
+    
 
 </style>
 <!--<link rel="icon" type="image/png" href="./imagenes/escudo-32x32.png">-->
@@ -197,7 +201,14 @@ loader {
                   <div class="card-body d-flex justify-content-between align-items-left">
                     <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 Cerrar Session
-                  </a>
+                   </a>
+                   <ul>
+                      <li><a href="cambiar_password.php"><font size="4">Cambiar Clave</font></a></li>
+                      <li><a type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                      <span style="font-size: 1.25em; aling:left">Cerrar Sesión</span>
+                         </a></li>
+
+                    </ul>
               </li>
             </ul>
 
