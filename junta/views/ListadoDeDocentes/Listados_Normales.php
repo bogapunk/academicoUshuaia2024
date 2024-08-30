@@ -85,8 +85,7 @@ try {
             $query .= " ORDER BY j_mov.puntajetotal DESC, j_mov.serviciosprovincia DESC, j_mov.promedio DESC, j_mov.antiguedadgestion DESC, j_mov.antiguedadtitulo DESC, j_doc.fechatit DESC";
           
         }
-        var_dump($query);
-        exit;
+        
         // Preparar la consulta
         $stmt = $conn->prepare($query);
         
