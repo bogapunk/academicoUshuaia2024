@@ -80,7 +80,7 @@ try {
         INNER JOIN 
         [Junta].[dbo].[_junta_modalidades] J_mod ON j_mod.codmod = j_mov.codmod
         WHERE
-            j_mov.excluido <> '23'  and tipo = '$tipo' and anodoc ='$anio' and codloc='$localidad' ";
+            j_mov.excluido <> '23'  and tipo = '$tipo' and anodoc = $anio and codloc='$localidad' ";
 
          if ($tipo == 'titulares') {
             $query .= " AND establecimiento = $establecimiento  ORDER BY j_doc.apellidoynombre, j_mov.puntajetotal desc, j_mov.serviciosprovincia desc, j_mov.promedio desc, j.mov.antiguedadgestion desc, j_mov.antiguedadtitulo desc, j_doc.fechatit desc";

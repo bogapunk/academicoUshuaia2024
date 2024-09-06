@@ -77,9 +77,9 @@ try {
           INNER JOIN [Junta].[dbo].[_junta_movimientos] j_mov2 
               ON j_mov.legdoc = j_mov2.legvinc
           WHERE
-              j_mov.codmod='$codmod' 
+              j_mov.codmod= $codmod 
               AND j_mov.tipo = '$tipo' 
-              AND j_mov.anodoc = '$anio' 
+              AND j_mov.anodoc = $anio
               AND j_mov.codloc = '$localidad'";
 
                     if ($tipo == 'titulares') {

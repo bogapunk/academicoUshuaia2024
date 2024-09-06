@@ -5,6 +5,7 @@ class Docente
 	private $legajo;
 	private $apellidoynombre;
 	private $Nacionalidad;
+	private $email;
 	private $fechanacim;
 	private $dni;
 	private $domicilio;

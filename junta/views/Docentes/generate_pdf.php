@@ -30,6 +30,7 @@ $fingreso = date('d-m-Y', strtotime($_GET['fingreso']));
 $cargosdocentes = $_GET['cargosdocentes'];
 $faperturaleg = date('d-m-Y', strtotime($_GET['faperturaleg']));
 $Nacionalidad = $_GET['Nacionalidad'];
+$email = $_GET['email'];
 $obsdoc = $_GET['obsdoc'];
 
 // Crear una nueva instancia de TCPDF
@@ -126,6 +127,10 @@ $html = <<<EOD
     <tr>
         <th style="text-align:left;">Nacionalidad</th>
         <td>{$Nacionalidad}</td>
+    </tr>
+    <tr>
+        <th style="text-align:left;">Email</th>
+        <td>{$email}</td>
     </tr>
     <tr>
         <th style="text-align:left;">Observaciones</th>

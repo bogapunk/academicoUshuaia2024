@@ -50,6 +50,7 @@ if(isset($_REQUEST['action']))
       $doc->__SET('faperturaleg', $faperturaleg);
       
       $doc->__SET('Nacionalidad', $_REQUEST['Nacionalidad']);
+      $doc->__SET('email', $_REQUEST['email']);
       $doc->__SET('obsdoc', $_REQUEST['obsdoc']);
       
       $model->ActualizarDocente($doc);
@@ -89,6 +90,7 @@ if(isset($_REQUEST['action']))
       $doc->__SET('faperturaleg', $faperturaleg);
       
       $doc->__SET('Nacionalidad', $_REQUEST['Nacionalidad']);
+      $doc->__SET('email', $_REQUEST['email']);
       $doc->__SET('obsdoc', $_REQUEST['obsdoc']);
       
       $model->RegistrarDocente($doc);
@@ -470,6 +472,10 @@ try {
                             <th style="text-align:left;">Nacionalidad</th>
                             <td><input type="text" name="Nacionalidad" value="<?php echo $doc->__GET('Nacionalidad'); ?>" class="form-control" /></td>
                         </tr>
+                        <tr>
+                            <th style="text-align:left;">Email</th>
+                            <td><input type="email" name="email" value="<?php echo $doc->__GET('email'); ?>" class="form-control" /></td>
+                        </tr>
 
 
                          <tr>
@@ -522,10 +528,11 @@ try {
     <input type="hidden" name="cargosdocentes" value="<?php echo $doc->__GET('cargosdocentes'); ?>" />
     <input type="hidden" name="faperturaleg" value="<?php echo !empty($doc->__GET('faperturaleg')) ? date('Y-m-d', strtotime($doc->__GET('faperturaleg'))) : ''; ?>" />
     <input type="hidden" name="Nacionalidad" value="<?php echo $doc->__GET('Nacionalidad'); ?>" />
+    <input type="hidden" name="email" value="<?php echo $doc->__GET('email'); ?>" />
     <input type="hidden" name="obsdoc" value="<?php echo $doc->__GET('obsdoc'); ?>" />
 
     <!-- Resto del formulario aquí -->
-    <a href="generate_pdf.php?legajo=<?php echo urlencode($doc->__GET('legajo')); ?>&apellidoynombre=<?php echo urlencode($doc->__GET('apellidoynombre')); ?>&dni=<?php echo urlencode($doc->__GET('dni')); ?>&domicilio=<?php echo urlencode($doc->__GET('domicilio')); ?>&lugarinsc=<?php echo urlencode($doc->__GET('lugarinsc')); ?>&fechanacim=<?php echo urlencode($doc->__GET('fechanacim')); ?>&promedioT=<?php echo urlencode($doc->__GET('promedioT')); ?>&telefonos=<?php echo urlencode($doc->__GET('telefonos')); ?>&Titulobas=<?php echo urlencode($doc->__GET('Titulobas')); ?>&fechatit=<?php echo urlencode($doc->__GET('fechatit')); ?>&otorgadopor=<?php echo urlencode($doc->__GET('otorgadopor')); ?>&finicio=<?php echo urlencode($doc->__GET('finicio')); ?>&otrostit=<?php echo urlencode($doc->__GET('otrostit')); ?>&fingreso=<?php echo urlencode($doc->__GET('fingreso')); ?>&cargosdocentes=<?php echo urlencode($doc->__GET('cargosdocentes')); ?>&faperturaleg=<?php echo urlencode($doc->__GET('faperturaleg')); ?>&Nacionalidad=<?php echo urlencode($doc->__GET('Nacionalidad')); ?>&obsdoc=<?php echo urlencode($doc->__GET('obsdoc')); ?>" class="btn btn-info">
+    <a href="generate_pdf.php?legajo=<?php echo urlencode($doc->__GET('legajo')); ?>&apellidoynombre=<?php echo urlencode($doc->__GET('apellidoynombre')); ?>&dni=<?php echo urlencode($doc->__GET('dni')); ?>&domicilio=<?php echo urlencode($doc->__GET('domicilio')); ?>&lugarinsc=<?php echo urlencode($doc->__GET('lugarinsc')); ?>&fechanacim=<?php echo urlencode($doc->__GET('fechanacim')); ?>&promedioT=<?php echo urlencode($doc->__GET('promedioT')); ?>&telefonos=<?php echo urlencode($doc->__GET('telefonos')); ?>&Titulobas=<?php echo urlencode($doc->__GET('Titulobas')); ?>&fechatit=<?php echo urlencode($doc->__GET('fechatit')); ?>&otorgadopor=<?php echo urlencode($doc->__GET('otorgadopor')); ?>&finicio=<?php echo urlencode($doc->__GET('finicio')); ?>&otrostit=<?php echo urlencode($doc->__GET('otrostit')); ?>&fingreso=<?php echo urlencode($doc->__GET('fingreso')); ?>&cargosdocentes=<?php echo urlencode($doc->__GET('cargosdocentes')); ?>&faperturaleg=<?php echo urlencode($doc->__GET('faperturaleg')); ?>&Nacionalidad=<?php echo urlencode($doc->__GET('Nacionalidad')); ?>&email=<?php echo urlencode($doc->__GET('email')); ?>&obsdoc=<?php echo urlencode($doc->__GET('obsdoc')); ?>" class="btn btn-info">
     <i class="glyphicon glyphicon-save"> Descargar Docente</i> 
 </a>
 </form>
@@ -731,7 +738,7 @@ if ($legajo != '' || $dni != '' || $ApellidoyNombre != '') {
   $("#vaciar").on("click", function(event) {
     event.preventDefault();
     $("#formulario_transaccion")
-      .find("input[type=text], input[type=number], input[type=date],textarea")
+      .find("input[type=text], input[type=number],input[type=email], input[type=date],textarea")
       .val("");
   });
 </script>

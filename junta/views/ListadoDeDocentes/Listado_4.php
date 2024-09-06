@@ -60,9 +60,9 @@ try {
                   FROM [Junta].[dbo].[_junta_movimientos] j_mov
                   INNER JOIN [Junta].[dbo].[_junta_docentes] j_doc ON j_mov.legdoc = j_doc.legajo
                   WHERE j_mov.excluido = '23' 
-                  AND codmod = '$codmod' 
+                  AND codmod = $codmod 
                   AND tipo = '$tipo' 
-                  AND anodoc = '$anio' 
+                  AND anodoc = $anio 
                   AND codloc = '$localidad' 
                   ORDER BY codmod, puntajetotal DESC";
 
@@ -132,7 +132,7 @@ try {
         $pdf->Cell(80, 5, 'NOMBRE', 1, 0, 'C');
         $pdf->Cell(20, 5, 'DNI', 1, 0, 'C');
         $pdf->Cell(20, 5, 'TOTAL', 1, 0, 'C');
-        $pdf->Cell(20, 5, 'NOTIFICACION', 1, 0, 'C');
+        $pdf->Cell(27, 5, 'NOTIFICACION', 1, 0, 'C');
 
         $pdf->SetFont('Arial', '', 10);
 
@@ -144,7 +144,7 @@ try {
             $pdf->Cell(80, 5, $row['ApellidoyNombre'], 1, 0, 'L');
             $pdf->Cell(20, 5, $row['dni'], 1, 0, 'C');
             $pdf->Cell(20, 5, $row['titulo'], 1, 0, 'C');
-            $pdf->Cell(20, 5, $row['puntajetotal'], 1, 0, 'C');
+            $pdf->Cell(27, 5, $row['puntajetotal'], 1, 0, 'C');
             $pdf->Ln();
             $nroOrden++; // Incrementar el contador
         }

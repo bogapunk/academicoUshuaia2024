@@ -496,7 +496,7 @@ class DocentesModel
     {
         try
         {
-            $stm = $this->pdo->prepare("SELECT id2,legajo, ApellidoyNombre AS apellidoynombre,Domicilio as domicilio,CAST(dni as INT) as dni,lugarinsc,fechanacim,promedioT,telefonos,Titulobas,fechatit,otorgadopor,finicio,otrostit,fingreso,cargosdocentes,faperturaleg,Nacionalidad,obsdoc FROM _junta_docentes WHERE id2 = ?");
+            $stm = $this->pdo->prepare("SELECT id2,legajo, ApellidoyNombre AS apellidoynombre,Domicilio as domicilio,CAST(dni as INT) as dni,lugarinsc,fechanacim,promedioT,telefonos,Titulobas,fechatit,otorgadopor,finicio,otrostit,fingreso,cargosdocentes,faperturaleg,Nacionalidad,email,obsdoc FROM _junta_docentes WHERE id2 = ?");
             $stm->execute(array($id2));
             $r = $stm->fetch(PDO::FETCH_OBJ);
 
@@ -520,6 +520,7 @@ class DocentesModel
             $mod->__SET('cargosdocentes', $r->cargosdocentes);
             $mod->__SET('faperturaleg', $r->faperturaleg);
             $mod->__SET('Nacionalidad', $r->Nacionalidad);
+            $mod->__SET('email', $r->email);
             $mod->__SET('obsdoc', $r->obsdoc);
 
             return $mod;
@@ -558,6 +559,7 @@ class DocentesModel
             $mod->__SET('cargosdocentes', $r->cargosdocentes);
             $mod->__SET('faperturaleg', $r->faperturaleg);
             $mod->__SET('Nacionalidad', $r->Nacionalidad);
+            $mod->__SET('email', $r->email);
             $mod->__SET('obsdoc', $r->obsdoc);
 
             return $mod;
@@ -624,6 +626,7 @@ class DocentesModel
                         cargosdocentes = ?, 
                         faperturaleg = ?, 
                         Nacionalidad = ?, 
+                        email = ?,
                         obsdoc = ? 
                     WHERE id2 = ?";
     
@@ -648,6 +651,7 @@ class DocentesModel
                 $data->__GET('cargosdocentes'),
                 $faperturaleg_sql,
                 $data->__GET('Nacionalidad'),
+                $data->__GET('email'),
                 $data->__GET('obsdoc'),
                 $data->__GET('id2')
             ]);
@@ -687,8 +691,8 @@ class DocentesModel
             $sql = "INSERT INTO _junta_docentes (
                         legajo, apellidoynombre, dni, domicilio, lugarinsc, fechanacim, 
                         promedioT, telefonos, Titulobas, fechatit, otorgadopor, finicio, 
-                        otrostit, fingreso, cargosdocentes, faperturaleg, Nacionalidad, obsdoc
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        otrostit, fingreso, cargosdocentes, faperturaleg, Nacionalidad,email, obsdoc
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
             // Preparar y ejecutar la consulta
             $stmt = $this->pdo->prepare($sql);
@@ -711,6 +715,7 @@ class DocentesModel
                 $data->__GET('cargosdocentes'),
                 $faperturaleg_sql,
                 $data->__GET('Nacionalidad'),
+                $data->__GET('email'),
                 $data->__GET('obsdoc')
             ]);
     

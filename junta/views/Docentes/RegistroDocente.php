@@ -497,21 +497,21 @@ materialize-date{
                         $docenteData = $docente->getRowsDocente($conditions); ?>
  <div class="row">
        <div class="row" class="col-12" >
-                  <div class="col col-sm-6">
+                  <div class="col col-sm-4">
                   <label for="legajo">Legajo:</label>
                     <input type="text" name="legajo" id="legajo" placeholder="Legajo" required="" class="materialize-input1"  style="width: 50%;">
-                    <button type="button" id="checkLegajo" class="btn btn-info">Verificar Legajo</button>
-                    <span id="legajoStatus"></span>
+                  
            
                   </div>
 
-                  <div class="col col-sm-6">
+                  <div class="col col-sm-8">
                     <input type="text" name="apellidoynombre" id="apellidoynombre" placeholder="Apellido y Nombre" required="" class="materialize-input1">
                  
                   </div>
             </div>
 </div>      
-
+<button type="button" id="checkLegajo" class="btn btn-info">Verificar Legajo</button>
+<span id="legajoStatus" style="margin-left: 10px; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span>
 
 <div class="row">
        <div class="row"  class="col-12">
@@ -555,7 +555,7 @@ materialize-date{
         <input type="date" id="fechanacim" name="fechanacim" placeholder="Fecha de nacimiento" required class="materialize-date">
     </div>
     
-    <div class="col col-sm-4">
+    <div class="col col-sm-5">
             
                 <label for="promedioT"><strong>Promedio:</strong></label>
                 <input type="number" id="promedioT" name="promedioT" placeholder="Promedio" required class="materialize-input1"  style="width: 50%;" step="0.01">
@@ -565,52 +565,30 @@ materialize-date{
  </div>
  <div class="row">
      <div class="row" class="col-12" >
-               <div class="col col-sm-6">
+               <div class="col col-sm-3">
                  <input type="text" name="telefonos" id="telefonos" placeholder="Telefonos" required="" class="materialize-input1">
               </div>
-              <div class="col col-sm-6">
-                 <input type="text" name="Titulobas" id="Titulobas" placeholder="Titulo Basico" required="" class="materialize-input-titulobasico">
+              <div class="col col-sm-9">
+              <input type="text" name="Titulobas" id="Titulobas" placeholder="Titulo Basico" required="" class="materialize-input-titulobasico" maxlength="200">
              </div>
      </div>
  </div>
-
 <div class="row">
      <div class="row" class="col-12" >
-               <div class="col col-sm-7">
-                <br>
-
-             <label><strong>Fecha Titular:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong></label></strong>
-                 <input type="date" name="fechatit" id="fechatit" placeholder="Fecha de Titular" required="" class="materialize-date">
-             </div>
-           <div class="col col-sm-5">
+               <div class="col col-sm-6">
                  <input type="text" name="otorgadopor" id="otorgadopor" placeholder="Otorgado por" required="" class="materialize-input1">
-          </div>
-      </div>
-</div>
-<div class="row">
-     <div class="row" class="col-12" >
-               <div class="col col-sm-7">
-                <br>
-            
-             <label><strong>Fecha Inicio Docencia: <strong></label></strong>
-
-                 <input type="date" name="finicio" id="finicio" placeholder="Fec Ini. Docencia" required="" class="materialize-date">
-              </div>
-
-              <div class="col col-sm-5">
+               </div>
+          <div class="col col-sm-6">
                 <input type="text" name="otrostit"  id="otrostit" placeholder="Otros Titulos" required="" class="materialize-input1">
               </div>
-        </div>
+      </div>
 </div>
-
+<br>
 <div class="row">
      <div class="row" class="col-12" >
                <div class="col col-sm-7">
-                  <br>
-
-            
-                 <label><strong>Residencia:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong></label></strong>
-
+               <br>
+                 <label><strong>Residencia:&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong></label></strong>
                  <input type="date" name="fingreso" id="fingreso" placeholder="Residencia" required="" class="materialize-date">
                </div>
                <div class="col col-sm-5">
@@ -621,12 +599,9 @@ materialize-date{
 <div class="row">
      <div class="row" class="col-12" >
                <div class="col col-sm-7">
- 
                  <br>
                   <label><strong>Fecha apertura Legajo:<strong></label></strong>
-
                  <input type="date" name="faperturaleg" id="faperturaleg" placeholder="Fec. apertura Leg." required="" class="materialize-date">
-
              </div>
              <div class="col col-sm-5">
                  <input type="text" name="Nacionalidad" id="Nacionalidad" placeholder="Nacionalidad" required="" class="materialize-input1">
@@ -634,12 +609,18 @@ materialize-date{
       </div>
 </div>
 
- <div class="row" >
-               <div class="col col-sm-19">
-                 <input type="text" name="obsdoc" id="obsdoc" placeholder="Observaciones" required="" class="materialize-input1">
-            </div>
-        </div>
-     </div>
+
+<div class="row">
+     <div class="row" class="col-12" >
+               <div class="col col-sm-6">
+                 <input type="email" name="email" id="email" placeholder="Ingrese email"  class="materialize-input1">
+               </div>
+          <div class="col col-sm-6">
+                <input type="text" name="obsdoc"  id="obsdoc" placeholder="Observaciones" required="" class="materialize-input1">
+              </div>
+      </div>
+</div>
+ 
         
                 <div class="send-button">
                     <button name="insertar" type="submit"  onclick="return myConfirm();">Guardar</button>
@@ -682,14 +663,13 @@ materialize-date{
                 $('#promedioT').val('');
                 $('#telefonos').val('');
                 $('#Titulobas').val('');
-                $('#fechatit').val('');
                 $('#otorgadopor').val('');
-                $('#finicio').val('');
                 $('#otrostit').val('');
                 $('#fingreso').val('');
                 $('#cargosdocentes').val('');
                 $('#faperturaleg').val('');
                 $('#Nacionalidad').val('');
+                $('#email').val('');
                 $('#obsdoc').val('');
             }
 
@@ -703,15 +683,15 @@ materialize-date{
                 $('#promedioT').prop('disabled', true);
                 $('#telefonos').prop('disabled', true);
                 $('#Titulobas').prop('disabled', true);
-                $('#fechatit').prop('disabled', true);
                 $('#otorgadopor').prop('disabled', true);
-                $('#finicio').prop('disabled', true);
                 $('#otrostit').prop('disabled', true);
                 $('#fingreso').prop('disabled', true);
                 $('#cargosdocentes').prop('disabled', true);
                 $('#faperturaleg').prop('disabled', true);
                 $('#Nacionalidad').prop('disabled', true);
+                $('#email').prop('disabled', true);
                 $('#obsdoc').prop('disabled', true);
+
             }
 
             // Función para habilitar los campos del formulario
@@ -724,14 +704,13 @@ materialize-date{
                 $('#promedioT').prop('disabled', false);
                 $('#telefonos').prop('disabled', false);
                 $('#Titulobas').prop('disabled', false);
-                $('#fechatit').prop('disabled', false);
                 $('#otorgadopor').prop('disabled', false);
-                $('#finicio').prop('disabled', false);
                 $('#otrostit').prop('disabled', false);
                 $('#fingreso').prop('disabled', false);
                 $('#cargosdocentes').prop('disabled', false);
                 $('#faperturaleg').prop('disabled', false);
                 $('#Nacionalidad').prop('disabled', false);
+                $('#email').prop('disabled', false);
                 $('#obsdoc').prop('disabled', false);
             }
 
@@ -752,7 +731,7 @@ materialize-date{
             data: { legajo: legajo },
             success: function(response) {
                 if (response.status === 'exists') {
-                    $('#legajoStatus').html('<span style="color: red;">El legajo ya existe!!!</span>');
+                    $('#legajoStatus').html('<span style="color: red;">El legajo ya existe,El botón de guardar esta deshabilitado!</span>');
 
                     // Mostrar y completar los datos del docente si el legajo ya existe
                     $('#docenteInfo').show();
@@ -770,11 +749,9 @@ materialize-date{
                     $('#Titulobas').val(response.docente.Titulobas);
 
                     formattedDate = formatDate(response.docente.fechatit);
-                    $('#fechatit').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
                     $('#otorgadopor').val(response.docente.otorgadopor);
 
                     formattedDate = formatDate(response.docente.finicio);
-                    $('#finicio').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
                     $('#otrostit').val(response.docente.otrostit);
 
                     formattedDate = formatDate(response.docente.fingreso);
@@ -784,6 +761,7 @@ materialize-date{
                     formattedDate = formatDate(response.docente.faperturaleg);
                     $('#faperturaleg').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
                     $('#Nacionalidad').val(response.docente.Nacionalidad);
+                    $('#email').val(response.docente.email);
                     $('#obsdoc').val(response.docente.obsdoc);
 
                     // Deshabilita los campos para que no se puedan editar

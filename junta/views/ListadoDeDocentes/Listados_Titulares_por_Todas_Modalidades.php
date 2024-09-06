@@ -88,7 +88,7 @@ if($conn){
         INNER JOIN
             [Junta].[dbo].[_junta_docentes] j_doc ON j_mov.legdoc = j_doc.legajo
         WHERE
-            j_mov.excluido = '23' AND anodoc ='$anio'AND  establecimiento = $establecimiento ORDER BY j_mov.codmod, j_mov.puntajetotal DESC, totalodn1 DESC, j_mov.concepto DESC, j_mov.serviciosprovincia DESC, j_mov.promedio DESC, j_mov.antiguedadgestion DESC, j_mov.antiguedadtitulo DESC, j_doc.fechatit DESC";
+            j_mov.excluido = '23' AND anodoc = $anio AND  establecimiento = $establecimiento ORDER BY j_mov.codmod, j_mov.puntajetotal DESC, totalodn1 DESC, j_mov.concepto DESC, j_mov.serviciosprovincia DESC, j_mov.promedio DESC, j_mov.antiguedadgestion DESC, j_mov.antiguedadtitulo DESC, j_doc.fechatit DESC";
      
      
         // Preparar la consulta

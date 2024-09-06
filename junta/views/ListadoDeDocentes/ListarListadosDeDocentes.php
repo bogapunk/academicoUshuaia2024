@@ -3,6 +3,8 @@
 
 require_once '../Modalidades/modalidades.entidad.php';
 require_once '../Modalidades/modalidades.model.php';
+
+
 include('header2.php');
 
 
@@ -505,17 +507,17 @@ span {
  		<label for="localidad">Localidad:</label>
 				<select id="localidad" name="localidad1" class="materialize-select33">
 				  <option value="">Seleccione</option>
-				  <option value="Ushuaia">Ushuaia</option>
-				  <option value="Rio Grande">Río Grande</option>
-				  <option value="Tolhuin">Tolhuin</option>
-				  <option value="Antartida">Antártida</option>
+				  <option value="USH">Ushuaia</option>
+				  <option value="RGD">Río Grande</option>
+				  <option value="TOL">Tolhuin</option>
+				  <option value="ANT">Antártida</option>
 				</select>
  
  	</td>
     
 
     <td align="left"><b>Año:</b>
-    <input type="text" size="10" name="name" id='year'  class="materialize-input1" align="left" >
+    <input type="num" size="10" name="name" id='year'  class="materialize-input1" align="left" >
      <b>Nota Nº:</b>
     <input type="text" size="20" name="name2" id='nota' class="materialize-input2" align="left">
      <input type="checkbox" id="chkexclu" class="form-check-input" align="left">

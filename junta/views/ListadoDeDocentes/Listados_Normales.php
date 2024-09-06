@@ -75,7 +75,7 @@ try {
         INNER JOIN
             [Junta].[dbo].[_junta_docentes] j_doc ON j_mov.legdoc = j_doc.legajo
         WHERE
-            j_mov.excluido = '23' and codmod= '$codmod' and tipo = '$tipo' and anodoc ='$anio' and codloc='$localidad' ";
+            j_mov.excluido = '23' and codmod= $codmod and tipo = '$tipo' and anodoc = $anio and codloc='$localidad' ";
        
          if ($tipo == 'titulares') {
             $query .= " AND establecimiento = $establecimiento order by j_mov.puntajetotal desc, totalodn1 desc, j_mov.concepto desc, j_mov.serviciosprovincia desc, j_mov.promedio desc, j_mov.antiguedadgestion desc, j_mov.antiguedadtitulo desc, J_doc.fechatit desc";
@@ -240,28 +240,56 @@ try {
         $pdf = new PDF('L', 'mm', 'Legal');;
         $pdf->AddPage();
         $pdf->SetFont('Arial', '', 10); 
-
+         
+        function formatearNumero($numero) {
+            // Convertir a número flotante
+            $numeroFloat = floatval($numero);
+            
+            // Verificar si el número tiene parte decimal
+            if (floor($numeroFloat) == $numeroFloat) {
+                // Es un entero
+                return intval($numeroFloat); // Devuelve como entero
+            } else {
+                // Es un decimal
+                return number_format($numeroFloat, 2); // Devuelve como decimal con dos decimales
+            }
+        }
 
 
         // Recorrer los resultados y generar el PDF
         foreach ($results as $row) {
-            $pdf->Cell(10, 5, $nroOrden, 1, 0, 'C'); // Mostrar el índice incremental
-            $pdf->Cell(30, 5, $row['legdoc'], 1, 0, 'C');
-            $pdf->Cell(80, 5, $row['ApellidoyNombre'], 1, 0, 'L');
-            $pdf->Cell(20, 5, $row['dni'], 1, 0, 'C');
-            $pdf->Cell(20, 5, $row['titulo'], 1, 0, 'C');
-            $pdf->Cell(20, 5, $row['promedio'], 1, 0, 'C');
-            $pdf->Cell(20, 5, $row['antiguedadgestion'], 1, 0, 'C');
-            $pdf->Cell(20, 5, $row['antiguedadtitulo'], 1, 0, 'C');
-            $pdf->Cell(20, 5, $row['serviciosprovincia'], 1, 0, 'C');
-            $pdf->Cell(20, 5, $row['otrosservicios'], 1, 0, 'C');
-            $pdf->Cell(20, 5, $row['residencia'], 1, 0, 'C');
-            $pdf->Cell(20, 5, $row['publicaciones'], 1, 0, 'C');
-            $pdf->Cell(23, 5, $row['otrosantecedentes'], 1, 0, 'C');
-            $pdf->Cell(20, 5, $row['puntajetotal'], 1, 0, 'C');
-            $nroOrden++; // Incrementar el contador
-            $contador++;
-            $pdf->Ln();
+              // Usar la función formatearNumero() para cada campo numérico
+                            $tituloFormateado = formatearNumero($row['titulo']);
+                            $otroServicioFormateado = formatearNumero($row['otrosservicios']);
+                            $residenciaFormateada = formatearNumero($row['residencia']);
+                            $puntajeTotalFormateado = formatearNumero($row['puntajetotal']);
+                            
+                            // Aplicar la función formatearNumero() a los campos adicionales
+                            $promedioFormateado = formatearNumero($row['promedio']);
+                            $antiguedadGestionFormateada = formatearNumero($row['antiguedadgestion']);
+                            $antiguedadTituloFormateada = formatearNumero($row['antiguedadtitulo']);
+                            $serviciosProvinciaFormateado = formatearNumero($row['serviciosprovincia']);
+                            $publicacionesFormateadas = formatearNumero($row['publicaciones']);
+                            $otrosAntecedentesFormateados = formatearNumero($row['otrosantecedentes']);
+
+                            // Generar las celdas del PDF con los valores formateados
+                            $pdf->Cell(10, 5, $nroOrden, 1, 0, 'C'); // Mostrar el índice incremental
+                            $pdf->Cell(30, 5, $row['legdoc'], 1, 0, 'C');
+                            $pdf->Cell(80, 5, utf8_decode($row['ApellidoyNombre']), 1, 0, 'L');
+                            $pdf->Cell(20, 5, $row['dni'], 1, 0, 'C');
+                            $pdf->Cell(20, 5, $tituloFormateado, 1, 0, 'C'); // Usar el valor formateado
+                            $pdf->Cell(20, 5, $promedioFormateado, 1, 0, 'C'); // Usar el valor formateado
+                            $pdf->Cell(20, 5, $antiguedadGestionFormateada, 1, 0, 'C'); // Usar el valor formateado
+                            $pdf->Cell(20, 5, $antiguedadTituloFormateada, 1, 0, 'C'); // Usar el valor formateado
+                            $pdf->Cell(20, 5, $serviciosProvinciaFormateado, 1, 0, 'C'); // Usar el valor formateado
+                            $pdf->Cell(20, 5, $otroServicioFormateado, 1, 0, 'C'); // Usar el valor formateado
+                            $pdf->Cell(20, 5, $residenciaFormateada, 1, 0, 'C'); // Usar el valor formateado
+                            $pdf->Cell(20, 5, $publicacionesFormateadas, 1, 0, 'C'); // Usar el valor formateado
+                            $pdf->Cell(23, 5, $otrosAntecedentesFormateados, 1, 0, 'C'); // Usar el valor formateado
+                            $pdf->Cell(20, 5, $puntajeTotalFormateado, 1, 0, 'C'); // Usar el valor formateado
+                            $nroOrden++; // Incrementar el contador
+                            $contador++;
+                            $pdf->Ln();
 
                // Agregar la lógica para dibujar el asterisco si se cumplen las condiciones
                if ($puntaje_total == $row['puntajetotal'] &&

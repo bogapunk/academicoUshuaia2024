@@ -102,14 +102,15 @@ if(isset($_POST['insertar'])){
     $promedioT = $_POST['promedioT'];
     $telefonos = $_POST['telefonos'];
     $Titulobas = $_POST['Titulobas'];
-    $fechatit = $_POST['fechatit'];
+    //$fechatit = $_POST['fechatit'];
     $otorgadopor = $_POST['otorgadopor'];
-    $finicio = $_POST['finicio'];
+    //$finicio = $_POST['finicio'];
     $otrostit = $_POST['otrostit'];
     $fingreso = $_POST['fingreso'];
     $cargosdocentes = $_POST['cargosdocentes'];
     $faperturaleg = $_POST['faperturaleg'];
     $Nacionalidad = $_POST['Nacionalidad'];
+    $email = $_POST['email'];
     $obsdoc = $_POST['obsdoc'];
    
     // Función para formatear la fecha
@@ -119,8 +120,8 @@ if(isset($_POST['insertar'])){
     }
     // Convertir las fechas
     $fechanacim = formatDate($fechanacim);
-    $fechatit = formatDate($fechatit);
-    $finicio = formatDate($finicio);
+    //$fechatit = formatDate($fechatit);
+    //$finicio = formatDate($finicio);
     $fingreso = formatDate($fingreso);
     $faperturaleg = formatDate($faperturaleg);
 
@@ -139,9 +140,9 @@ if(isset($_POST['insertar'])){
 
         // Preparar la consulta SQL
         $sql = "INSERT INTO _junta_docentes 
-                (legajo, ApellidoyNombre, dni, Domicilio, lugarinsc, fechanacim, promedioT, telefonos, Titulobas, fechatit, otorgadopor, finicio, otrostit, fingreso, cargosdocentes, faperturaleg, Nacionalidad, obsdoc) 
+                (legajo, ApellidoyNombre, dni, Domicilio, lugarinsc, fechanacim, promedioT, telefonos, Titulobas, otorgadopor, otrostit, fingreso, cargosdocentes, faperturaleg, Nacionalidad,email, obsdoc) 
                 VALUES 
-                (:legajo, :apellidoynombre, :dni, :Domicilio, :lugarinsc, :fechanacim, :promedioT, :telefonos, :Titulobas, :fechatit, :otorgadopor, :finicio, :otrostit, :fingreso, :cargosdocentes, :faperturaleg, :Nacionalidad, :obsdoc)";
+                (:legajo, :apellidoynombre, :dni, :Domicilio, :lugarinsc, :fechanacim, :promedioT, :telefonos, :Titulobas,  :otorgadopor,  :otrostit, :fingreso, :cargosdocentes, :faperturaleg, :Nacionalidad, :email, :obsdoc)";
        
         $stmt = $connect->prepare($sql);
 
@@ -155,23 +156,25 @@ if(isset($_POST['insertar'])){
         $stmt->bindParam(':promedioT', $promedioT, PDO::PARAM_STR);
         $stmt->bindParam(':telefonos', $telefonos, PDO::PARAM_STR);
         $stmt->bindParam(':Titulobas', $Titulobas, PDO::PARAM_STR);
-        $stmt->bindParam(':fechatit', $fechatit, PDO::PARAM_STR);
+       // $stmt->bindParam(':fechatit', $fechatit, PDO::PARAM_STR);
         $stmt->bindParam(':otorgadopor', $otorgadopor, PDO::PARAM_STR);
-        $stmt->bindParam(':finicio', $finicio, PDO::PARAM_STR);
+        //$stmt->bindParam(':finicio', $finicio, PDO::PARAM_STR);
         $stmt->bindParam(':otrostit', $otrostit, PDO::PARAM_STR);
         $stmt->bindParam(':fingreso', $fingreso, PDO::PARAM_STR);
         $stmt->bindParam(':cargosdocentes', $cargosdocentes, PDO::PARAM_STR);
         $stmt->bindParam(':faperturaleg', $faperturaleg, PDO::PARAM_STR);
         $stmt->bindParam(':Nacionalidad', $Nacionalidad, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->bindParam(':obsdoc', $obsdoc, PDO::PARAM_STR);
 
         // Ejecutar la consulta
         $result = $stmt->execute(); // Aquí se ejecuta la consulta y se guarda el resultado en $result
-
+        
         if ($result) {
             // Obtener el último ID insertado
-            $lastInsertId = $connect->lastInsertId();
-            echo "<div class='content alert alert-primary'>Gracias. Tu Nombre es: $apellidoynombre. El legajo del docente creado es: $lastInsertId.</div> ";
+            //$lastInsertId = $connect->lastInsertId();
+           // $legajo = $connect->legajo();
+            echo "<div class='content alert alert-primary'>Gracias. Tu Nombre es: $apellidoynombre. El legajo del docente creado es: $legajo.</div> ";
             // Redirigir al usuario a RegistroDocente.php después de unos segundos
             $redirect_time = 3; // tiempo en segundos antes de redirigir
             $redirect_url = "RegistroDocente.php";

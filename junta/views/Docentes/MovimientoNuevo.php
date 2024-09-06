@@ -327,7 +327,7 @@ try {
             $codloc = isset($_POST['codloc']) ? $_POST['codloc'] : '';
 
             // Variables específicas para tipo de carga 'Interinatos y Suplencias', 'permanente' o 'Concurso de Titularidad'
-            if ($tipoc === 'Interinatos' || $tipoc === 'permanente' || $tipoc === 'Concurso de Titularidad') {
+            if ($tipoc === 'Interinatos' || $tipoc === 'permanente' || $tipoc === 'concurso') {
                 $titulo = isset($_POST['titulo2']) ? floatval($_POST['titulo2']) : 0;
                 $promedio = isset($_POST['promedio2']) ? floatval($_POST['promedio2']) : 0;
                 $antiguedadgestion = isset($_POST['antiguedadgestion2']) ? floatval($_POST['antiguedadgestion2']) : 0;

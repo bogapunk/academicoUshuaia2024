@@ -693,7 +693,7 @@ sqlsrv_close($conn);
                           <option value="permanente"><strong>Permanente</strong></option>
                           <option value="titulares"><strong>Titulares</strong></option>
                           <option value="Interinatos"><strong>Interinatos y Suplencias</strong></option>
-                          <option value="Concurso de Titularidad"><strong>Concurso de Titularidad</strong></option>
+                          <option value="concurso"><strong>Concurso de Titularidad</strong></option>
                       </select>
   
                  </td>
@@ -1175,12 +1175,12 @@ document.addEventListener('DOMContentLoaded', function() {
         var tipo = tipoSelect.value;
         
         // Mostrar/ocultar tablas según el tipo
-        tablaPermanenteConcursoInterino.style.display = (tipo === 'permanente' || tipo === 'Concurso de Titularidad' || tipo === 'Interinatos') ? 'table' : 'none';
+        tablaPermanenteConcursoInterino.style.display = (tipo === 'permanente' || tipo === 'concurso' || tipo === 'Interinatos') ? 'table' : 'none';
         tablaTitular.style.display = (tipo === 'titulares') ? 'table' : 'none';
         
         // Mostrar/ocultar campo de conceptos según el tipo
         if (conceptoField) {
-            conceptoField.style.display = (tipo === 'Interinatos') ? 'none' : 'block';
+            conceptoField.style.display = (tipo === 'Interinatos' || tipo === 'permanente' || tipo === 'concurso' ) ? 'none' : 'block';
         } else {
             console.error('Elemento con ID "conceptoField" no encontrado.');
         }
