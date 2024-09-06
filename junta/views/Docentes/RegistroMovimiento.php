@@ -651,7 +651,7 @@ if ($conn === false) {
 }
 
 // Consulta SQL para obtener todas las modalidades
-$queryModalidades = "SELECT codmod, nommod FROM _junta_modalidades WHERE codmod >= 100 ORDER BY codmod ASC;";
+$queryModalidades = "SELECT codmod, nommod FROM _junta_modalidades ORDER BY codmod ASC;";
 $stmt = sqlsrv_query($conn, $queryModalidades);
 
 $modalidades = array(); // Array para almacenar los datos de modalidades
