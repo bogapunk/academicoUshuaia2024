@@ -951,38 +951,38 @@ document.getElementById('motivosExclusion').addEventListener('change', function(
                         <input type="number" id="concepto2" name="concepto2" class="materialize-input3" size="10" step="0.01">
                         <br>
                     </div>
-                <label for="promedio" style="display: inline-block; width: 225px;">4.- Promedio:</label>
+                <label for="promedio" style="display: inline-block; width: 225px;">3.- Promedio:</label>
                 <input type="number" id="promedio2" name="promedio2" class="materialize-input3" size="10" step="0.01" >
                 <br>
 
-                <label for="ant_gestion" style="display: inline-block; width: 225px;">5.- Antigüedad Gestión:</label>
+                <label for="ant_gestion" style="display: inline-block; width: 225px;">4.- Antigüedad Gestión:</label>
                 <input type="number" id="antiguedadgestion2" name="antiguedadgestion2" class="materialize-input3" size="10" step="0.01" >
                 <br>
 
-                <label for="ant_titulo" style="display: inline-block; width: 225px;">6.- Antigüedad Título:</label>
+                <label for="ant_titulo" style="display: inline-block; width: 225px;">5.- Antigüedad Título:</label>
                 <input type="number" id="antiguedadtitulo2" name="antiguedadtitulo2" class="materialize-input3" size="10" step="0.01" >
                 <br>
 
-                <label for="servicios" style="display: inline-block; width: 225px;">7.- Servicios:</label>
+                <label for="servicios" style="display: inline-block; width: 225px;">6.- Servicios:</label>
                 <br>
 
-                <label for="serv_prov" style="display: inline-block; width: 225px;">7.1- En la Provincia:</label>
+                <label for="serv_prov" style="display: inline-block; width: 225px;">6.1- En la Provincia:</label>
                 <input type="number" id="serviciosprovincia2" name="serviciosprovincia2" class="materialize-input3" size="10" step="0.01" >
                 <br>
 
-                <label for="otrosservicios2" style="display: inline-block; width: 225px;">7.2- Otros Servicios:</label>
+                <label for="otrosservicios2" style="display: inline-block; width: 225px;">6.2- Otros Servicios:</label>
                 <input type="number" id="otrosservicios2" name="otrosservicios2" class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="residencia" style="display: inline-block; width: 225px;">8.- Residencia:</label>
+                <label for="residencia" style="display: inline-block; width: 225px;">7.- Residencia:</label>
                 <input type="number" id="residencia2" name="residencia2" class="materialize-input3" size="10" step="0.01" >
                 <br>
 
-                <label for="publicaciones" style="display: inline-block; width: 225px;">9.- Publicaciones:</label>
+                <label for="publicaciones" style="display: inline-block; width: 225px;">8.- Publicaciones:</label>
                 <input type="number" id="publicaciones2" name="publicaciones2" class="materialize-input3" size="10" step="0.01" >
                 <br>
 
-                <label for="otrosantecedentes2" style="display: inline-block; width: 225px;">10.- Otros Antecedentes:</label>
+                <label for="otrosantecedentes2" style="display: inline-block; width: 225px;">9.- Otros Antecedentes:</label>
                 <input type="number" id="otrosantecedentes2" name="otrosantecedentes2" class="materialize-input3" size="10" step="0.01" >
                 <br>
             </td>

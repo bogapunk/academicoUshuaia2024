@@ -34,7 +34,9 @@ class Cconexion {
 
 // Obtener los valores del formulario de manera segura
 $codmod = isset($_GET['codmod']) ? $_GET['codmod'] : '';
-$modalidad = isset($_GET['modalidad']) ? $_GET['modalidad'] : '';
+$modalidad = isset($_GET['modalidad']) ? utf8_decode($_GET['modalidad']) : '';
+
+
 
 
 $tipo = isset($_GET['tipoc']) ? $_GET['tipoc'] : '';
@@ -104,7 +106,7 @@ try {
         $pdf->SetFont('Arial', '', 28);
         $pdf->Cell(250, 15, $_GET['titulo'], 0, 0, "L");
         $pdf->SetFont('Arial', 'I', 8);
-        $pdf->Cell(90, 3, 'JUNTA DE CLASIFICACIÓN Y DISCIPLINA NIVEL', 0, 1, "C");
+        $pdf->Cell(90, 3, utf8_decode('JUNTA DE CLASIFICACIÓN Y DISCIPLINA NIVEL'), 0, 1, "C");
         $pdf->Cell(250, 3, '', 0, 0, "L");
         $pdf->Cell(90, 3, 'INICIAL, PRIMARIO, MODALIDAD Y GABINETE', 0, 1, "C");
         $pdf->Cell(250, 3, '', 0, 0, "L");
@@ -125,22 +127,22 @@ try {
         }
 
         $pdf->SetFont('Arial', 'I', 10);
-        $pdf->Cell(250, 3, 'Nota N: ' . $_GET['nota'], 0, 0, "R");
+        $pdf->Cell(250, 3, utf8_decode('Nota Nº: ') . utf8_decode($_GET['nota']), 0, 0, "R");
         $pdf->SetFont('Arial', 'I', 6);
         $pdf->Cell(90, 3, 'Tel. (02901)441443-441447       Internos 1443 - 1447', 0, 1, "C");
         $pdf->Cell(250, 3, '', 0, 0, "L");
-        $pdf->Cell(90, 3, 'juntaegb1y2@gmail.com           e-mail:juntaegb1y2@gmail.com', 0, 1, "C");
+        $pdf->Cell(90, 3, 'Email:juntaegb1y2@gmail.com ,Email:juntaegb1y2@gmail.com', 0, 1, "C");
 
         // Agregar la línea que abarca todo el ancho de la página
         $x = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->Line($x, $y, $pdf->GetPageWidth() - $x, $y);
         $pdf->Ln(); // Salto de línea después de la línea horizontal
-
+        $pdf->Ln(); 
         $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(30, 5, 'Ano: ' . $_GET['year'], 0, 0, "L");
-        $pdf->Cell(45, 5, 'Localidad: ' . $_GET['localidad'], 0, 0, "L");
-        $pdf->Cell(20, 5, 'Modalidad: ' . $_GET['modalidad'], 0, 0, "L");
+        $pdf->Cell(30, 5, utf8_decode('Año: ') . $_GET['year'], 0, 0, "L");
+        $pdf->Cell(45, 5, utf8_decode('Localidad: ') . $_GET['localidad'], 0, 0, "L");
+        $pdf->Cell(20, 5, utf8_decode('Modalidad: ') . $modalidad, 0, 0, 'L');
         $pdf->Ln(); 
         $pdf->Ln(); 
         $pdf->SetFont('Arial', 'B', 10); // Cambiado a Arial
@@ -175,21 +177,22 @@ try {
                     $this->SetFont('Arial', '', 28);
                     $this->Cell(250, 15,$_GET['titulo'], 0, 0, "L");
                     $this->SetFont('Arial', 'I', 8);
-                    $this->Cell(90, 3, 'JUNTA DE CLASIFICACIÓN Y DISCIPLINA NIVEL', 0, 1, "C");
+                    $this->Cell(90, 3, utf8_decode('JUNTA DE CLASIFICACIÓN Y DISCIPLINA NIVEL'), 0, 1, "C");
                     $this->Cell(250, 3, '', 0, 0, "L");
                     $this->Cell(90, 3, 'INICIAL, PRIMARIO, MODALIDAD Y GABINETE', 0, 1, "C");
                     $this->Cell(250, 3, '', 0, 0, "L");
                     $this->SetFont('Arial', 'I', 6);
         
                     // Verificar la localidad para mostrar la dirección correspondiente
-                    if ($_GET['localidad'] === "Ushuaia") {
+                    if ($_GET['localidad'] === "USH") {
                         $this->Cell(90, 3, 'Gdor. Campos N 1443 - Casa 56/57 Tira 11(9410) Ushuaia', 0, 1, "C");
                         $this->SetFont('Arial', 'I', 18);
                         $this->Cell(250, 15, $_GET['subtitulo'], 0, 0, "L");
                         $this->SetFont('Arial', 'I', 6);
                         $this->Cell(90, 3, 'Tierra del Fuego', 0, 1, "C");
                     } else {
-                        $this->Cell(90, 3, 'Thorne N 1949 Depto 8 (9420) Río Grande', 0, 1, "C");
+                        
+                        $this->Cell(90, 3, utf8_decode('Thorne N 1949 Depto 8 (9420) Río Grande'), 0, 1, "C");
                         $this->SetFont('Arial', 'I', 10);
                         $this->Cell(250, 15, $_GET['subtitulo'], 0, 0, "L");
                         $this->SetFont('Arial', 'I', 6);
@@ -197,11 +200,11 @@ try {
                     }
         
                     $this->SetFont('Arial', 'I', 10);
-                    $this->Cell(250, 3, 'Nota N: ' . $_GET['nota'], 0, 0, "R");
+                    $this->Cell(250, 3, utf8_decode('Nota Nº: ') . utf8_decode($_GET['nota']), 0, 0, "R");
                     $this->SetFont('Arial', 'I', 6);
                     $this->Cell(90, 3, 'Tel. (02901)441443-441447       Internos 1443 - 1447', 0, 1, "C");
                     $this->Cell(250, 3, '', 0, 0, "L");
-                    $this->Cell(90, 3, 'juntaegb1y2@gmail.com           e-mail:juntaegb1y2@gmail.com', 0, 1, "C");
+                    $this->Cell(90, 3, 'Email:juntaegb1y2@gmail.com, Email:juntaegb1y2@gmail.com', 0, 1, "C");
                     
                     // Agregar la línea que abarca todo el ancho de la página
                     $x = $this->GetX();
@@ -214,9 +217,9 @@ try {
                 if ($pagina == 1 || $contador % 31 == 0) {
                     // Configuración de la fuente y posición para la cabecera
                     $this->SetFont('Arial', 'I', 10);
-                    $this->Cell(30, 5, 'Ano: ' .$_GET['year'], 0, 0, "L");
-                    $this->Cell(45, 5, 'Localidad: ' . $_GET['localidad'], 0, 0, "L");
-                    $this->Cell(20, 5, 'Modalidad: ' . $_GET['modalidad'], 0, 0, "L");
+                    $this->Cell(30, 5, utf8_decode('Año: ') . $_GET['year'], 0, 0, "L");
+                    $this->Cell(45, 5, utf8_decode('Localidad: ') . utf8_decode($_GET['localidad']), 0, 0, "L");
+                    $this->Cell(20, 5, utf8_decode('Modalidad: ') . utf8_decode($_GET['modalidad']), 0, 0, "L");
                     $this->Ln(); 
                     $this->Ln(); 
                     $this->SetFont('Arial', 'B', 10); // Cambiado a Arial

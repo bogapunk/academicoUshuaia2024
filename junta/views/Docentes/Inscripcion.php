@@ -687,23 +687,23 @@ if (sqlsrv_has_rows($resultData)) {
     // Tipo de inscripción
     echo "<th>Tipo Inscripción:";
     echo "<select name='tipo' id='tipo' style='width: 190px;' onchange='mostrarCamposAdicionales(); showTableBasedOnType();'>";
-    echo "<option value='permanente'";
-    if (trim($row['tipo']) == "permanente") {
+    echo "<option value='Permanente'";
+    if (trim($row['tipo']) == "Permanente") {
         echo " selected";
     }
     echo ">Permanente</option>";
-    echo "<option value='titulares'";
-    if (trim($row['tipo']) == "titulares") {
+    echo "<option value='Titulares'";
+    if (trim($row['tipo']) == "Titulares") {
         echo " selected";
     }
     echo ">Titulares</option>";
-    echo "<option value='transitorio'";
-    if (trim($row['tipo']) == "transitorio") {
+    echo "<option value='Interinatos'";
+    if (trim($row['tipo']) == "Interinatos") {
         echo " selected";
     }
     echo ">Interinatos y Suplencias</option>";
-    echo "<option value='concurso'";
-    if (trim($row['tipo']) == "concurso") {
+    echo "<option value='Concurso'";
+    if (trim($row['tipo']) == "Concurso") {
         echo " selected";
     }
     echo ">Concurso de Titularidad</option>";
@@ -785,10 +785,10 @@ $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '';
 
 // Opciones disponibles en el select
 $options = [
-    'permanente' => 'Permanente',
-    'titulares' => 'Titulares',
-    'transitorio' => 'Interinatos y Suplencias',
-    'concurso' => 'Concurso de Titularidad'
+    'Permanente' => 'Permanente',
+    'Titulares' => 'Titulares',
+    'Interinatos' => 'Interinatos y Suplencias',
+    'Concurso' => 'Concurso de Titularidad'
 ];
 
 // Tipo de inscripción
@@ -1043,231 +1043,317 @@ $row = array(
 );
 
 
-// Tabla Permanente Concurso Interino
-echo "<table id='tablaPermanenteConcursoInterino'>"; // Inicialmente oculta la tabla
+//Tabla Permanente Concurso Interino 
+echo "<script >
+  function calcularPuntajeTotal() {
+    try {
+      var titulo = parseFloat(document.getElementById('titulo2').value) || 0;
+      var otitulo = parseFloat(document.getElementById('otitulo2').value) || 0;
+      
+      var promedio = parseFloat(document.getElementById('promedio2').value) || 0;
+      var antiguedadgestion = parseFloat(document.getElementById('antiguedadgestion2').value) || 0;
+      var antiguedadtitulo = parseFloat(document.getElementById('antiguedadtitulo2').value) || 0;
+      var serviciosprovincia = parseFloat(document.getElementById('serviciosprovincia2').value) || 0;
+      var otrosservicios = parseFloat(document.getElementById('otrosservicios2').value) || 0;
+      var residencia = parseFloat(document.getElementById('residencia2').value) || 0;
+      var publicaciones = parseFloat(document.getElementById('publicaciones2').value) || 0;
+      var otrosantecedentes = parseFloat(document.getElementById('otrosantecedentes2').value) || 0;
+
+      // Sumar todos los valores y actualizar el campo de puntajetotal2
+      var puntajeTotal = (titulo + otitulo + promedio + antiguedadgestion + antiguedadtitulo + serviciosprovincia + otrosservicios + residencia + publicaciones + otrosantecedentes).toFixed(2);
+
+      document.getElementById('puntajetotal2').value = puntajeTotal;
+    } catch (e) {
+      document.getElementById('puntajetotal2').value = Error;
+    }
+  }
+</script>";
+
+
+echo "<table id='tablaPermanenteConcursoInterino'>";
 echo "<tr><td>";
 echo "<h3><u>CARGA COMUN</u> </h3>";
 echo "<br>";
 echo "<label for='puntajetotal2' style='display: inline-block; width: 225px;'>Puntaje Total:</label>";
-echo "<input type='number' id='puntajetotal2' name='puntajetotal2' value='" . htmlspecialchars($row['puntajetotal']) . "' step='0.01' size='5'>";
+echo "<input type='number' id='puntajetotal2' name='puntajetotal2' value='" . htmlspecialchars($row['puntajetotal']) . "' step='0.01' size='5' readonly>";
 echo "<br><br>";
 
 echo "<label for='titulo2' style='display: inline-block; width: 225px;'>1.- Título:</label>";
-echo "<input type='number' id='titulo2' name='titulo2' value='" . htmlspecialchars($row['titulo']) . "' step='0.01' size='5'>";
+echo "<input type='number' id='titulo2' name='titulo2' value='" . htmlspecialchars($row['titulo']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
 echo "<br>";
 
 echo "<label for='otitulo2' style='display: inline-block; width:225px;'>2.- Otros Título:</label>";
-echo "<input type='number' id='otitulo2' name='otitulo2' value='" . htmlspecialchars($row['otitulo']) . "' step='0.01' size='5'>";
+echo "<input type='number' id='otitulo2' name='otitulo2' value='" . htmlspecialchars($row['otitulo']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
 echo "<br>";
 
-echo "<label for='concepto2' style='display: inline-block; width:  225px;'>3.- Conceptos:</label>";
-echo "<input type='number' id='concepto2' name='concepto2' value='" . htmlspecialchars($row['concepto']) . "' step='0.01' size='5'>";
+
+
+echo "<label for='promedio2' style='display: inline-block; width:  225px;'>3.- Promedio:</label>";
+echo "<input type='number' id='promedio2' name='promedio2' value='" . htmlspecialchars($row['promedio']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
 echo "<br>";
 
-echo "<label for='promedio2' style='display: inline-block; width:  225px;'>4.- Promedio:</label>";
-echo "<input type='number' id='promedio2' name='promedio2' value='" . htmlspecialchars($row['promedio']) . "' step='0.01' size='5'>";
+echo "<label for='antiguedadgestion2' style='display: inline-block; width:  225px;'>4.- Antigüedad Gestión:</label>";
+echo "<input type='number' id='antiguedadgestion2' name='antiguedadgestion2' value='" . htmlspecialchars($row['antiguedadgestion']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
 echo "<br>";
 
-echo "<label for='antiguedadgestion2' style='display: inline-block; width:  225px;'>5.- Antigüedad Gestión:</label>";
-echo "<input type='number' id='antiguedadgestion2' name='antiguedadgestion2' value='" . htmlspecialchars($row['antiguedadgestion']) . "' step='0.01' size='5'>";
+echo "<label for='antiguedadtitulo2' style='display: inline-block; width:  225px;'>5.- Antigüedad Título:</label>";
+echo "<input type='number' id='antiguedadtitulo2' name='antiguedadtitulo2' value='" . htmlspecialchars($row['antiguedadtitulo']) ."' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
 echo "<br>";
 
-echo "<label for='antiguedadtitulo2' style='display: inline-block; width:  225px;'>6.- Antigüedad Título:</label>";
-echo "<input type='number' id='antiguedadtitulo2' name='antiguedadtitulo2' value='" . htmlspecialchars($row['antiguedadtitulo']) ."' step='0.01' size='5'>";
+echo "<label for='servicios' style='display: inline-block; width:  225px;'>6.- Servicios:</label>";
 echo "<br>";
 
-echo "<label for='servicios' style='display: inline-block; width:  225px;'>7.- Servicios:</label>";
+echo "<label for='serviciosprovincia2' style='display: inline-block; width:  225px;'>6.1- En la Provincia:</label>";
+echo "<input type='number' id='serviciosprovincia2' name='serviciosprovincia2' value='" . htmlspecialchars($row['serviciosprovincia']) ."' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
 echo "<br>";
 
-echo "<label for='serviciosprovincia2' style='display: inline-block; width:  225px;'>7.1- En la Provincia:</label>";
-echo "<input type='number' id='serviciosprovincia2' name='serviciosprovincia2' value='" . htmlspecialchars($row['serviciosprovincia']) ."' step='0.01' size='5'>";
+echo "<label for='otrosservicios2' style='display: inline-block; width:  225px;'>6.2- Otros Servicios:</label>";
+echo "<input type='number' id='otrosservicios2' name='otrosservicios2' value='" . htmlspecialchars($row['otrosservicios']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
 echo "<br>";
 
-echo "<label for='otrosservicios2' style='display: inline-block; width:  225px;'>7.2- Otros Servicios:</label>";
-echo "<input type='number' id='otrosservicios2' name='otrosservicios2' value='" . htmlspecialchars($row['otrosservicios']) . "' step='0.01' size='5'>";
+echo "<label for='residencia2' style='display: inline-block; width:  225px;'>7.- Residencia:</label>";
+echo "<input type='number' id='residencia2' name='residencia2' value='" . htmlspecialchars($row['residencia']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
 echo "<br>";
 
-echo "<label for='residencia2' style='display: inline-block; width:  225px;'>8.- Residencia:</label>";
-echo "<input type='number' id='residencia2' name='residencia2' value='" . htmlspecialchars($row['residencia']) . "' step='0.01' size='5'>";
+echo "<label for='publicaciones2' style='display: inline-block; width:  225px;'>8.- Publicaciones:</label>";
+echo "<input type='number' id='publicaciones2' name='publicaciones2' value='" . htmlspecialchars($row['publicaciones']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
 echo "<br>";
 
-echo "<label for='publicaciones2' style='display: inline-block; width:  225px;'>9.- Publicaciones:</label>";
-echo "<input type='number' id='publicaciones2' name='publicaciones2' value='" . htmlspecialchars($row['publicaciones']) . "' step='0.01' size='5'>";
+echo "<label for='otrosantecedentes2' style='display: inline-block; width:  225px;'>9.- Otros Antecedentes:</label>";
+echo "<input type='number' id='otrosantecedentes2' name='otrosantecedentes2' value='" . htmlspecialchars($row['otrosantecedentes']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
 echo "<br>";
 
-echo "<label for='otrosantecedentes2' style='display: inline-block; width:  225px;'>10.- Otros Antecedentes:</label>";
-echo "<input type='number' id='otrosantecedentes2' name='otrosantecedentes2' value='" . htmlspecialchars($row['otrosantecedentes']) . "' step='0.01' size='5'>";
-echo "<br>";
 echo "</td></tr>";
 echo "</table>";
 
+
+
+echo "<script>
+  function calcularPuntajeTotal2() {
+    try {
+      // Convertir los valores de los inputs a números (float), o 0 si el campo está vacío
+      var titulo = parseFloat(document.getElementById('titulo').value) || 0,
+          otitulo = parseFloat(document.getElementById('otrostit').value) || 0,
+          concepto = parseFloat(document.getElementById('concepto').value) || 0,
+          promedio = parseFloat(document.getElementById('promedio').value) || 0,
+          antiguedadGestion = parseFloat(document.getElementById('antiguedadgestion').value) || 0,
+          antiguedadTitulo = parseFloat(document.getElementById('antiguedadtitulo').value) || 0,
+          serviciosProvincia = parseFloat(document.getElementById('serviciosprovincia').value) || 0,
+          t_m_seccion = parseFloat(document.getElementById('t_m_seccion').value) || 0,
+          t_m_anio = parseFloat(document.getElementById('t_m_anio').value) || 0,
+          t_m_grupo = parseFloat(document.getElementById('t_m_grupo').value) || 0,
+          t_m_ciclo = parseFloat(document.getElementById('t_m_ciclo').value) || 0,
+          t_m_recupera = parseFloat(document.getElementById('t_m_recupera').value) || 0,
+          t_m_comple = parseFloat(document.getElementById('t_m_comple').value) || 0,
+          t_m_biblio = parseFloat(document.getElementById('t_m_biblio').value) || 0,
+          t_m_gabinete = parseFloat(document.getElementById('T_m_gabinete').value) || 0,
+          t_m_sec1 = parseFloat(document.getElementById('T_m_sec1').value) || 0,
+          t_m_sec2 = parseFloat(document.getElementById('t_m_sec2').value) || 0,
+          t_m_viced = parseFloat(document.getElementById('t_m_viced').value) || 0,
+          t_d_pu = parseFloat(document.getElementById('t_d_pu').value) || 0,
+          t_d_3 = parseFloat(document.getElementById('t_d_3').value) || 0,
+          t_d_2 = parseFloat(document.getElementById('t_d_2').value) || 0,
+          t_d_1 = parseFloat(document.getElementById('t_d_1').value) || 0,
+          t_d_biblio = parseFloat(document.getElementById('t_d_biblio').value) || 0,
+          t_d_gabi = parseFloat(document.getElementById('t_d_gabi').value) || 0,
+          t_d_seccoortec = parseFloat(document.getElementById('t_d_seccoortec').value) || 0,
+          t_d_supsectec = parseFloat(document.getElementById('t_d_supsectec').value) || 0,
+          t_d_supesc = parseFloat(document.getElementById('t_d_supesc').value) || 0,
+          t_d_supgral = parseFloat(document.getElementById('t_d_supgral').value) || 0,
+          t_d_adic = parseFloat(document.getElementById('t_d_adic').value) || 0,
+          otrosservicios = parseFloat(document.getElementById('otrosservicios').value) || 0,
+          o_g_a = parseFloat(document.getElementById('o_g_a').value) || 0,
+          o_g_b = parseFloat(document.getElementById('o_g_b').value) || 0,
+          o_g_c = parseFloat(document.getElementById('o_g_c').value) || 0,
+          o_g_d = parseFloat(document.getElementById('o_g_d').value) || 0,
+          residencia = parseFloat(document.getElementById('residencia').value) || 0,
+          publicaciones = parseFloat(document.getElementById('publicaciones').value) || 0,
+          otrosantecedentes = parseFloat(document.getElementById('otrosantecedentes').value) || 0;
+
+      // Sumar todos los valores y actualizar el campo de resultado
+      var puntajeTotal = titulo + otitulo + concepto + promedio + antiguedadGestion + antiguedadTitulo +
+                         serviciosProvincia + t_m_seccion + t_m_anio + t_m_grupo + t_m_ciclo + 
+                         t_m_recupera + t_m_comple + t_m_biblio + t_m_gabinete + t_m_sec1 + t_m_sec2 +
+                         t_m_viced + t_d_pu + t_d_3 + t_d_2 + t_d_1 + t_d_biblio + t_d_gabi + 
+                         t_d_seccoortec + t_d_supsectec + t_d_supesc + t_d_supgral + t_d_adic +
+                         otrosservicios + o_g_a + o_g_b + o_g_c + o_g_d + residencia + publicaciones +
+                         otrosantecedentes;
+
+      // Mostrar el puntaje total con dos decimales
+      document.getElementById('puntajetotal').value = puntajeTotal.toFixed(2);
+    } catch (e) {
+      // Si ocurre un error, mostrar 'Error'
+      document.getElementById('puntajetotal').value = 'Error';
+    }
+  }
+</script>
+";
 // Tabla Titular
 echo "<table id='tablaTitular'>";
 echo "<tr><td>";
 echo "<h3><u>CARGA TITULAR</u> </h3>";
 echo "<br>";
 echo "<label for='puntajetotal' style='display: inline-block; width: 225px;'>Puntaje Total:</label>";
-echo "<input type='number' id='puntajetotal' name='puntajetotal' value='" . htmlspecialchars($row['puntajetotal']) . "' size='10'>";
+echo "<input type='number' id='puntajetotal' name='puntajetotal' value='" . htmlspecialchars($row['puntajetotal']) . "' size='10' readonly>";
 echo "<br><br>";
 
 echo "<label for='titulo' style='display: inline-block; width: 225px;'>1.- Título:</label>";
-echo "<input type='number' id='titulo' name='titulo' value='" . htmlspecialchars($row['titulo']) . "' size='10'>";
+echo "<input type='number' id='titulo' name='titulo' value='" . htmlspecialchars($row['titulo']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='otrostit' style='display: inline-block; width:  225px;'>2.- Otros Título:</label>";
-echo "<input type='number' id='otrostit' name='otitulo' value='" . htmlspecialchars($row['otitulo']) . "' size='10'>";
+echo "<input type='number' id='otrostit' name='otitulo' value='" . htmlspecialchars($row['otitulo']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='concepto' style='display: inline-block; width:  225px;'>3.- Conceptos:</label>";
-echo "<input type='number' id='concepto' name='concepto' value='" . htmlspecialchars($row['concepto']) . "'  size='10'>";
+echo "<input type='number' id='concepto' name='concepto' value='" . htmlspecialchars($row['concepto']) . "'  size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
-
 echo "<label for='promedio' style='display: inline-block; width:  225px;'>4.- Promedio:</label>";
-echo "<input type='number' id='promedio' name='promedio' value='" . htmlspecialchars($row['promedio']) . "' size='10'>";
+echo "<input type='number' id='promedio' name='promedio' value='" . htmlspecialchars($row['promedio']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='ant_gestion' style='display: inline-block; width:  225px;'>5.- Antigüedad Gestión:</label>";
-echo "<input type='number' id='antiguedadgestion' name='antiguedadgestion' value='" . htmlspecialchars($row['antiguedadgestion']) . "' size='10'>";
+echo "<input type='number' id='antiguedadgestion' name='antiguedadgestion' value='" . htmlspecialchars($row['antiguedadgestion']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='ant_titulo' style='display: inline-block; width:  225px;'>6.- Antigüedad Título:</label>";
-echo "<input type='number' id='antiguedadtitulo' name='antiguedadtitulo' value='" . htmlspecialchars($row['antiguedadtitulo']) . "' size='10'>";
+echo "<input type='number' id='antiguedadtitulo' name='antiguedadtitulo' value='" . htmlspecialchars($row['antiguedadtitulo']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='servicios' style='display: inline-block; width:  225px;'>7.- Servicios:</label>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width:  225px;'>7.1- En la Provincia:</label>";
-echo "<input type='number' id='serviciosprovincia' name='serviciosprovincia' value='" . htmlspecialchars($row['serviciosprovincia']) . "' size='10'>";
+echo "<input type='number' id='serviciosprovincia' name='serviciosprovincia' value='" . htmlspecialchars($row['serviciosprovincia']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro de Sección:</label>";
-echo "<input type='number' id='t_m_seccion' name='t_m_seccion' value='" . htmlspecialchars($row['t_m_seccion']) . "' size='10'>";
+echo "<input type='number' id='t_m_seccion' name='t_m_seccion' value='" . htmlspecialchars($row['t_m_seccion']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro de Año:</label>";
-echo "<input type='number' id='t_m_anio' name='t_m_anio' value='" . htmlspecialchars($row['t_m_anio']) . "' size='10'>";
+echo "<input type='number' id='t_m_anio' name='t_m_anio' value='" . htmlspecialchars($row['t_m_anio']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro de Grupo:</label>";
-echo "<input type='number' id='t_m_grupo' name='t_m_grupo' value='" . htmlspecialchars($row['t_m_grupo']) . "' size='10'>";
+echo "<input type='number' id='t_m_grupo' name='t_m_grupo' value='" . htmlspecialchars($row['t_m_grupo']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro de Ciclo:</label>";
-echo "<input type='number' id='t_m_ciclo' name='t_m_ciclo' value='" . htmlspecialchars($row['t_m_ciclo']) . "' size='10'>";
+echo "<input type='number' id='t_m_ciclo' name='t_m_ciclo' value='" . htmlspecialchars($row['t_m_ciclo']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro Recuperado:</label>";
-echo "<input type='number' id='t_m_recupera' name='t_m_recupera' value='" . htmlspecialchars($row['t_m_recupera']) . "' size='10'>";
+echo "<input type='number' id='t_m_recupera' name='t_m_recupera' value='" . htmlspecialchars($row['t_m_recupera']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro Complementario:</label>";
-echo "<input type='number' id='t_m_comple' name='t_m_comple' value='" . htmlspecialchars($row['t_m_comple']) . "' size='10'>";
+echo "<input type='number' id='t_m_comple' name='t_m_comple' value='" . htmlspecialchars($row['t_m_comple']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro Bibliotecario:</label>";
-echo "<input type='number' id='t_m_biblio' name='t_m_biblio' value='" . htmlspecialchars($row['t_m_biblio']) . "' size='10'>";
+echo "<input type='number' id='t_m_biblio' name='t_m_biblio' value='" . htmlspecialchars($row['t_m_biblio']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Gabinete:</label>";
-echo "<input type='number' id='T_m_gabinete' name='t_m_gabinete' value='" . htmlspecialchars($row['t_m_gabinete']) . "' size='10'>";
+echo "<input type='number' id='T_m_gabinete' name='t_m_gabinete' value='" . htmlspecialchars($row['t_m_gabinete']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<hr>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Secretaria 1º:</label>";
-echo "<input type='number' id='T_m_sec1' name='t_m_sec1' value='" . htmlspecialchars($row['t_m_sec1']) . "' size='10'>";
+echo "<input type='number' id='T_m_sec1' name='t_m_sec1' value='" . htmlspecialchars($row['t_m_sec1']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Secretaria 2º:</label>";
-echo "<input type='number' id='t_m_sec2' name='t_m_sec2' value='" . htmlspecialchars($row['t_m_sec2']) . "' size='10'>";
+echo "<input type='number' id='t_m_sec2' name='t_m_sec2' value='" . htmlspecialchars($row['t_m_sec2']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Vice-Director:</label>";
-echo "<input type='number' id='t_m_viced' name='t_m_viced' value='" . htmlspecialchars($row['t_m_viced']) . "' size='10'>";
+echo "<input type='number' id='t_m_viced' name='t_m_viced' value='" . htmlspecialchars($row['t_m_viced']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<hr>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director Personal Único:</label>";
-echo "<input type='number' id='t_d_pu' name='t_d_pu' value='" . htmlspecialchars($row['t_d_pu']) . "' size='10'>";
+echo "<input type='number' id='t_d_pu' name='t_d_pu' value='" . htmlspecialchars($row['t_d_pu']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director de 3º:</label>";
-echo "<input type='number' id='t_d_3' name='t_d_3' value='" . htmlspecialchars($row['t_d_3']) . "' size='10'>";
+echo "<input type='number' id='t_d_3' name='t_d_3' value='" . htmlspecialchars($row['t_d_3']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director de 2º:</label>";
-echo "<input type='number' id='t_d_2' name='t_d_2' value='" . htmlspecialchars($row['t_d_2']) . "' size='10'>";
+echo "<input type='number' id='t_d_2' name='t_d_2' value='" . htmlspecialchars($row['t_d_2']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director de 1º:</label>";
-echo "<input type='number' id='t_d_1' name='t_d_1' value='" . htmlspecialchars($row['t_d_1']) . "' size='10'>";
+echo "<input type='number' id='t_d_1' name='t_d_1' value='" . htmlspecialchars($row['t_d_1']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director de Biblioteca:</label>";
-echo "<input type='number' id='t_d_biblio' name='t_d_biblio' value='" . htmlspecialchars($row['t_d_biblio']) . "' size='10'>";
+echo "<input type='number' id='t_d_biblio' name='t_d_biblio' value='" . htmlspecialchars($row['t_d_biblio']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director de Gabinete:</label>";
-echo "<input type='number' id='t_d_gabi' name='t_d_gabi' value='" . htmlspecialchars($row['t_d_gabi']) . "' size='10'>";
+echo "<input type='number' id='t_d_gabi' name='t_d_gabi' value='" . htmlspecialchars($row['t_d_gabi']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<hr>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Secretario Coord. Tec.:</label>";
-echo "<input type='number' id='t_d_seccoortec' name='t_d_seccoortec' value='" . htmlspecialchars($row['t_d_seccoortec']) . "' size='10'>";
+echo "<input type='number' id='t_d_seccoortec' name='t_d_seccoortec' value='" . htmlspecialchars($row['t_d_seccoortec']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Sup. Sec. Tec.:</label>";
-echo "<input type='number' id='t_d_supsectec' name='t_d_supsectec' value='" . htmlspecialchars($row['t_d_supsectec']) . "' size='10'>";
+echo "<input type='number' id='t_d_supsectec' name='t_d_supsectec' value='" . htmlspecialchars($row['t_d_supsectec']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Sup. Escolar:</label>";
-echo "<input type='number' id='t_d_supesc' name='t_d_supesc' value='" . htmlspecialchars($row['t_d_supesc']) . "' size='10'>";
+echo "<input type='number' id='t_d_supesc' name='t_d_supesc' value='" . htmlspecialchars($row['t_d_supesc']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Sup. General:</label>";
-echo "<input type='number' id='t_d_supgral' name='t_d_supgral' value='" . htmlspecialchars($row['t_d_supgral']) . "' size='10'>";
+echo "<input type='number' id='t_d_supgral' name='t_d_supgral' value='" . htmlspecialchars($row['t_d_supgral']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Adic.:</label>";
-echo "<input type='number' id='t_d_adic' name='t_d_adic' value='" . htmlspecialchars($row['t_d_adic']) . "' size='10'>";
+echo "<input type='number' id='t_d_adic' name='t_d_adic' value='" . htmlspecialchars($row['t_d_adic']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<hr>";
 
 echo "<label for='otrosservicios' style='display: inline-block; width:  225px;'>7.2- Otros Servicios:</label>";
-echo "<input type='number' id='otrosservicios' name='otrosservicios' value='" . htmlspecialchars($row['otrosservicios']) . "' size='10'>";
+echo "<input type='number' id='otrosservicios' name='otrosservicios' value='" . htmlspecialchars($row['otrosservicios']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='o_g_a' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo A:</label>";
-echo "<input type='number' id='o_g_a' name='o_g_a' value='" . htmlspecialchars($row['o_g_a']) . "' size='10'>";
+echo "<input type='number' id='o_g_a' name='o_g_a' value='" . htmlspecialchars($row['o_g_a']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='o_g_b' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo B:</label>";
-echo "<input type='number' id='o_g_b' name='o_g_b' value='" . htmlspecialchars($row['o_g_b']) . "' size='10'>";
+echo "<input type='number' id='o_g_b' name='o_g_b' value='" . htmlspecialchars($row['o_g_b']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='o_g_c' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo C:</label>";
-echo "<input type='number' id='o_g_c' name='o_g_c' value='" . htmlspecialchars($row['o_g_c']) . "' size='10'>";
+echo "<input type='number' id='o_g_c' name='o_g_c' value='" . htmlspecialchars($row['o_g_c']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='o_g_d' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo D:</label>";
-echo "<input type='number' id='o_g_d' name='o_g_d' value='" . htmlspecialchars($row['o_g_d']) . "' size='10'>";
+echo "<input type='number' id='o_g_d' name='o_g_d' value='" . htmlspecialchars($row['o_g_d']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='residencia' style='display: inline-block; width:  225px;'>8.- Residencia:</label>";
-echo "<input type='number' id='residencia' name='residencia' value='" . htmlspecialchars($row['residencia']) . "' size='10'>";
+echo "<input type='number' id='residencia' name='residencia' value='" . htmlspecialchars($row['residencia']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='publicaciones' style='display: inline-block; width:  225px;'>9.- Publicaciones:</label>";
-echo "<input type='number' id='publicaciones' name='publicaciones' value='" . htmlspecialchars($row['publicaciones']) . "' size='10'>";
+echo "<input type='number' id='publicaciones' name='publicaciones' value='" . htmlspecialchars($row['publicaciones']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='otrosantecedentes' style='display: inline-block; width:  225px;'>10.- Otros Antecedentes:</label>";
-echo "<input type='number' id='otrosantecedentes' name='otrosantecedentes' value='" . htmlspecialchars($row['otrosantecedentes']) . "' size='10'>";
+echo "<input type='number' id='otrosantecedentes' name='otrosantecedentes' value='" . htmlspecialchars($row['otrosantecedentes']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 echo "</td></tr>";
 
@@ -1281,11 +1367,11 @@ echo "    var tablaPermanenteConcursoInterino = document.getElementById('tablaPe
 echo "    var tablaTitular = document.getElementById('tablaTitular');";
 echo "    var tablaComun = document.getElementById('tablaComun');"; // Agregar la tabla común
 echo "    function mostrarTablaSegunTipo() {";
-echo "        if (tipoSelect.value === 'permanente' || tipoSelect.value === 'concurso' || tipoSelect.value === 'transitorio') {";
+echo "        if (tipoSelect.value === 'Permanente' || tipoSelect.value === 'Concurso' || tipoSelect.value === 'Interinatos') {";
 echo "            tablaPermanenteConcursoInterino.style.display = 'table';";
 echo "            tablaTitular.style.display = 'none';";
 echo "            tablaComun.style.display = 'none';"; // Ocultar la tabla común
-echo "        } else if (tipoSelect.value === 'titulares') {";
+echo "        } else if (tipoSelect.value === 'Titulares') {";
 echo "            tablaPermanenteConcursoInterino.style.display = 'none';";
 echo "            tablaTitular.style.display = 'table';";
 echo "            tablaComun.style.display = 'none';"; // Ocultar la tabla común
@@ -1352,13 +1438,13 @@ $(document).ready(function() {
 
         var archivo='ActualizarMovimientosPermanentes.php';
         var tipoSelect = document.getElementById('tipo');
-        if (tipoSelect.value === 'permanente') {
-        }else if (tipoSelect.value === 'titulares'){
+        if (tipoSelect.value === 'Permanente') {
+        }else if (tipoSelect.value === 'Titulares'){
           archivo='ActualizarMovimientosTitulares.php';
-        }else if (tipoSelect.value === 'transitoria'){
+        }else if (tipoSelect.value === 'Interinato'){
           archivo='ActualizarMovimientosTransitoria.php';
 
-        }else if (tipoSelect.value === 'concurso'){
+        }else if (tipoSelect.value === 'Concurso'){
           archivo='ActualizarMovimientosConcurso.php';
         }
 

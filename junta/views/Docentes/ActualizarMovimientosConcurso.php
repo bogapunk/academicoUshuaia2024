@@ -31,7 +31,7 @@ try {
     $puntajetotal = validate_numeric($_POST['puntajetotal2']);
     $titulo = validate_numeric($_POST['titulo2']);
     $otitulo = validate_numeric($_POST['otitulo2']);
-    $concepto = validate_numeric($_POST['concepto2']);
+    //$concepto = validate_numeric($_POST['concepto2']);
     $promedio = validate_numeric($_POST['promedio2']);
     $antiguedadgestion = validate_numeric($_POST['antiguedadgestion2']);
     $antiguedadtitulo = validate_numeric($_POST['antiguedadtitulo2']);
@@ -52,7 +52,7 @@ try {
         horas = :horas, 
         puntajetotal = :puntajetotal, 
         titulo = :titulo, 
-        concepto = :concepto,
+       
         otitulo= :otitulo,
         promedio = :promedio,
         antiguedadgestion = :antiguedadgestion,
@@ -79,7 +79,7 @@ try {
     $stmt->bindParam(':puntajetotal', $puntajetotal, is_null($puntajetotal) ? PDO::PARAM_NULL : PDO::PARAM_STR);
     $stmt->bindParam(':titulo', $titulo);
     $stmt->bindParam(':otitulo', $otitulo, PDO::PARAM_STR);
-    $stmt->bindParam(':concepto', $concepto);
+    //$stmt->bindParam(':concepto', $concepto);
     $stmt->bindParam(':promedio', $promedio, PDO::PARAM_STR);
     $stmt->bindParam(':antiguedadgestion', $antiguedadgestion, PDO::PARAM_STR);
     $stmt->bindParam(':antiguedadtitulo', $antiguedadtitulo, PDO::PARAM_STR);

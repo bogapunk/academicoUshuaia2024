@@ -206,7 +206,7 @@ tr:nth-child(even) {
 #modalidad_select {
   border-width: 1px; /* Adjust border width as desired */
   height: 25px;
-  width: 725px;
+  width: 530px;
 }
 
 #modalidad_select option {
@@ -355,11 +355,14 @@ span {
   border: none; /* Remove default border */
   border-bottom: 1px solid #ccc; /* Add underline border */
   background-color: transparent; /* Transparent background */
-  padding: 0px 0; /* Adjust padding for a comfortable fit */
+  padding: 0px 10px; /* Adjust padding for a comfortable fit */
   font-size: 15px; /* Adjust font size if needed */
   outline: none; /* Remove default outline */
-  width: 100%; /* Make the select element fill the container */
+  width: 300px; /* Adjust width as needed */
   cursor: pointer; /* Indicate interactivity on hover */
+  text-align: center; /* Center text inside the select */
+  display: block; /* Ensure the select is treated as a block element */
+  margin: 0 auto; /* Center the select horizontally */
 }
 .materialize-select3 {
   border: none; /* Remove default border */
@@ -428,6 +431,12 @@ span {
 
      <script type="text/javascript" src="../../scripts/jspdf.min.js"></script>
 
+
+
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+
 </head>
  <center><h1><u><font face="
     font-family: 'Open Sans', 'Sans-serif'" >Configuracion de Listado </font></u></h1></center>
@@ -435,7 +444,25 @@ span {
 <body>
   
 <!--<form action="Listados_Normales.php" method="POST" accept-charset="UTF-8">-->
+<style>
+  /* Estilo para centrar el campo de entrada */
+  .centered-input {
+  border: none; /* Remove default border */
+  border-bottom: 1px solid #ccc; /* Add underline border */
+  background-color: transparent; /* Transparent background */
+  padding: 0px 0px; /* Adjust padding for a comfortable fit */
+  font-size: 15px; /* Adjust font size if needed */
+  outline: none; /* Remove default outline */
+  width: 17%; /* Make the input element fill the container */
+  cursor: pointer;
+  /* Add the focus styling here */
+  &:focus {
+    border-color: #42a5f5; /* Change border color to blue on focus */
+  }
 
+
+  
+</style>
 <form class="form" style="max-width:"  >
   <div class="page-content bg-light"  >
 
@@ -447,51 +474,63 @@ span {
 
       <center> 
 		      
-			<span id="selected_codmod" class="selected-codmod"></span>
+	<!-- Campo para ingresar el código de modalidad -->
+  <center>
+  <input type="text" id="codmod_input" class="centered-input" placeholder="Ingrese Codigo Modalidad" title="Ingrese el código de la modalidad aquí" />
+</center>
+    
+
 <br>
-				<select name="nommod" id="modalidad_select" class="materialize-select2">
-				  <option value="" style="width: 500px;">Seleccione</option>
-          <?php
-               // Database connection
-              $serverName = "10.1.9.113"; // Replace with your SQL Server hostname
-              $connectionOptions = array(
-                  "Database" => "junta", // Replace with your database name
-                  "UID" => "SA", // Replace with your SQL Server username
-                  "PWD" => 'Davinci2024#', // Replace with your SQL Server password
-                  "CharacterSet" => "UTF-8", // acentos
-                  "TrustServerCertificate"=>true
-              );
+<br>
+<!-- Select para modalidades -->
+ 
+<select name="nommod"  id="modalidad_select" class="materialize-select2">
+    <option value="" style="width: 300px;">Nombre De Modalidad</option>
+</select>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Cuando el usuario deja de escribir en el campo de código de modalidad
+    $('#codmod_input').on('input', function() {
+        var codmod = $(this).val(); // Obtener el valor ingresado
 
-              $conn = sqlsrv_connect($serverName, $connectionOptions);
-
-              if ($conn === false) {
-                  die(print_r(sqlsrv_errors(), true));
-              }
-
-              // SQL query to retrieve modalities
-              $sql_modality = "SELECT codmod, nommod FROM _junta_modalidades order by codmod asc";
-
-              // Execute query
-              $result_modality = sqlsrv_query($conn, $sql_modality);
-
-              if ($result_modality === false) {
-                  die(print_r(sqlsrv_errors(), true));
-              }
-
-              // Loop through modalities and create options
-              while ($row_modality = sqlsrv_fetch_array($result_modality, SQLSRV_FETCH_ASSOC)) {
-                  $codmod = $row_modality['codmod'];
-                  $nommod = $row_modality['nommod'];
-
-                  echo "<option value='$codmod'>$nommod</option>";
-              }
-
-              // Close the connection
-              sqlsrv_free_stmt($result_modality);
-              sqlsrv_close($conn);
-              ?>
-				</select>
-
+        if (codmod.length > 0) {  // Solo buscar si hay algo ingresado
+            $.ajax({
+                url: 'buscar_modalidad_por_codigo.php',  // Archivo PHP para buscar el nombre de la modalidad
+                type: 'POST',
+                dataType: 'json',
+                data: { codmod: codmod },  // Enviar el código de modalidad ingresado
+                success: function(response) {
+                    if (response.success) {
+                        // Actualizar el campo con el nombre de la modalidad
+                        $('#nommod_input').val(response.nommod);
+                        
+                        // Actualizar el select con la modalidad encontrada
+                        var select = $('#modalidad_select');
+                        select.empty(); // Limpiar opciones actuales
+                        select.append('<option value="' + response.codmod + '">' + response.codmod + '-' + response.nommod + '</option>');
+                        select.val(response.codmod); // Seleccionar la opción encontrada
+                        
+                        // Reinitialize select2 if you use it
+                        if (typeof $.fn.select2 === 'function') {
+                            select.select2(); // Reinitialize select2 if necessary
+                        }
+                    } else {
+                        $('#nommod_input').val('No encontrado');  // Mostrar mensaje si no se encuentra
+                        $('#modalidad_select').empty(); // Limpiar opciones del select
+                    }
+                },
+                error: function() {
+                    $('#nommod_input').val('Error en la búsqueda');
+                }
+            });
+        } else {
+            $('#nommod_input').val('');  // Limpiar el campo si no hay código ingresado
+            $('#modalidad_select').empty(); // Limpiar opciones del select
+        }
+    });
+});
+</script>
 
 </div>
 
@@ -519,7 +558,7 @@ span {
     <td align="left"><b>Año:</b>
     <input type="num" size="10" name="name" id='year'  class="materialize-input1" align="left" >
      <b>Nota Nº:</b>
-    <input type="text" size="20" name="name2" id='nota' class="materialize-input2" align="left">
+    <input type="text" size="20" name="name2" id='nota' class="materialize-input1" align="left">
      <input type="checkbox" id="chkexclu" class="form-check-input" align="left">
     <label for="chkexclu" class="form-check-label" >Excluidos</label>
   </td>
@@ -786,7 +825,7 @@ function habilitarEstablecimiento(selectedValue) {
 <br>
     <!-- <center> <input type="button" id="create_pdf" value="Generar Informe" class="btn btn-info""> </center>-->
         
-    <input type="submit" class="btn btn-info" value="Generar PDF" onclick="procesarFormulario(event)">
+   <center> <input type="submit" class="btn btn-info" value="Generar PDF" onclick="procesarFormulario(event)" title="Generar PDF"></center>
 
 
 

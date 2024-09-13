@@ -85,13 +85,13 @@ try {
         $pdf->SetFont('Arial', '', 28);
         $pdf->Cell(250, 15, $titulo, 0, 0, "L");
         $pdf->SetFont('Arial', 'I', 8);
-        $pdf->Cell(90, 3, 'JUNTA DE CLASIFICACIÓN Y DISCIPLINA NIVEL', 0, 1, "C");
+        $pdf->Cell(90, 3, utf8_decode('JUNTA DE CLASIFICACIÓN Y DISCIPLINA NIVEL'), 0, 1, "C");
         $pdf->Cell(250, 3, '', 0, 0, "L");
         $pdf->Cell(90, 3, 'INICIAL, PRIMARIO, MODALIDAD Y GABINETE', 0, 1, "C");
         $pdf->Cell(250, 3, '', 0, 0, "L");
         $pdf->SetFont('Arial', 'I', 6);
 
-        if ($_GET["localidad"] === "Ushuaia") {
+        if ($_GET["localidad"] === "USH") {
             $pdf->Cell(90, 3, 'Gdor. Campos N 1443 - Casa 56/57 Tira 11(9410) Ushuaia', 0, 1, "C");
             $pdf->SetFont('Arial', 'I', 18);
             $pdf->Cell(250, 15, $_GET["subtitulo"], 0, 0, "L");
@@ -106,11 +106,11 @@ try {
         }
 
         $pdf->SetFont('Arial', 'I', 10);
-        $pdf->Cell(250, 3, 'Nota N: ' . $_GET["nota"], 0, 0, "R");
+        $pdf->Cell(250, 3, utf8_decode('Nota Nº: ') . utf8_decode($_GET['nota']), 0, 0, "R");
         $pdf->SetFont('Arial', 'I', 6);
         $pdf->Cell(90, 3, 'Tel. (02901)441443-441447       Internos 1443 - 1447', 0, 1, "C");
         $pdf->Cell(250, 3, '', 0, 0, "L");
-        $pdf->Cell(90, 3, 'juntaegb1y2@gmail.com           e-mail:juntaegb1y2@gmail.com', 0, 1, "C");
+        $pdf->Cell(90, 3, 'Email:juntaegb1y2@gmail.com ,Email:juntaegb1y2@gmail.com', 0, 1, "C");
 
         // Agregar la línea que abarca todo el ancho de la página
         $x = $pdf->GetX();
@@ -119,9 +119,9 @@ try {
         $pdf->Ln(); // Salto de línea después de la línea horizontal
 
         $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(30, 5, 'Ano: ' . $_GET["year"], 0, 0, "L");
-        $pdf->Cell(45, 5, 'Localidad: ' . $_GET["localidad"], 0, 0, "L");
-        $pdf->Cell(20, 5, 'Modalidad: ' . $_GET["modalidad"], 0, 0, "L");
+        $pdf->Cell(30, 5, utf8_decode('Año: ') . $_GET['year'], 0, 0, "L");
+        $pdf->Cell(45, 5, utf8_decode('Localidad: ') . $_GET['localidad'], 0, 0, "L");
+        $pdf->Cell(20, 5, utf8_decode('Modalidad: ') . $modalidad, 0, 0, 'L');
         $pdf->Ln(); 
         $pdf->Ln(); 
         $pdf->SetFont('Arial', 'B', 10); // Cambiado a Arial

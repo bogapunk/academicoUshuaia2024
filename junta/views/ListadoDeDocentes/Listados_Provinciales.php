@@ -200,7 +200,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $pdf->Cell(90, 3, 'INICIAL, PRIMARIO, MODALIDAD Y GABINETE', 0, 1, "C");
     $pdf->Cell(120, 3, '', 0, 0, "L");
     $pdf->SetFont('Arial', 'I', 6);
-    if ($_GET["localidad"] === "Ushuaia") {
+    if ($_GET["localidad"] === "USH") {
         $pdf->Cell(90, 3, 'Gdor. Campos N 1443 - Casa 56/57 Tira 11(9410) Ushuaia', 0, 1, "C");
         $pdf->SetFont('Arial', 'I', 18);
         $pdf->Cell(120, 15, $_GET["subtitulo"], 0, 0, "L");
@@ -209,7 +209,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $pdf->SetFont('Arial', 'I', 12);
         $pdf->Cell(120, 3, "Disposicin:  " . $_GET["disposicion"] . " Anexo: " . $_GET["anexo"], 0, 0, "R");
     } else {
-        $pdf->Cell(90, 3, 'Thorne N 1949 Depto 8 (9420) Río Grande', 0, 1, "C");
+        $pdf->Cell(90, 3, 'Thorne N 1949 Depto 8 (9420) Rio Grande', 0, 1, "C");
         $pdf->SetFont('Arial', 'I', 10);
         $pdf->Cell(120, 15, $_GET["subtitulo"], 0, 0, "L");
         $pdf->SetFont('Arial', 'I', 6);
@@ -219,11 +219,12 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     $pdf->SetFont('Arial', 'I', 10);
-    $pdf->Cell(120, 3, 'Nota N: ' . $_GET["nota"], 0, 0, "R");
+    $pdf->Cell(120, 3, utf8_decode('Nota Nº: ') . utf8_decode($_GET['nota']), 0, 0, "R");
+
     $pdf->SetFont('Arial', 'I', 6);
     $pdf->Cell(90, 3, 'Tel. (02901)441443-441447       Internos 1443 - 1447', 0, 1, "C");
     $pdf->Cell(120, 3, '', 0, 0, "L");
-    $pdf->Cell(90, 3, 'juntaegb1y2@gmail.com           e-mail:juntaegb1y2@gmail.com', 0, 1, "C");
+    $pdf->Cell(90, 3, ' Email: juntaegb1y2@gmail.com -- juntaegb1y2@gmail.com', 0, 1, "C");
 
     $x = $pdf->GetX();
     $y = $pdf->GetY();
@@ -231,8 +232,8 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $pdf->Ln();
 
     $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(30, 5, 'Ano!!!!: ' . $_GET["year"], 0, 0, "L");
-    $pdf->Cell(45, 5, 'Localidad!!!!!!!!!!!: ' . $_get["localidad"], 0, 0, "L");
+    $pdf->Cell(30, 5, utf8_decode('Año: ') . $_GET['year'], 0, 0, "L");
+    $pdf->Cell(45, 5, utf8_decode('Localidad: ') . $_GET['localidad'], 0, 0, "L");
     $pdf->Ln(10); // Espacio adicional antes de la cabecera de la tabla
 
     // Agregar la cabecera de la tabla
