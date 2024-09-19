@@ -27,6 +27,7 @@ try {
     $codloc =  $_POST['codloc'];
 
     $tipo = $_POST['tipo'];
+    $codmod = $_POST['codmod'];
     $obs = $_POST['obs'] ?? '';
     $horas = $_POST['horas'] ?? '';
     $puntajetotal = validate_numeric($_POST['puntajetotal']);
@@ -78,6 +79,7 @@ try {
         codloc = :codloc,
         establecimiento = :establecimiento, 
         tipo = :tipo, 
+        codmod = :codmod,
         obs = :obs, 
         horas = :horas, 
         puntajetotal = :puntajetotal, 
@@ -129,6 +131,7 @@ try {
     $stmt->bindParam(':codloc', $codloc);
     $stmt->bindParam(':establecimiento', $establecimiento, PDO::PARAM_STR);
     $stmt->bindParam(':tipo', $tipo);
+    $stmt->bindParam(':codmod', $codmod);
     $stmt->bindParam(':obs', $obs);
     $stmt->bindParam(':horas', $horas);
     $stmt->bindParam(':puntajetotal', $puntajetotal, is_null($puntajetotal) ? PDO::PARAM_NULL : PDO::PARAM_STR);

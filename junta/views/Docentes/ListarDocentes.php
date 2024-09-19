@@ -631,7 +631,8 @@ $connectionOptions = array(
     "Database" => "Junta",
     "Uid" => "SA",
     "PWD" => "Davinci2024#",
-    "TrustServerCertificate" => true
+    "TrustServerCertificate" => true,
+    "CharacterSet" => "UTF-8" // Para caracteres especiales
 );
 
 // Conexión con SQL Server

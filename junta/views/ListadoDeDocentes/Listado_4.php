@@ -59,7 +59,7 @@ try {
         $query = "SELECT *,(j_mov.titulo + j_mov.otrosantecedentes) as totalodn1
                   FROM [Junta].[dbo].[_junta_movimientos] j_mov
                   INNER JOIN [Junta].[dbo].[_junta_docentes] j_doc ON j_mov.legdoc = j_doc.legajo
-                  WHERE j_mov.excluido = '23' 
+                  WHERE  (j_mov.excluido = '23'or j_mov.excluido = 'no')
                   AND codmod = $codmod 
                   AND tipo = '$tipo' 
                   AND anodoc = $anio 

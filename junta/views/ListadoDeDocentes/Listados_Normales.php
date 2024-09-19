@@ -77,7 +77,8 @@ try {
         INNER JOIN
             [Junta].[dbo].[_junta_docentes] j_doc ON j_mov.legdoc = j_doc.legajo
         WHERE
-            j_mov.excluido = '23' and codmod= $codmod and tipo = '$tipo' and anodoc = $anio and codloc='$localidad' ";
+        
+            (j_mov.excluido = '23'or j_mov.excluido = 'no') and codmod= $codmod and tipo = '$tipo' and anodoc = $anio and codloc='$localidad' ";
        
          if ($tipo == 'titulares') {
             $query .= " AND establecimiento = $establecimiento order by j_mov.puntajetotal desc, totalodn1 desc, j_mov.concepto desc, j_mov.serviciosprovincia desc, j_mov.promedio desc, j_mov.antiguedadgestion desc, j_mov.antiguedadtitulo desc, J_doc.fechatit desc";
@@ -87,6 +88,7 @@ try {
             $query .= " ORDER BY j_mov.puntajetotal DESC, j_mov.serviciosprovincia DESC, j_mov.promedio DESC, j_mov.antiguedadgestion DESC, j_mov.antiguedadtitulo DESC, j_doc.fechatit DESC";
           
         }
+         
         
         // Preparar la consulta
         $stmt = $conn->prepare($query);
@@ -112,7 +114,7 @@ try {
         $pdf->Cell(250, 3, '', 0, 0, "L");
         $pdf->SetFont('Arial', 'I', 6);
 
-        if ($_GET['localidad'] === "Ushuaia") {
+        if ($_GET['localidad'] === "USH ") {
             $pdf->Cell(90, 3, 'Gdor. Campos N 1443 - Casa 56/57 Tira 11(9410) Ushuaia', 0, 1, "C");
             $pdf->SetFont('Arial', 'I', 18);
             $pdf->Cell(250, 15, $_GET['subtitulo'], 0, 0, "L");

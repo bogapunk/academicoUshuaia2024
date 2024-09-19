@@ -346,7 +346,7 @@ span {
   padding: 10px 0; /* Adjust padding for a comfortable fit */
   font-size: 16px; /* Adjust font size if needed */
   outline: none; /* Remove default outline */
-  width: 35%; /* Make the select element fill the container */
+  width: 50%; /* Make the select element fill the container */
   cursor: pointer; /* Indicate interactivity on hover */
 }
 
@@ -371,7 +371,7 @@ span {
   padding: 0px 0; /* Adjust padding for a comfortable fit */
   font-size: 16px; /* Adjust font size if needed */
   outline: none; /* Remove default outline */
-  width: 35%; /* Make the select element fill the container */
+  width: 50%; /* Make the select element fill the container */
   cursor: pointer; /* Indicate interactivity on hover */
   &:focus {
     border-color: #42a5f5; /* Change border color to blue on focus */

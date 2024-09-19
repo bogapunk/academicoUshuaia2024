@@ -668,21 +668,58 @@ if (sqlsrv_has_rows($resultData)) {
     echo "</div>";
     echo "</th>";
     echo "</tr>";
+   // Código de modalidad
+        echo "<tr>";
+        echo "<th>Cód. Mod: <input type='text' name='codmod' id='codmod' value='" . $row['codmod'] . "' size='8' onchange='fetchModalidad()'></th>";
 
-    // Código de modalidad
-    echo "<tr>";
-    echo "<th>Cód. Mod: <input type='text' name='codmod' value='" . $row['codmod'] . "' size='8'></th>";
-
-    // Modalidad
-    echo "<th>Modalidad:<select name='modalidad' style='width: 500px;'>";
-    foreach ($modalidades as $modalidad) {
-        echo "<option value='$modalidad'";
-        if (trim($row['nommod']) == $modalidad) {
-            echo " selected";
+        // Modalidad
+        echo "<th>Modalidad:<select name='modalidad' id='modalidad' style='width: 500px;'>";
+        foreach ($modalidades as $modalidad) {
+            echo "<option value='$modalidad'";
+            if (trim($row['nommod']) == $modalidad) {
+                echo " selected";
+            }
+            echo ">$modalidad</option>";
         }
-        echo ">$modalidad</option>";
+        echo "</select></th>";
+       
+
+// JavaScript para hacer la petición AJAX
+echo "<script>
+function fetchModalidad() {
+    const codmod = document.getElementById('codmod').value;
+
+    if (codmod) {
+        // Realizar la petición AJAX
+        fetch('buscar_por_codigo.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'codmod=' + codmod
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const modalidadSelect = document.getElementById('modalidad');
+                // Limpiar el select antes de agregar las nuevas opciones
+                modalidadSelect.innerHTML = '';
+
+                // Crear y agregar la opción de modalidad encontrada
+                const option = document.createElement('option');
+                option.value = data.nommod;
+                option.text = data.nommod;
+                modalidadSelect.appendChild(option);
+            } else {
+                alert(data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
+        });
     }
-    echo "</select></th>";
+}
+</script>";
 
     // Tipo de inscripción
     echo "<th>Tipo Inscripción:";
