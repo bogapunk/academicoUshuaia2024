@@ -570,7 +570,7 @@ $(document).ready(function() {
       <option value="permanente">Permanente</option>
       <option value="titulares">Titulares</option>
       <option value="transitorio">Interinatos y Suplencias</option>
-      <option value="Concurso de Titularidad">Concurso de Titularidad</option>
+      <option value="Concurso">Concurso de Titularidad</option>
     </select>
   
   </td>

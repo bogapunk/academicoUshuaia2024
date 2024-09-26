@@ -476,7 +476,8 @@ INNER JOIN _junta_movimientos j_mov ON j_doc.legajo = j_mov.legdoc
 LEFT JOIN _junta_modalidades j_mod ON j_mov.codmod = j_mod.codmod 
 LEFT JOIN _junta_dependencias j_dep ON j_mov.establecimiento = j_dep.coddep
 WHERE j_doc.legajo = '$legajo'
-ORDER BY j_mov.anodoc";
+ORDER BY j_mov.anodoc desc";
+// se ordena por el ultimo registro del año 2024
 
 // Establecer la conexión a SQL Server
 $serverName = "10.1.9.113"; // Reemplazar con el nombre de tu servidor SQL Server
@@ -519,6 +520,7 @@ if (isset($_GET['legajo'])) {
 
         // Imprimir el nombre del docente
         echo "<h2>Docente: " . $nombreDocente . "</h2>";
+        
         $resultData = sqlsrv_query($conn, $queryData);
         if ($resultData === false) {
             die(print_r(sqlsrv_errors(), true)); // Imprimir errores si la consulta falla
