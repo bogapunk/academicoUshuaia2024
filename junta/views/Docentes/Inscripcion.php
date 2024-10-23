@@ -528,6 +528,8 @@ $(document).ready(function() {
   
  <?php
 $legajo = $_GET['legajo'];
+$excluido = $_GET['excluido'];
+
 $codmod = $_GET['codmod'];
 $tipo = $_GET['tipo'];
 $anodoc = $_GET['anodoc'];
@@ -928,7 +930,9 @@ echo "</script>";
                                               echo "</select>";
                                               echo "</td>";
                                               echo"<th>";
-
+                                              echo"<br>";
+                                             
+                                                
                                                                                     // Establecer la conexión a SQL Server
                                         $serverName = "10.1.9.113"; // Reemplazar con el nombre de tu servidor SQL Server
                                         $connectionInfo = array(
@@ -955,48 +959,68 @@ echo "</script>";
                                             //echo "Conexión exitosa.";
                                               
                                               // Consulta SQL para obtener todos los motivos de exclusión
-                                              $queryMotivos = "SELECT idexclu, motivo FROM _junta_motivosexclusion";
-                                              $resultMotivos = sqlsrv_query($conn, $queryMotivos);
-                                              
-                                              // Verificar si se encontraron registros de motivos de exclusión
-                                              if ($resultMotivos && sqlsrv_has_rows($resultMotivos)) {
-                                                  // Generar el botón "Excluir Inscripción"
-                                                  echo "<label for='excluir'>Excluir Inscripción</label>";
-                                                  echo "<input type='checkbox' id='excluir' name='excluido' onchange='toggleMotivosExclusion()' style='transform: scale(0.8);' >";
-                                              
-                                                  // Generar el menú desplegable de motivos de exclusión, inicialmente oculto
-                                                  echo "<select id='motivosExclusion' name='excluido' style='display: none;'>";
-                                                  echo "<option value=''>Seleccione un motivo de exclusión</option>";
-                                              
-                                                  // Iterar sobre los resultados y generar las opciones del menú desplegable
-                                                  while ($rowMotivo = sqlsrv_fetch_array($resultMotivos, SQLSRV_FETCH_ASSOC)) {
-                                                      echo "<option value='" . $rowMotivo['idexclu'] . "'>" . $rowMotivo['motivo'] . "</option>";
-                                                  }
-                                                   
-                                                  echo "</select>";
-                                              
-                                                  // Script para mostrar u ocultar el menú desplegable de motivos de exclusión según el estado del botón
-                                                  echo "<script>";
-                                                  echo "function toggleMotivosExclusion() {";
-                                                  echo "var select = document.getElementById('motivosExclusion');";
-                                                  echo "var checkbox = document.getElementById('excluir');";
-                                                  echo "if (checkbox.checked) {";
-                                                  echo "select.style.display = 'block';";
-                                                  echo "} else {";
-                                                  echo "select.style.display = 'none';";
-                                                  echo "}";
-                                                  echo "}";
-                                                  echo "</script>";
-                                                  echo "</th>";
-                                              } else {
-                                                  echo "No se encontraron motivos de exclusión en la base de datos.";
-                                                  
-                                                }
-                                
+                                                    // Recuperar el motivo de exclusión seleccionado si existe en el POST
+                                                    $excluidoSeleccionado = isset($_GET['excluido']) ? $_GET['excluido'] : null;
+                                                    
+                                                   // Verificar si el checkbox debe estar marcado: solo si excluido es distinto de "23" y excluido no es "no"
+                                                            $excluirChecked = ($excluidoSeleccionado !== "23" && $excluidoSeleccionado !== "no") ? "checked" : "";
+
+                                                            // Consulta SQL para obtener todos los motivos de exclusión
+                                                            $queryMotivos = "SELECT idexclu, motivo FROM _junta_motivosexclusion";
+                                                            $resultMotivos = sqlsrv_query($conn, $queryMotivos);
+
+                                                            // Verificar si se encontraron registros de motivos de exclusión
+                                                            if ($resultMotivos && sqlsrv_has_rows($resultMotivos)) {
+                                                               // Generar el botón "Excluir Inscripción"
+                                                                    echo "<div style='display: flex; align-items: center;'>"; // Crear un contenedor flexible
+                                                                    echo "<label for='excluir' style='margin-right: 10px; margin-bottom: -3px;'>Excluir Inscripción</label>";
+
+                                                                    // Mostrar el checkbox y verificar si debe estar marcado
+                                                                    echo "<input type='checkbox' id='excluir' name='excluido_checkbox' onchange='toggleMotivosExclusion()' style='transform: scale(0.9); margin-right: 10px;' $excluirChecked>";
+
+                                                                    // Mostrar el menú desplegable de motivos de exclusión (visible si excluido != "23" y excluido != "no")
+                                                                    $display = ($excluidoSeleccionado !== "23" && $excluidoSeleccionado !== "no") ? "block" : "none";
+                                                                    echo "<select id='motivosExclusion' name='excluido' style='display: $display; width: 600px;'>"; // Ajusta el ancho según necesites
+                                                                    echo "<option value=''>Seleccione un motivo de exclusión</option>";
+
+                                                                    // Iterar sobre los resultados y generar las opciones del menú desplegable
+                                                                    while ($rowMotivo = sqlsrv_fetch_array($resultMotivos, SQLSRV_FETCH_ASSOC)) {
+                                                                        // Verificar si este motivo es el seleccionado
+                                                                        $selected = ($rowMotivo['idexclu'] == $excluidoSeleccionado) ? "selected" : "";
+                                                                        echo "<option value='" . $rowMotivo['idexclu'] . "' $selected>" . $rowMotivo['motivo'] . "</option>";
+                                                                    }
+
+                                                                    echo "</select>";
+                                                                    echo "</div>"; // Cerrar el contenedor flexible
+
+                                                                // Añadir el script para mostrar u ocultar el menú desplegable
+                                                                echo "<script>
+                                                                function toggleMotivosExclusion() {
+                                                                    var select = document.getElementById('motivosExclusion');
+                                                                    var checkbox = document.getElementById('excluir');
+                                                                    if (checkbox.checked) {
+                                                                        select.style.display = 'block';
+                                                                    } else {
+                                                                        select.style.display = 'none';
+                                                                        select.selectedIndex = 0; // Reiniciar selección cuando se desmarca el checkbox
+                                                                    }
+                                                                }
+
+                                                                // Mostrar el menú desplegable si el checkbox ya está marcado al cargar la página
+                                                                window.onload = function() {
+                                                                    var checkbox = document.getElementById('excluir');
+                                                                    if (checkbox.checked) {
+                                                                        document.getElementById('motivosExclusion').style.display = 'block';
+                                                                    }
+                                                                };
+                                                                </script>";
+                                                            } else {
+                                                                echo "No se encontraron motivos de exclusión en la base de datos.";
+                                                            }
                                                 echo "</table>"; // Cierre de la tabla
                                                 
                                               
-                                              echo"<br>";
+                                           
                                               
                                               // Generar los campos adicionales para "Titulares", inicialmente ocultos
                                               echo "<tr id='titularesRow' style='display: none;'>";
@@ -1478,7 +1502,7 @@ $(document).ready(function() {
         if (tipoSelect.value === 'Permanente') {
         }else if (tipoSelect.value === 'Titulares'){
           archivo='ActualizarMovimientosTitulares.php';
-        }else if (tipoSelect.value === 'Interinato'){
+        }else if (tipoSelect.value === 'Interinatos'){
           archivo='ActualizarMovimientosTransitoria.php';
 
         }else if (tipoSelect.value === 'Concurso'){

@@ -70,6 +70,8 @@ try {
     $publicaciones = validate_numeric($_POST['publicaciones']);
     $otrosantecedentes = validate_numeric($_POST['otrosantecedentes']);
 
+    $excluido = validate_numeric($_POST['excluido']);
+    
    
 
     // Consulta SQL para actualizar los datos
@@ -119,9 +121,13 @@ try {
         o_g_d = :o_g_d, 
         residencia = :residencia, 
         publicaciones = :publicaciones, 
-        otrosantecedentes = :otrosantecedentes
+        otrosantecedentes = :otrosantecedentes,
+        excluido = :excluido
 
     WHERE id2 = :id2";
+  
+  
+
 
     // Preparar la declaración
     $stmt = $conexion->prepare($consulta);
@@ -172,6 +178,7 @@ try {
     $stmt->bindParam(':residencia', $residencia, PDO::PARAM_STR);
     $stmt->bindParam(':publicaciones', $publicaciones, PDO::PARAM_STR);
     $stmt->bindParam(':otrosantecedentes', $otrosantecedentes, PDO::PARAM_STR);
+    $stmt->bindParam(':excluido', $excluido, PDO::PARAM_STR);
 
 
     $stmt->bindParam(':id2', $id2, PDO::PARAM_INT);

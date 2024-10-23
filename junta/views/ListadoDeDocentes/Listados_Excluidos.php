@@ -38,6 +38,14 @@ $modalidad = isset($_GET['modalidad']) ? $_GET['modalidad'] : '';
 
 
 $tipo = isset($_GET['tipoc']) ? $_GET['tipoc'] : '';
+
+// Verificar si el tipo es "transitorio" y cambiarlo a "interinato"
+if ($tipo == 'transitorio') {
+    $tipo = 'interinatos';
+}
+
+
+
 $localidad = isset($_GET['localidad']) ? $_GET['localidad'] : '';// ver
 
 
@@ -45,7 +53,7 @@ $anio = isset($_GET['year']) ? $_GET['year'] : '';
 $nota = isset($_GET['nota']) ? $_GET['nota'] : '';
 $titulo = isset($_GET['titulo']) ? $_GET['titulo'] : '';
 $subtitulo = isset($_GET['subtitulo']) ? $_GET['subtitulo'] : '';
-$establecimiento = isset($_POST['itemCode']) ? $_POST['itemCode'] : '';// ver 
+$establecimiento = isset($_GET['item_select']) ? $_GET['item_select'] : '';// ver 
 
 
 
@@ -57,7 +65,7 @@ FROM [Junta].[dbo].[_junta_dependencias] where coddep= '$establecimiento'";
 // Preparar la consulta parametrizada para obtener datos de la tabla _junta_modalidades
 // Validar que $codmod sea un número entero antes de convertirlo
 $codmod =  (int)$codmod; // Si no es un número entero, se asigna 0
-$establecimiento =(int)$establecimiento;// Si es numérico
+//$establecimiento =(int)$establecimiento;// Si es numérico
 $anio = (int)$anio; // Si es numérico
 try {
     // Crear una instancia de la clase Cconexion
@@ -75,24 +83,35 @@ try {
         INNER JOIN
             [Junta].[dbo].[_junta_docentes] j_doc ON j_mov.legdoc = j_doc.legajo
         INNER JOIN 
-        [Junta].[dbo].[_junta_motivosexclusion] j_motexc ON j_mov.excluido = j_motexc.idexclu
-
+            [Junta].[dbo].[_junta_motivosexclusion] j_motexc ON j_mov.excluido = j_motexc.idexclu
         INNER JOIN 
-        [Junta].[dbo].[_junta_modalidades] J_mod ON j_mod.codmod = j_mov.codmod
+            [Junta].[dbo].[_junta_modalidades] J_mod ON j_mod.codmod = j_mov.codmod
         WHERE
-            j_mov.excluido <> '23'  and tipo = '$tipo' and anodoc = $anio and codloc='$localidad' ";
+            (j_mov.excluido <> '23' AND j_mov.excluido <> 'no') 
+            AND tipo = '$tipo' 
+            AND anodoc = $anio 
+            AND codloc = '$localidad'";
 
-         if ($tipo == 'titulares') {
-            $query .= " AND establecimiento = $establecimiento  ORDER BY j_doc.apellidoynombre, j_mov.puntajetotal desc, j_mov.serviciosprovincia desc, j_mov.promedio desc, j.mov.antiguedadgestion desc, j_mov.antiguedadtitulo desc, j_doc.fechatit desc";
-         
-        }else{
-            
-            $query .= "ORDER BY j_doc.ApellidoyNombre, j_mov.puntajetotal desc, j_mov.serviciosprovincia desc, j_mov.promedio desc, j_mov.antiguedadgestion desc, j_mov.antiguedadtitulo desc, j_doc.fechatit desc";
-          
-        }
+if ($tipo == 'titulares') {
+    $query .= " AND establecimiento = $establecimiento  
+                ORDER BY j_doc.ApellidoyNombre, 
+                         j_mov.puntajetotal DESC, 
+                         j_mov.serviciosprovincia DESC, 
+                         j_mov.promedio DESC, 
+                         j_mov.antiguedadgestion DESC, 
+                         j_mov.antiguedadtitulo DESC, 
+                         j_doc.fechatit DESC";
+} else {
+    $query .= " ORDER BY j_doc.ApellidoyNombre, 
+                         j_mov.puntajetotal DESC, 
+                         j_mov.serviciosprovincia DESC, 
+                         j_mov.promedio DESC, 
+                         j_mov.antiguedadgestion DESC, 
+                         j_mov.antiguedadtitulo DESC, 
+                         j_doc.fechatit DESC";
+}
 
-        var_dump($query);
-        exit;
+       
         // Preparar la consulta
         $stmt = $conn->prepare($query);
         
@@ -108,10 +127,14 @@ try {
        
         $pdf->AddPage();
         // Encabezado del PDF
-        $pdf->SetFont('Arial', '', 28);
-        $pdf->Cell(250, 15, $_GET["titulo"] . ' EXCLUIDOS', 0, 0, "L");
-        $pdf->SetFont('Arial', 'I', 8);
-        $pdf->Cell(90, 3, utf8_decode('JUNTA DE CLASIFICACIÓN Y DISCIPLINA NIVEL'), 0, 1, "C");
+      // Imprimir "EXCLUIDOS" en una línea
+        $pdf->SetFont('Arial', 'I', 8);  // Cambia el tamaño y el estilo de la fuente
+        $pdf->Cell(250, 15, 'EXCLUIDOS', 0, 1, "L");  // El '1' aquí es importante para forzar el salto de línea
+
+        // Imprimir el título en la línea siguiente
+        $pdf->SetFont('Arial', '', 12);  // Cambia la fuente de nuevo si lo necesitas
+        $pdf->Cell(250, 15, $_GET["titulo"], 0, 1, "L");  // El '1' nuevamente fuerza un salto de línea
+        $pdf->Cell(90, 3,utf8_decode('JUNTA DE CLASIFICACIÓN Y DISCIPLINA NIVEL'), 0, 1, "C");
         $pdf->Cell(250, 3, '', 0, 0, "L");
         $pdf->Cell(90, 3, 'INICIAL, PRIMARIO, MODALIDAD Y GABINETE', 0, 1, "C");
         $pdf->Cell(250, 3, '', 0, 0, "L");
@@ -176,7 +199,7 @@ try {
                     $this->SetFont('Arial', '', 28);
                     $this->Cell(250, 15, $_GET["titulo"] . ' EXCLUIDOS', 0, 0, "L");
                     $this->SetFont('Arial', 'I', 8);
-                    $this->Cell(90, 3, 'JUNTA DE CLASIFICACIÓN Y DISCIPLINA NIVEL', 0, 1, "C");
+                    $this->Cell(90, 3, utf8_decode('JUNTA DE CLASIFICACIÓN Y DISCIPLINA NIVEL'), 0, 1, "C");
                     $this->Cell(250, 3, '', 0, 0, "L");
                     $this->Cell(90, 3, 'INICIAL, PRIMARIO, MODALIDAD Y GABINETE', 0, 1, "C");
                     $this->Cell(250, 3, '', 0, 0, "L");
@@ -190,7 +213,7 @@ try {
                         $this->SetFont('Arial', 'I', 6);
                         $this->Cell(90, 3, 'Tierra del Fuego', 0, 1, "C");
                     } else {
-                        $this->Cell(90, 3, 'Thorne N 1949 Depto 8 (9420) Río Grande', 0, 1, "C");
+                        $this->Cell(90, 3,  utf8_decode('Thorne N 1949 Depto 8 (9420) Río Grande'), 0, 1, "C");
                         $this->SetFont('Arial', 'I', 10);
                         $this->Cell(250, 15, $_GET["subtitulo"], 0, 0, "L");
                         $this->SetFont('Arial', 'I', 6);
@@ -251,8 +274,8 @@ try {
             $pdf->Cell(16, 5, $row['legdoc'], 1, 0, 'C');
             $pdf->Cell(70, 5, $row['ApellidoyNombre'], 1, 0, 'L');
             $pdf->Cell(25, 5, $row['dni'], 1, 0, 'C');
-            $pdf->Cell(120, 5, substr($row['nommod'], 0, 40), 1, 0, 'C');
-            $pdf->Cell(100, 5, $row['motivo'], 1, 0, 'C');
+            $pdf->Cell(120, 5, utf8_decode(substr($row['nommod'], 0, 40)), 1, 0, 'C');
+            $pdf->Cell(100, 5, utf8_decode($row['motivo']), 1, 0, 'C');
             $nroOrden++; // Incrementar el contador
             $contador++;
             $pdf->Ln();
@@ -261,7 +284,7 @@ try {
         }
     
         $pdf->SetFont('Arial', '', 9);
-        $pdf->Cell(350,5,"Todas las modalidades en un mismo listado",1,1,'C');
+        $pdf->Cell(341,5,"Todas las modalidades en un mismo listado",1,1,'C');
         // Salida del PDF
         ob_end_clean();
              

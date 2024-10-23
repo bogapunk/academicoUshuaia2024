@@ -618,7 +618,7 @@ $(document).ready(function() {
       }
 
       // SQL query to retrieve dependencies
-      $sql = "SELECT nomdep FROM _junta_dependencias";
+      $sql = "SELECT nomdep,coddep FROM _junta_dependencias";
 
       // Execute query
       $result = sqlsrv_query($conn, $sql);
@@ -635,8 +635,10 @@ $(document).ready(function() {
           // Loop through results and create options
           while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
               $itemName = $row['nomdep'];
-              echo "<option value='" . htmlspecialchars($itemName, ENT_QUOTES | ENT_XML1, 'UTF-8') . "'>$itemName</option>";
-          }
+              $itemCode = $row['coddep'];  // Get codep
+             
+              echo "<option value='" . htmlspecialchars($itemCode, ENT_QUOTES | ENT_XML1, 'UTF-8') . "'>" . htmlspecialchars($itemName, ENT_QUOTES | ENT_XML1, 'UTF-8') . "</option>";
+            }
 
           echo "</select>";
       } else {
@@ -1117,6 +1119,8 @@ function procesarFormulario(event) {
   const selectProvinciales = document.querySelector("select[name='nomdep']").value;
   const selectLocalidad = document.getElementById('localidad').value;
 
+  const selectEstablecimiento = document.getElementById('item_select').value;
+
   let url = 'ListarListadosDeDocentes.php'; // URL por defecto
 
   if (!chkExcluidos && chkNormal && selectProvinciales === '' && selectLocalidad !== '' && selectLocalidad !== 'Antartida') {
@@ -1167,6 +1171,8 @@ function procesarFormulario(event) {
  
 
   let anexo = document.getElementById('anexo').value;
+
+  let item_select = document.getElementById('item_select').value;
   
    
   window.location.href = url + '?modalidad=' + modalidadSelecionadaText + 
@@ -1178,6 +1184,7 @@ function procesarFormulario(event) {
                        '&subtitulo=' + subtitulo +
                        '&disposicion=' + disposicion +
                        '&anexo=' + anexo +
+                       '&item_select=' + item_select + 
                       '&tipoc=' + tipoc ; // Redirige a la URL deseada
 
 

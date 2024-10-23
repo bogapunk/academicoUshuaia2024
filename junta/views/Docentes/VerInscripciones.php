@@ -470,7 +470,7 @@ if ($conn === false) {
 
 
 // Ejecutar la consulta SQL
-$queryData = "SELECT j_doc.apellidoynombre, j_doc.legajo, j_mov.legdoc, j_mov.anodoc, j_mov.codmod, j_mov.establecimiento, j_mod.nommod, j_dep.coddep, j_dep.nomdep, j_mov.puntajetotal, j_mov.tipo, j_mov.fecha, j_mov.obs, j_mov.horas, j_mov.id2
+$queryData = "SELECT j_doc.apellidoynombre, j_doc.legajo, j_mov.legdoc, j_mov.anodoc, j_mov.codmod, j_mov.establecimiento, j_mod.nommod, j_dep.coddep, j_dep.nomdep, j_mov.puntajetotal, j_mov.tipo, j_mov.fecha, j_mov.obs, j_mov.horas, j_mov.id2,j_mov.excluido
 FROM _junta_docentes j_doc
 INNER JOIN _junta_movimientos j_mov ON j_doc.legajo = j_mov.legdoc
 LEFT JOIN _junta_modalidades j_mod ON j_mov.codmod = j_mod.codmod 
@@ -522,50 +522,65 @@ if (isset($_GET['legajo'])) {
         echo "<h2>Docente: " . $nombreDocente . "</h2>";
         
         $resultData = sqlsrv_query($conn, $queryData);
-        if ($resultData === false) {
-            die(print_r(sqlsrv_errors(), true)); // Imprimir errores si la consulta falla
-        }
-        echo "<a href='javascript:void(0);' onclick='history.go(-1); location.reload();' class='btn btn-success'>Actualizar</a>";
-
-        // Ejecutar la consulta original y mostrar los resultados en la tabla
-        if (sqlsrv_has_rows($resultData)) {
-            echo "<table border='1'>";
-            echo "<tr>";
-            echo "<th style='text-align: center;'>Año</th>";
-            echo "<th style='text-align: center;'>Código Modalidad</th>";
-            echo "<th style='text-align: center;'>Descripción</th>";
-            echo "<th style='text-align: center;'>Establecimiento</th>";
-            echo "<th style='text-align: center;'>Puntaje Total</th>";
-            echo "<th style='text-align: center;'>Tipo Inscripcion</th>";
-            echo "<th style='text-align: center;width: 150px;'>Fecha</th>";
-            echo "<th style='text-align: center; width: 235px;'>Opciones</th>";
-            echo "</tr>";
-
-            $odd = true;
-
-            while ($row = sqlsrv_fetch_array($resultData, SQLSRV_FETCH_ASSOC)) {
-                $color = $odd ? '#FFFFFF' : '#F2F2F2';
-                $odd = !$odd;
-
-                echo "<tr style='background-color: $color;'>";
-                echo "<td style='text-align: center;'>" . $row['anodoc'] . "</td>";
-                echo "<td style='text-align: center;'>" . $row['codmod'] . "</td>";
-                echo "<td style='text-align: center;'>" . $row['nommod'] . "</td>";
-                echo "<td style='text-align: center;'>" . (($row['nomdep'] == '-' || empty($row['nomdep']) || $row['establecimiento'] == 0) ? "No tiene establecimiento asignado" : $row['nomdep']) . "</td>";
-                echo "<td style='text-align: center;'>" . $row['puntajetotal'] . "</td>";
-                echo "<td style='text-align: center;'>" . $row['tipo'] . "</td>";
-                echo "<td style='text-align: center;'>";
-                if ($row['fecha'] !== null) {
-                    echo $row['fecha']->format('d-m-Y');
-                } else {
-                    echo "Fecha no disponible";
-                }
-                if (isset($row['fecha']) && $row['fecha'] !== null) {
-                  $encodedFecha = urlencode($row['fecha']->format('Y-m-d'));
-              } else {
-                  $encodedFecha = '';
+              if ($resultData === false) {
+                  die(print_r(sqlsrv_errors(), true)); // Imprimir errores si la consulta falla
               }
-              
+
+              // Mostrar el botón de actualización
+              echo "<a href='javascript:void(0);' onclick='history.go(-1); location.reload();' class='btn btn-success'>Actualizar</a>";
+
+              // Ejecutar la consulta original y mostrar los resultados en la tabla
+              if (sqlsrv_has_rows($resultData)) {
+                  echo "<table border='1'>";
+                  echo "<tr>";
+                  echo "<th style='text-align: center;'>Año</th>";
+                  echo "<th style='text-align: center;'>Código Modalidad</th>";
+                  echo "<th style='text-align: center;'>Descripción</th>";
+                  echo "<th style='text-align: center;'>Establecimiento</th>";
+                  echo "<th style='text-align: center;'>Puntaje Total</th>";
+                  echo "<th style='text-align: center;'>Tipo Inscripción</th>";
+                  echo "<th style='text-align: center;width: 150px;'>Fecha</th>";
+                  echo "<th style='text-align: center; width: 235px;'>Opciones</th>";
+                  echo "</tr>";
+
+                  $odd = true;
+
+                  while ($row = sqlsrv_fetch_array($resultData, SQLSRV_FETCH_ASSOC)) {
+                      $tipo = $row['tipo'];  // Valor del tipo
+                      $color = '';
+
+                      // Asignar el color según el valor de 'tipo'
+                      if ($tipo == 'Permanente'  || $tipo == 'permanente') {
+                          $color = '#A3D9A5';  // Verde claro para "Permanente"
+                      } elseif ($tipo == 'Concurso' ||$tipo == 'concurso' ) {
+                          $color = '#F9D423';  // Amarillo para "Concurso"
+                      } elseif ($tipo == 'Interinatos'|| $tipo == 'interinatos'  || $tipo == 'transitorio' ) {
+                          $color = '#FF6B6B';  // Rojo para "Interinato"
+                      } elseif ($tipo == 'Titulares'|| $tipo == 'titulares' ) {
+                          $color = '#4A90E2';  // Azul para "Titulares"
+                      } else {
+                          // Si no es ninguno de los anteriores, puedes usar un color por defecto
+                          $color = $odd ? '#FFFFFF' : '#F2F2F2';  // Alternar colores si el tipo es otro
+                      }
+
+                      $odd = !$odd;
+
+                      // Imprimir la fila de la tabla con el color de fondo asignado
+                      echo "<tr style='background-color: $color;'>";
+                      echo "<td style='text-align: center;'>" . $row['anodoc'] . "</td>";
+                      echo "<td style='text-align: center;'>" . $row['codmod'] . "</td>";
+                      echo "<td style='text-align: center;'>" . $row['nommod'] . "</td>";
+                      echo "<td style='text-align: center;'>" . (($row['nomdep'] == '-' || empty($row['nomdep']) || $row['establecimiento'] == 0) ? "No tiene establecimiento asignado" : $row['nomdep']) . "</td>";
+                      echo "<td style='text-align: center;'>" . $row['puntajetotal'] . "</td>";
+                      echo "<td style='text-align: center;'>" . $row['tipo'] . "</td>";
+                      echo "<td style='text-align: center;'>";
+
+                      // Mostrar la fecha de la inscripción (si existe)
+                      if ($row['fecha'] !== null) {
+                          echo $row['fecha']->format('d-m-Y');
+                      } else {
+                          echo "Fecha no disponible";
+                      }
 
 
                 
@@ -595,9 +610,10 @@ if (isset($_GET['legajo'])) {
                                     $encodedHoras = isset($row['horas']) ? urlencode((string) $row['horas']) : '';
                                     $encodedAnodoc = isset($row['anodoc']) ? urlencode((string) $row['anodoc']) : '';
                                     $encodedId2 = isset($row['id2']) ? urlencode((string) $row['id2']) : '';
+                                    $encodedexcluido = isset($row['excluido']) ? urlencode((string) $row['excluido']) : '';
 
                                     // El resto del código
-                                    echo "<a href='Inscripcion.php?legajo=" . $encodedLegajo . "&codmod=" . $encodedCodmod . "&tipo=" . $encodedTipo . "&nomdep=" . $encodedNomdep . "&obs=" . $encodedObs . "&horas=" . $encodedHoras . "&anodoc=" . $encodedAnodoc . "&id2=" . $encodedId2 . "&fecha=" . $encodedFecha . "' class='btn btn-success' title='Modificar'>";
+                                    echo "<a href='Inscripcion.php?legajo=" . $encodedLegajo . "&codmod=" . $encodedCodmod . "&tipo=" . $encodedTipo . "&nomdep=" . $encodedNomdep . "&obs=" . $encodedObs . "&horas=" . $encodedHoras . "&anodoc=" . $encodedAnodoc . "&id2=" . $encodedId2 . "&fecha=" . $encodedFecha . "&excluido=" . $encodedexcluido . "' class='btn btn-success' title='Modificar'>";
                 
                 echo "<span class='glifo glifo-lápiz'></span> Modificar";
                 echo "</a>";
