@@ -527,7 +527,7 @@ if (isset($_GET['legajo'])) {
               }
 
               // Mostrar el botón de actualización
-              echo "<a href='javascript:void(0);' onclick='history.go(-1); location.reload();' class='btn btn-success'>Actualizar</a>";
+              echo "<a href='javascript:void(0);' onclick='history.go(-1); location.reload();' class='btn btn-success' title='Actualizar Tabla'>Actualizar Tabla</a>";
 
               // Ejecutar la consulta original y mostrar los resultados en la tabla
               if (sqlsrv_has_rows($resultData)) {
@@ -712,7 +712,7 @@ function determinarColor($tipo) {
 
 
 <center>
-  <a href="./ListarDocentes.php" class="btn btn-success">Volver atrás</a>
+  <a href="./ListarDocentes.php" class="btn btn-success"> <i class="glyphicon glyphicon-arrow-left"></i> Volver atrás</a>
 </center>
 
   <?php include('footer2.php');?>

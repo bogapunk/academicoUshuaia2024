@@ -434,7 +434,7 @@ if (sqlsrv_has_rows($stmt)) {
         echo "<tr>";
         echo "<td>$legajo</td>";
         echo "<td>$apellidoynombre</td>";
-        echo "<td><center><button type='button' onclick='showDetails($legajo)' class='detalle-button'><i class='glyphicon glyphicon-list-alt'></i>  Detalle</button></center></td>";
+        echo "<td><center><button type='button' onclick='showDetails($legajo)' title='detalle docente' class='detalle-button'><i class='glyphicon glyphicon-list-alt'></i>  Detalle</button></center></td>";
         echo "</tr>";
 
         // Detalles del docente (oculto por defecto)
@@ -662,14 +662,17 @@ if (sqlsrv_has_rows($resultData)) {
     }
     
     // Botones de acción
-    echo "<th>";
-    echo "<div style='text-align: center;'>";
-    echo "<a class='btn btn-sm btn-danger' id='movimientoBorrado' href='#' data-id2='" . $row['id2'] . "' title='Eliminar'><i class='glyphicon glyphicon-trash'></i> Eliminar</a>";
-    echo "<button type='button' class='btn btn-success' id='grabarBtn'><i class='glyphicon glyphicon-refresh'></i> Grabar</button>";
-    echo "<button type='button' class='btn btn-primary' id='cancelarBtn'><i class='glyphicon glyphicon-remove'></i> Volver</button>";
-    echo "</div>";
-    echo "</th>";
-    echo "</tr>";
+            echo "<th>";
+            echo "<div style='text-align: center;'>";
+            echo "<a class='btn btn-sm btn-danger' id='movimientoBorrado' href='#' data-id2='" . $row['id2'] . "' title='Eliminar' style='width: 120px; display: inline-block; margin-right: 0px;'><i class='glyphicon glyphicon-trash'></i> Eliminar</a>";
+            echo"<button type='button' class='btn btn-success'  id='btnActualizar' title='Grabar'><i class='glyphicon glyphicon-floppy-disk'></i> Grabar</button>";
+            echo "<button type='button' class='btn btn-primary' id='cancelarBtn' title='volver' style='width: 120px; display: inline-block;'> <i class='glyphicon glyphicon-arrow-left'></i> Volver</button>";
+            echo "</div>";
+            
+            echo "</th>";
+            echo "</tr>";
+    
+    
    // Código de modalidad
         echo "<tr>";
         echo "<th>Cód. Mod: <input type='text' name='codmod' id='codmod' value='" . $row['codmod'] . "' size='8' onchange='fetchModalidad()'></th>";
@@ -725,24 +728,24 @@ function fetchModalidad() {
 
     // Tipo de inscripción
     echo "<th>Tipo Inscripción:";
-    echo "<select name='tipo' id='tipo' style='width: 190px;' onchange='mostrarCamposAdicionales(); showTableBasedOnType();'>";
+    echo "<select name='tipo' id='tipo' style='width: 200px;' onchange='mostrarCamposAdicionales(); showTableBasedOnType();'>";
     echo "<option value='Permanente'";
-    if (trim($row['tipo']) == "Permanente") {
+    if (trim($row['tipo']) == "Permanente" || trim($row['tipo']) == "permanente") {
         echo " selected";
     }
     echo ">Permanente</option>";
     echo "<option value='Titulares'";
-    if (trim($row['tipo']) == "Titulares") {
+    if (trim($row['tipo']) == "Titulares" || trim($row['tipo']) == "titulares") {
         echo " selected";
     }
     echo ">Titulares</option>";
     echo "<option value='Interinatos'";
-    if (trim($row['tipo']) == "Interinatos") {
+    if (trim($row['tipo']) == "Interinatos" || trim($row['tipo']) == "transitorio" ) {
         echo " selected";
     }
     echo ">Interinatos y Suplencias</option>";
     echo "<option value='Concurso'";
-    if (trim($row['tipo']) == "Concurso") {
+    if (trim($row['tipo']) == "Concurso" || trim($row['tipo']) == "concurso") {
         echo " selected";
     }
     echo ">Concurso de Titularidad</option>";
@@ -832,7 +835,7 @@ $options = [
 
 // Tipo de inscripción
 echo "<th>Tipo Inscripción:";
-echo "<select name='tipo' id='tipo' style='width: 190px;' onchange='mostrarCamposAdicionales(); showTableBasedOnType();'>";
+echo "<select name='tipo' id='tipo' style='width: 242px;' onchange='mostrarCamposAdicionales(); showTableBasedOnType();'>";
 
 foreach ($options as $value => $label) {
     echo "<option value='$value'";
@@ -1419,7 +1422,8 @@ echo "<br>";
 echo "</td></tr>";
 
 echo "</table>";
-echo"<button type='button' class='btn btn-info'  id='btnActualizar'>Actualizar</button>";
+echo "<br>";
+echo"<button type='button' class='btn btn-info' title='Actulizar Registro'  id='btnActualizar'><i class='glyphicon glyphicon-refresh'></i> Actualizar</button>";
 // JavaScript para mostrar u ocultar las tablas según el tipo seleccionado
 echo "<script>";
 echo "document.addEventListener('DOMContentLoaded', function() {";
@@ -1479,7 +1483,7 @@ echo "</script>";
              
               echo "</form>";
               echo "<center>";
-              echo" <a href='javascript:history.back()' class='btn btn-success'>Volver atrás</a>";
+              echo" <a href='javascript:history.back()' class='btn btn-success'><i class='glyphicon glyphicon-arrow-left'></i> Volver atrás</a>";
             echo "</center>";
             
          

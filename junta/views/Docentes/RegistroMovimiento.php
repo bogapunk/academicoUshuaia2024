@@ -543,7 +543,7 @@ if (sqlsrv_has_rows($stmt)) {
         echo "<tr>";
         echo "<td>{$legajo}</td>";
         echo "<td>{$apellidoynombre}</td>";
-        echo "<td><button type='button' onclick='showDetails(\"$legajo\")' class='detalle-button'>Detalle</button></td>";
+        echo "<td><button type='button' onclick='showDetails(\"$legajo\")' class='detalle-button' title='Detalle del Docente'> <i class='glyphicon glyphicon-list-alt'></i> Detalle</button></td>";
         echo "</tr>";
 
         // Detalles del docente (oculto por defecto)
@@ -1221,7 +1221,9 @@ function toggleMotivosExclusion(checkbox) {
     </table>
 
   
-    <input class="btn btn-success" type="submit" value="Guardar">
+    <button class="btn btn-success" title="Guardar Registro" type="submit">
+    <i class="glyphicon glyphicon-floppy-disk"></i> Guardar
+</button>
     
 </form>
 
@@ -1230,7 +1232,7 @@ function toggleMotivosExclusion(checkbox) {
 
 
 <center>
-  <a href="javascript:history.back()" class="btn btn-success">Volver atrás</a>
+  <a href="javascript:history.back()" class="btn btn-success"> <i class="glyphicon glyphicon-arrow-left"></i> Volver atrás</a>
 </center>
 
 
