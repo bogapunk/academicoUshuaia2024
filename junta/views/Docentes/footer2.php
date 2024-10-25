@@ -129,7 +129,7 @@ body{
 <div class="panel panel-default">
 <div class="panel-heading">
   <ul class="nav nav-pills">
-<center><div class="panel-footer"><a href="" target="_blank">Agencia de innovacion</a>
+<center><div class="panel-footer"><a href="" target="_blank">Agencia de Innovación </a>
 <center><img src="../../imagenes/pie_footer.png" width="50" height="50"></center>
 
 </div>
@@ -137,7 +137,8 @@ body{
  
   <li>
   <div class="card-body d-flex justify-content-between align-items-left">
-  <a href="../../MiCuenta.php?logoutSubmit=1"   class="btn btn-primary">Cerrar Sesion</a>
+  <a href="../../MiCuenta.php?logoutSubmit=1"   class="btn btn-primary">Cerrar Sesión 
+  </a>
 
 
 </div>
