@@ -527,7 +527,7 @@ if (isset($_GET['legajo'])) {
               }
 
               // Mostrar el botón de actualización
-              echo "<a href='javascript:void(0);' onclick='history.go(-1); location.reload();' class='btn btn-success' title='Actualizar Tabla'>Actualizar Tabla</a>";
+              echo "<a href='javascript:void(0);' onclick='history.go(-1); location.reload();' class='btn btn-success' title='Actualizar Tabla'><i class='glyphicon glyphicon-refresh'></i> Actualizar Tabla</a>";
 
               // Ejecutar la consulta original y mostrar los resultados en la tabla
               if (sqlsrv_has_rows($resultData)) {
@@ -592,7 +592,7 @@ if (isset($_GET['legajo'])) {
                     }
                                     echo "</td>";
                                     echo "<td style='text-align: center;'>";
-                                    echo "<a class='btn btn-sm btn-danger movimientoBorrado' href='#' data-id2='" . htmlspecialchars($row['id2'], ENT_QUOTES, 'UTF-8') . "' title='Eliminar'><i class='glifo glifo-trash'></i> Eliminar</a>";
+                                    echo "<a class='btn btn-sm btn-danger movimientoBorrado' href='#' data-id2='" . htmlspecialchars($row['id2'], ENT_QUOTES, 'UTF-8') . "' title='Eliminar'><i class='glyphicon glyphicon-trash'></i>  Eliminar</a>";
 
 
                                     // Asegúrate de que las variables sean cadenas antes de aplicar urlencode
@@ -615,7 +615,7 @@ if (isset($_GET['legajo'])) {
                                     // El resto del código
                                     echo "<a href='Inscripcion.php?legajo=" . $encodedLegajo . "&codmod=" . $encodedCodmod . "&tipo=" . $encodedTipo . "&nomdep=" . $encodedNomdep . "&obs=" . $encodedObs . "&horas=" . $encodedHoras . "&anodoc=" . $encodedAnodoc . "&id2=" . $encodedId2 . "&fecha=" . $encodedFecha . "&excluido=" . $encodedexcluido . "' class='btn btn-success' title='Modificar'>";
                 
-                echo "<span class='glifo glifo-lápiz'></span> Modificar";
+                echo "<span class='glifo glifo-lápiz'></span><i class='glyphicon glyphicon-pencil'></i>  Modificar";
                 echo "</a>";
                 echo "</td>";
                 
