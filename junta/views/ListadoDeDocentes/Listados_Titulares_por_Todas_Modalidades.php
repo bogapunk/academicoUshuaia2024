@@ -47,7 +47,7 @@ $nota = isset($_GET['nota']) ? $_GET['nota'] : '';
 
 $titulo = isset($_GET['titulo']) ? $_GET['titulo'] : '';
 $subtitulo = isset($_GET['subtitulo']) ? $_GET['subtitulo'] : '';
-$establecimiento = isset($_POST['itemCode']) ? $_POST['itemCode'] : '';// ver 
+$establecimiento = isset($_GET['item_select']) ? $_GET['item_select'] : '';// ver 
 
 
 $disposicion =isset($_GET['disposicion']) ? $_GET['disposicion'] : '';
@@ -82,15 +82,25 @@ try {
 
 
 if($conn){
-    $query = "SELECT *,(j_mov.titulo + j_mov.otrosantecedentes) as totalodn1
-     FROM
-            [Junta].[dbo].[_junta_movimientos] j_mov
-        INNER JOIN
-            [Junta].[dbo].[_junta_docentes] j_doc ON j_mov.legdoc = j_doc.legajo
-        WHERE
-             (j_mov.excluido = '23'or j_mov.excluido = 'no') AND anodoc = $anio AND  establecimiento = $establecimiento ORDER BY j_mov.codmod, j_mov.puntajetotal DESC, totalodn1 DESC, j_mov.concepto DESC, j_mov.serviciosprovincia DESC, j_mov.promedio DESC, j_mov.antiguedadgestion DESC, j_mov.antiguedadtitulo DESC, j_doc.fechatit DESC";
-     
-     
+                $query = "SELECT *,
+                (COALESCE(j_mov.titulo, '') + COALESCE(j_mov.otrosantecedentes, '')) AS totalodn1
+            FROM
+                [Junta].[dbo].[_junta_movimientos] j_mov
+            INNER JOIN
+                [Junta].[dbo].[_junta_docentes] j_doc ON j_mov.legdoc = j_doc.legajo
+            WHERE
+                (j_mov.excluido = '23' OR j_mov.excluido = 'no' OR j_mov.excluido IS NULL) 
+                AND anodoc = $anio 
+                AND establecimiento = $establecimiento 
+                AND codloc = '$localidad' 
+            ORDER BY j_mov.codmod, j_mov.puntajetotal DESC, totalodn1 DESC,
+                j_mov.concepto DESC, j_mov.serviciosprovincia DESC,
+                j_mov.promedio DESC, j_mov.antiguedadgestion DESC,
+                j_mov.antiguedadtitulo DESC, j_doc.fechatit DESC";
+         
+
+
+        
         // Preparar la consulta
         $stmt = $conn->prepare($query);
                 
@@ -166,9 +176,23 @@ if($conn){
         
         $pdf->SetFont('Arial', 'B', 0); // Cambiado a Arial
         // Inicializar una variable para almacenar la modalidad actual
+        function formatearNumero($numero) {
+            // Convertir a número flotante
+            $numeroFloat = floatval($numero);
+            
+            // Verificar si el número tiene parte decimal
+            if (floor($numeroFloat) == $numeroFloat) {
+                // Es un entero, retornar como entero sin decimales
+                return intval($numeroFloat);
+            } else {
+                // Es un decimal, retornar con dos decimales
+                return number_format($numeroFloat, 2);
+            }
+        }
         $modalidad_actual = '';
         foreach ($results as $row) {
-           
+            $codmod = htmlspecialchars($row['codmod'], ENT_QUOTES, 'UTF-8');
+               
             if ($row['codmod'] !== $modalidad_actual) {
                // Imprimir la modalidad junto con su nombre
                
@@ -180,23 +204,27 @@ if($conn){
                                 $stmt_modalidad = $conn->prepare($sql_modalidad);
 
                                 // Asignar el valor del código de modalidad
-                                $stmt_modalidad->bindValue(':codmod', $row['codmod'], PDO::PARAM_INT);
+                                $stmt_modalidad->bindValue(':codmod', utf8_decode($row['codmod']), PDO::PARAM_INT);
 
                                 // Ejecutar la consulta
                                 $stmt_modalidad->execute();
 
                                 // Obtener el nombre de la modalidad
                                 $nombre_modalidad = $stmt_modalidad->fetchColumn();
-
+                                  
+                                 // Convertir el nombre a UTF-8 si es necesario antes de imprimir en el PDF
+                                  $nombre_modalidad = utf8_decode($nombre_modalidad);
+                                 
                                 // Imprimir la modalidad junto con su nombre
-                                $pdf->Cell(350, 8, 'Modalidad ' . $row['codmod'] . ' - ' . $nombre_modalidad, 1, 0, "C");
+                             
+                                $pdf->Cell(345, 8, 'Modalidad: ' . $row['codmod'] . ' - ' . $nombre_modalidad, 1, 0, "C");
 
 
                    // $pdf->Cell(325, 8, 'Modalidad ' . $row['codmod'] . ' - ' . $row['nommod'], 1, 0, "C");
                    
                     $pdf->Ln();
-                    $modalidad_actual = $row['codmod']; // Actualizar la modalidad actual
-
+                    $modalidad_actual = utf8_decode($row['codmod']); // Actualizar la modalidad actual
+                
                      // Imprimir encabezado de la tabla
                                 $pdf->SetFont('Arial', '', 10);
                                 $pdf->Cell(7, 5, "N", 1, 0, "C");
@@ -217,22 +245,27 @@ if($conn){
                                 $contador = 1; // Reiniciar el contador de filas
                             }
 
+                            
+
                             // Imprimir detalles del docente
                             $pdf->Cell(7, 5, $contador, 1, 0, "C");
                             $pdf->Cell(15, 5, $row['legdoc'], 1, 0, "C");
-                            $pdf->Cell(75, 5, $row['ApellidoyNombre'], 1, 0, "L");
+                            $pdf->Cell(75, 5, utf8_decode($row['ApellidoyNombre']), 1, 0, "L");
                             $wobs = $row['obs'] != "" ? $row['obs'] : "";
                             $pdf->Cell(40, 5, $wobs, 1, 0, "C");
                             $pdf->Cell(12, 5, $row['horas'], 1, 0, "C");
                             $pdf->Cell(22, 5, $row['dni'], 1, 0, "C");
-                            $pdf->Cell(14, 5, $row['titulo'], 1, 0, "C");
-                            $pdf->Cell(12, 5, $row['concepto'], 1, 0, "C");
-                            $pdf->Cell(20, 5, $row['serviciosprovincia'], 1, 0, "C");
-                            $pdf->Cell(20, 5, $row['otrosservicios'], 1, 0, "C");
-                            $pdf->Cell(20, 5, $row['residencia'], 1, 0, "C");
-                            $pdf->Cell(20, 5, $row['publicaciones'], 1, 0, "C");
-                            $pdf->Cell(23, 5, $row['otrosantecedentes'], 1, 0, "C");
-                            $pdf->Cell(15, 5, $row['puntajetotal'], 1, 0, "C");
+                            
+                            // Aplicar formateo antes de imprimir cada valor
+                                    $pdf->Cell(14, 5, formatearNumero($row['titulo']), 1, 0, "C");
+                                    $pdf->Cell(12, 5, formatearNumero($row['concepto']), 1, 0, "C");
+                                    $pdf->Cell(20, 5, formatearNumero($row['serviciosprovincia']), 1, 0, "C");
+                                    $pdf->Cell(20, 5, formatearNumero($row['otrosservicios']), 1, 0, "C");
+                                    $pdf->Cell(20, 5, formatearNumero($row['residencia']), 1, 0, "C");
+                                    $pdf->Cell(20, 5, formatearNumero($row['publicaciones']), 1, 0, "C");
+                                    $pdf->Cell(23, 5, formatearNumero($row['otrosantecedentes']), 1, 0, "C");
+                                    $pdf->Cell(15, 5, formatearNumero($row['puntajetotal']), 1, 0, "C");
+
                             $pdf->Cell(30, 5, " ", 1, 0, "C");
 
                             // Si hay igualdad de mérito, marcar con un asterisco
@@ -257,7 +290,7 @@ if($conn){
                                 }
                                 
                                 $pdf->SetFont('Arial', '', 12);
-                                $pdf->Cell(350, 5, $textoT, 1, 1, 'C');
+                                $pdf->Cell(345, 5, $textoT, 1, 1, 'C');
                                 
                                 // Salida del PDF
                                 ob_end_clean();

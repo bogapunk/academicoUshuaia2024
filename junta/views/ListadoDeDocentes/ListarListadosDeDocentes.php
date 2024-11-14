@@ -1119,62 +1119,49 @@ function procesarFormulario(event) {
   const selectProvinciales = document.querySelector("select[name='nomdep']").value;
   const selectLocalidad = document.getElementById('localidad').value;
 
-  const selectEstablecimiento = document.getElementById('item_select').value;
-
+  // Selección del <select> con name="nomdep2"
+  const selectEstablecimiento = document.querySelector("select[name='nomdep2']").value;
+  
   let url = 'ListarListadosDeDocentes.php'; // URL por defecto
 
   if (!chkExcluidos && chkNormal && selectProvinciales === '' && selectLocalidad !== '' && selectLocalidad !== 'Antartida') {
     url = 'Listados_Normales.php';
-} else if (!chkExcluidos && chkNormal && selectProvinciales === '' && selectLocalidad === 'Antartida') {
+  } else if (!chkExcluidos && chkNormal && selectProvinciales === '' && selectLocalidad === 'Antartida') {
     url = 'Listados_Antartida.php';
-} else if (!chkExcluidos && chkTodasModalidadesTitulares && selectProvinciales === '') {
+  } else if (!chkExcluidos && chkTodasModalidadesTitulares && selectProvinciales === '') {
     url = 'Listados_Titulares_por_Todas_Modalidades.php';
-} else if (!chkExcluidos && chkModalidadCiudadUnificada && selectProvinciales === '') {
+  } else if (!chkExcluidos && chkModalidadCiudadUnificada && selectProvinciales === '') {
     url = 'Listado_4.php';
-} else if (!chkExcluidos && chkTitularesModalidadCiudadSinEstablecimiento && selectProvinciales === '') {
+  } else if (!chkExcluidos && chkTitularesModalidadCiudadSinEstablecimiento && selectProvinciales === '') {
     url = 'Listado_4.php';
-} else if (!chkExcluidos && chkComplementariosCiudadSinEstablecimientoTitulares && selectProvinciales === '') {
+  } else if (!chkExcluidos && chkComplementariosCiudadSinEstablecimientoTitulares && selectProvinciales === '') {
     url = 'Listado_4.php';
-} else if (!chkExcluidos && chkNormal && selectProvinciales !== '') {
+  } else if (!chkExcluidos && chkNormal && selectProvinciales !== '') {
     url = 'Listados_Provinciales.php';
-} else if (chkExcluidos && selectProvinciales === '' && selectLocalidad === 'Antartida') {
+  } else if (chkExcluidos && selectProvinciales === '' && selectLocalidad === 'Antartida') {
     url = 'Listado_Antartida_Excluido.php';
-} else if (chkExcluidos) {
+  } else if (chkExcluidos) {
     url = 'Listados_Excluidos.php';
-}
+  }
+
   const modalidadSelecionada = document.getElementById('modalidad_select');
   const codmod = modalidadSelecionada.value;
-    const modalidadSelecionadaIndex = modalidadSelecionada.selectedIndex;
-    const modalidadSelecionadaText = modalidadSelecionada.options[modalidadSelecionadaIndex].text;
-  
-
+  const modalidadSelecionadaIndex = modalidadSelecionada.selectedIndex;
+  const modalidadSelecionadaText = modalidadSelecionada.options[modalidadSelecionadaIndex].text;
 
   let localidad = document.getElementById('localidad').value;
-
-
   let year = document.getElementById('year').value;
- 
   let nota = document.getElementById('nota').value;
- 
   let titulo = document.getElementById('titulo').value;
-  
-
   let subtitulo = document.getElementById('subtitulo').value;
- 
- 
-
   let tipoc = document.getElementById('tipoc').value;
-
-
   let disposicion = document.getElementById('disposicion').value;
-
- 
-
   let anexo = document.getElementById('anexo').value;
 
-  let item_select = document.getElementById('item_select').value;
-  
-   
+  // Obtener el valor de "item_select" (coddep)
+  const item_select = document.querySelector("select[name='nomdep2']").value;
+
+  // Redirigir a la URL con los parámetros
   window.location.href = url + '?modalidad=' + modalidadSelecionadaText + 
                        '&codmod=' + codmod + 
                        '&year=' + year + 
@@ -1185,10 +1172,7 @@ function procesarFormulario(event) {
                        '&disposicion=' + disposicion +
                        '&anexo=' + anexo +
                        '&item_select=' + item_select + 
-                      '&tipoc=' + tipoc ; // Redirige a la URL deseada
-
-
-
+                       '&tipoc=' + tipoc;
 }
 
 

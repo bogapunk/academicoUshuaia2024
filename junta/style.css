@@ -53,19 +53,36 @@ h2 {
 .login-form input[type="email"],
 .login-form input[type="password"] {
     border: none; /* Remove default border */
-    border-bottom: 1px solid #ccc; /* Add underline border */
+    border-bottom: 2px solid #ccc; /* Thicker underline for better visibility */
     background-color: transparent; /* Transparent background */
-    padding: 10px 0; /* Adjust padding for a comfortable fit */
+    padding: 12px 0; /* Adjust padding for a more comfortable fit */
     font-size: 16px; /* Adjust font size */
     outline: none; /* Remove default outline */
-    width: 45%; /* Make the input element fill the container */
-    transition: border-color 0.3s ease-in-out; /* Smooth transition for border color */
+    width: 100%; /* Make the input element fill the container */
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for border color and shadow */
+    color: #333; /* Dark text color for readability */
 }
 
 .login-form input[type="text"]:focus,
 .login-form input[type="email"]:focus,
 .login-form input[type="password"]:focus {
     border-color: #42a5f5; /* Change border color to blue on focus */
+    box-shadow: 0 2px 5px rgba(66, 165, 245, 0.3); /* Subtle shadow on focus for better visibility */
+}
+
+.login-form input[type="text"]::placeholder,
+.login-form input[type="email"]::placeholder,
+.login-form input[type="password"]::placeholder {
+    color: #aaa; /* Lighter placeholder text */
+    font-style: italic; /* Italicize placeholder text */
+}
+
+@media (max-width: 768px) {
+    .login-form input[type="text"],
+    .login-form input[type="email"],
+    .login-form input[type="password"] {
+        width: 90%; /* Make input fields wider on smaller screens */
+    }
 }
 
 .regisFrm textarea {

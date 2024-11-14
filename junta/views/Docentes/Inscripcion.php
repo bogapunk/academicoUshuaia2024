@@ -326,7 +326,7 @@ tr:nth-child(even) {
 </head>
 <body>
   <div class="container">
-    <center><h1>Inscripciones De Docentes</h1></center>
+    <center><h1><u>Inscripcion de Docente</u></h1></center>
     <center><h3>(Actualizacion)</h3></center>
 <br>
 
@@ -462,9 +462,9 @@ if (sqlsrv_has_rows($stmt)) {
         echo "</tr>";
         echo "<tr id='details_info_$legajo' style='display:none'>";
         if ($row['fingreso'] !== null) {
-          echo "<td>Residencia::</td><td colspan='2'>" . $row['fingreso']->format('d/m/Y') . "</td>";
+          echo "<td>Residencia:</td><td colspan='2'>" . $row['fingreso']->format('d/m/Y') . "</td>";
       } else {
-          echo "<td>Residencia::</td><td colspan='2'>No disponible</td>";
+          echo "<td>Residencia:</td><td colspan='2'>No disponible</td>";
       }
        
        
@@ -1029,29 +1029,27 @@ echo "</script>";
                                               echo "<tr id='titularesRow' style='display: none;'>";
                                               
                                               // Realiza la consulta para obtener los nombres de los establecimientos
-                                              $queryEstablecimientos = "SELECT nomdep,coddep FROM _junta_dependencias";
-                                              $resultEstablecimientos = sqlsrv_query($conn, $queryEstablecimientos);
-                                              
-                                              // Muestra el campo de selección con los nombres de los establecimientos
-                                              echo "<th>Establecimiento: <select name='establecimiento'  style='width: 200px;' >";
-                                              
-                                              // Itera sobre los resultados de la consulta
-                                              while ($rowEstablecimiento = sqlsrv_fetch_array($resultEstablecimientos, SQLSRV_FETCH_ASSOC)) {
-                                                  $nombreEstablecimiento = $rowEstablecimiento['nomdep'];
-                                                  $codEstablecimiento = $rowEstablecimiento['coddep'];
+                                             // Realiza la consulta para obtener los nombres de los establecimientos
+                                                $queryEstablecimientos = "SELECT nomdep, coddep FROM _junta_dependencias";
+                                                $resultEstablecimientos = sqlsrv_query($conn, $queryEstablecimientos);
 
-                                              
-                                                  // Verificar si el tipo de inscripción es "titulares" u otra opción deseada
-                                                  if (trim($row['tipo']) == "titulares" || trim($row['tipo']) == "otra_opcion_deseada") {
-                                                      // Si es "titulares" o la otra opción deseada, preselecciona el establecimiento
-                                                      echo "<option value='$codEstablecimiento' selected>$nombreEstablecimiento</option>";
-                                                  } else {
-                                                      // De lo contrario, agrega la opción sin preselección
-                                                      echo "<option value='$codEstablecimiento'>$nombreEstablecimiento</option>";
-                                                  }
-                                              }
-                                              
-                                              echo "</select></th>";
+                                                // Muestra el campo de selección con los nombres de los establecimientos
+                                                echo "<th>Establecimiento: <select name='establecimiento' style='width: 200px;'>";
+
+                                                // Itera sobre los resultados de la consulta
+                                                while ($rowEstablecimiento = sqlsrv_fetch_array($resultEstablecimientos, SQLSRV_FETCH_ASSOC)) {
+                                                    $nombreEstablecimiento = $rowEstablecimiento['nomdep'];
+                                                    $codEstablecimiento = $rowEstablecimiento['coddep'];
+                                                    
+                                                    // Verifica si el establecimiento actual coincide con el valor recibido
+                                                    $selected = ($nombreEstablecimiento === $receivedNomdep) ? "selected" : "";
+
+                                                    // Genera la opción del select, incluyendo "selected" si es la opción preseleccionada
+                                                    echo "<option value='$codEstablecimiento' $selected>$nombreEstablecimiento</option>";
+                                                }
+
+                                                // Cierra el select
+                                                echo "</select></th>";
                             
                                               echo "<td>Observación: <input type='text' id='obs' name='obs' style='width: 300px;' value='" . htmlspecialchars($obs) . "'></td>";
                                               echo "<td>Horas: <input type='number' name='horas' style='width: 50px;' value='" . htmlspecialchars($horas) . "'></td>";
@@ -1422,8 +1420,10 @@ echo "<br>";
 echo "</td></tr>";
 
 echo "</table>";
+
 echo "<br>";
-echo"<button type='button' class='btn btn-info' title='Actulizar Registro'  id='btnActualizar'><i class='glyphicon glyphicon-refresh'></i> Actualizar</button>";
+echo"<button type='button' class='btn btn-info' title='Actulizar Registro'  id='btnActualizar2'><i class='glyphicon glyphicon-refresh'></i> Actualizar</button>";
+
 // JavaScript para mostrar u ocultar las tablas según el tipo seleccionado
 echo "<script>";
 echo "document.addEventListener('DOMContentLoaded', function() {";
@@ -1483,7 +1483,7 @@ echo "</script>";
              
               echo "</form>";
               echo "<center>";
-              echo" <a href='javascript:history.back()' class='btn btn-success'><i class='glyphicon glyphicon-arrow-left'></i> Volver atrás</a>";
+              echo" <a href='javascript:history.back()' class='btn btn-success' title='Volver'><i class='glyphicon glyphicon-arrow-left'></i> Volver atrás</a>";
             echo "</center>";
             
          
@@ -1493,7 +1493,7 @@ echo "</script>";
                 <?php include('footer2.php');?>
                 <script>
 $(document).ready(function() {
-    $('#btnActualizar').click(function(event) {
+    $('#btnActualizar, #btnActualizar2').click(function(event) {
         event.preventDefault(); // Evitar el envío tradicional del formulario
 
         var datos = $('#miFormulario').serialize(); // Serializa los datos del formulario
@@ -1521,7 +1521,7 @@ $(document).ready(function() {
             success: function(response) {
                 // Maneja la respuesta del servidor aquí
                 console.log(response); // Muestra la respuesta en la consola para depuración
-                alert("Actualización exitosa: " + response);
+                alert("Datos actualizados y guardados con éxito: " + response);
             },
             error: function(xhr, status, error) {
                 // Maneja errores de la solicitud AJAX

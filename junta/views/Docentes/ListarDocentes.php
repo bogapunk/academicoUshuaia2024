@@ -249,6 +249,20 @@ tr:nth-child(even) {
 }
 
 
+/* Fondo predeterminado para el botón Ver y otros botones */
+.btn-custom {
+    background-color: #17a2b8; /* Color predeterminado del botón Ver */
+    border-color: #17a2b8;
+    color: white;
+}
+
+/* Cambiar a color negro al pasar el cursor sobre los botones */
+.btn-custom:hover, .btn-success:hover, .btn-danger:hover, .btn-primary:hover {
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+    color: #ffffff !important;
+}
+
 </style>
 <link rel="icon" type="./image/png" href="./imagenes/escudo-32x32.png">
 <!DOCTYPE html>
@@ -700,14 +714,24 @@ if ($legajo != '' || $dni != '' || $ApellidoyNombre != '') {
                             ?>
                         </center>
                     </td>
+                    
                     <td>
                         <center>
-                            <a class="btn btn-sm btn-success" href="?action=editar&id2=<?= htmlspecialchars($row['id2']) ?>" title="Editar">
-                                <i class="glyphicon glyphicon-edit"></i> Editar
-                            </a>
-                            <a class="btn btn-sm btn-danger" href="?action=eliminar&id2=<?= htmlspecialchars($row['id2']) ?>" title="Borrar" onclick="return myConfirm4();">
-                                <i class="glyphicon glyphicon-trash"></i> Borrar
-                            </a>
+                       
+                                <a class="btn btn-sm btn-success" href="?action=editar&id2=<?= htmlspecialchars($row['id2']) ?>" title="Editar legajos">
+                                    <i class="glyphicon glyphicon-edit"></i> Editar
+                                </a>
+                                <a class="btn btn-sm btn-danger" href="?action=eliminar&id2=<?= htmlspecialchars($row['id2']) ?>" title="Borrar legajo" onclick="return myConfirm4();">
+                                    <i class="glyphicon glyphicon-trash"></i> Borrar
+                                </a>
+                                <a href="VerInscripciones.php?legajo=<?= htmlspecialchars($row['Legajo']) ?>" title="Ver Inscripcion legajos" class="btn btn-custom btn-sm">
+                                    <span class="glyphicon glyphicon-eye-open"></span> Ver 
+                                </a>
+                                <a href="RegistroMovimiento.php?legajo=<?= htmlspecialchars($row['Legajo']) ?>" title="Agregar Inscripcion" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-plus"></span> Agregar 
+                                </a>
+
+
                         </center>
                     </td>
                 </tr>

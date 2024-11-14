@@ -470,7 +470,7 @@ if ($conn === false) {
 
 
 // Ejecutar la consulta SQL
-$queryData = "SELECT j_doc.apellidoynombre, j_doc.legajo, j_mov.legdoc, j_mov.anodoc, j_mov.codmod, j_mov.establecimiento, j_mod.nommod, j_dep.coddep, j_dep.nomdep, j_mov.puntajetotal, j_mov.tipo, j_mov.fecha, j_mov.obs, j_mov.horas, j_mov.id2,j_mov.excluido
+$queryData = "SELECT j_doc.apellidoynombre, j_doc.legajo, j_mov.legdoc, j_mov.anodoc, j_mov.codmod, j_mov.establecimiento, j_mod.nommod, j_dep.coddep, j_dep.nomdep, j_mov.puntajetotal, j_mov.tipo, j_mov.fecha, j_mov.obs, j_mov.horas, j_mov.id2,j_mov.excluido,j_mov.codloc
 FROM _junta_docentes j_doc
 INNER JOIN _junta_movimientos j_mov ON j_doc.legajo = j_mov.legdoc
 LEFT JOIN _junta_modalidades j_mod ON j_mov.codmod = j_mod.codmod 
@@ -540,7 +540,7 @@ if (isset($_GET['legajo'])) {
                   echo "<th style='text-align: center;'>Puntaje Total</th>";
                   echo "<th style='text-align: center;'>Tipo Inscripción</th>";
                   echo "<th style='text-align: center;width: 150px;'>Fecha</th>";
-                  echo "<th style='text-align: center; width: 235px;'>Opciones</th>";
+                  echo "<th style='text-align: center; width: 330px;'>Opciones</th>";
                   echo "</tr>";
 
                   $odd = true;
@@ -571,7 +571,9 @@ if (isset($_GET['legajo'])) {
                       echo "<td style='text-align: center;'>" . $row['codmod'] . "</td>";
                       echo "<td style='text-align: center;'>" . $row['nommod'] . "</td>";
                       echo "<td style='text-align: center;'>" . (($row['nomdep'] == '-' || empty($row['nomdep']) || $row['establecimiento'] == 0) ? "No tiene establecimiento asignado" : $row['nomdep']) . "</td>";
-                      echo "<td style='text-align: center;'>" . $row['puntajetotal'] . "</td>";
+                      echo "<td style='text-align: center;'>" . number_format($row['puntajetotal'], 2, '.', ',') . "</td>";
+
+
                       echo "<td style='text-align: center;'>" . $row['tipo'] . "</td>";
                       echo "<td style='text-align: center;'>";
 
@@ -611,13 +613,30 @@ if (isset($_GET['legajo'])) {
                                     $encodedAnodoc = isset($row['anodoc']) ? urlencode((string) $row['anodoc']) : '';
                                     $encodedId2 = isset($row['id2']) ? urlencode((string) $row['id2']) : '';
                                     $encodedexcluido = isset($row['excluido']) ? urlencode((string) $row['excluido']) : '';
-
+                                    $codloc = isset($row['codloc']) ? $row['codloc'] : '';
+                                    // Asegúrate de que $codloc esté correctamente asignado antes de codificarlo
+                                    $encodedCodloc = urlencode($codloc);
                                     // El resto del código
-                                    echo "<a href='Inscripcion.php?legajo=" . $encodedLegajo . "&codmod=" . $encodedCodmod . "&tipo=" . $encodedTipo . "&nomdep=" . $encodedNomdep . "&obs=" . $encodedObs . "&horas=" . $encodedHoras . "&anodoc=" . $encodedAnodoc . "&id2=" . $encodedId2 . "&fecha=" . $encodedFecha . "&excluido=" . $encodedexcluido . "' class='btn btn-success' title='Modificar'>";
-                
-                echo "<span class='glifo glifo-lápiz'></span><i class='glyphicon glyphicon-pencil'></i>  Modificar";
-                echo "</a>";
-                echo "</td>";
+                                    echo "<a href='Inscripcion.php?legajo=" . $encodedLegajo . "&codmod=" . $encodedCodmod . "&tipo=" . $encodedTipo . "&nomdep=" . $encodedNomdep . "&obs=" . $encodedObs . "&horas=" . $encodedHoras . "&anodoc=" . $encodedAnodoc . "&id2=" . $encodedId2 . "&fecha=" . $encodedFecha . "&excluido=" . $encodedexcluido . "' class='btn btn-success' title='Modificar' style='margin-right: 10px;'>";
+                                    echo "<span class='glifo glifo-lápiz'></span><i class='glyphicon glyphicon-pencil'></i>  Modificar";
+                                    echo "</a>";
+                                    
+                                    $encodedCodloc = urlencode($codloc); // Codificar correctamente el valor de codloc
+
+                                    echo "<a href='Duplicar.php?legajo=" . $encodedLegajo . 
+                                    "&codmod=" . $encodedCodmod . 
+                                    "&tipo=" . $encodedTipo . 
+                                    "&nomdep=" . $encodedNomdep . 
+                                    "&obs=" . $encodedObs . 
+                                    "&horas=" . $encodedHoras . 
+                                    "&anodoc=" . $encodedAnodoc . 
+                                    "&id2=" . $encodedId2 . 
+                                    "&fecha=" . $encodedFecha . 
+                                    "&excluido=" . $encodedexcluido . 
+                                    "&codloc=" . $encodedCodloc . "' 
+                                    class='btn btn-warning' title='Duplicar'>";
+                                    echo "<span class='glifo glifo-lápiz' style='margin-right: 8px;'></span><i class='glyphicon glyphicon-copy'></i>  Duplicar";
+                                    echo "</a>";
                 
 
                 echo "</tr>";
@@ -719,4 +738,3 @@ function determinarColor($tipo) {
 </body>
 </html>
 
-./ListarDependencias.php

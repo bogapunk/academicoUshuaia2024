@@ -315,7 +315,7 @@ try {
         $legajo = isset($_POST['legajo']) ? $_POST['legajo'] : '';
         // Recoger el tipo de carga del formulario
         $tipoc = isset($_POST['tipoc']) ? $_POST['tipoc'] : '';
-
+        
         // Verificar si el legajo está vacío
         if (empty($legajo)) {
             throw new Exception("El campo legajo está vacío.");
@@ -437,7 +437,7 @@ try {
                 $params_insert = array(
                     $anodoc, $legajo, $codmod, $establecimiento, $puntajetotal, $promedio, $T_m_anio, $T_m_seccion, $T_m_grupo, $T_m_ciclo, $T_m_recupera, $T_d_pu, $T_d_3, $T_d_2, $T_d_1, $T_d_biblio, $T_d_gabi, $T_d_seccoortec, $T_d_supsectec, $T_d_supesc, $T_d_supgral, $T_d_adic, $O_g_a, $O_g_b, $O_g_c, $O_g_d, $codloc, $tipoc,$obs,$horas,$otitulo,$concepto,$antiguedadgestion,$antiguedadtitulo,$titulo,$serviciosprovincia, $T_m_comple, $T_m_biblio,$T_m_gabinete,$T_m_sec1,$T_m_sec2,$T_m_viced,$otrosservicios,$residencia,$publicaciones,$otrosantecedentes
                 );
-
+                 
                
             } else {
                 throw new Exception("Tipo de carga inválido.");
