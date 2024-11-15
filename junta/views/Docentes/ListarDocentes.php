@@ -575,13 +575,26 @@ try {
     <h2><u>Buscador de Datos</u></h2>
     <form method="GET" action="">
         <div class="form-row">
-            <div class="form-group col-md-4">
+        <div class="form-group col-md-4">
                 <label for="legajo">Legajo</label>
-                <input type="text" class="form-control" id="legajo" name="legajo" placeholder="Ingrese Legajo">
+                <input type="number" 
+                   class="form-control" 
+                   id="legajo" 
+                   name="legajo" 
+                   placeholder="Ingrese Legajo" 
+                   onpaste="return false;">
+        </div>
             </div>
             <div class="form-group col-md-4">
                 <label for="dni">DNI</label>
-                <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese DNI">
+             
+                  <input type="number" 
+                   class="form-control" 
+                   id="dni" 
+                   name="dni" 
+                   placeholder="Ingrese DNI" 
+                   onpaste="return false;">
+
             </div>
             <div class="form-group col-md-4">
                 <label for="apellido">Apellido y Nombre</label>
@@ -596,6 +609,7 @@ try {
                               <button type="submit" class="btn btn-warning">
                                   <i class="glyphicon glyphicon-search"></i> Buscar
                               </button>
+                               
                           </div>
                       </form>
                      
@@ -617,6 +631,22 @@ try {
 });
     </script>
 
+<script>
+    document.getElementById('legajo').addEventListener('input', function (e) {
+        this.value = this.value.replace(/[^0-9]/g, ''); // Elimina todo excepto números
+    });
+
+    document.getElementById('dni').addEventListener('input', function (e) {
+        this.value = this.value.replace(/[^0-9]/g, ''); // Elimina todo excepto números
+    });
+</script>
+
+<script>
+    // Función para limpiar la tabla
+    function clearResults() {
+        document.getElementById("resultBody").innerHTML = '';  // Limpia el contenido de la tabla
+    }
+</script>
 
 <!--
 <div class="container-fluid">
@@ -767,5 +797,10 @@ if ($legajo != '' || $dni != '' || $ApellidoyNombre != '') {
       .val("");
   });
 </script>
-
+<script>
+    // Función para limpiar la tabla
+    function clearResults() {
+        document.getElementById("resultBody").innerHTML = '';  // Limpia el contenido de la tabla
+    }
+</script>
 <?php include('footer2.php');?>
