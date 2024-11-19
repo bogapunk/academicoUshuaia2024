@@ -389,18 +389,18 @@ try {
                
                         <tr>
                             <th style="text-align:left;font-size:1.2em;">Legajo</th>
-                            <td><input type="number" name="legajo" value="<?php echo $doc->__GET('legajo'); ?>" class="form-control" /></td>
+                            <td><input type="number" name="legajo" value="<?php echo $doc->__GET('legajo'); ?>" class="form-control" required /></td>
                         </tr>
 
                          <tr>
                             <th style="text-align:left;">Apellido y Nombre</th>
-                            <td><input type="text" name="apellidoynombre" value="<?php echo $doc->__GET('apellidoynombre'); ?>" class="form-control"/></td>
+                            <td><input type="text" name="apellidoynombre" value="<?php echo $doc->__GET('apellidoynombre'); ?>" class="form-control" required /></td>
                         </tr>
 
 
                         <tr>
                             <th style="text-align:left;">dni</th>
-                            <td><input type="number" name="dni" value="<?php echo $doc->__GET('dni'); ?>" class="form-control"/></td>
+                            <td><input type="number" name="dni" value="<?php echo $doc->__GET('dni'); ?>" class="form-control" required/></td>
                         </tr>
                         <tr>
                             <th style="text-align:left;">domicilio</th>
@@ -507,12 +507,12 @@ try {
                         <tr>
               
                             <td colspan="2">
-                             <center><button type="submit" class="btn btn-primary" onclick="return myConfirm();"><i class="glyphicon glyphicon-floppy-saved"> Cargar</i></button>&nbsp;&nbsp;
+                             <center><button type="submit" class="btn btn-primary" onclick="return myConfirm();" title="Cagar Docente"><i class="glyphicon glyphicon-floppy-saved"> Cargar</i></button>&nbsp;&nbsp;
                             
-                                <button class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR"><i class="glyphicon glyphicon-erase"> Limpiar</i></button>
+                                <button class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR" title="Limapiar Datos"><i class="glyphicon glyphicon-erase"> Limpiar</i></button>
                             
                             <center><b>Numero de Legajo:</b><?php echo $doc->__GET('legajo');// aca te faltaba poner los echo para que se muestre el valor de la variable.  ?></center>
-                            <a href="VerInscripciones.php?legajo=<?php echo $doc->__GET('legajo'); ?>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span>  Ver Inscripciones</a>
+                            <a href="VerInscripciones.php?legajo=<?php echo $doc->__GET('legajo'); ?>" class="btn btn-success btn-sm" title="Ver Inscripcion Docente"><span class="glyphicon glyphicon-edit" ></span>  Ver Inscripciones</a>
 
                         
                             </td>
@@ -524,6 +524,12 @@ try {
 
                     </table>
                 </form>
+
+
+
+
+
+
                 <form method="GET" action="generate_pdf.php">
     <input type="hidden" name="legajo" value="<?php echo $doc->__GET('legajo'); ?>" />
     <input type="hidden" name="apellidoynombre" value="<?php echo $doc->__GET('apellidoynombre'); ?>" />
@@ -546,11 +552,28 @@ try {
     <input type="hidden" name="obsdoc" value="<?php echo $doc->__GET('obsdoc'); ?>" />
 
     <!-- Resto del formulario aquí -->
-    <a href="generate_pdf.php?legajo=<?php echo urlencode($doc->__GET('legajo')); ?>&apellidoynombre=<?php echo urlencode($doc->__GET('apellidoynombre')); ?>&dni=<?php echo urlencode($doc->__GET('dni')); ?>&domicilio=<?php echo urlencode($doc->__GET('domicilio')); ?>&lugarinsc=<?php echo urlencode($doc->__GET('lugarinsc')); ?>&fechanacim=<?php echo urlencode($doc->__GET('fechanacim')); ?>&promedioT=<?php echo urlencode($doc->__GET('promedioT')); ?>&telefonos=<?php echo urlencode($doc->__GET('telefonos')); ?>&Titulobas=<?php echo urlencode($doc->__GET('Titulobas')); ?>&fechatit=<?php echo urlencode($doc->__GET('fechatit')); ?>&otorgadopor=<?php echo urlencode($doc->__GET('otorgadopor')); ?>&finicio=<?php echo urlencode($doc->__GET('finicio')); ?>&otrostit=<?php echo urlencode($doc->__GET('otrostit')); ?>&fingreso=<?php echo urlencode($doc->__GET('fingreso')); ?>&cargosdocentes=<?php echo urlencode($doc->__GET('cargosdocentes')); ?>&faperturaleg=<?php echo urlencode($doc->__GET('faperturaleg')); ?>&Nacionalidad=<?php echo urlencode($doc->__GET('Nacionalidad')); ?>&email=<?php echo urlencode($doc->__GET('email')); ?>&obsdoc=<?php echo urlencode($doc->__GET('obsdoc')); ?>" class="btn btn-info">
-    <i class="glyphicon glyphicon-save"> Descargar Docente</i> 
+    <a href="generate_pdf.php?legajo=<?php echo urlencode($doc->__GET('legajo')); ?>&apellidoynombre=<?php echo urlencode($doc->__GET('apellidoynombre')); ?>&dni=<?php echo urlencode($doc->__GET('dni')); ?>&domicilio=<?php echo urlencode($doc->__GET('domicilio')); ?>&lugarinsc=<?php echo urlencode($doc->__GET('lugarinsc')); ?>&fechanacim=<?php echo urlencode($doc->__GET('fechanacim')); ?>&promedioT=<?php echo urlencode($doc->__GET('promedioT')); ?>&telefonos=<?php echo urlencode($doc->__GET('telefonos')); ?>&Titulobas=<?php echo urlencode($doc->__GET('Titulobas')); ?>&fechatit=<?php echo urlencode($doc->__GET('fechatit')); ?>&otorgadopor=<?php echo urlencode($doc->__GET('otorgadopor')); ?>&finicio=<?php echo urlencode($doc->__GET('finicio')); ?>&otrostit=<?php echo urlencode($doc->__GET('otrostit')); ?>&fingreso=<?php echo urlencode($doc->__GET('fingreso')); ?>&cargosdocentes=<?php echo urlencode($doc->__GET('cargosdocentes')); ?>&faperturaleg=<?php echo urlencode($doc->__GET('faperturaleg')); ?>&Nacionalidad=<?php echo urlencode($doc->__GET('Nacionalidad')); ?>&email=<?php echo urlencode($doc->__GET('email')); ?>&obsdoc=<?php echo urlencode($doc->__GET('obsdoc')); ?>" class="btn btn-info" title="Descargar PDF">
+    <i class="glyphicon glyphicon-save"> Información Docente PDF</i> 
 </a>
 </form>
+<script language="Javascript">
+    function myConfirm() {
+    // Obtener todos los campos obligatorios
+    const legajo = document.querySelector('input[name="legajo"]').value.trim();
+    const apellidoynombre = document.querySelector('input[name="apellidoynombre"]').value.trim();
+    const dni = document.querySelector('input[name="dni"]').value.trim();
 
+    // Verificar si algún campo está vacío
+    if (!legajo || !apellidoynombre || !dni) {
+        alert("Debe completar todos los campos obligatorios.");
+        return false; // Evita el envío del formulario
+    }
+
+    // Si todo está completo, muestra el mensaje de éxito
+    alert("Carga realizada con éxito!!!!!");
+    return true; // Permite el envío del formulario
+}
+    </script>
               </center>
 
               <!--Script para la impresion de docente -->
@@ -565,7 +588,7 @@ try {
                 }
               </script>
        <div>
-         <a href="RegistroDocente.php" class="btn btn-primary">
+         <a href="RegistroDocente.php" class="btn btn-primary" title="Ingrese Nuevo Docente">
                           <span class="glyphicon glyphicon-plus"></span> Nuevo Docente
                       </a>
               </div>              
@@ -598,7 +621,10 @@ try {
             </div>
             <div class="form-group col-md-4">
                 <label for="apellido">Apellido y Nombre</label>
-                <input type="text" class="form-control" id="apellido" name="ApellidoyNombre" placeholder="Ingrese Apellido y Nombre">
+                <input type="text" class="form-control" id="apellido" name="ApellidoyNombre" 
+           placeholder="Ingrese Apellido y Nombre"
+           oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s'-]/g, '')"
+           title="Solo se permiten letras, espacios, apóstrofes y guiones.">
             </div>
         </div>
       <center>
@@ -606,8 +632,8 @@ try {
                   <div class="header-buttons">
                       <form method="GET" action="" class="form-inline">
                           <div class="form-group">
-                              <button type="submit" class="btn btn-warning">
-                                  <i class="glyphicon glyphicon-search"></i> Buscar
+                              <button type="submit" class="btn btn-warning" title="Buscar Docente">
+                                  <i class="glyphicon glyphicon-search"></i>  Buscar
                               </button>
                                
                           </div>
