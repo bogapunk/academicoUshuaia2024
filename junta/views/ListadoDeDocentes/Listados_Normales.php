@@ -78,7 +78,7 @@ try {
             [Junta].[dbo].[_junta_docentes] j_doc ON j_mov.legdoc = j_doc.legajo
         WHERE
         
-            (j_mov.excluido = '23'or j_mov.excluido = 'no') and codmod= $codmod and tipo = '$tipo' and anodoc = $anio and codloc='$localidad' ";
+            (j_mov.excluido = '23'or j_mov.excluido = 'no' or  j_mov.excluido IS NULL) and codmod= $codmod and tipo = '$tipo' and anodoc = $anio and codloc='$localidad' ";
        
          if ($tipo == 'titulares') {
             $query .= " AND establecimiento = $establecimiento order by j_mov.puntajetotal desc, totalodn1 desc, j_mov.concepto desc, j_mov.serviciosprovincia desc, j_mov.promedio desc, j_mov.antiguedadgestion desc, j_mov.antiguedadtitulo desc, J_doc.fechatit desc";
@@ -89,7 +89,7 @@ try {
           
         }
          
-       
+
         // Preparar la consulta
         $stmt = $conn->prepare($query);
         

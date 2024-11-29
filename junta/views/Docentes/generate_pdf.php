@@ -1,6 +1,6 @@
 <?php
 //require_once('../tcpdf/tcpdf.php');
-require('tcpdf/tcpdf.php');
+require_once('tcpdf/tcpdf.php');
 // Crear nueva instancia de TCPDF
 $pdf = new TCPDF();
 
