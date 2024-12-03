@@ -445,6 +445,7 @@ try {
            
             // Ejecutar la consulta de inserción
             $stmt_insert = sqlsrv_query($conn, $sql_insert, $params_insert);
+            
             if ($stmt_insert === false) {
                 throw new Exception("Error al insertar datos: " . print_r(sqlsrv_errors(), true));
             } else {

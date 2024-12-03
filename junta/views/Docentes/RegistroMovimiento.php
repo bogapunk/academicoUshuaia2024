@@ -730,7 +730,17 @@ if ($conn === false) {
 }
 
 // Consulta SQL para obtener todos los establecimientos
-$queryEstablecimientos = "SELECT iddep, nomdep, coddep FROM _junta_dependencias order by coddep";
+$queryEstablecimientos = "
+    SELECT iddep, nomdep, coddep 
+    FROM _junta_dependencias 
+    ORDER BY 
+        CASE 
+            WHEN nomdep LIKE '%jardín%' THEN 1
+            WHEN nomdep LIKE '%escuela%' THEN 2
+            ELSE 3
+        END,
+        coddep;
+";
 $stmt = sqlsrv_query($conn, $queryEstablecimientos);
 
 if ($stmt === false) {
@@ -879,6 +889,7 @@ $localidades = array(); // Array para almacenar los códigos de localidades
 // Guardar los códigos de localidades en un array
 while ($rowLocalidad = sqlsrv_fetch_array($stmtLocalidades, SQLSRV_FETCH_ASSOC)) {
     $localidades[] = $rowLocalidad['codloc'];
+    
 }
 
 // Nombres de las localidades (puedes modificar según tus necesidades)
@@ -888,6 +899,8 @@ $nombreLocalidades = array(
     'TOL' => 'Tolhuin',
     'ANT' => 'Antartida'
 );
+// Asegúrate de que el array $localidades esté correctamente definido
+$localidades = ['RGD', 'USH', 'TOL', 'ANT'];  // Array de localidades, incluye 'ANT' para Antartida
 
 ?>
 

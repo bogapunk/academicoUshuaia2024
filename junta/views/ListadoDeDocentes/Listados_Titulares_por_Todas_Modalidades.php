@@ -48,7 +48,7 @@ $nota = isset($_GET['nota']) ? $_GET['nota'] : '';
 $titulo = isset($_GET['titulo']) ? $_GET['titulo'] : '';
 $subtitulo = isset($_GET['subtitulo']) ? $_GET['subtitulo'] : '';
 $establecimiento = isset($_GET['item_select']) ? $_GET['item_select'] : '';// ver 
-
+ 
 
 $disposicion =isset($_GET['disposicion']) ? $_GET['disposicion'] : '';
 $anexo =isset($_GET['anexo']) ? $_GET['anexo'] : '';
@@ -103,7 +103,7 @@ if($conn){
         
         // Preparar la consulta
         $stmt = $conn->prepare($query);
-                
+         
                 
         // Ejecutar la consulta
         $stmt->execute();
@@ -120,7 +120,11 @@ if($conn){
 
         // Encabezado del PDF
         $pdf->SetFont('Arial', '', 28);
-        $pdf->Cell(250, 15, $_GET["titulo"], 0, 0, "L");
+        //$titulo_utf8 = mb_convert_encoding($titulo, 'UTF-8', 'auto');
+       
+        $pdf->Cell(250, 15, utf8_decode($_GET["titulo"]), 0, 0, "L");
+        
+        
         $pdf->SetFont('Arial', 'I', 8);
         $pdf->Cell(90, 3,  utf8_decode('JUNTA DE CLASIFICACIÓN Y DISCIPLINA NIVEL'), 0, 1, "C");
         $pdf->Cell(250, 3, '', 0, 0, "L");
@@ -130,19 +134,20 @@ if($conn){
         if ($_GET["localidad"] === "USH") {
             $pdf->Cell(90, 3, 'Gdor. Campos N 1443 - Casa 56/57 Tira 11(9410) Ushuaia', 0, 1, "C");
             $pdf->SetFont('Arial', 'I', 18);
-            $pdf->Cell(250, 15, $_GET["subtitulo"], 0, 0, "L");
+            $pdf->Cell(250, 15, utf8_decode($_GET["subtitulo"]), 0, 0, "L");
             $pdf->SetFont('Arial', 'I', 6);
             $pdf->Cell(90, 3, 'Tierra del Fuego', 0, 1, "C");
             $pdf->SetFont('Arial', 'I', 12);
-            $pdf->Cell(250, 3, "Disposicin:  " . $_GET["disposicion"] . " Anexo: " . $_GET["anexo"], 0, 0, "R");
+           
+            $pdf->Cell(250, 3, utf8_decode("Disposición:  " . $disposicion . " Anexo: " . $anexo), 0, 0, "R");
         } else {
             $pdf->Cell(90, 3, 'Thorne N 1949 Depto 8 (9420) Rio Grande', 0, 1, "C");
             $pdf->SetFont('Arial', 'I', 10);
-            $pdf->Cell(250, 15, $_GET["subtitulo"], 0, 0, "L");
+            $pdf->Cell(250, 15, utf8_decode($_GET["subtitulo"]), 0, 0, "L");
             $pdf->SetFont('Arial', 'I', 6);
             $pdf->Cell(90, 3, 'Tierra del Fuego', 0, 1, "C");
             $pdf->SetFont('Arial', 'I', 12);
-            $pdf->Cell(250, 3, "Disposicion:  " . $_GET["disposicion"] . " Anexo: " . $_GET["anexo"], 0, 0, "R");
+            $pdf->Cell(250, 3, utf8_decode("Disposición:  " . $disposicion . " Anexo: " . $anexo), 0, 0, "R");
         }
 
         $pdf->SetFont('Arial', 'I', 10);
