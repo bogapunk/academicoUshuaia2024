@@ -58,7 +58,7 @@ $pdf->AddPage();
 
 // Contenido del PDF
 $html = <<<EOD
-<center><h1>JUNTA DE CLASIFICACION 2024 </h1></center>
+<center><h1>JUNTA DE CLASIFICACIONES 2024 </h1></center>
 <center><h2>Informacion del Docente </h2></center>
 <table border="1" cellpadding="5">
     <tr>
