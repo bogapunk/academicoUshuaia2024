@@ -58,7 +58,7 @@ $pdf->AddPage();
 
 // Contenido del PDF
 $html = <<<EOD
-<center><h1>JUNTA DE CLASIFICACION 2024 </h1></center>
+<center><h1>JUNTA DE CLASIFICACIONES 2024 </h1></center>
 <center><h2>Informacion del Docente </h2></center>
 <table border="1" cellpadding="5">
     <tr>
@@ -144,6 +144,5 @@ EOD;
 $pdf->writeHTML($html, true, false, true, false, '');
 
 // Enviar el PDF al navegador como descarga
-$pdf->Output('docente_info.pdf', '/home/hbogarin/academicoUshuaia2024/junta/pdf
-'); // 'server juntas 2024' para descargar
+$pdf->Output('docente_info.pdf', 'I'); // 'server juntas 2024' para descargar
 ?>
