@@ -144,6 +144,5 @@ EOD;
 $pdf->writeHTML($html, true, false, true, false, '');
 
 // Enviar el PDF al navegador como descarga
-$pdf->Output('docente_info.pdf', '/home/hbogarin/academicoUshuaia2024/junta/pdf
-'); // 'server juntas 2024' para descargar
+$pdf->Output('docente_info.pdf', 'I'); // 'server juntas 2024' para descargar
 ?>
