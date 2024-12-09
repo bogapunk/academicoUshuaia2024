@@ -329,7 +329,7 @@ tr:nth-child(even) {
     </script>
 
   <div class="container"> <center><h1><u><font face="
-    font-family: 'Open Sans', 'Sans-serif' COLOR="black">Datos Docentes</font></u></h1></center>
+    font-family: 'Open Sans', 'Sans-serif' COLOR="black">Datos Docente </font></u></h1></center>
     <br>
     <br>
     <!-- Brand and toggle get grouped for better mobile display -->
