@@ -26,6 +26,9 @@ RUN chmod uga+x /usr/bin/install-php-extensions \
 RUN curl -o /usr/local/bin/composer https://getcomposer.org/composer-stable.phar \
     && chmod +x /usr/local/bin/composer
 
+WORKDIR /var/www/html
+RUN composer require tecnickcom/tcpdf
+
 # Downloading and installing nodejs as well as the yarn package manager.
 RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash - \
     && apt-get install -y nodejs \
