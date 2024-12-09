@@ -1,7 +1,9 @@
 <?php
 //require_once('../tcpdf/tcpdf.php');
-require_once('tcpdf/tcpdf.php');
+//require_once('tcpdf/tcpdf.php');
 // Crear nueva instancia de TCPDF
+require_once __DIR__ . 'vendor/autoload.php';
+
 $pdf = new TCPDF();
 
 // Configuración del PDF
