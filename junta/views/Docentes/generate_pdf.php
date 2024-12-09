@@ -1,8 +1,8 @@
 <?php
-//require_once('../tcpdf/tcpdf.php');
+require_once('/home/hbogarin/tcpdf');
 //require_once('tcpdf/tcpdf.php');
 // Crear nueva instancia de TCPDF
-require_once __DIR__ . '/vendor/autoload.php';
+//require_once __DIR__ . '/vendor/autoload.php';
 
 $pdf = new TCPDF();
 
