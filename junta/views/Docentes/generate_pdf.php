@@ -1,21 +1,22 @@
 <?php
-require_once('/home/hbogarin/tcpdf/tcpdf/tcpdf.php');
-//require_once('tcpdf/tcpdf.php');
-// Crear nueva instancia de TCPDF
-//require_once __DIR__ . '/vendor/autoload.php';
+require('../ListadoDeDocentes/fpdf.php');
 
-$pdf = new TCPDF();
-
-// Configuración del PDF
-$pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Autor del Documento');
-$pdf->SetTitle('Información del Docente');
-$pdf->SetSubject('Informe del Docente');
-$pdf->SetKeywords('TCPDF, PDF, ejemplo, prueba');
-
-// Agregar una página
+// Crear una nueva instancia de FPDF
+$pdf = new FPDF();
 $pdf->AddPage();
-// Obtener los datos de la URL
+
+// Configuración del documento
+$pdf->SetTitle('Informacion del Docente');
+$pdf->SetFont('Arial', 'B', 18);
+
+// Agregar un título
+$pdf->Cell(190, 10, 'JUNTA DE CLASIFICACIONES 2024', 0, 1, 'C');
+$pdf->Cell(190, 10, 'Informacion del Docente', 0, 1, 'C');
+
+// Espacio entre el título y la tabla
+$pdf->Ln(10);
+
+// Datos de la URL
 $legajo = $_GET['legajo'];
 $apellidoynombre = $_GET['apellidoynombre'];
 $dni = $_GET['dni'];
@@ -36,115 +37,74 @@ $Nacionalidad = $_GET['Nacionalidad'];
 $email = $_GET['email'];
 $obsdoc = $_GET['obsdoc'];
 
-// Crear una nueva instancia de TCPDF
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+// Configuración de la tabla
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->SetFont('Arial', 'U', 20); // 'U' habilita el subrayado y tamaño de 18
 
-// Configuración del documento
-$pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Nombre del Autor');
-$pdf->SetTitle('Documento PDF');
-$pdf->SetSubject('Información del Docente-junta de clasificacion 2024');
+// Mostrar "Datos Personales" subrayado y centrado
+$pdf->Cell(190, 15, 'Datos Personales', 0, 1, 'C');
 
-$pdf->SetKeywords('TCPDF, PDF, docente, información');
+// Si quieres dibujar una línea debajo del texto:
+$pdf->Line(10, $pdf->GetY(), 200, $pdf->GetY()); // Línea desde 10 en X hasta 200 en X en la misma Y
+// Datos en la tabla
+$pdf->SetFont('Arial', '', 12);
+$pdf->Cell(95, 10, 'Legajo', 1, 0, 'L');
+$pdf->Cell(95, 10, $legajo, 1, 1, 'L');
 
-// Configuración de márgenes
-$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+$pdf->Cell(95, 10, 'Apellido y Nombre', 1, 0, 'L');
+$pdf->Cell(95, 10, utf8_decode($apellidoynombre), 1, 1, 'L');
 
-// Configuración de fuente
-$pdf->SetFont('helvetica', '', 12);
+$pdf->Cell(95, 10, 'DNI', 1, 0, 'L');
+$pdf->Cell(95, 10, $dni, 1, 1, 'L');
 
-// Añadir una página
-$pdf->AddPage();
+$pdf->Cell(95, 10, 'Domicilio', 1, 0, 'L');
+$pdf->Cell(95, 10, $domicilio, 1, 1, 'L');
 
-// Contenido del PDF
-$html = <<<EOD
-<center><h1>JUNTA DE CLASIFICACIONES 2024 </h1></center>
-<center><h2>Informacion del Docente </h2></center>
-<table border="1" cellpadding="5">
-    <tr>
-        <th style="text-align:left;">Legajo</th>
-        <td>{$legajo}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Apellido y Nombre</th>
-        <td>{$apellidoynombre}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">DNI</th>
-        <td>{$dni}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Domicilio</th>
-        <td>{$domicilio}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Lugar Inscripción</th>
-        <td>{$lugarinsc}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Fecha Nacimiento</th>
-        <td>{$fechanacim}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Promedio</th>
-        <td>{$promedioT}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Teléfono</th>
-        <td>{$telefonos}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Título Básico</th>
-        <td>{$Titulobas}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Fecha Título</th>
-        <td>{$fechatit}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Otorgado Por</th>
-        <td>{$otorgadopor}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Fecha Inicio Docencia</th>
-        <td>{$finicio}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Otros Títulos</th>
-        <td>{$otrostit}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Fecha Ingreso</th>
-        <td>{$fingreso}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Cargo Docente</th>
-        <td>{$cargosdocentes}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Fecha Apertura Legajo</th>
-        <td>{$faperturaleg}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Nacionalidad</th>
-        <td>{$Nacionalidad}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Email</th>
-        <td>{$email}</td>
-    </tr>
-    <tr>
-        <th style="text-align:left;">Observaciones</th>
-        <td>{$obsdoc}</td>
-    </tr>
-</table>
-EOD;
+$pdf->Cell(95, 10, 'Lugar Inscripcion', 1, 0, 'L');
+$pdf->Cell(95, 10, $lugarinsc, 1, 1, 'L');
 
-// Escribir el contenido del PDF
-$pdf->writeHTML($html, true, false, true, false, '');
+$pdf->Cell(95, 10, 'Fecha Nacimiento', 1, 0, 'L');
+$pdf->Cell(95, 10, $fechanacim, 1, 1, 'L');
 
-// Enviar el PDF al navegador como descarga
-$pdf->Output('docente_info.pdf', 'I'); // 'server juntas 2024' para descargar
+$pdf->Cell(95, 10, 'Promedio', 1, 0, 'L');
+$pdf->Cell(95, 10, $promedioT, 1, 1, 'L');
+
+$pdf->Cell(95, 10, 'Telefono', 1, 0, 'L');
+$pdf->Cell(95, 10, $telefonos, 1, 1, 'L');
+
+$pdf->Cell(95, 10, 'Titulo Basico', 1, 0, 'L');
+$pdf->Cell(95, 10, $Titulobas, 1, 1, 'L');
+
+$pdf->Cell(95, 10, 'Fecha Titulo', 1, 0, 'L');
+$pdf->Cell(95, 10, $fechatit, 1, 1, 'L');
+
+$pdf->Cell(95, 10, 'Otorgado Por', 1, 0, 'L');
+$pdf->Cell(95, 10, $otorgadopor, 1, 1, 'L');
+
+$pdf->Cell(95, 10, 'Fecha Inicio Docencia', 1, 0, 'L');
+$pdf->Cell(95, 10, $finicio, 1, 1, 'L');
+
+$pdf->Cell(95, 10, 'Otros Titulos', 1, 0, 'L');
+$pdf->Cell(95, 10, $otrostit, 1, 1, 'L');
+
+$pdf->Cell(95, 10, 'Fecha Ingreso', 1, 0, 'L');
+$pdf->Cell(95, 10, $fingreso, 1, 1, 'L');
+
+$pdf->Cell(95, 10, 'Cargo Docente', 1, 0, 'L');
+$pdf->Cell(95, 10, $cargosdocentes, 1, 1, 'L');
+
+$pdf->Cell(95, 10, 'Fecha Apertura Legajo', 1, 0, 'L');
+$pdf->Cell(95, 10, $faperturaleg, 1, 1, 'L');
+
+$pdf->Cell(95, 10, 'Nacionalidad', 1, 0, 'L');
+$pdf->Cell(95, 10, $Nacionalidad, 1, 1, 'L');
+
+$pdf->Cell(95, 10, 'Email', 1, 0, 'L');
+$pdf->Cell(95, 10, $email, 1, 1, 'L');
+
+$pdf->Cell(95, 10, 'Observaciones', 1, 0, 'L');
+$pdf->Cell(95, 10, utf8_decode($obsdoc), 1, 1, 'L');
+
+// Salida del PDF (mostrarlo en el navegador)
+$pdf->Output('docente_info.pdf', 'I');
 ?>
