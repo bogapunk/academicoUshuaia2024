@@ -1020,7 +1020,23 @@ echo "</script>";
                                               
                                               // Realiza la consulta para obtener los nombres de los establecimientos
                                              // Realiza la consulta para obtener los nombres de los establecimientos
-                                                $queryEstablecimientos = "SELECT nomdep, coddep FROM _junta_dependencias";
+                                                $queryEstablecimientos = "   SELECT iddep, nomdep, coddep
+FROM _junta_dependencias
+ORDER BY 
+    CASE 
+        WHEN nomdep COLLATE Latin1_General_CI_AI LIKE '%jardín%' THEN 1
+        WHEN nomdep COLLATE Latin1_General_CI_AI LIKE '%escuela%' THEN 2
+        ELSE 3
+    END,
+    -- Extraer el número más robustamente, eliminando texto adicional
+    TRY_CAST(
+        TRIM(REPLACE(REPLACE(REPLACE(REPLACE(
+            SUBSTRING(nomdep, PATINDEX('%[0-9]%', nomdep), LEN(nomdep)),
+            '-', ''), 'TOLHUIN', ''), 'ALMANZA', ''), 'N°', ''))
+        AS INT
+    ),
+    coddep;
+";
                                                 $resultEstablecimientos = sqlsrv_query($conn, $queryEstablecimientos);
 
                                                 // Muestra el campo de selección con los nombres de los establecimientos
@@ -1181,65 +1197,81 @@ echo "</table>";
 
 
 echo "<script>
-  function calcularPuntajeTotal2() {
+function calcularPuntajeTotal2() { 
     try {
-      // Convertir los valores de los inputs a números (float), o 0 si el campo está vacío
-      var titulo = parseFloat(document.getElementById('titulo').value) || 0,
-          otitulo = parseFloat(document.getElementById('otrostit').value) || 0,
-          concepto = parseFloat(document.getElementById('concepto').value) || 0,
-          promedio = parseFloat(document.getElementById('promedio').value) || 0,
-          antiguedadGestion = parseFloat(document.getElementById('antiguedadgestion').value) || 0,
-          antiguedadTitulo = parseFloat(document.getElementById('antiguedadtitulo').value) || 0,
-          serviciosProvincia = parseFloat(document.getElementById('serviciosprovincia').value) || 0,
-          t_m_seccion = parseFloat(document.getElementById('t_m_seccion').value) || 0,
-          t_m_anio = parseFloat(document.getElementById('t_m_anio').value) || 0,
-          t_m_grupo = parseFloat(document.getElementById('t_m_grupo').value) || 0,
-          t_m_ciclo = parseFloat(document.getElementById('t_m_ciclo').value) || 0,
-          t_m_recupera = parseFloat(document.getElementById('t_m_recupera').value) || 0,
-          t_m_comple = parseFloat(document.getElementById('t_m_comple').value) || 0,
-          t_m_biblio = parseFloat(document.getElementById('t_m_biblio').value) || 0,
-          t_m_gabinete = parseFloat(document.getElementById('T_m_gabinete').value) || 0,
-          t_m_sec1 = parseFloat(document.getElementById('T_m_sec1').value) || 0,
-          t_m_sec2 = parseFloat(document.getElementById('t_m_sec2').value) || 0,
-          t_m_viced = parseFloat(document.getElementById('t_m_viced').value) || 0,
-          t_d_pu = parseFloat(document.getElementById('t_d_pu').value) || 0,
-          t_d_3 = parseFloat(document.getElementById('t_d_3').value) || 0,
-          t_d_2 = parseFloat(document.getElementById('t_d_2').value) || 0,
-          t_d_1 = parseFloat(document.getElementById('t_d_1').value) || 0,
-          t_d_biblio = parseFloat(document.getElementById('t_d_biblio').value) || 0,
-          t_d_gabi = parseFloat(document.getElementById('t_d_gabi').value) || 0,
-          t_d_seccoortec = parseFloat(document.getElementById('t_d_seccoortec').value) || 0,
-          t_d_supsectec = parseFloat(document.getElementById('t_d_supsectec').value) || 0,
-          t_d_supesc = parseFloat(document.getElementById('t_d_supesc').value) || 0,
-          t_d_supgral = parseFloat(document.getElementById('t_d_supgral').value) || 0,
-          t_d_adic = parseFloat(document.getElementById('t_d_adic').value) || 0,
-          otrosservicios = parseFloat(document.getElementById('otrosservicios').value) || 0,
-          o_g_a = parseFloat(document.getElementById('o_g_a').value) || 0,
-          o_g_b = parseFloat(document.getElementById('o_g_b').value) || 0,
-          o_g_c = parseFloat(document.getElementById('o_g_c').value) || 0,
-          o_g_d = parseFloat(document.getElementById('o_g_d').value) || 0,
-          residencia = parseFloat(document.getElementById('residencia').value) || 0,
-          publicaciones = parseFloat(document.getElementById('publicaciones').value) || 0,
-          otrosantecedentes = parseFloat(document.getElementById('otrosantecedentes').value) || 0;
+        var getFieldValue = function(id) {
+            var element = document.getElementById(id);
+            var value = element ? element.value : '';
+            // Reemplazar la coma por punto y convertir a número
+            value = value.replace(',', '.');
+            // Validar si es un número válido, si no devolver 0
+            return !isNaN(parseFloat(value)) && value.trim() !== '' ? parseFloat(value) : 0;
+        };
 
-      // Sumar todos los valores y actualizar el campo de resultado
-      var puntajeTotal = titulo + otitulo + concepto + promedio + antiguedadGestion + antiguedadTitulo +
-                         serviciosProvincia + t_m_seccion + t_m_anio + t_m_grupo + t_m_ciclo + 
-                         t_m_recupera + t_m_comple + t_m_biblio + t_m_gabinete + t_m_sec1 + t_m_sec2 +
-                         t_m_viced + t_d_pu + t_d_3 + t_d_2 + t_d_1 + t_d_biblio + t_d_gabi + 
-                         t_d_seccoortec + t_d_supsectec + t_d_supesc + t_d_supgral + t_d_adic +
-                         otrosservicios + o_g_a + o_g_b + o_g_c + o_g_d + residencia + publicaciones +
-                         otrosantecedentes;
+        // Campos principales
+        var titulo = getFieldValue('titulo'),
+            otitulo = getFieldValue('otrostit'),
+            concepto = getFieldValue('concepto'),
+            promedio = getFieldValue('promedio'),
+            antiguedadGestion = getFieldValue('antiguedadgestion'),
+            antiguedadTitulo = getFieldValue('antiguedadtitulo'),
+            residencia = getFieldValue('residencia'),
+            publicaciones = getFieldValue('publicaciones'),
+            otrosantecedentes = getFieldValue('otrosantecedentes');
 
-      // Mostrar el puntaje total con dos decimales
-      document.getElementById('puntajetotal').value = puntajeTotal.toFixed(2);
-    } catch (e) {
-      // Si ocurre un error, mostrar 'Error'
-      document.getElementById('puntajetotal').value = 'Error';
+        // Sumar campos relacionados con servicios provincia
+        var serviciosProvincia = 
+            getFieldValue('t_m_seccion') +
+            getFieldValue('t_m_anio') +
+            getFieldValue('t_m_grupo') +
+            getFieldValue('t_m_ciclo') +
+            getFieldValue('t_m_recupera') +
+            getFieldValue('t_m_comple') +
+            getFieldValue('t_m_biblio') +
+            getFieldValue('t_m_gabinete') +
+            getFieldValue('t_m_sec1') +
+            getFieldValue('t_m_sec2') +
+            getFieldValue('t_m_viced') +
+            getFieldValue('t_d_pu') +
+            getFieldValue('t_d_3') +
+            getFieldValue('t_d_2') +
+            getFieldValue('t_d_1') +
+            getFieldValue('t_d_biblio') +
+            getFieldValue('t_d_gabi') +
+            getFieldValue('t_d_seccoortec') +
+            getFieldValue('t_d_supsectec') +
+            getFieldValue('t_d_supesc') +
+            getFieldValue('t_d_supgral') +
+            getFieldValue('t_d_adic');
+
+        // Calcular el total de otros servicios
+        var otrosServicios = 
+            getFieldValue('o_g_a') +
+            getFieldValue('o_g_b') +
+            getFieldValue('o_g_c') +
+            getFieldValue('o_g_d');
+
+        // Actualizar el valor de otrosServicios en el campo correspondiente
+        var otrosServiciosElement = document.getElementById('otrosservicios');
+        if (otrosServiciosElement) otrosServiciosElement.value = otrosServicios.toFixed(2);
+
+        // Actualizar el valor de serviciosProvincia en el campo correspondiente
+        var serviciosProvinciaElement = document.getElementById('serviciosprovincia');
+        if (serviciosProvinciaElement) serviciosProvinciaElement.value = serviciosProvincia.toFixed(2);
+
+        // Calcular el puntaje total
+        var puntajeTotal = titulo + otitulo + concepto + promedio + antiguedadGestion +
+                           antiguedadTitulo + serviciosProvincia + residencia + publicaciones +
+                           otrosantecedentes + otrosServicios;
+
+        // Actualizar el valor en el campo puntajetotal
+        var puntajeTotalElement = document.getElementById('puntajetotal');
+        if (puntajeTotalElement) puntajeTotalElement.value = puntajeTotal.toFixed(2);
+    } catch (error) {
+        console.error('Error al calcular el puntaje total: ', error);
     }
-  }
-</script>
-";
+}
+</script>";
 // Tabla Titular
 echo "<table id='tablaTitular'>";
 echo "<tr><td>";
@@ -1276,8 +1308,8 @@ echo "<br>";
 echo "<label for='servicios' style='display: inline-block; width:  225px;'>7.- Servicios:</label>";
 echo "<br>";
 
-echo "<label for='serv_prov' style='display: inline-block; width:  225px;'>7.1- En la Provincia:</label>";
-echo "<input type='number' id='serviciosprovincia' name='serviciosprovincia' value='" . htmlspecialchars($row['serviciosprovincia']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
+echo "<label for='serv_prov' style='display: inline-block; width: 225px;'>7.1- En la Provincia:</label>";
+echo "<input type='text' id='serviciosprovincia' name='serviciosprovincia' value='" . htmlspecialchars($row['serviciosprovincia']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro de Sección:</label>";
@@ -1309,13 +1341,13 @@ echo "<input type='number' id='t_m_biblio' name='t_m_biblio' value='" . htmlspec
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Gabinete:</label>";
-echo "<input type='number' id='T_m_gabinete' name='t_m_gabinete' value='" . htmlspecialchars($row['t_m_gabinete']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
+echo "<input type='number' id='t_m_gabinete' name='t_m_gabinete' value='" . htmlspecialchars($row['t_m_gabinete']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<hr>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Secretaria 1º:</label>";
-echo "<input type='number' id='T_m_sec1' name='t_m_sec1' value='" . htmlspecialchars($row['t_m_sec1']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
+echo "<input type='number' id='t_m_sec1' name='t_m_sec1' value='" . htmlspecialchars($row['t_m_sec1']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Secretaria 2º:</label>";
@@ -1377,7 +1409,7 @@ echo "<br>";
 echo "<hr>";
 
 echo "<label for='otrosservicios' style='display: inline-block; width:  225px;'>7.2- Otros Servicios:</label>";
-echo "<input type='number' id='otrosservicios' name='otrosservicios' value='" . htmlspecialchars($row['otrosservicios']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
+echo "<input type='text' id='otrosservicios' name='otrosservicios' value='" . htmlspecialchars($row['otrosservicios']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
 echo "<br>";
 
 echo "<label for='o_g_a' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo A:</label>";

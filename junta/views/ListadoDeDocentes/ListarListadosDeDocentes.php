@@ -618,7 +618,24 @@ $(document).ready(function() {
       }
 
       // SQL query to retrieve dependencies
-      $sql = "SELECT nomdep,coddep FROM _junta_dependencias";
+      $sql = "
+    SELECT iddep, nomdep, coddep
+FROM _junta_dependencias
+ORDER BY 
+    CASE 
+        WHEN nomdep COLLATE Latin1_General_CI_AI LIKE '%jardín%' THEN 1
+        WHEN nomdep COLLATE Latin1_General_CI_AI LIKE '%escuela%' THEN 2
+        ELSE 3
+    END,
+    -- Extraer el número más robustamente, eliminando texto adicional
+    TRY_CAST(
+        TRIM(REPLACE(REPLACE(REPLACE(REPLACE(
+            SUBSTRING(nomdep, PATINDEX('%[0-9]%', nomdep), LEN(nomdep)),
+            '-', ''), 'TOLHUIN', ''), 'ALMANZA', ''), 'N°', ''))
+        AS INT
+    ),
+    coddep;
+";
 
       // Execute query
       $result = sqlsrv_query($conn, $sql);

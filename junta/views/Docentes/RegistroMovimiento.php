@@ -731,15 +731,22 @@ if ($conn === false) {
 
 // Consulta SQL para obtener todos los establecimientos
 $queryEstablecimientos = "
-    SELECT iddep, nomdep, coddep 
-    FROM _junta_dependencias 
-    ORDER BY 
-        CASE 
-            WHEN nomdep LIKE '%jardín%' THEN 1
-            WHEN nomdep LIKE '%escuela%' THEN 2
-            ELSE 3
-        END,
-        coddep;
+    SELECT iddep, nomdep, coddep
+FROM _junta_dependencias
+ORDER BY 
+    CASE 
+        WHEN nomdep COLLATE Latin1_General_CI_AI LIKE '%jardín%' THEN 1
+        WHEN nomdep COLLATE Latin1_General_CI_AI LIKE '%escuela%' THEN 2
+        ELSE 3
+    END,
+    -- Extraer el número más robustamente, eliminando texto adicional
+    TRY_CAST(
+        TRIM(REPLACE(REPLACE(REPLACE(REPLACE(
+            SUBSTRING(nomdep, PATINDEX('%[0-9]%', nomdep), LEN(nomdep)),
+            '-', ''), 'TOLHUIN', ''), 'ALMANZA', ''), 'N°', ''))
+        AS INT
+    ),
+    coddep;
 ";
 $stmt = sqlsrv_query($conn, $queryEstablecimientos);
 
@@ -748,7 +755,8 @@ if ($stmt === false) {
 }
 
 // Muestra el campo de selección con los nombres de los establecimientos
-echo "<th>Establecimiento:<select name='establecimiento' id='establecimiento' class='materialize-select4'>";
+echo "<th id='thEstablecimiento' style='display:none;'>Establecimiento:
+    <select name='establecimiento' id='establecimiento' class='materialize-select4'>";
 
 // Itera sobre los resultados de la consulta
 while ($rowEstablecimiento = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
@@ -770,6 +778,8 @@ while ($rowEstablecimiento = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
 }
 
 echo "</select></th>";
+
+
 
 // Liberar el statement y cerrar la conexión
 sqlsrv_free_stmt($stmt);
@@ -947,15 +957,15 @@ document.getElementById('motivosExclusion').addEventListener('change', function(
             <h3><u>CARGA COMUN</u> </h3>
               <br>
                 <label for="comun_puntajetotal" style="display: inline-block; width: 225px;">Puntaje Total:</label>
-                <input type="number" name="puntajetotal2" id="puntajetotal2" class="materialize-input3"  size="10" step="0.01" >
+                <input type='number' id='puntajetotal2' name='puntajetotal2' value='" . htmlspecialchars($row['puntajetotal']) . "' step='0.01' size='5' readonly>
                 <br><br>
 
                 <label for="titulo" style="display: inline-block; width: 225px;">1.- Título:</label>
-                <input type="number" id="titulo2" name="titulo2" class="materialize-input3" size="10"  step="0.01" >
+                <input type="number" id="titulo2" name="titulo2" class="materialize-input3" size="10"  step="0.01" onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()' >
                 <br>
 
                 <label for="otrostit" style="display: inline-block; width: 225px;">2.- Otros Título:</label>
-                <input type="number" id="otitulo2" name="otitulo2" class="materialize-input3" size="10" step="0.01">
+                <input type="number" id="otitulo2" name="otitulo2" class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
                 <br>
 
              <!-- Campo Conceptos -->
@@ -965,42 +975,81 @@ document.getElementById('motivosExclusion').addEventListener('change', function(
                         <br>
                     </div>
                 <label for="promedio" style="display: inline-block; width: 225px;">3.- Promedio:</label>
-                <input type="number" id="promedio2" name="promedio2" class="materialize-input3" size="10" step="0.01" >
+                <input type="number" id="promedio2" name="promedio2" class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
                 <br>
 
                 <label for="ant_gestion" style="display: inline-block; width: 225px;">4.- Antigüedad Gestión:</label>
-                <input type="number" id="antiguedadgestion2" name="antiguedadgestion2" class="materialize-input3" size="10" step="0.01" >
+                <input type="number" id="antiguedadgestion2" name="antiguedadgestion2" class="materialize-input3" size="10" step="0.01"  onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
                 <br>
 
                 <label for="ant_titulo" style="display: inline-block; width: 225px;">5.- Antigüedad Título:</label>
-                <input type="number" id="antiguedadtitulo2" name="antiguedadtitulo2" class="materialize-input3" size="10" step="0.01" >
+                <input type="number" id="antiguedadtitulo2" name="antiguedadtitulo2" class="materialize-input3" size="10" step="0.01"  onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
                 <br>
 
                 <label for="servicios" style="display: inline-block; width: 225px;">6.- Servicios:</label>
                 <br>
 
                 <label for="serv_prov" style="display: inline-block; width: 225px;">6.1- En la Provincia:</label>
-                <input type="number" id="serviciosprovincia2" name="serviciosprovincia2" class="materialize-input3" size="10" step="0.01" >
+                <input type="number" id="serviciosprovincia2" name="serviciosprovincia2" class="materialize-input3" size="10" step="0.01"  onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
                 <br>
 
                 <label for="otrosservicios2" style="display: inline-block; width: 225px;">6.2- Otros Servicios:</label>
-                <input type="number" id="otrosservicios2" name="otrosservicios2" class="materialize-input3" size="10" step="0.01">
+                <input type="number" id="otrosservicios2" name="otrosservicios2" class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
                 <br>
 
                 <label for="residencia" style="display: inline-block; width: 225px;">7.- Residencia:</label>
-                <input type="number" id="residencia2" name="residencia2" class="materialize-input3" size="10" step="0.01" >
+                <input type="number" id="residencia2" name="residencia2" class="materialize-input3" size="10" step="0.01"  onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
                 <br>
 
                 <label for="publicaciones" style="display: inline-block; width: 225px;">8.- Publicaciones:</label>
-                <input type="number" id="publicaciones2" name="publicaciones2" class="materialize-input3" size="10" step="0.01" >
+                <input type="number" id="publicaciones2" name="publicaciones2" class="materialize-input3" size="10" step="0.01"  onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
                 <br>
 
                 <label for="otrosantecedentes2" style="display: inline-block; width: 225px;">9.- Otros Antecedentes:</label>
-                <input type="number" id="otrosantecedentes2" name="otrosantecedentes2" class="materialize-input3" size="10" step="0.01" >
+                <input type="number" id="otrosantecedentes2" name="otrosantecedentes2" class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
                 <br>
             </td>
         </tr>
     </table>
+
+    
+
+<script >
+  function calcularPuntajeTotal() {
+    try {
+      var titulo = parseFloat(document.getElementById('titulo2').value) || 0;
+      var otitulo = parseFloat(document.getElementById('otitulo2').value) || 0;
+      
+      var promedio = parseFloat(document.getElementById('promedio2').value) || 0;
+      var antiguedadgestion = parseFloat(document.getElementById('antiguedadgestion2').value) || 0;
+      var antiguedadtitulo = parseFloat(document.getElementById('antiguedadtitulo2').value) || 0;
+      var serviciosprovincia = parseFloat(document.getElementById('serviciosprovincia2').value) || 0;
+      var otrosservicios = parseFloat(document.getElementById('otrosservicios2').value) || 0;
+      var residencia = parseFloat(document.getElementById('residencia2').value) || 0;
+      var publicaciones = parseFloat(document.getElementById('publicaciones2').value) || 0;
+      var otrosantecedentes = parseFloat(document.getElementById('otrosantecedentes2').value) || 0;
+
+      // Sumar todos los valores y actualizar el campo de puntajetotal2
+      var puntajeTotal = (titulo + otitulo + promedio + antiguedadgestion + antiguedadtitulo + serviciosprovincia + otrosservicios + residencia + publicaciones + otrosantecedentes).toFixed(2);
+
+      document.getElementById('puntajetotal2').value = puntajeTotal;
+    } catch (e) {
+      document.getElementById('puntajetotal2').value = Error;
+    }
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Tabla para Titular -->
     <table id="tablaTitular" style="display: none;">
@@ -1009,36 +1058,36 @@ document.getElementById('motivosExclusion').addEventListener('change', function(
               <h3><u>CARGA TITULAR</u> </h3>
               <br>
                 <label for="puntajetotal" style="display: inline-block; width: 225px;">Puntaje Total:</label>
-                <input type="number" name="puntajetotal" id="puntajetotal" class="materialize-input3" size="10" step="0.01" >
+                <input type='number' id='puntajetotal' name='puntajetotal' value='" . htmlspecialchars($row['puntajetotal']) . "' size='10' readonly>
                 <br><br>
 
                 <label for="titulo" style="display: inline-block; width: 225px;">1.- Título:</label>
-                <input type="number" id="titulo" name="titulo"  class="materialize-input3" size="10" step="0.01">
+                <input type="number" id="titulo" name="titulo"  class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>
                 <br>
 
                 <label for="otrostit" style="display: inline-block; width: 225px;">2.- Otros Título:</label>
-                <input type="number" id="otrostit" name="otitulo"  class="materialize-input3" size="10" step="0.01" >
+                <input type="number" id="otrostit" name="otitulo"  class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>
                 <br>
                 <label for="concepto" style="display: inline-block; width: 225px;">3.- Conceptos:</label>
-                <input type="number" id="concepto" name="concepto" class="materialize-input3" size="10" step="0.01" >
+                <input type="number" id="concepto" name="concepto" class="materialize-input3" size="10" step="0.01"  onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>
                 <br>
                 <label for="promedio" style="display: inline-block; width: 225px;">4.- Promedio:</label>
-                <input type="number" id="promedio" name="promedio"  class="materialize-input3" size="10" step="0.01" >
+                <input type="number" id="promedio" name="promedio"  class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()' >
                 <br>
 
                 <label for="ant_gestion" style="display: inline-block; width: 225px;">5.- Antigüedad Gestión:</label>
-                <input type="number" id="antiguedadgestion" name="antiguedadgestion"  class="materialize-input3" size="10" step="0.01">
+                <input type="number" id="antiguedadgestion" name="antiguedadgestion"  class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>
                 <br>
 
                 <label for="ant_titulo" style="display: inline-block; width: 225px;">6.- Antigüedad Título:</label>
-                <input type="number" id="antiguedadtitulo" name="antiguedadtitulo"  class="materialize-input3" size="10" step="0.01" >
+                <input type="number" id="antiguedadtitulo" name="antiguedadtitulo"  class="materialize-input3" size="10" step="0.01"  onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>
                 <br>
 
                 <label for="servicios" style="display: inline-block; width: 225px;">7.- Servicios:</label>
                 <br>
 
                 <label for="serv_prov" style="display: inline-block; width: 208px;margin-left: 20px; ">7.1- En la Provincia:</label>
-                <input type="number" id="serviciosprovincia" name="serviciosprovincia"  class="materialize-input3" size="10" step="0.01">
+                <input type="number" id="serviciosprovincia" name="serviciosprovincia"  class="materialize-input3" size="10" step="0.01"  >
                 <br>
 
                 <label for="t_m_seccion" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;">Maestro de Sección:</label>
@@ -1050,11 +1099,11 @@ document.getElementById('motivosExclusion').addEventListener('change', function(
                 <br>
 
                 <label for="t_m_grupo" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Maestro de Grupo:</label>
-                <input type="number" id="t_m_grupo" name="t_m_grupo"  class="materialize-input3" size="10" step="0.01">
+                <input type="number" id="t_m_grupo" name="t_m_grupo"  class="materialize-input3" size="10" step="0.01"  >
                 <br>
 
                 <label for="t_m_ciclo" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Maestro de Ciclo:</label>
-                <input type="number" id="t_m_ciclo" name="t_m_ciclo"  class="materialize-input3" size="10" step="0.01" >
+                <input type="number" id="t_m_ciclo" name="t_m_ciclo"  class="materialize-input3" size="10" step="0.01"  >
                 <br>
 
                 <label for="t_m_recupera" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Maestro Recuperador:</label>
@@ -1158,22 +1207,95 @@ document.getElementById('motivosExclusion').addEventListener('change', function(
                 <br>
 
                 <label for="residencia" style="display: inline-block; width: 225px;">8.- Residencia:</label>
-                <input type="number" id="residencia" name="residencia"  class="materialize-input3" size="10" step="0.01">
+                <input type="number" id="residencia" name="residencia"  class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>
                 <br>
 
                 <label for="publicaciones" style="display: inline-block; width: 225px;">9.- Publicaciones:</label>
-                <input type="number" id="publicaciones" name="publicaciones"  class="materialize-input3" size="10" step="0.01">
+                <input type="number" id="publicaciones" name="publicaciones"  class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>
                 <br>
 
                 <label for="otrosantecedentes" style="display: inline-block; width: 225px;">10.- Otros Antecedentes:</label>
-                <input type="number" id="otrosantecedentes" name="otrosantecedentes" class="materialize-input3" size="10" step="0.01">
+                <input type="number" id="otrosantecedentes" name="otrosantecedentes" class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>
                 <br>
             </td>
         </tr>
+
+
+        <script>
+function calcularPuntajeTotal2() { 
+    try {
+        // Campos principales
+        var titulo = parseFloat(document.getElementById('titulo').value) || 0,
+            otitulo = parseFloat(document.getElementById('otrostit').value) || 0,
+            concepto = parseFloat(document.getElementById('concepto').value) || 0,
+            promedio = parseFloat(document.getElementById('promedio').value) || 0,
+            antiguedadGestion = parseFloat(document.getElementById('antiguedadgestion').value) || 0,
+            antiguedadTitulo = parseFloat(document.getElementById('antiguedadtitulo').value) || 0,
+            residencia = parseFloat(document.getElementById('residencia').value) || 0,
+            publicaciones = parseFloat(document.getElementById('publicaciones').value) || 0,
+            otrosantecedentes = parseFloat(document.getElementById('otrosantecedentes').value) || 0;
+
+        // Sumar campos relacionados con servicios provincia
+        var serviciosProvincia = 
+            (parseFloat(document.getElementById('t_m_seccion').value) || 0) +
+            (parseFloat(document.getElementById('t_m_anio').value) || 0) +
+            (parseFloat(document.getElementById('t_m_grupo').value) || 0) +
+            (parseFloat(document.getElementById('t_m_ciclo').value) || 0) +
+            (parseFloat(document.getElementById('t_m_recupera').value) || 0) +
+            (parseFloat(document.getElementById('t_m_comple').value) || 0) +
+            (parseFloat(document.getElementById('t_m_biblio').value) || 0) +
+            (parseFloat(document.getElementById('t_m_gabinete').value) || 0) +
+            (parseFloat(document.getElementById('t_m_sec1').value) || 0) +
+            (parseFloat(document.getElementById('t_m_sec2').value) || 0) +
+            (parseFloat(document.getElementById('t_m_viced').value) || 0) +
+            (parseFloat(document.getElementById('t_d_pu').value) || 0) +
+            (parseFloat(document.getElementById('t_d_3').value) || 0) +
+            (parseFloat(document.getElementById('t_d_2').value) || 0) +
+            (parseFloat(document.getElementById('t_d_1').value) || 0) +
+            (parseFloat(document.getElementById('t_d_biblio').value) || 0) +
+            (parseFloat(document.getElementById('t_d_gabi').value) || 0) +
+            (parseFloat(document.getElementById('t_d_seccoortec').value) || 0) +
+            (parseFloat(document.getElementById('t_d_supsectec').value) || 0) +
+            (parseFloat(document.getElementById('t_d_supesc').value) || 0) +
+            (parseFloat(document.getElementById('t_d_supgral').value) || 0) +
+            (parseFloat(document.getElementById('t_d_adic').value) || 0);
+
+        // Calcular el total de otros servicios
+        var otrosServicios = 
+           // (parseFloat(document.getElementById('otrosservicios').value) || 0) +
+            (parseFloat(document.getElementById('o_g_a').value) || 0) +
+            (parseFloat(document.getElementById('o_g_b').value) || 0) +
+            (parseFloat(document.getElementById('o_g_c').value) || 0) +
+            (parseFloat(document.getElementById('o_g_d').value) || 0);
+
+        // Actualizar el valor de otrosServicios en el campo correspondiente
+        document.getElementById('otrosservicios').value = otrosServicios.toFixed(2);
+        
+        // Actualizar el valor de serviciosProvincia en el campo correspondiente
+        document.getElementById('serviciosprovincia').value = serviciosProvincia.toFixed(2);
+        
+        // Calcular el puntaje total
+        var puntajeTotal = titulo + otitulo + concepto + promedio + antiguedadGestion +
+                           antiguedadTitulo + serviciosProvincia + residencia + publicaciones +
+                           otrosantecedentes + otrosServicios;
+
+        // Actualizar el valor en el campo puntajetotal
+        document.getElementById('puntajetotal').value = puntajeTotal.toFixed(2);
+    } catch (error) {
+        console.error("Error al calcular el puntaje total: ", error);
+    }
+}
+
+
+// Escuchar eventos en todos los campos
+document.querySelectorAll('input[type="number"]').forEach(input => {
+    input.addEventListener('input', calcularPuntajeTotal2);
+});
+</script>
     </table>
 
   
-
+   
     
 
 <!-- JavaScript para mostrar u ocultar las tablas según el tipo seleccionado -->
@@ -1183,6 +1305,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var tablaPermanenteConcursoInterino = document.getElementById('tablaPermanenteConcursoInterino');
     var tablaTitular = document.getElementById('tablaTitular');
     var conceptoField = document.getElementById('conceptoField'); // Campo de Conceptos
+    var thEstablecimiento = document.getElementById('thEstablecimiento'); // Campo de establecimiento
 
     function mostrarTablaSegunTipo() {
         var tipo = tipoSelect.value;
@@ -1197,6 +1320,13 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             console.error('Elemento con ID "conceptoField" no encontrado.');
         }
+
+        // Mostrar/ocultar el campo de establecimiento según el tipo
+        if (thEstablecimiento) {
+            thEstablecimiento.style.display = (tipo === 'titulares') ? 'table-cell' : 'none';
+        } else {
+            console.error('Elemento con ID "thEstablecimiento" no encontrado.');
+        }
     }
 
     // Añadir event listener para el cambio en el select
@@ -1209,6 +1339,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Llamar a la función al cargar la página
     mostrarTablaSegunTipo();
 });
+
 </script>
 
 
