@@ -196,9 +196,11 @@ try {
             $otrosantecedentes = isset($_POST['otrosantecedentes']) ? floatval($_POST['otrosantecedentes']) : 0;
              
            // Calcular el puntaje total sumando los campos relevantes
-            $puntajetotal = $titulo + $otitulo + $concepto + $promedio + $antiguedadgestion + $antiguedadtitulo + $serviciosprovincia + $otrosservicios + $residencia + $publicaciones + $otrosantecedentes + $T_m_anio + $T_m_seccion + $T_m_grupo + $T_m_ciclo + $T_m_recupera + $T_d_pu + $T_d_3 + $T_d_2 + $T_d_1 + $T_d_biblio + $T_d_gabi + $T_d_seccoortec + $T_d_supsectec + $T_d_supesc + $T_d_supgral + $T_d_adic + $O_g_a + $O_g_b + $O_g_c + $O_g_d + $T_m_comple + $T_m_biblio + $T_m_gabinete + $T_m_sec1 + $T_m_sec2 + $T_m_viced;
+            //$puntajetotal = $titulo + $otitulo + $concepto + $promedio + $antiguedadgestion + $antiguedadtitulo + $serviciosprovincia + $otrosservicios + $residencia + $publicaciones + $otrosantecedentes + $T_m_anio + $T_m_seccion + $T_m_grupo + $T_m_ciclo + $T_m_recupera + $T_d_pu + $T_d_3 + $T_d_2 + $T_d_1 + $T_d_biblio + $T_d_gabi + $T_d_seccoortec + $T_d_supsectec + $T_d_supesc + $T_d_supgral + $T_d_adic + $O_g_a + $O_g_b + $O_g_c + $O_g_d + $T_m_comple + $T_m_biblio + $T_m_gabinete + $T_m_sec1 + $T_m_sec2 + $T_m_viced;
 
-           
+            $puntajetotal = $titulo + $otitulo + $concepto + $promedio + $antiguedadgestion +
+                           $antiguedadtitulo + $serviciosprovincia + $residencia + $publicaciones +
+                           $otrosantecedentes + $otrosservicios;
 
             // Definir la consulta SQL de inserción
             $sql_insert = "INSERT INTO _junta_movimientos 
