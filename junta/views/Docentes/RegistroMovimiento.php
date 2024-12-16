@@ -256,7 +256,7 @@ tr:nth-child(even) {
   padding: 0px 0px; /* Adjust padding for a comfortable fit */
   font-size: 15px; /* Adjust font size if needed */
   outline: none; /* Remove default outline */
-  width: 20%; /* Make the input element fill the container */
+  width: 28%; /* Make the input element fill the container */
   cursor: pointer;
   /* Add the focus styling here */
   &:focus {
@@ -297,7 +297,7 @@ tr:nth-child(even) {
   border-bottom: 1px solid #ccc; /* Add underline border */
   background-color: transparent; /* Transparent background */
   padding: 0px 0px; /* Adjust padding for a comfortable fit */
-  font-size: 15px; /* Adjust font size if needed */
+  font-size: 13px; /* Adjust font size if needed */
   outline: none; /* Remove default outline */
   width: %; /* Make the input element fill the container */
   cursor: pointer;
@@ -359,7 +359,7 @@ tr:nth-child(even) {
   padding: 0px 0; /* Adjust padding for a comfortable fit */
   font-size: 16px; /* Adjust font size if needed */
   outline: none; /* Remove default outline */
-  width: 90%; /* Make the select element fill the container */
+  width: 75%; /* Make the select element fill the container */
   cursor: pointer; /* Indicate interactivity on hover */
   font-weight: bold;
   &:focus {
@@ -678,17 +678,75 @@ sqlsrv_close($conn);
         </tr>
         <tr>
            <!-- <th>Cod.Mod: &nbsp;<input type="text" id="codmod" class="materialize-input1" name="codmod"  required></th>-->
-            <th>Modalidad:
-                <select name='codmod' class="materialize-select3" id='nommod' >
-                <?php 
-                        foreach ($modalidades as $codmod => $nommod) {
-                          echo "<option value='$codmod'>$codmod-$nommod</option>";
-                          
-                        }
-                        ?>
-                </select>
+           
+         <tr>
+         <th>Cód. Mod: 
+    <input type="text" name="codmod" id="codmod" 
+           value="<?php echo isset($row['codmod']) ? htmlspecialchars($row['codmod'], ENT_QUOTES, 'UTF-8') : ''; ?>" 
+           size="8" onchange="fetchModalidad()">
+</th>
+
+<th>Modalidad:
+    <select name="modalidad" id="modalidad" style="width: 420px;">
+        <?php if (!empty($modalidades)): ?>
+            <?php foreach ($modalidades as $modalidad): ?>
+                <option value="<?php echo htmlspecialchars($modalidad, ENT_QUOTES, 'UTF-8'); ?>" 
+                    <?php echo isset($row['nommod']) && trim($row['nommod']) === trim($modalidad) ? "selected='selected'" : ""; ?>>
+                    <?php echo htmlspecialchars($modalidad, ENT_QUOTES, 'UTF-8'); ?>
+                </option>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <option value="">No hay modalidades disponibles</option>
+        <?php endif; ?>
+    </select>
+</th>
+<!-- JavaScript -->
+<script>
+function fetchModalidad() {
+    const codmod = document.getElementById('codmod').value;
+
+    if (codmod.trim()) { // Validar que el código no esté vacío
+        // Realizar la solicitud AJAX
+        fetch('buscar_por_codigo.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'codmod=' + encodeURIComponent(codmod) // Escapar el valor
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                const modalidadSelect = document.getElementById('modalidad');
+                modalidadSelect.innerHTML = ''; // Limpiar el select
+
+                // Crear y agregar la opción de modalidad encontrada
+                const option = document.createElement('option');
+                option.value = data.nommod;
+                option.text = data.nommod;
+                option.selected = true; // Preseleccionar la opción
+                modalidadSelect.appendChild(option);
+            } else {
+                alert(data.error || 'No se encontró la modalidad.');
+            }
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
+            alert('Hubo un error al procesar la solicitud.');
+        });
+    } else {
+        alert('Por favor, ingrese un código de modalidad válido.');
+    }
+}
+</script>
+              </select></th>
                 <td> <b>Tipo de Listado:</b>
-                <select name="tipoc" id="tipoc" class="materialize-select4" onchange="habilitarTipo(this.value)" style='width: 200px;'>
+                <select name="tipoc" id="tipoc" class="materialize-select4" onchange="habilitarTipo(this.value)" style='width: 220px;'>
                           <option value=""><strong>Seleccione</strong></option>
                           <option value="permanente"><strong>Permanente</strong></option>
                           <option value="titulares"><strong>Titulares</strong></option>
@@ -701,7 +759,7 @@ sqlsrv_close($conn);
         </tr>
         <tr>    
                       <tr>
-        <th id="fechaCampo"  style="display: none;">Fecha:&nbsp;<input type="date" id="fecha" name="fecha" class="materialize-input2"></th>
+        <th id="fechaCampo"  style="display: none;">Fecha:&nbsp;&nbsp;<input type="date" id="fecha" name="fecha" class="materialize-input2"></th>
         </tr>
 
 <th id='thObservaciones'  style='display: none;'>Observaciones: <input type="text" id="obs" class="materialize-input_obs" name="obs" ></th>
@@ -914,8 +972,8 @@ $localidades = ['RGD', 'USH', 'TOL', 'ANT'];  // Array de localidades, incluye '
 
 ?>
 
-<th>Localidad: &nbsp;
-    <select name='codloc' class="materialize-select3" style='width: 200px;'>
+<th>Localidad:
+    <select name='codloc' class="materialize-select3" style='width: 160px;'>
         <option value="">Seleccione</option>
         <?php 
         foreach ($localidades as $localidad) {
@@ -1363,8 +1421,6 @@ function toggleMotivosExclusion(checkbox) {
 }
 </script>
     </table>
-
-  
     <button class="btn btn-success" title="Guardar Registro" type="submit">
     <i class="glyphicon glyphicon-floppy-disk"></i> Guardar
 </button>
