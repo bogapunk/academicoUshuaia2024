@@ -327,7 +327,7 @@ try {
             $codloc = isset($_POST['codloc']) ? $_POST['codloc'] : '';
 
             // Variables específicas para tipo de carga 'Interinatos y Suplencias', 'permanente' o 'Concurso de Titularidad'
-            if ($tipoc === 'Interinatos' || $tipoc === 'permanente' || $tipoc === 'concurso') {
+            if ($tipoc === 'transitorio' || $tipoc === 'permanente' || $tipoc === 'concurso') {
                 $titulo = isset($_POST['titulo2']) ? floatval($_POST['titulo2']) : 0;
                 $promedio = isset($_POST['promedio2']) ? floatval($_POST['promedio2']) : 0;
                 $antiguedadgestion = isset($_POST['antiguedadgestion2']) ? floatval($_POST['antiguedadgestion2']) : 0;
@@ -350,6 +350,11 @@ try {
                 $fecha = isset($_POST['fecha']) ? $_POST['fecha'] : '';
                 $otitulo = isset($_POST['otitulo2']) ? floatval($_POST['otitulo2']) : 0;
                 $concepto = isset($_POST['concepto2']) ? floatval($_POST['concepto2']) : 0;
+                 
+
+                
+    // Si el tipo es 'transitorio', asignar establecimiento a 1
+    $establecimiento = ($tipoc === 'transitorio') ? 1 : (isset($_POST['establecimiento']) ? $_POST['establecimiento'] : '');//esto es nuevo 2025
 
                 // Calcular el puntaje total sumando los campos relevantes
                 $puntajetotal = $titulo + $otitulo + $concepto + $promedio + $antiguedadgestion + $antiguedadtitulo + $serviciosprovincia + $otrosservicios + $residencia + $publicaciones + $otrosantecedentes;

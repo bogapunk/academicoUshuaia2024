@@ -746,7 +746,7 @@ if ($conn === false) {
 }
 
 // Primera consulta: SQL query para recuperar los listados generales
-$sqlListados = "SELECT Listado, ciudad FROM _junta_listadosgenerales";
+$sqlListados = "SELECT Listado, ciudad, modalidades FROM _junta_listadosgenerales";
 
 // Execute query
 $resultListados = sqlsrv_query($conn, $sqlListados);
@@ -764,14 +764,15 @@ if (sqlsrv_has_rows($resultListados)) {
     while ($row = sqlsrv_fetch_array($resultListados, SQLSRV_FETCH_ASSOC)) {
         $itemName = $row["Listado"];
         $itemCiudad = $row["ciudad"];
-
+        $modalidades1 = $row["modalidades"];
         // Concatenar itemName y itemCiudad con un separador (por ejemplo, coma)
         $combinedValue = "$itemName, $itemCiudad";
-
+        
         // Crear un elemento option con el valor combinado y el texto formateado
-        echo "<option value='" . htmlspecialchars($combinedValue, ENT_QUOTES | ENT_XML1, 'UTF-8') . "'>$itemName ($itemCiudad)</option>";
+        echo "<option value='" . htmlspecialchars($combinedValue, ENT_QUOTES | ENT_XML1, 'UTF-8') . "'>$itemName ($itemCiudad) - $modalidades1</option>";
     }
     echo "</select>";
+
 } else {
     echo "No se encontraron datos";
 }
@@ -1165,6 +1166,11 @@ function procesarFormulario(event) {
   const codmod = modalidadSelecionada.value;
   const modalidadSelecionadaIndex = modalidadSelecionada.selectedIndex;
   const modalidadSelecionadaText = modalidadSelecionada.options[modalidadSelecionadaIndex].text;
+  // Capturar la opción seleccionada en el select de listados provinciales
+  const selectNomdep = document.querySelector("select[name='nomdep']");
+  const selectedOption = selectNomdep.options[selectNomdep.selectedIndex].value; // Obtiene "Listado, Ciudad"
+
+
 
   let localidad = document.getElementById('localidad').value;
   let year = document.getElementById('year').value;
@@ -1174,6 +1180,19 @@ function procesarFormulario(event) {
   let tipoc = document.getElementById('tipoc').value;
   let disposicion = document.getElementById('disposicion').value;
   let anexo = document.getElementById('anexo').value;
+
+
+  let listado = "";
+    let ciudad = "";
+
+    if (selectedOption) {
+        // Separar "Listado, Ciudad" en sus componentes individuales
+        let partes = selectedOption.split(", ");
+        listado = partes[0] || "";
+        ciudad = partes[1] || "";
+    }
+
+
 
   // Obtener el valor de "item_select" (coddep)
   const item_select = document.querySelector("select[name='nomdep2']").value;
@@ -1189,7 +1208,9 @@ function procesarFormulario(event) {
                        '&disposicion=' + disposicion +
                        '&anexo=' + anexo +
                        '&item_select=' + item_select + 
-                       '&tipoc=' + tipoc;
+                       '&tipoc=' + tipoc+
+                       '&listado=' + listado + 
+                       '&ciudad=' + ciudad;
 }
 
 

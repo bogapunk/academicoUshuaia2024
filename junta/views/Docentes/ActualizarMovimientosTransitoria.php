@@ -22,6 +22,7 @@ try {
 
     // Recibir los datos del formulario y convertirlos al tipo correcto
     $id2 = (int)$_POST['id2'];
+    $anodoc =$_POST['anodoc'];
     $fecha = $_POST['fecha'];
     $establecimiento = validate_numeric($_POST['establecimiento']);
     $codloc =  $_POST['codloc'];
@@ -45,7 +46,7 @@ try {
     $excluido = validate_numeric($_POST['excluido']);
     // Consulta SQL para actualizar los datos
     $consulta = "UPDATE _junta_movimientos SET 
-
+        anodoc = :anodoc,
         fecha = :fecha,
         codloc = :codloc,
         establecimiento = :establecimiento, 
@@ -55,7 +56,7 @@ try {
         horas = :horas, 
         puntajetotal = :puntajetotal, 
         titulo = :titulo, 
-        
+    
         otitulo= :otitulo,
         promedio = :promedio,
         antiguedadgestion = :antiguedadgestion,
@@ -69,12 +70,13 @@ try {
 
 
     WHERE id2 = :id2";
- var_dump($consulta);
- exit;
+      
+ 
     // Preparar la declaración
     $stmt = $conexion->prepare($consulta);
 
     // Vincular parámetros
+    $stmt->bindParam(':anodoc', $anodoc);
     $stmt->bindParam(':fecha', $fecha);
     $stmt->bindParam(':codloc', $codloc);
     $stmt->bindParam(':establecimiento', $establecimiento, PDO::PARAM_STR);

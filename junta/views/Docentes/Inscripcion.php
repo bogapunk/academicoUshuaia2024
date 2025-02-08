@@ -739,8 +739,8 @@ function fetchModalidad() {
         echo " selected";
     }
     echo ">Titulares</option>";
-    echo "<option value='Interinatos'";
-    if (trim($row['tipo']) == "Interinatos" || trim($row['tipo']) == "transitorio" ) {
+    echo "<option value='transitorio'";
+    if (trim($row['tipo']) == "Transitorio" || trim($row['tipo']) == "transitorio" ) {
         echo " selected";
     }
     echo ">Interinatos y Suplencias</option>";
@@ -829,7 +829,7 @@ $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '';
 $options = [
     'Permanente' => 'Permanente',
     'Titulares' => 'Titulares',
-    'Interinatos' => 'Interinatos y Suplencias',
+    'transitorio' => 'Interinatos y Suplencias',
     'Concurso' => 'Concurso de Titularidad'
 ];
 
@@ -1464,7 +1464,7 @@ echo "    var tablaPermanenteConcursoInterino = document.getElementById('tablaPe
 echo "    var tablaTitular = document.getElementById('tablaTitular');";
 echo "    var tablaComun = document.getElementById('tablaComun');"; // Agregar la tabla común
 echo "    function mostrarTablaSegunTipo() {";
-echo "        if (tipoSelect.value === 'Permanente' || tipoSelect.value === 'Concurso' || tipoSelect.value === 'Interinatos') {";
+echo "        if (tipoSelect.value === 'Permanente' || tipoSelect.value === 'Concurso' || tipoSelect.value === 'transitorio') {";
 echo "            tablaPermanenteConcursoInterino.style.display = 'table';";
 echo "            tablaTitular.style.display = 'none';";
 echo "            tablaComun.style.display = 'none';"; // Ocultar la tabla común
@@ -1538,7 +1538,7 @@ $(document).ready(function() {
         if (tipoSelect.value === 'Permanente') {
         }else if (tipoSelect.value === 'Titulares'){
           archivo='ActualizarMovimientosTitulares.php';
-        }else if (tipoSelect.value === 'Interinatos'){
+        }else if (tipoSelect.value === 'transitorio'){
           archivo='ActualizarMovimientosTransitoria.php';
 
         }else if (tipoSelect.value === 'Concurso'){

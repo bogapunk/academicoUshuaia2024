@@ -554,7 +554,7 @@ if (isset($_GET['legajo'])) {
                           $color = '#A3D9A5';  // Verde claro para "Permanente"
                       } elseif ($tipo == 'Concurso' ||$tipo == 'concurso' ) {
                           $color = '#F9D423';  // Amarillo para "Concurso"
-                      } elseif ($tipo == 'Interinatos'|| $tipo == 'interinatos'  || $tipo == 'transitorio' ) {
+                      } elseif ($tipo == 'Interinatos'|| $tipo == 'interinatos' || $tipo == 'interinos' || $tipo == 'transitorio' ) {
                           $color = '#FF6B6B';  // Rojo para "Interinato"
                       } elseif ($tipo == 'Titulares'|| $tipo == 'titulares' ) {
                           $color = '#4A90E2';  // Azul para "Titulares"
@@ -574,7 +574,9 @@ if (isset($_GET['legajo'])) {
                       echo "<td style='text-align: center;'>" . number_format($row['puntajetotal'], 2, '.', ',') . "</td>";
 
 
-                      echo "<td style='text-align: center;'>" . $row['tipo'] . "</td>";
+                      echo "<td style='text-align: center;'>" . (strcasecmp($row['tipo'], 'Transitorio') === 0 ? 'Interino' : $row['tipo']) . "</td>";
+
+
                       echo "<td style='text-align: center;'>";
 
                       // Mostrar la fecha de la inscripción (si existe)
