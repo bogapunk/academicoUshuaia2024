@@ -746,7 +746,7 @@ if ($conn === false) {
 }
 
 // Primera consulta: SQL query para recuperar los listados generales
-$sqlListados = "SELECT Listado, ciudad, modalidades FROM _junta_listadosgenerales";
+$sqlListados = "SELECT id,Listado, ciudad, modalidades FROM _junta_listadosgenerales";
 
 // Execute query
 $resultListados = sqlsrv_query($conn, $sqlListados);
@@ -757,24 +757,24 @@ if ($resultListados === false) {
 
 // Check if any data found
 if (sqlsrv_has_rows($resultListados)) {
-    echo "<select name='nomdep' id='item_select' class='materialize-select'>";
-    echo "<option value=''>Seleccione</option>";
+  echo "<select name='nomdep' id='item_select' class='materialize-select'>";
+  echo "<option value=''>Seleccione</option>";
 
-    // Loop through results and create options
-    while ($row = sqlsrv_fetch_array($resultListados, SQLSRV_FETCH_ASSOC)) {
-        $itemName = $row["Listado"];
-        $itemCiudad = $row["ciudad"];
-        $modalidades1 = $row["modalidades"];
-        // Concatenar itemName y itemCiudad con un separador (por ejemplo, coma)
-        $combinedValue = "$itemName, $itemCiudad";
-        
-        // Crear un elemento option con el valor combinado y el texto formateado
-        echo "<option value='" . htmlspecialchars($combinedValue, ENT_QUOTES | ENT_XML1, 'UTF-8') . "'>$itemName ($itemCiudad) - $modalidades1</option>";
-    }
-    echo "</select>";
-
+  // Recorrer los resultados y crear las opciones
+  while ($row = sqlsrv_fetch_array($resultListados, SQLSRV_FETCH_ASSOC)) {
+      $itemName = $row["Listado"];
+      $itemCiudad = $row["ciudad"];
+      $idmodalidad = $row["id"];
+      
+      // Concatenar itemName y itemCiudad con un separador (por ejemplo, coma)
+      $combinedValue = "$itemName, $itemCiudad";
+      
+      // Crear un elemento option con el valor combinado y el texto formateado
+      echo "<option value='" . htmlspecialchars($combinedValue, ENT_QUOTES | ENT_XML1, 'UTF-8') . "' data-idmodalidad='$idmodalidad'>$itemName ($itemCiudad) - $idmodalidad</option>";
+  }
+  echo "</select>";
 } else {
-    echo "No se encontraron datos";
+  echo "No se encontraron datos";
 }
 
 // Free statement for the first query
@@ -1154,8 +1154,8 @@ function procesarFormulario(event) {
     url = 'Listado_4.php';
   } else if (!chkExcluidos && chkComplementariosCiudadSinEstablecimientoTitulares && selectProvinciales === '') {
     url = 'Listado_4.php';
-  } else if (!chkExcluidos && chkNormal && selectProvinciales !== '') {
-    url = 'Listados_Provinciales.php';
+  } else if (!chkExcluidos  && selectProvinciales !== '') {
+    url = 'Listados_Provinciales.php';// este se modifico para que no se seleccione ningun checkbox de la 5 opciones que ahi 
   } else if (chkExcluidos && selectProvinciales === '' && selectLocalidad === 'Antartida') {
     url = 'Listado_Antartida_Excluido.php';
   } else if (chkExcluidos) {
@@ -1180,7 +1180,10 @@ function procesarFormulario(event) {
   let tipoc = document.getElementById('tipoc').value;
   let disposicion = document.getElementById('disposicion').value;
   let anexo = document.getElementById('anexo').value;
-
+  //let idmodalidad = document.getElementById('idmodalidad').value;
+ 
+  // Obtener idmodalidad desde el atributo data-idmodalidad
+  const idmodalidad = selectNomdep.options[selectNomdep.selectedIndex].getAttribute('data-idmodalidad');
 
   let listado = "";
     let ciudad = "";
@@ -1210,7 +1213,8 @@ function procesarFormulario(event) {
                        '&item_select=' + item_select + 
                        '&tipoc=' + tipoc+
                        '&listado=' + listado + 
-                       '&ciudad=' + ciudad;
+                       '&ciudad=' + ciudad +
+                       '&idmodalidad=' + idmodalidad ;
 }
 
 
