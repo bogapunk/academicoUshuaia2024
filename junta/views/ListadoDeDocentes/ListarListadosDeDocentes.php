@@ -770,7 +770,7 @@ if (sqlsrv_has_rows($resultListados)) {
       $combinedValue = "$itemName, $itemCiudad";
       
       // Crear un elemento option con el valor combinado y el texto formateado
-      echo "<option value='" . htmlspecialchars($combinedValue, ENT_QUOTES | ENT_XML1, 'UTF-8') . "' data-idmodalidad='$idmodalidad'>$itemName ($itemCiudad) - $idmodalidad</option>";
+      echo "<option value='" . htmlspecialchars($combinedValue, ENT_QUOTES | ENT_XML1, 'UTF-8') . "' data-idmodalidad='$idmodalidad'>$itemName ($itemCiudad)</option>";
   }
   echo "</select>";
 } else {
