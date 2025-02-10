@@ -354,8 +354,8 @@ try {
 
                 
     // Si el tipo es 'transitorio', asignar establecimiento a 1
-    $establecimiento = ($tipoc === 'transitorio') ? 1 : (isset($_POST['establecimiento']) ? $_POST['establecimiento'] : '');//esto es nuevo 2025
-
+    $establecimiento = (in_array($tipoc, ['transitorio', 'permanente', 'Concurso', 'concurso'])) ? 1 : (isset($_POST['establecimiento']) ? $_POST['establecimiento'] : '');//esto es nuevo 2025
+  
                 // Calcular el puntaje total sumando los campos relevantes
                 $puntajetotal = $titulo + $otitulo + $concepto + $promedio + $antiguedadgestion + $antiguedadtitulo + $serviciosprovincia + $otrosservicios + $residencia + $publicaciones + $otrosantecedentes;
                    
