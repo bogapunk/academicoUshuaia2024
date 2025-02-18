@@ -289,7 +289,12 @@ class DependenciasModel
     {
         try 
         {
-            $sql = "INSERT INTO _junta_dependencias (codniv,coddep, nomdep, domicilio,directo,interno, codloc,iddep,CUISE) 
+			 // Obtener el último valor de coddep para incrementar
+			 $stmt = $this->pdo->query("SELECT MAX(coddep) AS max_coddep FROM _junta_dependencias");
+			 $row = $stmt->fetch();
+			 $nextCoddep = max(700, $row['max_coddep'] + 1); // Si el máximo es menor a 700, comenzar desde 700
+	 
+            $sql = "INSERT INTO _junta_dependencias (codniv,coddep, nomdep, domicilio,directo,interno, codloc,CUISE) 
                     VALUES (?, ?, ?, ?, ?, ?, ?,?,?)";
 
             $this->pdo->prepare($sql)->execute(
@@ -301,7 +306,6 @@ class DependenciasModel
 					$data->__GET('directo'), 
 					$data->__GET('interno'), 
                     $data->__GET('codloc'), 
-					$data->__GET('iddep'), 
                     $data->__GET('CUISE')
 
 

@@ -519,16 +519,41 @@ if (isset($_GET['legajo'])) {
         $nombreDocente = $rowNombreDocente['apellidoynombre'];
 
         // Imprimir el nombre del docente
-        echo "<h2>Docente: " . $nombreDocente . "</h2>";
+        echo "<h2><u>Docente:</u> " . $nombreDocente . "</h2>";
         
         $resultData = sqlsrv_query($conn, $queryData);
               if ($resultData === false) {
                   die(print_r(sqlsrv_errors(), true)); // Imprimir errores si la consulta falla
               }
 
-              // Mostrar el botón de actualización
-              echo "<a href='javascript:void(0);' onclick='history.go(-1); location.reload();' class='btn btn-success' title='Actualizar Tabla'><i class='glyphicon glyphicon-refresh'></i> Actualizar Tabla</a>";
-
+              // Mostrar el botón de actualización de tabla registro nuevo moeviento y volver
+              echo "<div class='d-flex justify-content-center align-items-center mt-3'>
+              <a href='javascript:void(0);' onclick='history.go(-1); location.reload();' class='btn btn-info mx-2' title='Actualizar Tabla' style='margin-top: 10px;'>
+                  <i class='glyphicon glyphicon-refresh'></i> Actualizar Tabla
+              </a>
+              <a href='RegistroMovimiento.php?legajo=" . urlencode($legajo) . "' class='btn btn-primary mx-2 pt-2' style='margin-top: 10px;'>
+                  <i class='glyphicon glyphicon-plus'></i> Nuevo Movimiento
+              </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href='./ListarDocentes.php' class='btn btn-success mx-2'>
+                  <i class='glyphicon glyphicon-arrow-left'></i> Volver atrás
+              </a>
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <label for='tipoFiltro'>Filtrar por Tipo de Inscripción: </label>
+                  <select id='tipoFiltro' class='form-control' style='width: 200px; display: inline-block;'>
+                      <option value=''>Todos</option> <!-- Opción para mostrar todos -->
+                      <option value='permanente'>Permanente</option>
+                      <option value='concurso'>Concurso</option>
+                      <option value='transitorio'>Interino</option>
+                      <option value='titulares'>Titulares</option>
+                  </select>
+            
+          </div>";
+          echo"<br>";
+          echo"<br>";
+          
+      // Filtro por Tipo de Inscripción
+         
+   
               // Ejecutar la consulta original y mostrar los resultados en la tabla
               if (sqlsrv_has_rows($resultData)) {
                   echo "<table border='1'>";
@@ -554,8 +579,8 @@ if (isset($_GET['legajo'])) {
                           $color = '#A3D9A5';  // Verde claro para "Permanente"
                       } elseif ($tipo == 'Concurso' ||$tipo == 'concurso' ) {
                           $color = '#F9D423';  // Amarillo para "Concurso"
-                      } elseif ($tipo == 'Interinatos'|| $tipo == 'interinatos' || $tipo == 'interinos' || $tipo == 'transitorio' ) {
-                          $color = '#FF6B6B';  // Rojo para "Interinato"
+                      } elseif ($tipo == 'Interino'|| $tipo == 'interino' || $tipo == 'interinos' || $tipo == 'transitorio' || $tipo == 'Transitorio' ) {
+                          $color = '#FF6B6B';  // Rojo para "Interino"
                       } elseif ($tipo == 'Titulares'|| $tipo == 'titulares' ) {
                           $color = '#4A90E2';  // Azul para "Titulares"
                       } else {
@@ -566,7 +591,8 @@ if (isset($_GET['legajo'])) {
                       $odd = !$odd;
 
                       // Imprimir la fila de la tabla con el color de fondo asignado
-                      echo "<tr style='background-color: $color;'>";
+
+                      echo "<tr class='tipoFila' data-tipo='" . strtolower($tipo) . "' style='background-color: $color;'>"; // Asegúrate de que el tipo esté en minúsculas
                       echo "<td style='text-align: center;'>" . $row['anodoc'] . "</td>";
                       echo "<td style='text-align: center;'>" . $row['codmod'] . "</td>";
                       echo "<td style='text-align: center;'>" . $row['nommod'] . "</td>";
@@ -619,7 +645,8 @@ if (isset($_GET['legajo'])) {
                                     // Asegúrate de que $codloc esté correctamente asignado antes de codificarlo
                                     $encodedCodloc = urlencode($codloc);
                                     // El resto del código
-                                    echo "<a href='Inscripcion.php?legajo=" . $encodedLegajo . "&codmod=" . $encodedCodmod . "&tipo=" . $encodedTipo . "&nomdep=" . $encodedNomdep . "&obs=" . $encodedObs . "&horas=" . $encodedHoras . "&anodoc=" . $encodedAnodoc . "&id2=" . $encodedId2 . "&fecha=" . $encodedFecha . "&excluido=" . $encodedexcluido . "' class='btn btn-success' title='Modificar' style='margin-right: 10px;'>";
+                                    echo "<a href='Inscripcion.php?legajo=" . $encodedLegajo . "&codmod=" . $encodedCodmod . "&tipo=" . $encodedTipo . "&nomdep=" . $encodedNomdep . "&obs=" . $encodedObs . "&horas=" . $encodedHoras . "&anodoc=" . $encodedAnodoc . "&id2=" . $encodedId2 . "&fecha=" . $encodedFecha . "&excluido=" . $encodedexcluido . "' class='btn btn-success' title='Modificar' style='margin-right: 10px; margin-top: 10px;'>";
+
                                     echo "<span class='glifo glifo-lápiz'></span><i class='glyphicon glyphicon-pencil'></i>  Modificar";
                                     echo "</a>";
                                     
@@ -655,8 +682,21 @@ if (isset($_GET['legajo'])) {
     // Si legajo no está definido, mostrar un mensaje de error
     echo "<p>El parámetro legajo no está definido.</p>";
 }
+echo"<script>
+document.getElementById('tipoFiltro').addEventListener('change', function() {
+    var tipoSeleccionado = this.value.toLowerCase();
+    var filas = document.querySelectorAll('.tipoFila');
 
-
+    filas.forEach(function(fila) {
+        var tipoFila = fila.getAttribute('data-tipo');
+        if (tipoSeleccionado === '' || tipoFila === tipoSeleccionado) {
+            fila.style.display = ''; // Mostrar fila
+        } else {
+            fila.style.display = 'none'; // Ocultar fila
+        }
+    });
+});
+</script>";
 //javascript para borrado de movimiento
 
 echo "<script>
@@ -718,7 +758,7 @@ function determinarColor($tipo) {
    </th>
    <br>
   <br>
-<a href="RegistroMovimiento.php?legajo=<?php echo $legajo; ?>" class="btn btn-primary" > <span class="glyphicon glyphicon-plus"></span> Nuevo Movimiento</a>
+<!--<a href="RegistroMovimiento.php?legajo=<?php echo $legajo; ?>" class="btn btn-primary" > <span class="glyphicon glyphicon-plus"></span> Nuevo Movimiento</a>-->
 <br>
 <br>
 
@@ -731,12 +771,169 @@ function determinarColor($tipo) {
  
   </div>
 
-
+<!--
 <center>
   <a href="./ListarDocentes.php" class="btn btn-success"> <i class="glyphicon glyphicon-arrow-left"></i> Volver atrás</a>
-</center>
+</center>--S
 
-  <?php include('footer2.php');?>
 </body>
 </html>
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agencia de Innovación</title>
+  <style>
+    .btn-success {
+      margin: 10px;
+    }
+    .main {
+      margin: 20px;
+    }
+    body {
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      text-align: center;
+    }
+    .hide {
+      max-height: 0 !important;
+    }
+    .dropdown {
+      border: 0.1em solid black;
+      width: 10em;
+      margin-bottom: 1em;
+    }
+    .dropdown .title {
+      margin: .3em .3em .3em .3em;
+      width: 100%;
+    }
+    .dropdown .title .fa-angle-right {
+      float: right;
+      margin-right: .7em;
+      transition: transform .3s;
+    }
+    .dropdown .menu {
+      transition: max-height .5s ease-out;
+      max-height: 20em;
+      overflow: hidden;
+    }
+    .dropdown .menu .option {
+      margin: .3em .3em .3em .3em;
+      margin-top: 0.3em;
+    }
+    .dropdown .menu .option:hover {
+      background: rgba(0,0,0,0.2);
+    }
+    .pointerCursor:hover {
+      cursor: pointer;
+    }
+    .rotate-90 {
+      transform: rotate(90deg);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      border: 0 none;
+      position: relative;
+    }
+
+    #menu_gral2 {
+      font-family: verdana, sans-serif;
+      width: 80%;
+      margin: 1.5rem auto;
+    }
+
+    #menu_gral2 ul {
+      list-style-type: none;
+      text-align: center;
+      font-size: 0;
+    }
+
+    #menu_gral2 > ul li {
+      display: inline-block;
+      width: 25%;
+      position: relative;
+      background: #337ab7;
+    }
+
+    #menu_gral2 li a {
+      display: block;
+      text-decoration: none;
+      font-size: 2rem;
+      width: 100%;
+      font-family: 'Roboto', sans-serif;
+      background-color: #2698f3;
+      font-size: 18px;
+      line-height: 2.5rem;
+      color: #fff;
+    }
+
+    #menu_gral2 li:hover a, #menu_gral li a:focus {
+      background: #e55916;
+      color: #fff;
+    }
+
+    #menu_gral2 li ul {
+      position: absolute;
+      width: 0;
+      overflow: hidden;
+    }
+
+    #menu_gral2 li:hover ul, #menu_gral li:focus ul {
+      width: 100%;
+      margin: 0 -4rem -4rem -4rem;
+      padding: 0 4rem 4rem 4rem;
+      z-index: 5;
+    }
+
+    #menu_gral2 li li {
+      display: block;
+      width: 100%;
+    }
+
+    #menu_gral2 li:hover li a, #menu_gral li:focus li a {
+      font-family: monospace;
+      font-size: .9rem;
+      line-height: 1.7rem;
+      border-top: 1px solid #e5e5e5;
+      background: #444;
+    }
+
+    #menu_gral2 li li a:hover, #menu_gral li li a:focus {
+      background: #8AA9B8;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <ul class="nav nav-pills">
+          <div class="panel-footer">
+            <a href="" target="_blank">Agencia de Innovación</a>
+          </div>
+        </ul>
+        <img src="../../imagenes/pie_footer.png" width="50" height="50" alt="Logo" />
+        <nav id="menu_gral2">
+          <ul>
+            <li>
+              <div class="card-body d-flex justify-content-between align-items-center">
+                <a href="../../MiCuenta.php?logoutSubmit=1" class="btn btn-primary">Cerrar Sesión</a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div><!-- Panel cierra -->
+      </div>
+  </div>
+
+  <!-- Paginación de la tabla -->
+
+  <center>
+  <?php include('footer2.php');?>
+  </center>
+
+</body>
+</html>

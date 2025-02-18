@@ -37,7 +37,8 @@ if (isset($_POST['insertar'])) {
     $stmt->bindParam(':directo', $directo, PDO::PARAM_STR);
     $stmt->bindParam(':interno', $interno, PDO::PARAM_STR);
     $stmt->bindParam(':codniv', $codniv, PDO::PARAM_INT);
-
+    echo '<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+';
     try {
         $stmt->execute();
         $lastInsertId = $connect->lastInsertId();
@@ -51,7 +52,7 @@ if (isset($_POST['insertar'])) {
     
             // Redirección a RegistroDependencia.php después de 3 segundos
             echo '<script>';
-            echo 'setTimeout(function() { window.location.href = "RegistroDependencia.php"; }, 3000);'; // Redirige después de 3 segundos
+            echo 'setTimeout(function() { window.location.href = "ListarDependencias.php"; }, 2000);'; // Redirige después de 2 segundos
             echo '</script>';
         } else {
             // Mensaje de error utilizando Bootstrap

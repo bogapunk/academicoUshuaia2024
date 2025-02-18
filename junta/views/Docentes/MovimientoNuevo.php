@@ -457,17 +457,66 @@ try {
                 throw new Exception("Error al insertar datos: " . print_r(sqlsrv_errors(), true));
             } else {
                  // Datos insertados correctamente
-                 echo "Datos insertados correctamente.";
-                
-                 // Mostrar mensaje y redireccionar después de 3 segundos
-                 echo "<script>
-                         // Mostrar mensaje por 5 segundos
-                         setTimeout(function() {
-                             alert('Los datos se han insertado correctamente.');
-                             // Redireccionar a la página deseada
-                             window.location.href = './VerInscripciones.php?legajo=".$legajo."';
-                         }, 5000); // 3000 milisegundos = 3 segundos
-                       </script>";
+                 // Mostrar mensaje de éxito con estilo
+echo '<div style="background-color: #4CAF50; color: white; padding: 15px; border-radius: 5px; font-size: 16px; font-weight: bold; text-align: center; box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2);">
+                    Datos insertados correctamente.
+                    </div>';
+
+                    // Mostrar mensaje adicional con otro color y redireccionar después de 3 segundos
+                    echo "<script>
+                    // Crear el primer div para mostrar el mensaje de éxito
+                    var mensajeExito = document.createElement('div');
+                    mensajeExito.innerHTML = 'Los datos se han insertado correctamente!!!!!';
+                    mensajeExito.style.position = 'fixed';
+                    mensajeExito.style.top = '20px';
+                    mensajeExito.style.left = '50%';
+                    mensajeExito.style.transform = 'translateX(-50%)';
+                    mensajeExito.style.backgroundColor = '#4CAF50'; // Verde para éxito
+                    mensajeExito.style.color = 'white';
+                    mensajeExito.style.padding = '15px';
+                    mensajeExito.style.borderRadius = '5px';
+                    mensajeExito.style.fontSize = '16px';
+                    mensajeExito.style.fontWeight = 'bold';
+                    mensajeExito.style.textAlign = 'center';
+                    mensajeExito.style.boxShadow = '0 4px 8px rgba(0, 128, 0, 0.2)';
+                    mensajeExito.style.zIndex = '9999'; // Asegura que el mensaje esté por encima de otros elementos
+
+                    // Agregar el mensaje al body
+                    document.body.appendChild(mensajeExito);
+
+                    // Eliminar el primer mensaje después de 3 segundos
+                    setTimeout(function() {
+                    mensajeExito.style.display = 'none';
+
+                    // Crear el segundo div para mostrar otro mensaje de alerta
+                    var mensajeAlerta = document.createElement('div');
+                   mensajeAlerta.innerHTML = '¡Atención! El movimiento del docente se registró correctamente.';
+
+                    mensajeAlerta.style.position = 'fixed';
+                    mensajeAlerta.style.top = '20px';
+                    mensajeAlerta.style.left = '50%';
+                    mensajeAlerta.style.transform = 'translateX(-50%)';
+                    mensajeAlerta.style.backgroundColor = '#FF9800'; // Naranja para alerta
+                    mensajeAlerta.style.color = 'white';
+                    mensajeAlerta.style.padding = '15px';
+                    mensajeAlerta.style.borderRadius = '5px';
+                    mensajeAlerta.style.fontSize = '16px';
+                    mensajeAlerta.style.fontWeight = 'bold';
+                    mensajeAlerta.style.textAlign = 'center';
+                    mensajeAlerta.style.boxShadow = '0 4px 8px rgba(255, 165, 0, 0.6)';
+                    mensajeAlerta.style.zIndex = '9999'; // Asegura que el mensaje esté por encima de otros elementos
+
+                    // Agregar el segundo mensaje al body
+                    document.body.appendChild(mensajeAlerta);
+
+                    // Eliminar el segundo mensaje después de 3 segundos
+                    setTimeout(function() {
+                        mensajeAlerta.style.display = 'none';
+                        // Redireccionar a la página deseada
+                        window.location.href = './VerInscripciones.php?legajo=".$legajo."';
+                    }, 2000); // 2000 milisegundos = 2 segundos
+                    }, 2000); // 2000 milisegundos = 2 segundos
+                    </script>";
             }
         }
     }

@@ -99,7 +99,7 @@ try {
         $codloc = isset($_POST['codloc']) ? $_POST['codloc'] : '';
 
         // Variables específicas para tipo de carga 'Interinatos y Suplencias', 'permanente' o 'Concurso de Titularidad'
-        if ($tipo === 'Interinatos' || $tipo === 'permanente' || $tipo === 'concurso' || $tipo === 'interinato' || $tipo === 'Permanente' || $tipo === 'Concurso') {
+        if ($tipo === 'transitorio' || $tipo === 'permanente' || $tipo === 'concurso' || $tipo === 'Transitorio' || $tipo === 'Permanente' || $tipo === 'Concurso') {
             $titulo = isset($_POST['titulo2']) ? floatval($_POST['titulo2']) : 0;
             $promedio = isset($_POST['promedio2']) ? floatval($_POST['promedio2']) : 0;
             $antiguedadgestion = isset($_POST['antiguedadgestion2']) ? floatval($_POST['antiguedadgestion2']) : 0;
@@ -139,7 +139,7 @@ try {
             }
 
             // Verificar el tipo de carga
-            if (!in_array($tipo, ['Interinatos', 'permanente', 'concurso', 'Permanente', 'Concurso'])) {
+            if (!in_array($tipo, ['transitorio', 'permanente', 'concurso', 'Permanente', 'Concurso'])) {
                 throw new Exception("Tipo de carga inválido.");
             }
 
@@ -220,18 +220,57 @@ try {
             if ($stmt_insert === false) {
                 throw new Exception("Error al insertar datos: " . print_r(sqlsrv_errors(), true));
             } else {
-                 // Datos insertados correctamente
-                 echo "Datos insertados correctamente, Se duplico la Inscripcion.";
-                
-                 // Mostrar mensaje y redireccionar después de 5 segundos
-                 echo "<script>
-                         // Mostrar mensaje por 5 segundos
-                         setTimeout(function() {
-                             alert('Los datos se han Duplicado correctamente!!!.');
-                             // Redireccionar a la página deseada
-                             window.location.href = './VerInscripciones.php?legajo=".$legajo."';
-                         }, 5000); // 5000 milisegundos = 5 segundos
-                       </script>";
+                  // Datos insertados correctamente
+    echo "<div id='mensaje-exito' style='
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2);
+    z-index: 9999;
+'>
+Los datos se han duplicado correctamente!!!
+</div>";
+
+echo "<script>
+setTimeout(function() {
+    // Ocultar el mensaje de éxito
+    document.getElementById('mensaje-exito').style.display = 'none';
+
+    // Crear mensaje de alerta
+    var mensajeAlerta = document.createElement('div');
+    mensajeAlerta.innerHTML = '¡Atención! El movimiento del docente se registró correctamente.';
+    mensajeAlerta.style.position = 'fixed';
+    mensajeAlerta.style.top = '20px';
+    mensajeAlerta.style.left = '50%';
+    mensajeAlerta.style.transform = 'translateX(-50%)';
+    mensajeAlerta.style.backgroundColor = '#FF9800';
+    mensajeAlerta.style.color = 'white';
+    mensajeAlerta.style.padding = '15px';
+    mensajeAlerta.style.borderRadius = '5px';
+    mensajeAlerta.style.fontSize = '16px';
+    mensajeAlerta.style.fontWeight = 'bold';
+    mensajeAlerta.style.textAlign = 'center';
+    mensajeAlerta.style.boxShadow = '0 4px 8px rgba(255, 165, 0, 0.6)';
+    mensajeAlerta.style.zIndex = '9999';
+
+    // Agregar el mensaje al body
+    document.body.appendChild(mensajeAlerta);
+
+    // Ocultar el mensaje de alerta y redirigir después de 2 segundos
+    setTimeout(function() {
+        mensajeAlerta.style.display = 'none';
+        window.location.href = './VerInscripciones.php?legajo=".$legajo."';
+    }, 2000);
+}, 2000);
+</script>";
             }
         }
     } catch (Exception $e) {

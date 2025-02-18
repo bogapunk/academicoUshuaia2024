@@ -126,22 +126,24 @@ body{
 </div>
 <body>
 	<div class="main">
+    
 <div class="panel panel-default">
 <div class="panel-heading">
   <ul class="nav nav-pills">
-<center><div class="panel-footer"><a href="" target="_blank">Agencia de Innovación </a>
-<center><img src="../../imagenes/pie_footer.png" width="50" height="50"></center>
+   <center><div class="panel-footer"><a href="" target="_blank">Agencia de Innovación </a>
+    <center><img src="../../imagenes/pie_footer.png" width="50" height="50"></center>
+    <center>
 
-</div>
- <nav id="menu_gral2">
+    <nav id="menu_gral2">
  
-  <li>
-  <div class="card-body d-flex justify-content-between align-items-left">
-  <a href="../../MiCuenta.php?logoutSubmit=1"   class="btn btn-primary">Cerrar Sesión 
-  </a>
+    <li>
+   <div class="card-body d-flex justify-content-between align-items-left">
+   <a href="../../MiCuenta.php?logoutSubmit=1"   class="btn btn-primary">Cerrar Sesión 
+   </a>
 
 
 </div>
+
 </li>
 </nav>
   </div>
@@ -158,7 +160,7 @@ body{
 <center>
  <div class="elementor-element elementor-element-79dab63d elementor-widget elementor-widget-heading" data-id="79dab63d" data-element_type="widget" data-widget_type="heading.default">
                 <div class="elementor-widget-container">
-            <p class="elementor-heading-title elementor-size-default">© 2024 - Todos los derechos reservados | Las Islas Malvinas son argentinas.</p>       </div>
+            <p class="elementor-heading-title elementor-size-default">© 2025 - Todos los derechos reservados | Las Islas Malvinas son argentinas.</p>       </div>
 </div>
 
 

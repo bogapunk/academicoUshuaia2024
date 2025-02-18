@@ -258,7 +258,7 @@ tr:nth-child(even) {
 
 /* Cambiar a color negro al pasar el cursor sobre los botones */
 .btn-custom:hover, .btn-success:hover, .btn-danger:hover, .btn-primary:hover {
-    background-color: #000000 !important;
+    background-color: #e55916 !important;
     border-color: #000000 !important;
     color: #ffffff !important;
 }
@@ -297,6 +297,11 @@ tr:nth-child(even) {
 
 </head>
 <body>
+<script>
+    window.onload = function() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+</script>
 <button class="btn-flotante" onclick="topFunction()" title='subir'>Subir</button>
 
   <div class="page-content bg-light">
@@ -552,7 +557,7 @@ try {
     <input type="hidden" name="obsdoc" value="<?php echo $doc->__GET('obsdoc'); ?>" />
 
     <!-- Resto del formulario aquí -->
-    <a href="generate_pdf.php?legajo=<?php echo urlencode($doc->__GET('legajo')); ?>&apellidoynombre=<?php echo urlencode($doc->__GET('apellidoynombre')); ?>&dni=<?php echo urlencode($doc->__GET('dni')); ?>&domicilio=<?php echo urlencode($doc->__GET('domicilio')); ?>&lugarinsc=<?php echo urlencode($doc->__GET('lugarinsc')); ?>&fechanacim=<?php echo urlencode($doc->__GET('fechanacim')); ?>&promedioT=<?php echo urlencode($doc->__GET('promedioT')); ?>&telefonos=<?php echo urlencode($doc->__GET('telefonos')); ?>&Titulobas=<?php echo urlencode($doc->__GET('Titulobas')); ?>&fechatit=<?php echo urlencode($doc->__GET('fechatit')); ?>&otorgadopor=<?php echo urlencode($doc->__GET('otorgadopor')); ?>&finicio=<?php echo urlencode($doc->__GET('finicio')); ?>&otrostit=<?php echo urlencode($doc->__GET('otrostit')); ?>&fingreso=<?php echo urlencode($doc->__GET('fingreso')); ?>&cargosdocentes=<?php echo urlencode($doc->__GET('cargosdocentes')); ?>&faperturaleg=<?php echo urlencode($doc->__GET('faperturaleg')); ?>&Nacionalidad=<?php echo urlencode($doc->__GET('Nacionalidad')); ?>&email=<?php echo urlencode($doc->__GET('email')); ?>&obsdoc=<?php echo urlencode($doc->__GET('obsdoc')); ?>" class="btn btn-info" title="Descargar PDF">
+    <a href="generate_pdf.php?legajo=<?php echo urlencode($doc->__GET('legajo')); ?>&apellidoynombre=<?php echo urlencode($doc->__GET('apellidoynombre')); ?>&dni=<?php echo urlencode($doc->__GET('dni')); ?>&domicilio=<?php echo urlencode($doc->__GET('domicilio')); ?>&lugarinsc=<?php echo urlencode($doc->__GET('lugarinsc')); ?>&fechanacim=<?php echo urlencode($doc->__GET('fechanacim')); ?>&promedioT=<?php echo urlencode($doc->__GET('promedioT')); ?>&telefonos=<?php echo urlencode($doc->__GET('telefonos')); ?>&Titulobas=<?php echo urlencode($doc->__GET('Titulobas')); ?>&fechatit=<?php echo urlencode($doc->__GET('fechatit')); ?>&otorgadopor=<?php echo urlencode($doc->__GET('otorgadopor')); ?>&finicio=<?php echo urlencode($doc->__GET('finicio')); ?>&otrostit=<?php echo urlencode($doc->__GET('otrostit')); ?>&fingreso=<?php echo urlencode($doc->__GET('fingreso')); ?>&cargosdocentes=<?php echo urlencode($doc->__GET('cargosdocentes')); ?>&faperturaleg=<?php echo urlencode($doc->__GET('faperturaleg')); ?>&Nacionalidad=<?php echo urlencode($doc->__GET('Nacionalidad')); ?>&email=<?php echo urlencode($doc->__GET('email')); ?>&obsdoc=<?php echo urlencode($doc->__GET('obsdoc')); ?>" class="btn btn-info" title="Descargar PDF" target="_blank">
     <i class="glyphicon glyphicon-save"> Información Docente PDF</i> 
 </a>
 </form>
@@ -587,13 +592,14 @@ try {
                   ventimp.close();
                 }
               </script>
-       <div>
-         <a href="RegistroDocente.php" class="btn btn-primary" title="Ingrese Nuevo Docente">
-                          <span class="glyphicon glyphicon-plus"></span> Nuevo Docente
-                      </a>
-              </div>              
+       <div style="text-align: left;top: 20px;right: -27px;">
+  <a href="RegistroDocente.php" class="btn btn-primary" title="Ingrese Nuevo Docente">
+    <span class="glyphicon glyphicon-plus"></span> Nuevo Docente
+  </a>
+</div>
 <div class="container-fluid">
 <div class="input-group">
+    <!--
 <div class="container mt-4">
     <h2><u>Buscador de Datos</u></h2>
     <form method="GET" action="">
@@ -641,12 +647,8 @@ try {
                      
                   </div>
               </form>
-</div></center>
+</div></center>-->
 
- <!--<a href="../../controller/exportar_docentes.php" class="btn btn-info btn-sm" onclick="return myConfirm3();" >
-          <span class="glyphicon glyphicon-download-alt"></span> Descargar
-        </a>
-</div>-->
 
 
     <script>
@@ -673,27 +675,132 @@ try {
         document.getElementById("resultBody").innerHTML = '';  // Limpia el contenido de la tabla
     }
 </script>
+<center><h1><b><u>Buscar Docente</u></b></h1></center>
+<h2 id="filterHeader" style="display: none;"><u>Buscador de Datos!!!!</u></h2> <!-- Hide initially -->
+<br>
+<form id="busquedaForm">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="legajo" style="right: 12px">Legajo</label>
+            <input type="number" class="form-control" id="legajo" name="legajo" placeholder="Ingrese Legajo" style="right: 12px">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="dni">DNI</label>
+            <input type="number" class="form-control" id="dni" name="dni" placeholder="Ingrese DNI">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="apellido">Apellido y Nombre</label>
+            <input type="text" class="form-control" id="apellido" name="ApellidoyNombre" placeholder="Ingrese Apellido y Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s'-]/g, '')" style="width: 311px">
 
-<!--
-<div class="container-fluid">
- <table class="table table-hover table-bordered results" id="example">
+        </div>
+    </div>
+    <center>
+    
+    <button type="button" class="btn btn-warning" id="buscarBtn">
+        <i class="glyphicon glyphicon-search"></i> Buscar
+    </button>
+</center>
+</form>
 
-    <thead class="thead-dark" >
-        <thead class="buscar">
-        <tr>
-            <th><center style="font-size:1em"; onclick="sortTable(3)" >LEGAJO</center></th>
-            <th><center style="font-size:1em";>APELLIDO Y NOMBRE </center></th>
-            <th><center style="font-size:1em"; onclick="sortTable(4)">FECHA DE NAC.</center></th>
-            <th><center style="font-size:1em";>TELEFONO</center></th>
-            <th><center style="font-size:1em";>LOCALIDAD </center></th>
-            <th><center style="font-size:1em";>DNI</center></th>
-            <th style="text-align: center; padding: 10px 140px;">ACCIONES</th>
-        </tr>
+<!-- Input de búsqueda en la tabla -->
+<div id="searchLabel" style="display: none; width: 360px;right: -15px">
+    <label><b><u>Buscar</u></b></label>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-6" style="margin-left: auto;">
+        <input type="text" id="searchTable" class="form-control" placeholder="Buscar Docente (Legajo, DNI o Apellido)" 
+               style="margin-bottom: 10px;right: -14px;width: 348px; display: none;">
+    </div>
+</div>
 
-    </thead>
-  </thead>
--->
+<div class="container mt-4">
+    <table id="resultTable" class="display table table-bordered" style="display: none;">
+        <thead>
+            <tr>
+                <th><center>Legajo</center></th>
+                <th><center>DNI</center></th>
+                <th><center>Apellido y Nombre</center></th>
+                <th><center>Localidad de Inscripción</center></th>
+                <th><center>Acciones</center></th>
+            </tr>
+        </thead>
+        <tbody id="resultBody">
+            <!-- Mensaje "No hay datos" por defecto -->
+            <tr class="no-data"><td colspan="5" class="text-center">No hay datos</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function () {
+    $('#buscarBtn').click(function () {
+        var legajo = $('#legajo').val().trim();
+        var dni = $('#dni').val().trim();
+        var apellido = $('#apellido').val().trim();
+
+        // Validación: Si no hay datos en ninguno de los campos, mostrar alerta y detener la búsqueda
+        if (legajo === '' && dni === '' && apellido === '') {
+            alert('Debe ingresar al menos un dato para realizar la búsqueda.');
+            return;
+        }
+
+        var formData = $('#busquedaForm').serialize(); // Serializar los datos del formulario
+        $.ajax({
+            url: 'buscar_docente.php',
+            type: 'GET', // Método GET para la solicitud
+            data: formData, // Enviar los datos serializados
+            success: function (data) {
+                $('#resultBody').html(data); // Insertar las filas de datos, sin <thead>
+
+                // Contar las filas de la tabla excluyendo la fila del mensaje "No hay datos"
+                var rowCount = $('#resultBody tr').not('.no-data').length;
+
+                if (rowCount > 0) {
+                    $('#resultTable').show(); // Mostrar la tabla si hay datos
+                    $('#searchLabel').show(); // Mostrar el "Buscar Docente"
+                    $('#searchTable').show(); // Mostrar el input de búsqueda en la tabla
+                    $('.no-data').remove(); // Eliminar mensaje "No se encontraron resultados" si hay datos
+                } else {
+                    $('#resultTable').show(); // Mostrar la tabla con el mensaje de "No se encontraron resultados"
+                    $('#searchLabel').hide(); // Ocultar el "Buscar Docente"
+                    $('#searchTable').hide(); // Ocultar el input de búsqueda
+                    $('#resultBody').html('<tr class="no-data"><td colspan="5" class="text-center" style="color:red;">No se encontraron resultados</td></tr>');
+                }
+            },
+            error: function () {
+                // Mostrar mensaje de error en caso de que la solicitud falle
+                alert('Hubo un error al realizar la búsqueda. Por favor, inténtelo de nuevo.');
+            }
+        });
+    });
+
+    // Filtrado en tiempo real dentro de la tabla
+    $("#searchTable").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+
+        // Filtrar las filas del cuerpo de la tabla
+        $("#resultBody tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+
+        // Si no hay coincidencias visibles, mostrar mensaje "No hay coincidencias"
+        if ($("#resultBody tr:visible").length === 0) {
+            if ($("#resultBody .no-data").length === 0) {
+                $("#resultBody").append('<tr class="no-data"><td colspan="5" class="text-center">No hay coincidencias</td></tr>');
+            }
+        } else {
+            $("#resultBody .no-data").remove();
+        }
+    });
+});
+</script>
+
+
+
 <tbody>
+
+<!-- este es el codigo anterior de busqueda --->
 <?php
 // Incluye la conexión a la base de datos aquí
 $serverName = "10.1.9.113";
@@ -741,6 +848,7 @@ if ($legajo != '' || $dni != '' || $ApellidoyNombre != '') {
         die(print_r(sqlsrv_errors(), true));
     }
 ?>
+<!--
 <div class="container mt-4">
     <h2>Resultados de la Búsqueda</h2>
     <table id="resultTable" class="display table table-bordered">
@@ -752,7 +860,7 @@ if ($legajo != '' || $dni != '' || $ApellidoyNombre != '') {
                 <th><center style="font-size:1em">Localidad de Inscripcion</center></th>
                 <th><center style="font-size:1em">Acciones</center></th>
             </tr>
-        </thead>
+        </thead>-->
         <tbody>
             <?php while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)): ?>
                 <tr>
@@ -794,7 +902,9 @@ if ($legajo != '' || $dni != '' || $ApellidoyNombre != '') {
             <?php endwhile; ?>
         </tbody>
     </table>
+    
 </div>
+
 <?php
 }
 ?>
@@ -829,4 +939,6 @@ if ($legajo != '' || $dni != '' || $ApellidoyNombre != '') {
         document.getElementById("resultBody").innerHTML = '';  // Limpia el contenido de la tabla
     }
 </script>
+
+
 <?php include('footer2.php');?>

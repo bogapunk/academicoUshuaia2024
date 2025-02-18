@@ -117,7 +117,23 @@ $placeholders = implode(',', array_fill(0, count($modalidades), '?')); // Crear 
 if (!$ciudad) {
     die("No ID proporcionado.");
 }
+// Valores posibles de codloc esto es nuevo 
+// Valores posibles de codloc
+$valores_validos = ['USH', 'RGD', 'TOL', 'ANT'];
 
+// Si $localidad tiene uno de los valores esperados, se filtra si es tolhuin me trai por defecto tambien rio grande , en caso contrario no 
+if (in_array($localidad, $valores_validos)) {
+    if ($localidad == 'TOL') {
+        // Si el valor es 'TOL', la condición debe incluir 'codloc = TOL' y 'codloc = RGD'
+        $localidad_condition = "AND (j_mov.codloc = 'TOL' OR j_mov.codloc = 'RGD')";
+    } else {
+        // Para los demás valores de localidad, solo se filtra por 'codloc'
+        $localidad_condition = "AND j_mov.codloc = '$localidad'";
+    }
+} else {
+    // Si no hay localidad o es un valor no válido, no se aplica ningún filtro
+    $localidad_condition = '';
+}
 
 // Conectar a la base de datos
 $conexion = new Cconexion("10.1.9.113", "junta", "SA", 'Davinci2024#');
@@ -128,7 +144,6 @@ try {
                               FROM [Junta].[dbo].[_junta_listadosgenerales] 
                               WHERE id = ?";
 
-                            
     $stmt = $conn->prepare($sql_listado_generales);
     $stmt->bindParam(1, $idmodalidad, PDO::PARAM_INT);
     $stmt->execute();
@@ -165,7 +180,7 @@ FROM [Junta].[dbo].[_junta_movimientos] j_mov
 JOIN [Junta].[dbo].[_junta_docentes] j_doc ON j_mov.legdoc = j_doc.legajo
 JOIN [Junta].[dbo].[_junta_dependencias] j_dep ON j_mov.establecimiento = j_dep.coddep
 WHERE j_mov.codmod IN ('$modalidades') 
-AND j_mov.codloc = '$localidad'
+$localidad_condition -- todo los valores de localidad 
 AND j_mov.anodoc = $anio 
 AND j_mov.tipo = 'titulares'
 GROUP BY 
@@ -173,13 +188,12 @@ GROUP BY
 ORDER BY  
     puntajetotal DESC, totalodn1 DESC, concepto DESC, serviciosprovincia DESC, promedio DESC, antiguedadgestion DESC, fechatit DESC;";
 
-
-        } else {
-            die("No se encontraron datos.");
-        }
-    } catch (Exception $e) {
-        die("Error en la consulta: " . $e->getMessage());
+    } else {
+        die("No se encontraron datos.");
     }
+} catch (Exception $e) {
+    die("Error en la consulta: " . $e->getMessage());
+}
  
     $stmt2 = $conn->prepare($query);
     $stmt2->execute();
@@ -263,12 +277,25 @@ ORDER BY
   // Información adicional
   $pdf->SetFont('Arial', '', 10);
   $pdf->Cell(30, 5, utf8_decode('Año: ') . $_GET['year'], 0, 0, "L");
-  $pdf->Cell(45, 5, utf8_decode('Localidad: ') . $_GET['localidad'], 0, 0, "L");
+// Verificar si la localidad está vacía
+if (empty($_GET['localidad'])) {
+    // Si está vacía, mostrar 'USH-RGD-TOL'
+    $localidad_display = 'USH-RGD-TOL';
+} elseif ($_GET['localidad'] == 'TOL') {
+    // Si es 'TOL', mostrar 'RGD-TOL'
+    $localidad_display = 'RGD-TOL';
+} else {
+    // Si no está vacía y no es 'TOL', usar el valor de localidad recibido
+    $localidad_display = $_GET['localidad'];
+}
+
+// Ahora, usar la variable $localidad_display para mostrar el texto en el PDF
+$pdf->Cell(45, 5, utf8_decode('Localidad: ') . $localidad_display, 0, 0, "L");
   $pdf->Cell(120, 5, "Disposicion:" . $_GET["disposicion"] . " Anexo: " . $_GET["anexo"], 0, 0, "C");
   $pdf->Ln(10); // Espacio adicional antes de la cabecera de la tabla
     // Agregar la cabecera de la tabla
     $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(7, 5, 'Nro', 1, 0, 'C');
+    $pdf->Cell(10, 5, 'Nro', 1, 0, 'C');
     $pdf->Cell(20, 5, 'LEGAJO', 1, 0, 'C');
     $pdf->Cell(80, 5, 'NOMBRE', 1, 0, 'C');
     $pdf->Cell(25, 5, 'DNI', 1, 0, 'C');
@@ -282,7 +309,7 @@ ORDER BY
         if ($contador % 57 == 0) {
             $pdf->AddPage();
             $pdf->SetFont('Arial', 'B', 10);
-            $pdf->Cell(7, 5, 'Nro', 1, 0, 'C');
+            $pdf->Cell(10, 5, 'Nro', 1, 0, 'C');
             $pdf->Cell(20, 5, 'LEGAJO', 1, 0, 'C');
             $pdf->Cell(80, 5, 'NOMBRE', 1, 0, 'C');
             $pdf->Cell(25, 5, 'DNI', 1, 0, 'C');
@@ -291,7 +318,7 @@ ORDER BY
         }
        
         $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(7, 5, $nroOrden, 1, 0, 'C');
+        $pdf->Cell(10, 5, $nroOrden, 1, 0, 'C');
         $pdf->Cell(20, 5, $row['legdoc'], 1, 0, 'C');
         $pdf->Cell(80, 5,  utf8_decode($row['ApellidoyNombre']), 1, 0, 'L');
         $pdf->Cell(25, 5, $row['dni'], 1, 0, 'C');

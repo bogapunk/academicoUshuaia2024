@@ -281,4 +281,20 @@ class Dependencia {
     public function __destruct() {
         sqlsrv_close($this->conn);
     }
+
+    public function obtenerUltimoCoddep()
+{
+    $sql = "SELECT MAX(coddep) AS max_coddep FROM _junta_dependencias";
+    $stmt = sqlsrv_query($this->conn, $sql); // Cambié $this->pdo a $this->conn
+    if ($stmt === false) {
+        die(print_r(sqlsrv_errors(), true));
+    }
+    $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+    return $row['max_coddep'] ?? 700; // Si no hay registros, devolvemos 700
+}
+
+
+
+
+
 }

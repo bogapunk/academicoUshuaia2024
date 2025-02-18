@@ -308,7 +308,7 @@ span {
   padding: 10px 0; /* Adjust padding for a comfortable fit */
   font-size: 16px; /* Adjust font size if needed */
   outline: none; /* Remove default outline */
-  width: 30%; /* Make the select element fill the container */
+  width: 36%; /* Make the select element fill the container */
   cursor: pointer; /* Indicate interactivity on hover */
 }
 
@@ -1219,20 +1219,6 @@ function procesarFormulario(event) {
 
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

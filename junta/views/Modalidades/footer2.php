@@ -185,7 +185,7 @@ body{
 <center>
  <div class="elementor-element elementor-element-79dab63d elementor-widget elementor-widget-heading" data-id="79dab63d" data-element_type="widget" data-widget_type="heading.default">
                 <div class="elementor-widget-container">
-            <p class="elementor-heading-title elementor-size-default">© 2024 - Todos los derechos reservados | Las Islas Malvinas son argentinas.</p>       </div>
+            <p class="elementor-heading-title elementor-size-default">© 2025 - Todos los derechos reservados | Las Islas Malvinas son argentinas.</p>       </div>
 </div>
 
 

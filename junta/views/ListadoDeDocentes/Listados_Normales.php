@@ -232,7 +232,7 @@ try {
                     $this->Ln(); 
                     $this->Ln(); 
                     $this->SetFont('Arial', 'B', 10); // Cambiado a Arial
-                    $this->Cell(10, 5, 'N', 1, 0, 'C');
+                    $this->Cell(10, 5, utf8_decode('Nº'), 1, 0, 'C');
                     $this->Cell(30,5, 'LEGAJO', 1, 0, 'C');
                     $this->Cell(80, 5, 'NOMBRE', 1, 0, 'C');
                     $this->Cell(20, 5, 'DNI', 1, 0, 'C');
@@ -287,7 +287,7 @@ try {
                             // Generar las celdas del PDF con los valores formateados
                             $pdf->Cell(10, 5, $nroOrden, 1, 0, 'C'); // Mostrar el índice incremental
                             $pdf->Cell(30, 5, $row['legdoc'], 1, 0, 'C');
-                            $pdf->Cell(80, 5, utf8_decode($row['ApellidoyNombre']), 1, 0, 'L');
+                            $pdf->Cell(80, 5, utf8_decode($row['ApellidoyNombre']), 1, 0, 'C');
                             $pdf->Cell(20, 5, $row['dni'], 1, 0, 'C');
                             $pdf->Cell(20, 5, $tituloFormateado, 1, 0, 'C'); // Usar el valor formateado
                             $pdf->Cell(20, 5, $promedioFormateado, 1, 0, 'C'); // Usar el valor formateado

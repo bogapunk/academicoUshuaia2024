@@ -391,47 +391,71 @@ button:hover {
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
 <div class="col-sm-3 r-form-1-box wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
+<?php
+include 'Dependencias.php';
+$dependencia = new Dependencia();
 
+// Obtener el último coddep
+$ultimoCoddep = $dependencia->obtenerUltimoCoddep();
+$proximoCoddep = $ultimoCoddep + 1;  // Incrementamos el último valor para el siguiente
+?>
 <div class="col-sm-6 r-form-1-box wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
     <h2><b><u><FONT COLOR="Black">CREAR DEPENDENCIA</FONT></u></b></h2>
-		<h4>Nueva Dependencia</h4>
-		<?php echo !empty($statusMsg)?'<p class="'.$statusMsgType.'">'.$statusMsg.'</p>':''; ?>
-		<div class="regisFrm">
-			<form action="MiDepedencia.php" method="post">
-             <center>   
-				<input type="text" name="nomdep" placeholder="Nombre de dependencia" required=""  class="form-control">
-				<input type="number" name="coddep" placeholder="Codigo de Dependencia" required=""  class="form-control">
-                <input type="text" name="domicilio" placeholder="Domicilio de Dependencia" required=""  class="form-control">
-                <input type="text" name="codloc" placeholder="Ciudad de Dependencia" required=""  class="form-control">
-                <input type="text" name="directo" placeholder="Directo" required=""  class="form-control">
-                <input type="text" name="interno" placeholder="Interno" required=""  class="form-control">
-                 <?php 
+    <h4>Nueva Dependencia</h4>
+    <?php echo !empty($statusMsg) ? '<p class="' . $statusMsgType . '">' . $statusMsg . '</p>' : ''; ?>
+    <div class="regisFrm">
+        <form action="MiDepedencia.php" method="post">
+            <center>
+                <input type="text" name="nomdep" placeholder="Nombre de dependencia" required="" class="form-control">
+                
+                <!-- Mostrar el próximo coddep -->
+                <div class="form-group">
+             <input type="number" name="coddep" value="<?php echo $proximoCoddep; ?>" placeholder="Código de Dependencia" class="form-control" readonly>
+              <small class="form-text text-muted">Código asignado automaticamente por el sistema</small>
+             </div>
+                <input type="text" name="domicilio" placeholder="Domicilio de Dependencia" required="" class="form-control">
 
-                            include 'Dependencias.php';
-                        $dependencia = new Dependencia();
-                        
-                        $conditions['return_type'] = 'single';
+                <select name="codloc" class="form-control">
+                    <option>Seleccione localidad</option>
+                    <option value="USH">Ushuaia</option>
+                    <option value="RGD">Rio Grande</option>
+                    <option value="TOL">Tolhuin</option>
+                    <option value="ANT1">Antártida</option>
+                </select>
 
-                    $dependenciaData = $dependencia->getRows3($conditions);  
+                <input type="text" name="directo" placeholder="Directo"  class="form-control">
+                <input type="text" name="interno" placeholder="Interno"  class="form-control">
+                
+                <?php 
+                    // Incluir Dependencias.php y obtener los datos de la dependencia
+                    $dependencia = new Dependencia();
+                    
+                    // Definir condiciones para obtener la fila específica de la base de datos
+                    $conditions = array(
+                        'return_type' => 'single'  // Solo obtener una fila
+                    );
 
-                                    // Definir variables predeterminadas para evitar errores
-                                    $codnivActivo = '';
-                                    $codnivInactivo = '';
+                    // Obtener los datos de la dependencia
+                    $dependenciaData = $dependencia->getRows3($conditions);
 
-                                    // Verificar si $dependenciaData contiene 'codniv'
-                                    if (isset($dependenciaData['codniv'])) {
-                                        if ($dependenciaData['codniv'] == "activo") {
-                                            $codnivActivo = "selected";
-                                        } elseif ($dependenciaData['codniv'] == "inactivo") {
-                                            $codnivInactivo = "selected";
-                                        }
-                                    }?>
-                             
-                                 <select id="codniv" class="form-control" name="codniv"  class="form-control">
-                                                    <option value="1" <?php echo $codnivActivo; ?>>Activo</option>
-                                                    <option value="0" <?php echo $codnivInactivo; ?>>Inactivo</option>
-                                </select>
-                          
+                    // Definir valores predeterminados para evitar errores
+                    $codnivActivo = '';
+                    $codnivInactivo = '';
+
+                    // Verificar si existe el valor 'codniv' en la base de datos
+                    if (isset($dependenciaData['codniv'])) {
+                        if ($dependenciaData['codniv'] == "activo") {
+                            $codnivActivo = "selected";
+                        } elseif ($dependenciaData['codniv'] == "inactivo") {
+                            $codnivInactivo = "selected";
+                        }
+                    }
+                ?>
+                <!-- Mostrar el select con los valores de "Activo" o "Inactivo" -->
+                <select id="codniv" class="form-control" name="codniv">
+                    <option value="1" <?php echo $codnivActivo; ?>>Activo</option>
+                    <option value="0" <?php echo $codnivInactivo; ?>>Inactivo</option>
+                </select>
 
             
 
