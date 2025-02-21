@@ -287,7 +287,7 @@ try {
                             // Generar las celdas del PDF con los valores formateados
                             $pdf->Cell(10, 5, $nroOrden, 1, 0, 'C'); // Mostrar el índice incremental
                             $pdf->Cell(30, 5, $row['legdoc'], 1, 0, 'C');
-                            $pdf->Cell(80, 5, utf8_decode($row['ApellidoyNombre']), 1, 0, 'C');
+                            $pdf->Cell(80, 5, utf8_decode($row['ApellidoyNombre']), 1, 0, 'L');
                             $pdf->Cell(20, 5, $row['dni'], 1, 0, 'C');
                             $pdf->Cell(20, 5, $tituloFormateado, 1, 0, 'C'); // Usar el valor formateado
                             $pdf->Cell(20, 5, $promedioFormateado, 1, 0, 'C'); // Usar el valor formateado

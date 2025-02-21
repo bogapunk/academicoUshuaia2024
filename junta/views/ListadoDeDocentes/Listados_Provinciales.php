@@ -222,8 +222,8 @@ ORDER BY
   $pdf->AddPage();
   
   // Encabezado del PDF
-  $pdf->SetFont('Arial', 'B', 20);
-  $pdf->Cell(120, 15, utf8_decode($_GET["titulo"]), 0, 0, "L");
+  $pdf->SetFont('Arial', 'B', 15);
+  $pdf->Cell(120, 13, utf8_decode($_GET["titulo"]), 0, 0, "L");
   
   $pdf->SetFont('Arial', '', 13);
   // Descomentar si es necesario
@@ -231,7 +231,7 @@ ORDER BY
   
   // Subtítulos y localización
   $pdf->SetFont('Arial', 'I', 8);
-  $pdf->Cell(90, 3, 'JUNTA DE CLASIFICACIÓN Y DISCIPLINA NIVEL', 0, 1, "C");
+  $pdf->Cell(90, 3, utf8_decode('JUNTA DE CLASIFICACIÓN Y DISCIPLINA NIVEL'), 0, 1, "C");
   $pdf->Cell(120, 3, '', 0, 0, "L");
   $pdf->Cell(90, 3, 'INICIAL, PRIMARIO, MODALIDAD Y GABINETE', 0, 1, "C");
   $pdf->Cell(120, 3, '', 0, 0, "L");
@@ -240,8 +240,8 @@ ORDER BY
   $pdf->SetFont('Arial', 'I', 6);
   if ($_GET["localidad"] === "USH") {
       $pdf->Cell(90, 3, 'Gdor. Campos N 1443 - Casa 56/57 Tira 11(9410) Ushuaia', 0, 1, "C");
-      $pdf->SetFont('Arial', 'B', 15);
-      $pdf->Cell(120, 15, utf8_decode($_GET["subtitulo"]), 0, 0, "L");
+      $pdf->SetFont('Arial', 'B', 13);
+      $pdf->Cell(120, 13, utf8_decode($_GET["subtitulo"]), 0, 0, "L");
       $pdf->SetFont('Arial', 'I', 10);
       $pdf->Cell(1, 15,"Fecha:  ". date("d/m/Y"), 0, 0, "R");  
       $pdf->SetFont('Arial', 'I', 6);
