@@ -470,7 +470,7 @@ if ($conn === false) {
 
 
 // Ejecutar la consulta SQL
-$queryData = "SELECT j_doc.apellidoynombre, j_doc.legajo, j_mov.legdoc, j_mov.anodoc, j_mov.codmod, j_mov.establecimiento, j_mod.nommod, j_dep.coddep, j_dep.nomdep, j_mov.puntajetotal, j_mov.tipo, j_mov.fecha, j_mov.obs, j_mov.horas, j_mov.id2,j_mov.excluido,j_mov.codloc
+$queryData = "SELECT j_doc.apellidoynombre, j_doc.legajo, j_mov.legdoc, j_mov.anodoc, j_mov.codmod, j_mov.establecimiento, j_mod.nommod, j_dep.coddep, j_dep.nomdep, j_mov.puntajetotal, j_mov.tipo, j_mov.fecha, j_mov.obs, j_mov.horas, j_mov.id2,j_mov.excluido,j_mov.codloc,j_mov.hijos,j_mov.legvinc
 FROM _junta_docentes j_doc
 INNER JOIN _junta_movimientos j_mov ON j_doc.legajo = j_mov.legdoc
 LEFT JOIN _junta_modalidades j_mod ON j_mov.codmod = j_mod.codmod 
@@ -640,12 +640,31 @@ if (isset($_GET['legajo'])) {
                                     $encodedHoras = isset($row['horas']) ? urlencode((string) $row['horas']) : '';
                                     $encodedAnodoc = isset($row['anodoc']) ? urlencode((string) $row['anodoc']) : '';
                                     $encodedId2 = isset($row['id2']) ? urlencode((string) $row['id2']) : '';
-                                    $encodedexcluido = isset($row['excluido']) ? urlencode((string) $row['excluido']) : '';
+                                    $encodedexcluido = isset($row['excluido']) && !empty($row['excluido']) ? urlencode((string) $row['excluido']) : urlencode('no');
+
+                                    $hijos = isset($row['hijos']) ? $row['hijos'] : 0;
+                                    $encodedHijos = urlencode($hijos);
+                                    $encodedLegvinc = isset($row['legvinc']) ? urlencode((string) $row['legvinc']) : '0'; // Si 'legvinc' está vacío, se asigna '0'nc'] : '0';
+
                                     $codloc = isset($row['codloc']) ? $row['codloc'] : '';
                                     // Asegúrate de que $codloc esté correctamente asignado antes de codificarlo
                                     $encodedCodloc = urlencode($codloc);
                                     // El resto del código
-                                    echo "<a href='Inscripcion.php?legajo=" . $encodedLegajo . "&codmod=" . $encodedCodmod . "&tipo=" . $encodedTipo . "&nomdep=" . $encodedNomdep . "&obs=" . $encodedObs . "&horas=" . $encodedHoras . "&anodoc=" . $encodedAnodoc . "&id2=" . $encodedId2 . "&fecha=" . $encodedFecha . "&excluido=" . $encodedexcluido . "' class='btn btn-success' title='Modificar' style='margin-right: 10px; margin-top: 10px;'>";
+                                   // Generación del enlace con los parámetros codificados
+                                      echo "<a href='Inscripcion.php?legajo=" . $encodedLegajo . 
+                                      "&codmod=" . $encodedCodmod . 
+                                      "&tipo=" . $encodedTipo . 
+                                      "&nomdep=" . $encodedNomdep . 
+                                      "&obs=" . $encodedObs . 
+                                      "&horas=" . $encodedHoras . 
+                                      "&anodoc=" . $encodedAnodoc . 
+                                      "&id2=" . $encodedId2 . 
+                                      "&fecha=" . $encodedFecha . 
+                                      "&excluido=" . $encodedexcluido . 
+                                      "&hijos=" . $encodedHijos . 
+                                      "&codloc=" . $encodedCodloc . 
+                                      "&legvinc=" . $encodedLegvinc . 
+                                      "' class='btn btn-success' title='Modificar' style='margin-right: 10px; margin-top: 10px;'>";
 
                                     echo "<span class='glifo glifo-lápiz'></span><i class='glyphicon glyphicon-pencil'></i>  Modificar";
                                     echo "</a>";
@@ -662,6 +681,8 @@ if (isset($_GET['legajo'])) {
                                     "&id2=" . $encodedId2 . 
                                     "&fecha=" . $encodedFecha . 
                                     "&excluido=" . $encodedexcluido . 
+
+
                                     "&codloc=" . $encodedCodloc . "' 
                                     class='btn btn-warning' title='Duplicar'>";
                                     echo "<span class='glifo glifo-lápiz' style='margin-right: 8px;'></span><i class='glyphicon glyphicon-copy'></i>  Duplicar";

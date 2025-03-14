@@ -42,7 +42,8 @@ try {
     $residencia = validate_numeric($_POST['residencia2']);
     $publicaciones = validate_numeric($_POST['publicaciones2']);
     $otrosantecedentes = validate_numeric($_POST['otrosantecedentes2']);
-  
+    $hijos =  validate_numeric($_POST['hijos']);
+    
     $excluido = validate_numeric($_POST['excluido']);
     // Consulta SQL para actualizar los datos
     $consulta = "UPDATE _junta_movimientos SET 
@@ -66,12 +67,12 @@ try {
         residencia = :residencia, 
         publicaciones = :publicaciones,
         otrosantecedentes = :otrosantecedentes,
-        excluido = :excluido
+        excluido = :excluido,
+        hijos = :hijos
 
 
     WHERE id2 = :id2";
       
- 
     // Preparar la declaración
     $stmt = $conexion->prepare($consulta);
 
@@ -98,6 +99,7 @@ try {
     $stmt->bindParam(':otrosantecedentes', $otrosantecedentes, PDO::PARAM_STR);
     
     $stmt->bindParam(':excluido', $excluido, PDO::PARAM_STR);
+    $stmt->bindParam(':hijos', $hijos);
 
      
     $stmt->bindParam(':id2', $id2, PDO::PARAM_INT);

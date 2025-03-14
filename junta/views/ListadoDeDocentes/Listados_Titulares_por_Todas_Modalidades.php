@@ -96,8 +96,9 @@ if($conn){
             ORDER BY j_mov.codmod, j_mov.puntajetotal DESC, totalodn1 DESC,
                 j_mov.concepto DESC, j_mov.serviciosprovincia DESC,
                 j_mov.promedio DESC, j_mov.antiguedadgestion DESC,
-                j_mov.antiguedadtitulo DESC, j_doc.fechatit DESC";
-         
+                j_mov.antiguedadtitulo DESC, j_doc.fingreso asc";//esta modificcacion se debe revisar para ver si esta ok para todos
+
+       
 
 
         

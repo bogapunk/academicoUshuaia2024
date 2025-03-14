@@ -523,12 +523,16 @@ $(document).ready(function() {
     });
 });
 </script>
-
+<center><h4><u>Actulizacion de Movimiento</u></h4></center>
 <table>
   
  <?php
 $legajo = $_GET['legajo'];
-$excluido = $_GET['excluido'];
+$excluido = isset($_GET['excluido']) && $_GET['excluido'] !== null ? $_GET['excluido'] : 'no';
+
+
+
+$hijos = isset($_GET['hijos']) ? $_GET['hijos'] : 0;
 
 $codmod = $_GET['codmod'];
 $tipo = $_GET['tipo'];
@@ -630,7 +634,7 @@ $queryData = "SELECT
         j_mov.t_d_supgral,
         j_mov.t_d_adic,
         j_mov.concepto,
-        j_mov.id2
+        j_mov.id2,j_mov.legvinc
     FROM _junta_docentes j_doc
     INNER JOIN _junta_movimientos j_mov ON j_mov.id2 = '$id2' AND j_doc.legajo = j_mov.legdoc
     INNER JOIN _junta_modalidades j_mod ON j_mov.codmod = j_mod.codmod
@@ -656,29 +660,34 @@ if (sqlsrv_has_rows($resultData)) {
     
     // Curso
     if (isset($row['anodoc'])) {
-        echo "<th>Curso: </th><th><input type='text' name='anodoc' value='" . $row['anodoc'] . "' size='11'></th>";
+        echo "<td style='text-align: left; width: 192px;'>Curso: <input type='text' name='anodoc' value='" . htmlspecialchars($row['anodoc']) . "' size='11'></td>";
     } else {
-        echo "<th>Curso: </th><th><input type='text' name='anodoc' value='' size='11'></th>"; 
+        echo "<td style='text-align: left; width: 192px;'>Curso: <input type='text' name='anodoc' value='' size='11'></td>"; 
     }
+    echo "<th>";
+    echo "</th>";
     
-    // Botones de acción
-            echo "<th>";
-            echo "<div style='text-align: center;'>";
-            echo "<a class='btn btn-sm btn-danger' id='movimientoBorrado' href='#' data-id2='" . $row['id2'] . "' title='Eliminar' style='width: 120px; display: inline-block; margin-right: 0px;'><i class='glyphicon glyphicon-trash'></i> Eliminar</a>";
-            echo"<button type='button' class='btn btn-success'  id='btnActualizar' title='Grabar'><i class='glyphicon glyphicon-floppy-disk'></i> Grabar</button>";
-            echo "<button type='button' class='btn btn-primary' id='cancelarBtn' title='volver' style='width: 120px; display: inline-block;'> <i class='glyphicon glyphicon-arrow-left'></i> Volver</button>";
-            echo "</div>";
-            
-            echo "</th>";
-            echo "</tr>";
-    
+        // Botones de acción
+                echo "<td style='text-align: center;'>";
+                echo "<div style='text-align: center;'>";
+
+                // Coloca los botones dentro de un contenedor para mantener la alineación
+                echo "<a class='btn btn-sm btn-danger' id='movimientoBorrado' href='#' data-id2='" . $row['id2'] . "' title='Eliminar' style='width: 120px; display: inline-block; margin-right: 0px;'><i class='glyphicon glyphicon-trash'></i> Eliminar</a>";
+                echo "<button type='button' class='btn btn-success' id='btnActualizar' title='Grabar'><i class='glyphicon glyphicon-floppy-disk'></i> Grabar</button>";
+                echo "<button type='button' class='btn btn-primary' id='cancelarBtn' title='Volver' style='width: 120px; display: inline-block;'> <i class='glyphicon glyphicon-arrow-left'></i> Volver</button>";
+
+                echo "</div>";
+                echo "</td>"; // Asegurarse de que esté dentro de la tercera columna
+
+                echo "</tr>";
+                    
     
    // Código de modalidad
         echo "<tr>";
         echo "<th>Cód. Mod: <input type='text' name='codmod' id='codmod' value='" . $row['codmod'] . "' size='8' onchange='fetchModalidad()'></th>";
 
         // Modalidad
-        echo "<th>Modalidad:<select name='modalidad' id='modalidad' style='width: 500px;'>";
+        echo "<th>Modalidad:<select name='modalidad' id='modalidad' style='width: 384px;'>";
         foreach ($modalidades as $modalidad) {
             echo "<option value='$modalidad'";
             if (trim($row['nommod']) == $modalidad) {
@@ -726,44 +735,45 @@ function fetchModalidad() {
 }
 </script>";
 
-    // Tipo de inscripción
-    echo "<th>Tipo Inscripción:";
-    echo "<select name='tipo' id='tipo' style='width: 200px;' onchange='mostrarCamposAdicionales(); showTableBasedOnType();'>";
-    echo "<option value='Permanente'";
-    if (trim($row['tipo']) == "Permanente" || trim($row['tipo']) == "permanente") {
-        echo " selected";
-    }
-    echo ">Permanente</option>";
-    echo "<option value='Titulares'";
-    if (trim($row['tipo']) == "Titulares" || trim($row['tipo']) == "titulares") {
-        echo " selected";
-    }
-    echo ">Titulares</option>";
-    echo "<option value='transitorio'";
-    if (trim($row['tipo']) == "Transitorio" || trim($row['tipo']) == "transitorio" ) {
-        echo " selected";
-    }
-    echo ">Interinatos y Suplencias</option>";
-    echo "<option value='Concurso'";
-    if (trim($row['tipo']) == "Concurso" || trim($row['tipo']) == "concurso") {
-        echo " selected";
-    }
-    echo ">Concurso de Titularidad</option>";
-    echo "</select>";
-    echo "</th>";
-    echo "</tr>";
-    echo "</table>";
+   // Tipo de inscripción
+echo "<th>Tipo Inscripción:";
+echo "<select name='tipo' id='tipo' style='width: 200px;' onchange='mostrarCamposAdicionales(); '>";
+echo "<option value='Permanente'";
+if (trim($row['tipo']) == "Permanente" || trim($row['tipo']) == "permanente") {
+    echo " selected";
+}
+echo ">Permanente</option>";
+echo "<option value='Titulares'";
+if (trim($row['tipo']) == "Titulares" || trim($row['tipo']) == "titulares") {
+    echo " selected";
+}
+echo ">Titulares</option>";
+echo "<option value='transitorio'";
+if (trim($row['tipo']) == "Transitorio" || trim($row['tipo']) == "transitorio" ) {
+    echo " selected";
+}
+echo ">Interinatos y Suplencias</option>";
+echo "<option value='Concurso'";
+if (trim($row['tipo']) == "Concurso" || trim($row['tipo']) == "concurso") {
+    echo " selected";
+}
+echo ">Concurso de Titularidad</option>";
+echo "</select>";
+echo "</th>";
+echo "</tr>";
+echo "</table>";
    
 } else {
   
      // Curso
      $anodoc = isset($_GET['anodoc']) ? $_GET['anodoc'] : '';
     // Verificar si anodoc está definido en la URL o en la consulta de la base de datos
-if (!empty($anodoc)) {
-  echo "<th>Curso: </th><th><input type='text' name='anodoc' value='" . htmlspecialchars($anodoc) . "' size='11'></th>";
-} else {
-  echo "<th>Curso: </th><th><input type='text' name='anodoc' value='' size='11'></th>"; 
-}
+    if (!empty($anodoc)) {
+        echo "<th style='text-align: right;'>Curso: <input type='text' name='anodoc' value='" . htmlspecialchars($anodoc) . "' size='11'></th>";
+    } else {
+        echo "<th style='text-align: right;'>Curso: <input type='text' name='anodoc' value='' size='11'></th>"; 
+    }
+    
 
 $id2 = isset($_GET['id2']) ? $_GET['id2'] : '';
 
@@ -835,7 +845,7 @@ $options = [
 
 // Tipo de inscripción
 echo "<th>Tipo Inscripción:";
-echo "<select name='tipo' id='tipo' style='width: 242px;' onchange='mostrarCamposAdicionales(); showTableBasedOnType();'>";
+echo "<select name='tipo' id='tipo' style='width: 242px;' onchange='mostrarCamposAdicionales();'>";
 
 foreach ($options as $value => $label) {
     echo "<option value='$value'";
@@ -904,7 +914,7 @@ echo "document.addEventListener('DOMContentLoaded', function() {";
 echo "    var tipoSelect = document.getElementById('tipo');";
 echo "    var fechaRow = document.getElementById('fechaRow');";
 echo "    tipoSelect.addEventListener('change', function() {";
-echo "        if (tipoSelect.value === 'permanente') {";
+echo "        if (tipoSelect.value === 'Permanente') {";
 echo "            fechaRow.style.display = 'table-row';";
 echo "        } else {";
 echo "            fechaRow.style.display = 'none';";
@@ -923,17 +933,45 @@ echo "</script>";
                                               $codloc = isset($row['codloc']) ? $row['codloc'] : null;
 
                                               echo "<th style='width:50px;'>Localidad:</th>";
-                                              echo "<td>";
-                                              echo "<select name='codloc' style='width: 200px;'>";
-                                              echo "<option></option>";
-                                              echo "<option value='USH'" . ($codloc === "USH" ? " selected" : "") . ">Ushuaia</option>";
-                                              echo "<option value='RGD'" . ($codloc === "RGD" ? " selected" : "") . ">Rio Grande</option>";
-                                              echo "<option value='TOL'" . ($codloc === "TOL" ? " selected" : "") . ">Tolhuin</option>";
-                                              echo "<option value='ANT1'" . ($codloc === "ANT1" ? " selected" : "") . ">Antartida</option>";
-                                              echo "</select>";
+echo "<td>";
+echo "<select name='codloc' style='width: 200px;' onchange='checkLocalidad()'>";
+echo "<option></option>";
+echo "<option value='USH'" . ($codloc === "USH" ? " selected" : "") . ">Ushuaia</option>";
+echo "<option value='RGD'" . ($codloc === "RGD" ? " selected" : "") . ">Rio Grande</option>";
+echo "<option value='TOL'" . ($codloc === "TOL" ? " selected" : "") . ">Tolhuin</option>";
+echo "<option value='ANT'" . ($codloc === "ANT" ? " selected" : "") . ">Antartida</option>";
+echo "</select>";
+echo "</td>";
+
+                    // Verificar si la localidad es diferente de "ANT1" (Antártida) para mostrar "Cantidad de Hijos"
+                    if ($codloc == "ANT") {
+                        echo "<th style='width:50px;'>Cantidad de Hijos:</th>";
+                        echo "<td>";
+                        echo "<input type='number' name='hijos' id='hijos' value='$hijos' min='0' style='width: 80px;'>";
+                        echo "</td>";
+                        // Correcto: HTML fuera del echo
+                                ?>
+                                                               <label for="legajo">Legajo vinculado:</label>
+                                <input type="text" name="legajo2" id="legajo" placeholder="Ingrese legajo" value="<?php echo isset($row['legvinc']) && $row['legvinc'] !== '' ? htmlspecialchars($row['legvinc']) : '0'; ?>" disabled />
+
+                                <?php
+
+                    } else {
+                        // Si la localidad es Antártida, no mostrar el campo "Cantidad de Hijos"
+                        echo "<script>
+                                document.getElementById('hijos').style.display = 'none';
+                            </script>";
+}
                                               echo "</td>";
                                               echo"<th>";
                                               echo"<br>";
+
+
+                                              
+                                              
+
+
+
                                              
                                                 
                                                                                     // Establecer la conexión a SQL Server
@@ -959,6 +997,7 @@ echo "</script>";
                                                 echo "Message: " . $error['message'] . "<br>";
                                             }
                                         }
+                                        
                                             //echo "Conexión exitosa.";
                                               
                                               // Consulta SQL para obtener todos los motivos de exclusión
@@ -1069,7 +1108,7 @@ ORDER BY
                             
                                               echo "<td>Observación: <input type='text' id='obs' name='obs' style='width: 300px;' value='" . htmlspecialchars($obs) . "'></td>";
                                               echo "<td>Horas: <input type='number' name='horas' style='width: 50px;' value='" . htmlspecialchars($horas) . "'></td>";
-
+                                               
 
                      
 // Inicializar valores de $row
@@ -1462,49 +1501,64 @@ echo "document.addEventListener('DOMContentLoaded', function() {";
 echo "    var tipoSelect = document.getElementById('tipo');";
 echo "    var tablaPermanenteConcursoInterino = document.getElementById('tablaPermanenteConcursoInterino');";
 echo "    var tablaTitular = document.getElementById('tablaTitular');";
-echo "    var tablaComun = document.getElementById('tablaComun');"; // Agregar la tabla común
+echo "    var tablaComun = document.getElementById('tablaComun');"; 
+
 echo "    function mostrarTablaSegunTipo() {";
-echo "        if (tipoSelect.value === 'Permanente' || tipoSelect.value === 'Concurso' || tipoSelect.value === 'transitorio') {";
-echo "            tablaPermanenteConcursoInterino.style.display = 'table';";
-echo "            tablaTitular.style.display = 'none';";
-echo "            tablaComun.style.display = 'none';"; // Ocultar la tabla común
-echo "        } else if (tipoSelect.value === 'Titulares') {";
-echo "            tablaPermanenteConcursoInterino.style.display = 'none';";
-echo "            tablaTitular.style.display = 'table';";
-echo "            tablaComun.style.display = 'none';"; // Ocultar la tabla común
+echo "        if (!tipoSelect) return;"; // Si el select no existe, salir
+echo "        if (tipoSelect.value === 'Permanente' || tipoSelect.value === 'permanente' ||";
+echo "            tipoSelect.value === 'Concurso' || tipoSelect.value === 'concurso' ||";
+echo "            tipoSelect.value === 'transitorio' || tipoSelect.value === 'Transitorio') {";
+echo "            if (tablaPermanenteConcursoInterino) tablaPermanenteConcursoInterino.style.display = 'table';";
+echo "            if (tablaTitular) tablaTitular.style.display = 'none';";
+echo "            if (tablaComun) tablaComun.style.display = 'none';";
+echo "        } else if (tipoSelect.value === 'Titulares' || tipoSelect.value === 'titulares') {";
+echo "            if (tablaPermanenteConcursoInterino) tablaPermanenteConcursoInterino.style.display = 'none';";
+echo "            if (tablaTitular) tablaTitular.style.display = 'table';";
+echo "            if (tablaComun) tablaComun.style.display = 'none';";
 echo "        } else {";
-echo "            tablaPermanenteConcursoInterino.style.display = 'none';";
-echo "            tablaTitular.style.display = 'none';";
-echo "            tablaComun.style.display = 'table';"; // Mostrar la tabla común
+echo "            if (tablaPermanenteConcursoInterino) tablaPermanenteConcursoInterino.style.display = 'none';";
+echo "            if (tablaTitular) tablaTitular.style.display = 'none';";
+echo "            if (tablaComun) tablaComun.style.display = 'table';";
 echo "        }";
 echo "    }";
-echo "    tipoSelect.addEventListener('change', mostrarTablaSegunTipo);"; // Escuchar el cambio en el select
-echo "    mostrarTablaSegunTipo();"; // Llamar a la función al cargar la página para mostrar la tabla correspondiente
+echo "    if (tipoSelect) tipoSelect.addEventListener('change', mostrarTablaSegunTipo);";
+echo "    mostrarTablaSegunTipo();";
 echo "});";
 echo "</script>";
+
 
            
                 echo"<br>";
   
                
          // Script para mostrar u ocultar los campos adicionales según el tipo de inscripción seleccionado
-                    echo "<script>";
-                    echo "function mostrarCamposAdicionales() {";
-                    echo "var select = document.getElementById('tipo');";
-                    echo "var titularesRow = document.getElementById('titularesRow');";
-                    echo "var fechaRow = document.getElementById('fechaRow');";
-                    echo "if (select.value === 'titulares') {";
-                    echo "titularesRow.style.display = 'table-row';";
-                    echo "fechaRow.style.display = 'none';";
-                    echo "} else {";
-                    echo "titularesRow.style.display = 'none';";
-                    echo "fechaRow.style.display = 'table-row';";
-                    echo "}";
-                    echo "}";
-      // Llamar a la función para mostrar campos adicionales y tablas al cargar la página
-                    echo "mostrarCamposAdicionales();";
-                    echo "showTableBasedOnType();";
-                    echo "</script>";?>
+                    echo "<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function mostrarCamposAdicionales() {
+        var select = document.getElementById('tipo');
+        var titularesRow = document.getElementById('titularesRow');
+        var fechaRow = document.getElementById('fechaRow');
+
+        // Verificar que los elementos existen antes de intentar manipularlos
+        if (!titularesRow || !fechaRow) {
+            console.warn('Algunos elementos no se encontraron en el DOM.');
+            return;
+        }
+
+        // Mostrar u ocultar según el tipo seleccionado
+        if (select.value === 'titulares' || select.value === 'Titulares') {
+            titularesRow.style.display = 'table-row';
+            fechaRow.style.display = 'none';
+        } else {
+            titularesRow.style.display = 'none';
+            fechaRow.style.display = 'table-row';
+        }
+    }
+
+    // Llamar a la función para inicializar
+    mostrarCamposAdicionales();
+});</script>
+";?>
 
                 
               

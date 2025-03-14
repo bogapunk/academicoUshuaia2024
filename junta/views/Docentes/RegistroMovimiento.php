@@ -359,7 +359,7 @@ tr:nth-child(even) {
   padding: 0px 0; /* Adjust padding for a comfortable fit */
   font-size: 16px; /* Adjust font size if needed */
   outline: none; /* Remove default outline */
-  width: 75%; /* Make the select element fill the container */
+  width: 67%; /* Make the select element fill the container */
   cursor: pointer; /* Indicate interactivity on hover */
   font-weight: bold;
   &:focus {
@@ -671,6 +671,18 @@ sqlsrv_close($conn);
 
 <center><h4><u>Carga de Movimiento</u></h4></center>
 <form action="MovimientoNuevo.php" method="post"> 
+<div id="antartidaFields" style="display: none;">
+    <label for="legajo">Legajo viculado:</label>
+    <input type="text" name="legajo2" id="legajo" placeholder="Ingrese legajo" />
+
+    <span id="legajoStatus"></span> <!-- Aquí mostramos el estado del legajo -->
+
+    <label for="checkboxAntartida">Marque para confirmar</label>
+    <input type="checkbox" name="checkboxAntartida" id="checkboxAntartida" />
+     <!-- Campo para la cantidad de hijos -->
+     <label for="numHijos">Cantidad de Hijos:</label>
+    <input type="number" name="hijos" id="hijos" placeholder="cantidad de hijos" min="0" style="width: 80px;"  />
+</div>
 <input type="hidden" name="legajo" value="<?php echo htmlspecialchars($legajo); ?>">
     <table border='2'>
         <tr>
@@ -687,7 +699,7 @@ sqlsrv_close($conn);
 </th>
 
 <th>Modalidad:
-    <select name="modalidad" id="modalidad" style="width: 420px;">
+    <select name="modalidad" id="modalidad" style="width: 331px;">
         <?php if (!empty($modalidades)): ?>
             <?php foreach ($modalidades as $modalidad): ?>
                 <option value="<?php echo htmlspecialchars($modalidad, ENT_QUOTES, 'UTF-8'); ?>" 
@@ -700,7 +712,22 @@ sqlsrv_close($conn);
         <?php endif; ?>
     </select>
 </th>
-<!-- JavaScript -->
+<!-- JavaScript para dejar selccionado el legajo 2 -->
+<script>
+document.getElementById("checkboxAntartida").addEventListener("change", function() {
+    let legajoInput = document.getElementById("legajo");
+    
+    if (this.checked) {
+        legajoInput.readOnly = true; // Bloquea el campo
+    } else {
+        legajoInput.readOnly = false; // Desbloquea el campo si se desmarca
+    }
+});
+
+
+  </script>
+
+<!-- JavaScript verifica el codigo modalidad -->
 <script>
 function fetchModalidad() {
     const codmod = document.getElementById('codmod').value;
@@ -745,8 +772,8 @@ function fetchModalidad() {
 }
 </script>
               </select></th>
-                <td> <b>Tipo de Listado:</b>
-                <select name="tipoc" id="tipoc" class="materialize-select4" onchange="habilitarTipo(this.value)" style='width: 220px;'>
+                <td> <b>Tipo Listado:</b>
+                <select name="tipoc" id="tipoc" class="materialize-select4" onchange="habilitarTipo(this.value)" style='width: 150px;'>
                           <option value=""><strong>Seleccione</strong></option>
                           <option value="permanente"><strong>Permanente</strong></option>
                           <option value="titulares"><strong>Titulares</strong></option>
@@ -973,7 +1000,7 @@ $localidades = ['RGD', 'USH', 'TOL', 'ANT'];  // Array de localidades, incluye '
 ?>
 
 <th>Localidad:
-    <select name='codloc' class="materialize-select3" style='width: 160px;'>
+    <select name='codloc' class="materialize-select3" style='width: 160px;' id="selectLocalidad">
         <option value="">Seleccione</option>
         <?php 
         foreach ($localidades as $localidad) {
@@ -982,30 +1009,136 @@ $localidades = ['RGD', 'USH', 'TOL', 'ANT'];  // Array de localidades, incluye '
         }
         ?>
     </select>
-
-
-<input type='hidden' name='idexclu' id='idexclu' value=''>
+    
 </th>
+
+
+
 <script>
-function toggleMotivosExclusion(checkbox) {
-    var select = document.getElementById('motivosExclusion');
-    var hiddenInput = document.getElementById('idexclu');
+ document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("selectLocalidad").addEventListener("change", function() {
+        var selectedValue = this.value;
+        var antartidaFields = document.getElementById("antartidaFields");
 
-    if (checkbox.checked) {
-        select.style.display = 'block'; // Mostrar el menú desplegable si el checkbox está marcado
-    } else {
-        select.style.display = 'none'; // Ocultar el menú desplegable si el checkbox está desmarcado
-        hiddenInput.value = ''; // Limpiar el valor del campo oculto idexclu
-    }
-}
+        if (selectedValue === "ANT") {
+            antartidaFields.style.display = "block";
+        } else {
+            antartidaFields.style.display = "none";
+            document.getElementById("legajo").value = ""; // Limpiar legajo si no se selecciona Antártida
+            document.getElementById("legajoStatus").innerHTML = ""; // Limpiar mensaje de estado
+        }
+    });
 
-// Capturar el valor seleccionado del menú desplegable y asignarlo al campo oculto idexclu
-document.getElementById('motivosExclusion').addEventListener('change', function() {
-    var select = document.getElementById('motivosExclusion');
-    var hiddenInput = document.getElementById('idexclu');
-    hiddenInput.value = select.value;
+    document.getElementById("legajo").addEventListener("input", function() {
+        var legajo = this.value.trim();
+        var statusMessage = document.getElementById("legajoStatus");
+
+        // Depuración: Mostrar el valor de legajo2 en la consola
+        var legajo2Value = document.querySelector('[name="legajo2"]').value;
+        console.log("Legajo2 enviado:", legajo2Value);
+
+        if (legajo !== "") {
+            // Realizar la consulta AJAX para verificar si el legajo existe
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "verifica_legajo.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    console.log(response);  // Depuración
+
+                    if (response.status === "exists") {
+                        statusMessage.innerHTML = "<span style='color: green;'>Legajo válido. Docente: " 
+                            + response.docente.ApellidoyNombre + "</span>";
+                    } else if (response.status === "not_found") {
+                        statusMessage.innerHTML = "<span style='color: red;'>Legajo no encontrado.</span>";
+                    } else {
+                        statusMessage.innerHTML = "<span style='color: red;'>Error al verificar el legajo.</span>";
+                    }
+                }
+            };
+            xhr.send("legajo=" + legajo);
+        } else {
+            statusMessage.innerHTML = ""; // Limpiar mensaje si el campo está vacío
+        }
+    });
 });
+
+
 </script>
+      </th>
+
+      <?php
+echo "<th>";
+$excluidoSeleccionado = isset($_GET['excluido']) ? $_GET['excluido'] : "23"; // Valor por defecto 23 si no se pasa un valor
+
+// Si no hay valor para 'excluido', el checkbox no está marcado
+$excluirChecked = ($excluidoSeleccionado == "23") ? "" : "checked";
+
+// Mostrar el select de motivos oculto por defecto
+$display = ($excluidoSeleccionado == "23") ? "none" : "block"; // Ocultar si es 23
+
+$queryMotivos = "SELECT idexclu, motivo FROM _junta_motivosexclusion";
+$resultMotivos = sqlsrv_query($conn, $queryMotivos);
+
+if ($resultMotivos && sqlsrv_has_rows($resultMotivos)) {
+    echo "<div style='display: flex; align-items: center;'>"; // Contenedor flexible
+    echo "<label for='excluir' style='margin-right: 10px; margin-bottom: -3px;'>Excluir Inscripción</label>";
+
+    // Checkbox de exclusión
+    echo "<input type='checkbox' id='excluir' name='excluido_checkbox' onclick='toggleMotivosExclusion(this)' style='transform: scale(0.9); margin-right: 10px;' $excluirChecked>";
+
+    // Menú desplegable de motivos de exclusión (oculto por defecto)
+    echo "<select id='motivosExclusion' name='excluido' style='display: $display; width: 127px;'>";
+    echo "<option value='23' " . ($excluidoSeleccionado == "23" ? "selected" : "") . ">Ningún motivo de exclusión</option>"; // Opción por defecto
+
+    while ($rowMotivo = sqlsrv_fetch_array($resultMotivos, SQLSRV_FETCH_ASSOC)) {
+        $selected = ($rowMotivo['idexclu'] == $excluidoSeleccionado) ? "selected" : "";
+        echo "<option value='" . $rowMotivo['idexclu'] . "' $selected>" . $rowMotivo['motivo'] . "</option>";
+    }
+    
+    echo "</select>";
+
+    // Campo oculto para guardar el motivo de exclusión seleccionado
+    echo "<input type='hidden' name='idexclu' id='idexclu' value='" . htmlspecialchars($excluidoSeleccionado, ENT_QUOTES, 'UTF-8') . "'>";
+
+    echo "</div>"; // Cerrar contenedor flexible
+
+    // Script mejorado
+    echo "<script>
+    function toggleMotivosExclusion(checkbox) {
+        var select = document.getElementById('motivosExclusion');
+        var hiddenInput = document.getElementById('idexclu');
+
+        if (checkbox.checked) {
+            select.style.display = 'block'; // Mostrar el menú desplegable si el checkbox está marcado
+        } else {
+            select.style.display = 'none'; // Ocultar el menú desplegable si el checkbox está desmarcado
+            select.selectedIndex = 0; // Reiniciar selección cuando se desmarca el checkbox
+            hiddenInput.value = '23'; // Valor por defecto '23' cuando no se selecciona nada
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var select = document.getElementById('motivosExclusion');
+        var hiddenInput = document.getElementById('idexclu');
+
+        select.addEventListener('change', function() {
+            hiddenInput.value = select.value; // Asignar el valor seleccionado al campo oculto
+        });
+
+        // Asegurar que el menú desplegable esté visible si el checkbox ya está marcado al cargar la página
+        if (document.getElementById('excluir').checked) {
+            select.style.display = 'block';
+        }
+    });
+    </script>";
+} else {
+    echo "No se encontraron motivos de exclusión en la base de datos.";
+}
+echo "</th>";
+echo "</table>"; // Cierre de la tabla
+?>
 <!-- HTML para el formulario -->
 
     <!-- Tabla para Permanente, Concurso, Interino -->

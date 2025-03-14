@@ -523,7 +523,7 @@ $(document).ready(function() {
     });
 });
 </script>
-
+<center><h4><u>Duplicado de  Movimiento</u></h4></center>
 <table>
   
  <?php
@@ -656,9 +656,9 @@ if (sqlsrv_has_rows($resultData)) {
     
     // Curso
     if (isset($row['anodoc'])) {
-        echo "<th>Curso: </th><th><input type='text' name='anodoc' value='" . $row['anodoc'] . "' size='11'></th>";
+        echo "<th>Curso: <input type='text' name='anodoc' value='" . $row['anodoc'] . "' size='11'></th>";
     } else {
-        echo "<th>Curso: </th><th><input type='text' name='anodoc' value='' size='11'></th>"; 
+        echo "<th>Curso: <input type='text' name='anodoc' value='' size='11'></th>"; 
     }
     
  
@@ -919,7 +919,7 @@ echo "</script>";
                                               echo "<option value='USH'" . ($codloc === "USH" ? " selected" : "") . ">Ushuaia</option>";
                                               echo "<option value='RGD'" . ($codloc === "RGD" ? " selected" : "") . ">Rio Grande</option>";
                                               echo "<option value='TOL'" . ($codloc === "TOL" ? " selected" : "") . ">Tolhuin</option>";
-                                              echo "<option value='ANT1'" . ($codloc === "ANT1" ? " selected" : "") . ">Antartida</option>";
+                                              echo "<option value='ANT'" . ($codloc === "ANT" ? " selected" : "") . ">Antartida</option>";
                                               echo "</select>";
                                               echo "</td>";
                                               echo"<th>";

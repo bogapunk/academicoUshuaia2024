@@ -281,10 +281,11 @@ $T_m_sec2 = '';
 $T_m_viced = '';
 $obs = '';
 $horas = '';
-$legvinc = '';
+//$legvinc = '';
 $hijos = '';
 $excluido = '';
 
+$legvinc = isset($_POST['legajo2']) ? $_POST['legajo2'] : ''; // Make sure this is defined before usage
 
 // Definición de constantes
 define('HOST', '10.1.9.113'); // Host de la base de datos
@@ -350,7 +351,12 @@ try {
                 $fecha = isset($_POST['fecha']) ? $_POST['fecha'] : '';
                 $otitulo = isset($_POST['otitulo2']) ? floatval($_POST['otitulo2']) : 0;
                 $concepto = isset($_POST['concepto2']) ? floatval($_POST['concepto2']) : 0;
-                 
+                $excluido = isset($_POST['excluido']) && is_numeric($_POST['excluido']) ? $_POST['excluido'] : 23;
+                $legvinc = isset($_POST['legajo2']) && $_POST['legajo2'] !== '' ? $_POST['legajo2'] : 0;
+                $hijos = isset($_POST['hijos']) && $_POST['hijos'] !== '' ? $_POST['hijos'] : 0;
+
+
+
 
                 
     // Si el tipo es 'transitorio', asignar establecimiento a 1
@@ -378,11 +384,11 @@ try {
 
                 // Definir la consulta SQL de inserción
                 $sql_insert = "INSERT INTO _junta_movimientos 
-                        (anodoc, legdoc, codmod, establecimiento, titulo, promedio, antiguedadgestion, antiguedadtitulo, serviciosprovincia, otrosservicios, residencia, publicaciones, otrosantecedentes, puntajetotal, codloc, tipo, T_m_comple, T_m_biblio, T_m_sec1, T_m_sec2, T_m_viced, obs, horas, fecha,otitulo,concepto) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CAST(? AS date),?,?)";
+                        (anodoc, legdoc, codmod, establecimiento, titulo, promedio, antiguedadgestion, antiguedadtitulo, serviciosprovincia, otrosservicios, residencia, publicaciones, otrosantecedentes, puntajetotal, codloc, tipo, T_m_comple, T_m_biblio, T_m_sec1, T_m_sec2, T_m_viced, obs, horas, fecha,otitulo,concepto,excluido,legvinc,hijos) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CAST(? AS date),?,?,?,?,?)";
 
                 $params_insert = array(
-                    $anodoc, $legajo, $codmod, $establecimiento, $titulo, $promedio, $antiguedadgestion, $antiguedadtitulo, $serviciosprovincia, $otrosservicios, $residencia, $publicaciones, $otrosantecedentes, $puntajetotal, $codloc, $tipoc, $T_m_comple, $T_m_biblio, $T_m_sec1, $T_m_sec2, $T_m_viced, $obs, $horas, $fecha,$otitulo,$concepto
+                    $anodoc, $legajo, $codmod, $establecimiento, $titulo, $promedio, $antiguedadgestion, $antiguedadtitulo, $serviciosprovincia, $otrosservicios, $residencia, $publicaciones, $otrosantecedentes, $puntajetotal, $codloc, $tipoc, $T_m_comple, $T_m_biblio, $T_m_sec1, $T_m_sec2, $T_m_viced, $obs, $horas, $fecha,$otitulo,$concepto,$excluido,$legvinc,$hijos
                 );
                    
             } elseif ($tipoc === 'titulares') { // Variables específicas para tipo de carga 'titulares'
@@ -428,7 +434,12 @@ try {
                 $residencia = isset($_POST['residencia']) ? floatval($_POST['residencia']) : 0;
                 $publicaciones = isset($_POST['publicaciones']) ? floatval($_POST['publicaciones']) : 0;
                 $otrosantecedentes = isset($_POST['otrosantecedentes']) ? floatval($_POST['otrosantecedentes']) : 0;
-                 
+                $excluido = isset($_POST['excluido']) && is_numeric($_POST['excluido']) ? $_POST['excluido'] : 23;
+                $legvinc = isset($_POST['legajo2']) && $_POST['legajo2'] !== '' ? $_POST['legajo2'] : 0;
+                $hijos = isset($_POST['hijos']) && $_POST['hijos'] !== '' ? $_POST['hijos'] : 0;
+
+
+
                // Calcular el puntaje total sumando los campos relevantes
                 //$puntajetotal = $titulo + $otitulo + $concepto + $promedio + $antiguedadgestion + $antiguedadtitulo + $serviciosprovincia + $otrosservicios + $residencia + $publicaciones + $otrosantecedentes + $T_m_anio + $T_m_seccion + $T_m_grupo + $T_m_ciclo + $T_m_recupera + $T_d_pu + $T_d_3 + $T_d_2 + $T_d_1 + $T_d_biblio + $T_d_gabi + $T_d_seccoortec + $T_d_supsectec + $T_d_supesc + $T_d_supgral + $T_d_adic + $O_g_a + $O_g_b + $O_g_c + $O_g_d + $T_m_comple + $T_m_biblio + $T_m_gabinete + $T_m_sec1 + $T_m_sec2 + $T_m_viced;
                 $puntajetotal = $titulo + $otitulo + $concepto + $promedio + $antiguedadgestion +
@@ -438,11 +449,11 @@ try {
 
                 // Definir la consulta SQL de inserción
                 $sql_insert = "INSERT INTO _junta_movimientos 
-                        (anodoc, legdoc, codmod, establecimiento, puntajetotal, promedio, T_m_anio, T_m_seccion, T_m_grupo, T_m_ciclo, T_m_recupera, T_d_pu, T_d_3, T_d_2, T_d_1, T_d_biblio, T_d_gabi, T_d_seccoortec, T_d_supsectec, T_d_supesc, T_d_supgral, T_d_adic, O_g_a, O_g_b, O_g_c, O_g_d, codloc, tipo,obs,horas,otitulo,concepto,antiguedadgestion,antiguedadtitulo,titulo,serviciosprovincia,t_m_comple,t_m_biblio,t_m_gabinete,t_m_sec1,t_m_sec2,t_m_viced,otrosservicios,residencia,publicaciones,otrosantecedentes) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,? ,? ,? ,? ,? ,? ,? ,?, ?, ?)";
-
+                        (anodoc, legdoc, codmod, establecimiento, puntajetotal, promedio, T_m_anio, T_m_seccion, T_m_grupo, T_m_ciclo, T_m_recupera, T_d_pu, T_d_3, T_d_2, T_d_1, T_d_biblio, T_d_gabi, T_d_seccoortec, T_d_supsectec, T_d_supesc, T_d_supgral, T_d_adic, O_g_a, O_g_b, O_g_c, O_g_d, codloc, tipo,obs,horas,otitulo,concepto,antiguedadgestion,antiguedadtitulo,titulo,serviciosprovincia,t_m_comple,t_m_biblio,t_m_gabinete,t_m_sec1,t_m_sec2,t_m_viced,otrosservicios,residencia,publicaciones,otrosantecedentes,excluido,legvinc,hijos) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,? ,? ,? ,? ,? ,? ,? ,?, ?, ?,?,?,?)";
+                  
                 $params_insert = array(
-                    $anodoc, $legajo, $codmod, $establecimiento, $puntajetotal, $promedio, $T_m_anio, $T_m_seccion, $T_m_grupo, $T_m_ciclo, $T_m_recupera, $T_d_pu, $T_d_3, $T_d_2, $T_d_1, $T_d_biblio, $T_d_gabi, $T_d_seccoortec, $T_d_supsectec, $T_d_supesc, $T_d_supgral, $T_d_adic, $O_g_a, $O_g_b, $O_g_c, $O_g_d, $codloc, $tipoc,$obs,$horas,$otitulo,$concepto,$antiguedadgestion,$antiguedadtitulo,$titulo,$serviciosprovincia, $T_m_comple, $T_m_biblio,$T_m_gabinete,$T_m_sec1,$T_m_sec2,$T_m_viced,$otrosservicios,$residencia,$publicaciones,$otrosantecedentes
+                    $anodoc, $legajo, $codmod, $establecimiento, $puntajetotal, $promedio, $T_m_anio, $T_m_seccion, $T_m_grupo, $T_m_ciclo, $T_m_recupera, $T_d_pu, $T_d_3, $T_d_2, $T_d_1, $T_d_biblio, $T_d_gabi, $T_d_seccoortec, $T_d_supsectec, $T_d_supesc, $T_d_supgral, $T_d_adic, $O_g_a, $O_g_b, $O_g_c, $O_g_d, $codloc, $tipoc,$obs,$horas,$otitulo,$concepto,$antiguedadgestion,$antiguedadtitulo,$titulo,$serviciosprovincia, $T_m_comple, $T_m_biblio,$T_m_gabinete,$T_m_sec1,$T_m_sec2,$T_m_viced,$otrosservicios,$residencia,$publicaciones,$otrosantecedentes,$excluido,$legvinc,$hijos
                 );
                  
                
@@ -514,8 +525,8 @@ echo '<div style="background-color: #4CAF50; color: white; padding: 15px; border
                         mensajeAlerta.style.display = 'none';
                         // Redireccionar a la página deseada
                         window.location.href = './VerInscripciones.php?legajo=".$legajo."';
-                    }, 2000); // 2000 milisegundos = 2 segundos
-                    }, 2000); // 2000 milisegundos = 2 segundos
+                    }, 1000); // 1000 milisegundos = 1 segundos
+                    }, 1000); // 1000 milisegundos = 1 segundos
                     </script>";
             }
         }

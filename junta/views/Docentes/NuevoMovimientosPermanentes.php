@@ -40,6 +40,7 @@ try {
     $residencia = validate_numeric($_POST['residencia2']);
     $publicaciones = validate_numeric($_POST['publicaciones2']);
     $otrosantecedentes = validate_numeric($_POST['otrosantecedentes2']);
+    
 
     // Consulta SQL para insertar los datos
     $consulta = "INSERT INTO _junta_movimientos (

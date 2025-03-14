@@ -151,23 +151,20 @@ tr:nth-child(even) {
 <body>
 
 
-  <script type="text/javascript">
-  
-if (<?php echo isset($_REQUEST['message']) ? 'true' : 'false'; ?>) {
-  // Get the message from the session
-  var message = "<?php echo $_REQUEST['message']; ?>";
+<script type="text/javascript">
+  <?php if (isset($_REQUEST['message']) && !empty($_REQUEST['message'])): ?>
+    var message = "<?php echo addslashes($_REQUEST['message']); ?>"; // Evitar problemas con comillas
+    var alertType = (message.includes("eliminado") || message.includes("éxito")) ? "success" : "danger";
+    var alertHtml = '<div class="alert alert-' + alertType + '">' + message + '</div>';
 
-  // Create a Bootstrap alert element based on the message type (success or error)
-  var alertType = (message.includes("eliminado") || message.includes("éxito")) ? "success" : "danger";
-  var alertHtml = '<div class="alert alert-' + alertType + '">' + message + '</div>';
+    // Insertar el mensaje en el contenedor
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("message-container").insertAdjacentHTML('afterbegin', alertHtml);
+    });
 
-  // Insert the alert HTML into the page (e.g., before or after a specific element)
-  $("#message-container").prepend(alertHtml);
-
-  // Clear the message from the session
-  <?php unset($_REQUEST['message']); ?>
-}
-  
+    // Eliminar la variable de sesión (esto solo es efectivo si está en $_SESSION, no en $_REQUEST)
+    <?php unset($_REQUEST['message']); ?>
+  <?php endif; ?>
 </script>
   <div class="page-content bg-light">
   <div class="container" > <center><h1><u><font face="
@@ -186,21 +183,27 @@ if (<?php echo isset($_REQUEST['message']) ? 'true' : 'false'; ?>) {
 // Te recomiendo utilizar esta conección, la que utilizas ya no es la recomendada. 
 //$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); //conexion mysql
 
-// Conexión a SQL Server
-$serverName = "10.1.9.113"; // o la dirección IP del servidor
+// Conexión a SQL Server--- se mejoro la velicidad de conexion a la base de datos 
+$serverName = "10.1.9.113";
 $database = "junta";
-$username = "SA"; // Reemplaza con tu usuario
-$password = 'Davinci2024#'; // Reemplaza con tu contraseña
+$username = "SA";
+$password = "Davinci2024#";
 
 try {
-    $link = new PDO("sqlsrv:server=$serverName;Database=$database;TrustServerCertificate=true", $username, $password);
-    // Establecer el modo de error de PDO a excepción
-    $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Conexión optimizada con Connection Pooling activado
+    $link = new PDO(
+        "sqlsrv:server=$serverName;Database=$database;TrustServerCertificate=true;ConnectionPooling=1;LoginTimeout=5",
+        $username,
+        $password,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,  // Manejo de errores con excepciones
+            PDO::ATTR_EMULATE_PREPARES => false           // Consultas nativas (más rápidas)
+        ]
+    );
 } catch (PDOException $e) {
-    echo "Error en la conexión: " . $e->getMessage();
+    error_log("Error en la conexión: " . $e->getMessage()); // Guarda el error en el log
+    die("Error en la conexión a la base de datos."); // Mensaje genérico para el usuario
 }
-
-
 
 ?>
 

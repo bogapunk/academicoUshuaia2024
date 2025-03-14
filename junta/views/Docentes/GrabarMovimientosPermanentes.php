@@ -119,7 +119,7 @@ try {
             $obs = isset($_POST['obs']) ? $_POST['obs'] : '';
             $horas = isset($_POST['horas']) ? floatval($_POST['horas']) : 0;
             $fecha = isset($_POST['fecha']) ? $_POST['fecha'] : '';
-
+            $establecimiento = 1;
             // Calcular el puntaje total sumando los campos relevantes
             $puntajetotal = $titulo + $otitulo + $concepto + $promedio + $antiguedadgestion + $antiguedadtitulo + $serviciosprovincia + $otrosservicios + $residencia + $publicaciones + $otrosantecedentes;
                    
@@ -218,7 +218,9 @@ try {
             // Ejecutar la consulta de inserción
             $stmt_insert = sqlsrv_query($conn, $sql_insert, $params_insert);
             if ($stmt_insert === false) {
-                throw new Exception("Error al insertar datos: " . print_r(sqlsrv_errors(), true));
+                throw new Exception("No se pudo completar la inserción. Detalles del error: " . print_r(sqlsrv_errors(), true));
+                
+        exit; // Detener la ejecución para evitar que el código continúe
             } else {
                   // Datos insertados correctamente
     echo "<div id='mensaje-exito' style='
@@ -264,17 +266,24 @@ setTimeout(function() {
     // Agregar el mensaje al body
     document.body.appendChild(mensajeAlerta);
 
-    // Ocultar el mensaje de alerta y redirigir después de 2 segundos
+    // Ocultar el mensaje de alerta y redirigir después de 1 segundos
     setTimeout(function() {
         mensajeAlerta.style.display = 'none';
         window.location.href = './VerInscripciones.php?legajo=".$legajo."';
-    }, 2000);
-}, 2000);
+    }, 1000);
+}, 1000);
 </script>";
             }
         }
     } catch (Exception $e) {
-    echo "Error: " . $e->getMessage();
+    // Mostrar el mensaje de error y el botón de volver atrás
+    echo "<div style='color: red; font-weight: bold; margin-bottom: 10px;'>
+            {$e->getMessage()}
+          </div>";
+    echo "<button onclick='history.back()' style='padding: 8px 12px; background-color: #f44336; color: white; border: none; cursor: pointer;'>
+            Volver Atrás
+          </button>";
+
 }
 
 // Cerrar la conexión

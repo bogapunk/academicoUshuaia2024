@@ -8,7 +8,7 @@ require_once '../Modalidades/modalidades.model.php';
 include('header2.php');
 
 
-// Logica
+// Logica 
 $mod = new Modalidad();
 $model = new ModalidadesModel();
 
@@ -844,7 +844,8 @@ function habilitarEstablecimiento(selectedValue) {
 <br>
 <br>
     <!-- <center> <input type="button" id="create_pdf" value="Generar Informe" class="btn btn-info""> </center>-->
-        
+  
+    
    <center> <input type="submit" class="btn btn-info" value="Generar PDF" onclick="procesarFormulario(event)" title="Generar PDF"></center>
 
 
@@ -1139,13 +1140,16 @@ function procesarFormulario(event) {
 
   // Selección del <select> con name="nomdep2"
   const selectEstablecimiento = document.querySelector("select[name='nomdep2']").value;
-  
+  console.log('chkExcluidos:', chkExcluidos);
+  console.log('chkNormal:', chkNormal);
+  console.log('selectLocalidad:', selectLocalidad);
   let url = 'ListarListadosDeDocentes.php'; // URL por defecto
 
-  if (!chkExcluidos && chkNormal && selectProvinciales === '' && selectLocalidad !== '' && selectLocalidad !== 'Antartida') {
+  if (!chkExcluidos && chkNormal && selectProvinciales === '' && selectLocalidad !== '' && selectLocalidad !== 'ANT') {
     url = 'Listados_Normales.php';
-  } else if (!chkExcluidos && chkNormal && selectProvinciales === '' && selectLocalidad === 'Antartida') {
-    url = 'Listados_Antartida.php';
+  } else if (!chkExcluidos && chkNormal  && selectLocalidad === 'ANT') {
+    console.log('Entrando en la condición de Antártida');
+    url = 'Listados_Antartidas2.php';
   } else if (!chkExcluidos && chkTodasModalidadesTitulares && selectProvinciales === '') {
     url = 'Listados_Titulares_por_Todas_Modalidades.php';
   } else if (!chkExcluidos && chkModalidadCiudadUnificada && selectProvinciales === '') {
@@ -1156,7 +1160,7 @@ function procesarFormulario(event) {
     url = 'Listado_4.php';
   } else if (!chkExcluidos  && selectProvinciales !== '') {
     url = 'Listados_Provinciales.php';// este se modifico para que no se seleccione ningun checkbox de la 5 opciones que ahi 
-  } else if (chkExcluidos && selectProvinciales === '' && selectLocalidad === 'Antartida') {
+  } else if (chkExcluidos && selectProvinciales === '' && selectLocalidad === 'ANT') {
     url = 'Listado_Antartida_Excluido.php';
   } else if (chkExcluidos) {
     url = 'Listados_Excluidos.php';
@@ -1219,7 +1223,6 @@ function procesarFormulario(event) {
 
 
 </script>
-
 
 
 
