@@ -263,6 +263,43 @@ tr:nth-child(even) {
     color: #ffffff !important;
 }
 
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 6px solid #007bff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #007bff transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 </style>
 <link rel="icon" type="./image/png" href="./imagenes/escudo-32x32.png">
 <!DOCTYPE html>
@@ -675,6 +712,7 @@ try {
         document.getElementById("resultBody").innerHTML = '';  // Limpia el contenido de la tabla
     }
 </script>
+
 <center><h1><b><u>Buscar Docente</u></b></h1></center>
 <h2 id="filterHeader" style="display: none;"><u>Buscador de Datos!!!!</u></h2> <!-- Hide initially -->
 <br>
@@ -713,6 +751,12 @@ try {
     </div>
 </div>
 
+<!-- Preloader bonito con Bootstrap -->
+<div id="preloader" style="display: none; text-align: center; margin-top: 20px;">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    <p style="margin-top: 10px; color: #444; font-weight: bold;">Buscando docentes...</p>
+</div>
+
 <div class="container mt-4">
     <table id="resultTable" class="display table table-bordered" style="display: none;">
         <thead>
@@ -739,52 +783,62 @@ $(document).ready(function () {
         var dni = $('#dni').val().trim();
         var apellido = $('#apellido').val().trim();
 
-        // Validación: Si no hay datos en ninguno de los campos, mostrar alerta y detener la búsqueda
         if (legajo === '' && dni === '' && apellido === '') {
             alert('Debe ingresar al menos un dato para realizar la búsqueda.');
             return;
         }
 
-        var formData = $('#busquedaForm').serialize(); // Serializar los datos del formulario
+        var formData = $('#busquedaForm').serialize();
+
         $.ajax({
             url: 'buscar_docente.php',
-            type: 'GET', // Método GET para la solicitud
-            data: formData, // Enviar los datos serializados
-            success: function (data) {
-                $('#resultBody').html(data); // Insertar las filas de datos, sin <thead>
+            type: 'GET',
+            data: formData,
 
-                // Contar las filas de la tabla excluyendo la fila del mensaje "No hay datos"
+            beforeSend: function () {
+                // Mostrar preloader antes de la solicitud
+                $('#preloader').show();
+                $('#resultTable').hide(); // Ocultar tabla anterior si hay
+                $('#resultBody').empty(); // Limpiar resultados anteriores
+            },
+
+            success: function (data) {
+                $('#resultBody').html(data);
+
                 var rowCount = $('#resultBody tr').not('.no-data').length;
 
                 if (rowCount > 0) {
-                    $('#resultTable').show(); // Mostrar la tabla si hay datos
-                    $('#searchLabel').show(); // Mostrar el "Buscar Docente"
-                    $('#searchTable').show(); // Mostrar el input de búsqueda en la tabla
-                    $('.no-data').remove(); // Eliminar mensaje "No se encontraron resultados" si hay datos
+                    $('#resultTable').show();
+                    $('#searchLabel').show();
+                    $('#searchTable').show();
+                    $('.no-data').remove();
                 } else {
-                    $('#resultTable').show(); // Mostrar la tabla con el mensaje de "No se encontraron resultados"
-                    $('#searchLabel').hide(); // Ocultar el "Buscar Docente"
-                    $('#searchTable').hide(); // Ocultar el input de búsqueda
+                    $('#resultTable').show();
+                    $('#searchLabel').hide();
+                    $('#searchTable').hide();
                     $('#resultBody').html('<tr class="no-data"><td colspan="5" class="text-center" style="color:red;">No se encontraron resultados</td></tr>');
                 }
             },
+
             error: function () {
-                // Mostrar mensaje de error en caso de que la solicitud falle
                 alert('Hubo un error al realizar la búsqueda. Por favor, inténtelo de nuevo.');
+            },
+
+            complete: function () {
+                // Ocultar preloader al terminar la solicitud (éxito o error)
+                $('#preloader').hide();
             }
         });
     });
 
-    // Filtrado en tiempo real dentro de la tabla
-    $("#searchTable").on("keyup", function() {
+    // Filtro en tiempo real dentro de la tabla
+    $("#searchTable").on("keyup", function () {
         var value = $(this).val().toLowerCase();
 
-        // Filtrar las filas del cuerpo de la tabla
-        $("#resultBody tr").filter(function() {
+        $("#resultBody tr").filter(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
 
-        // Si no hay coincidencias visibles, mostrar mensaje "No hay coincidencias"
         if ($("#resultBody tr:visible").length === 0) {
             if ($("#resultBody .no-data").length === 0) {
                 $("#resultBody").append('<tr class="no-data"><td colspan="5" class="text-center">No hay coincidencias</td></tr>');

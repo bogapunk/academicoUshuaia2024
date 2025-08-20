@@ -40,9 +40,9 @@ $modalidad = isset($_GET['modalidad']) ? $_GET['modalidad'] : '';
 $tipo = isset($_GET['tipoc']) ? $_GET['tipoc'] : '';
 
 // Verificar si el tipo es "transitorio" y cambiarlo a "interinato"
-if ($tipo == 'transitorio') {
-    $tipo = 'interinatos';
-}
+//if ($tipo == 'transitorio') {
+  //  $tipo = 'interinatos';
+//}
 
 
 
@@ -53,8 +53,8 @@ $anio = isset($_GET['year']) ? $_GET['year'] : '';
 $nota = isset($_GET['nota']) ? $_GET['nota'] : '';
 $titulo = isset($_GET['titulo']) ? $_GET['titulo'] : '';
 $subtitulo = isset($_GET['subtitulo']) ? $_GET['subtitulo'] : '';
-$establecimiento = isset($_GET['item_select']) ? $_GET['item_select'] : '';// ver 
-
+//$establecimiento = isset($_GET['item_select']) ? $_GET['item_select'] : '';// ver 
+$establecimiento = isset($_POST['itemCode']) ? $_POST['itemCode'] : '';// ver 
 
 
 $sql_modality = "Select codmod ,nommod FROM [Junta].[dbo].[_junta_modalidades] where codmod= '$codmod'";
@@ -92,15 +92,15 @@ try {
             AND anodoc = $anio 
             AND codloc = '$localidad'";
 
-if ($tipo == 'titulares') {
-    $query .= " AND establecimiento = $establecimiento  
-                ORDER BY j_doc.ApellidoyNombre, 
+if ($tipo == 'transitorio' || $tipo == 'interinatos'  ) {
+    $query .= "ORDER BY j_doc.ApellidoyNombre, 
                          j_mov.puntajetotal DESC, 
                          j_mov.serviciosprovincia DESC, 
                          j_mov.promedio DESC, 
                          j_mov.antiguedadgestion DESC, 
                          j_mov.antiguedadtitulo DESC, 
-                         j_doc.fechatit DESC";
+                         j_doc.fechatit DESC ";
+                    
 } else {
     $query .= " ORDER BY j_doc.ApellidoyNombre, 
                          j_mov.puntajetotal DESC, 
@@ -176,7 +176,8 @@ if ($tipo == 'titulares') {
         $pdf->Ln(); 
         $pdf->SetFont('Arial', 'B', 9); // Cambiado a Arial
         // Cabecera de la tabla
-        $pdf->Cell(10, 5, 'N', 1, 0, 'C');
+        $pdf->Cell(10, 5, iconv('UTF-8', 'ISO-8859-1', 'Nº'), 1, 0, 'C');
+        //$pdf->Cell(7, 5, iconv('UTF-8', 'ISO-8859-1', 'Nº'), 1, 0, 'C');
         $pdf->Cell(16, 5, 'LEGAJO', 1, 0, 'C');
         $pdf->Cell(70, 5, 'NOMBRE', 1, 0, 'C');
         $pdf->Cell(25, 5, 'DNI', 1, 0, 'C');
@@ -272,7 +273,8 @@ if ($tipo == 'titulares') {
             }
             $pdf->Cell(10, 5, $nroOrden, 1, 0, 'C'); // Mostrar el índice incremental
             $pdf->Cell(16, 5, $row['legdoc'], 1, 0, 'C');
-            $pdf->Cell(70, 5, $row['ApellidoyNombre'], 1, 0, 'L');
+            $pdf->Cell(70, 5, utf8_decode($row['ApellidoyNombre']), 1, 0, 'L');
+            //$pdf->Cell(53, 5, utf8_decode($row['ApellidoyNombre']), 1, 0, 'L');
             $pdf->Cell(25, 5, $row['dni'], 1, 0, 'C');
             $pdf->Cell(120, 5, utf8_decode(substr($row['nommod'], 0, 40)), 1, 0, 'C');
             $pdf->Cell(100, 5, utf8_decode($row['motivo']), 1, 0, 'C');

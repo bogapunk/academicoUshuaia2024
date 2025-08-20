@@ -670,7 +670,7 @@ sqlsrv_close($conn);
 ?>
 
 <center><h4><u>Carga de Movimiento</u></h4></center>
-<form action="MovimientoNuevo.php" method="post"> 
+<form id="myForm" action="MovimientoNuevo.php" method="post" > 
 <div id="antartidaFields" style="display: none;">
     <label for="legajo">Legajo viculado:</label>
     <input type="text" name="legajo2" id="legajo" placeholder="Ingrese legajo" />
@@ -1089,7 +1089,7 @@ if ($resultMotivos && sqlsrv_has_rows($resultMotivos)) {
     echo "<input type='checkbox' id='excluir' name='excluido_checkbox' onclick='toggleMotivosExclusion(this)' style='transform: scale(0.9); margin-right: 10px;' $excluirChecked>";
 
     // Menú desplegable de motivos de exclusión (oculto por defecto)
-    echo "<select id='motivosExclusion' name='excluido' style='display: $display; width: 127px;'>";
+    echo "<select id='motivosExclusion' name='excluido' style='display: $display; width: 248px;'>";
     echo "<option value='23' " . ($excluidoSeleccionado == "23" ? "selected" : "") . ">Ningún motivo de exclusión</option>"; // Opción por defecto
 
     while ($rowMotivo = sqlsrv_fetch_array($resultMotivos, SQLSRV_FETCH_ASSOC)) {
@@ -1150,32 +1150,117 @@ echo "</table>"; // Cierre de la tabla
                 <label for="comun_puntajetotal" style="display: inline-block; width: 225px;">Puntaje Total:</label>
                 <input type='number' id='puntajetotal2' name='puntajetotal2' value='" . htmlspecialchars($row['puntajetotal']) . "' step='0.01' size='5' readonly>
                 <br><br>
-
-                <label for="titulo" style="display: inline-block; width: 225px;">1.- Título:</label>
-                <input type="number" id="titulo2" name="titulo2" class="materialize-input3" size="10"  step="0.01" onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()' >
+                <!-- Título -->
+                
+                <label for="titulo2" style="display: inline-block; width: 225px;">1.- Título:</label>
+                <select id="titulo2" name="titulo2" class="materialize-input3" onchange="validarTitulo(); calcularPuntajeTotal();">
+                <option value="">Seleccionar</option>
+                <option value="9">9</option>
+                <option value="6">6</option>
+                <option value="3">3</option>
+                <option value="0">0</option>
+                </select>
+                <span id="error-msg-titulo" style="color: red; display: none;">El valor no está dentro de los parámetros permitidos (9, 6, 3, 0).</span>
                 <br>
 
-                <label for="otrostit" style="display: inline-block; width: 225px;">2.- Otros Título:</label>
-                <input type="number" id="otitulo2" name="otitulo2" class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
-                <br>
+                <script>
+                function validarTitulo() {
+                    const valoresPermitidos = ["9", "6", "3", "0"];
+                    const input = document.getElementById("titulo2").value;
+                    const errorMsg = document.getElementById("error-msg-titulo");
 
-             <!-- Campo Conceptos -->
-                    <div id="conceptoField" style="display: none;">
-                        <label for="concepto2" style="display: inline-block; width: 225px;">3.- Conceptos:</label>
-                        <input type="number" id="concepto2" name="concepto2" class="materialize-input3" size="10" step="0.01">
+                    if (valoresPermitidos.includes(input)) {
+                        errorMsg.style.display = "none";
+                    } else {
+                        errorMsg.style.display = "inline";
+                    }
+                }
+                </script>
+
+              <!-- Otros Título -->
+              <label for="otitulo2" style="display: inline-block; width: 225px;">2.- Otros Título:</label>
+              <input type="number" id="otitulo2" name="otitulo2" class="materialize-input3" size="10" step="0.01" onchange="calcularPuntajeTotal()" onkeyup="calcularPuntajeTotal()">
+              <br>
+
+              <!-- Campo Conceptos -->
+              <div id="conceptoField" style="display: none;">
+                  <label for="concepto2" style="display: inline-block; width: 225px;">3.- Conceptos:</label>
+                  <input type="number" id="concepto2" name="concepto2" class="materialize-input3" size="10" step="0.01">
+                  <br>
+              </div>
+
+              <!-- Promedio -->
+              <label for="promedio2" style="display: inline-block; width: 225px;">3.- Promedio:</label>
+              <input type="number" id="promedio2" name="promedio2" class="materialize-input3" size="10" step="0.01" onchange="calcularPuntajeTotal()" onkeyup="calcularPuntajeTotal()">
+              <br>
+                  <!-- Antigüedad Gestión -->
+                  <label for="ant_gestion2" style="display: inline-block; width: 225px;">4.- Antigüedad Gestión:</label>
+                        <input type="number" id="antiguedadgestion2" name="antiguedadgestion2" class="materialize-input3" size="10" step="0.01" min="0" 
+                            onchange="validarAntiguedad(); calcularPuntajeTotal();" 
+                            onkeyup="validarAntiguedad(); calcularPuntajeTotal();">
+                        <span id="error-msg-antiguedad" style="color: red; display: none;">Valor inválido. Debe ser múltiplo de 0.25 y no ser número par exacto.</span>
                         <br>
-                    </div>
-                <label for="promedio" style="display: inline-block; width: 225px;">3.- Promedio:</label>
-                <input type="number" id="promedio2" name="promedio2" class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
-                <br>
 
-                <label for="ant_gestion" style="display: inline-block; width: 225px;">4.- Antigüedad Gestión:</label>
-                <input type="number" id="antiguedadgestion2" name="antiguedadgestion2" class="materialize-input3" size="10" step="0.01"  onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
-                <br>
+                        <script>
+                        function validarAntiguedad() {
+                            const tipo = document.getElementById("tipoc").value;
+                            const inputRaw = document.getElementById("antiguedadgestion2").value.trim();
+                            const input = parseFloat(inputRaw);
+                            const errorMsg = document.getElementById("error-msg-antiguedad");
 
-                <label for="ant_titulo" style="display: inline-block; width: 225px;">5.- Antigüedad Título:</label>
-                <input type="number" id="antiguedadtitulo2" name="antiguedadtitulo2" class="materialize-input3" size="10" step="0.01"  onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
-                <br>
+                            if (tipo === "permanente" || inputRaw === "") {
+                                errorMsg.style.display = "none";
+                                return;
+                            }
+
+                            const tope = 3;
+                            const esMultiplo025 = (input * 100) % 25 === 0;
+                            const esParExacto = input % 2 === 0;
+
+                            if (isNaN(input) || input < 0 || input > tope || !esMultiplo025 || esParExacto) {
+                                errorMsg.style.display = "inline";
+                            } else {
+                                errorMsg.style.display = "none";
+                            }
+                        }
+                        </script>
+
+                        <!-- Antigüedad del Título -->
+                        <label for="ant_titulo" style="display: inline-block; width: 225px;">5.- Antigüedad Título:</label>
+                        <input type="number" id="antiguedadtitulo2" name="antiguedadtitulo2" class="materialize-input3" size="10" step="0.01" min="0" max="3" 
+                            onchange="validarAntiguedadTitulo(); calcularPuntajeTotal();" 
+                            onkeyup="validarAntiguedadTitulo(); calcularPuntajeTotal();">
+                        <span id="error-msg-antiguedadtitulo" style="color: red; display: none;">Valor inválido. Debe ser múltiplo de 0.20 y no ser número impar exacto.</span>
+                        <br>
+
+                        <script>
+                            function validarAntiguedadTitulo() {
+                                const inputRaw = document.getElementById("antiguedadtitulo2").value.trim();
+                                const input = parseFloat(inputRaw);
+                                const errorMsg = document.getElementById("error-msg-antiguedadtitulo");
+
+                                if (inputRaw === "") {
+                                    errorMsg.style.display = "none";
+                                    return;
+                                }
+
+                                const esMultiplo020 = (input * 100) % 20 === 0;
+                                const esImparExacto = input % 2 === 1;
+
+                                // 👉 Se permite el 3 como excepción aunque sea impar
+                                if (
+                                    isNaN(input) ||
+                                    input < 0 ||
+                                    input > 3 ||
+                                    !esMultiplo020 ||
+                                    (esImparExacto && input !== 3)
+                                ) {
+                                    errorMsg.style.display = "inline";
+                                } else {
+                                    errorMsg.style.display = "none";
+                                }
+                            }
+                            </script>
 
                 <label for="servicios" style="display: inline-block; width: 225px;">6.- Servicios:</label>
                 <br>
@@ -1188,17 +1273,96 @@ echo "</table>"; // Cierre de la tabla
                 <input type="number" id="otrosservicios2" name="otrosservicios2" class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
                 <br>
 
-                <label for="residencia" style="display: inline-block; width: 225px;">7.- Residencia:</label>
-                <input type="number" id="residencia2" name="residencia2" class="materialize-input3" size="10" step="0.01"  onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
-                <br>
+             <!-- Residencia -->
+<label for="residencia" style="display: inline-block; width: 225px;">7.- Residencia:</label>
+<input type="number" id="residencia2" name="residencia2" class="materialize-input3" size="10" step="1" min="0" 
+      onchange="validarResidencia(); calcularPuntajeTotal();" 
+      onkeyup="validarResidencia(); calcularPuntajeTotal();">
+
+<!-- Campo oculto donde se guarda el valor correcto -->
+<input type="hidden" id="residencia_puntos" name="residencia_puntos">
+
+<span id="error-msg-residencia" style="color: red; display: none;">El valor debe estar entre 0 y 11 años.</span>
+<span id="puntos-residencia" style="font-weight: bold; color: green;"></span>
+<br>
+
+<script>
+function validarResidencia() {
+    const inputElement = document.getElementById("residencia2");
+    const hiddenInput = document.getElementById("residencia_puntos"); // Campo oculto
+    const errorMsg = document.getElementById("error-msg-residencia");
+    const puntosDisplay = document.getElementById("puntos-residencia");
+    
+    let años = parseInt(inputElement.value.trim());
+    let puntos = 0;
+
+    if (isNaN(años) || años < 0) {
+        errorMsg.style.display = "inline";
+        puntosDisplay.innerText = "";
+        hiddenInput.value = ""; // Borra el valor incorrecto
+        return;
+    } else {
+        errorMsg.style.display = "none";
+    }
+
+    // Cálculo de puntos según la cantidad de años
+    if (años >= 0 && años <= 4) {
+        puntos = años * 0.10;
+    } else if (años === 5) {
+        puntos = 1.00;
+    } else if (años >= 6 && años <= 9) {
+        puntos = 1.00 + (años - 5) * 0.10;
+    } else if (años === 10) {
+        puntos = 2.00;
+    } else if (años >= 11) {
+        puntos = 3.00;
+    }
+
+    puntosDisplay.innerText = `Puntos: ${puntos.toFixed(2)}`;
+    hiddenInput.value = puntos.toFixed(2); // Guarda los puntos en el campo oculto
+}
+</script>
+
 
                 <label for="publicaciones" style="display: inline-block; width: 225px;">8.- Publicaciones:</label>
-                <input type="number" id="publicaciones2" name="publicaciones2" class="materialize-input3" size="10" step="0.01"  onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
-                <br>
+                    <input type="number" id="publicaciones2" name="publicaciones2" class="materialize-input3" size="10" step="0.01" min="0" max="3"
+                          onchange='validarPublicaciones(); calcularPuntajeTotal()' 
+                          onkeyup='validarPublicaciones(); calcularPuntajeTotal()'>
+                    <span id="error-msg-publicaciones" style="color: red; display: none;">Máximo permitido: 3</span>
+                    <br>
 
-                <label for="otrosantecedentes2" style="display: inline-block; width: 225px;">9.- Otros Antecedentes:</label>
-                <input type="number" id="otrosantecedentes2" name="otrosantecedentes2" class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>
-                <br>
+                    <label for="otrosantecedentes2" style="display: inline-block; width: 225px;">9.- Otros Antecedentes:</label>
+                    <input type="number" id="otrosantecedentes2" name="otrosantecedentes2" class="materialize-input3" size="10" step="0.01" min="0" max="3"
+                          onchange='validarOtrosAntecedentes(); calcularPuntajeTotal()' 
+                          onkeyup='validarOtrosAntecedentes(); calcularPuntajeTotal()'>
+                    <span id="error-msg-otrosantecedentes" style="color: red; display: none;">Máximo permitido: 3</span>
+                    <br>
+
+                  <script>
+                       function validarPublicaciones() {
+                            const tope = 3;
+                            const input = document.getElementById("publicaciones2").value.trim();
+                            const errorMsg = document.getElementById("error-msg-publicaciones");
+
+                            if (input === "" || isNaN(input) || parseFloat(input) > tope) {
+                                errorMsg.style.display = "inline";
+                            } else {
+                                errorMsg.style.display = "none";
+                            }
+                        }
+
+                        function validarOtrosAntecedentes() {
+                            const tope = 3;
+                            const input = document.getElementById("otrosantecedentes2").value.trim();
+                            const errorMsg = document.getElementById("error-msg-otrosantecedentes");
+
+                            if (input === "" || isNaN(input) || parseFloat(input) > tope) {
+                                errorMsg.style.display = "inline";
+                            } else {
+                                errorMsg.style.display = "none";
+                            }
+                        }
+                  </script>
             </td>
         </tr>
     </table>
@@ -1216,12 +1380,18 @@ echo "</table>"; // Cierre de la tabla
       var antiguedadtitulo = parseFloat(document.getElementById('antiguedadtitulo2').value) || 0;
       var serviciosprovincia = parseFloat(document.getElementById('serviciosprovincia2').value) || 0;
       var otrosservicios = parseFloat(document.getElementById('otrosservicios2').value) || 0;
-      var residencia = parseFloat(document.getElementById('residencia2').value) || 0;
+      //var residencia = parseFloat(document.getElementById('residencia2').value) || 0;
       var publicaciones = parseFloat(document.getElementById('publicaciones2').value) || 0;
       var otrosantecedentes = parseFloat(document.getElementById('otrosantecedentes2').value) || 0;
 
       // Sumar todos los valores y actualizar el campo de puntajetotal2
-      var puntajeTotal = (titulo + otitulo + promedio + antiguedadgestion + antiguedadtitulo + serviciosprovincia + otrosservicios + residencia + publicaciones + otrosantecedentes).toFixed(2);
+      // Obtener el puntaje de Residencia calculado
+      var residenciaText = document.getElementById('puntos-residencia').innerText.replace("Puntos: ", "").trim();
+        var residencia = parseFloat(residenciaText) || 0;
+
+        // Sumar todos los valores y actualizar el campo de puntajetotal2
+        var puntajeTotal = (titulo + otitulo + promedio + antiguedadgestion + antiguedadtitulo + serviciosprovincia + otrosservicios + residencia + publicaciones + otrosantecedentes).toFixed(2);
+
 
       document.getElementById('puntajetotal2').value = puntajeTotal;
     } catch (e) {
@@ -1252,9 +1422,15 @@ echo "</table>"; // Cierre de la tabla
                 <input type='number' id='puntajetotal' name='puntajetotal' value='" . htmlspecialchars($row['puntajetotal']) . "' size='10' readonly>
                 <br><br>
 
-                <label for="titulo" style="display: inline-block; width: 225px;">1.- Título:</label>
-                <input type="number" id="titulo" name="titulo"  class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>
-                <br>
+                   <!-- Campo: Título -->
+                        <label for="titulo" style="display: inline-block; width: 225px;">1.- Título:</label>
+                        <select id="titulo" name="titulo" class="materialize-input3" onchange="calcularPuntajeTotal2();">
+                        <option value="">Seleccionar</option>
+                        <option value="9">9</option>
+                        <option value="6">6</option>
+                        <option value="3">3</option>
+                        </select>
+                        <br><br>
 
                 <label for="otrostit" style="display: inline-block; width: 225px;">2.- Otros Título:</label>
                 <input type="number" id="otrostit" name="otitulo"  class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>
@@ -1396,18 +1572,96 @@ echo "</table>"; // Cierre de la tabla
                 <label for="o_g_d" style="display: inline-block; width: 208px; margin-left: 20px; color:#0000FF;">Grupo D:</label>
                 <input type="number" id="o_g_d" name="o_g_d" class="materialize-input3" size="10" step="0.01" >
                 <br>
-
+                <!-- Residencia -->
                 <label for="residencia" style="display: inline-block; width: 225px;">8.- Residencia:</label>
-                <input type="number" id="residencia" name="residencia"  class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>
+                <input type="number" id="residencia" name="residencia" class="materialize-input3" size="10" step="0.01"
+                    onchange="validarResidenciaTitulares(); calcularPuntajeTotal2();" 
+                    onkeyup="validarResidenciaTitulares(); calcularPuntajeTotal2();">
+
+                <!-- Campo oculto donde se guarda el valor correcto -->
+                <input type="hidden" id="residencia_puntos2" name="residencia_puntos2">
+
+                <span id="error-msg-residencia" style="color: red; display: none;">El valor debe estar entre 0 y 11 años.</span>
+                <span id="puntos-residencia2" style="font-weight: bold; color: green;"></span>
                 <br>
 
-                <label for="publicaciones" style="display: inline-block; width: 225px;">9.- Publicaciones:</label>
-                <input type="number" id="publicaciones" name="publicaciones"  class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>
-                <br>
+                <script>
+                function validarResidenciaTitulares() {
+                    const inputElement = document.getElementById("residencia");
+                    const hiddenInput = document.getElementById("residencia_puntos2");
+                    const errorMsg = document.getElementById("error-msg-residencia");
+                    const puntosDisplay = document.getElementById("puntos-residencia2");
 
-                <label for="otrosantecedentes" style="display: inline-block; width: 225px;">10.- Otros Antecedentes:</label>
-                <input type="number" id="otrosantecedentes" name="otrosantecedentes" class="materialize-input3" size="10" step="0.01" onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>
-                <br>
+                    let años = parseFloat(inputElement.value.trim());
+                    let puntos = 0;
+
+                    if (isNaN(años) || años < 0) {
+                        errorMsg.style.display = "inline";
+                        puntosDisplay.innerText = "";
+                        hiddenInput.value = "";
+                        return;
+                    } else {
+                        errorMsg.style.display = "none";
+                    }
+
+                    // Cálculo de puntos
+                    if (años >= 0 && años <= 4) {
+                        puntos = años * 0.10;
+                    } else if (años === 5) {
+                        puntos = 1.00;
+                    } else if (años >= 6 && años <= 9) {
+                        puntos = 1.00 + (años - 5) * 0.10;
+                    } else if (años === 10) {
+                        puntos = 2.00;
+                    } else if (años >= 11) {
+                        puntos = 3.00;
+                    }
+
+                    puntosDisplay.innerText = `Puntos: ${puntos.toFixed(2)}`;
+                    hiddenInput.value = puntos.toFixed(2);
+                }
+                </script>
+
+               <!-- Publicaciones -->
+                    <label for="publicaciones" style="display: inline-block; width: 225px;">9.- Publicaciones:</label>
+                    <input type="number" id="publicaciones" name="publicaciones" class="materialize-input3" size="10" step="0.01" min="0" max="3"
+                        onkeyup="validarPublicaciones2(); calcularPuntajeTotal2()">
+                    <span id="error-msg-publicaciones2" style="color: red; display: none;">Máximo permitido: 3</span>
+                    <br>
+
+                    <!-- Otros Antecedentes -->
+                    <label for="otrosantecedentes" style="display: inline-block; width: 225px;">10.- Otros Antecedentes:</label>
+                    <input type="number" id="otrosantecedentes" name="otrosantecedentes" class="materialize-input3" size="10" step="0.01" min="0" max="3"
+                        onchange="validarOtrosAntecedentes2(); calcularPuntajeTotal2()" 
+                        onkeyup="validarOtrosAntecedentes2(); calcularPuntajeTotal2()">
+                    <span id="error-msg-otrosantecedentes2" style="color: red; display: none;">Máximo permitido: 3</span>
+                    <br>
+
+                    <script>
+                    function validarPublicaciones2() {
+                        const tope = 3;
+                        const input = String(document.getElementById("publicaciones").value).trim();
+                        const errorMsg = document.getElementById("error-msg-publicaciones2");
+
+                        if (input === "" || isNaN(input) || parseFloat(input) > tope || parseFloat(input) < 0) {
+                            errorMsg.style.display = "inline";
+                        } else {
+                            errorMsg.style.display = "none";
+                        }
+                    }
+
+                    function validarOtrosAntecedentes2() {
+                        const tope = 3;
+                        const input = String(document.getElementById("otrosantecedentes").value).trim();
+                        const errorMsg = document.getElementById("error-msg-otrosantecedentes2");
+
+                        if (input === "" || isNaN(input) || parseFloat(input) > tope || parseFloat(input) < 0) {
+                            errorMsg.style.display = "inline";
+                        } else {
+                            errorMsg.style.display = "none";
+                        }
+                    }
+                    </script>
             </td>
         </tr>
 
@@ -1422,7 +1676,7 @@ function calcularPuntajeTotal2() {
             promedio = parseFloat(document.getElementById('promedio').value) || 0,
             antiguedadGestion = parseFloat(document.getElementById('antiguedadgestion').value) || 0,
             antiguedadTitulo = parseFloat(document.getElementById('antiguedadtitulo').value) || 0,
-            residencia = parseFloat(document.getElementById('residencia').value) || 0,
+            //residencia = parseFloat(document.getElementById('residencia').value) || 0,
             publicaciones = parseFloat(document.getElementById('publicaciones').value) || 0,
             otrosantecedentes = parseFloat(document.getElementById('otrosantecedentes').value) || 0;
 
@@ -1465,6 +1719,9 @@ function calcularPuntajeTotal2() {
         // Actualizar el valor de serviciosProvincia en el campo correspondiente
         document.getElementById('serviciosprovincia').value = serviciosProvincia.toFixed(2);
         
+        var residenciaText = document.getElementById('puntos-residencia2').innerText.replace("Puntos: ", "").trim();
+        var residencia = parseFloat(residenciaText) || 0;
+
         // Calcular el puntaje total
         var puntajeTotal = titulo + otitulo + concepto + promedio + antiguedadGestion +
                            antiguedadTitulo + serviciosProvincia + residencia + publicaciones +
@@ -1560,7 +1817,20 @@ function toggleMotivosExclusion(checkbox) {
     
 </form>
 
+<script>
+document.getElementById("myForm").addEventListener("submit", function(event) {
+    // Ejecutamos la validación específica
+    validarAntiguedadTitulo();
 
+    const errorAntTit = document.getElementById("error-msg-antiguedadtitulo").style.display;
+
+    // Si el mensaje de error está visible, no enviamos el formulario
+    if (errorAntTit === "inline") {
+        event.preventDefault(); // ✋ Detiene el envío
+        alert("Por favor, corrija los errores antes de guardar.");
+    }
+});
+</script>
  
 
 

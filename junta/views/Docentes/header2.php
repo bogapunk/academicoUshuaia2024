@@ -3,14 +3,42 @@
 <head>
 <title>Agencia de innovacion</title>
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900"  type="text/css" media="all">
-<!-- Último minificado bootstrap css -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- jQuery libraria incluida -->
+<!-- Preload de la fuente Roboto -->
+<link rel="preload" href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" as="style" onload="this.rel='stylesheet'">
+<noscript>
+  <link href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" rel="stylesheet" type="text/css" media="all">
+</noscript>
+
+<!-- Preload Bootstrap CSS -->
+<link rel="preload" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" as="style" onload="this.rel='stylesheet'">
+<noscript>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</noscript>
+
+<!-- jQuery normal (no preload) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<!-- Último minificado bootstrap js -->
+
+<!-- Bootstrap JS normal (no preload) -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <style>
+
+   /* Preload styles */
+    #preload {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      font-size: 2em;
+      color: #337ab7;
+    }
+/* ... tu CSS personalizado ... */
 .btn-success {
   margin: 10px;
 }
@@ -65,7 +93,6 @@ body{
 .rotate-90{
   transform: rotate(90deg);
 }
-
 
 * {
     margin: 0;
@@ -130,10 +157,8 @@ body{
 #menu_gral li li a:hover, #menu_gral li li a:focus {
     background: #8AA9B8; 
 }
-
-
-
 </style>
+
 <!--<link rel="icon" type="image/png" href="./imagenes/escudo-32x32.png">-->
 <link rel="shortcut icon" href="../../imagenes/favicon.svg" type="image/x-icon"/>  
 
@@ -143,6 +168,8 @@ body{
 <center><img src="../../imagenes/aif-logo.png" width="400" height="100"></center>
 
 <body>
+   <!-- PRELOAD -->
+<div id="preload">Cargando...</div>
 <div class="main">
 <div class="panel panel-default">
 
@@ -166,8 +193,8 @@ body{
       <div class="card-body d-flex justify-content-between align-items-center">
       <a href="#" class="btn btn-primary">Legajos</a></div>
           <ul>
-           <li><a href="../ListadoDeDocentes/ListarListadosDeDocentes.php"><font size="4">Listado de Docentes</font></b></a></li>
-          <li><a href="../Docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></b></a></li>
+           <li><a href="../ListadoDeDocentes/ListarListadosDeDocentes.php"><font size="4">Listado de Docentes</font></a></li>
+          <li><a href="../Docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></a></li>
           <li><a href="../../controller/exportar_docentes_especiales.php"><font size="3">Listado Docentes Especial(Temp)</font></a></li>
           <li><a href="../../controller/exportar_docentes_especiales_SinTitulares.php"><font size="3">Listado Docentes de Esp. SIN TITULARES(Temporal)</font></a></li>
            <li><a href="../../controller/exportar_docentes_especiales_completos.php"><font size="3">Listado Docentes de Esp.(Interino,supl.y Titulares)</font></a></li>
@@ -187,33 +214,29 @@ body{
     <a href="../Usuarios/ListarUsuarios.php"   class="btn btn-primary" class="logout">Usuarios</a>
 </div>
 
-
-
   </li>
   </ul>
 
 </nav>
 
-
-<!--
-<li>
-
-  <div class="card-body d-flex justify-content-between align-items-center">
-  <a href="Registro.php" class="btn btn-primary" class="logout">Usuarios</a>
-</div>
-
-</li> -->
-<!-- 
-<li>
-  <div class="card-body d-flex justify-content-between align-items-center">
-  <a href="../MiCuenta.php?logoutSubmit=1"   class="btn btn-primary" class="logout">Cerrar Sesion</a>
-</div>
-
-</li> 
--->
-  </ul>
-
+</ul>
 
 </div>
 <div class="panel-body">
 <div class="row">
+
+<!-- CONTENIDO AQUÍ -->
+
+</div>
+</div>
+</div>
+</div>
+
+</body>
+<script>
+    // Ocultar el preload cuando la página termine de cargar
+    $(window).on('load', function () {
+      $('#preload').fadeOut('slow');
+    });
+  </script>
+</html>

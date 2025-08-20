@@ -335,7 +335,9 @@ try {
                 $antiguedadtitulo = isset($_POST['antiguedadtitulo2']) ? floatval($_POST['antiguedadtitulo2']) : 0;
                 $serviciosprovincia = isset($_POST['serviciosprovincia2']) ? floatval($_POST['serviciosprovincia2']) : 0;
                 $otrosservicios = isset($_POST['otrosservicios2']) ? floatval($_POST['otrosservicios2']) : 0;
-                $residencia = isset($_POST['residencia2']) ? floatval($_POST['residencia2']) : 0;
+                $residencia = isset($_POST['residencia_puntos']) ? floatval($_POST['residencia_puntos']) : 0;
+
+                //$residencia = isset($_POST['residencia2']) ? floatval($_POST['residencia2']) : 0;
                 $publicaciones = isset($_POST['publicaciones2']) ? floatval($_POST['publicaciones2']) : 0;
                 $otrosantecedentes = isset($_POST['otrosantecedentes2']) ? floatval($_POST['otrosantecedentes2']) : 0;
                // $puntajetotal = isset($_POST['puntajetotal2']) ? floatval($_POST['puntajetotal2']) : 0;
@@ -386,7 +388,7 @@ try {
                 $sql_insert = "INSERT INTO _junta_movimientos 
                         (anodoc, legdoc, codmod, establecimiento, titulo, promedio, antiguedadgestion, antiguedadtitulo, serviciosprovincia, otrosservicios, residencia, publicaciones, otrosantecedentes, puntajetotal, codloc, tipo, T_m_comple, T_m_biblio, T_m_sec1, T_m_sec2, T_m_viced, obs, horas, fecha,otitulo,concepto,excluido,legvinc,hijos) 
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CAST(? AS date),?,?,?,?,?)";
-
+            
                 $params_insert = array(
                     $anodoc, $legajo, $codmod, $establecimiento, $titulo, $promedio, $antiguedadgestion, $antiguedadtitulo, $serviciosprovincia, $otrosservicios, $residencia, $publicaciones, $otrosantecedentes, $puntajetotal, $codloc, $tipoc, $T_m_comple, $T_m_biblio, $T_m_sec1, $T_m_sec2, $T_m_viced, $obs, $horas, $fecha,$otitulo,$concepto,$excluido,$legvinc,$hijos
                 );
@@ -431,7 +433,8 @@ try {
                 $T_m_sec2 = isset($_POST['t_m_sec2']) ? floatval($_POST['t_m_sec2']) : 0;
                 $T_m_viced = isset($_POST['t_m_viced']) ? floatval($_POST['t_m_viced']) : 0;
                 $otrosservicios = isset($_POST['otrosservicios']) ? floatval($_POST['otrosservicios']) : 0;
-                $residencia = isset($_POST['residencia']) ? floatval($_POST['residencia']) : 0;
+                //$residencia = isset($_POST['residencia']) ? floatval($_POST['residencia']) : 0;
+                $residencia = isset($_POST['residencia_puntos2']) ? floatval($_POST['residencia_puntos2']) : 0;
                 $publicaciones = isset($_POST['publicaciones']) ? floatval($_POST['publicaciones']) : 0;
                 $otrosantecedentes = isset($_POST['otrosantecedentes']) ? floatval($_POST['otrosantecedentes']) : 0;
                 $excluido = isset($_POST['excluido']) && is_numeric($_POST['excluido']) ? $_POST['excluido'] : 23;

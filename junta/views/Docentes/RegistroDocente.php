@@ -629,6 +629,9 @@ materialize-date{
  
 
             </form>
+       
+          
+        
             <script>
             $(document).ready(function() {
             // Función para formatear la fecha de año-mes-día a día-mes-año
@@ -832,17 +835,14 @@ materialize-date{
 });
     </script>
 
-
-
    </div>
-</div>
-           <center><a href="./ListarDocentes.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
+    <center><a href="./ListarDocentes.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
 
 
-
-        </div>
+  <?php include('footer2.php');?>
+ 
     </div>
-    
+ 
     
 <!--Inicia columna 7-->
 <div class="col-sm-3 text wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
@@ -859,9 +859,7 @@ materialize-date{
                 }
                 }
 
-</script>
-
-</div>
-<?php include('footer2.php');?>
-
-
+           </script>
+           
+   </div>
+  

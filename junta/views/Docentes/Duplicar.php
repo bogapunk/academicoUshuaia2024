@@ -660,7 +660,21 @@ if (sqlsrv_has_rows($resultData)) {
     } else {
         echo "<th>Curso: <input type='text' name='anodoc' value='' size='11'></th>"; 
     }
+    echo "<th>";
+    echo "</th>";
     
+        // Botones de acción
+                echo "<td style='text-align: center;'>";
+                echo "<div style='text-align: center;'>";
+
+                // Coloca los botones dentro de un contenedor para mantener la alineación
+                
+                echo "<button type='button' class='btn btn-primary' id='cancelarBtn' title='Volver' style='width: 120px; display: inline-block;'> <i class='glyphicon glyphicon-arrow-left'></i> Volver</button>";
+
+                echo "</div>";
+                echo "</td>"; // Asegurarse de que esté dentro de la tercera columna
+
+                echo "</tr>";
  
     
    // Código de modalidad

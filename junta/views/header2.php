@@ -3,7 +3,7 @@
 <head>
 <title>Agencia de innovacion</title>
 <link rel="stylesheet" href="style.css" type="text/css" media="all" />
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" 	type="text/css" media="all">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" type="text/css" media="all">
 <!-- Último minificado bootstrap css -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- jQuery libraria incluida -->
@@ -131,12 +131,25 @@ body{
     background: #8AA9B8; 
 }
 
-loader {
+/* Loader Styles */
+#preload-overlay {
+  display:none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.8);
+  z-index: 9999;
+  text-align: center;
+  padding-top: 20%;
+  font-size: 24px;
+  color: #333;
+}
+.loader {
   border: 16px solid #f3f3f3;
   border-top: 16px solid #3498db;
   border-radius: 50%;
   width: 120px;
   height: 120px;
+  margin: auto;
   animation: spin 2s linear infinite;
 }
 
@@ -145,93 +158,96 @@ loader {
   100% { transform: rotate(360deg); }
 }
 
-
-
-
-
-
 </style>
 <!--<link rel="icon" type="image/png" href="./imagenes/escudo-32x32.png"> anterior-->
 
 <link rel="shortcut icon" href="../imagenes/favicon.svg" type="image/x-icon"/>  
 </head>
 
-</head>
-
-<!--<center><img src="../imagenes/fondoCabecera.jpg"></center> anterior
--->
-<center><img src="../imagenes/aif-logo.png" width="400" height="100"></center>
 <body>
+
+<!-- Preloader -->
+<div id="preload-overlay">
+  <div class="loader"></div>
+  <p>Cargando...</p>
+</div>
+
+<center><img src="../imagenes/aif-logo.png" width="400" height="100"></center>
+
 <div class="main">
-<div class="panel panel-default">
+  <div class="panel panel-default">
 
-<div class="panel-heading">
-  <ul class="nav nav-pills">
-   
-    <li role="group">
-    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <div class="panel-heading">
+      <ul class="nav nav-pills">
 
-      </div>
-  </li>
+        <li role="group">
+          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 
-  <nav id="menu_gral">
-  <ul>
-    <li>
-     <div class="card-body d-flex justify-content-between align-items-center">
-      <a href="panel2.php"  class="btn btn-primary">Inicio</a>
+          </div>
+        </li>
 
-      </div>
-    </li>
-    <li>
-      <div class="card-body d-flex justify-content-between align-items-center">
-      <a href="#" class="btn btn-primary">Legajos</a></div>
-        <ul>
-           <li><a href="ListadoDeDocentes/ListarListadosDeDocentes.php" text-align: right;><font size="4">Listado de Docentes</font></b></a></li>
-          <li><a href="Docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></b></a></li>
-          <li ><a  href="../controller/exportar_docentes_especiales.php"><font size="4">Listado Docentes Especial(Temp)</font></a></li>
-          <li ><a href="../controller/exportar_docentes_especiales_SinTitulares.php" ><font size="3">Listado Docentes de Esp. SINTITULARES(Temporal)</font></a></li>
-           <li ><a  href="../controller/exportar_docentes_especiales_completos.php"><font   size="3">Listado Docentes de Esp.(Interino,supl.y Titulares)</font></a></li>
-        </ul>
-    </li>
-         <li>
-          <div class="card-body d-flex justify-content-between align-items-center">
-          <a href="#"  class="btn btn-primary">Administracion</a></div>
-        <ul>
-          <li><a href="./Modalidades/ListarModalidades.php"><font size="4">Modalidades</font></a></li>
-          <li><a href="./Dependencias/ListarDependencias.php"><font size="4">Dependencia</font></a></li>
-          <li><a href="./ConfiguracionListados/ListarConfiguracionListados.php"><font size="4">Configuracion Listados</font></a></li>
-        </ul>
-    </li>
-     <li>
-       <div class="card-body d-flex justify-content-between align-items-center">
-       <a href="./Usuarios/ListarUsuarios.php"   class="btn btn-primary" class="logout">Usuarios</a>
-       </div>
-    </li>
-   </ul>
+        <nav id="menu_gral">
+          <ul>
+            <li>
+             <div class="card-body d-flex justify-content-between align-items-center">
+              <a href="panel2.php"  class="btn btn-primary">Inicio</a>
+              </div>
+            </li>
+            <li>
+              <div class="card-body d-flex justify-content-between align-items-center">
+              <a href="#" class="btn btn-primary">Legajos</a></div>
+                <ul>
+                   <li><a href="ListadoDeDocentes/ListarListadosDeDocentes.php" style="text-align:"><font size="4">Listado de Docentes</font></a></li>
+                  <li><a href="Docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></a></li>
+                  <li><a href="../controller/exportar_docentes_especiales.php"><font size="4">Listado Docentes Especial(Temp)</font></a></li>
+                  <li><a href="../controller/exportar_docentes_especiales_SinTitulares.php"><font size="3">Listado Docentes de Esp. SINTITULARES(Temporal)</font></a></li>
+                   <li><a href="../controller/exportar_docentes_especiales_completos.php"><font size="3">Listado Docentes de Esp.(Interino,supl.y Titulares)</font></a></li>
+                </ul>
+            </li>
+                 <li>
+                  <div class="card-body d-flex justify-content-between align-items-center">
+                  <a href="#"  class="btn btn-primary">Administracion</a></div>
+                <ul>
+                  <li><a href="./Modalidades/ListarModalidades.php"><font size="4">Modalidades</font></a></li>
+                  <li><a href="./Dependencias/ListarDependencias.php"><font size="4">Dependencia</font></a></li>
+                  <li><a href="./ConfiguracionListados/ListarConfiguracionListados.php"><font size="4">Configuracion Listados</font></a></li>
+                </ul>
+            </li>
+             <li>
+               <div class="card-body d-flex justify-content-between align-items-center">
+               <a href="./Usuarios/ListarUsuarios.php"   class="btn btn-primary" class="logout">Usuarios</a>
+               </div>
+            </li>
+           </ul>
+        </nav>
 
-</nav>
+      </ul>
+    </div>
 
+    <div class="panel-body">
+      <div class="row">
+      <!-- Aquí continúa el contenido -->
+      <script>
+$(document).ready(function(){
+  $('#menu_gral a').on('click', function(e) {
+    var url = $(this).attr('href');
 
-<!--
-<li>
+    // Ignorar si href es vacío o #
+    if(!url || url === '#') {
+      return;
+    }
 
-  <div class="card-body d-flex justify-content-between align-items-center">
-  <a href="Registro.php" class="btn btn-primary" class="logout">Usuarios</a>
-</div>
+    e.preventDefault(); // Detiene la navegación inmediata
 
-</li> -->
-<!-- 
-<li>
-  <div class="card-body d-flex justify-content-between align-items-center">
-  <a href="../MiCuenta.php?logoutSubmit=1"   class="btn btn-primary" class="logout">Cerrar Sesion</a>
-</div>
+    // Mostrar preloader
+    $('#preload-overlay').show();
 
-</li> 
--->
-  </ul>
-
-
-</div>
-<div class="panel-body">
-<div class="row">
-
+    // Redirigir después de un breve delay para que el preloader se vea
+    setTimeout(function(){
+      window.location.href = url;
+    }, 500); // 0.5 segundos, puedes ajustar el tiempo
+  });
+});
+</script>
+</body>
+</html>

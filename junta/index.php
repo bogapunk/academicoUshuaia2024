@@ -129,11 +129,64 @@ include('header.php');
         border-bottom: 3px solid black; /* Subrayado de 3px de grosor y color negro */
         display: inline-block; /* Asegura que el subrayado esté solo en el texto */
     }
+ /* Spinner (Preload) */
+ #preload {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
 
+.spinner {
+    width: 80px;
+    height: 80px;
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.spinner-text {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+   
+    .input-icon {
+    position: relative;
+}
+
+.input-icon i {
+    position: absolute;
+    left: 210px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 16px;
+    pointer-events: none; /* Para que no interfiera al hacer clic */
+}
+
+.input-icon input {
+    padding-left: 35px; /* Espacio para el ícono */
+}
 </style>
 
 <div class="col-sm-3 r-form-1-box wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <div class="col-sm-6 r-form-1-box wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
 <h1 class="subrayado"><b>Sistema de Juntas</b></h1>
     <?php
@@ -158,26 +211,40 @@ include('header.php');
         <p><b>Nombres: </b><?php echo $userData['nombres'] . ' ' . $userData['apellidos']; ?></p>
         <p><b>Email: </b><?php echo $userData['email']; ?></p>
         <p><b>Telefono: </b><?php echo $userData['telefono']; ?></p>
-</div>
 
 <?php } else { ?>
     <h2><b>(Acceder)</b></h2>
     <?php echo !empty($statusMsg) ? '<p class="' . $statusMsgType . '">' . $statusMsg . '</p>' : ''; ?>
     <center>
+     
         <div class="login-form">
             <form id="loginForm" action="MiCuenta.php" method="post">
-                <div class="form-group">
-                    <input type="email" name="email" class="form-control" placeholder="Ingrese Usuario" required="">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="Ingrese Password" required="">
-                </div>
+            <div class="form-group input-icon">
+            <i class="fas fa-user"></i>
+            <input type="email" name="email" class="form-control" placeholder="Ingrese Usuario" required>
+        </div>
+
+            <div class="form-group input-icon">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" class="form-control" placeholder=" Ingrese Password" required>
+            </div>
             
                 <div class="form-group">
-                    <button type="submit" name="loginSubmit" class="btn btn-primary btn-block btn-sm" onclick="showPreload()" title='Iniciar Session'>Iniciar Sesión</button>
+                <button type="submit" name="loginSubmit" class="btn btn-primary btn-block btn-sm" title='Iniciar Sesión'> Iniciar Sesión</button>
                 </div>
             </form>
+            <!-- PRELOAD SPINNER -->
+                    <div id="preload" style="display: none;">
+                        <div class="spinner"></div>
+                        <div class="spinner-text">Cargando.....</div>
+                    </div>
         </div>
+        <div class="form-group" style="margin-top: 15px; text-align: center;">
+   <!-- <a href="reset_password.php" style="font-size: 14px; color: #007bff; text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+        ¿Olvidaste tu contraseña?
+    </a>-->
+</div>
+        
     </center>
 <?php } ?>
 
@@ -191,8 +258,18 @@ ob_end_flush();
 ?>
 
 <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+        const form = this;
+        if (form.checkValidity()) {
+            document.getElementById('preload').style.display = 'flex';
+        }
+    });
+</script>
+
+
+<script>
     function showPreload() {
-        document.getElementById('preload').style.display = 'block';
+        document.getElementById('preload').style.display = 'flex';
     }
 </script>
 

@@ -82,7 +82,7 @@ body{
     display: block;
     text-decoration: none;
     font-size: 2rem;
-    width: 18%;
+    width: 32%;
     font-family: 'Roboto', sans-serif;
     background-color: #2698f3;
     font-size: 18px;

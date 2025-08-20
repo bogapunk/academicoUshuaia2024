@@ -523,7 +523,7 @@ $(document).ready(function() {
     });
 });
 </script>
-<center><h4><u>Actulizacion de Movimiento</u></h4></center>
+<center><h4><u>Actualizacion de Movimiento</u></h4></center>
 <table>
   
  <?php

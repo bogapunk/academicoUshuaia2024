@@ -58,7 +58,8 @@ h2 {
     padding: 12px 0; /* Adjust padding for a more comfortable fit */
     font-size: 16px; /* Adjust font size */
     outline: none; /* Remove default outline */
-    width: 46%; /* Make the input element fill the container */
+    width: 42%; /* Make the input element fill the container */
+    height: 42%;
     transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for border color and shadow */
     color: #333; /* Dark text color for readability */
 }
