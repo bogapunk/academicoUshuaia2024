@@ -665,12 +665,14 @@ if (sqlsrv_has_rows($resultData)) {
     
         // Botones de acción
                 echo "<td style='text-align: center;'>";
-                echo "<div style='text-align: center;'>";
+                echo "<div style='display: flex; justify-content: center; gap: 20px;'>";
+                echo "<button type='button' class='btn btn-primary' id='cancelarBtn' title='Volver'>
+                        <i class='glyphicon glyphicon-arrow-left'></i> Volver
+                    </button>";
 
-                // Coloca los botones dentro de un contenedor para mantener la alineación
-                
-                echo "<button type='button' class='btn btn-primary' id='cancelarBtn' title='Volver' style='width: 120px; display: inline-block;'> <i class='glyphicon glyphicon-arrow-left'></i> Volver</button>";
-
+                echo "<button class='btn btn-warning' title='Duplicar Registro' type='submit'>
+                        <i class='glyphicon glyphicon-copy'></i> Duplicar
+                    </button>";
                 echo "</div>";
                 echo "</td>"; // Asegurarse de que esté dentro de la tercera columna
 

@@ -1,7 +1,7 @@
 FROM php:8.1-apache
 
 ENV ACCEPT_EULA=Y
-
+# Install prerequisites for the sqlsrv and pdo_sqlsrv PHP extensions.
 # Install prerequisites required for tools and extensions installed later on.
 RUN apt-get update \
     && apt-get install -y apt-transport-https gnupg2 libpng-dev libzip-dev nano unzip \

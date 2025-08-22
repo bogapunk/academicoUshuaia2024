@@ -1198,31 +1198,44 @@ echo "</table>"; // Cierre de la tabla
                         <input type="number" id="antiguedadgestion2" name="antiguedadgestion2" class="materialize-input3" size="10" step="0.01" min="0" 
                             onchange="validarAntiguedad(); calcularPuntajeTotal();" 
                             onkeyup="validarAntiguedad(); calcularPuntajeTotal();">
-                        <span id="error-msg-antiguedad" style="color: red; display: none;">Valor inválido. Debe ser múltiplo de 0.25 y no ser número par exacto.</span>
+                        <span id="error-msg-antiguedad" style="color: red; display: none;">Valor inválido. Ingrese un número entre 0 y 3, en incrementos de 0.25. No se permiten números enteros pares, excepto 2.00.</span>
                         <br>
 
                         <script>
                         function validarAntiguedad() {
-                            const tipo = document.getElementById("tipoc").value;
-                            const inputRaw = document.getElementById("antiguedadgestion2").value.trim();
-                            const input = parseFloat(inputRaw);
-                            const errorMsg = document.getElementById("error-msg-antiguedad");
+                                            const tipo = document.getElementById("tipoc").value;
+                                            const inputRaw = document.getElementById("antiguedadgestion2").value.trim();
+                                            const input = parseFloat(inputRaw);
+                                            const errorMsg = document.getElementById("error-msg-antiguedad");
 
-                            if (tipo === "permanente" || inputRaw === "") {
-                                errorMsg.style.display = "none";
-                                return;
-                            }
+                                            if (tipo === "permanente" || inputRaw === "") {
+                                                errorMsg.style.display = "none";
+                                                return;
+                                            }
 
-                            const tope = 3;
-                            const esMultiplo025 = (input * 100) % 25 === 0;
-                            const esParExacto = input % 2 === 0;
+                                            const tope = 3;
+                                            const valor = Math.round(input * 100); // evitar errores de coma flotante
 
-                            if (isNaN(input) || input < 0 || input > tope || !esMultiplo025 || esParExacto) {
-                                errorMsg.style.display = "inline";
-                            } else {
-                                errorMsg.style.display = "none";
-                            }
-                        }
+                                            // múltiplos de 0.25 → 25 centésimas
+                                            const esMultiplo025 = valor % 25 === 0;
+
+                                            // es un entero par exacto (ej: 2, 4, 6...)
+                                            const esEnteroPar = Number.isInteger(input) && input % 2 === 0;
+
+                                            // 🚨 Condiciones de error (excepto que el valor sea 2)
+                                            if (
+                                                isNaN(input) ||
+                                                input < 0 ||
+                                                input > tope ||
+                                                !esMultiplo025 ||
+                                                (esEnteroPar && input !== 2)
+                                            ) {
+                                                errorMsg.style.display = "inline";
+                                            } else {
+                                                errorMsg.style.display = "none";
+                                            }
+                                        }
+
                         </script>
 
                         <!-- Antigüedad del Título -->
@@ -1230,36 +1243,45 @@ echo "</table>"; // Cierre de la tabla
                         <input type="number" id="antiguedadtitulo2" name="antiguedadtitulo2" class="materialize-input3" size="10" step="0.01" min="0" max="3" 
                             onchange="validarAntiguedadTitulo(); calcularPuntajeTotal();" 
                             onkeyup="validarAntiguedadTitulo(); calcularPuntajeTotal();">
-                        <span id="error-msg-antiguedadtitulo" style="color: red; display: none;">Valor inválido. Debe ser múltiplo de 0.20 y no ser número impar exacto.</span>
+                        <span id="error-msg-antiguedadtitulo" style="color: red; display: none;">Valor inválido. Ingrese un número entre 0 y 3, en incrementos de 0.20. Solo se permiten 1 y 3 como enteros exactos.</span>
                         <br>
 
                         <script>
-                            function validarAntiguedadTitulo() {
-                                const inputRaw = document.getElementById("antiguedadtitulo2").value.trim();
-                                const input = parseFloat(inputRaw);
-                                const errorMsg = document.getElementById("error-msg-antiguedadtitulo");
+                          function validarAntiguedadTitulo() {
+                                            const inputRaw = document.getElementById("antiguedadtitulo2").value.trim();
+                                            const input = parseFloat(inputRaw);
+                                            const errorMsg = document.getElementById("error-msg-antiguedadtitulo");
 
-                                if (inputRaw === "") {
-                                    errorMsg.style.display = "none";
-                                    return;
-                                }
+                                            if (inputRaw === "") {
+                                                errorMsg.style.display = "none";
+                                                return;
+                                            }
 
-                                const esMultiplo020 = (input * 100) % 20 === 0;
-                                const esImparExacto = input % 2 === 1;
+                                            // Redondeo a 2 decimales para evitar problemas de coma flotante
+                                            const valor = Math.round(input * 100);
 
-                                // 👉 Se permite el 3 como excepción aunque sea impar
-                                if (
-                                    isNaN(input) ||
-                                    input < 0 ||
-                                    input > 3 ||
-                                    !esMultiplo020 ||
-                                    (esImparExacto && input !== 3)
-                                ) {
-                                    errorMsg.style.display = "inline";
-                                } else {
-                                    errorMsg.style.display = "none";
-                                }
-                            }
+                                            // Debe ser múltiplo de 20 (0.20, 0.40, 0.60...)
+                                            const esMultiplo020 = valor % 20 === 0;
+
+                                            // Está dentro del rango 0 - 3
+                                            const dentroDelRango = input >= 0 && input <= 3;
+
+                                            // Verifica si es número entero impar
+                                            const esEnteroImpar = Number.isInteger(input) && input % 2 === 1;
+
+                                            // 🚨 Condiciones de error (excepto 1 y 3 que sí se aceptan)
+                                            if (
+                                                isNaN(input) ||
+                                                !dentroDelRango ||
+                                                (!esMultiplo020 && input !== 1 && input !== 3) ||
+                                                (esEnteroImpar && input !== 1 && input !== 3)
+                                            ) {
+                                                errorMsg.style.display = "inline";
+                                            } else {
+                                                errorMsg.style.display = "none";
+                                            }
+                                        }
+
                             </script>
 
                 <label for="servicios" style="display: inline-block; width: 225px;">6.- Servicios:</label>
