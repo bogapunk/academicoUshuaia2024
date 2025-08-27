@@ -73,11 +73,11 @@ try {
     // Obtener la conexión usando el método conectar2()
 
     
-    $conn = $conexion->conectar2();
-    /* Listados Normales */
-    if ($conn) {
-        // Construir la consulta con filtros
-        $query = "SELECT *
+  $conn = $conexion->conectar2();
+/* Listados Excluido */
+if ($conn) {
+    // Construir la consulta base con filtros
+    $query = "SELECT *
         FROM
             [Junta].[dbo].[_junta_movimientos] j_mov
         INNER JOIN
@@ -92,24 +92,28 @@ try {
             AND anodoc = $anio 
             AND codloc = '$localidad'";
 
-if ($tipo == 'transitorio' || $tipo == 'interinatos'  ) {
-    $query .= "ORDER BY j_doc.ApellidoyNombre, 
-                         j_mov.puntajetotal DESC, 
-                         j_mov.serviciosprovincia DESC, 
-                         j_mov.promedio DESC, 
-                         j_mov.antiguedadgestion DESC, 
-                         j_mov.antiguedadtitulo DESC, 
-                         j_doc.fechatit DESC ";
-                    
-} else {
-    $query .= " ORDER BY j_doc.ApellidoyNombre, 
-                         j_mov.puntajetotal DESC, 
-                         j_mov.serviciosprovincia DESC, 
-                         j_mov.promedio DESC, 
-                         j_mov.antiguedadgestion DESC, 
-                         j_mov.antiguedadtitulo DESC, 
-                         j_doc.fechatit DESC";
-}
+    // Adaptar el filtro por establecimiento si tipoc es "titulares"
+    if (isset($_POST['tipoc']) && $_POST['tipoc'] == 'titulares' && !empty($_POST['establecimiento'])) {
+        $establecimiento = $_POST['establecimiento'];
+        $query .= " AND j_mov.establecimiento = '$establecimiento'";
+    }
+
+    // Ordenamiento
+    if ($tipo == 'transitorio' || $tipo == 'interinatos') {
+        // Orden alfabético únicamente
+        $query .= " ORDER BY j_doc.ApellidoyNombre ASC";
+    } else {
+        // Orden alfabético + criterios de puntaje
+        $query .= " ORDER BY j_doc.ApellidoyNombre ASC, 
+                            j_mov.puntajetotal DESC, 
+                            j_mov.serviciosprovincia DESC, 
+                            j_mov.promedio DESC, 
+                            j_mov.antiguedadgestion DESC, 
+                            j_mov.antiguedadtitulo DESC, 
+                            j_doc.fechatit DESC";
+    }
+
+
 
        
         // Preparar la consulta
@@ -291,7 +295,7 @@ if ($tipo == 'transitorio' || $tipo == 'interinatos'  ) {
         ob_end_clean();
              
         // Output PDF
-        $pdf->Output('D', 'file.pdf');
+        $pdf->Output('D', 'excluidos.pdf');
     }
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
