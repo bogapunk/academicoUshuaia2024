@@ -539,13 +539,14 @@ if (isset($_GET['legajo'])) {
               </a>
              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <label for='tipoFiltro'>Filtrar por Tipo de Inscripción: </label>
-                  <select id='tipoFiltro' class='form-control' style='width: 200px; display: inline-block;'>
-                      <option value=''>Todos</option> <!-- Opción para mostrar todos -->
-                      <option value='permanente'>Permanente</option>
-                      <option value='concurso'>Concurso</option>
-                      <option value='transitorio'>Interino</option>
-                      <option value='titulares'>Titulares</option>
-                  </select>
+                      <select id='tipoFiltro' class='form-control' style='width: 200px; display: inline-block;'>
+                          <option value=''>Todos</option> <!-- Opción para mostrar todos -->
+                          <option value='permanente'>Permanente</option>
+                          <option value='concurso'>Concurso</option>
+                          <option value='transitorio'>Interino</option>
+                          <option value='titulares'>Titulares</option>
+                          <option value='puntaje0'>Excluido</option> <!-- NUEVA OPCIÓN -->
+                      </select>
             
           </div>";
           echo"<br>";
@@ -556,7 +557,7 @@ if (isset($_GET['legajo'])) {
    
               // Ejecutar la consulta original y mostrar los resultados en la tabla
               if (sqlsrv_has_rows($resultData)) {
-                  echo "<table border='1'>";
+                  echo "<table border='1'style='border-collapse: collapse; border: 2px solid #000;'>";
                   echo "<tr>";
                   echo "<th style='text-align: center;'>Año</th>";
                   echo "<th style='text-align: center;'>Código Modalidad</th>";
@@ -570,25 +571,30 @@ if (isset($_GET['legajo'])) {
 
                   $odd = true;
 
-                  while ($row = sqlsrv_fetch_array($resultData, SQLSRV_FETCH_ASSOC)) {
-                      $tipo = $row['tipo'];  // Valor del tipo
-                      $color = '';
+                 while ($row = sqlsrv_fetch_array($resultData, SQLSRV_FETCH_ASSOC)) {
+    $tipo = strtolower(trim($row['tipo']));  
+    $puntaje = floatval($row['puntajetotal']);
+    $color = '';
 
-                      // Asignar el color según el valor de 'tipo'
-                      if ($tipo == 'Permanente'  || $tipo == 'permanente') {
-                          $color = '#A3D9A5';  // Verde claro para "Permanente"
-                      } elseif ($tipo == 'Concurso' ||$tipo == 'concurso' ) {
-                          $color = '#F9D423';  // Amarillo para "Concurso"
-                      } elseif ($tipo == 'Interino'|| $tipo == 'interino' || $tipo == 'interinos' || $tipo == 'transitorio' || $tipo == 'Transitorio' ) {
-                          $color = '#FF6B6B';  // Rojo para "Interino"
-                      } elseif ($tipo == 'Titulares'|| $tipo == 'titulares' ) {
-                          $color = '#4A90E2';  // Azul para "Titulares"
-                      } else {
-                          // Si no es ninguno de los anteriores, puedes usar un color por defecto
-                          $color = $odd ? '#FFFFFF' : '#F2F2F2';  // Alternar colores si el tipo es otro
-                      }
+    // Prioridad: puntaje 0 → naranja
+    if ($puntaje == 0) {
+        $color = '#FFCCBC';
+    } elseif ($tipo == 'permanente' || $tipo == 'listado permanentes') {
+        $color = '#E0E0E0';
+    } elseif ($tipo == 'concurso') {
+        $color = '#B3E5FC';
+    } elseif ($tipo == 'interino' || $tipo == 'interinos' || $tipo == 'suplente' || $tipo == 'suplencia' || $tipo == 'interino y suple.' || $tipo == 'transitorio') {
+        $color = '#C8E6C9';
+    } elseif ($tipo == 'titulares' || $tipo == 'titular') {
+        $color = '#FFF9C4';
+    } elseif ($tipo == 'excluidos' || $tipo == 'excluido') {
+        $color = '#FFCCBC';
+    } else {
+        $color = $odd ? '#FFFFFF' : '#F2F2F2';
+    }
 
-                      $odd = !$odd;
+
+                    $odd = !$odd;
 
                       // Imprimir la fila de la tabla con el color de fondo asignado
 
@@ -703,21 +709,26 @@ if (isset($_GET['legajo'])) {
     // Si legajo no está definido, mostrar un mensaje de error
     echo "<p>El parámetro legajo no está definido.</p>";
 }
-echo"<script>
+echo "<script>
 document.getElementById('tipoFiltro').addEventListener('change', function() {
     var tipoSeleccionado = this.value.toLowerCase();
     var filas = document.querySelectorAll('.tipoFila');
 
     filas.forEach(function(fila) {
         var tipoFila = fila.getAttribute('data-tipo');
-        if (tipoSeleccionado === '' || tipoFila === tipoSeleccionado) {
-            fila.style.display = ''; // Mostrar fila
+        var puntaje = parseFloat(fila.querySelector('td:nth-child(5)').innerText.replace(',', '.'));
+
+        if (tipoSeleccionado === '') {
+            fila.style.display = '';
+        } else if (tipoSeleccionado === 'puntaje0') {
+            fila.style.display = (puntaje === 0) ? '' : 'none';
         } else {
-            fila.style.display = 'none'; // Ocultar fila
+            fila.style.display = (tipoFila === tipoSeleccionado) ? '' : 'none';
         }
     });
 });
 </script>";
+
 //javascript para borrado de movimiento
 
 echo "<script>
@@ -761,16 +772,18 @@ sqlsrv_close($conn);
 // Determina el color según el valor de 'tipo'
 function determinarColor($tipo) {
     switch ($tipo) {
-        case 'titulares':
-            return '#FFF4DD';
         case 'Interino y Suple.':
-            return '#E8FCFF';
-        case 'permanente':
-            return '#CEFFEF';
+            return '#C8E6C9'; // Verde pastel claro
         case 'concurso':
-            return '#F3F3F3';
+            return '#B3E5FC'; // Celeste pastel claro
+        case 'titulares':
+            return '#FFF9C4'; // Amarillo pastel claro
+        case 'permanente':
+            return '#E0E0E0'; // Gris claro pastel
+        case 'excluidos':
+            return '#FFCCBC'; // Naranja pastel claro
         default:
-            return '#FFFFFF'; // Color blanco por defecto
+            return '#FFFFFF'; // Blanco por defecto
     }
 }
 
