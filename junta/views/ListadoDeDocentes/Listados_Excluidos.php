@@ -180,12 +180,12 @@ if ($conn) {
         $pdf->Ln(); 
         $pdf->SetFont('Arial', 'B', 9); // Cambiado a Arial
         // Cabecera de la tabla
-        $pdf->Cell(10, 5, iconv('UTF-8', 'ISO-8859-1', 'Nº'), 1, 0, 'C');
+        $pdf->Cell(7, 5, iconv('UTF-8', 'ISO-8859-1', 'Nº'), 1, 0, 'C');
         //$pdf->Cell(7, 5, iconv('UTF-8', 'ISO-8859-1', 'Nº'), 1, 0, 'C');
-        $pdf->Cell(16, 5, 'LEGAJO', 1, 0, 'C');
-        $pdf->Cell(70, 5, 'NOMBRE', 1, 0, 'C');
-        $pdf->Cell(25, 5, 'DNI', 1, 0, 'C');
-        $pdf->Cell(120, 5, 'CARGO', 1, 0, 'C');
+        $pdf->Cell(13, 5, 'LEGAJO', 1, 0, 'C');
+        $pdf->Cell(60, 5, 'NOMBRE', 1, 0, 'C');
+        $pdf->Cell(22, 5, 'DNI', 1, 0, 'C');
+        $pdf->Cell(140, 5, 'CARGO', 1, 0, 'C');
         $pdf->Cell(100, 5, 'MOTIVOS', 1, 0, 'C');
         $pdf->Ln(); 
         $nroOrden = 1;
@@ -252,11 +252,11 @@ if ($conn) {
                     $this->Ln(); 
                     $this->Ln(); 
                     $this->SetFont('Arial', 'B', 9); // Cambiado a Arial
-                    $this->Cell(10, 5, 'N', 1, 0, 'C');
-                    $this->Cell(16,5, 'LEGAJO', 1, 0, 'C');
-                    $this->Cell(70, 5, 'NOMBRE', 1, 0, 'C');
-                    $this->Cell(25, 5, 'DNI', 1, 0, 'C');
-                    $this->Cell(120, 5, 'CARGO', 1, 0, 'C');
+                    $this->Cell(9, 5,iconv('UTF-8', 'ISO-8859-1', 'Nº'), 1, 0, 'C');
+                    $this->Cell(13,5, 'LEGAJO', 1, 0, 'C');
+                    $this->Cell(60, 5, 'Apellido y Nombre', 1, 0, 'C');
+                    $this->Cell(22, 5, 'DNI', 1, 0, 'C');
+                    $this->Cell(140, 5, 'CARGO', 1, 0, 'C');
                     $this->Cell(100, 5, 'MOTIVO', 1, 0, 'C');// Salto de línea al final de la fila
                     $this->Ln(); // Salto de línea después de la línea horizontal
                 }
@@ -275,12 +275,14 @@ if ($conn) {
                 $pdf->AddPage(); // Agregar una nueva página cuando sea necesario
                 $pagina++;
             }
-            $pdf->Cell(10, 5, $nroOrden, 1, 0, 'C'); // Mostrar el índice incremental
-            $pdf->Cell(16, 5, $row['legdoc'], 1, 0, 'C');
-            $pdf->Cell(70, 5, utf8_decode($row['ApellidoyNombre']), 1, 0, 'L');
+            $pdf->Cell(9, 5, $nroOrden, 1, 0, 'C'); // Mostrar el índice incremental
+            $pdf->Cell(13, 5, $row['legdoc'], 1, 0, 'C');
+            $pdf->Cell(60, 5, utf8_decode($row['ApellidoyNombre']), 1, 0, 'L');
             //$pdf->Cell(53, 5, utf8_decode($row['ApellidoyNombre']), 1, 0, 'L');
-            $pdf->Cell(25, 5, $row['dni'], 1, 0, 'C');
-            $pdf->Cell(120, 5, utf8_decode(substr($row['nommod'], 0, 40)), 1, 0, 'C');
+           $pdf->Cell(22, 5, $row['dni'], 1, 0, 'C'); // 25 mm en lugar de 20
+            $pdf->SetFont('Arial', '', 9); // tamaño más pequeño solo para esta celda
+$pdf->Cell(140, 5, utf8_decode(substr($row['nommod'], 0, 80)), 1, 0, 'C');
+$pdf->SetFont('Arial', '', 10); // volver al tamaño normal para el resto
             $pdf->Cell(100, 5, utf8_decode($row['motivo']), 1, 0, 'C');
             $nroOrden++; // Incrementar el contador
             $contador++;
@@ -290,7 +292,7 @@ if ($conn) {
         }
     
         $pdf->SetFont('Arial', '', 9);
-        $pdf->Cell(341,5,"Todas las modalidades en un mismo listado",1,1,'C');
+        $pdf->Cell(344,5,"Todas las modalidades en un mismo listado",1,1,'C');
         // Salida del PDF
         ob_end_clean();
              
