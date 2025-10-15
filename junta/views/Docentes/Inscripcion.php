@@ -523,7 +523,7 @@ $(document).ready(function() {
     });
 });
 </script>
-<center><h4><u>Actualizacion de Movimiento</u></h4></center>
+<center><h4><u>Actulizacion de Movimiento</u></h4></center>
 <table>
   
  <?php
@@ -572,11 +572,11 @@ if ($conn) {
 $queryModalidades = "SELECT codmod, nommod FROM _junta_modalidades";
 $resultModalidades = sqlsrv_query($conn, $queryModalidades);
 
-$modalidades = array(); // Almacenar las modalidades (código + nombre)
+$modalidades = array(); // // Almacenar las modalidades (código + nombre)
 
 if ($resultModalidades) {
     while ($rowModalidad = sqlsrv_fetch_array($resultModalidades, SQLSRV_FETCH_ASSOC)) {
-        $modalidades[] = [
+           $modalidades[] = [
             'codmod' => $rowModalidad['codmod'],
             'nommod' => $rowModalidad['nommod']
         ];
@@ -585,7 +585,6 @@ if ($resultModalidades) {
     die(print_r(sqlsrv_errors(), true));
 }
 
-// Consulta principal con joins
 $queryData = "SELECT 
         j_doc.apellidoynombre, 
         j_doc.legajo, 
@@ -600,6 +599,7 @@ $queryData = "SELECT
         j_mov.tipo, 
         j_mov.fecha,
         j_mov.codloc, 
+        j_mod.nommod, 
         j_mov.titulo,
         j_mov.otitulo, 
         j_mov.promedio,
@@ -637,11 +637,12 @@ $queryData = "SELECT
         j_mov.t_d_supgral,
         j_mov.t_d_adic,
         j_mov.concepto,
-        j_mov.id2
+        j_mov.id2,j_mov.legvinc
     FROM _junta_docentes j_doc
     INNER JOIN _junta_movimientos j_mov ON j_mov.id2 = '$id2' AND j_doc.legajo = j_mov.legdoc
     INNER JOIN _junta_modalidades j_mod ON j_mov.codmod = j_mod.codmod
     LEFT JOIN _junta_dependencias j_dep ON j_mov.establecimiento = j_dep.coddep";
+ 
 
 $resultData = sqlsrv_query($conn, $queryData);
 
@@ -650,40 +651,45 @@ if ($resultData === false) {
 }
 
 echo "<table border='1'>";  
-echo "<form action='GrabarMovimientosPermanentes.php' method='post'>";
-echo "<input type='hidden' name='legajo' value='" . htmlspecialchars($legajo) . "'>";
+echo "<form id='miFormulario'>";
 
-// Verifica si hay filas
+// Verifica si hay filas en el resultado de la consulta
 if (sqlsrv_has_rows($resultData)) {
     $row = sqlsrv_fetch_array($resultData, SQLSRV_FETCH_ASSOC);
    
-    // === Fila de encabezado con curso y botones ===
+    // Imprimir la tabla
+   
     echo "<tr>";
     
     // Curso
-    echo "<th>Curso: <input type='text' name='anodoc' value='" . htmlspecialchars($row['anodoc'] ?? '') . "' size='11'></th>";
-    echo "<th></th>";
+    if (isset($row['anodoc'])) {
+        echo "<td style='text-align: left; width: 192px;'>Curso: <input type='text' name='anodoc' value='" . htmlspecialchars($row['anodoc']) . "' size='11'></td>";
+    } else {
+        echo "<td style='text-align: left; width: 192px;'>Curso: <input type='text' name='anodoc' value='' size='11'></td>"; 
+    }
+    echo "<th>";
+    echo "</th>";
     
-    // Botones
-    echo "<td style='text-align: center;'>";
-    echo "<div style='display: flex; justify-content: center; gap: 20px;'>";
-    echo "<button type='button' class='btn btn-primary' id='cancelarBtn' title='Volver'>
-            <i class='glyphicon glyphicon-arrow-left'></i> Volver
-        </button>";
-    echo "<button class='btn btn-warning' title='Duplicar Registro' type='submit'>
-            <i class='glyphicon glyphicon-copy'></i> Duplicar
-        </button>";
-    echo "</div>";
-    echo "</td>";
-    echo "</tr>";
+        // Botones de acción
+                echo "<td style='text-align: center;'>";
+                echo "<div style='text-align: center;'>";
 
-    // === Fila de modalidad ===
-    echo "<tr>";
+                // Coloca los botones dentro de un contenedor para mantener la alineación
+                echo "<a class='btn btn-sm btn-danger' id='movimientoBorrado' href='#' data-id2='" . $row['id2'] . "' title='Eliminar' style='width: 120px; display: inline-block; margin-right: 0px;'><i class='glyphicon glyphicon-trash'></i> Eliminar</a>";
+                echo "<button type='button' class='btn btn-success' id='btnActualizar' title='Grabar'><i class='glyphicon glyphicon-floppy-disk'></i> Grabar</button>";
+                echo "<button type='button' class='btn btn-primary' id='cancelarBtn' title='Volver' style='width: 120px; display: inline-block;'> <i class='glyphicon glyphicon-arrow-left'></i> Volver</button>";
 
-    // Código de modalidad
-    echo "<th>Cód. Mod: <input type='text' name='codmod' id='codmod' value='" . htmlspecialchars($row['codmod']) . "' size='8' onchange='fetchModalidad()'></th>";
+                echo "</div>";
+                echo "</td>"; // Asegurarse de que esté dentro de la tercera columna
 
-    // Modalidad (select)
+                echo "</tr>";
+                    
+    
+   // Código de modalidad
+        echo "<tr>";
+        echo "<th>Cód. Mod: <input type='text' name='codmod' id='codmod' value='" . $row['codmod'] . "' size='8' onchange='fetchModalidad()'></th>";
+
+       // Modalidad (select)
     echo "<th>Modalidad:
             <select name='modalidad' id='modalidad' style='width: 500px;'>";
 
@@ -1628,5 +1634,3 @@ function myConfirmMov() {
 
 
 </th>
-
-
