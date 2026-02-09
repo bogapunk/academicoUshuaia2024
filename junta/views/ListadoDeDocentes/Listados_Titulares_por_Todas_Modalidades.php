@@ -83,7 +83,7 @@ try {
 
 if($conn){
                 $query = "SELECT *,
-                (COALESCE(j_mov.titulo, '') + COALESCE(j_mov.otrosantecedentes, '')) AS totalodn1
+                (COALESCE(j_mov.titulo, 0) + COALESCE(j_mov.otrosantecedentes, 0)) AS totalodn1
             FROM
                 [Junta].[dbo].[_junta_movimientos] j_mov
             INNER JOIN
@@ -233,7 +233,7 @@ if($conn){
                 
                      // Imprimir encabezado de la tabla
                                 $pdf->SetFont('Arial', '', 10);
-                                $pdf->Cell(7, 5, "N", 1, 0, "C");
+                                $pdf->Cell(7, 5, utf8_decode('Nº'), 1, 0, "C");
                                 $pdf->Cell(15, 5, "LEGAJO", 1, 0, "C");
                                 $pdf->Cell(75, 5, "NOMBRE", 1, 0, "C");
                                 $pdf->Cell(40, 5, "OBS.", 1, 0, "C");
@@ -250,14 +250,33 @@ if($conn){
                                 $pdf->Cell(30, 5, "NOTIFICADO", 1, 1, "C");
                                 $contador = 1; // Reiniciar el contador de filas
                             }
+// agregado nuevo para los caracrtes especiales
+                           if (!function_exists('pdfText')) {
+                                function pdfText($text) {
+                                    if ($text === null || $text === '') {
+                                        return '';
+                                    }
 
-                            
+                                    // Normalizar encoding
+                                    $text = html_entity_decode($text, ENT_QUOTES, 'UTF-8');
+                                    $text = utf8_encode($text);
 
+                                    // Eliminar carácter Â residual
+                                    $text = str_replace('Â', '', $text);
+
+                                    // Adaptar a FPDF (Arial)
+                                    return iconv(
+                                        'UTF-8',
+                                        'ISO-8859-1//TRANSLIT',
+                                        $text
+                                    );
+                                }
+                            }
                             // Imprimir detalles del docente
                             $pdf->Cell(7, 5, $contador, 1, 0, "C");
                             $pdf->Cell(15, 5, $row['legdoc'], 1, 0, "C");
                             $pdf->Cell(75, 5, utf8_decode($row['ApellidoyNombre']), 1, 0, "L");
-                            $wobs = $row['obs'] != "" ? $row['obs'] : "";
+                           $wobs = pdfText($row['obs']);
                             $pdf->Cell(40, 5, $wobs, 1, 0, "C");
                             $pdf->Cell(12, 5, $row['horas'], 1, 0, "C");
                             $pdf->Cell(22, 5, $row['dni'], 1, 0, "C");
