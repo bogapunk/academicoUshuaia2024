@@ -93,6 +93,8 @@ $codmod = isset($_GET['codmod']) ? $_GET['codmod'] : '';
 $modalidad = isset($_GET['modalidad']) ? $_GET['modalidad'] : '';
 $tipo = isset($_GET['tipoc']) ? $_GET['tipoc'] : '';
 $localidad = isset($_GET['localidad']) ? $_GET['localidad'] : '';
+
+      
 $anio = isset($_GET['year']) ? (int)$_GET['year'] : 0; // Convertir a entero
 $nota = isset($_GET['nota']) ? $_GET['nota'] : '';
 $titulo = isset($_GET['titulo']) ? $_GET['titulo'] : '';
@@ -123,15 +125,18 @@ $valores_validos = ['USH', 'RGD', 'TOL', 'ANT','PROVIN'];
 
 // Si $localidad tiene uno de los valores esperados, se filtra si es tolhuin me trai por defecto tambien rio grande , en caso contrario no 
 if (in_array($localidad, $valores_validos)) {
+
     if ($localidad == 'TOL') {
-        // Si el valor es 'TOL', la condición debe incluir 'codloc = TOL' y 'codloc = RGD'
         $localidad_condition = "AND (j_mov.codloc = 'TOL' OR j_mov.codloc = 'RGD')";
+
+    } elseif ($localidad == 'PROVIN') {
+        $localidad_condition = "AND j_mov.codloc IN ('USH','RGD','TOL')";
+
     } else {
-        // Para los demás valores de localidad, solo se filtra por 'codloc'
         $localidad_condition = "AND j_mov.codloc = '$localidad'";
     }
+
 } else {
-    // Si no hay localidad o es un valor no válido, no se aplica ningún filtro
     $localidad_condition = '';
 }
 
@@ -208,13 +213,27 @@ ORDER BY
         
         // Ejecutar la consulta
         $stmt->execute();
-        
+  
         // Obtener los resultados
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
   if (!$results) {
       die("No se encontraron resultados en la consulta.");
   }
+$localidad = isset($_GET['localidad']) ? trim($_GET['localidad']) : '';
 
+if ($localidad === 'PROVIN') {
+    $localidad_display = 'USH-RGD-TOL';
+
+} elseif ($localidad === 'TOL') {
+    $localidad_display = 'RGD-TOL';
+
+} elseif ($localidad !== '') {
+    $localidad_display = $localidad;
+
+} else {
+    $localidad_display = '';
+}
   // A partir de aquí, puedes seguir generando el PDF con los resultados obtenidos...
 
   $pdf = new FPDF('P', 'mm', 'Legal');
@@ -288,6 +307,7 @@ if (($_GET['localidad']== 'PROVIN')) {
     // Si no está vacía y no es 'TOL', usar el valor de localidad recibido
     $localidad_display = $_GET['localidad'];
 }
+
 
 // Ahora, usar la variable $localidad_display para mostrar el texto en el PDF
 $pdf->Cell(45, 5, utf8_decode('Localidad: ') . $localidad_display, 0, 0, "L");
