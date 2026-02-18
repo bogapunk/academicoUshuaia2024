@@ -119,7 +119,7 @@ if (!$ciudad) {
 }
 // Valores posibles de codloc esto es nuevo 
 // Valores posibles de codloc
-$valores_validos = ['USH', 'RGD', 'TOL', 'ANT'];
+$valores_validos = ['USH', 'RGD', 'TOL', 'ANT','PROVIN'];
 
 // Si $localidad tiene uno de los valores esperados, se filtra si es tolhuin me trai por defecto tambien rio grande , en caso contrario no 
 if (in_array($localidad, $valores_validos)) {
@@ -278,8 +278,8 @@ ORDER BY
   $pdf->SetFont('Arial', '', 10);
   $pdf->Cell(30, 5, utf8_decode('Año: ') . $_GET['year'], 0, 0, "L");
 // Verificar si la localidad está vacía
-if (empty($_GET['localidad'])) {
-    // Si está vacía, mostrar 'USH-RGD-TOL'
+if (($_GET['localidad']== 'PROVIN')) {
+    // Si muetra provinciales mostrara 'USH-RGD-TOL'
     $localidad_display = 'USH-RGD-TOL';
 } elseif ($_GET['localidad'] == 'TOL') {
     // Si es 'TOL', mostrar 'RGD-TOL'

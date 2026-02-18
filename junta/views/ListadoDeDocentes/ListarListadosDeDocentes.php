@@ -550,6 +550,7 @@ $(document).ready(function() {
 				  <option value="RGD">Río Grande</option>
 				  <option value="TOL">Tolhuin</option>
 				  <option value="ANT">Antártida</option>
+          <option value="PROVIN">PROVINCIALES</option>
 				</select>
  
  	</td>
