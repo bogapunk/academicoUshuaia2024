@@ -116,6 +116,74 @@
 
   }
 
+  function juntaSpinnerEsUrlDescarga(url) {
+
+    if (!url) return false;
+
+    var u = String(url).toLowerCase();
+
+    return u.indexOf('exportar_') !== -1
+
+      || u.indexOf('/controller/exportar') !== -1
+
+      || u.indexOf('content-disposition') !== -1;
+
+  }
+
+  var _downloadHideTimer = null;
+
+  function juntaSpinnerProgramarOcultarDescarga(maxMs) {
+
+    var limite = maxMs || 8000;
+
+    var ocultado = false;
+
+    function ocultar() {
+
+      if (ocultado) return;
+
+      ocultado = true;
+
+      if (_downloadHideTimer) {
+
+        clearTimeout(_downloadHideTimer);
+
+        _downloadHideTimer = null;
+
+      }
+
+      window.removeEventListener('focus', ocultar);
+
+      document.removeEventListener('visibilitychange', onVisible);
+
+      juntaSpinnerHide();
+
+    }
+
+    function onVisible() {
+
+      if (document.visibilityState === 'visible') {
+
+        setTimeout(ocultar, 250);
+
+      }
+
+    }
+
+    if (_downloadHideTimer) {
+
+      clearTimeout(_downloadHideTimer);
+
+    }
+
+    window.addEventListener('focus', ocultar);
+
+    document.addEventListener('visibilitychange', onVisible);
+
+    _downloadHideTimer = setTimeout(ocultar, limite);
+
+  }
+
 
 
   function juntaSpinnerClearFailsafe() {
@@ -271,6 +339,34 @@
 
   document.addEventListener('DOMContentLoaded', function() {
 
+    document.addEventListener('click', function(e) {
+
+      var link = e.target.closest ? e.target.closest('a') : null;
+
+      if (!link) return;
+
+      if (link.getAttribute('data-toggle') === 'modal') return;
+
+      if (link.classList && link.classList.contains('junta-menu-salir')) return;
+
+      var url = link.getAttribute('href');
+
+      if (!url || url === '#' || url.indexOf('javascript:') === 0) return;
+
+      if (link.getAttribute('target') === '_blank') return;
+
+      if (juntaSpinnerEsUrlDescarga(url)) {
+
+        juntaSpinnerShow('Generando archivo\u2026');
+
+        juntaSpinnerProgramarOcultarDescarga(8000);
+
+        return;
+
+      }
+
+    }, true);
+
     var links = document.querySelectorAll('#menu_gral a, #menu_gral2 a');
 
     for (var i = 0; i < links.length; i++) {
@@ -284,6 +380,14 @@
         var url = this.getAttribute('href');
 
         if (!url || url === '#' || url.indexOf('javascript:') === 0) return;
+
+        if (this.getAttribute('target') === '_blank') return;
+
+        if (juntaSpinnerEsUrlDescarga(url)) {
+
+          return;
+
+        }
 
         juntaSpinnerShow('Cargando\u2026');
 
