@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../seguridad_requiere_login.php';
 // verifica y vincula legajo
 // verifica_legajo.php
 if (isset($_POST['legajo'])) {

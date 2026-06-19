@@ -1,0 +1,387 @@
+/**
+ * Configuración de Listado (PDF) — diseño v2 (Pasos 1, 2 y 3)
+ * Revertir: ListarListadosDeDocentes.php → $LLD_CONFIG_UI_V2 = false
+ */
+.lld-v2-shell {
+  --lld-primary: #004481;
+  --lld-primary-light: #2698f3;
+  --lld-muted: #6b7280;
+  --lld-surface: #f3f5f9;
+  --lld-card: #ffffff;
+  --lld-border: rgba(15, 23, 42, 0.08);
+  --lld-radius: 14px;
+  --lld-shadow: 0 10px 36px rgba(15, 23, 42, 0.08);
+  background: var(--lld-surface);
+  margin: 0 auto 24px;
+  padding: clamp(1.25rem, 2.5vw, 2rem) clamp(10px, 2vw, 18px) clamp(1.5rem, 2.5vw, 2rem);
+  border-radius: var(--lld-radius);
+  box-sizing: border-box;
+  max-width: min(1100px, calc(100vw - 12px));
+}
+
+.lld-v2-shell .lld-v2-card {
+  background: var(--lld-card);
+  border: 1px solid var(--lld-border);
+  border-radius: 12px;
+  box-shadow: var(--lld-shadow);
+  padding: clamp(1.25rem, 2.5vw, 1.85rem) clamp(1.1rem, 2.5vw, 1.75rem);
+}
+
+.lld-v2-header {
+  text-align: center;
+  margin-bottom: clamp(1.1rem, 2vw, 1.5rem);
+  padding-bottom: clamp(0.75rem, 1.4vw, 1rem);
+  border-bottom: 1px solid rgba(38, 152, 243, 0.2);
+}
+
+.lld-v2-title {
+  display: inline-block;
+  margin: 0 0 0.45rem;
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: clamp(1.55rem, 2.8vw, 2rem);
+  font-weight: 700;
+  color: var(--lld-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  padding-bottom: 0.4rem;
+  border-bottom: 4px solid var(--lld-primary-light);
+}
+
+.lld-v2-subtitle {
+  margin: 0.6rem auto 0;
+  max-width: 40rem;
+  font-size: clamp(0.92rem, 1.35vw, 1.05rem);
+  color: var(--lld-muted);
+  line-height: 1.5;
+}
+
+.lld-v2-section-title {
+  margin: 0 0 1rem;
+  padding-bottom: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1e40af;
+  border-bottom: 2px solid rgba(38, 152, 243, 0.22);
+}
+
+.lld-v2-shell .lld-v2-modalidad-wrap {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.lld-v2-shell #codmod_input.centered-input {
+  display: block;
+  width: min(320px, 100%);
+  margin: 0 auto 12px;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.lld-v2-shell #codmod_input.centered-input:focus {
+  border-color: var(--lld-primary-light) !important;
+  box-shadow: 0 0 0 3px rgba(38, 152, 243, 0.15);
+  outline: none;
+}
+
+.lld-v2-shell #modalidad_select,
+.lld-v2-shell .materialize-select,
+.lld-v2-shell .materialize-select2,
+.lld-v2-shell .materialize-select3,
+.lld-v2-shell .materialize-select33,
+.lld-v2-shell .materialize-select4 {
+  min-height: 40px;
+  border-radius: 8px !important;
+  border-color: #d1d5db !important;
+}
+
+.lld-v2-shell .select2-container {
+  max-width: 100%;
+}
+
+.lld-v2-shell .responsive-table {
+  width: 100%;
+  border: none !important;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  margin: 0.5rem 0 1rem;
+}
+
+.lld-v2-shell .responsive-table td {
+  padding: 8px 10px !important;
+  vertical-align: middle;
+  border: none !important;
+  background: transparent !important;
+  font-size: 14px;
+  color: #374151;
+}
+
+.lld-v2-shell .responsive-table tr {
+  background: transparent !important;
+}
+
+.lld-v2-shell .responsive-table label,
+.lld-v2-shell .responsive-table b {
+  font-weight: 600;
+  color: #374151;
+}
+
+.lld-v2-shell .materialize-input1,
+.lld-v2-shell .materialize-input3 {
+  min-height: 38px;
+  padding: 6px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.lld-v2-shell .materialize-input3 {
+  width: 100%;
+  max-width: 100%;
+}
+
+.lld-v2-shell .materialize-input1:focus,
+.lld-v2-shell .materialize-input3:focus {
+  border-color: var(--lld-primary-light);
+  box-shadow: 0 0 0 3px rgba(38, 152, 243, 0.12);
+  outline: none;
+}
+
+.lld-v2-options-block {
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.lld-v2-options-block hr {
+  margin: 1rem 0;
+  border-color: #e2e8f0;
+}
+
+.lld-v2-shell .form-check-group {
+  margin-bottom: 0.55rem;
+  text-align: left !important;
+}
+
+.lld-v2-shell .form-check-label {
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.lld-v2-shell .form-check-input {
+  position: static !important;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.lld-v2-submit-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 1.25rem 0 0.5rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(38, 152, 243, 0.15);
+}
+
+.lld-v2-submit-wrap .lld-v2-submit-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 180px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  margin: 0 !important;
+  padding: 0 24px !important;
+  border-radius: 10px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 14px rgba(38, 152, 243, 0.25);
+  position: static !important;
+}
+
+.lld-v2-submit-wrap .lld-v2-submit-btn:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 6px 18px rgba(38, 152, 243, 0.3);
+}
+
+.lld-v2-shell .container {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* —— Paso 3: paneles, opciones y listados provinciales —— */
+.lld-v2-section > br {
+  display: none;
+}
+
+.lld-v2-block-title {
+  margin: 0 0 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1e40af;
+}
+
+.lld-v2-fields-panel .materialize-select33,
+.lld-v2-fields-panel .materialize-select3,
+.lld-v2-fields-panel .materialize-select4,
+.lld-v2-fields-panel #localidad,
+.lld-v2-fields-panel #tipoc {
+  width: 100% !important;
+  max-width: 100%;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  padding: 8px 10px !important;
+  font-size: 14px !important;
+  min-height: 40px;
+  box-sizing: border-box;
+}
+
+.lld-v2-select-wrap .materialize-select2 {
+  width: 100% !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  padding: 8px 10px !important;
+  text-align: left !important;
+  margin: 0 !important;
+}
+
+.lld-v2-fields-panel {
+  margin: 0.75rem 0 1.25rem;
+  padding: 1.1rem 1.15rem;
+  background: #fafbfc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+.lld-v2-select-wrap {
+  max-width: min(520px, 100%);
+  margin: 0 auto 1.35rem;
+}
+
+.lld-v2-select-wrap #modalidad_select {
+  width: 100% !important;
+}
+
+.lld-v2-shell .select2-container--default .select2-selection--single {
+  min-height: 42px !important;
+  height: 42px !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.lld-v2-shell .select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 40px !important;
+  padding-left: 12px !important;
+  color: #374151 !important;
+  font-size: 14px !important;
+}
+
+.lld-v2-shell .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 40px !important;
+}
+
+.lld-v2-shell .select2-container--default.select2-container--focus .select2-selection--single,
+.lld-v2-shell .select2-container--default.select2-container--open .select2-selection--single {
+  border-color: var(--lld-primary-light) !important;
+  box-shadow: 0 0 0 3px rgba(38, 152, 243, 0.12);
+}
+
+.lld-v2-fields-panel .responsive-table {
+  margin: 0;
+}
+
+.lld-v2-fields-panel .responsive-table td[colspan="2"],
+.lld-v2-fields-panel .responsive-table td:first-child:last-child {
+  display: block;
+  width: 100% !important;
+}
+
+.lld-v2-fields-panel #titulo,
+.lld-v2-fields-panel #subtitulo,
+.lld-v2-fields-panel #disposicion,
+.lld-v2-fields-panel #anexo,
+.lld-v2-fields-panel #establecimiento_data select.materialize-select4,
+.lld-v2-fields-panel select[name='nomdep2'].materialize-select4 {
+  width: 50% !important;
+  max-width: 50%;
+}
+
+.lld-v2-options-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.lld-v2-options-block .form-check-group {
+  padding: 0.45rem 0.55rem;
+  border-radius: 8px;
+  transition: background-color 0.15s ease;
+}
+
+.lld-v2-options-block .form-check-group:hover {
+  background: rgba(38, 152, 243, 0.06);
+}
+
+.lld-v2-provincial-block {
+  margin-top: 0.75rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed #cbd5e1;
+}
+
+.lld-v2-provincial-block .materialize-select,
+.lld-v2-provincial-block select[name='nomdep'] {
+  width: 100% !important;
+  max-width: 100%;
+  min-height: 42px;
+  margin-top: 0.35rem;
+  font-size: 14px;
+}
+
+.lld-v2-field-hint {
+  display: block;
+  margin: 0.35rem 0 0;
+  font-size: 12px;
+  color: var(--lld-muted);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .lld-v2-shell .responsive-table td {
+    display: block;
+    width: 100% !important;
+  }
+
+  .lld-v2-fields-panel #titulo,
+  .lld-v2-fields-panel #subtitulo,
+  .lld-v2-fields-panel #disposicion,
+  .lld-v2-fields-panel #anexo,
+  .lld-v2-fields-panel #establecimiento_data select.materialize-select4,
+  .lld-v2-fields-panel select[name='nomdep2'].materialize-select4 {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  .lld-v2-submit-wrap .lld-v2-submit-btn {
+    width: 100%;
+    max-width: 320px;
+  }
+}

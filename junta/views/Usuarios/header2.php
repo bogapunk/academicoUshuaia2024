@@ -1,3 +1,7 @@
+﻿<?php
+require_once __DIR__ . '/../seguridad_rol.php';
+require_once __DIR__ . '/../seguridad_requiere_login.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +9,7 @@
   <title>Agencia de Innovación</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
@@ -147,56 +151,20 @@
       background: #8AA9B8;
     }
 
-    #preload-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(255, 255, 255, 0.95);
-      z-index: 9999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column; /* Apila loader y texto verticalmente */
-    }
-
-    .loader {
-      border: 8px solid #f3f3f3;
-      border-top: 8px solid #3498db;
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      animation: spin 1s linear infinite;
-    }
-
-    .loading-text {
-      margin-top: 20px;
-      font-size: 18px;
-      color: #333;
-      font-family: 'Roboto', sans-serif;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
   </style>
+  <link rel="stylesheet" href="../../aesthetic-polish.css" type="text/css" media="all" />
 </head>
 
 <body>
+<?php include __DIR__ . '/../../spinner-global-include.php'; ?>
+<?php include __DIR__ . '/../../swal-global-include.php'; ?>
 
-<!-- Preloader -->
-<div id="preload-overlay">
-    <div class="loader"></div>
-    <p class="loading-text">Cargando...</p>
-  </div>
+  <div id="contenido">
 
-  <!-- Contenido oculto hasta que termine la carga -->
-  <div id="contenido" style="display:none;">
-
-    <!-- Cabecera -->
-    <center><img src="../../imagenes/aif-logo.png" width="400" height="100" alt="Logo Agencia"></center>
+    <?php
+    $JUNTA_CABECERA_IMG = '../../';
+    include __DIR__ . '/../../cabecera_institucional.php';
+    ?>
 
     <!-- Menú -->
     <div class="main">
@@ -217,7 +185,7 @@
               <a href="#" class="btn btn-primary">Legajos</a>
               <ul>
                 <li><a href="../ListadoDeDocentes/ListarListadosDeDocentes.php">Listado de Docentes</a></li>
-                <li><a href="../Docentes/ListarDocentes.php">Editar Docentes</a></li>
+                <li><a href="../Docentes/ListarDocentes.php">Docentes</a></li>
                 <li><a href="../../controller/exportar_docentes_especiales.php">Listado Docentes Especial (Temporal)</a></li>
                 <li><a href="../../controller/exportar_docentes_especiales_SinTitulares.php">Listado Especial SIN Titulares</a></li>
                 <li><a href="../../controller/exportar_docentes_especiales_completos.php">Listado Esp. Interinos, Supl. y Titulares</a></li>
@@ -231,23 +199,18 @@
                 <li><a href="../configuracionListados/listarConfiguracionListados.php">Configuración Listados</a></li>
               </ul>
             </li>
-            <li><a href="ListarUsuarios.php" class="btn btn-primary">Usuarios</a></li>
+            <?php
+            $juntaNavRel = '../';
+            $juntaNavUsuariosHref = 'ListarUsuarios.php';
+            require __DIR__ . '/../inc/menu_usuario_nav.php';
+            ?>
           </ul>
         </nav>
       </div>
     </div>
 
-  </div> <!-- fin contenido -->
+  <!-- El cierre de #contenido y el pie están en footer2.php (contenido de la página entre el menú y el pie) -->
 
-  <!-- Script para preloader -->
-  <script>
-    window.addEventListener("load", function () {
-      setTimeout(function () {
-        document.getElementById("preload-overlay").style.display = "none";
-        document.getElementById("contenido").style.display = "block";
-      }, 3000);
-    });
-  </script>
 
   <!-- Script para inactividad -->
   <script>
@@ -293,13 +256,9 @@
       window.location.href = base_url;
     }
 
-    document.onmousemove = iniciarContadorInactividad;
-    document.onkeypress = iniciarContadorInactividad;
-    document.onclick = iniciarContadorInactividad;
+    document.addEventListener('mousemove', iniciarContadorInactividad);
+    document.addEventListener('keypress', iniciarContadorInactividad);
+    document.addEventListener('click', iniciarContadorInactividad);
 
     iniciarContadorInactividad();
   </script>
- 
-
-</body>
-</html>

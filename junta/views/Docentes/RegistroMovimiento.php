@@ -386,8 +386,181 @@ tr:nth-child(even) {
             display: none;
         }
 
+/* --- Movimiento Nuevo: layout por bloques (coherente con docentes) --- */
+.mov-shell {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 12px 12px 40px;
+  box-sizing: border-box;
+}
 
+.mov-page-title {
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #1f2937;
+  text-align: center;
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(38, 152, 243, 0.35);
+  letter-spacing: 0.03em;
+}
 
+.mov-section-title {
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #1e40af;
+  margin: 24px 0 14px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.mov-subsec {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #374151;
+  margin: 18px 0 10px;
+  clear: both;
+}
+
+.mov-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  padding: 18px 16px 20px;
+  margin-bottom: 20px;
+}
+
+.mov-card .table {
+  margin-bottom: 0;
+}
+
+.mov-docente-resumen td,
+.mov-docente-resumen th {
+  font-weight: 600;
+  font-size: 15px;
+}
+.mov-docente-resumen thead th {
+  font-weight: 700;
+}
+
+.mov-docente-actions {
+  text-align: right;
+  vertical-align: middle !important;
+}
+
+.mov-field-label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.mov-carga-movimiento .form-group {
+  margin-bottom: 14px;
+}
+
+.mov-carga-fila-mixta {
+  margin-bottom: 8px;
+}
+
+.mov-carga-fila-mixta > [class*="col-"] {
+  margin-bottom: 8px;
+}
+
+.mov-carga-movimiento .form-control {
+  border-radius: 6px;
+  min-height: 38px;
+  font-size: 15px;
+}
+
+.mov-puntajes-panel {
+  margin-top: 20px;
+  padding: 16px 14px 20px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.mov-puntajes-panel h3.mov-puntajes-heading {
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.mov-puntajes-inner .form-group {
+  margin-bottom: 12px;
+}
+
+.mov-input-num,
+.mov-puntajes-panel .mov-input-num {
+  max-width: 140px;
+  width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.mov-puntajes-panel .form-control.mov-input-num {
+  max-width: 140px;
+}
+
+.mov-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0 16px;
+  padding-top: 18px;
+  border-top: 1px solid #e5e7eb;
+}
+
+#antartidaFields.mov-antartida-box {
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px dashed #94a3b8;
+}
+
+@media (max-width: 767px) {
+  .mov-shell {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .mov-input-num,
+  .mov-puntajes-panel .form-control.mov-input-num {
+    max-width: 100%;
+  }
+  .mov-docente-actions {
+    text-align: left;
+  }
+}
+
+.mov-puntajes-panel input.materialize-input3,
+.mov-puntajes-panel select.materialize-input3 {
+  width: 100%;
+  max-width: 140px;
+  min-height: 36px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  padding: 4px 8px;
+  box-sizing: border-box;
+  background: #fff;
+  font-size: 15px;
+}
 
 </style>
 <link rel="icon" type="./image/png" href="./imagenes/escudo-32x32.png">
@@ -404,8 +577,7 @@ tr:nth-child(even) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
-      <!-- sweeteralert2 -->
-      <link rel="stylesheet" href="../Assets/swal2/sweetalert2.min.css" type="text/css" />
+      <!-- SweetAlert2 CSS now loaded globally via header -->
 
       <!--aca esta las extensiones para el paginado de la las tablas --->
   
@@ -423,10 +595,8 @@ tr:nth-child(even) {
 
 </head>
 <body>
-  <div class="container">
-   <center> <h1><u>Movimiento Nuevo</u></h1></center>
-  <br>
-  <br>
+  <div class="container mov-shell">
+   <h1 class="mov-page-title">Movimiento nuevo</h1>
 
 <?php
 // Te recomiendo utilizar esta conexión, la que utilizas ya no es la recomendada.
@@ -519,8 +689,9 @@ if ($stmt === false) {
 }
 
 if (sqlsrv_has_rows($stmt)) {
-    echo "<table border='1'>";
-    echo "<tr><th>Legajo</th><th>Apellido y Nombre</th><th>Detalle</th></tr>";
+    echo "<h2 class='mov-section-title'>Datos del docente</h2>";
+    echo "<div class='mov-card'><table class='table table-bordered table-condensed mov-docente-resumen'>";
+    echo "<thead><tr><th>Legajo</th><th>Apellido y Nombre</th><th class='mov-docente-actions'>Detalle</th></tr></thead><tbody>";
 
     while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
         $legajo = $row['legajo'];
@@ -543,34 +714,21 @@ if (sqlsrv_has_rows($stmt)) {
         echo "<tr>";
         echo "<td>{$legajo}</td>";
         echo "<td>{$apellidoynombre}</td>";
-        echo "<td><button type='button' onclick='showDetails(\"$legajo\")' class='detalle-button' title='Detalle del Docente'> <i class='glyphicon glyphicon-list-alt'></i> Detalle</button></td>";
+        echo "<td class='mov-docente-actions'><button type='button' onclick='showDetails(\"$legajo\")' class='btn btn-warning btn-sm detalle-button' title='Detalle del Docente'><i class='glyphicon glyphicon-list-alt'></i> Detalle</button></td>";
         echo "</tr>";
 
-        // Detalles del docente (oculto por defecto)
-        echo "<tr id='details_$legajo' style='display:none'>";
-        echo "<td colspan='3'><b>Detalles del Docente</b></td>";
+        echo "<tr id='details_$legajo' style='display:none' class='active'>";
+        echo "<td colspan='3'><strong>Detalles del docente</strong></td>";
         echo "</tr>";
-        echo "<tr id='details_info_$legajo' style='display:none'>";
-        echo "<td>Fecha Nac.:</td><td colspan='2'>{$fechanacim}</td>";
-        echo "</tr>";
-        echo "<tr id='details_info_$legajo' style='display:none'>";
-        echo "<td>Tít. Básico:</td><td colspan='2'>{$titulobas}</td>";
-        echo "</tr>";
-        echo "<tr id='details_info_$legajo' style='display:none'>";
-        echo "<td>Promedio:</td><td colspan='2'>{$promediot}</td>";
-        echo "</tr>";
-        echo "<tr id='details_info_$legajo' style='display:none'>";
-        echo "<td>Otro título:</td><td colspan='2'>{$otrostit}</td>";
-        echo "</tr>";
-        echo "<tr id='details_info_$legajo' style='display:none'>";
-        echo "<td>Cargo Docente:</td><td colspan='2'>{$cargosdocentes}</td>";
-        echo "</tr>";
-        echo "<tr id='details_info_$legajo' style='display:none'>";
-        echo "<td>Residencia:</td><td colspan='2'>{$fingreso}</td>";
-        echo "</tr>";
+        echo "<tr data-detail-info='$legajo' style='display:none'><td>Fecha Nac.:</td><td colspan='2'>" . htmlspecialchars((string)$fechanacim, ENT_QUOTES, 'UTF-8') . "</td></tr>";
+        echo "<tr data-detail-info='$legajo' style='display:none'><td>Tít. Básico:</td><td colspan='2'>" . htmlspecialchars((string)$titulobas, ENT_QUOTES, 'UTF-8') . "</td></tr>";
+        echo "<tr data-detail-info='$legajo' style='display:none'><td>Promedio:</td><td colspan='2'>" . htmlspecialchars((string)$promediot, ENT_QUOTES, 'UTF-8') . "</td></tr>";
+        echo "<tr data-detail-info='$legajo' style='display:none'><td>Otro título:</td><td colspan='2'>" . htmlspecialchars((string)$otrostit, ENT_QUOTES, 'UTF-8') . "</td></tr>";
+        echo "<tr data-detail-info='$legajo' style='display:none'><td>Cargo docente:</td><td colspan='2'>" . htmlspecialchars((string)$cargosdocentes, ENT_QUOTES, 'UTF-8') . "</td></tr>";
+        echo "<tr data-detail-info='$legajo' style='display:none'><td>Residencia:</td><td colspan='2'>" . htmlspecialchars((string)$fingreso, ENT_QUOTES, 'UTF-8') . "</td></tr>";
     }
 
-    echo "</table>";
+    echo "</tbody></table></div>";
 } else {
     echo "No se encontraron docentes en la base de datos.";
 }
@@ -584,16 +742,17 @@ sqlsrv_close($conn);
 <script type="text/javascript">
 function showDetails(legajo) {
   var detailsElement = document.getElementById("details_" + legajo);
-  var detailsInfoElements = document.querySelectorAll("[id^='details_info_" + legajo + "']");
-  if (detailsElement.style.display === "none") {
-    detailsElement.style.display = "table-row"; // Mostrar la fila de detalles
+  var detailsInfoElements = document.querySelectorAll("[data-detail-info='" + legajo + "']");
+  if (!detailsElement) { return; }
+  if (detailsElement.style.display === "none" || detailsElement.style.display === "") {
+    detailsElement.style.display = "table-row";
     detailsInfoElements.forEach(function(item) {
-      item.style.display = "table-row"; // Mostrar las filas de detalles adicionales
+      item.style.display = "table-row";
     });
   } else {
-    detailsElement.style.display = "none"; // Ocultar la fila de detalles
+    detailsElement.style.display = "none";
     detailsInfoElements.forEach(function(item) {
-      item.style.display = "none"; // Ocultar las filas de detalles adicionales
+      item.style.display = "none";
     });
   }
 }
@@ -602,32 +761,15 @@ function showDetails(legajo) {
 <script>
         function habilitarTipo(value) {
             var fechaCampo = document.getElementById('fechaCampo');
-            var observacionTipo = document.getElementById("observacionTipo");
-            var horasTipo = document.getElementById("horasTipo");
-            var thObservaciones = document.getElementById("thObservaciones");
-            var thHoras = document.getElementById("thHoras");
-            
-          
-            // Mostrar/ocultar campos según el valor del select
-            if (value === 'permanente') {
-                fechaCampo.style.display = 'table-row';
-            } else {
-                fechaCampo.style.display = 'none';
+            var movRowTitularExtras = document.getElementById('movRowTitularExtras');
+
+            if (fechaCampo) {
+                fechaCampo.style.display = (value === 'permanente') ? 'block' : 'none';
             }
 
-            if (value === "titulares") {
-                thObservaciones.style.display = "table-row";
-                thHoras.style.display = "table-row";
-                observacionTipo.style.display = "table-cell";
-                horasTipo.style.display = "table-cell";
-            } else {
-                thObservaciones.style.display = "none";
-                thHoras.style.display = "none";
-                observacionTipo.style.display = "none";
-                horasTipo.style.display = "none";
+            if (movRowTitularExtras) {
+                movRowTitularExtras.style.display = (value === "titulares") ? 'block' : 'none';
             }
-
-           
         }
 </script>
 <?php
@@ -669,9 +811,9 @@ sqlsrv_free_stmt($stmt);
 sqlsrv_close($conn);
 ?>
 
-<center><h4><u>Carga de Movimiento</u></h4></center>
+<h2 class="mov-section-title">Carga de Movimiento</h2>
 <form id="myForm" action="MovimientoNuevo.php" method="post" > 
-<div id="antartidaFields" style="display: none;">
+<div id="antartidaFields" class="mov-antartida-box" style="display: none;">
     <label for="legajo">Legajo viculado:</label>
     <input type="text" name="legajo2" id="legajo" placeholder="Ingrese legajo" />
 
@@ -684,22 +826,26 @@ sqlsrv_close($conn);
     <input type="number" name="hijos" id="hijos" placeholder="cantidad de hijos" min="0" style="width: 80px;"  />
 </div>
 <input type="hidden" name="legajo" value="<?php echo htmlspecialchars($legajo); ?>">
-    <table border='2'>
-        <tr>
-            <th>Curso: &nbsp &nbsp;<input type="text" id="anodoc" class="materialize-input1" name="anodoc"  required></th>         
-        </tr>
-        <tr>
-           <!-- <th>Cod.Mod: &nbsp;<input type="text" id="codmod" class="materialize-input1" name="codmod"  required></th>-->
-           
-         <tr>
-         <th>Cód. Mod: 
-    <input type="text" name="codmod" id="codmod" 
-           value="<?php echo isset($row['codmod']) ? htmlspecialchars($row['codmod'], ENT_QUOTES, 'UTF-8') : ''; ?>" 
-           size="8" onchange="fetchModalidad()">
-</th>
-
-<th>Modalidad:
-    <select name="modalidad" id="modalidad" style="width: 331px;">
+<div class="mov-card mov-carga-movimiento">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="mov-field-label" for="anodoc">Curso</label>
+                <input type="text" id="anodoc" class="form-control" name="anodoc" required>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="mov-field-label" for="codmod">Cód. mod.</label>
+                <input type="text" name="codmod" id="codmod" class="form-control"
+                       value="<?php echo isset($row['codmod']) ? htmlspecialchars($row['codmod'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                       onchange="fetchModalidad()">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="mov-field-label" for="modalidad">Modalidad</label>
+                <select name="modalidad" id="modalidad" class="form-control">
         <?php if (!empty($modalidades)): ?>
             <?php foreach ($modalidades as $modalidad): ?>
                 <option value="<?php echo htmlspecialchars($modalidad, ENT_QUOTES, 'UTF-8'); ?>" 
@@ -710,8 +856,10 @@ sqlsrv_close($conn);
         <?php else: ?>
             <option value="">No hay modalidades disponibles</option>
         <?php endif; ?>
-    </select>
-</th>
+                </select>
+            </div>
+        </div>
+    </div>
 <!-- JavaScript para dejar selccionado el legajo 2 -->
 <script>
 document.getElementById("checkboxAntartida").addEventListener("change", function() {
@@ -759,38 +907,79 @@ function fetchModalidad() {
                 option.selected = true; // Preseleccionar la opción
                 modalidadSelect.appendChild(option);
             } else {
-                alert(data.error || 'No se encontró la modalidad.');
+                juntaError('Error', data.error || 'No se encontró la modalidad.');
             }
         })
         .catch(error => {
             console.error('Error en la solicitud:', error);
-            alert('Hubo un error al procesar la solicitud.');
+            juntaError('Error', 'Hubo un error al procesar la solicitud.');
         });
     } else {
-        alert('Por favor, ingrese un código de modalidad válido.');
+        juntaAlert('Por favor, ingrese un código de modalidad válido.', 'warning');
     }
 }
 </script>
-              </select></th>
-                <td> <b>Tipo Listado:</b>
-                <select name="tipoc" id="tipoc" class="materialize-select4" onchange="habilitarTipo(this.value)" style='width: 150px;'>
-                          <option value=""><strong>Seleccione</strong></option>
-                          <option value="permanente"><strong>Permanente</strong></option>
-                          <option value="titulares"><strong>Titulares</strong></option>
-                          <option value="transitorio"><strong>Interinatos y Suplencias</strong></option>
-                          <option value="concurso"><strong>Concurso de Titularidad</strong></option>
-                      </select>
-  
-                 </td>
-            </th>
-        </tr>
-        <tr>    
-                      <tr>
-        <th id="fechaCampo"  style="display: none;">Fecha:&nbsp;&nbsp;<input type="date" id="fecha" name="fecha" class="materialize-input2"></th>
-        </tr>
 
-<th id='thObservaciones'  style='display: none;'>Observaciones: <input type="text" id="obs" class="materialize-input_obs" name="obs" ></th>
-<th id='thHoras' style='display: none;'>Horas: <input type="number" id="horas" class="materialize-input1" name="horas" style='width: 50px;'></th>
+<?php
+// Localidades (codloc): misma lógica que antes; $conn queda abierto para motivos de exclusión más abajo
+$serverName = "10.1.9.113";
+$connectionOptions = array(
+    "Database" => "junta",
+    "Uid" => "SA",
+    "PWD" => 'Davinci2024#',
+    "TrustServerCertificate" => true,
+    "CharacterSet" => "UTF-8"
+);
+$conn = sqlsrv_connect($serverName, $connectionOptions);
+if ($conn === false) {
+    die(print_r(sqlsrv_errors(), true));
+}
+$queryLocalidades = "SELECT DISTINCT codloc FROM _junta_movimientos";
+$stmtLocalidades = sqlsrv_query($conn, $queryLocalidades);
+if ($stmtLocalidades === false) {
+    die(print_r(sqlsrv_errors(), true));
+}
+$localidades = array();
+while ($rowLocalidad = sqlsrv_fetch_array($stmtLocalidades, SQLSRV_FETCH_ASSOC)) {
+    $localidades[] = $rowLocalidad['codloc'];
+}
+$nombreLocalidades = array(
+    'RGD' => 'Rio Grande',
+    'USH' => 'Ushuaia',
+    'TOL' => 'Tolhuin',
+    'ANT' => 'Antartida'
+);
+$localidades = ['RGD', 'USH', 'TOL', 'ANT'];
+sqlsrv_free_stmt($stmtLocalidades);
+?>
+
+    <div class="row mov-carga-fila-mixta">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="mov-field-label" for="tipoc">Tipo listado</label>
+                <select name="tipoc" id="tipoc" class="form-control" onchange="habilitarTipo(this.value)">
+                          <option value="">Seleccione</option>
+                          <option value="permanente">Permanente</option>
+                          <option value="titulares">Titulares</option>
+                          <option value="transitorio">Interinatos y Suplencias</option>
+                          <option value="concurso">Concurso de Titularidad</option>
+                      </select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="mov-field-label" for="selectLocalidad">Localidad</label>
+                <select name="codloc" class="form-control" id="selectLocalidad">
+                    <option value="">Seleccione</option>
+                    <?php
+                    foreach ($localidades as $localidad) {
+                        $nombreLocalidad = isset($nombreLocalidades[$localidad]) ? $nombreLocalidades[$localidad] : $localidad;
+                        echo "<option value='" . htmlspecialchars($localidad, ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars($nombreLocalidad, ENT_QUOTES, 'UTF-8') . "</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
 
                 
 
@@ -806,11 +995,11 @@ $connectionOptions = array(
     "CharacterSet" => 'UTF-8'
 );
 
-// Establecer la conexión
-$conn = sqlsrv_connect($serverName, $connectionOptions);
+// Conexión dedicada (no reutilizar $conn de localidades/motivos)
+$connEst = sqlsrv_connect($serverName, $connectionOptions);
 
 // Comprobar la conexión
-if ($conn === false) {
+if ($connEst === false) {
     die(print_r(sqlsrv_errors(), true));
 }
 
@@ -833,15 +1022,14 @@ ORDER BY
     ),
     coddep;
 ";
-$stmt = sqlsrv_query($conn, $queryEstablecimientos);
+$stmt = sqlsrv_query($connEst, $queryEstablecimientos);
 
 if ($stmt === false) {
     die(print_r(sqlsrv_errors(), true));
 }
 
-// Muestra el campo de selección con los nombres de los establecimientos
-echo "<th id='thEstablecimiento' style='display:none;'>Establecimiento:
-    <select name='establecimiento' id='establecimiento' class='materialize-select4'>";
+// Muestra el campo de selección con los nombres de los establecimientos (tercera columna de la misma fila que tipo listado y localidad)
+echo "<div class='col-sm-4'><div id='thEstablecimiento' class='form-group' style='display:none;'><label class='mov-field-label' for='establecimiento'>Establecimiento</label><select name='establecimiento' id='establecimiento' class='form-control'>";
 
 // Itera sobre los resultados de la consulta
 while ($rowEstablecimiento = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
@@ -862,15 +1050,13 @@ while ($rowEstablecimiento = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
     }
 }
 
-echo "</select></th>";
+echo "</select></div></div>";
 
 
 
-// Liberar el statement y cerrar la conexión
+// Liberar el statement y cerrar la conexión de establecimientos
 sqlsrv_free_stmt($stmt);
-sqlsrv_close($conn);
-
-echo "</select></th>"; // Cierra el campo de selección'''''''
+sqlsrv_close($connEst);
 
 
 // Campo oculto para enviar el coddep seleccionado
@@ -887,14 +1073,46 @@ function updateCoddep() {
 }
 
 // Actualiza el valor al cambiar la selección
-document.getElementById('establecimiento').addEventListener('change', updateCoddep);
+var _estSel = document.getElementById('establecimiento');
+if (_estSel) {
+  _estSel.addEventListener('change', updateCoddep);
+}
 
 // Inicializa el valor al cargar la página
 document.addEventListener('DOMContentLoaded', function() {
-  updateCoddep();
+  if (document.getElementById('establecimiento')) {
+    updateCoddep();
+  }
 });
 </script>";
+echo '</div>';
+?>
 
+    <div class="row" id="fechaCampo" style="display: none;">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="mov-field-label" for="fecha">Fecha</label>
+                <input type="date" id="fecha" name="fecha" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="movRowTitularExtras" style="display: none;">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="mov-field-label" for="obs">Observaciones</label>
+                <input type="text" id="obs" class="form-control" name="obs">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="mov-field-label" for="horas">Horas</label>
+                <input type="number" id="horas" class="form-control mov-input-num" name="horas">
+            </div>
+        </div>
+    </div>
+
+<?php
 // Verificar si el formulario se ha enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Obtener el valor seleccionado del campo de selección 'establecimiento'
@@ -951,69 +1169,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
 
-<?php
-// Consulta SQL para obtener los valores únicos de codloc desde _junta_movimientos
-// Configuración de la conexión a SQL Server
-$serverName = "10.1.9.113"; // Cambia esto si tu servidor no es localhost
-$connectionOptions = array(
-    "Database" => "junta",
-    "Uid" => "SA", // Cambia esto a tu usuario real
-    "PWD" => 'Davinci2024#',
-    "TrustServerCertificate"=>True,// Cambia esto a tu contraseña real
-    "CharacterSet" => "UTF-8" // para que lea los acentos y ñ
-);
-
-// Establecer la conexión
-$conn = sqlsrv_connect($serverName, $connectionOptions);
-
-// Comprobar la conexión
-if ($conn === false) {
-    die(print_r(sqlsrv_errors(), true));
-}
-
-// Consulta SQL para obtener las localidades distintas
-$queryLocalidades = "SELECT DISTINCT codloc FROM _junta_movimientos";
-$stmtLocalidades = sqlsrv_query($conn, $queryLocalidades);
-
-if ($stmtLocalidades === false) {
-    die(print_r(sqlsrv_errors(), true));
-}
-
-$localidades = array(); // Array para almacenar los códigos de localidades
-
-// Guardar los códigos de localidades en un array
-while ($rowLocalidad = sqlsrv_fetch_array($stmtLocalidades, SQLSRV_FETCH_ASSOC)) {
-    $localidades[] = $rowLocalidad['codloc'];
-    
-}
-
-// Nombres de las localidades (puedes modificar según tus necesidades)
-$nombreLocalidades = array(
-    'RGD' => 'Rio Grande',
-    'USH' => 'Ushuaia',
-    'TOL' => 'Tolhuin',
-    'ANT' => 'Antartida'
-);
-// Asegúrate de que el array $localidades esté correctamente definido
-$localidades = ['RGD', 'USH', 'TOL', 'ANT'];  // Array de localidades, incluye 'ANT' para Antartida
-
-?>
-
-<th>Localidad:
-    <select name='codloc' class="materialize-select3" style='width: 160px;' id="selectLocalidad">
-        <option value="">Seleccione</option>
-        <?php 
-        foreach ($localidades as $localidad) {
-            $nombreLocalidad = isset($nombreLocalidades[$localidad]) ? $nombreLocalidades[$localidad] : $localidad;
-            echo "<option value='$localidad'>$nombreLocalidad</option>";
-        }
-        ?>
-    </select>
-    
-</th>
-
-
-
 <script>
  document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("selectLocalidad").addEventListener("change", function() {
@@ -1066,10 +1221,9 @@ $localidades = ['RGD', 'USH', 'TOL', 'ANT'];  // Array de localidades, incluye '
 
 
 </script>
-      </th>
 
       <?php
-echo "<th>";
+echo "<div class='row'><div class='col-sm-12'><div class='form-group'>";
 $excluidoSeleccionado = isset($_GET['excluido']) ? $_GET['excluido'] : "23"; // Valor por defecto 23 si no se pasa un valor
 
 // Si no hay valor para 'excluido', el checkbox no está marcado
@@ -1136,24 +1290,26 @@ if ($resultMotivos && sqlsrv_has_rows($resultMotivos)) {
 } else {
     echo "No se encontraron motivos de exclusión en la base de datos.";
 }
-echo "</th>";
-echo "</table>"; // Cierre de la tabla
+echo "</div></div></div></div>";
 ?>
-<!-- HTML para el formulario -->
-
-    <!-- Tabla para Permanente, Concurso, Interino -->
-    <table id="tablaPermanenteConcursoInterino" style="display: none;">
-        <tr>
-            <td>
-            <h3><u>CARGA COMUN</u> </h3>
-              <br>
-                <label for="comun_puntajetotal" style="display: inline-block; width: 225px;">Puntaje Total:</label>
-                <input type='number' id='puntajetotal2' name='puntajetotal2' value='" . htmlspecialchars($row['puntajetotal']) . "' step='0.01' size='5' readonly>
-                <br><br>
+<h2 class="mov-section-title">Carga de puntajes</h2>
+    <div id="tablaPermanenteConcursoInterino" class="mov-puntajes-panel" style="display: none;">
+        <div class="mov-puntajes-inner container-fluid">
+            <h3 class="mov-puntajes-heading">Carga común</h3>
+            <div class="row">
+                <div class="col-sm-6">
+                <div class="form-group">
+                <label class="mov-field-label" for="puntajetotal2">Puntaje total</label>
+                <input type="number" id="puntajetotal2" name="puntajetotal2" value="" step="0.01" class="form-control mov-input-num" readonly>
+                </div>
+                </div>
+            </div>
                 <!-- Título -->
-                
-                <label for="titulo2" style="display: inline-block; width: 225px;">1.- Título:</label>
-                <select id="titulo2" name="titulo2" class="materialize-input3" onchange="validarTitulo(); calcularPuntajeTotal();">
+            <div class="row">
+                <div class="col-sm-6">
+                <div class="form-group">
+                <label class="mov-field-label" for="titulo2">1. Título</label>
+                <select id="titulo2" name="titulo2" class="form-control" onchange="validarTitulo(); calcularPuntajeTotal();">
                 <option value="">Seleccionar</option>
                 <option value="9">9</option>
                 <option value="6">6</option>
@@ -1161,7 +1317,7 @@ echo "</table>"; // Cierre de la tabla
                 <option value="0">0</option>
                 </select>
                 <span id="error-msg-titulo" style="color: red; display: none;">El valor no está dentro de los parámetros permitidos (9, 6, 3, 0).</span>
-                <br>
+                </div></div></div>
 
                 <script>
                 function validarTitulo() {
@@ -1385,9 +1541,8 @@ function validarResidencia() {
                             }
                         }
                   </script>
-            </td>
-        </tr>
-    </table>
+        </div><!-- /.mov-puntajes-inner -->
+    </div><!-- /#tablaPermanenteConcursoInterino -->
 
     
 
@@ -1434,15 +1589,17 @@ function validarResidencia() {
 
 
 
-    <!-- Tabla para Titular -->
-    <table id="tablaTitular" style="display: none;">
-        <tr>
-            <td>
-              <h3><u>CARGA TITULAR</u> </h3>
-              <br>
-                <label for="puntajetotal" style="display: inline-block; width: 225px;">Puntaje Total:</label>
-                <input type='number' id='puntajetotal' name='puntajetotal' value='" . htmlspecialchars($row['puntajetotal']) . "' size='10' readonly>
-                <br><br>
+    <div id="tablaTitular" class="mov-puntajes-panel" style="display: none;">
+        <div class="mov-puntajes-inner container-fluid">
+              <h3 class="mov-puntajes-heading">Carga titular</h3>
+              <div class="row">
+                <div class="col-sm-6">
+                <div class="form-group">
+                <label class="mov-field-label" for="puntajetotal">Puntaje total</label>
+                <input type="number" id="puntajetotal" name="puntajetotal" value="" step="0.01" class="form-control mov-input-num" readonly>
+                </div>
+                </div>
+              </div>
 
                    <!-- Campo: Título -->
                         <label for="titulo" style="display: inline-block; width: 225px;">1.- Título:</label>
@@ -1474,124 +1631,129 @@ function validarResidencia() {
 
                 <label for="servicios" style="display: inline-block; width: 225px;">7.- Servicios:</label>
                 <br>
+                <p class="mov-subsec">Docencia — cargos en establecimientos</p>
 
                 <label for="serv_prov" style="display: inline-block; width: 208px;margin-left: 20px; ">7.1- En la Provincia:</label>
                 <input type="number" id="serviciosprovincia" name="serviciosprovincia"  class="materialize-input3" size="10" step="0.01"  >
                 <br>
 
-                <label for="t_m_seccion" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;">Maestro de Sección:</label>
+                <label for="t_m_seccion" style="display: inline-block; width: 208px;margin-left: 20px;">Maestro de Sección:</label>
                 <input type="number" id="t_m_seccion" name="t_m_seccion"   class="materialize-input3" size="10" step="0.01" >
                 <br>
 
-                <label for="t_m_anio" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Maestro de Año:</label>
+                <label for="t_m_anio" style="display: inline-block; width: 208px;margin-left: 20px; ">Maestro de Año:</label>
                 <input type="number" id="t_m_anio" name="t_m_anio"  class="materialize-input3" size="10" step="0.01" >
                 <br>
 
-                <label for="t_m_grupo" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Maestro de Grupo:</label>
+                <label for="t_m_grupo" style="display: inline-block; width: 208px;margin-left: 20px; ">Maestro de Grupo:</label>
                 <input type="number" id="t_m_grupo" name="t_m_grupo"  class="materialize-input3" size="10" step="0.01"  >
                 <br>
 
-                <label for="t_m_ciclo" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Maestro de Ciclo:</label>
+                <label for="t_m_ciclo" style="display: inline-block; width: 208px;margin-left: 20px; ">Maestro de Ciclo:</label>
                 <input type="number" id="t_m_ciclo" name="t_m_ciclo"  class="materialize-input3" size="10" step="0.01"  >
                 <br>
 
-                <label for="t_m_recupera" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Maestro Recuperador:</label>
+                <label for="t_m_recupera" style="display: inline-block; width: 208px;margin-left: 20px; ">Maestro Recuperador:</label>
                 <input type="number" id="t_m_recupera" name="t_m_recupera"  class="materialize-input3" size="10" step="0.01" >
                 <br>
 
-                <label for="t_m_comple" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Maestro Complementario:</label>
+                <label for="t_m_comple" style="display: inline-block; width: 208px;margin-left: 20px; ">Maestro Complementario:</label>
                 <input type="number" id="t_m_comple" name="t_m_comple"  class="materialize-input3" size="10" step="0.01" >
                 <br>
 
-                <label for="t_m_biblio" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Maestro Bibliotecario:</label>
+                <label for="t_m_biblio" style="display: inline-block; width: 208px;margin-left: 20px; ">Maestro Bibliotecario:</label>
                 <input type="number" id="t_m_biblio" name="t_m_biblio"  class="materialize-input3" size="10" step="0.01" >
                 <br>
 
-                <label for="t_m_gabinete" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Gabinete:</label>
+                <label for="t_m_gabinete" style="display: inline-block; width: 208px;margin-left: 20px; ">Gabinete:</label>
                 <input type="number" id="t_m_gabinete" name="t_m_gabinete"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <hr>
+                <p class="mov-subsec">Secretaría y vice</p>
 
-                <label for="t_m_sec1" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Secretaría 1º:</label>
+                <label for="t_m_sec1" style="display: inline-block; width: 208px;margin-left: 20px; ">Secretaría 1º:</label>
                 <input type="number" id="t_m_sec1" name="t_m_sec1"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="t_m_sec2" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Secretaría 2º:</label>
+                <label for="t_m_sec2" style="display: inline-block; width: 208px;margin-left: 20px; ">Secretaría 2º:</label>
                 <input type="number" id="t_m_sec2" name="t_m_sec2"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="t_m_viced" style="display: inline-block; width: 208px;margin-left: 20px; color:#0000FF;">Vice-Director:</label>
+                <label for="t_m_viced" style="display: inline-block; width: 208px;margin-left: 20px;">Vice-Director:</label>
                 <input type="number" id="t_m_viced" name="t_m_viced"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <hr>
+                <p class="mov-subsec">Dirección</p>
 
-                <label for="t_d_pu" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Director Personal Único:</label>
+                <label for="t_d_pu" style="display: inline-block; width: 208px;margin-left: 20px; ">Director Personal Único:</label>
                 <input type="number" id="t_d_pu" name="t_d_pu"  class="materialize-input3" size="10"step="0.01">
                 <br>
 
-                <label for="t_d_3" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Director de 3º:</label>
+                <label for="t_d_3" style="display: inline-block; width: 208px;margin-left: 20px; ">Director de 3º:</label>
                 <input type="number" id="t_d_3" name="t_d_3"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="t_d_2" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Director de 2º:</label>
+                <label for="t_d_2" style="display: inline-block; width: 208px;margin-left: 20px; ">Director de 2º:</label>
                 <input type="number" id="t_d_2" name="t_d_2"  class="materialize-input3"  size="10" step="0.01">
                 <br>
 
-                <label for="t_d_1" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Director de 1º:</label>
+                <label for="t_d_1" style="display: inline-block; width: 208px;margin-left: 20px; ">Director de 1º:</label>
                 <input type="number" id="t_d_1" name="t_d_1"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="t_d_biblio" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;  ">Director de Biblioteca:</label>
+                <label for="t_d_biblio" style="display: inline-block; width: 208px;margin-left: 20px;  ">Director de Biblioteca:</label>
                 <input type="number" id="t_d_biblio" name="t_d_biblio"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="t_d_gabi" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Director de Gabinete:</label>
+                <label for="t_d_gabi" style="display: inline-block; width: 208px;margin-left: 20px; ">Director de Gabinete:</label>
                 <input type="number" id="t_d_gabi" name="t_d_gabi"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
                 <hr>
+                <p class="mov-subsec">Supervisión</p>
 
-                <label for="t_d_seccoortec" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Secretario Coord. Tec.:</label>
+                <label for="t_d_seccoortec" style="display: inline-block; width: 208px;margin-left: 20px; ">Secretario Coord. Tec.:</label>
                 <input type="number" id="t_d_seccoortec" name="t_d_seccoortec"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="t_d_supsectec" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Supe. Sec. Tec.:</label>
+                <label for="t_d_supsectec" style="display: inline-block; width: 208px;margin-left: 20px; ">Supe. Sec. Tec.:</label>
                 <input type="number" id="t_d_supsectec" name="t_d_supsectec"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="t_d_supesc" style="display: inline-block; width: 208px;margin-left: 20px;color:#0000FF; ">Sup. Escolar:</label>
+                <label for="t_d_supesc" style="display: inline-block; width: 208px;margin-left: 20px; ">Sup. Escolar:</label>
                 <input type="number" id="t_d_supesc" name="t_d_supesc" class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="t_d_supgral" style="display: inline-block; width: 208px;margin-left: 20px; color:#0000FF;">Sup. General:</label>
+                <label for="t_d_supgral" style="display: inline-block; width: 208px;margin-left: 20px;">Sup. General:</label>
                 <input type="number" id="t_d_supgral" name="t_d_supgral"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="t_d_adic" style="display: inline-block; width: 208px; margin-left: 20px; color:#0000FF;">Adic.:</label>
+                <label for="t_d_adic" style="display: inline-block; width: 208px; margin-left: 20px;">Adic.:</label>
                 <input type="number" id="t_d_adic" name="t_d_adic"  class="materialize-input3" size="10"step="0.01">
                 <br>
 
                 <hr>
 
+                <p class="mov-subsec">Otros servicios (grupos A–D)</p>
                 <label for="otrosservicios" style="display: inline-block; width: 225px;">7.2- Otros Servicios:</label>
                 <input type="number" id="otrosservicios" name="otrosservicios" class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="o_g_a" style="display: inline-block; width: 208px; margin-left: 20px; color:#0000FF;">Grupo A:</label>
+                <label for="o_g_a" style="display: inline-block; width: 208px; margin-left: 20px;">Grupo A:</label>
                 <input type="number" id="o_g_a" name="o_g_a"  class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="o_g_b" style="ddisplay: inline-block; width: 208px; margin-left: 20px; color:#0000FF;">Grupo B:</label>
+                <label for="o_g_b" style="display: inline-block; width: 208px; margin-left: 20px;">Grupo B:</label>
                 <input type="number" id="o_g_b" name="o_g_b" class="materialize-input3"  size="10" step="0.01" >
                 <br>
 
-                <label for="o_g_c" style="display: inline-block; width: 208px; margin-left: 20px; color:#0000FF;">Grupo C:</label>
+                <label for="o_g_c" style="display: inline-block; width: 208px; margin-left: 20px;">Grupo C:</label>
                 <input type="number" id="o_g_c" name="o_g_c"   class="materialize-input3" size="10" step="0.01">
                 <br>
 
-                <label for="o_g_d" style="display: inline-block; width: 208px; margin-left: 20px; color:#0000FF;">Grupo D:</label>
+                <label for="o_g_d" style="display: inline-block; width: 208px; margin-left: 20px;">Grupo D:</label>
                 <input type="number" id="o_g_d" name="o_g_d" class="materialize-input3" size="10" step="0.01" >
                 <br>
                 <!-- Residencia -->
@@ -1762,11 +1924,8 @@ document.querySelectorAll('input[type="number"]').forEach(input => {
     input.addEventListener('input', calcularPuntajeTotal2);
 });
 </script>
-    </table>
-
-  
-   
-    
+    </div><!-- /.mov-puntajes-inner -->
+    </div><!-- /#tablaTitular -->
 
 <!-- JavaScript para mostrar u ocultar las tablas según el tipo seleccionado -->
 <script>
@@ -1778,11 +1937,15 @@ document.addEventListener('DOMContentLoaded', function() {
     var thEstablecimiento = document.getElementById('thEstablecimiento'); // Campo de establecimiento
 
     function mostrarTablaSegunTipo() {
-        var tipo = tipoSelect.value;
+        var tipo = tipoSelect ? tipoSelect.value : '';
         
         // Mostrar/ocultar tablas según el tipo
-        tablaPermanenteConcursoInterino.style.display = (tipo === 'permanente' || tipo === 'concurso' || tipo === 'transitorio') ? 'table' : 'none';
-        tablaTitular.style.display = (tipo === 'titulares') ? 'table' : 'none';
+        if (tablaPermanenteConcursoInterino) {
+            tablaPermanenteConcursoInterino.style.display = (tipo === 'permanente' || tipo === 'concurso' || tipo === 'transitorio') ? 'block' : 'none';
+        }
+        if (tablaTitular) {
+            tablaTitular.style.display = (tipo === 'titulares') ? 'block' : 'none';
+        }
         
         // Mostrar/ocultar campo de conceptos según el tipo
         if (conceptoField) {
@@ -1793,7 +1956,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Mostrar/ocultar el campo de establecimiento según el tipo
         if (thEstablecimiento) {
-            thEstablecimiento.style.display = (tipo === 'titulares') ? 'table-cell' : 'none';
+            thEstablecimiento.style.display = (tipo === 'titulares') ? 'block' : 'none';
         } else {
             console.error('Elemento con ID "thEstablecimiento" no encontrado.');
         }
@@ -1832,11 +1995,12 @@ function toggleMotivosExclusion(checkbox) {
     }
 }
 </script>
-    </table>
-    <button class="btn btn-success" title="Guardar Registro" type="submit">
+    <div class="mov-form-actions">
+    <button class="btn btn-primary" title="Guardar Registro" type="submit">
     <i class="glyphicon glyphicon-floppy-disk"></i> Guardar
 </button>
-    
+    <a href="javascript:history.back()" class="btn btn-default"><i class="glyphicon glyphicon-arrow-left"></i> Volver atrás</a>
+    </div>
 </form>
 
 <script>
@@ -1849,17 +2013,12 @@ document.getElementById("myForm").addEventListener("submit", function(event) {
     // Si el mensaje de error está visible, no enviamos el formulario
     if (errorAntTit === "inline") {
         event.preventDefault(); // ✋ Detiene el envío
-        alert("Por favor, corrija los errores antes de guardar.");
+        juntaAlert('Por favor, corrija los errores antes de guardar.', 'warning');
     }
 });
 </script>
  
 
 
-<center>
-  <a href="javascript:history.back()" class="btn btn-success"> <i class="glyphicon glyphicon-arrow-left"></i> Volver atrás</a>
-</center>
-
-
-</th>
+<?php $JUNTA_PIE_SESION_DIRECT = true; ?>
 <?php include('footer2.php');?>

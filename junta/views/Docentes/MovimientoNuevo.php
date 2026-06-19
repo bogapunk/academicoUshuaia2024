@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../seguridad_requiere_login.php';
 // Configuración de la base de datos anterior
 
 /*
@@ -210,8 +211,9 @@ try {
                 if ($stmt_insert->execute()) {
                    // Mostrar alerta y redirigir a la página de registro con el legajo
                    echo "<script>
-                   alert('Nuevo registro creado exitosamente.');
-                   window.location.href = 'RegistroMovimiento.php?legajo=" . $legajo . "';
+                   juntaSuccess('¡Registro creado!', 'Nuevo registro creado exitosamente.').then(function() {
+                     window.location.href = 'RegistroMovimiento.php?legajo=" . $legajo . "';
+                   });
                  </script>";
                 } else {
                     echo "Error al añadir el movimiento";

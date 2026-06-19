@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agencia de innovacion</title>
 <link rel="stylesheet" href="style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" 	type="text/css" media="all">
@@ -83,6 +85,7 @@
 }
 
 </style>
+<link rel="stylesheet" href="aesthetic-polish.css" type="text/css" media="all" />
 <!--
 <link rel="icon" type="image/png" href="./imagenes/escudo-32x32.png">-->
 
@@ -90,9 +93,11 @@
 </head>
 <!--
 <img src="./imagenes/fondoCabecera.jpg">-->
-<center><img src="./imagenes/aif-logo.png" width="400" height="100"></center>
-
 <body>
+<?php
+$JUNTA_CABECERA_IMG = '';
+include __DIR__ . '/cabecera_institucional.php';
+?>
 <div class="main">
 <div class="panel panel-default">
 <div class="panel-heading">

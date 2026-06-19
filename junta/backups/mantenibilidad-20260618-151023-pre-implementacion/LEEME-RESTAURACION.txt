@@ -1,0 +1,10 @@
+﻿Paquete de mantenibilidad - Respaldo
+====================================
+Fecha: 2026-06-18 15:10:23
+Carpeta: D:\xampp\htdocs\Juntas2024\junta\backups\mantenibilidad-20260618-151023-pre-implementacion
+
+Archivos respaldados: 4
+
+Restaurar con:
+  .\scripts\restore-paquete-mantenibilidad.ps1 -BackupDir "D:\xampp\htdocs\Juntas2024\junta\backups\mantenibilidad-20260618-151023-pre-implementacion"
+  .\scripts\restore-paquete-mantenibilidad.ps1 -Latest

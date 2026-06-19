@@ -1,8 +1,13 @@
+﻿<?php
+require_once __DIR__ . '/../seguridad_rol.php';
+require_once __DIR__ . '/../seguridad_requiere_login.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Agencia de Innovación</title>
+  <link rel="stylesheet" href="../../style.css" type="text/css" media="all" />
 
   <!-- Google Fonts -->
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" type="text/css">
@@ -20,22 +25,6 @@
   <link rel="shortcut icon" href="../../imagenes/favicon.svg" type="image/x-icon"/>  
 
   <style>
-    /* Preload styles */
-    #preload {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      font-size: 2em;
-      color: #337ab7;
-    }
-
     /* General styles */
     body {
       font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
@@ -153,15 +142,17 @@
       background: #8AA9B8;
     }
   </style>
+  <link rel="stylesheet" href="../../aesthetic-polish.css" type="text/css" media="all" />
 </head>
 
 <body>
+<?php include __DIR__ . '/../../spinner-global-include.php'; ?>
+<?php include __DIR__ . '/../../swal-global-include.php'; ?>
 
-  <!-- PRELOAD -->
-  <div id="preload">Cargando...</div>
-
-  <!-- Logo -->
-  <center><img src="../../imagenes/aif-logo.png" width="400" height="100" alt="Agencia de Innovación"></center>
+  <?php
+  $JUNTA_CABECERA_IMG = '../../';
+  include __DIR__ . '/../../cabecera_institucional.php';
+  ?>
 
   <div class="main">
     <div class="panel panel-default">
@@ -183,7 +174,7 @@
                 </div>
                 <ul>
                   <li><a href="#"><font size="4">Listado de Docentes</font></a></li>
-                  <li><a href="../Docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></a></li>
+                  <li><a href="../Docentes/ListarDocentes.php"><font size="4">Docentes</font></a></li>
                   <li><a href="../../controller/exportar_docentes_especiales.php"><font size="3">Listado Docentes Especial (Temp)</font></a></li>
                   <li><a href="../../controller/exportar_docentes_especiales_SinTitulares.php"><font size="3">Docentes Esp. SIN TITULARES</font></a></li>
                   <li><a href="../../controller/exportar_docentes_especiales_completos.php"><font size="3">Docentes Esp. Interino, Supl. y Titulares</font></a></li>
@@ -199,29 +190,14 @@
                   <li><a href="../ConfiguracionListados/ListarConfiguracionListados.php"><font size="4">Configuración Listados</font></a></li>
                 </ul>
               </li>
-              <li>
-                <div class="card-body d-flex justify-content-between align-items-center">
-                  <a href="../Usuarios/ListarUsuarios.php" class="btn btn-primary">Usuarios</a>
-                </div>
-              </li>
+              <?php
+              $juntaNavRel = '../';
+              require __DIR__ . '/../inc/menu_usuario_nav.php';
+              ?>
             </ul>
           </nav>
         </ul>
       </div>
       <div class="panel-body">
         <div class="row">
-          <!-- Aquí va el contenido -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Ocultar el preload cuando la página termine de cargar
-    $(window).on('load', function () {
-      $('#preload').fadeOut('slow');
-    });
-  </script>
-
-</body>
-</html>
+          <!-- Contenido de la página a continuación -->

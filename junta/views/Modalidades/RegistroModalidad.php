@@ -9,462 +9,197 @@ if(!empty($sessData['estado']['msg'])){
 include('header2.php');
 ?>
 <style type="text/css">
-?>
-<style type="text/css">
- .nav>li>a {
-    position: relative;
-    display: block;
-    padding: 7px 15px;
+.registro-mod-page {
+  padding: 12px 0 32px;
 }
 
-thead{
-
-    display: table-header-group;
-    vertical-align: middle;
-    border-color: inherit;
-}
-table {
-  border-spacing: 0;
-  width: 100%;
-  border: 1px solid #ddd;
+.registro-mod-shell {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 12px;
+  box-sizing: border-box;
 }
 
-th {
-  cursor: pointer;
+.registro-mod-shell .form-container {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  padding: 22px 24px 26px;
 }
 
-th, td {
-  text-align: left;
-  padding: 16px;
+.registro-mod-header {
+  text-align: center;
+  margin-bottom: 18px;
 }
 
-tr:nth-child(even) {
-  background-color: #f2f2f2
-}
-* {
-    margin: 0;
-    padding: 0;
-    border: o none;
-    position: relative;
-}
-#menu_gral {
-    font-family: verdana, sans sherif;
-    width: 80%;
-    margin: 1.5rem auto;
-}
-#menu_gral ul {
-    list-style-type: none; 
-    text-align: left;
-    font-size: 0;
-}
-#menu_gral > ul li {
-    display: inline-block;
-    width: 25%;
-    position: relative;
-    background: #ffffff;
-}
-#menu_gral li a {
-    display: block;
-    text-decoration: none;
-    font-size: 2rem;
-    font-family: 'Roboto', sans-serif;
-    background-color: #2698f3;
-    font-size: 18px;
-    line-height: 4rem;
-    color: #fff;
-}
-#menu_gral li:hover a, #menu_gral li a:focus {
-    background: #e55916;
-    color: #fff;
-}
-
-#menu_gral li ul {
-    position: absolute;
-    width: 0;
-    overflow: hidden;
-}
-#menu_gral li:hover ul, #menu_gral li:focus ul {
-    width: 110%;
-    margin: 0 -4rem -4rem -4rem;
-    padding: 0 4rem 4rem 4rem;
-   
-    z-index: 5;
-}
-#menu_gral li li {
-    display: block;
-    width: 130%;
-}
-#menu_gral li:hover li a, #menu_gral li:focus li a {
-    font-family: monospace;
-    font-size: .9rem;
-    line-height: 1.7rem;
-    border-top: 1px solid #e5e5e5;
-    background: #e55916;
-}
-#menu_gral li li a:hover, #menu_gral li li a:focus {
-    background: #8AA9B8; 
-}
-
-input[type="button"], input[type="submit"] {
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-}
-
-h1 {
-    font-size: 40px;
-    margin: 50px auto;
-    letter-spacing: 3px;
-}
-
-.container {
-    width: 40%;
-    margin: 0 auto;
-    background-color: #f7f7f7;
-    color: #757575;
-    font-family: 'Raleway', sans-serif;
-    text-align: left;
-    padding: 30px;
-}
-h2 {
-            font-size: 25px;
-            text-align: center;
-        }
-        h4 {
-            font-size: 20px;
-            text-align: center;
-        }
-
-.container p {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 20px;
-}
-.regisFrm input[type="text"], .regisFrm input[type="email"], .regisFrm input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    margin: 10px auto; /* Cambia 'margin: 10px 50px;' a esto */
-    outline: none;
-    color: #000;
-    font-weight: 500;
-    font-family: 'Roboto', sans-serif;
-}
-
-.regisFrm textarea {
-    height: 100px;
-}
-
-.regisFrm ::-webkit-input-placeholder {
-    color: #666;
-}
-
-.regisFrm ::-moz-placeholder {
-    color: #666;
-}
-
-.regisFrm ::-moz-placeholder {
-    color: #666;
-}
-
-.regisFrm ::-ms-input-placeholder {
-    color: #666;
-}
-
-.send-button {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.send-button input[type="submit"] {
-    padding: 10px 0;
-    width: 60%;
-    font-family: 'Roboto', sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    border: none;
-    outline: none;
-    color: #FFF;
-    background-color: #2196F3;
-    cursor: pointer;
-}
-
-.send-button input[type="submit"]:hover {
-    background-color: #055d54;
-}
-
-a.logout{float: right;}
-p.success{color:#34A853;}
-p.error{color:#EA4335;}
-/* Responsive Code */
-
-@media screen and (max-width: 1920px) {
-    h1 {
-        margin: 75px auto;
-    }
-    .container {
-        width: 25%;
-    }
-}
-
-@media screen and (max-width: 1680px) {
-    .container {
-        width: 30%;
-    }
-}
-
-@media screen and (max-width: 1600px) {
-    h1 {
-        margin: 50px auto;
-    }
-}
-
-@media screen and (max-width: 1367px) {
-    .container {
-        width: 35%;
-    }
-}
-
-@media screen and (max-width: 1024px) {
-    .container {
-        width: 45%;
-    }
-}
-
-@media screen and (max-width: 966px) {
-    h1 {
-        letter-spacing: 2px;
-    }
-}
-
-@media screen and (max-width: 853px) {
-    .container {
-        width: 50%;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .container {
-        width: 55%;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .container {
-        width: 60%;
-    }
-}
-
-@media screen and (max-width: 736px) {
-    h1 {
-        letter-spacing: 0;
-    }
-}
-
-@media screen and (max-width: 667px) {
-    .container {
-        width: 65%;
-    }
-}
-
-@media screen and (max-width: 603px) {
-    h1 {
-        font-size: 35px;
-    }
-    .container {
-        width: 70%;
-    }
-}
-
-@media screen and (max-width: 568px) {
-    .container {
-        width: 75%;
-    }
-    h1 {
-        font-size: 30px;
-    }
-}
-
-@media screen and (max-width: 533px) {
-    h1 {
-        font-size: 30px;
-    }
-    .container {
-        width: 80%;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    h1 {
-        margin: 40px 0;
-    }
-    .container {
-        width: 85%;
-        padding: 20px;
-    }
-    h2 {
-        font-size: 25px;
-    }
-    .regisFrm input[type="text"], .regisFrm input[type="email"], .regisFrm input[type="password"] {
-        width: 93%;
-    }
-}
-
-@media screen and (max-width: 414px) {
-    h1 {
-        margin: 30px 0;
-    }
-    .social-icons ul li span.icons {
-        width: 30px;
-        height: 30px;
-    }
-    .regisFrm label {
-        font-size: 13px;
-    }
-    .regisFrm input[type="text"], .regisFrm input[type="email"], .regisFrm input[type="password"] {
-        width: 91.5%;
-        font-size: 12px;
-        margin: 5px 0 15px;
-    }
-}
-
-@media screen and (max-width: 384px) {
-    h1 {
-        font-size: 25px;
-        line-height: 35px;
-    }
-    .container {
-        width: 90%;
-        padding: 20px 10px;
-    }
-    .container p {
-        font-size: 16px;
-        margin-bottom: 15px;
-        line-height: 22px;
-    }
-    h2 {
-        font-size: 20px;
-    }
-}
-
-@media screen and (max-width: 360px) {
-    .send-button input[type="submit"] {
-        width: 50%;
-        font-size: 16px;
-    }
-}
-
-
-
-.form-control {
-    width: 100%;
-    height: 34px;
-    padding: 6px 0px;
-    margin: 0 auto; /* Agrega esta línea */
-    }
-
-button {
-  background: cornflowerblue;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-  font-family: 'Lato';
-  margin: 5px;
+.registro-mod-title {
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 6px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(38, 152, 243, 0.35);
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  cursor: pointer;
-  outline: none;
 }
 
-button:hover {
-  background: orange;
+.registro-mod-subtitle {
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6b7280;
+  margin: 0;
 }
+
+.registro-mod-shell .form-group {
+  margin-bottom: 16px;
+}
+
+.registro-mod-shell .form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.registro-mod-shell .form-control,
+.registro-mod-shell select.form-control {
+  width: 100%;
+  max-width: 100%;
+  min-height: 40px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  box-shadow: none;
+  font-size: 14px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+
+.registro-mod-shell select.form-control {
+  height: auto;
+  line-height: 1.35;
+  -webkit-appearance: menulist;
+  appearance: menulist;
+}
+
+.registro-mod-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.registro-mod-actions .btn {
+  min-width: 140px;
+  border-radius: 6px;
+  font-weight: 600;
+  padding: 10px 18px;
+}
+
+.registro-mod-actions .btn-success {
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .registro-mod-shell .form-container {
+    padding: 16px 12px;
+  }
+  .registro-mod-title {
+    font-size: 22px;
+  }
+}
+
+p.success { color: #34A853; }
+p.error { color: #EA4335; }
 </style>
-<!-- JavaScript -->
-<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
-<div class="col-sm-3 r-form-1-box wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
+<?php
+include 'Modalidades.php';
+$modalidad = new Modalidad();
+$conditions['return_type'] = 'single';
+$modalidadData = $modalidad->getRows3($conditions);
 
-<div class="col-sm-6 r-form-1-box wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
-    <h2><b><u><FONT COLOR="Black">CREAR MODALIDAD</FONT></u></b></h2>
-		<h4>Nueva Modalidad</h4>
-		<?php echo !empty($statusMsg)?'<p class="'.$statusMsgType.'">'.$statusMsg.'</p>':''; ?>
-		<div class="regisFrm">
-			<form action="MiModalidad.php" method="post">
-				<input type="text" name="codmod" placeholder="Modalidad" required="">
-				<input type="text" name="nommod" placeholder="Descripcion" required="">
-                 <?php 
-
-                        include 'Modalidades.php';
-                        $modalidad = new Modalidad();
-                        
-                        $conditions['return_type'] = 'single';
-
-                        $modalidadData = $modalidad->getRows3($conditions); 
-                                // Opciones del select
 $opciones = [
     "DOCENTE" => "DOCENTE",
     "HABILITANTE" => "HABILITANTE",
     "SUPLETORIO" => "SUPLETORIO"
 ];
-
-// Verificar si se obtuvieron datos y asignar el valor seleccionado (si existe)
 $tituloSeleccionado = isset($modalidadData['titulo']) ? $modalidadData['titulo'] : null;
 ?>
 
-<center> 
-    <select id="titulo" class="form-control" name="titulo">
-        <?php foreach ($opciones as $valor => $etiqueta): ?>
+<div class="registro-mod-page">
+<div class="registro-mod-shell">
+  <div class="registro-mod-header">
+    <h1 class="registro-mod-title">Crear Modalidad</h1>
+    <p class="registro-mod-subtitle">Complete los datos de la nueva modalidad</p>
+  </div>
+
+  <?php echo !empty($statusMsg) ? '<p class="' . $statusMsgType . '">' . $statusMsg . '</p>' : ''; ?>
+
+  <div class="form-container">
+    <form action="MiModalidad.php" method="post">
+
+      <div class="form-group">
+        <label for="codmod">Código de Modalidad</label>
+        <input type="text" name="codmod" id="codmod" placeholder="Ingrese el código de modalidad" required class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="nommod">Descripción</label>
+        <input type="text" name="nommod" id="nommod" placeholder="Ingrese la descripción" required class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <select id="titulo" class="form-control" name="titulo">
+          <?php foreach ($opciones as $valor => $etiqueta): ?>
             <option value="<?= $valor ?>" <?php if ($valor == $tituloSeleccionado) echo "selected"; ?>>
-                <?= $etiqueta ?>
+              <?= $etiqueta ?>
             </option>
-        <?php endforeach; ?>
-    </select>
-</center>
+          <?php endforeach; ?>
+        </select>
+      </div>
 
+      <div class="form-group">
+        <label for="tope">Tope</label>
+        <input type="text" name="tope" id="tope" placeholder="Ingrese el tope" required class="form-control">
+      </div>
 
+      <div class="registro-mod-actions">
+        <button name="insertar" type="submit" id="btnGuardarRegMod" class="btn btn-primary">
+          <span class="glyphicon glyphicon-floppy-saved"></span> Guardar
+        </button>
+        <a href="./ListarModalidades.php" class="btn btn-success">
+          <span class="glyphicon glyphicon-arrow-left"></span> Volver
+        </a>
+      </div>
 
-				<input type="text" name="tope" placeholder="ingrese el tope " required="">
-          <!--
-                <div class="form-check">
-                      <input class="form-check-input" type="checkbox"  id="flexCheckIndeterminate" name="comp">
-                      <label class="form-check-label" for="flexCheckIndeterminate">
-                        Es complemetario
-                      </label>
-                    </div>
-                   -->
-        
-				<div class="send-button">
-					<button name="insertar" type="submit"  onclick="return myConfirm();">Guardar</button>
-				</div>
+    </form>
+  </div>
+</div>
+</div>
 
-
-
-			</form>
-            <center><a href="./ListarModalidades.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
-
-
-
-		</div>
-	</div>
-    
-    
-<!--Inicia columna 7-->
-<div class="col-sm-3 text wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script type="text/javascript">
- function myConfirm() {
-  var result = confirm("¿Desea Cargar Los datos?");
-  if (result==true) {
-   return true;
-
-  } else {
-   return false;
-  }
-}
-
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('btnGuardarRegMod').addEventListener('click', function(e) {
+    e.preventDefault();
+    var form = this.closest('form');
+    juntaConfirm('¿Desea cargar los datos de la nueva modalidad?', function() {
+      if (!form.querySelector('input[name="insertar"]')) {
+        var h = document.createElement('input');
+        h.type = 'hidden'; h.name = 'insertar'; h.value = '1';
+        form.appendChild(h);
+      }
+      form.submit();
+    });
+  });
+});
 </script>
 <?php include('footer2.php');?>

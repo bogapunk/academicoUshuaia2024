@@ -1,2 +1,6 @@
 data
 datos
+
+# Credenciales locales (paquete mantenibilidad)
+junta/.env
+.env

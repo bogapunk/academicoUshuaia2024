@@ -1,8 +1,12 @@
+﻿<?php
+require_once __DIR__ . '/../seguridad_rol.php';
+require_once __DIR__ . '/../seguridad_requiere_login.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Agencia de innovacion</title>
-
+<link rel="stylesheet" href="../../style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900"  type="text/css" media="all">
 <!-- Último minificado bootstrap css -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -134,15 +138,20 @@ body{
 
 
 </style>
+<link rel="stylesheet" href="../../aesthetic-polish.css" type="text/css" media="all" />
 <!--<link rel="icon" type="image/png" href="./imagenes/escudo-32x32.png">-->
 <link rel="shortcut icon" href="../../imagenes/favicon.svg" type="image/x-icon"/>  
 
 </head>
 
 <!--<center><img src="../../imagenes/fondoCabecera.jpg"></center>-->
-<center><img src="../../imagenes/aif-logo.png" width="400" height="100"></center>
-
 <body>
+<?php include __DIR__ . '/../../spinner-global-include.php'; ?>
+<?php include __DIR__ . '/../../swal-global-include.php'; ?>
+<?php
+$JUNTA_CABECERA_IMG = '../../';
+include __DIR__ . '/../../cabecera_institucional.php';
+?>
 <div class="main">
 <div class="panel panel-default">
 
@@ -167,7 +176,7 @@ body{
       <a href="#" class="btn btn-primary">Legajos</a></div>
           <ul>
            <li><a href="../ListadoDeDocentes/ListarListadosDeDocentes.php"><font size="4">Listado de Docentes</font></b></a></li>
-          <li><a href="../Docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></b></a></li>
+          <li><a href="../Docentes/ListarDocentes.php"><font size="4">Docentes</font></b></a></li>
           <li><a href="../../controller/exportar_docentes_especiales.php"><font size="3">Listado Docentes Especial(Temp)</font></a></li>
           <li><a href="../../controller/exportar_docentes_especiales_SinTitulares.php"><font size="3">Listado Docentes de Esp. SIN TITULARES(Temporal)</font></a></li>
            <li><a href="../../controller/exportar_docentes_especiales_completos.php"><font size="3">Listado Docentes de Esp.(Interino,supl.y Titulares)</font></a></li>
@@ -182,14 +191,10 @@ body{
           <li><a href="../ConfiguracionListados/ListarConfiguracionListados.php"><font size="3">Configuracion Listados</font></a></li>
         </ul>
     </li>
-     <li>
-       <div class="card-body d-flex justify-content-between align-items-center">
-    <a href="../Usuarios/ListarUsuarios.php"   class="btn btn-primary" class="logout">Usuarios</a>
-</div>
-
-
-
-  </li>
+     <?php
+     $juntaNavRel = '../';
+     require __DIR__ . '/../inc/menu_usuario_nav.php';
+     ?>
   </ul>
 
 </nav>
@@ -206,7 +211,7 @@ body{
 <!-- 
 <li>
   <div class="card-body d-flex justify-content-between align-items-center">
-  <a href="../MiCuenta.php?logoutSubmit=1"   class="btn btn-primary" class="logout">Cerrar Sesion</a>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#juntaModalCerrarSesion">Cerrar sesión</button>
 </div>
 
 </li> 

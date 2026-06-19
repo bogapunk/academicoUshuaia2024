@@ -1,3 +1,6 @@
+<?php
+require_once __DIR__ . '/../seguridad_requiere_admin.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +70,7 @@
 						<td><?php echo $row['rol']; ?></td>
 						<td>
 							<a href="#edit_<?php echo $row['id']; ?>" class="btn btn-success btn-sm" data-toggle="modal"><span class="glyphicon glyphicon-edit"></span> Editar</a>
-							<a href="#delete_<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal"><span class="glyphicon glyphicon-trash"></span> Borrar</a>
+							<a href="#delete_<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" data-toggle="modal" title="Eliminar"><span class="glyphicon glyphicon-trash"></span> Eliminar</a>
 						</td>
 						<?php include('BorrarEditarModal.php'); ?>
 					</tr>

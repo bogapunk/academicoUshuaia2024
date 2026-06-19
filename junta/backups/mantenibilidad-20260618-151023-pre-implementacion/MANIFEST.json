@@ -1,0 +1,26 @@
+﻿[
+    {
+        "archivo":  "junta_config.php",
+        "origen":  "D:\\xampp\\htdocs\\Juntas2024\\junta\\junta_config.php",
+        "respaldo":  "D:\\xampp\\htdocs\\Juntas2024\\junta\\backups\\mantenibilidad-20260618-151023-pre-implementacion\\junta_config.php",
+        "fecha":  "2026-06-18 15:10:23"
+    },
+    {
+        "archivo":  "Usuarios_Conexion_Sqlserver.php",
+        "origen":  "D:\\xampp\\htdocs\\Juntas2024\\junta\\Usuarios_Conexion_Sqlserver.php",
+        "respaldo":  "D:\\xampp\\htdocs\\Juntas2024\\junta\\backups\\mantenibilidad-20260618-151023-pre-implementacion\\Usuarios_Conexion_Sqlserver.php",
+        "fecha":  "2026-06-18 15:10:23"
+    },
+    {
+        "archivo":  "Config\\Config.php",
+        "origen":  "D:\\xampp\\htdocs\\Juntas2024\\junta\\Config\\Config.php",
+        "respaldo":  "D:\\xampp\\htdocs\\Juntas2024\\junta\\backups\\mantenibilidad-20260618-151023-pre-implementacion\\Config\\Config.php",
+        "fecha":  "2026-06-18 15:10:23"
+    },
+    {
+        "archivo":  "_repo_.gitignore",
+        "origen":  "D:\\xampp\\htdocs\\Juntas2024\\.gitignore",
+        "respaldo":  "D:\\xampp\\htdocs\\Juntas2024\\junta\\backups\\mantenibilidad-20260618-151023-pre-implementacion\\_repo_.gitignore",
+        "fecha":  "2026-06-18 15:10:23"
+    }
+]

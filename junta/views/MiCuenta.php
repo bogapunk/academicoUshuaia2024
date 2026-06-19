@@ -2,8 +2,9 @@
 // Start session
 session_start();
 
-// Load and initialize user class
-include 'Usuarios.php';
+// Clase User centralizada (misma BD que login y listado)
+require_once __DIR__ . '/../Usuarios_Conexion_Sqlserver.php';
+require_once __DIR__ . '/seguridad_password.php';
 $user = new User();
 
 function setSessionState($type, $msg) {
@@ -14,12 +15,18 @@ function setSessionState($type, $msg) {
 }
 
 if (isset($_POST['signupSubmit'])) {
+    require_once __DIR__ . '/seguridad_requiere_admin.php';
+
     // Check whether user details are empty
     if (!empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['email']) && !empty($_POST['telefono']) && !empty($_POST['rol']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])) {
         // Password and confirm password comparison
         if ($_POST['password'] !== $_POST['confirm_password']) {
             setSessionState('error', 'Confirmar que la contraseña debe coincidir con la contraseña.');
         } else {
+            $validacionPassword = junta_password_validar($_POST['password']);
+            if ($validacionPassword !== true) {
+                setSessionState('error', $validacionPassword);
+            } else {
             // Check if user exists in the database
             $prevCon['where'] = array('email' => $_POST['email']);
             $prevCon['return_type'] = 'count';
@@ -33,19 +40,25 @@ if (isset($_POST['signupSubmit'])) {
                     'nombres' => $_POST['nombres'],
                     'apellidos' => $_POST['apellidos'],
                     'email' => $_POST['email'],
-                    'password' => md5($_POST['password']), // Hash de la contraseña con md5
+                    'password' => junta_password_hash($_POST['password']),
                     'telefono' => $_POST['telefono'],
                     'rol' => $_POST['rol'],
                     'estado' => '1'
                 );
-                $insert = $user->insert($userData);
+                $newUserId = $user->insert($userData);
 
-                // Set estado based on data insert
-                if ($insert) {
-                    setSessionState('success', 'Se registraste exitosamente, inicia sesión con tus credenciales!!!!!!!');
+                if ($newUserId) {
+                    $_SESSION['usuario_creado'] = array(
+                        'id'        => $newUserId,
+                        'nombres'   => $_POST['nombres'],
+                        'apellidos' => $_POST['apellidos'],
+                        'email'     => $_POST['email'],
+                        'rol'       => $_POST['rol'],
+                    );
                 } else {
-                    setSessionState('success', 'Se registraste exitosamente, inicia sesión con tus credenciales.');
+                    setSessionState('error', 'No se pudo crear el usuario. Por favor, intente de nuevo.');
                 }
+            }
             }
         }
     } else {
@@ -71,6 +84,9 @@ if (isset($_POST['signupSubmit'])) {
         if ($userData && password_verify($_POST['password'], $userData['password'])) {
             $_SESSION['sessData']['userLoggedIn'] = TRUE;
             $_SESSION['sessData']['userID'] = $userData['id'];
+            if (!empty($userData['rol'])) {
+                $_SESSION['sessData']['userRol'] = $userData['rol'];
+            }
             setSessionState('success', 'Bienvenido '.$userData['nombres'].'!');
         } else {
             setSessionState('error', 'Email o contraseña incorrectos, por favor intente de nuevo.');
@@ -142,6 +158,10 @@ if (isset($_POST['signupSubmit'])) {
         if ($_POST['password'] !== $_POST['confirm_password']) {
             setSessionState('error', 'Confirmar que la contraseña debe coincidir con la contraseña.');
         } else {
+            $validacionPassword = junta_password_validar($_POST['password']);
+            if ($validacionPassword !== true) {
+                setSessionState('error', $validacionPassword);
+            } else {
             // Check whether identity code exists in the database
             $prevCon['where'] = array('olvido_pass_iden' => $fp_code);
             $prevCon['return_type'] = 'single';
@@ -160,6 +180,7 @@ if (isset($_POST['signupSubmit'])) {
                 }
             } else {
                 setSessionState('error', 'No está autorizado a restablecer una nueva contraseña de esta cuenta.');
+            }
             }
         }
     } else {
@@ -180,6 +201,9 @@ if (isset($_POST['signupSubmit'])) {
 
     // Redirect to the home page
     header("Location: Usuarios/ListarUsuarios.php");
+} elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['email']) && !empty($_POST['password'])) {
+    setSessionState('error', 'No se pudo procesar la solicitud de alta. Por favor, intente nuevamente.');
+    header('Location: Registro.php');
 } else {
     // Redirect to the home page
     header("Location: Usuarios/ListarUsuarios.php");

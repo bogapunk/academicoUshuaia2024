@@ -2,16 +2,13 @@
 require_once 'docentes.entidad.php';
 require_once 'docentes.model.php';
 
-include('header2.php');
-
-
-
 // Logica
 $doc = new Docente();
-$model = new DocentesModel();
+$model = null;
 
-if(isset($_REQUEST['action']))
-{
+if (isset($_REQUEST['action'])) {
+  $model = new DocentesModel();
+
   switch($_REQUEST['action'])
   {
     case 'actualizar':
@@ -64,7 +61,7 @@ if(isset($_REQUEST['action']))
       $doc->__SET('domicilio', $_REQUEST['domicilio']);
       $doc->__SET('lugarinsc', $_REQUEST['lugarinsc']);
       
-      $fechanacim = !empty($_REQUEST['fechanacim']) ? date('Y-d-m H:i:s.000', strtotime($_REQUEST['fechanacim'])) : null;
+      $fechanacim = !empty($_REQUEST['fechanacim']) ? date('Y-m-d H:i:s.000', strtotime($_REQUEST['fechanacim'])) : null;
       $doc->__SET('fechanacim', $fechanacim);
       
       $doc->__SET('promedioT', $_REQUEST['promedioT']);
@@ -105,6 +102,8 @@ if(isset($_REQUEST['action']))
       break;
   }
 }
+
+include('header2.php');
 
 ?>
 <!-- Begin Page Content -->
@@ -249,56 +248,213 @@ tr:nth-child(even) {
 }
 
 
-/* Fondo predeterminado para el botón Ver y otros botones */
-.btn-custom {
-    background-color: #17a2b8; /* Color predeterminado del botón Ver */
-    border-color: #17a2b8;
-    color: white;
-}
-
-/* Cambiar a color negro al pasar el cursor sobre los botones */
-.btn-custom:hover, .btn-success:hover, .btn-danger:hover, .btn-primary:hover {
-    background-color: #e55916 !important;
-    border-color: #000000 !important;
-    color: #ffffff !important;
-}
 
 
-.lds-ring {
-  display: inline-block;
-  position: relative;
-  width: 64px;
-  height: 64px;
-}
-.lds-ring div {
+/* Buscador + tabla de resultados: mismo ancho máximo y centrado */
+.listado-docentes-busqueda {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 12px 24px;
   box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 51px;
-  height: 51px;
-  margin: 6px;
-  border: 6px solid #007bff;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #007bff transparent transparent transparent;
 }
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
+
+.listado-docentes-busqueda #busquedaForm .form-group {
+  margin-bottom: 0;
 }
-.lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
+
+.listado-docentes-busqueda #busquedaForm .form-control {
+  min-height: 42px;
+  padding: 8px 12px;
+  line-height: 1.35;
+  box-sizing: border-box;
 }
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
+
+.listado-docentes-busqueda .filtro-tabla-wrap {
+  width: 88%;
+  max-width: 900px;
+  margin: 14px auto 10px;
 }
-@keyframes lds-ring {
-  0% {
-    transform: rotate(0deg);
+
+.listado-docentes-busqueda .filtro-tabla-wrap .form-control {
+  width: 100%;
+  max-width: 100%;
+}
+
+.listado-docentes-busqueda .container.mt-4 {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.listado-docentes-busqueda #resultTable {
+  width: 100% !important;
+  table-layout: auto;
+}
+
+.listado-docentes-busqueda .dataTables_wrapper {
+  width: 100% !important;
+  overflow-x: auto;
+}
+
+/* --- Formulario Datos Docente: layout claro, secciones y campos proporcionados --- */
+.docente-form-shell {
+  max-width: 920px;
+  margin: 0 auto 28px;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.docente-form-title {
+  text-align: center;
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 18px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(38, 152, 243, 0.35);
+}
+
+.docente-form-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.docente-form-table th {
+  width: 34%;
+  max-width: 260px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #374151;
+  text-align: left !important;
+  vertical-align: middle !important;
+  padding: 12px 14px !important;
+  background: #f3f4f6;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.docente-form-table td {
+  vertical-align: middle !important;
+  padding: 12px 14px !important;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.docente-form-table tr:last-child th,
+.docente-form-table tr:last-child td {
+  border-bottom: none;
+}
+
+.docente-form-table .form-control {
+  display: inline-block;
+  width: 100%;
+  max-width: 420px;
+  min-height: 40px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.docente-form-table textarea.form-control {
+  max-width: 100%;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.docente-form-table .docente-input-sm {
+  max-width: 220px;
+}
+
+.docente-form-table .docente-input-md {
+  max-width: 320px;
+}
+
+.docente-sec-row td {
+  padding: 10px 14px !important;
+  background: #e8f4fe !important;
+  border-bottom: 1px solid #dbeafe;
+}
+
+.docente-sec-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1e40af;
+}
+
+.docente-form-table tr:last-child td {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.docente-legajo-resumen {
+  width: 100%;
+  margin-top: 6px;
+  font-size: 14px;
+  color: #374151;
+}
+
+@media (max-width: 768px) {
+  .docente-form-table th,
+  .docente-form-table td {
+    display: block;
+    width: 100% !important;
+    max-width: none !important;
   }
-  100% {
-    transform: rotate(360deg);
+
+  .docente-form-table .form-control {
+    max-width: 100% !important;
   }
 }
+
+/* Barra superior de acciones (Nuevo Docente + PDF) alineada */
+.listado-docentes-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.listado-docentes-busqueda-titulo {
+  text-align: center;
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid rgba(38, 152, 243, 0.35);
+}
+
+.listado-docentes-busqueda-acciones {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+<?php readfile(__DIR__ . '/../css/junta-panel-polish.css'); ?>
+<?php readfile(__DIR__ . '/../css/junta-acciones-polish.css'); ?>
+<?php readfile(__DIR__ . '/../css/docentes-list-polish.css'); ?>
 
 </style>
 <link rel="icon" type="./image/png" href="./imagenes/escudo-32x32.png">
@@ -314,9 +470,11 @@ tr:nth-child(even) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
-      <!-- sweeteralert2 -->
-      <link rel="stylesheet" href="../Assets/swal2/sweetalert2.min.css" type="text/css" />
+      <!-- SweetAlert2 ahora se carga globalmente via header -->
 
       <!--aca esta las extensiones para el paginado de la las tablas --->
   
@@ -334,11 +492,6 @@ tr:nth-child(even) {
 
 </head>
 <body>
-<script>
-    window.onload = function() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-</script>
 <button class="btn-flotante" onclick="topFunction()" title='subir'>Subir</button>
 
   <div class="page-content bg-light">
@@ -370,10 +523,7 @@ tr:nth-child(even) {
       }
     </script>
 
-  <div class="container"> <center><h1><u><font face="
-    font-family: 'Open Sans', 'Sans-serif' COLOR="black">Datos Docente </font></u></h1></center>
-    <br>
-    <br>
+  <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
@@ -383,27 +533,6 @@ tr:nth-child(even) {
     <!-- /.navbar-collapse --> 
   </div>
   <!-- /.container-fluid --> 
-
-<?php
-// Te recomiendo utilizar esta conexión, la que utilizas ya no es la recomendada. 
-//$link = new PDO('mysql:host=localhost;dbname=junta', 'root', ''); // el campo vaciío es para la password. 
-try {
-  $dsn = "sqlsrv:server=10.1.9.113;database=junta;TrustServerCertificate=yes";
-  $username = "SA";
-  $password = 'Davinci2024#';
-  
-  // Crear la conexión PDO
-  $link = new PDO($dsn, $username, $password);
-
-  // Establecer el modo de error de PDO para que lance excepciones
-  $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-} catch (PDOException $e) {
-  echo "Error en la conexión a SQL Server: " . $e->getMessage();
-}
-?>
-
-    
 
 <?php 
 
@@ -417,355 +546,87 @@ try {
     unset($_SESSION['message']);
   }
 ?>
-<script type="text/javascript">
-  
-</script>
 
-<center>
- <form action="?action=<?php echo $doc->id2 > 0 ? 'actualizar' : 'registrar'; ?>" method="post" class="pure-form pure-form-stacked" style="margin-bottom:30px;" id="formulario_transaccion">
-               
-                    <input type="hidden" name="id2" value="<?php echo $doc->__GET('id2'); ?>" />
-
-
-                    <table style="width:100%" id="seleccion">
-               
-                        <tr>
-                            <th style="text-align:left;font-size:1.2em;">Legajo</th>
-                            <td><input type="number" name="legajo" value="<?php echo $doc->__GET('legajo'); ?>" class="form-control" required /></td>
-                        </tr>
-
-                         <tr>
-                            <th style="text-align:left;">Apellido y Nombre</th>
-                            <td><input type="text" name="apellidoynombre" value="<?php echo $doc->__GET('apellidoynombre'); ?>" class="form-control" required /></td>
-                        </tr>
-
-
-                        <tr>
-                            <th style="text-align:left;">dni</th>
-                            <td><input type="number" name="dni" value="<?php echo $doc->__GET('dni'); ?>" class="form-control" required/></td>
-                        </tr>
-                        <tr>
-                            <th style="text-align:left;">domicilio</th>
-                            <td><input type="text" name="domicilio" value="<?php echo $doc->__GET('domicilio'); ?>" class="form-control" /></td>
-                        </tr>
-                         <tr>
-                            <th style="text-align:left;">Lugar Inscripcion</th>
-                           
-                            <td><input type="text" name="lugarinsc" value="<?php
-                                  if ($doc->__GET('lugarinsc') == 'RG' or $doc->__GET('lugarinsc') == 'RGD') {
-                                      echo 'Rio Grande';
-                                  } elseif ($doc->__GET('lugarinsc') == 'USH') {
-                                      echo 'Ushuaia';
-                                  } elseif ($doc->__GET('lugarinsc') == 'TOL') {
-                                      echo 'Tolhuin';
-                                  } else {
-                                      echo $doc->__GET('lugarinsc'); // Display original value if not matched
-                                                  }
-                                              ?>"class="form-control" /></td>
-                        </tr>
-
-                         <tr>
-                         <th style="text-align:left;">Fecha Nacimiento</th>
-                         <td> <input type="date" name="fechanacim" value="<?php echo !empty($doc->__GET('fechanacim')) ? date('Y-m-d', strtotime($doc->__GET('fechanacim'))) : ''; ?>" class="form-control" /></td>
-
-                        </tr>
-
-                         <tr>
-                            <th style="text-align:left;">Promedio</th>
-                            <td>
-                                <input type="number" name="promedioT" value="<?php echo number_format($doc->__GET('promedioT'), 2, '.', ''); ?>" step="0.01" class="form-control" />
-                            </td>
-                        </tr>
-                         <tr>
-                            <th style="text-align:left;">telefono</th>
-                            <td><input type="text" name="telefonos" value="<?php echo $doc->__GET('telefonos'); ?>" class="form-control"/></td>
-                        </tr>
-                        <tr>
-                            <th style="text-align:left;">Titulo Basico</th>
-                            <td><input type="text" name="Titulobas" value="<?php echo $doc->__GET('Titulobas') ?>" class="form-control" /></td>
-                        </tr>
-                        <tr>
-                            <th style="text-align:left;">Fecha Titulo</th>
-                            
-                            <td><input type="date" name="fechatit" value="<?php echo !empty($doc->__GET('fechatit')) ? date('Y-m-d', strtotime($doc->__GET('fechatit'))) : ''; ?>" class="form-control" /></td>         
-                          </tr>
-                        <tr>
-                            <th style="text-align:left;">Otorgando Por</th>
-                            <td><input type="text" name="otorgadopor" value="<?php echo $doc->__GET('otorgadopor'); ?>" class="form-control" /></td>
-                        </tr>
-                        <tr>
-                           <tr>
-                                  <th style="text-align: left;">Fecha Inicio Docencia</th>
-                                
-                                  <td><input type="date" name="finicio" value="<?php echo !empty($doc->__GET('finicio')) ? date('Y-m-d', strtotime($doc->__GET('finicio'))) : ''; ?>" class="form-control" /></td>
-
-                                </tr>
-                        </tr>
-                        <tr>
-                            <th style="text-align:left;">Otros Titulos</th>
-                            <td><input type="text" name="otrostit" value="<?php echo $doc->__GET('otrostit'); ?>" class="form-control" /></td>
-                        </tr>
-                     
-                         <tr>
-                            <th style="text-align:left;">Fecha ingreso</th>
-                            <td><input type="date" name="fingreso" value="<?php echo !empty($doc->__GET('fingreso')) ? date('Y-m-d', strtotime($doc->__GET('fingreso'))) : ''; ?>" class="form-control" /></td>
-
-                          </tr>
-
-                         <tr>
-                            <th style="text-align:left;">Cargo Docente</th>
-                            <td><input type="text" name="cargosdocentes" value="<?php echo $doc->__GET('cargosdocentes'); ?>" class="form-control" /></td>
-                        </tr>
-
-                         <tr>
-                            <th style="text-align:left;">fecha Apertura Legajo</th>
-                            <td><input type="date" name="faperturaleg" value="<?php echo !empty($doc->__GET('faperturaleg')) ? date('Y-m-d', strtotime($doc->__GET('faperturaleg'))) : ''; ?>" class="form-control" /></td>
-
-                          </tr>
-
-
-                         <tr>
-                            <th style="text-align:left;">Nacionalidad</th>
-                            <td><input type="text" name="Nacionalidad" value="<?php echo $doc->__GET('Nacionalidad'); ?>" class="form-control" /></td>
-                        </tr>
-                        <tr>
-                            <th style="text-align:left;">Email</th>
-                            <td><input type="email" name="email" value="<?php echo $doc->__GET('email'); ?>" class="form-control" /></td>
-                        </tr>
-
-
-                         <tr>
-                            <th style="text-align:left;">Observaciones</th>
-              
-                            <td>
-                              <textarea name="obsdoc" rows="5" class="form-control"><?php echo $doc->__GET('obsdoc'); ?></textarea>
-                            </td>
-                        </tr>
-                        </tr>
-
-
-
-
-                        <tr>
-              
-                            <td colspan="2">
-                             <center><button type="submit" class="btn btn-primary" onclick="return myConfirm();" title="Cagar Docente"><i class="glyphicon glyphicon-floppy-saved"> Cargar</i></button>&nbsp;&nbsp;
-                            
-                                <button class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR" title="Limapiar Datos"><i class="glyphicon glyphicon-erase"> Limpiar</i></button>
-                            
-                            <center><b>Numero de Legajo:</b><?php echo $doc->__GET('legajo');// aca te faltaba poner los echo para que se muestre el valor de la variable.  ?></center>
-                            <a href="VerInscripciones.php?legajo=<?php echo $doc->__GET('legajo'); ?>" class="btn btn-success btn-sm" title="Ver Inscripcion Docente"><span class="glyphicon glyphicon-edit" ></span>  Ver Inscripciones</a>
-
-                        
-                            </td>
-                        
-                        </tr>
-
-                          
- 
-
-                    </table>
-                </form>
-
-
-
-
-
-
-                <form method="GET" action="generate_pdf.php">
-    <input type="hidden" name="legajo" value="<?php echo $doc->__GET('legajo'); ?>" />
-    <input type="hidden" name="apellidoynombre" value="<?php echo $doc->__GET('apellidoynombre'); ?>" />
-    <input type="hidden" name="dni" value="<?php echo $doc->__GET('dni'); ?>" />
-    <input type="hidden" name="domicilio" value="<?php echo $doc->__GET('domicilio'); ?>" />
-    <input type="hidden" name="lugarinsc" value="<?php echo $doc->__GET('lugarinsc'); ?>" />
-    <input type="hidden" name="fechanacim" value="<?php echo $doc->__GET('fechanacim'); ?>" />
-    <input type="hidden" name="promedioT" value="<?php echo number_format($doc->__GET('promedioT'), 2, '.', ''); ?>" />
-    <input type="hidden" name="telefonos" value="<?php echo $doc->__GET('telefonos'); ?>" />
-    <input type="hidden" name="Titulobas" value="<?php echo $doc->__GET('Titulobas'); ?>" />
-    <input type="hidden" name="fechatit" value="<?php echo !empty($doc->__GET('fechatit')) ? date('Y-m-d', strtotime($doc->__GET('fechatit'))) : ''; ?>" />
-    <input type="hidden" name="otorgadopor" value="<?php echo $doc->__GET('otorgadopor'); ?>" />
-    <input type="hidden" name="finicio" value="<?php echo !empty($doc->__GET('finicio')) ? date('Y-m-d', strtotime($doc->__GET('finicio'))) : ''; ?>" />
-    <input type="hidden" name="otrostit" value="<?php echo $doc->__GET('otrostit'); ?>" />
-    <input type="hidden" name="fingreso" value="<?php echo !empty($doc->__GET('fingreso')) ? date('Y-m-d', strtotime($doc->__GET('fingreso'))) : ''; ?>" />
-    <input type="hidden" name="cargosdocentes" value="<?php echo $doc->__GET('cargosdocentes'); ?>" />
-    <input type="hidden" name="faperturaleg" value="<?php echo !empty($doc->__GET('faperturaleg')) ? date('Y-m-d', strtotime($doc->__GET('faperturaleg'))) : ''; ?>" />
-    <input type="hidden" name="Nacionalidad" value="<?php echo $doc->__GET('Nacionalidad'); ?>" />
-    <input type="hidden" name="email" value="<?php echo $doc->__GET('email'); ?>" />
-    <input type="hidden" name="obsdoc" value="<?php echo $doc->__GET('obsdoc'); ?>" />
-
-    <!-- Resto del formulario aquí -->
-    <a href="generate_pdf.php?legajo=<?php echo urlencode($doc->__GET('legajo')); ?>&apellidoynombre=<?php echo urlencode($doc->__GET('apellidoynombre')); ?>&dni=<?php echo urlencode($doc->__GET('dni')); ?>&domicilio=<?php echo urlencode($doc->__GET('domicilio')); ?>&lugarinsc=<?php echo urlencode($doc->__GET('lugarinsc')); ?>&fechanacim=<?php echo urlencode($doc->__GET('fechanacim')); ?>&promedioT=<?php echo urlencode($doc->__GET('promedioT')); ?>&telefonos=<?php echo urlencode($doc->__GET('telefonos')); ?>&Titulobas=<?php echo urlencode($doc->__GET('Titulobas')); ?>&fechatit=<?php echo urlencode($doc->__GET('fechatit')); ?>&otorgadopor=<?php echo urlencode($doc->__GET('otorgadopor')); ?>&finicio=<?php echo urlencode($doc->__GET('finicio')); ?>&otrostit=<?php echo urlencode($doc->__GET('otrostit')); ?>&fingreso=<?php echo urlencode($doc->__GET('fingreso')); ?>&cargosdocentes=<?php echo urlencode($doc->__GET('cargosdocentes')); ?>&faperturaleg=<?php echo urlencode($doc->__GET('faperturaleg')); ?>&Nacionalidad=<?php echo urlencode($doc->__GET('Nacionalidad')); ?>&email=<?php echo urlencode($doc->__GET('email')); ?>&obsdoc=<?php echo urlencode($doc->__GET('obsdoc')); ?>" class="btn btn-info" title="Descargar PDF" target="_blank">
-    <i class="glyphicon glyphicon-save"> Información Docente PDF</i> 
-</a>
-</form>
-<script language="Javascript">
-    function myConfirm() {
-    // Obtener todos los campos obligatorios
-    const legajo = document.querySelector('input[name="legajo"]').value.trim();
-    const apellidoynombre = document.querySelector('input[name="apellidoynombre"]').value.trim();
-    const dni = document.querySelector('input[name="dni"]').value.trim();
-
-    // Verificar si algún campo está vacío
-    if (!legajo || !apellidoynombre || !dni) {
-        alert("Debe completar todos los campos obligatorios.");
-        return false; // Evita el envío del formulario
-    }
-
-    // Si todo está completo, muestra el mensaje de éxito
-    alert("Carga realizada con éxito!!!!!");
-    return true; // Permite el envío del formulario
-}
-    </script>
-              </center>
-
-              <!--Script para la impresion de docente -->
-              <script language="Javascript">
-                function imprSelec(nombre) {
-                  var ficha = document.getElementById(nombre);
-                  var ventimp = window.open(' ', 'popimpr');
-                  ventimp.document.write( ficha.innerHTML );
-                  ventimp.document.close();
-                  ventimp.print( );
-                  ventimp.close();
-                }
-              </script>
-       <div style="text-align: left;top: 20px;right: -27px;">
+<div class="listado-docentes-busqueda">
+<?php
+$juntaPdfDocenteUrl = 'generate_pdf.php?legajo=' . urlencode((string) $doc->__GET('legajo'))
+    . '&apellidoynombre=' . urlencode((string) $doc->__GET('apellidoynombre'))
+    . '&dni=' . urlencode((string) $doc->__GET('dni'))
+    . '&domicilio=' . urlencode((string) $doc->__GET('domicilio'))
+    . '&lugarinsc=' . urlencode((string) $doc->__GET('lugarinsc'))
+    . '&fechanacim=' . urlencode((string) $doc->__GET('fechanacim'))
+    . '&promedioT=' . urlencode((string) $doc->__GET('promedioT'))
+    . '&telefonos=' . urlencode((string) $doc->__GET('telefonos'))
+    . '&Titulobas=' . urlencode((string) $doc->__GET('Titulobas'))
+    . '&fechatit=' . urlencode((string) $doc->__GET('fechatit'))
+    . '&otorgadopor=' . urlencode((string) $doc->__GET('otorgadopor'))
+    . '&finicio=' . urlencode((string) $doc->__GET('finicio'))
+    . '&otrostit=' . urlencode((string) $doc->__GET('otrostit'))
+    . '&fingreso=' . urlencode((string) $doc->__GET('fingreso'))
+    . '&cargosdocentes=' . urlencode((string) $doc->__GET('cargosdocentes'))
+    . '&faperturaleg=' . urlencode((string) $doc->__GET('faperturaleg'))
+    . '&Nacionalidad=' . urlencode((string) $doc->__GET('Nacionalidad'))
+    . '&email=' . urlencode((string) $doc->__GET('email'))
+    . '&obsdoc=' . urlencode((string) $doc->__GET('obsdoc'));
+?>
+<div class="listado-docentes-toolbar">
   <a href="RegistroDocente.php" class="btn btn-primary" title="Ingrese Nuevo Docente">
     <span class="glyphicon glyphicon-plus"></span> Nuevo Docente
   </a>
+  <a href="<?php echo htmlspecialchars($juntaPdfDocenteUrl, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-info" title="Descargar PDF" target="_blank" rel="noopener noreferrer">
+    <i class="glyphicon glyphicon-save"></i> Información Docente PDF
+  </a>
 </div>
-<div class="container-fluid">
-<div class="input-group">
-    <!--
-<div class="container mt-4">
-    <h2><u>Buscador de Datos</u></h2>
-    <form method="GET" action="">
-        <div class="form-row">
-        <div class="form-group col-md-4">
-                <label for="legajo">Legajo</label>
-                <input type="number" 
-                   class="form-control" 
-                   id="legajo" 
-                   name="legajo" 
-                   placeholder="Ingrese Legajo" 
-                   onpaste="return false;">
+<h1 class="listado-docentes-busqueda-titulo">Buscar Docente</h1>
+<form id="busquedaForm">
+    <div class="listado-docentes-busqueda-filtros">
+        <div class="form-group doc-busq-field doc-busq-field-legajo">
+            <label for="legajo">Legajo</label>
+            <input type="number" class="form-control docente-input-sm" id="legajo" name="legajo" placeholder="Ingrese Legajo">
         </div>
-            </div>
-            <div class="form-group col-md-4">
-                <label for="dni">DNI</label>
-             
-                  <input type="number" 
-                   class="form-control" 
-                   id="dni" 
-                   name="dni" 
-                   placeholder="Ingrese DNI" 
-                   onpaste="return false;">
-
-            </div>
-            <div class="form-group col-md-4">
-                <label for="apellido">Apellido y Nombre</label>
-                <input type="text" class="form-control" id="apellido" name="ApellidoyNombre" 
-           placeholder="Ingrese Apellido y Nombre"
-           oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s'-]/g, '')"
-           title="Solo se permiten letras, espacios, apóstrofes y guiones.">
-            </div>
+        <div class="form-group doc-busq-field doc-busq-field-dni">
+            <label for="dni">DNI</label>
+            <input type="number" class="form-control docente-input-sm" id="dni" name="dni" placeholder="Ingrese DNI">
         </div>
-      <center>
-                  <div class="container mt-4">
-                  <div class="header-buttons">
-                      <form method="GET" action="" class="form-inline">
-                          <div class="form-group">
-                              <button type="submit" class="btn btn-warning" title="Buscar Docente">
-                                  <i class="glyphicon glyphicon-search"></i>  Buscar
-                              </button>
-                               
-                          </div>
-                      </form>
-                     
-                  </div>
-              </form>
-</div></center>-->
-
-
-
-    <script>
-      $(document).ready(function(){
-  $("#example").DataTable({
-    // "sPaginationType": "bootstrap",
-  });
-});
-    </script>
+        <div class="form-group doc-busq-field doc-busq-field-nombre">
+            <label for="apellido">Apellido y Nombre</label>
+            <input type="text" class="form-control" id="apellido" name="ApellidoyNombre" placeholder="Ingrese Apellido y Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s'-]/g, '')">
+        </div>
+    </div>
+    <div class="listado-docentes-busqueda-acciones">
+    <button type="submit" class="btn btn-warning" id="buscarBtn">
+        <i class="glyphicon glyphicon-search"></i> Buscar
+    </button>
+    </div>
+    <div id="busquedaResultadoOk" class="listado-docentes-busqueda-ok alert alert-success" role="status" aria-live="polite" style="display: none;">
+        <i class="glyphicon glyphicon-ok-sign" aria-hidden="true"></i>
+        <span>Resultados encontrados correctamente.</span>
+    </div>
+</form>
 
 <script>
     document.getElementById('legajo').addEventListener('input', function (e) {
-        this.value = this.value.replace(/[^0-9]/g, ''); // Elimina todo excepto números
+        this.value = this.value.replace(/[^0-9]/g, '');
     });
-
     document.getElementById('dni').addEventListener('input', function (e) {
-        this.value = this.value.replace(/[^0-9]/g, ''); // Elimina todo excepto números
+        this.value = this.value.replace(/[^0-9]/g, '');
     });
 </script>
 
-<script>
-    // Función para limpiar la tabla
-    function clearResults() {
-        document.getElementById("resultBody").innerHTML = '';  // Limpia el contenido de la tabla
-    }
-</script>
-
-<center><h1><b><u>Buscar Docente</u></b></h1></center>
-<h2 id="filterHeader" style="display: none;"><u>Buscador de Datos!!!!</u></h2> <!-- Hide initially -->
-<br>
-<form id="busquedaForm">
-    <div class="form-row">
-        <div class="form-group col-md-4">
-            <label for="legajo" style="right: 12px">Legajo</label>
-            <input type="number" class="form-control" id="legajo" name="legajo" placeholder="Ingrese Legajo" style="right: 12px">
-        </div>
-        <div class="form-group col-md-4">
-            <label for="dni">DNI</label>
-            <input type="number" class="form-control" id="dni" name="dni" placeholder="Ingrese DNI">
-        </div>
-        <div class="form-group col-md-4">
-            <label for="apellido">Apellido y Nombre</label>
-            <input type="text" class="form-control" id="apellido" name="ApellidoyNombre" placeholder="Ingrese Apellido y Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s'-]/g, '')" style="width: 311px">
-
-        </div>
-    </div>
-    <center>
-    
-    <button type="button" class="btn btn-warning" id="buscarBtn">
-        <i class="glyphicon glyphicon-search"></i> Buscar
-    </button>
-</center>
-</form>
-
-<!-- Input de búsqueda en la tabla -->
-<div id="searchLabel" style="display: none; width: 360px;right: -15px">
-    <label><b><u>Buscar</u></b></label>
-</div>
-<div class="row justify-content-center">
-    <div class="col-md-6" style="margin-left: auto;">
-        <input type="text" id="searchTable" class="form-control" placeholder="Buscar Docente (Legajo, DNI o Apellido)" 
-               style="margin-bottom: 10px;right: -14px;width: 348px; display: none;">
-    </div>
+<div class="filtro-tabla-wrap">
+        <input type="text" id="searchTable" class="form-control" placeholder="Filtrar resultados por Legajo, DNI o Apellido..." style="display: none;">
 </div>
 
-<!-- Preloader bonito con Bootstrap -->
-<div id="preloader" style="display: none; text-align: center; margin-top: 20px;">
-    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-    <p style="margin-top: 10px; color: #444; font-weight: bold;">Buscando docentes...</p>
-</div>
 
-<div class="container mt-4">
-    <table id="resultTable" class="display table table-bordered" style="display: none;">
+<div class="container-fluid cfg-card cfg-table-wrap" style="overflow-x:auto;">
+    <table id="resultTable" class="display table table-hover table-bordered results" style="display: none;">
         <thead>
             <tr>
-                <th><center>Legajo</center></th>
-                <th><center>DNI</center></th>
-                <th><center>Apellido y Nombre</center></th>
-                <th><center>Localidad de Inscripción</center></th>
-                <th><center>Acciones</center></th>
+                <th>Legajo</th>
+                <th>DNI</th>
+                <th>Apellido y Nombre</th>
+                <th>Localidad de Inscripción</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody id="resultBody">
@@ -774,17 +635,17 @@ try {
         </tbody>
     </table>
 </div>
+</div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function () {
-    $('#buscarBtn').click(function () {
+    function ejecutarBusquedaDocentes() {
         var legajo = $('#legajo').val().trim();
         var dni = $('#dni').val().trim();
         var apellido = $('#apellido').val().trim();
 
         if (legajo === '' && dni === '' && apellido === '') {
-            alert('Debe ingresar al menos un dato para realizar la búsqueda.');
+            juntaAlert('Debe ingresar al menos un dato para realizar la búsqueda.', 'warning');
             return;
         }
 
@@ -796,10 +657,10 @@ $(document).ready(function () {
             data: formData,
 
             beforeSend: function () {
-                // Mostrar preloader antes de la solicitud
-                $('#preloader').show();
-                $('#resultTable').hide(); // Ocultar tabla anterior si hay
-                $('#resultBody').empty(); // Limpiar resultados anteriores
+                juntaSpinnerShow('Buscando docentes\u2026');
+                $('#resultTable').hide();
+                $('#resultBody').empty();
+                $('#busquedaResultadoOk').hide();
             },
 
             success: function (data) {
@@ -809,26 +670,35 @@ $(document).ready(function () {
 
                 if (rowCount > 0) {
                     $('#resultTable').show();
-                    $('#searchLabel').show();
                     $('#searchTable').show();
+                    $('#busquedaResultadoOk').show();
                     $('.no-data').remove();
                 } else {
                     $('#resultTable').show();
-                    $('#searchLabel').hide();
                     $('#searchTable').hide();
+                    $('#busquedaResultadoOk').hide();
                     $('#resultBody').html('<tr class="no-data"><td colspan="5" class="text-center" style="color:red;">No se encontraron resultados</td></tr>');
                 }
             },
 
             error: function () {
-                alert('Hubo un error al realizar la búsqueda. Por favor, inténtelo de nuevo.');
+                juntaError('Error', 'Hubo un error al realizar la búsqueda. Por favor, inténtelo de nuevo.');
             },
 
             complete: function () {
-                // Ocultar preloader al terminar la solicitud (éxito o error)
-                $('#preloader').hide();
+                juntaSpinnerHide();
             }
         });
+    }
+
+    $('#buscarBtn').click(function (e) {
+        e.preventDefault();
+        ejecutarBusquedaDocentes();
+    });
+
+    $('#busquedaForm').on('submit', function (e) {
+        e.preventDefault();
+        ejecutarBusquedaDocentes();
     });
 
     // Filtro en tiempo real dentro de la tabla
@@ -850,136 +720,185 @@ $(document).ready(function () {
 });
 </script>
 
-
-
-<tbody>
-
-<!-- este es el codigo anterior de busqueda --->
-<?php
-// Incluye la conexión a la base de datos aquí
-$serverName = "10.1.9.113";
-$connectionOptions = array(
-    "Database" => "Junta",
-    "Uid" => "SA",
-    "PWD" => "Davinci2024#",
-    "TrustServerCertificate" => true,
-    "CharacterSet" => "UTF-8" // Para caracteres especiales
-);
-
-// Conexión con SQL Server
-$conn = sqlsrv_connect($serverName, $connectionOptions);
-
-if ($conn === false) {
-    die(print_r(sqlsrv_errors(), true));
-}
-
-$legajo = isset($_GET['legajo']) ? $_GET['legajo'] : '';
-$dni = isset($_GET['dni']) ? $_GET['dni'] : '';
-$ApellidoyNombre = isset($_GET['ApellidoyNombre']) ? $_GET['ApellidoyNombre'] : '';
-
-// Solo ejecutar la consulta si alguno de los campos tiene un valor
-if ($legajo != '' || $dni != '' || $ApellidoyNombre != '') {
-    $params = [];
-    // Incluir id2 en la selección
-    $sql = "SELECT id2, Legajo, dni, ApellidoyNombre,lugarinsc FROM _junta_docentes WHERE 1=1";
-
-    if ($legajo != '') {
-        $sql .= " AND Legajo = ?";
-        $params[] = $legajo;
-    }
-    if ($dni != '') {
-        $sql .= " AND dni = ?";
-        $params[] = $dni;
-    }
-    if ($ApellidoyNombre != '') {
-        $sql .= " AND ApellidoyNombre LIKE ?";
-        $params[] = "%$ApellidoyNombre%";
-    }
-
-    $stmt = sqlsrv_query($conn, $sql, $params);
-
-    if ($stmt === false) {
-        die(print_r(sqlsrv_errors(), true));
-    }
-?>
-<!--
-<div class="container mt-4">
-    <h2>Resultados de la Búsqueda</h2>
-    <table id="resultTable" class="display table table-bordered">
-        <thead>
-            <tr>
-                <th><center style="font-size:1em">Legajo</center></th>
-                <th><center style="font-size:1em">DNI</center></th>
-                <th><center style="font-size:1em">Apellido y Nombre</center></th>
-                <th><center style="font-size:1em">Localidad de Inscripcion</center></th>
-                <th><center style="font-size:1em">Acciones</center></th>
-            </tr>
-        </thead>-->
-        <tbody>
-            <?php while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)): ?>
-                <tr>
-                    <td><center style="font-size:1em"><?= htmlspecialchars($row['Legajo']) ?></center></td>
-                    <td><center style="font-size:1em"><?= htmlspecialchars($row['dni']) ?></center></td>
-                    <td><center style="font-size:1em"><?= htmlspecialchars($row['ApellidoyNombre']) ?></center></td>
-                    <td>
-                        <center style="font-size:1em">
-                            <?php 
-                            if (is_null($row['lugarinsc']) || trim($row['lugarinsc']) === '') {
-                                echo "<span style='color: red;'>Localidad de Inscripción no disponible</span>";
-                            } else {
-                                echo htmlspecialchars($row['lugarinsc']);
-                            }
-                            ?>
-                        </center>
-                    </td>
-                    
-                    <td>
-                        <center>
-                       
-                                <a class="btn btn-sm btn-success" href="?action=editar&id2=<?= htmlspecialchars($row['id2']) ?>" title="Editar legajos">
-                                    <i class="glyphicon glyphicon-edit"></i> Editar
-                                </a>
-                                <a class="btn btn-sm btn-danger" href="?action=eliminar&id2=<?= htmlspecialchars($row['id2']) ?>" title="Borrar legajo" onclick="return myConfirm4();">
-                                    <i class="glyphicon glyphicon-trash"></i> Borrar
-                                </a>
-                                <a href="VerInscripciones.php?legajo=<?= htmlspecialchars($row['Legajo']) ?>" title="Ver Inscripcion legajos" class="btn btn-custom btn-sm">
-                                    <span class="glyphicon glyphicon-eye-open"></span> Ver 
-                                </a>
-                                <a href="RegistroMovimiento.php?legajo=<?= htmlspecialchars($row['Legajo']) ?>" title="Agregar Inscripcion" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-plus"></span> Agregar 
-                                </a>
-
-
-                        </center>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
-    
-</div>
-
-<?php
-}
-?>
-
-<!-- Include jQuery, DataTables, and other necessary scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#resultTable').DataTable();
-    });
-
     function myConfirm4() {
-        return confirm("¿Desea borrar al docente?");
+        juntaConfirmDanger('¿Desea borrar al docente?');
+        return false;
+    }
+</script>
+<script>
+    function clearResults() {
+        document.getElementById("resultBody").innerHTML = '';
+    }
+</script>
+
+<div class="cfg-listados-polish docentes-page docente-datos-panel">
+<div class="docente-form-shell cfg-card">
+<h1 class="docente-form-title cfg-page-title">Datos Docente</h1>
+ <form action="?action=<?php echo $doc->id2 > 0 ? 'actualizar' : 'registrar'; ?>" method="post" class="pure-form pure-form-stacked" style="margin-bottom:0;" id="formulario_transaccion">
+                    <input type="hidden" name="id2" value="<?php echo $doc->__GET('id2'); ?>" />
+                    <table class="docente-form-table" id="seleccion">
+                        <tr class="docente-sec-row">
+                            <td colspan="2" class="docente-sec-title">Datos personales y de contacto</td>
+                        </tr>
+                        <tr>
+                            <th>Legajo</th>
+                            <td><input type="number" name="legajo" value="<?php echo $doc->__GET('legajo'); ?>" class="form-control docente-input-sm" required /></td>
+                        </tr>
+                         <tr>
+                            <th>Apellido y Nombre</th>
+                            <td><input type="text" name="apellidoynombre" value="<?php echo $doc->__GET('apellidoynombre'); ?>" class="form-control" required /></td>
+                        </tr>
+                        <tr>
+                            <th>DNI</th>
+                            <td><input type="number" name="dni" value="<?php echo $doc->__GET('dni'); ?>" class="form-control docente-input-sm" required/></td>
+                        </tr>
+                        <tr>
+                            <th>Domicilio</th>
+                            <td><input type="text" name="domicilio" value="<?php echo $doc->__GET('domicilio'); ?>" class="form-control" /></td>
+                        </tr>
+                         <tr>
+                            <th>Lugar inscripción</th>
+                            <td><input type="text" name="lugarinsc" value="<?php
+                                  if ($doc->__GET('lugarinsc') == 'RG' or $doc->__GET('lugarinsc') == 'RGD') {
+                                      echo 'Rio Grande';
+                                  } elseif ($doc->__GET('lugarinsc') == 'USH') {
+                                      echo 'Ushuaia';
+                                  } elseif ($doc->__GET('lugarinsc') == 'TOL') {
+                                      echo 'Tolhuin';
+                                  } else {
+                                      echo $doc->__GET('lugarinsc');
+                                  }
+                                              ?>" class="form-control docente-input-md" /></td>
+                        </tr>
+                         <tr>
+                         <th>Fecha nacimiento</th>
+                         <td><input type="date" name="fechanacim" value="<?php echo !empty($doc->__GET('fechanacim')) ? date('Y-m-d', strtotime($doc->__GET('fechanacim'))) : ''; ?>" class="form-control docente-input-sm" /></td>
+                        </tr>
+                         <tr>
+                            <th>Teléfono</th>
+                            <td><input type="text" name="telefonos" value="<?php echo $doc->__GET('telefonos'); ?>" class="form-control docente-input-md"/></td>
+                        </tr>
+                         <tr>
+                            <th>Nacionalidad</th>
+                            <td><input type="text" name="Nacionalidad" value="<?php echo $doc->__GET('Nacionalidad'); ?>" class="form-control docente-input-md" /></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td><input type="email" name="email" value="<?php echo $doc->__GET('email'); ?>" class="form-control" /></td>
+                        </tr>
+                        <tr class="docente-sec-row">
+                            <td colspan="2" class="docente-sec-title">Formación y calificación</td>
+                        </tr>
+                         <tr>
+                            <th>Promedio</th>
+                            <td>
+                                <input type="number" name="promedioT" value="<?php echo number_format($doc->__GET('promedioT'), 2, '.', ''); ?>" step="0.01" class="form-control docente-input-sm" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Título básico</th>
+                            <td><input type="text" name="Titulobas" value="<?php echo $doc->__GET('Titulobas') ?>" class="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <th>Fecha título</th>
+                            <td><input type="date" name="fechatit" value="<?php echo !empty($doc->__GET('fechatit')) ? date('Y-m-d', strtotime($doc->__GET('fechatit'))) : ''; ?>" class="form-control docente-input-sm" /></td>
+                          </tr>
+                        <tr>
+                            <th>Otorgado por</th>
+                            <td><input type="text" name="otorgadopor" value="<?php echo $doc->__GET('otorgadopor'); ?>" class="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <th>Otros títulos</th>
+                            <td><input type="text" name="otrostit" value="<?php echo $doc->__GET('otrostit'); ?>" class="form-control" /></td>
+                        </tr>
+                        <tr class="docente-sec-row">
+                            <td colspan="2" class="docente-sec-title">Antecedentes laborales y legajo</td>
+                        </tr>
+                        <tr>
+                                  <th>Fecha inicio docencia</th>
+                                  <td><input type="date" name="finicio" value="<?php echo !empty($doc->__GET('finicio')) ? date('Y-m-d', strtotime($doc->__GET('finicio'))) : ''; ?>" class="form-control docente-input-sm" /></td>
+                        </tr>
+                         <tr>
+                            <th>Fecha ingreso</th>
+                            <td><input type="date" name="fingreso" value="<?php echo !empty($doc->__GET('fingreso')) ? date('Y-m-d', strtotime($doc->__GET('fingreso'))) : ''; ?>" class="form-control docente-input-sm" /></td>
+                          </tr>
+                         <tr>
+                            <th>Cargo docente</th>
+                            <td><input type="text" name="cargosdocentes" value="<?php echo $doc->__GET('cargosdocentes'); ?>" class="form-control" /></td>
+                        </tr>
+                         <tr>
+                            <th>Fecha apertura legajo</th>
+                            <td><input type="date" name="faperturaleg" value="<?php echo !empty($doc->__GET('faperturaleg')) ? date('Y-m-d', strtotime($doc->__GET('faperturaleg'))) : ''; ?>" class="form-control docente-input-sm" /></td>
+                          </tr>
+                        <tr class="docente-sec-row">
+                            <td colspan="2" class="docente-sec-title">Observaciones</td>
+                        </tr>
+                         <tr>
+                            <th>Observaciones</th>
+                            <td>
+                              <textarea name="obsdoc" rows="5" class="form-control"><?php echo $doc->__GET('obsdoc'); ?></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                             <div class="docente-form-actions cfg-actions">
+                                <button type="submit" class="btn btn-primary" onclick="return myConfirm();" title="Cagar Docente"><i class="glyphicon glyphicon-floppy-saved"></i> Cargar</button>
+                                <button type="button" class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR" title="Limapiar Datos"><i class="glyphicon glyphicon-erase"></i> Limpiar</button>
+                                <a href="VerInscripciones.php?legajo=<?php echo $doc->__GET('legajo'); ?>" class="btn btn-success" title="Ver Inscripcion Docente"><span class="glyphicon glyphicon-list-alt"></span> Ver inscripciones</a>
+                             </div>
+                             <div class="docente-legajo-resumen"><strong>Número de legajo:</strong> <?php echo $doc->__GET('legajo'); ?></div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+</div>
+</div><!-- .docente-datos-panel -->
+
+<script>
+    function myConfirm() {
+    var form = document.getElementById('formulario_transaccion');
+    var legajo = form.querySelector('input[name="legajo"]').value.trim();
+    var apellidoynombre = form.querySelector('input[name="apellidoynombre"]').value.trim();
+    var dni = form.querySelector('input[name="dni"]').value.trim();
+
+    if (!legajo || !apellidoynombre || !dni) {
+        juntaAlert('Debe completar todos los campos obligatorios.', 'warning');
+        return false;
     }
 
+    Swal.fire({
+      title: '¿Desea cargar los datos?',
+      text: 'Se guardarán los datos del docente.',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, cargar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#2698f3',
+      cancelButtonColor: '#6c757d',
+      reverseButtons: true
+    }).then(function(result) {
+      if (result.isConfirmed) {
+        form._juntaConfirmed = true;
+        form.submit();
+      }
+    });
+    return false;
+}
+</script>
 
-  $("#limpiar").click(function(event) {
-    $("#formulario_transaccion")[0].reset();
-  });
+<script language="Javascript">
+    function imprSelec(nombre) {
+      var ficha = document.getElementById(nombre);
+      var ventimp = window.open(' ', 'popimpr');
+      ventimp.document.write( ficha.innerHTML );
+      ventimp.document.close();
+      ventimp.print( );
+      ventimp.close();
+    }
+</script>
 
+<script>
   $("#vaciar").on("click", function(event) {
     event.preventDefault();
     $("#formulario_transaccion")
@@ -987,12 +906,6 @@ if ($legajo != '' || $dni != '' || $ApellidoyNombre != '') {
       .val("");
   });
 </script>
-<script>
-    // Función para limpiar la tabla
-    function clearResults() {
-        document.getElementById("resultBody").innerHTML = '';  // Limpia el contenido de la tabla
-    }
-</script>
 
-
+<?php $JUNTA_PIE_SESION_DIRECT = true; ?>
 <?php include('footer2.php');?>

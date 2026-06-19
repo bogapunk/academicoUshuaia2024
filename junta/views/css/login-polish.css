@@ -1,0 +1,446 @@
+@charset "UTF-8";
+/*
+ * Estilos pantalla de login (diseño moderno).
+ * REVERTIR: en index.php volver a index.login-clasico.php o usar header.php + footer.php sin este CSS.
+ */
+
+.junta-login-page {
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+	background: linear-gradient(165deg, #eef4fb 0%, #f8fafc 42%, #ffffff 100%);
+	color: #1e293b;
+	min-height: 100vh;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	overflow-x: hidden;
+}
+
+.junta-login-page * {
+	box-sizing: border-box;
+}
+
+.junta-login-page .junta-cabecera-institucional {
+	margin-bottom: 0;
+	padding-top: 0.85rem;
+	padding-bottom: 0.95rem;
+}
+
+@media (min-width: 768px) {
+	.junta-login-page .junta-cabecera-institucional {
+		padding-top: 1rem;
+		padding-bottom: 1.05rem;
+	}
+}
+
+.junta-login-main {
+	flex: 1;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.junta-home.junta-login-shell {
+	padding: 0.65rem 16px 2.25rem;
+	min-height: 0;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	background: transparent;
+}
+
+.junta-login-hero {
+	width: 100%;
+	max-width: 720px;
+	margin: 0 auto;
+	padding: 0.2rem 0.75rem 0;
+	text-align: center;
+	flex-shrink: 0;
+}
+
+.junta-login-titulo {
+	text-align: center;
+	margin: 0 0 0.45rem 0;
+	font-size: clamp(2.05rem, 5vw, 2.85rem);
+	line-height: 1.12;
+	font-weight: 700;
+	color: #0f172a;
+	letter-spacing: -0.02em;
+}
+
+@media (min-width: 481px) {
+	.junta-login-titulo {
+		font-size: clamp(2.25rem, 4.8vw, 3.15rem);
+	}
+}
+
+@media (min-width: 768px) {
+	.junta-home.junta-login-shell {
+		padding: 1rem 24px 3rem;
+	}
+	.junta-login-hero {
+		padding-top: 0.45rem;
+	}
+	.junta-login-titulo {
+		font-size: clamp(2.45rem, 3.8vw, 3.35rem);
+	}
+}
+
+@media (min-width: 1024px) {
+	.junta-home.junta-login-shell {
+		padding-top: 1.15rem;
+		padding-bottom: 3.5rem;
+	}
+}
+
+.junta-login-leyenda {
+	text-align: center;
+	font-size: clamp(1rem, 2vw, 1.2rem);
+	color: #475569;
+	margin: 0;
+	line-height: 1.45;
+	font-weight: 500;
+}
+
+.junta-login-form-wrap {
+	width: 100%;
+	max-width: 480px;
+	margin: clamp(1.35rem, 4vw, 2rem) auto 0;
+	padding: 0 8px;
+	flex-shrink: 0;
+}
+
+@media (min-width: 481px) {
+	.junta-login-form-wrap {
+		margin-top: clamp(1.75rem, 4.5vh, 2.75rem);
+		max-width: 460px;
+	}
+}
+
+@media (min-width: 768px) {
+	.junta-login-form-wrap {
+		margin-top: clamp(2.25rem, 5.5vh, 3.75rem);
+		max-width: 500px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.junta-login-form-wrap {
+		margin-top: clamp(2.75rem, 6vh, 4.25rem);
+	}
+}
+
+.junta-home .form-container {
+	width: 100%;
+	max-width: 450px;
+	margin: 0 auto;
+	padding: 1.55rem 1.45rem 1.7rem;
+	background: #ffffff;
+	border-radius: 14px;
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	box-shadow: 0 10px 32px rgba(15, 23, 42, 0.09), 0 1px 0 rgba(255, 255, 255, 0.9) inset;
+}
+
+@media (min-width: 481px) {
+	.junta-home .form-container {
+		padding: 1.6rem 1.55rem 1.75rem;
+	}
+}
+
+@media (min-width: 768px) {
+	.junta-home .form-container {
+		padding: 1.75rem 1.7rem 1.95rem;
+		max-width: 470px;
+	}
+}
+
+.junta-secion-titulo {
+	font-size: 1.45rem;
+	font-weight: 600;
+	margin: 0 0 1.1rem 0;
+	text-align: center;
+	color: #0f172a;
+	letter-spacing: -0.01em;
+}
+
+/* —— Alertas de estado (error / éxito) —— */
+.junta-login-alert {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.65rem;
+	padding: 0.75rem 0.9rem;
+	margin: 0 0 1rem 0;
+	border-radius: 10px;
+	font-size: 0.95rem;
+	line-height: 1.45;
+	text-align: left;
+}
+
+.junta-login-alert i {
+	flex-shrink: 0;
+	margin-top: 0.1rem;
+	font-size: 1.05rem;
+}
+
+.junta-login-alert--error {
+	background: #fef2f2;
+	border: 1px solid #fecaca;
+	color: #991b1b;
+}
+
+.junta-login-alert--success {
+	background: #f0fdf4;
+	border: 1px solid #bbf7d0;
+	color: #166534;
+}
+
+/* —— Labels visibles —— */
+.junta-field-group {
+	margin-bottom: 1rem;
+}
+
+.junta-field-group:last-of-type {
+	margin-bottom: 0;
+}
+
+.junta-field-label {
+	display: block;
+	margin: 0 0 0.45rem 0;
+	font-size: clamp(1rem, 2.4vw, 1.12rem);
+	font-weight: 600;
+	color: #1e293b;
+	letter-spacing: 0.01em;
+}
+
+@media (min-width: 768px) {
+	.junta-field-label {
+		font-size: 1.15rem;
+	}
+}
+
+.junta-bienvenida-caja {
+	max-width: 100%;
+	margin: 0 auto;
+	padding: 1.35rem 1.25rem;
+	background: #ffffff;
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	border-radius: 14px;
+	box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
+	text-align: left;
+}
+
+.junta-datos-lead {
+	font-size: 1rem;
+	color: #64748b;
+	text-align: center;
+	margin: 0 0 0.85rem 0;
+	line-height: 1.45;
+}
+
+.junta-login-datos p {
+	text-align: left;
+	margin-bottom: 0.5rem;
+	font-size: 1rem;
+	color: #334155;
+}
+
+.junta-home .junta-input-wrap {
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.junta-home .junta-input-wrap:focus-within {
+	border-color: rgba(33, 150, 243, 0.55) !important;
+	box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.12);
+}
+
+.junta-home .junta-input-wrap:focus-within .junta-input-icon {
+	color: var(--junta-brand-blue, #2196f3);
+}
+
+.junta-home .junta-input-wrap .form-control {
+	font-size: 17px;
+	font-family: inherit;
+	transition: box-shadow 0.2s ease;
+}
+
+.junta-home .junta-input-wrap .form-control:focus {
+	box-shadow: none !important;
+}
+
+.junta-login-btn {
+	width: 100%;
+	padding: 12px 18px;
+	font-size: 16px;
+	font-family: inherit;
+	font-weight: 600;
+	border: 1px solid var(--junta-brand-blue-border, #1976d2);
+	border-radius: 10px;
+	cursor: pointer;
+	box-shadow: 0 2px 6px rgba(33, 150, 243, 0.22);
+	transition: background-color 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, transform 0.2s ease;
+}
+
+@media (hover: hover) {
+	.junta-login-btn:hover,
+	.junta-login-btn:focus {
+		transform: translateY(-1px);
+	}
+}
+
+.subrayado-hero {
+	border-bottom: 3px solid var(--junta-brand-blue, #2196f3);
+	display: inline-block;
+	padding-bottom: 0.15rem;
+}
+
+#preload {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.92);
+	z-index: 99999;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#preload.junta-preload-visible {
+	display: flex;
+}
+
+.junta-login-page .spinner {
+	width: 60px;
+	height: 60px;
+	border: 5px solid #e2e8f0;
+	border-top-color: var(--junta-brand-blue, #2196f3);
+	border-radius: 50%;
+	animation: juntaLoginSpin 0.85s linear infinite;
+}
+
+.junta-login-page .spinner-text {
+	margin-top: 18px;
+	font-size: 1.05rem;
+	font-weight: 600;
+	color: #374151;
+	font-family: inherit;
+	letter-spacing: 0.01em;
+}
+
+@keyframes juntaLoginSpin {
+	to { transform: rotate(360deg); }
+}
+
+.junta-home .login-form .junta-form-fields {
+	text-align: left !important;
+}
+
+.junta-home .login-form .form-group.junta-input-wrap {
+	position: relative !important;
+	overflow: visible !important;
+	margin-bottom: 0 !important;
+}
+
+.junta-home .login-form .junta-input-icon {
+	position: absolute !important;
+	left: 0 !important;
+	top: 0 !important;
+	bottom: 0 !important;
+	width: 58px !important;
+	min-width: 58px !important;
+	z-index: 5 !important;
+	flex-shrink: 0 !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+}
+
+.junta-home .login-form .junta-input-icon i {
+	font-size: 1.25rem !important;
+	line-height: 1 !important;
+}
+
+.junta-home .login-form .junta-input-wrap input.form-control {
+	width: 100% !important;
+	padding-left: 74px !important;
+}
+
+.junta-home .login-form .junta-input-wrap .form-control {
+	z-index: 1;
+}
+
+/* Pie login */
+.junta-login-footer {
+	margin-top: auto;
+	padding: 1.35rem 1rem 1.5rem;
+	border-top: 1px solid rgba(15, 23, 42, 0.08);
+	background: rgba(255, 255, 255, 0.72);
+}
+
+.junta-login-footer-inner {
+	max-width: 640px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.junta-login-footer-link {
+	display: inline-block;
+	margin-bottom: 0.65rem;
+	font-size: 0.95rem;
+	font-weight: 600;
+	color: var(--junta-brand-blue, #2196f3);
+	text-decoration: none;
+}
+
+.junta-login-footer-link:hover,
+.junta-login-footer-link:focus {
+	color: var(--junta-brand-orange, #e55916);
+	text-decoration: underline;
+}
+
+.junta-login-footer-logo {
+	display: block;
+	margin: 0 auto 0.65rem;
+}
+
+.junta-login-footer-copy {
+	margin: 0;
+	font-size: 0.82rem;
+	line-height: 1.45;
+	color: #64748b;
+}
+
+@media (max-width: 480px) {
+	.junta-secion-titulo { font-size: 1.3rem; }
+	.junta-home.junta-login-shell {
+		justify-content: flex-start;
+		padding: 0.5rem 12px 1.85rem;
+	}
+	.junta-login-hero {
+		padding-left: 0.35rem;
+		padding-right: 0.35rem;
+	}
+	.junta-login-form-wrap {
+		margin-top: 1.25rem;
+		padding: 0 4px;
+	}
+	.junta-login-titulo {
+		font-size: clamp(1.95rem, 7.5vw, 2.35rem);
+	}
+	.junta-field-label {
+		font-size: 1.02rem;
+	}
+	.junta-home .form-container {
+		padding: 1.4rem 1.2rem 1.55rem;
+		border-radius: 12px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.junta-login-btn { transition: none; }
+	.junta-login-btn:hover { transform: none; }
+	.junta-login-page .spinner { animation: none; }
+}

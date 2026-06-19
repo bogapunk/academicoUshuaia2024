@@ -1,0 +1,490 @@
+/* Sistema unificado de botones — referencia: Guardar / Limpiar Formulario (Modalidades) */
+:root {
+  --junta-btn-radius: 11px;
+  --junta-btn-radius-sm: 9px;
+  --junta-btn-height: 42px;
+  --junta-btn-height-sm: 34px;
+  --junta-btn-min-width: 138px;
+  --junta-btn-min-width-sm: 88px;
+  --junta-btn-pad-x: 18px;
+  --junta-btn-pad-x-sm: 12px;
+  --junta-btn-font: 14px;
+  --junta-btn-font-sm: 13px;
+  --junta-btn-gap: 7px;
+  --junta-btn-shadow: 0 3px 12px rgba(15, 23, 42, 0.12);
+  --junta-btn-shadow-hover: 0 6px 18px rgba(15, 23, 42, 0.16);
+  --junta-btn-grad-success: linear-gradient(145deg, #22a06b, #15803d);
+  --junta-btn-grad-danger: linear-gradient(145deg, #ef4444, #b91c1c);
+  --junta-btn-grad-warning: linear-gradient(145deg, #f59e0b, #d97706);
+  --junta-btn-grad-primary: linear-gradient(145deg, #2b8fd9, #003366);
+  --junta-btn-grad-info: linear-gradient(145deg, #0ea5e9, #0369a1);
+  --junta-btn-grad-default: linear-gradient(145deg, #ffffff, #f1f5f9);
+}
+
+/* Base operacional (todos los .btn salvo navegación principal) */
+.btn,
+a.btn,
+button.btn,
+input.btn[type="submit"],
+input.btn[type="button"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: var(--junta-btn-gap);
+  min-width: var(--junta-btn-min-width);
+  min-height: var(--junta-btn-height);
+  height: var(--junta-btn-height);
+  padding: 0 var(--junta-btn-pad-x) !important;
+  border-radius: var(--junta-btn-radius) !important;
+  border: none !important;
+  font-size: var(--junta-btn-font) !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+  white-space: nowrap;
+  text-decoration: none !important;
+  position: static !important;
+  top: auto !important;
+  bottom: auto !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  box-sizing: border-box !important;
+  box-shadow: var(--junta-btn-shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.btn.btn-sm,
+a.btn.btn-sm,
+button.btn.btn-sm {
+  min-width: var(--junta-btn-min-width-sm);
+  min-height: var(--junta-btn-height-sm);
+  height: var(--junta-btn-height-sm);
+  padding: 0 var(--junta-btn-pad-x-sm) !important;
+  border-radius: var(--junta-btn-radius-sm) !important;
+  font-size: var(--junta-btn-font-sm) !important;
+  gap: 5px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1);
+}
+
+.btn:hover,
+a.btn:hover,
+button.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--junta-btn-shadow-hover);
+  filter: brightness(1.04);
+  text-decoration: none !important;
+}
+
+.btn.btn-sm:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.14);
+}
+
+.btn:active,
+.btn.active {
+  transform: translateY(0);
+  filter: brightness(0.98);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.1);
+}
+
+.btn .glyphicon,
+.btn i.glyphicon,
+.btn span.glyphicon {
+  position: static !important;
+  top: auto !important;
+  line-height: 1 !important;
+  flex-shrink: 0;
+  font-size: 13px !important;
+  font-style: normal !important;
+}
+
+.btn.btn-sm .glyphicon,
+.btn.btn-sm i.glyphicon {
+  font-size: 12px !important;
+}
+
+.btn-success,
+a.btn-success,
+button.btn-success {
+  background: var(--junta-btn-grad-success) !important;
+  color: #fff !important;
+}
+
+.btn-danger,
+a.btn-danger,
+button.btn-danger {
+  background: var(--junta-btn-grad-danger) !important;
+  color: #fff !important;
+}
+
+.btn-warning,
+a.btn-warning,
+button.btn-warning {
+  background: var(--junta-btn-grad-warning) !important;
+  color: #fff !important;
+}
+
+.btn-primary,
+a.btn-primary,
+button.btn-primary,
+.btn-custom,
+a.btn-custom {
+  background: var(--junta-btn-grad-primary) !important;
+  color: #fff !important;
+}
+
+.btn-info,
+a.btn-info,
+button.btn-info {
+  background: var(--junta-btn-grad-info) !important;
+  color: #fff !important;
+}
+
+.btn-default,
+a.btn-default,
+button.btn-default {
+  background: var(--junta-btn-grad-default) !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-info:hover,
+.btn-info:focus,
+.btn-custom:hover,
+.btn-custom:focus {
+  color: #fff !important;
+}
+
+.btn-default:hover,
+.btn-default:focus {
+  color: #1e293b !important;
+  background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important;
+  border-color: #94a3b8 !important;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active,
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active {
+  color: #fff !important;
+  border: none !important;
+}
+
+.btn-success:hover,
+.btn-success:focus { background: var(--junta-btn-grad-success) !important; filter: brightness(1.08); }
+.btn-danger:hover,
+.btn-danger:focus { background: var(--junta-btn-grad-danger) !important; filter: brightness(1.08); }
+.btn-warning:hover,
+.btn-warning:focus { background: var(--junta-btn-grad-warning) !important; filter: brightness(1.08); }
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-custom:hover,
+.btn-custom:focus { background: var(--junta-btn-grad-primary) !important; filter: brightness(1.08); }
+.btn-info:hover,
+.btn-info:focus { background: var(--junta-btn-grad-info) !important; filter: brightness(1.08); }
+
+/* Anular margen lateral Bootstrap (.btn + .btn) en grupos con gap flex */
+.cfg-actions .btn + .btn,
+.junta-acciones .btn + .btn,
+.usuarios-acciones .btn + .btn,
+.acciones-docentes .btn + .btn,
+.acciones-inscripciones .btn + .btn,
+.modal-footer .btn + .btn,
+.cfg-toolbar .btn + .btn,
+center .btn + .btn {
+  margin-left: 0 !important;
+}
+
+/* Anular margin:10px legacy de headers en .btn-success dentro de grupos de acción */
+.junta-acciones .btn-success,
+.junta-acciones a.btn-success,
+.junta-btn-group .btn-success,
+.junta-btn-group a.btn-success,
+.junta-btn-group button.btn-success,
+.cfg-listados-polish .junta-acciones .btn-success,
+.cfg-listados-polish .junta-btn-group .btn-success,
+.acciones-docentes .btn-success,
+.acciones-docentes a.btn-success {
+  margin: 0 !important;
+}
+
+/* Grupo horizontal de botones — fila alineada y centrada */
+.junta-btn-group,
+.cfg-actions:not(td),
+.mov-form-actions,
+.docente-form-actions,
+.listado-docentes-busqueda-acciones,
+.listado-docentes-toolbar,
+.cfg-toolbar > div:last-child,
+.usuarios-toolbar-actions,
+.modal-footer,
+.send-button {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  align-content: center !important;
+  gap: 12px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  line-height: 1;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.junta-btn-group > .btn,
+.junta-btn-group > a.btn,
+.junta-btn-group > button.btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  align-self: center !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+  position: static !important;
+  top: auto !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+  min-width: 120px !important;
+}
+
+.cfg-actions:not(td) > .btn,
+.cfg-actions:not(td) > a.btn,
+.cfg-actions:not(td) > button.btn,
+.mov-form-actions > .btn,
+.mov-form-actions > a.btn,
+.mov-form-actions > button.btn,
+.docente-form-actions > .btn,
+.docente-form-actions > a.btn,
+.docente-form-actions > button.btn,
+.modal-footer > .btn,
+.modal-footer > a.btn,
+.modal-footer > button.btn,
+.cfg-toolbar > div:last-child > .btn,
+.cfg-toolbar > div:last-child > a.btn,
+.usuarios-toolbar-actions > .btn,
+.usuarios-toolbar-actions > a.btn,
+.listado-docentes-busqueda-acciones > .btn,
+.listado-docentes-busqueda-acciones > a.btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  align-self: center !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+  position: static !important;
+  top: auto !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+}
+
+td.cfg-actions-cell,
+.cfg-listados-polish td.cfg-actions-cell {
+  display: table-cell !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+td.cfg-actions {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+td.cfg-actions > .btn + .btn,
+td.cfg-actions > button + button,
+.junta-btn-group > .btn + .btn {
+  margin-left: 0 !important;
+}
+
+/* Toolbar superior en paneles cfg */
+.cfg-listados-polish .cfg-toolbar .btn {
+  margin: 0 !important;
+}
+
+/* Inscripciones — barra superior: Actualizar / Nuevo movimiento / Volver atrás */
+.ins-list-shell .ins-toolbar-actions.junta-btn-group,
+.ins-list-shell .junta-btn-group.ins-toolbar-actions {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 14px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 55%, #e8f4fd 100%);
+  border: 1px solid #b6d4f5;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0, 68, 129, 0.08);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ins-list-shell .ins-toolbar-actions .btn.ins-btn {
+  min-width: 170px;
+  min-height: 44px;
+  height: 44px;
+  border-radius: 12px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  padding: 0 20px !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.ins-list-shell .ins-toolbar-actions .btn.ins-btn .ins-btn-label {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+}
+
+.ins-list-shell .ins-toolbar-actions .btn.ins-btn .glyphicon,
+.ins-list-shell .ins-toolbar-actions .btn.ins-btn i.glyphicon {
+  font-size: 14px !important;
+  margin-right: 2px;
+  opacity: 1;
+}
+
+/* Actualizar tabla — azul institucional vibrante */
+.ins-list-shell .ins-toolbar-actions .btn.ins-btn-refresh {
+  background: linear-gradient(165deg, #4db3ff 0%, #2698f3 45%, #1565c0 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(38, 152, 243, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+.ins-list-shell .ins-toolbar-actions .btn.ins-btn-refresh:hover,
+.ins-list-shell .ins-toolbar-actions .btn.ins-btn-refresh:focus {
+  background: linear-gradient(165deg, #64c0ff 0%, #2b8fd9 45%, #0d47a1 100%) !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(38, 152, 243, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  filter: none;
+}
+
+/* Nuevo movimiento — verde esmeralda llamativo */
+.ins-list-shell .ins-toolbar-actions .btn.ins-btn-new {
+  background: linear-gradient(165deg, #4ade80 0%, #22c55e 45%, #15803d 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+.ins-list-shell .ins-toolbar-actions .btn.ins-btn-new:hover,
+.ins-list-shell .ins-toolbar-actions .btn.ins-btn-new:focus {
+  background: linear-gradient(165deg, #6ee7a0 0%, #16a34a 45%, #166534 100%) !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(34, 197, 94, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  filter: none;
+}
+
+/* Volver atrás — naranja institucional (marca Agencia de Innovación) */
+.ins-list-shell .ins-toolbar-actions .btn.ins-btn-back {
+  background: linear-gradient(165deg, #ff8c4d 0%, #e55916 50%, #c9470f 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(229, 89, 22, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+}
+
+.ins-list-shell .ins-toolbar-actions .btn.ins-btn-back:hover,
+.ins-list-shell .ins-toolbar-actions .btn.ins-btn-back:focus {
+  background: linear-gradient(165deg, #ffa066 0%, #f06a1f 50%, #b33d0a 100%) !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(229, 89, 22, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
+  filter: none;
+}
+
+/* Excluir menú de navegación principal y pie institucional */
+#menu_gral .btn,
+#menu_gral a.btn,
+#menu_gral button.btn,
+#menu_gral > ul > li > a,
+#menu_gral > ul > li > .card-body > a,
+#menu_gral > ul > li > .card-body > button.btn,
+.junta-pie-boton-sesion .btn,
+.junta-pie-boton-sesion a.btn,
+.junta-pie-boton-sesion button.btn {
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: inherit;
+  border-radius: inherit;
+  box-shadow: inherit;
+  transform: none !important;
+  filter: none !important;
+}
+
+#menu_gral .btn:hover,
+#menu_gral a.btn:hover,
+.junta-pie-boton-sesion .btn:hover {
+  transform: none;
+}
+
+.junta-login-shell .junta-login-btn,
+.junta-login-shell .junta-form-actions button[type="submit"] {
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  border-radius: 10px !important;
+}
+
+/* Botón flotante: conservar forma circular */
+.btn-flotante {
+  min-width: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 999px !important;
+}
+
+@media (max-width: 768px) {
+  .junta-btn-group,
+  .mov-form-actions,
+  .docente-form-actions,
+  .cfg-toolbar > div:last-child {
+    gap: 10px;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .junta-btn-group > .btn,
+  .btn,
+  a.btn,
+  button.btn {
+    min-width: 110px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .btn.btn-sm {
+    min-width: 80px !important;
+  }
+}

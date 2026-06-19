@@ -407,8 +407,7 @@ span {
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
-      <!-- sweeteralert2 -->
-      <link rel="stylesheet" href="../Assets/swal2/sweetalert2.min.css" type="text/css" />
+      <!-- SweetAlert2 ahora se carga globalmente via header -->
 
       <!--aca esta las extensiones para el paginado de la las tablas --->
   
@@ -865,7 +864,6 @@ $link = new PDO('mysql:host=db;dbname=junta', 'root', ''); // el campo vaciío e
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
-<script src="../Assets/swal2/sweetalert2.min.js"></script>
    <script>
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -953,10 +951,6 @@ $(document).ready(function() {
 
 
 </script>
-
-</body>
-</html>
-<!-- < ?php include('AgregarModal.php'); ?>-->
 <script src="../js/jquery.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <?php include('footer2.php');?>

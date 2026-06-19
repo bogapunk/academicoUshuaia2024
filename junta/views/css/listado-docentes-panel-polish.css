@@ -1,0 +1,415 @@
+/* Panel Configuración de Listado (PDF) — extiende junta-panel-polish.css */
+.cfg-listados-polish.lld-panel span {
+  background-color: transparent;
+}
+
+.cfg-listados-polish.lld-panel .lld-section-modalidad {
+  text-align: center;
+}
+
+.cfg-listados-polish.lld-panel .lld-section-modalidad .select-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.cfg-listados-polish.lld-panel .centered-input {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 10px;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 10px !important;
+  background: #ffffff !important;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+  font-size: 15px;
+  color: #1f2937;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.cfg-listados-polish.lld-panel .centered-input:focus {
+  border-color: var(--cfg-primary-light) !important;
+  box-shadow: 0 0 0 4px rgba(43, 143, 217, 0.14);
+  outline: none;
+}
+
+.cfg-listados-polish.lld-panel #modalidad_select {
+  width: 100% !important;
+  max-width: 560px;
+  height: 44px;
+  margin: 0 auto;
+  display: block;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  padding: 0 14px !important;
+  font-size: 15px;
+  text-align: left;
+}
+
+.cfg-listados-polish.lld-panel .select2-container {
+  width: 100% !important;
+  max-width: 560px !important;
+  margin: 0 auto;
+  display: block;
+}
+
+.cfg-listados-polish.lld-panel .select2-container--default .select2-selection--single {
+  height: 44px !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 10px !important;
+  background: #fff;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.cfg-listados-polish.lld-panel .select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 42px !important;
+  padding-left: 14px;
+  color: #1f2937;
+  font-size: 15px;
+}
+
+.cfg-listados-polish.lld-panel .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 42px !important;
+}
+
+.cfg-listados-polish.lld-panel .lld-section-params,
+.cfg-listados-polish.lld-panel .lld-section-options {
+  overflow-x: auto;
+}
+
+.cfg-listados-polish.lld-panel .responsive-table,
+.cfg-listados-polish.lld-panel .lld-options-panel {
+  width: 100%;
+  border: none !important;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0;
+}
+
+.cfg-listados-polish.lld-panel .responsive-table td,
+.cfg-listados-polish.lld-panel .responsive-table th {
+  padding: 6px 10px !important;
+  border: none !important;
+  vertical-align: middle;
+  background: transparent !important;
+}
+
+.cfg-listados-polish.lld-panel .lld-inline-fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  width: 100%;
+}
+
+.cfg-listados-polish.lld-panel .lld-field-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.cfg-listados-polish.lld-panel .lld-field-item.lld-field-tipo {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.cfg-listados-polish.lld-panel .lld-field-item.lld-field-full.lld-field-provincial,
+.cfg-listados-polish.lld-panel .lld-field-full:has(.materialize-select) {
+  flex-wrap: nowrap;
+}
+
+.cfg-listados-polish.lld-panel .lld-field-item.lld-field-full {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.cfg-listados-polish.lld-panel .lld-field-label,
+.cfg-listados-polish.lld-panel .lld-field-item > label.lld-field-label,
+.cfg-listados-polish.lld-panel .lld-field-item > span.lld-field-label {
+  flex: 0 0 auto;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cfg-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cfg-listados-polish.lld-panel .lld-field-inline-check {
+  gap: 6px;
+}
+
+.cfg-listados-polish.lld-panel .lld-field-inline-check .form-check-label {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cfg-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.cfg-listados-polish.lld-panel .lld-field-item .materialize-select33 {
+  min-width: 130px;
+  max-width: 170px;
+  width: auto;
+  flex: 1 1 130px;
+}
+
+.cfg-listados-polish.lld-panel .lld-field-item.lld-field-tipo .materialize-select3 {
+  width: 230px !important;
+  min-width: 200px;
+  max-width: 240px;
+  flex: 0 0 auto;
+}
+
+.cfg-listados-polish.lld-panel .lld-field-item.lld-field-tipo .materialize-select3 option {
+  white-space: normal;
+}
+
+.cfg-listados-polish.lld-panel .lld-field-item .materialize-input1 {
+  width: 72px !important;
+  max-width: 90px;
+  flex: 0 0 auto;
+}
+
+.cfg-listados-polish.lld-panel .lld-field-full .materialize-input3,
+.cfg-listados-polish.lld-panel .lld-field-full .materialize-select4,
+.cfg-listados-polish.lld-panel #establecimiento_data select.materialize-select4 {
+  flex: 0 1 50%;
+  min-width: 0;
+  width: 50% !important;
+  max-width: 50%;
+}
+
+.cfg-listados-polish.lld-panel .lld-field-full .materialize-select,
+.cfg-listados-polish.lld-panel .lld-section-options .materialize-select,
+.cfg-listados-polish.lld-panel select[name='nomdep'].materialize-select {
+  flex: 0 0 auto;
+  width: 460px !important;
+  min-width: 320px;
+  max-width: 520px;
+  margin-top: 0;
+}
+
+.cfg-listados-polish.lld-panel .lld-field-full .materialize-select option,
+.cfg-listados-polish.lld-panel select[name='nomdep'].materialize-select option {
+  white-space: normal;
+}
+
+.cfg-listados-polish.lld-panel .materialize-input1,
+.cfg-listados-polish.lld-panel .materialize-input2,
+.cfg-listados-polish.lld-panel .materialize-input3,
+.cfg-listados-polish.lld-panel .materialize-select,
+.cfg-listados-polish.lld-panel .materialize-select2,
+.cfg-listados-polish.lld-panel .materialize-select3,
+.cfg-listados-polish.lld-panel .materialize-select33,
+.cfg-listados-polish.lld-panel .materialize-select4 {
+  height: 40px;
+  min-height: 40px;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 8px !important;
+  border-bottom: 1px solid #cbd5e1 !important;
+  background: #ffffff !important;
+  padding: 0 10px !important;
+  font-size: 14px !important;
+  color: #1f2937;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.cfg-listados-polish.lld-panel .materialize-input3 {
+  width: 50% !important;
+  max-width: 50%;
+}
+
+.cfg-listados-polish.lld-panel .materialize-select33,
+.cfg-listados-polish.lld-panel .materialize-select3,
+.cfg-listados-polish.lld-panel .materialize-select4 {
+  margin-top: 0;
+}
+
+.cfg-listados-polish.lld-panel .lld-options-panel {
+  padding: 0;
+}
+
+.cfg-listados-polish.lld-panel .lld-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cfg-listados-polish.lld-panel .lld-options-divider {
+  border: none;
+  border-top: 1px solid #dbeafe;
+  margin: 12px 0 10px;
+}
+
+.cfg-listados-polish.lld-panel .lld-section-options .form-check-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  margin-bottom: 0;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.cfg-listados-polish.lld-panel .lld-section-options .form-check-group .form-check-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.cfg-listados-polish.lld-panel .lld-section-options .form-check-group b {
+  display: inline;
+  margin: 0 8px 0 0;
+}
+
+.cfg-listados-polish.lld-panel .materialize-input1 {
+  width: 88px !important;
+  max-width: 120px;
+}
+
+.cfg-listados-polish.lld-panel .materialize-input1[name="name2"],
+.cfg-listados-polish.lld-panel #nota {
+  width: 120px !important;
+  max-width: 160px;
+}
+
+.cfg-listados-polish.lld-panel .form-check-input {
+  margin: 0;
+  flex-shrink: 0;
+  accent-color: var(--cfg-primary-light);
+}
+
+.cfg-listados-polish.lld-panel .form-check-label {
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+  margin-left: 0;
+}
+
+.cfg-listados-polish.lld-panel .form-check-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  margin-bottom: 0;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.cfg-listados-polish.lld-panel .form-check-group:hover {
+  background: #f1f5f9;
+  border-color: #dbeafe;
+}
+
+.cfg-listados-polish.lld-panel .form-check-group b {
+  display: inline;
+  margin: 0 8px 0 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cfg-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cfg-listados-polish.lld-panel hr {
+  display: none;
+}
+
+.cfg-listados-polish.lld-panel .lld-submit-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 22px 0 10px;
+}
+
+.cfg-listados-polish.lld-panel .lld-submit-wrap .btn,
+.cfg-listados-polish.lld-panel input.lld-submit-btn[type="submit"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 200px;
+  height: 44px;
+  margin: 0 !important;
+  padding: 0 24px;
+  border-radius: 11px;
+  border: none !important;
+  font-weight: 600;
+  font-size: 15px;
+  position: static !important;
+  background: linear-gradient(145deg, var(--cfg-primary-light), var(--cfg-navy)) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.14);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.cfg-listados-polish.lld-panel .lld-submit-wrap .btn:hover,
+.cfg-listados-polish.lld-panel input.lld-submit-btn[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.18);
+  filter: brightness(1.04);
+}
+
+@media (max-width: 992px) {
+  .cfg-listados-polish.lld-panel .lld-inline-fields {
+    gap: 10px;
+  }
+
+  .cfg-listados-polish.lld-panel .lld-field-item.lld-field-tipo {
+    width: auto;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .cfg-listados-polish.lld-panel .lld-inline-fields {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cfg-listados-polish.lld-panel .lld-field-item,
+  .cfg-listados-polish.lld-panel .lld-field-item.lld-field-tipo {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .cfg-listados-polish.lld-panel .lld-field-item .materialize-select33,
+  .cfg-listados-polish.lld-panel .lld-field-item.lld-field-tipo .materialize-select3,
+  .cfg-listados-polish.lld-panel .lld-field-full .materialize-select,
+  .cfg-listados-polish.lld-panel .lld-section-options .materialize-select,
+  .cfg-listados-polish.lld-panel .lld-field-full .materialize-input3,
+  .cfg-listados-polish.lld-panel .lld-field-full .materialize-select4,
+  .cfg-listados-polish.lld-panel #establecimiento_data select.materialize-select4,
+  .cfg-listados-polish.lld-panel .materialize-input3 {
+    max-width: 100%;
+    width: 100% !important;
+    flex: 1 1 100%;
+  }
+
+  .cfg-listados-polish.lld-panel .lld-field-full {
+    flex-wrap: wrap;
+  }
+
+  .cfg-listados-polish.lld-panel .centered-input,
+  .cfg-listados-polish.lld-panel #modalidad_select {
+    max-width: 100%;
+  }
+}

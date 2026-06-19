@@ -1,0 +1,94 @@
+/* VerInscripciones — tokens y barra de acciones (complementa junta-botones-polish.css) */
+
+.ins-list-shell {
+
+  --ins-primary: var(--cfg-primary, #004481);
+
+  --ins-primary-light: var(--cfg-primary-light, #2b8fd9);
+
+  --ins-navy: var(--cfg-navy, #003366);
+
+  --ins-muted: var(--cfg-muted, #6b7280);
+
+  --ins-surface: #eef2f7;
+
+  --ins-card: #ffffff;
+
+  --ins-radius: 16px;
+
+  --ins-shadow: 0 14px 44px rgba(15, 23, 42, 0.11);
+
+  --ins-border: rgba(15, 23, 42, 0.07);
+
+  background: linear-gradient(180deg, #e8eef5 0%, var(--ins-surface) 120px, var(--ins-surface) 100%);
+
+}
+
+
+
+.ins-list-card {
+
+  border: 1px solid var(--ins-border);
+
+  box-shadow: var(--ins-shadow);
+
+}
+
+
+
+.ins-list-shell .ins-dashboard-table thead th {
+
+  background: linear-gradient(135deg, var(--ins-primary) 0%, var(--ins-navy) 100%) !important;
+
+  border-bottom: 3px solid var(--ins-primary-light) !important;
+
+}
+
+
+
+.ins-list-shell .acciones-inscripciones .btn-success {
+
+  background: linear-gradient(145deg, #22a06b, #15803d) !important;
+
+  border: none !important;
+
+  border-radius: 9px !important;
+
+}
+
+
+
+.ins-list-shell .acciones-inscripciones .btn-danger {
+
+  background: linear-gradient(145deg, #ef4444, #b91c1c) !important;
+
+  border: none !important;
+
+  border-radius: 9px !important;
+
+}
+
+
+
+.ins-list-shell .acciones-inscripciones .btn-warning {
+
+  background: linear-gradient(145deg, #f59e0b, #d97706) !important;
+
+  border: none !important;
+
+  border-radius: 9px !important;
+
+}
+
+
+
+.ins-list-shell .alert-info {
+
+  border-radius: 12px;
+
+  border-left: 5px solid var(--ins-primary-light);
+
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+
+}
+

@@ -4,6 +4,7 @@ header('Content-Type: text/html; charset=UTF-8');
 
 ob_start ();
 require('fpdf.php'); // Ajusta esta ruta según sea necesario
+require_once 'pdf_nombre_archivo.php';
 
 class Cconexion {
     private $host;
@@ -297,7 +298,7 @@ $pdf->SetFont('Arial', '', 10); // volver al tamaño normal para el resto
         ob_end_clean();
              
         // Output PDF
-        $pdf->Output('D', 'excluidos.pdf');
+        $pdf->Output('D', generarNombreArchivoListadoPdf(['excluidos' => true]));
     }
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();

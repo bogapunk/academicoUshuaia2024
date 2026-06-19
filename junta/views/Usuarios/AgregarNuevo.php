@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../seguridad_requiere_admin.php';
 session_start();
 include_once('dbconect.php');
 
@@ -6,27 +7,40 @@ if(isset($_POST['agregar'])){
 	$database = new Connection();
 	$db = $database->open();
 	try{
-		//hacer uso de una declaración preparada para prevenir la inyección de sql
 		$stmt = $db->prepare("INSERT INTO usuarios (nombres, apellidos, email, telefono, rol) VALUES (:nombres, :apellidos, :email, :telefono, :password,:rol)");
-		//instrucción if-else en la ejecución de nuestra declaración preparada
-		$_SESSION['message'] = ( $stmt->execute(array(':nombres' => $_POST['nombres'] , ':apellidos' => $_POST['apellidos'] , ':email' => $_POST['email'], ':telefono' => $_POST['telefono'], ':password' => $_POST['password'], ':rol' => $_POST['rol'])) ) ? 'Usuario guardado correctamente' : 'Algo salió mal. No se puede agregar miembro';
+		$resultado = $stmt->execute(array(
+			':nombres'  => $_POST['nombres'],
+			':apellidos'=> $_POST['apellidos'],
+			':email'    => $_POST['email'],
+			':telefono' => $_POST['telefono'],
+			':password' => $_POST['password'],
+			':rol'      => $_POST['rol']
+		));
 
-		var_dump($stmt);
-		exit;	
-	
+		if ($resultado) {
+			$nuevoId = $db->lastInsertId();
+			$_SESSION['message'] = 'Usuario guardado correctamente';
+			$_SESSION['usuario_creado'] = array(
+				'id'        => $nuevoId,
+				'nombres'   => $_POST['nombres'],
+				'apellidos' => $_POST['apellidos'],
+				'email'     => $_POST['email'],
+				'rol'       => $_POST['rol']
+			);
+		} else {
+			$_SESSION['message'] = 'Algo salió mal. No se puede agregar miembro';
+		}
 	}
 	catch(PDOException $e){
 		$_SESSION['message'] = $e->getMessage();
 	}
 
-	//cerrar la conexion
 	$database->close();
 }
-
 else{
 	$_SESSION['message'] = 'Llene el formulario';
 }
 
 header('location: ListarUsuarios.php');
-	
+exit;
 ?>

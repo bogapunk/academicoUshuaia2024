@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <title>Ministerio de Educación, Cultura, Ciencia y Tecnología</title>
@@ -18,12 +18,15 @@
 	margin: 20px;
 }
 </style>
+<link rel="stylesheet" href="aesthetic-polish.css" type="text/css" media="all" />
 <link rel="icon" type="image/png" href="./imagenes/escudo-32x32.png">
 </head>
 
-<img src="./imagenes/fondoCabecera.jpg">
-
 <body>
+<?php
+$JUNTA_CABECERA_IMG = '';
+include __DIR__ . '/cabecera_institucional.php';
+?>
 <div class="main">
 <div class="panel panel-default">
 <div class="panel-heading">
@@ -38,7 +41,7 @@
       <a class="dropdown-item" href="#">Listado de Docentes</a>
       <br>
       <br>
-      <a class="dropdown-item" href="#">Editar Docentes</a>
+      <a class="dropdown-item" href="#">Docentes</a>
       <br>
       <br>
       <a class="dropdown-item" href="#">Listado Docentes de Especial(Temporal)</a>
@@ -77,7 +80,7 @@
 <li>
 
   <div class="card-body d-flex justify-content-between align-items-center">
-  <a href="MiCuenta.php?logoutSubmit=1"   class="btn btn-primary" class="logout">Cerrar Sesion</a>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#juntaModalCerrarSesion">Cerrar sesión</button>
 </div>
 </li>   
 
@@ -85,3 +88,7 @@
 </div>
 <div class="panel-body">
 <div class="row">
+<?php
+$urlSalir = 'MiCuenta.php?logoutSubmit=1';
+include __DIR__ . '/modal_cerrar_sesion_junta.php';
+?>

@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../seguridad_requiere_login.php';
 // Configuraciones de conexión a la base de datos
 define('HOST', '10.1.9.113');
 define('BD', 'junta');

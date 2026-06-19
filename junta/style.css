@@ -310,3 +310,397 @@ p.error{color:#EA4335;}
     }
 }
 
+/* Login index (Sistema de Juntas): anular reglas de .login-form (42% de ancho) y alinear a la tarjeta */
+.junta-login-shell {
+    width: 100% !important;
+    max-width: 100%;
+    float: none !important;
+    clear: both;
+    box-sizing: border-box;
+}
+.junta-login-shell .form-container {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.junta-login-shell .login-form {
+    width: 100% !important;
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+/* body tiene text-align:center; el formulario de login no debe centrar campos (evita iconos "flotando") */
+.junta-login-shell .login-form form,
+.junta-login-shell .login-form .junta-form-fields {
+    text-align: left;
+}
+.junta-login-shell .login-form form {
+    width: 100% !important;
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+}
+/* Contenedor de campos: centrado y ancho ligeramente menor que la tarjeta */
+.junta-login-shell .login-form .junta-form-fields {
+    max-width: 390px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 0 2px;
+}
+/* Icono fijo a la izquierda + input 100% (rompe 42% de .login-form y evita desgarre flex) */
+.junta-login-shell .login-form .form-group.junta-input-wrap {
+    position: relative;
+    width: 100% !important;
+    max-width: 100% !important;
+    float: none !important;
+    clear: both;
+    display: block !important;
+    margin: 0 auto 1rem !important;
+    box-sizing: border-box;
+    padding: 0;
+    min-height: 0;
+    border: 1px solid #c5d9e8;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    overflow: visible;
+}
+.junta-login-shell .login-form .junta-input-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 58px;
+    min-width: 58px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5a7a8c;
+    background: linear-gradient(180deg, #eef6fc 0%, #e3eef8 100%);
+    border-right: 1px solid #c5d9e8;
+    border-radius: 7px 0 0 7px;
+    font-size: 1.1rem;
+    margin: 0;
+    line-height: 1;
+    pointer-events: none;
+}
+.junta-login-shell .login-form .junta-input-icon i {
+    display: block;
+    font-size: 1.25rem;
+}
+/* Anula width 42% / 90% heredado de .login-form input (style.css) */
+.junta-login-shell .login-form .junta-input-wrap .form-control,
+.junta-login-shell .login-form .junta-input-wrap input[type="email"],
+.junta-login-shell .login-form .junta-input-wrap input[type="password"] {
+    position: relative;
+    z-index: 1;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 54px !important;
+    height: auto !important;
+    margin: 0 !important;
+    float: none !important;
+    box-sizing: border-box !important;
+    padding: 12px 14px 12px 74px !important;
+    background-color: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #333;
+    text-align: left;
+    font-size: 17px;
+}
+.junta-login-shell .login-form .junta-input-wrap .form-control:focus,
+.junta-login-shell .login-form .junta-input-wrap input:focus {
+    outline: none;
+    z-index: 1;
+    box-shadow: inset 0 0 0 2px rgba(0, 123, 255, 0.45) !important;
+}
+.junta-login-shell .login-form .junta-form-actions {
+    max-width: 390px;
+    width: 100%;
+    margin: 0.85rem auto 0;
+    box-sizing: border-box;
+    padding: 0 2px;
+}
+.junta-login-shell .login-form .junta-form-actions .junta-login-btn,
+.junta-login-shell .login-form .junta-form-actions button[type="submit"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    margin: 0 auto;
+    float: none !important;
+    box-sizing: border-box;
+}
+/* Form-group en login sin mezclar con input-wrap (evita display: block forzado en el mismo nodo) */
+.junta-login-shell .login-form .form-group:not(.junta-input-wrap) {
+    width: 100% !important;
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box;
+}
+
+/* —— Cabecera: logo AIF; debajo, leyenda institucional en UNA línea (Roboto / sistema) —— */
+.junta-cabecera-institucional {
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    padding: 1.1rem 0.5rem 1.2rem;
+    box-sizing: border-box;
+    margin: 0 auto 0.25rem;
+}
+.junta-cabecera-institucional-inner {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.85rem;
+    box-sizing: border-box;
+}
+.junta-cabecera-logo-cel {
+    width: 100%;
+    text-align: center;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+}
+.junta-cabecera-logo-img {
+    max-width: min(100%, 400px);
+    width: 400px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+/* Leyenda: una sola línea, centrada; si el ancho no alcanza, scroll horizontal (sigue siendo “una línea”) */
+.junta-cabecera-texto {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0.15rem 0 0;
+    text-align: center;
+    box-sizing: border-box;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    overscroll-behavior-x: contain;
+}
+.junta-cabecera-texto::-webkit-scrollbar {
+    height: 5px;
+}
+.junta-cabecera-texto::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+/* Cuando la leyenda va dentro de un contenedor estrecho (p. ej. formulario de reset) */
+.container .junta-cabecera-texto {
+    margin: 0.4rem 0 0.85rem;
+    text-align: center;
+}
+.junta-cabecera-linea-unica {
+    display: inline-block;
+    margin: 0;
+    padding: 0.2rem 0.55rem 0.25rem;
+    font-family: 'Roboto', 'Lucida Sans', Geneva, Verdana, sans-serif;
+    font-size: clamp(1rem, 3.6vw, 1.3rem);
+    font-weight: 700;
+    letter-spacing: 0.045em;
+    line-height: 1.42;
+    text-transform: uppercase;
+    text-align: center;
+    color: #1e2d3a;
+    white-space: nowrap;
+    max-width: none;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+@media (min-width: 600px) {
+    .junta-cabecera-linea-unica {
+        font-size: clamp(1.1rem, 2.65vw, 1.42rem);
+        letter-spacing: 0.05em;
+    }
+}
+@media (min-width: 900px) {
+    .junta-cabecera-institucional {
+        padding: 1.2rem 1.25rem 1.4rem;
+    }
+    .junta-cabecera-linea-unica {
+        font-size: clamp(1.18rem, 1.9vw, 1.55rem);
+        letter-spacing: 0.052em;
+    }
+}
+@media (min-width: 1200px) {
+    .junta-cabecera-linea-unica {
+        font-size: clamp(1.22rem, 1.15vw, 1.62rem);
+        letter-spacing: 0.048em;
+    }
+}
+
+/* Pie institucional global: estable, centrado y con jerarquia visual sutil */
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.junta-pie-sistema {
+    clear: both;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-top: auto;
+    padding: 1rem 12px 1.25rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    background: #fafbfd;
+}
+
+.junta-pie-contenedor {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.junta-pie-cerrar-tarjeta {
+    max-width: 100%;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    padding: 0.85rem 1.1rem;
+}
+
+.junta-pie-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.junta-pie-identidad {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.junta-pie-aif-link {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2698f3;
+    text-decoration: none;
+    margin: 0;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+    font-family: 'Roboto', 'Lucida Sans', Geneva, Verdana, sans-serif;
+}
+
+.junta-pie-aif-link:hover,
+.junta-pie-aif-link:focus {
+    color: #e55916;
+    text-decoration: none;
+}
+
+.junta-pie-logo-bloque {
+    margin: 0;
+    text-align: center;
+}
+
+.junta-pie-img {
+    display: inline-block;
+    vertical-align: middle;
+    width: 44px;
+    height: 44px;
+}
+
+.junta-pie-cerrar-nav {
+    display: flex;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    border: none;
+}
+
+.junta-pie-boton-sesion {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Alineado con #menu_gral2 li a del pie clasico (perfil comun) */
+.junta-pie-boton-sesion .btn,
+.junta-pie-boton-sesion .btn-primary,
+.junta-pie-boton-sesion a.btn,
+.junta-pie-boton-sesion button.btn {
+    min-width: 9.5rem;
+    background-color: #2196f3 !important;
+    border-color: #1976d2 !important;
+    color: #fff !important;
+    font-family: 'Roboto', 'Lucida Sans', Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    padding: 0.45rem 0.95rem;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.junta-pie-boton-sesion .btn:hover,
+.junta-pie-boton-sesion .btn:focus,
+.junta-pie-boton-sesion .btn-primary:hover,
+.junta-pie-boton-sesion .btn-primary:focus,
+.junta-pie-boton-sesion a.btn:hover,
+.junta-pie-boton-sesion a.btn:focus,
+.junta-pie-boton-sesion button.btn:hover,
+.junta-pie-boton-sesion button.btn:focus {
+    background-color: #e55916 !important;
+    border-color: #d35400 !important;
+    color: #fff !important;
+}
+
+.junta-pie-copyright-leyenda {
+    font-size: 13px;
+    color: #555;
+    margin: 0.75rem 0 0;
+    line-height: 1.55;
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    font-family: 'Roboto', 'Lucida Sans', Geneva, Verdana, sans-serif;
+}
+
+@media (max-width: 768px) {
+    .junta-pie-superior {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .junta-pie-identidad {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .junta-pie-boton-sesion .btn,
+    .junta-pie-boton-sesion .btn-primary,
+    .junta-pie-boton-sesion a.btn,
+    .junta-pie-boton-sesion button.btn {
+        min-width: 8.75rem;
+    }
+}
+

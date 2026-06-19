@@ -3,6 +3,7 @@
 header('Content-Type: text/html; charset=UTF-8');
 ob_start();
 require('fpdf.php'); // Ajusta esta ruta según sea necesario
+require_once 'pdf_nombre_archivo.php';
 function traeesc($cod, $legdoc, $anio) {
     try {
         $conexion = new Cconexion("db", "junta", "SA", '"asd123"');
@@ -351,6 +352,6 @@ $pdf->Cell(45, 5, utf8_decode('Localidad: ') . $localidad_display, 0, 0, "L");
     }
 
     ob_end_clean();
-    $pdf->Output('D', 'file.pdf');
+    $pdf->Output('D', generarNombreArchivoListadoPdf());
 
 ?>

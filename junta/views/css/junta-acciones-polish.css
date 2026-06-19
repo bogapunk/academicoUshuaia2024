@@ -1,0 +1,375 @@
+/* Contenedores de botones de Acciones en tablas (estilos de botón: junta-botones-polish.css) */
+.junta-acciones,
+.usuarios-acciones,
+.acciones-docentes,
+.acciones-inscripciones {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  flex-wrap: nowrap !important;
+  vertical-align: middle !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+/* Hijos directos: misma altura y alineación (evita primer botón desplazado) */
+.junta-acciones > .btn,
+.junta-acciones > a.btn,
+.junta-acciones > button.btn,
+.usuarios-acciones > .btn,
+.usuarios-acciones > a.btn,
+.acciones-docentes > .btn,
+.acciones-docentes > a.btn,
+.acciones-docentes > button.btn {
+  align-self: center !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+  flex-shrink: 0;
+}
+
+/* <center> legacy en celdas de tabla */
+.cfg-listados-polish .cfg-table-wrap td:last-child,
+.cfg-listados-polish .cfg-table-wrap td:last-child center,
+.cfg-listados-polish td.cfg-actions-cell,
+.listado-docentes-busqueda #resultTable td.acciones-docentes-cell {
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap;
+}
+
+/* Buscar Docentes: misma altura y alineación (anula margin:10px legacy de .btn-success en headers) */
+.listado-docentes-busqueda .acciones-docentes > .btn,
+.listado-docentes-busqueda .acciones-docentes > a.btn,
+.listado-docentes-busqueda .acciones-docentes > button.btn,
+.listado-docentes-busqueda .acciones-docentes > .btn-success,
+.listado-docentes-busqueda .acciones-docentes > a.btn-success {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: row !important;
+  align-self: center !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  max-height: 34px !important;
+  line-height: 1 !important;
+  box-sizing: border-box !important;
+}
+
+.listado-docentes-busqueda .acciones-docentes .glyphicon,
+.listado-docentes-busqueda .acciones-docentes .btn .glyphicon,
+.listado-docentes-busqueda .acciones-docentes a.btn .glyphicon {
+  position: static !important;
+  top: auto !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+  font-style: normal !important;
+}
+
+.cfg-listados-polish .cfg-table-wrap td:last-child center {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  line-height: 1 !important;
+  vertical-align: middle !important;
+}
+
+/* Modalidades, Dependencias, Configuración: acciones en tabla (Editar / Eliminar) */
+.cfg-listados-polish .junta-acciones > .btn,
+.cfg-listados-polish .junta-acciones > a.btn,
+.cfg-listados-polish .junta-acciones > button.btn,
+.cfg-listados-polish .junta-acciones > .btn-success,
+.cfg-listados-polish .junta-acciones > a.btn-success {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: row !important;
+  align-self: center !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  max-height: 34px !important;
+  line-height: 1 !important;
+  box-sizing: border-box !important;
+}
+
+/* Mismo panel: Guardar / Limpiar / Imprimir en formulario */
+.cfg-listados-polish td.cfg-actions-cell .junta-btn-group {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  vertical-align: middle !important;
+}
+
+.cfg-listados-polish td.cfg-actions-cell .junta-btn-group > .btn,
+.cfg-listados-polish td.cfg-actions-cell .junta-btn-group > a.btn,
+.cfg-listados-polish td.cfg-actions-cell .junta-btn-group > button.btn,
+.cfg-listados-polish td.cfg-actions-cell .junta-btn-group > .btn-success,
+.cfg-listados-polish td.cfg-actions-cell .junta-btn-group > a.btn-success {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  align-self: center !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+  line-height: 1 !important;
+  box-sizing: border-box !important;
+}
+
+.cfg-listados-polish .junta-acciones .glyphicon,
+.cfg-listados-polish .junta-btn-group .glyphicon,
+.cfg-listados-polish .junta-acciones .btn .glyphicon,
+.cfg-listados-polish .junta-btn-group .btn .glyphicon,
+.cfg-listados-polish .junta-acciones a.btn .glyphicon,
+.cfg-listados-polish .junta-btn-group button.btn .glyphicon {
+  position: static !important;
+  top: auto !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+  font-style: normal !important;
+}
+
+.cfg-listados-polish .cfg-table-wrap tbody td:last-child,
+.cfg-listados-polish .cfg-table-wrap table tbody td:last-child {
+  vertical-align: middle !important;
+  text-align: center !important;
+}
+
+/* Barra superior del panel (Nueva / Descargar, etc.) */
+.cfg-listados-polish .cfg-toolbar > div:last-child {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+}
+
+.cfg-listados-polish .cfg-toolbar > div:last-child > .btn,
+.cfg-listados-polish .cfg-toolbar > div:last-child > a.btn,
+.cfg-listados-polish .cfg-toolbar > div:last-child > button.btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  align-self: center !important;
+  margin: 0 !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+  line-height: 1 !important;
+  box-sizing: border-box !important;
+}
+
+.cfg-listados-polish .cfg-toolbar .glyphicon {
+  position: static !important;
+  top: auto !important;
+  margin: 0 !important;
+  line-height: 1 !important;
+  vertical-align: middle !important;
+}
+
+/* Listado de Inscripciones: tres acciones compactas y alineadas */
+.ins-dashboard-table .acciones-inscripciones,
+.ins-dashboard-table .junta-acciones.acciones-inscripciones {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center !important;
+  justify-items: stretch;
+  gap: 6px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  vertical-align: middle !important;
+}
+
+.ins-dashboard-table .acciones-inscripciones .glifo {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+.ins-dashboard-table .acciones-inscripciones .btn,
+.ins-dashboard-table .acciones-inscripciones a.btn,
+.ins-dashboard-table .acciones-inscripciones button.btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: row !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  max-height: 32px !important;
+  margin: 0 !important;
+  padding: 0 5px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  gap: 4px !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  align-self: center !important;
+  vertical-align: middle !important;
+  box-sizing: border-box !important;
+}
+
+.ins-dashboard-table .acciones-inscripciones .btn .acciones-inscripciones-label {
+  display: inline !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  font-weight: 600 !important;
+  vertical-align: middle !important;
+}
+
+.ins-dashboard-table .acciones-inscripciones .btn .glyphicon,
+.ins-dashboard-table .acciones-inscripciones .btn i.glyphicon {
+  display: inline-block !important;
+  position: static !important;
+  top: auto !important;
+  line-height: 1 !important;
+  font-size: 11px !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+}
+
+.ins-cell-acciones {
+  vertical-align: middle !important;
+}
+
+/* Pantallas medianas (1401px–1799px): icono + texto apilados */
+@media (min-width: 1401px) and (max-width: 1799px) {
+  .ins-dashboard-table .acciones-inscripciones,
+  .ins-dashboard-table .junta-acciones.acciones-inscripciones {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    width: 100%;
+  }
+
+  .ins-dashboard-table .acciones-inscripciones .btn,
+  .ins-dashboard-table .acciones-inscripciones a.btn,
+  .ins-dashboard-table .acciones-inscripciones button.btn {
+    width: 100% !important;
+    height: 27px !important;
+    min-height: 27px !important;
+    max-height: 27px !important;
+    padding: 0 6px !important;
+    font-size: 10.5px !important;
+    gap: 5px !important;
+    transform: none !important;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12) !important;
+  }
+
+  .ins-dashboard-table .acciones-inscripciones .btn:hover,
+  .ins-dashboard-table .acciones-inscripciones a.btn:hover {
+    transform: none !important;
+    filter: brightness(1.06);
+  }
+
+  .ins-dashboard-table .acciones-inscripciones .btn .acciones-inscripciones-label {
+    display: inline !important;
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    clip: auto !important;
+    font-size: 10.5px !important;
+  }
+
+  .ins-dashboard-table .acciones-inscripciones .btn .glyphicon,
+  .ins-dashboard-table .acciones-inscripciones .btn i.glyphicon {
+    font-size: 10.5px !important;
+  }
+}
+
+/* Espacio reducido / pantallas pequeñas (≤1400px): solo iconos (title = tooltip) */
+@media (max-width: 1400px) {
+  .ins-dashboard-table .acciones-inscripciones,
+  .ins-dashboard-table .junta-acciones.acciones-inscripciones {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    align-items: center !important;
+    gap: 4px !important;
+    width: 100%;
+  }
+
+  .ins-dashboard-table .acciones-inscripciones .btn,
+  .ins-dashboard-table .acciones-inscripciones a.btn,
+  .ins-dashboard-table .acciones-inscripciones button.btn {
+    position: relative !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+    padding: 0 4px !important;
+    gap: 0 !important;
+    justify-content: center !important;
+    transform: none !important;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12) !important;
+  }
+
+  .ins-dashboard-table .acciones-inscripciones .btn:hover,
+  .ins-dashboard-table .acciones-inscripciones a.btn:hover {
+    transform: none !important;
+    filter: brightness(1.06);
+  }
+
+  .ins-dashboard-table .acciones-inscripciones .btn .acciones-inscripciones-label {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  .ins-dashboard-table .acciones-inscripciones .btn .glyphicon,
+  .ins-dashboard-table .acciones-inscripciones .btn i.glyphicon {
+    font-size: 13px !important;
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .junta-acciones,
+  .usuarios-acciones,
+  .acciones-docentes,
+  .acciones-inscripciones:not(.ins-dashboard-table .acciones-inscripciones) {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+
+  .ins-dashboard-table .acciones-inscripciones {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}

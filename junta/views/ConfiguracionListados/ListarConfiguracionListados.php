@@ -195,11 +195,7 @@ tr:nth-child(even) {
   }
 }
 
-
-
-
-
-
+<?php readfile(__DIR__ . '/../css/junta-panel-polish.css'); ?>
 
 </style>
 <link rel="icon" type="./image/png" href="./imagenes/escudo-32x32.png">
@@ -214,9 +210,10 @@ tr:nth-child(even) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
-      <!-- sweeteralert2 -->
-<link rel="stylesheet" href="../Assets/swal2/sweetalert2.min.css" type="text/css" />
 
     <!--aca esta las extensiones para el paginado de la las tablas --->
   
@@ -260,8 +257,9 @@ function topFunction() {
     document.documentElement.scrollTop = 0;
 }
     </script>
-  <div class="container"> <center><h1><u><font face="
-    font-family: 'Roboto', sans-serif;" COLOR="black">Configuracion de Listados de Aspirantes a cubrir Cargos Provinciales</font></u></h1></center>
+<div class="cfg-listados-polish">
+  <div class="container">
+    <h1 class="cfg-page-title">Configuracion de Listados de Aspirantes a cubrir Cargos Provinciales</h1>
     <br>
     <br>
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -311,11 +309,12 @@ try {
 <script type="text/javascript">
   
 </script>
+<div class="cfg-card">
 <center>
- <form action="?action=<?php echo $confLis->id > 0 ? 'actualizar' : 'registrar'; ?>" method="post" class="pure-form pure-form-stacked" style="margin-bottom:30px;" id="formulario_transaccion"  >
+ <form action="?action=<?php echo $confLis->id > 0 ? 'actualizar' : 'registrar'; ?>" method="post" class="pure-form pure-form-stacked" style="margin-bottom:0;" id="formulario_transaccion"  >
                     <input type="hidden" name="id" value="<?php echo $confLis->__GET('id'); ?>" />
                     
-                    <table style="width:750px;" id="seleccion">
+                    <table class="cfg-form-table" style="max-width:760px;" id="seleccion">
                       <!--
                         <tr>
                             <th style="text-align:left;">Id2</th>
@@ -349,15 +348,12 @@ try {
 
                         <tr>
 
-                            <td colspan="2">
-                             <br>
-                             <center>  <button type="submit" class="btn btn-success" onclick="return myConfirm();"><i class="glyphicon glyphicon-floppy-saved"> Guardar </i></button>&nbsp&nbsp&nbsp&nbsp
-                              
-                                <button class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR"><i class="glyphicon glyphicon-erase"> Limpiar </i></button>
-                              &nbsp&nbsp&nbsp&nbsp
-                              <button class="btn btn-info">
-                                <a href="javascript:imprSelec('seleccion')"  style="color: white;"><i class="glyphicon glyphicon-print"> Imprimir </i></a></button>
-
+                            <td colspan="2" class="cfg-actions-cell">
+                             <div class="junta-btn-group">
+                             <button type="submit" class="btn btn-success" id="btnGuardarConf"><i class="glyphicon glyphicon-floppy-saved"></i> Guardar</button>
+                                <button type="button" class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR"><i class="glyphicon glyphicon-erase"></i> Limpiar</button>
+                                <button type="button" class="btn btn-info" onclick="imprSelec('seleccion')"><i class="glyphicon glyphicon-print"></i> Imprimir</button>
+                             </div>
                             </td>
 
 
@@ -365,6 +361,7 @@ try {
                     </table>
                 </form>
               </center>
+              </div>
 
               <!--Script para la impresion de modalidad -->
               <script language="Javascript">
@@ -379,16 +376,18 @@ try {
               </script>
 
 
-<div class="container-fluid">
-<div class="input-group">
-  <b>Buscar:&nbsp</b> <div class="form-group pull-right">
-    <input type="text" class="search form-control" placeholder="¿Que Desea Buscar?">
-</div>
-</div>
-<a href="RegistroConfiguracionListado.php" class="btn btn-primary" > <span class="glyphicon glyphicon-plus"></span> Agregar Listados</a>&nbsp&nbsp
- <a href="../../controller/exportar_listadoConfiguracion.php" class="btn btn-info btn-sm" onclick="return myConfirm3();" >
-          <span class="glyphicon glyphicon-download-alt"></span>  Descargar
-        </a>
+<div class="container-fluid cfg-card">
+<div class="cfg-toolbar">
+  <div class="cfg-search-wrap">
+    <b>Buscar:</b>
+    <input type="text" class="search form-control" placeholder="Buscar por listado o ciudad...">
+  </div>
+  <div>
+    <a href="RegistroConfiguracionListado.php" class="btn btn-primary" > <span class="glyphicon glyphicon-plus"></span> Agregar Listados</a>
+    <a href="../../controller/exportar_listadoConfiguracion.php" class="btn btn-info btn-sm" id="btnDescargarConf">
+      <span class="glyphicon glyphicon-download-alt"></span>  Descargar
+    </a>
+  </div>
 </div>
     <script>
       $(document).ready(function(){
@@ -397,16 +396,16 @@ try {
   });
 });
     </script>
-<div class="container-fluid">
+<div class="container-fluid cfg-card cfg-table-wrap">
 <table class="table table-hover table-bordered results" id="example">
 
     <thead class="thead-dark" >
         <thead class="buscar">
         <tr>
-            <th><center  style="font-size:2.0em"; onclick="sortTable(3)"><center>Listados Definidos</center></th>
+            <th><center onclick="sortTable(3)"><center>Listados Definidos</center></th>
            <!-- <th><center>Modalidades</center></th>-->
-            <th><center  style="font-size:2.0em"; onclick="sortTable(4)">Ciudad</center></th>
-            <th><center style="font-size:2.3em";>ACCIONES</center></th>
+            <th><center onclick="sortTable(4)">Ciudad</center></th>
+            <th><center>Acciones</center></th>
         </tr>
 
     </thead>
@@ -415,16 +414,18 @@ try {
 <tbody>
  <?php foreach($model->ListarConfiguracionListado() as $r): ?>
                         <tr>
-                            <td><left style="font-size:1.3em"><?php echo $r->__GET('listado'); ?></left></td>
+                            <td><left><?php echo $r->__GET('listado'); ?></left></td>
                            <!-- <td><?php echo $r->__GET('modalidades'); ?></td>-->
-                            <td><center style="font-size:1.3em"><?php echo $r->__GET('ciudad'); ?></center></td>
+                            <td><center><?php echo $r->__GET('ciudad'); ?></center></td>
                              <td>
                               <!--boton anterior de editar
                                 <a href="?action=editar&id=<?php echo $r->id; ?>" title=editar><span class="glyphicon glyphicon-edit" style="color:green" title="Editar">Editar</span></a>-->
                              <center>
+                                  <div class="junta-acciones">
                                   <a class="btn btn-sm btn-success" id="modalidades"  href="?action=editar&id=<?php echo $r->id; ?>" title="Editar" data-id="<?php echo $id; ?>"><i class="glyphicon glyphicon-edit"></i> Editar</a>
                     
-                                <a class="btn btn-sm btn-danger" id="modalidadesBorrado"  href="?action=eliminar&id=<?php echo $r->id; ?>" title="Borrar" onclick="return myConfirm();"><i class="glyphicon glyphicon-trash" ></i> Borrar</a>
+                                <a class="btn btn-sm btn-danger btn-eliminar-conf" href="?action=eliminar&id=<?php echo $r->id; ?>" title="Eliminar"><i class="glyphicon glyphicon-trash" ></i> Eliminar</a>
+                                  </div>
 
                                  </center>
                             </td>
@@ -435,6 +436,8 @@ try {
 </div>
 </div>
 </table>
+
+</div><!-- .cfg-listados-polish -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
@@ -453,37 +456,31 @@ try {
       .val("");
   });
 
-  // guardar datos del Listado
- function myConfirm() {
-  var result = confirm("¿Desea Guarda el listado?");
-  if (result==true) {
-   return true;
+  document.getElementById('btnGuardarConf').addEventListener('click', function(e) {
+    e.preventDefault();
+    var form = document.getElementById('formulario_transaccion');
+    juntaConfirm('¿Desea guardar el listado?', function() {
+      form.submit();
+    });
+  });
 
-  } else {
-   return false;
-  }
-}
+  document.getElementById('btnDescargarConf').addEventListener('click', function(e) {
+    e.preventDefault();
+    var href = this.getAttribute('href');
+    juntaConfirm('¿Desea descargar a Excel los listados de configuración?', function() {
+      window.location.href = href;
+    });
+  });
 
-//funcion de guardar datos
-function myConfirm2() {
-  var result = confirm("¿Desea Guardar Modificacion Modalidad?");
-  if (result==true) {
-   return true;
-
-  } else {
-   return false;
-  }
-}
-//funcion descargar excel 
-function myConfirm3() {
-  var result = confirm("¿Desea descargar a excel los listados de configuracion ?");
-  if (result==true) {
-   return true;
-
-  } else {
-   return false;
-  }
-}
+  document.querySelectorAll('.btn-eliminar-conf').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var href = this.getAttribute('href');
+      juntaConfirmDanger('¿Desea eliminar el listado?', function() {
+        window.location.href = href;
+      });
+    });
+  });
 
 
 
@@ -498,7 +495,6 @@ function myConfirm3() {
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
-<script src="../Assets/swal2/sweetalert2.min.js"></script>
    <script>
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -586,9 +582,6 @@ $(document).ready(function() {
 
 
 </script>
-</body>
-</html>
-<!-- < ?php include('AgregarModal.php'); ?>-->
 <script src="../js/jquery.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <?php include('footer2.php');?>

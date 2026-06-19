@@ -1,4 +1,5 @@
 <?php
+require_once dirname(__DIR__) . '/views/seguridad_requiere_login.php';
 require "ConsultaDocentes.php";
 $docente = new ConsultaDocentes();
 

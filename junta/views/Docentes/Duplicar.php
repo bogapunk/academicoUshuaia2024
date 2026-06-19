@@ -288,6 +288,283 @@ tr:nth-child(even) {
   background-color: #367c39; /* Color de fondo cuando se selecciona */
 }
 
+/* --- Coherencia con Movimiento nuevo (solo presentación) --- */
+.mov-shell {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 12px 12px 40px;
+  box-sizing: border-box;
+}
+.mov-page-title {
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #1f2937;
+  text-align: center;
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(38, 152, 243, 0.35);
+  letter-spacing: 0.03em;
+}
+.mov-page-title .mov-page-sub {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #64748b;
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+}
+.mov-section-title {
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #1e40af;
+  margin: 24px 0 14px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+.mov-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  padding: 18px 16px 20px;
+  margin-bottom: 20px;
+}
+.mov-card .table {
+  margin-bottom: 0;
+}
+.mov-docente-resumen td,
+.mov-docente-resumen th {
+  font-weight: 600;
+  font-size: 15px;
+}
+.mov-docente-resumen thead th {
+  font-weight: 700;
+}
+.mov-docente-actions {
+  text-align: right;
+  vertical-align: middle !important;
+}
+.mov-field-label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 6px;
+}
+.mov-carga-movimiento .form-group {
+  margin-bottom: 14px;
+}
+.mov-carga-fila-mixta {
+  margin-bottom: 8px;
+}
+.mov-carga-fila-mixta > [class*="col-"] {
+  margin-bottom: 8px;
+}
+.mov-carga-movimiento .form-control {
+  border-radius: 6px;
+  min-height: 38px;
+  font-size: 15px;
+}
+.mov-placeholder-col {
+  min-height: 1px;
+}
+.mov-excluir-row {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.mov-excluir-row .mov-motivos-select {
+  max-width: 100%;
+}
+.mov-puntajes-panel {
+  margin: 16px 0 0;
+  padding: 16px 14px 20px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  box-sizing: border-box;
+}
+.mov-puntajes-inner.container-fluid {
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: left;
+}
+.mov-puntajes-inner label:not(.mov-puntajes-inline-label) {
+  display: block !important;
+  width: auto !important;
+  text-align: left !important;
+  font-weight: 600;
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 6px;
+}
+.mov-puntajes-panel h3.mov-puntajes-heading {
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+.mov-input-num {
+  max-width: 140px;
+  width: 100%;
+}
+.mov-puntajes-panel .form-control.mov-input-num {
+  max-width: 140px;
+}
+.mov-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0 16px;
+  padding-top: 18px;
+  border-top: 1px solid #e5e7eb;
+}
+.mov-section-head {
+  margin: 24px 0 14px;
+}
+.mov-section-head-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.mov-section-head-actions .btn {
+  min-width: 210px;
+  width: 210px;
+  max-width: 100%;
+  height: 48px !important;
+  min-height: 48px !important;
+  padding: 0 18px !important;
+  box-sizing: border-box !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap;
+  vertical-align: middle !important;
+}
+.mov-section-head-actions .btn .glyphicon {
+  margin-right: 12px !important;
+}
+@media (max-width: 480px) {
+  .mov-section-head-actions .btn {
+    width: 100%;
+    min-width: 0;
+  }
+}
+.mov-section-head .mov-section-title--in-head {
+  margin: 0;
+  margin-top: 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+.mov-form-actions--footer {
+  justify-content: center;
+}
+.mov-puntajes-grid2 {
+  max-width: 760px;
+}
+.mov-puntajes-field-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 6px 10px;
+}
+.mov-puntajes-field-row .mov-puntajes-label-col {
+  flex: 1 1 auto;
+  min-width: min(260px, 100%);
+  padding-right: 6px;
+}
+.mov-puntajes-field-row .mov-puntajes-input-col {
+  flex: 0 0 148px;
+  width: 148px;
+  max-width: 148px;
+  text-align: right;
+}
+.mov-puntajes-field-row .mov-puntajes-input-col .form-control {
+  width: 100%;
+  max-width: 140px;
+  margin-left: auto;
+  text-align: right;
+}
+.mov-puntajes-field-row .mov-puntajes-input-col input[type="number"],
+.mov-puntajes-field-row .mov-puntajes-input-col input[type="text"],
+.mov-puntajes-field-row .mov-puntajes-input-col select {
+  margin-bottom: 0;
+  font-size: 15px;
+}
+.mov-puntajes-inline-label {
+  margin: 0 !important;
+  font-weight: 600;
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.4;
+}
+.mov-puntajes-field-row--indent .mov-puntajes-label-col {
+  padding-left: 18px;
+}
+.mov-puntajes-subsec {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1e3a5f;
+  margin: 14px 0 8px;
+  padding-top: 2px;
+}
+.mov-puntajes-servicios-head {
+  margin: 6px 0 4px;
+}
+.mov-puntajes-servicios-head .mov-field-label {
+  margin-bottom: 0;
+}
+.mov-field-label-sec {
+  color: #1e40af !important;
+}
+.mov-puntajes-sep {
+  margin: 14px 0;
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+  clear: both;
+}
+@media (max-width: 767px) {
+  .mov-shell {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .mov-docente-actions {
+    text-align: left;
+  }
+  .mov-input-num,
+  .mov-puntajes-panel .form-control.mov-input-num {
+    max-width: 100%;
+  }
+  .mov-puntajes-field-row .mov-puntajes-input-col {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
+  }
+  .mov-puntajes-field-row .mov-puntajes-input-col .form-control {
+    margin-left: 0;
+    max-width: 100%;
+  }
+}
 
 </style>
 <link rel="icon" type="./image/png" href="./imagenes/escudo-32x32.png">
@@ -304,8 +581,7 @@ tr:nth-child(even) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
-      <!-- sweeteralert2 -->
-      <link rel="stylesheet" href="../Assets/swal2/sweetalert2.min.css" type="text/css" />
+      <!-- SweetAlert2 CSS loaded globally via header -->
 
       <!--aca esta las extensiones para el paginado de la las tablas --->
   
@@ -325,10 +601,8 @@ tr:nth-child(even) {
 
 </head>
 <body>
-  <div class="container">
-    <center><h1><u>Inscripcion de Docente</u></h1></center>
-    <center><h3>(Duplicado)</h3></center>
-<br>
+  <div class="container mov-shell">
+    <h1 class="mov-page-title">Inscripción de docente<span class="mov-page-sub">(Duplicado)</span></h1>
 
 <?php
 // Establecer la conexión a SQL Server
@@ -369,7 +643,6 @@ if (isset($_SESSION['message'])) {
 }
 ?>
 
-<th>
 <?php
 $legajo = $_GET['legajo'];
 $nomdep = $_GET['nomdep'];
@@ -424,55 +697,46 @@ if ($stmt === false) {
 
 // Verificar si se encontraron docentes
 if (sqlsrv_has_rows($stmt)) {
-    echo "<table border='1'>";
-    echo "<tr><th>Legajo</th><th>Apellido y Nombre</th><th><center>Acciones</center></th></tr>";
+    echo "<h2 class='mov-section-title'>Datos del docente</h2>";
+    echo "<div class='mov-card'><table class='table table-bordered table-condensed mov-docente-resumen'>";
+    echo "<thead><tr><th>Legajo</th><th>Apellido y Nombre</th><th class='mov-docente-actions'>Detalle</th></tr></thead><tbody>";
 
     while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-        $legajo = $row['legajo'];
+        $legajoDoc = $row['legajo'];
         $apellidoynombre = $row['apellidoynombre'];
+        if ($row['fechanacim'] == null) {
+            $fechanacim = $row['fechanacim'];
+        } else {
+            $fechanacim = $row['fechanacim']->format('d/m/Y');
+        }
+        $titulobas = $row['titulobas'];
+        $promediot = $row['promediot'];
+        $otrostit = $row['otrostit'];
+        $cargosdocentes = $row['cargosdocentes'];
+        if ($row['fingreso'] == null) {
+            $fingreso = $row['fingreso'];
+        } else {
+            $fingreso = $row['fingreso']->format('d/m/Y');
+        }
 
         echo "<tr>";
-        echo "<td>$legajo</td>";
-        echo "<td>$apellidoynombre</td>";
-        echo "<td><center><button type='button' onclick='showDetails($legajo)' title='detalle docente' class='detalle-button'><i class='glyphicon glyphicon-list-alt'></i>  Detalle</button></center></td>";
+        echo "<td>" . htmlspecialchars((string) $legajoDoc, ENT_QUOTES, 'UTF-8') . "</td>";
+        echo "<td>" . htmlspecialchars((string) $apellidoynombre, ENT_QUOTES, 'UTF-8') . "</td>";
+        echo "<td class='mov-docente-actions'><button type='button' onclick='showDetails(\"" . htmlspecialchars((string) $legajoDoc, ENT_QUOTES, 'UTF-8') . "\")' class='btn btn-warning btn-sm detalle-button' title='Detalle del docente'><i class='glyphicon glyphicon-list-alt'></i> Detalle</button></td>";
         echo "</tr>";
 
-        // Detalles del docente (oculto por defecto)
-        echo "<tr id='details_$legajo' style='display:none'>";
-        echo "<td colspan='3'><b>Detalles del Docente</b></td>";
+        echo "<tr id='details_" . htmlspecialchars((string) $legajoDoc, ENT_QUOTES, 'UTF-8') . "' style='display:none' class='active'>";
+        echo "<td colspan='3'><strong>Detalles del docente</strong></td>";
         echo "</tr>";
-        echo "<tr id='details_info_$legajo' style='display:none'>";
-            if ($row['fechanacim'] !== null) {
-              echo "<td>Fecha Nac.:</td><td colspan='2'>" . $row['fechanacim']->format('d/m/Y') . "</td>";
-          } else {
-              echo "<td>Fecha Nac.:</td><td colspan='2'>No disponible</td>";
-          }
-        echo "</tr>";
-        echo "<tr id='details_info_$legajo' style='display:none'>";
-        echo "<td>Tít. Básico:</td><td colspan='2'>" .$row['titulobas']. "</td>";
-        echo "</tr>";
-        echo "<tr id='details_info_$legajo' style='display:none'>";
-        echo "<td>Promedio:</td><td colspan='2'>" .$row['promediot']. "</td>";
-        echo "</tr>";
-        echo "<tr id='details_info_$legajo' style='display:none'>";
-        echo "<td>Otro título:</td><td colspan='2'>" .$row['otrostit']. "</td>";
-        echo "</tr>";
-        echo "<tr id='details_info_$legajo' style='display:none'>";
-        echo "<td>Cargo Docente:</td><td colspan='2'>" .$row['cargosdocentes']. "</td>";
-        echo "</tr>";
-        echo "<tr id='details_info_$legajo' style='display:none'>";
-        if ($row['fingreso'] !== null) {
-          echo "<td>Residencia::</td><td colspan='2'>" . $row['fingreso']->format('d/m/Y') . "</td>";
-      } else {
-          echo "<td>Residencia::</td><td colspan='2'>No disponible</td>";
-      }
-       
-       
-       
-        echo "</tr>";
+        echo "<tr data-detail-info='" . htmlspecialchars((string) $legajoDoc, ENT_QUOTES, 'UTF-8') . "' style='display:none'><td>Fecha Nac.:</td><td colspan='2'>" . htmlspecialchars((string) $fechanacim, ENT_QUOTES, 'UTF-8') . "</td></tr>";
+        echo "<tr data-detail-info='" . htmlspecialchars((string) $legajoDoc, ENT_QUOTES, 'UTF-8') . "' style='display:none'><td>Tít. Básico:</td><td colspan='2'>" . htmlspecialchars((string) $titulobas, ENT_QUOTES, 'UTF-8') . "</td></tr>";
+        echo "<tr data-detail-info='" . htmlspecialchars((string) $legajoDoc, ENT_QUOTES, 'UTF-8') . "' style='display:none'><td>Promedio:</td><td colspan='2'>" . htmlspecialchars((string) $promediot, ENT_QUOTES, 'UTF-8') . "</td></tr>";
+        echo "<tr data-detail-info='" . htmlspecialchars((string) $legajoDoc, ENT_QUOTES, 'UTF-8') . "' style='display:none'><td>Otro título:</td><td colspan='2'>" . htmlspecialchars((string) $otrostit, ENT_QUOTES, 'UTF-8') . "</td></tr>";
+        echo "<tr data-detail-info='" . htmlspecialchars((string) $legajoDoc, ENT_QUOTES, 'UTF-8') . "' style='display:none'><td>Cargo docente:</td><td colspan='2'>" . htmlspecialchars((string) $cargosdocentes, ENT_QUOTES, 'UTF-8') . "</td></tr>";
+        echo "<tr data-detail-info='" . htmlspecialchars((string) $legajoDoc, ENT_QUOTES, 'UTF-8') . "' style='display:none'><td>Residencia:</td><td colspan='2'>" . htmlspecialchars((string) $fingreso, ENT_QUOTES, 'UTF-8') . "</td></tr>";
     }
 
-    echo "</table>";
+    echo "</tbody></table></div>";
 } else {
     echo "No se encontraron docentes en la base de datos.";
 }
@@ -487,16 +751,17 @@ sqlsrv_close($conn);
 <script type="text/javascript">
 function showDetails(legajo) {
   var detailsElement = document.getElementById("details_" + legajo);
-  var detailsInfoElements = document.querySelectorAll("[id^='details_info_" + legajo + "']");
-  if (detailsElement.style.display === "none") {
-    detailsElement.style.display = "table-row"; // Mostrar la fila de detalles
+  var detailsInfoElements = document.querySelectorAll("[data-detail-info='" + legajo + "']");
+  if (!detailsElement) { return; }
+  if (detailsElement.style.display === "none" || detailsElement.style.display === "") {
+    detailsElement.style.display = "table-row";
     detailsInfoElements.forEach(function(item) {
-      item.style.display = "table-row"; // Mostrar las filas de detalles adicionales
+      item.style.display = "table-row";
     });
   } else {
-    detailsElement.style.display = "none"; // Ocultar la fila de detalles
+    detailsElement.style.display = "none";
     detailsInfoElements.forEach(function(item) {
-      item.style.display = "none"; // Ocultar las filas de detalles adicionales
+      item.style.display = "none";
     });
   }
 }
@@ -504,29 +769,25 @@ function showDetails(legajo) {
 <script>
 $(document).ready(function() {
     $('#grabarBtn').click(function() {
-        alert('Se ha grabado la información.');
+        juntaSuccess('Grabado', 'Se ha grabado la información.');
     });
 
     $('#cancelarBtn').click(function() {
-        history.back(); // Volver a la página anterior
+        history.back();
     });
 
     $('#eliminarBtn').click(function() {
-        if (confirm('¿Estás seguro de que quieres eliminar esta inscripción?')) {
-            // Aquí puedes agregar la lógica para eliminar el elemento con el ID 'id2'
+        juntaConfirmDanger('¿Estás seguro de que quieres eliminar esta inscripción?', function() {
             var elementoEliminar = document.getElementById('id2');
             var padreElemento = elementoEliminar.parentNode;
             padreElemento.removeChild(elementoEliminar);
 
-            alert('La inscripción ha sido eliminada.');
-        }
+            juntaSuccess('Eliminado', 'La inscripción ha sido eliminada.');
+        });
     });
 });
 </script>
-<center><h4><u>Duplicado de  Movimiento</u></h4></center>
-<table>
-  
- <?php
+<?php
 $legajo = $_GET['legajo'];
 $excluido = $_GET['excluido'];
 
@@ -645,93 +906,40 @@ if ($resultData === false) {
     die(print_r(sqlsrv_errors(), true));
 }
 
-echo "<table border='1'>";  
-echo "<form action='GrabarMovimientosPermanentes.php' method='post'>";
-echo "<input type='hidden' name='legajo' value='" . htmlspecialchars($legajo) . "'>";
+echo "<form id=\"formDuplicarMov\" action='GrabarMovimientosPermanentes.php' method='post'>";
+echo "<input type='hidden' name='legajo' value='" . htmlspecialchars((string) $legajo, ENT_QUOTES, 'UTF-8') . "'>";
+echo "<input type='hidden' name='id2' id='id2' value='" . htmlspecialchars((string) $id2, ENT_QUOTES, 'UTF-8') . "'>";
 
-// Verifica si hay filas
+echo '<div class="mov-section-head">';
+echo '<div class="mov-section-head-actions">';
+echo '<button class="btn btn-warning" type="submit" title="Duplicar registro"><i class="glyphicon glyphicon-copy"></i> Duplicar</button>';
+echo '<a href="javascript:history.back()" class="btn btn-default" title="Volver atrás"><i class="glyphicon glyphicon-arrow-left"></i> Volver atrás</a>';
+echo '</div>';
+echo '<h2 class="mov-section-title mov-section-title--in-head">Duplicado de movimiento</h2>';
+echo '</div>';
+echo '<div class="mov-card mov-carga-movimiento"><div class="container-fluid">';
+
 if (sqlsrv_has_rows($resultData)) {
     $row = sqlsrv_fetch_array($resultData, SQLSRV_FETCH_ASSOC);
-   
-    // === Fila de encabezado con curso y botones ===
-    echo "<tr>";
-    
-    // Curso
-    echo "<th>Curso: <input type='text' name='anodoc' value='" . htmlspecialchars($row['anodoc'] ?? '') . "' size='11'></th>";
-    echo "<th></th>";
-    
-    // Botones
-    echo "<td style='text-align: center;'>";
-    echo "<div style='display: flex; justify-content: center; gap: 20px;'>";
-    echo "<button type='button' class='btn btn-primary' id='cancelarBtn' title='Volver'>
-            <i class='glyphicon glyphicon-arrow-left'></i> Volver
-        </button>";
-    echo "<button class='btn btn-warning' title='Duplicar Registro' type='submit'>
-            <i class='glyphicon glyphicon-copy'></i> Duplicar
-        </button>";
-    echo "</div>";
-    echo "</td>";
-    echo "</tr>";
+    $anodocVal = isset($row['anodoc']) ? htmlspecialchars((string) $row['anodoc'], ENT_QUOTES, 'UTF-8') : '';
+    $codlocSel = isset($row['codloc']) ? $row['codloc'] : null;
 
-    // === Fila de modalidad ===
-    echo "<tr>";
-
-    // Código de modalidad
-    echo "<th>Cód. Mod: <input type='text' name='codmod' id='codmod' value='" . htmlspecialchars($row['codmod']) . "' size='8' onchange='fetchModalidad()'></th>";
-
-    // Modalidad (select)
-    echo "<th>Modalidad:
-            <select name='modalidad' id='modalidad' style='width: 500px;'>";
-
+    echo '<div class="row">';
+    echo '<div class="col-sm-4"><div class="form-group"><label class="mov-field-label" for="anodoc">Curso</label>';
+    echo "<input type=\"text\" class=\"form-control\" name=\"anodoc\" id=\"anodoc\" value=\"{$anodocVal}\"></div></div>";
+    echo '<div class="col-sm-4"><div class="form-group"><label class="mov-field-label" for="codmod">Cód. mod.</label>';
+    echo "<input type=\"text\" class=\"form-control\" name=\"codmod\" id=\"codmod\" value=\"" . htmlspecialchars((string) $row['codmod'], ENT_QUOTES, 'UTF-8') . "\" onchange=\"fetchModalidad()\"></div></div>";
+    echo '<div class="col-sm-4"><div class="form-group"><label class="mov-field-label" for="modalidad">Modalidad</label>';
+    echo "<select class=\"form-control\" name=\"modalidad\" id=\"modalidad\">";
     foreach ($modalidades as $modalidad) {
         $selected = ($modalidad['codmod'] == $row['codmod']) ? "selected" : "";
-        echo "<option value='" . htmlspecialchars($modalidad['codmod']) . "' $selected>" . htmlspecialchars($modalidad['nommod']) . "</option>";
+        echo "<option value='" . htmlspecialchars($modalidad['codmod'], ENT_QUOTES, 'UTF-8') . "' $selected>" . htmlspecialchars($modalidad['nommod'], ENT_QUOTES, 'UTF-8') . "</option>";
     }
+    echo "</select></div></div></div>";
 
-    echo "  </select>
-        </th>";
-       
-
-// JavaScript para hacer la petición AJAX
-echo "<script>
-function fetchModalidad() {
-    const codmod = document.getElementById('codmod').value;
-
-    if (codmod) {
-        // Realizar la petición AJAX
-        fetch('buscar_por_codigo.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: 'codmod=' + codmod
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                const modalidadSelect = document.getElementById('modalidad');
-                // Limpiar el select antes de agregar las nuevas opciones
-                modalidadSelect.innerHTML = '';
-
-                // Crear y agregar la opción de modalidad encontrada
-                const option = document.createElement('option');
-                option.value = data.nommod;
-                option.text = data.nommod;
-                modalidadSelect.appendChild(option);
-            } else {
-                alert(data.error);
-            }
-        })
-        .catch(error => {
-            console.error('Error en la solicitud:', error);
-        });
-    }
-}
-</script>";
-
-    // Tipo de inscripción
-    echo "<th>Tipo Inscripción:";
-    echo "<select name='tipo' id='tipo' style='width: 200px;' onchange='mostrarCamposAdicionales(); showTableBasedOnType();'>";
+    echo '<div class="row mov-carga-fila-mixta">';
+    echo '<div class="col-sm-4"><div class="form-group"><label class="mov-field-label" for="tipo">Tipo inscripción</label>';
+    echo "<select class=\"form-control\" name=\"tipo\" id=\"tipo\" onchange=\"mostrarCamposAdicionales(); showTableBasedOnType();\">";
     echo "<option value='Permanente'";
     if (trim($row['tipo']) == "Permanente" || trim($row['tipo']) == "permanente") {
         echo " selected";
@@ -752,106 +960,135 @@ function fetchModalidad() {
         echo " selected";
     }
     echo ">Concurso de Titularidad</option>";
-    echo "</select>";
-    echo "</th>";
-    echo "</tr>";
-    echo "</table>";
-   
-} else {
-  
-     // Curso
-     $anodoc = isset($_GET['anodoc']) ? $_GET['anodoc'] : '';
-    // Verificar si anodoc está definido en la URL o en la consulta de la base de datos
-if (!empty($anodoc)) {
-  echo "<th>Curso: </th><th><input type='text' name='anodoc' value='" . htmlspecialchars($anodoc) . "' size='11'></th>";
-} else {
-  echo "<th>Curso: </th><th><input type='text' name='anodoc' value='' size='11'></th>"; 
-}
+    echo "</select></div></div>";
+    echo '<div class="col-sm-4"><div class="form-group"><label class="mov-field-label" for="codloc">Localidad</label>';
+    echo "<select class=\"form-control\" name=\"codloc\" id=\"codloc\">";
+    echo "<option value=\"\">Seleccione</option>";
+    echo "<option value='USH'" . ($codlocSel === "USH" ? " selected" : "") . ">Ushuaia</option>";
+    echo "<option value='RGD'" . ($codlocSel === "RGD" ? " selected" : "") . ">Rio Grande</option>";
+    echo "<option value='TOL'" . ($codlocSel === "TOL" ? " selected" : "") . ">Tolhuin</option>";
+    echo "<option value='ANT'" . ($codlocSel === "ANT" ? " selected" : "") . ">Antártida</option>";
+    echo "</select></div></div>";
+    echo '<div class="col-sm-4 hidden-xs"><div class="form-group mov-placeholder-col"><span class="text-muted">&nbsp;</span></div></div>';
+    echo '</div>';
 
-$id2 = isset($_GET['id2']) ? $_GET['id2'] : '';
+echo "<script>
+function fetchModalidad() {
+    const codmod = document.getElementById('codmod').value;
 
-// Botones de acción
-echo "<th>";
-echo "<div style='text-align: center;'>";
-
-// Verificar si $row['id2'] está definido antes de usarlo
-if (isset($row['id2'])) {
-    echo "<a class='btn btn-sm btn-danger' id='movimientoBorrado' href='#' data-id2='" . htmlspecialchars($row['id2']) . "' title='Eliminar'><i class='glyphicon glyphicon-trash'></i> Eliminar</a>";
-} else {
-    // Manejo alternativo si $row['id2'] no está definido
-    echo "<a class='btn btn-sm btn-danger' id='movimientoBorrado' href='#' data-id2='' title='Eliminar'><i class='glyphicon glyphicon-trash'></i> Eliminar</a>";
-}
-echo "<button type='button' class='btn btn-success' id='grabarBtn'><i class='glyphicon glyphicon-refresh'></i> Grabar</button>";
-echo "<button type='button' class='btn btn-primary' id='cancelarBtn'><i class='glyphicon glyphicon-remove'></i> Volver</button>";
-echo "</div>";
-echo "</th>";
-echo "</tr>";
-
-// Código de modalidad
-$codmod = isset($_GET['codmod']) ? $_GET['codmod'] : '';
-
-echo "<tr>";
-
-// Verificar si codmod está definido en la URL o en la consulta de la base de datos
-if (!empty($codmod)) {
-    echo "<th>Cód. Mod: <input type='text' name='codmod' value='" . htmlspecialchars($codmod) . "' size='8'></th>";
-    
-    // Consultar la base de datos para obtener el nombre de la modalidad
-    $queryModalidad = "SELECT nommod FROM _junta_modalidades WHERE codmod = ?";
-    $params = array($codmod);
-    $resultModalidad = sqlsrv_query($conn, $queryModalidad, $params);
-    
-    if ($resultModalidad === false) {
-        die(print_r(sqlsrv_errors(), true));
+    if (codmod) {
+        fetch('buscar_por_codigo.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'codmod=' + codmod
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const modalidadSelect = document.getElementById('modalidad');
+                modalidadSelect.innerHTML = '';
+                const option = document.createElement('option');
+                option.value = data.nommod;
+                option.text = data.nommod;
+                modalidadSelect.appendChild(option);
+            } else {
+                juntaError('Error', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
+        });
     }
-    
-    if (sqlsrv_has_rows($resultModalidad)) {
-        $rowModalidad = sqlsrv_fetch_array($resultModalidad, SQLSRV_FETCH_ASSOC);
-        $nommod = $rowModalidad['nommod'];
-    } else {
-        $nommod = ''; // Manejar el caso donde no se encuentra la modalidad
-    }
+}
+</script>";
+
 } else {
-    echo "<th>Cód. Mod: <input type='text' name='codmod' value='' size='8'></th>"; 
-    $nommod = ''; // Define $nommod como vacío si no hay codmod definido
-}
-
-// Modalidad
-echo "<th>Modalidad:<select name='modalidad' style='width: 500px;'>";
-foreach ($modalidades as $modalidad) {
-    echo "<option value='$modalidad'";
-    if ($nommod == $modalidad) {
-        echo " selected";
+    $row = array();
+    $anodoc = isset($_GET['anodoc']) ? $_GET['anodoc'] : '';
+    $codmod = isset($_GET['codmod']) ? $_GET['codmod'] : '';
+    $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '';
+    $nommod = '';
+    if (!empty($codmod)) {
+        $queryModalidad = "SELECT nommod FROM _junta_modalidades WHERE codmod = ?";
+        $params = array($codmod);
+        $resultModalidad = sqlsrv_query($conn, $queryModalidad, $params);
+        if ($resultModalidad && sqlsrv_has_rows($resultModalidad)) {
+            $rowModalidad = sqlsrv_fetch_array($resultModalidad, SQLSRV_FETCH_ASSOC);
+            $nommod = $rowModalidad['nommod'];
+        }
     }
-    echo ">$modalidad</option>";
-}
-echo "</select></th>"; // Cierra el campo de selección de modalidad
-$tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '';
+    $codlocSel = isset($_GET['codloc']) ? $_GET['codloc'] : null;
+    $anodocVal = htmlspecialchars((string) $anodoc, ENT_QUOTES, 'UTF-8');
 
-// Opciones disponibles en el select
-$options = [
-    'Permanente' => 'Permanente',
-    'Titulares' => 'Titulares',
-    'transitorio' => 'Interinatos y Suplencias',
-    'Concurso' => 'Concurso de Titularidad'
-];
-
-// Tipo de inscripción
-echo "<th>Tipo Inscripción:";
-echo "<select name='tipo' id='tipo' style='width: 242px;' onchange='mostrarCamposAdicionales(); showTableBasedOnType();'>";
-
-foreach ($options as $value => $label) {
-    echo "<option value='$value'";
-    if ($tipo === $value) {
-        echo " selected";
+    echo '<div class="row">';
+    echo '<div class="col-sm-4"><div class="form-group"><label class="mov-field-label" for="anodoc">Curso</label>';
+    echo "<input type=\"text\" class=\"form-control\" name=\"anodoc\" id=\"anodoc\" value=\"{$anodocVal}\"></div></div>";
+    echo '<div class="col-sm-4"><div class="form-group"><label class="mov-field-label" for="codmod">Cód. mod.</label>';
+    echo "<input type=\"text\" class=\"form-control\" name=\"codmod\" id=\"codmod\" value=\"" . htmlspecialchars((string) $codmod, ENT_QUOTES, 'UTF-8') . "\" onchange=\"fetchModalidad()\"></div></div>";
+    echo '<div class="col-sm-4"><div class="form-group"><label class="mov-field-label" for="modalidad">Modalidad</label>';
+    echo "<select class=\"form-control\" name=\"modalidad\" id=\"modalidad\">";
+    foreach ($modalidades as $modalidad) {
+        $sel = (isset($modalidad['nommod']) && $nommod !== '' && trim((string) $nommod) === trim((string) $modalidad['nommod'])) ? ' selected' : '';
+        echo "<option value='" . htmlspecialchars($modalidad['codmod'], ENT_QUOTES, 'UTF-8') . "'" . $sel . ">" . htmlspecialchars($modalidad['nommod'], ENT_QUOTES, 'UTF-8') . "</option>";
     }
-    echo ">$label</option>";
-}
+    echo "</select></div></div></div>";
 
-echo "</select>";
-echo "</th>";
-echo "</tr>";
-echo "</table>";
+    $options = [
+        'Permanente' => 'Permanente',
+        'Titulares' => 'Titulares',
+        'transitorio' => 'Interinatos y Suplencias',
+        'Concurso' => 'Concurso de Titularidad'
+    ];
+    echo '<div class="row mov-carga-fila-mixta">';
+    echo '<div class="col-sm-4"><div class="form-group"><label class="mov-field-label" for="tipo">Tipo inscripción</label>';
+    echo "<select class=\"form-control\" name=\"tipo\" id=\"tipo\" onchange=\"mostrarCamposAdicionales(); showTableBasedOnType();\">";
+    foreach ($options as $value => $label) {
+        echo "<option value='" . htmlspecialchars($value, ENT_QUOTES, 'UTF-8') . "'";
+        if ($tipo === $value) {
+            echo " selected";
+        }
+        echo ">" . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . "</option>";
+    }
+    echo "</select></div></div>";
+    echo '<div class="col-sm-4"><div class="form-group"><label class="mov-field-label" for="codloc">Localidad</label>';
+    echo "<select class=\"form-control\" name=\"codloc\" id=\"codloc\">";
+    echo "<option value=\"\">Seleccione</option>";
+    echo "<option value='USH'" . ($codlocSel === "USH" ? " selected" : "") . ">Ushuaia</option>";
+    echo "<option value='RGD'" . ($codlocSel === "RGD" ? " selected" : "") . ">Rio Grande</option>";
+    echo "<option value='TOL'" . ($codlocSel === "TOL" ? " selected" : "") . ">Tolhuin</option>";
+    echo "<option value='ANT'" . ($codlocSel === "ANT" ? " selected" : "") . ">Antártida</option>";
+    echo "</select></div></div>";
+    echo '<div class="col-sm-4 hidden-xs"><div class="form-group mov-placeholder-col"><span class="text-muted">&nbsp;</span></div></div>';
+    echo '</div>';
+
+echo "<script>
+function fetchModalidad() {
+    const codmod = document.getElementById('codmod').value;
+    if (codmod) {
+        fetch('buscar_por_codigo.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'codmod=' + codmod
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const modalidadSelect = document.getElementById('modalidad');
+                modalidadSelect.innerHTML = '';
+                const option = document.createElement('option');
+                option.value = data.nommod;
+                option.text = data.nommod;
+                modalidadSelect.appendChild(option);
+            } else {
+                juntaError('Error', data.error);
+            }
+        })
+        .catch(error => { console.error('Error en la solicitud:', error); });
+    }
+}
+</script>";
 
 }
 
@@ -861,29 +1098,25 @@ echo "</table>";
 <script>
 jQuery(document).ready(function($) {
   $('.btn-danger').click(function(e) {
-      e.preventDefault(); // Previene el comportamiento predeterminado del enlace
+      e.preventDefault();
       
-      // Obtiene el ID2 del atributo de datos
       var id2 = $(this).data('id2');
       
-      // Pregunta al usuario si realmente desea eliminar el movimiento
-      if (confirm('¿Desea eliminar el movimiento?')) {
-          // Realiza la solicitud AJAX para eliminar el movimiento
+      juntaConfirmDanger('¿Desea eliminar el movimiento?', function() {
           jQuery.ajax({
               type: 'POST',
-              url: 'eliminar_movimiento.php', // Ruta al script PHP que maneja la eliminación
-              data: { id2: id2 }, // Envía el ID2 al servidor
+              url: 'eliminar_movimiento.php',
+              data: { id2: id2 },
               success: function(response) {
-                  alert('El movimiento ha sido eliminado exitosamente.');
-                  // Actualiza la página o realiza otras acciones si es necesario
-                  location.reload(); // Recarga la página para reflejar los cambios
+                  juntaSuccess('Eliminado', 'El movimiento ha sido eliminado exitosamente.');
+                  location.reload();
               },
               error: function(xhr, status, error) {
-                  alert('Error al intentar eliminar el movimiento. Por favor, inténtalo de nuevo.');
+                  juntaError('Error', 'Error al intentar eliminar el movimiento. Por favor, inténtalo de nuevo.');
                   console.error(xhr.responseText);
               }
           });
-      }
+      });
   });
 });
 </script>
@@ -895,145 +1128,74 @@ if (!empty($fecha)) {
     $fecha = '';
 }
 
+echo "<div class=\"row\" id=\"fechaRow\" style=\"display: none;\">";
+echo "<div class=\"col-sm-4\"><div class=\"form-group\"><label class=\"mov-field-label\" for=\"fechaMov\">Fecha</label>";
+echo "<input type=\"date\" class=\"form-control\" name=\"fecha\" id=\"fechaMov\" value=\"" . htmlspecialchars($fecha, ENT_QUOTES, 'UTF-8') . "\"></div></div></div>";
 
+$serverName = "10.1.9.113";
+$connectionInfo = array(
+    "Database" => "junta",
+    "Uid" => "SA",
+    "PWD" => 'Davinci2024#',
+    "CharacterSet" => "UTF-8",
+    "TrustServerCertificate" => true
+);
+$conn = sqlsrv_connect($serverName, $connectionInfo);
 
-echo "<tr id='fechaRow' style='display: none;'>"; // Inicialmente oculto
-echo "<th colspan='4'>Fecha: <input type='date' name='fecha' value='" . htmlspecialchars($fecha) . "'></th>";
-echo "</tr>";
+if ($conn) {
+    echo "";
+} else {
+    echo "Error en la conexión.<br>";
+    $errors = sqlsrv_errors();
+    foreach ($errors as $error) {
+        echo "SQLSTATE: " . $error['SQLSTATE'] . "<br>";
+        echo "Code: " . $error['code'] . "<br>";
+        echo "Message: " . $error['message'] . "<br>";
+    }
+}
 
-// Luego, dentro de tu script PHP, puedes agregar el siguiente código JavaScript
-echo "<script>";
-echo "document.addEventListener('DOMContentLoaded', function() {";
-echo "    var tipoSelect = document.getElementById('tipo');";
-echo "    var fechaRow = document.getElementById('fechaRow');";
-echo "    tipoSelect.addEventListener('change', function() {";
-echo "        if (tipoSelect.value === 'permanente') {";
-echo "            fechaRow.style.display = 'table-row';";
-echo "        } else {";
-echo "            fechaRow.style.display = 'none';";
-echo "        }";
-echo "    });";
+$excluidoSeleccionado = isset($_GET['excluido']) ? $_GET['excluido'] : null;
+$excluirChecked = ($excluidoSeleccionado !== "23" && $excluidoSeleccionado !== "no") ? "checked" : "";
 
-echo "    // Mostrar la fila de fecha si el tipo es 'permanente' al cargar la página";
-echo "    if (tipoSelect.value === 'permanente') {";
-echo "        fechaRow.style.display = 'table-row';";
-echo "    }";
-echo "});";
-echo "</script>";
+$queryMotivos = "SELECT idexclu, motivo FROM _junta_motivosexclusion";
+$resultMotivos = sqlsrv_query($conn, $queryMotivos);
 
+if ($resultMotivos && sqlsrv_has_rows($resultMotivos)) {
+    echo "<div class='row mov-excluir-row'><div class='col-sm-12'><div class='form-group'>";
+    echo "<label class='mov-field-label' for='excluir'>Excluir inscripción</label>";
+    echo "<div style='display:flex;flex-wrap:wrap;align-items:center;gap:10px;'>";
+    echo "<input type='checkbox' id='excluir' name='excluido_checkbox' onchange='toggleMotivosExclusion()' $excluirChecked>";
+    $display = ($excluidoSeleccionado !== "23" && $excluidoSeleccionado !== "no") ? "block" : "none";
+    echo "<select id='motivosExclusion' name='excluido' class='form-control mov-motivos-select' style='display: $display; max-width:100%;'>";
+    echo "<option value=''>Seleccione un motivo de exclusión</option>";
+    while ($rowMotivo = sqlsrv_fetch_array($resultMotivos, SQLSRV_FETCH_ASSOC)) {
+        $selected = ($rowMotivo['idexclu'] == $excluidoSeleccionado) ? "selected" : "";
+        echo "<option value='" . $rowMotivo['idexclu'] . "' $selected>" . htmlspecialchars((string) $rowMotivo['motivo'], ENT_QUOTES, 'UTF-8') . "</option>";
+    }
+    echo "</select></div></div></div></div>";
+    echo "<script>
+    function toggleMotivosExclusion() {
+        var select = document.getElementById('motivosExclusion');
+        var checkbox = document.getElementById('excluir');
+        if (checkbox.checked) {
+            select.style.display = 'block';
+        } else {
+            select.style.display = 'none';
+            select.selectedIndex = 0;
+        }
+    }
+    window.addEventListener('load', function() {
+        var checkbox = document.getElementById('excluir');
+        if (checkbox && checkbox.checked && document.getElementById('motivosExclusion')) {
+            document.getElementById('motivosExclusion').style.display = 'block';
+        }
+    });
+    </script>";
+} else {
+    echo "<p class='text-muted'>No se encontraron motivos de exclusión en la base de datos.</p>";
+}
 
- 
-                                              $codloc = isset($row['codloc']) ? $row['codloc'] : null;
-
-                                              echo "<th style='width:50px;'>Localidad:</th>";
-                                              echo "<td>";
-                                              echo "<select name='codloc' style='width: 200px;'>";
-                                              echo "<option></option>";
-                                              echo "<option value='USH'" . ($codloc === "USH" ? " selected" : "") . ">Ushuaia</option>";
-                                              echo "<option value='RGD'" . ($codloc === "RGD" ? " selected" : "") . ">Rio Grande</option>";
-                                              echo "<option value='TOL'" . ($codloc === "TOL" ? " selected" : "") . ">Tolhuin</option>";
-                                              echo "<option value='ANT'" . ($codloc === "ANT" ? " selected" : "") . ">Antartida</option>";
-                                              echo "</select>";
-                                              echo "</td>";
-                                              echo"<th>";
-                                              echo"<br>";
-                                             
-                                                
-                                                                                    // Establecer la conexión a SQL Server
-                                        $serverName = "10.1.9.113"; // Reemplazar con el nombre de tu servidor SQL Server
-                                        $connectionInfo = array(
-                                            "Database" => "junta", // Reemplazar con el nombre de tu base de datos
-                                            "Uid" => "SA", // Usuario SQL Server
-                                            "PWD" => 'Davinci2024#', // Contraseña del usuario SQL Server
-                                            "CharacterSet" => "UTF-8", // Para caracteres especiales
-                                            "TrustServerCertificate" => true // Confía en certificados autofirmados
-                                        );
-                                        $conn = sqlsrv_connect($serverName, $connectionInfo);
-
-                                        if ($conn) {
-                                            echo "";
-                                        } else {
-                                            echo "Error en la conexión.<br>";
-                                            // Obtener y mostrar errores detallados
-                                            $errors = sqlsrv_errors();
-                                            foreach ($errors as $error) {
-                                                echo "SQLSTATE: " . $error['SQLSTATE'] . "<br>";
-                                                echo "Code: " . $error['code'] . "<br>";
-                                                echo "Message: " . $error['message'] . "<br>";
-                                            }
-                                        }
-                                            //echo "Conexión exitosa.";
-                                              
-                                              // Consulta SQL para obtener todos los motivos de exclusión
-                                                    // Recuperar el motivo de exclusión seleccionado si existe en el POST
-                                                    $excluidoSeleccionado = isset($_GET['excluido']) ? $_GET['excluido'] : null;
-                                                    
-                                                   // Verificar si el checkbox debe estar marcado: solo si excluido es distinto de "23" y excluido no es "no"
-                                                            $excluirChecked = ($excluidoSeleccionado !== "23" && $excluidoSeleccionado !== "no") ? "checked" : "";
-
-                                                            // Consulta SQL para obtener todos los motivos de exclusión
-                                                            $queryMotivos = "SELECT idexclu, motivo FROM _junta_motivosexclusion";
-                                                            $resultMotivos = sqlsrv_query($conn, $queryMotivos);
-
-                                                            // Verificar si se encontraron registros de motivos de exclusión
-                                                            if ($resultMotivos && sqlsrv_has_rows($resultMotivos)) {
-                                                               // Generar el botón "Excluir Inscripción"
-                                                                    echo "<div style='display: flex; align-items: center;'>"; // Crear un contenedor flexible
-                                                                    echo "<label for='excluir' style='margin-right: 10px; margin-bottom: -3px;'>Excluir Inscripción</label>";
-
-                                                                    // Mostrar el checkbox y verificar si debe estar marcado
-                                                                    echo "<input type='checkbox' id='excluir' name='excluido_checkbox' onchange='toggleMotivosExclusion()' style='transform: scale(0.9); margin-right: 10px;' $excluirChecked>";
-
-                                                                    // Mostrar el menú desplegable de motivos de exclusión (visible si excluido != "23" y excluido != "no")
-                                                                    $display = ($excluidoSeleccionado !== "23" && $excluidoSeleccionado !== "no") ? "block" : "none";
-                                                                    echo "<select id='motivosExclusion' name='excluido' style='display: $display; width: 600px;'>"; // Ajusta el ancho según necesites
-                                                                    echo "<option value=''>Seleccione un motivo de exclusión</option>";
-
-                                                                    // Iterar sobre los resultados y generar las opciones del menú desplegable
-                                                                    while ($rowMotivo = sqlsrv_fetch_array($resultMotivos, SQLSRV_FETCH_ASSOC)) {
-                                                                        // Verificar si este motivo es el seleccionado
-                                                                        $selected = ($rowMotivo['idexclu'] == $excluidoSeleccionado) ? "selected" : "";
-                                                                        echo "<option value='" . $rowMotivo['idexclu'] . "' $selected>" . $rowMotivo['motivo'] . "</option>";
-                                                                    }
-
-                                                                    echo "</select>";
-                                                                    echo "</div>"; // Cerrar el contenedor flexible
-
-                                                                // Añadir el script para mostrar u ocultar el menú desplegable
-                                                                echo "<script>
-                                                                function toggleMotivosExclusion() {
-                                                                    var select = document.getElementById('motivosExclusion');
-                                                                    var checkbox = document.getElementById('excluir');
-                                                                    if (checkbox.checked) {
-                                                                        select.style.display = 'block';
-                                                                    } else {
-                                                                        select.style.display = 'none';
-                                                                        select.selectedIndex = 0; // Reiniciar selección cuando se desmarca el checkbox
-                                                                    }
-                                                                }
-
-                                                                // Mostrar el menú desplegable si el checkbox ya está marcado al cargar la página
-                                                                window.onload = function() {
-                                                                    var checkbox = document.getElementById('excluir');
-                                                                    if (checkbox.checked) {
-                                                                        document.getElementById('motivosExclusion').style.display = 'block';
-                                                                    }
-                                                                };
-                                                                </script>";
-                                                            } else {
-                                                                echo "No se encontraron motivos de exclusión en la base de datos.";
-                                                            }
-                                                echo "</table>"; // Cierre de la tabla
-                                                
-                                              
-                                           
-                                              
-                                              // Generar los campos adicionales para "Titulares", inicialmente ocultos
-                                              echo "<tr id='titularesRow' style='display: none;'>";
-                                              
-                                              // Realiza la consulta para obtener los nombres de los establecimientos
-                                             // Realiza la consulta para obtener los nombres de los establecimientos
-                                                $queryEstablecimientos = "   SELECT iddep, nomdep, coddep
+$queryEstablecimientos = "   SELECT iddep, nomdep, coddep
 FROM _junta_dependencias
 ORDER BY 
     CASE 
@@ -1041,7 +1203,6 @@ ORDER BY
         WHEN nomdep COLLATE Latin1_General_CI_AI LIKE '%escuela%' THEN 2
         ELSE 3
     END,
-    -- Extraer el número más robustamente, eliminando texto adicional
     TRY_CAST(
         TRIM(REPLACE(REPLACE(REPLACE(REPLACE(
             SUBSTRING(nomdep, PATINDEX('%[0-9]%', nomdep), LEN(nomdep)),
@@ -1050,31 +1211,28 @@ ORDER BY
     ),
     coddep;
 ";
-                                                $resultEstablecimientos = sqlsrv_query($conn, $queryEstablecimientos);
+$resultEstablecimientos = sqlsrv_query($conn, $queryEstablecimientos);
 
-                                                // Muestra el campo de selección con los nombres de los establecimientos
-                                                echo "<th>Establecimiento: <select name='establecimiento' style='width: 200px;'>";
+echo "<div id='titularesRow' class='row' style='display: none;'>";
+echo "<div class='col-sm-4'><div class='form-group'><label class='mov-field-label' for='establecimiento'>Establecimiento</label>";
+echo "<select class='form-control' name='establecimiento' id='establecimiento'>";
+if ($resultEstablecimientos) {
+    while ($rowEstablecimiento = sqlsrv_fetch_array($resultEstablecimientos, SQLSRV_FETCH_ASSOC)) {
+        $nombreEstablecimiento = $rowEstablecimiento['nomdep'];
+        $codEstablecimiento = $rowEstablecimiento['coddep'];
+        $selected = ($nombreEstablecimiento === $receivedNomdep) ? "selected" : "";
+        echo "<option value='" . htmlspecialchars((string) $codEstablecimiento, ENT_QUOTES, 'UTF-8') . "' $selected>" . htmlspecialchars((string) $nombreEstablecimiento, ENT_QUOTES, 'UTF-8') . "</option>";
+    }
+}
+echo "</select></div></div>";
+echo "<div class='col-sm-6'><div class='form-group'><label class='mov-field-label' for='obs'>Observación</label>";
+echo "<input type='text' class='form-control' id='obs' name='obs' value='" . htmlspecialchars($obs, ENT_QUOTES, 'UTF-8') . "'></div></div>";
+echo "<div class='col-sm-2'><div class='form-group'><label class='mov-field-label' for='horas'>Horas</label>";
+echo "<input type='number' class='form-control mov-input-num' name='horas' id='horas' value='" . htmlspecialchars((string) $horas, ENT_QUOTES, 'UTF-8') . "'></div></div>";
+echo "</div>";
 
-                                                // Itera sobre los resultados de la consulta
-                                                while ($rowEstablecimiento = sqlsrv_fetch_array($resultEstablecimientos, SQLSRV_FETCH_ASSOC)) {
-                                                    $nombreEstablecimiento = $rowEstablecimiento['nomdep'];
-                                                    $codEstablecimiento = $rowEstablecimiento['coddep'];
-                                                    
-                                                    // Verifica si el establecimiento actual coincide con el valor recibido
-                                                    $selected = ($nombreEstablecimiento === $receivedNomdep) ? "selected" : "";
+echo "</div></div>";
 
-                                                    // Genera la opción del select, incluyendo "selected" si es la opción preseleccionada
-                                                    echo "<option value='$codEstablecimiento' $selected>$nombreEstablecimiento</option>";
-                                                }
-
-                                                // Cierra el select
-                                                echo "</select></th>";
-                            
-                                              echo "<td>Observación: <input type='text' id='obs' name='obs' style='width: 300px;' value='" . htmlspecialchars($obs) . "'></td>";
-                                              echo "<td>Horas: <input type='number' name='horas' style='width: 50px;' value='" . htmlspecialchars($horas) . "'></td>";
-
-
-                     
 // Inicializar valores de $row
 
 
@@ -1151,61 +1309,36 @@ echo "<script >
 </script>";
 
 
-echo "<table id='tablaPermanenteConcursoInterino'>";
-echo "<tr><td>";
-echo "<h3><u>CARGA COMUN</u> </h3>";
-echo "<br>";
-echo "<label for='puntajetotal2' style='display: inline-block; width: 225px;'>Puntaje Total:</label>";
-echo "<input type='number' id='puntajetotal2' name='puntajetotal2' value='" . htmlspecialchars($row['puntajetotal']) . "' step='0.01' size='5' readonly>";
-echo "<br><br>";
-
-echo "<label for='titulo2' style='display: inline-block; width: 225px;'>1.- Título:</label>";
-echo "<input type='number' id='titulo2' name='titulo2' value='" . htmlspecialchars($row['titulo']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
-echo "<br>";
-
-echo "<label for='otitulo2' style='display: inline-block; width:225px;'>2.- Otros Título:</label>";
-echo "<input type='number' id='otitulo2' name='otitulo2' value='" . htmlspecialchars($row['otitulo']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
-echo "<br>";
-
-
-
-echo "<label for='promedio2' style='display: inline-block; width:  225px;'>3.- Promedio:</label>";
-echo "<input type='number' id='promedio2' name='promedio2' value='" . htmlspecialchars($row['promedio']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
-echo "<br>";
-
-echo "<label for='antiguedadgestion2' style='display: inline-block; width:  225px;'>4.- Antigüedad Gestión:</label>";
-echo "<input type='number' id='antiguedadgestion2' name='antiguedadgestion2' value='" . htmlspecialchars($row['antiguedadgestion']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
-echo "<br>";
-
-echo "<label for='antiguedadtitulo2' style='display: inline-block; width:  225px;'>5.- Antigüedad Título:</label>";
-echo "<input type='number' id='antiguedadtitulo2' name='antiguedadtitulo2' value='" . htmlspecialchars($row['antiguedadtitulo']) ."' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
-echo "<br>";
-
-echo "<label for='servicios' style='display: inline-block; width:  225px;'>6.- Servicios:</label>";
-echo "<br>";
-
-echo "<label for='serviciosprovincia2' style='display: inline-block; width:  225px;'>6.1- En la Provincia:</label>";
-echo "<input type='number' id='serviciosprovincia2' name='serviciosprovincia2' value='" . htmlspecialchars($row['serviciosprovincia']) ."' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
-echo "<br>";
-
-echo "<label for='otrosservicios2' style='display: inline-block; width:  225px;'>6.2- Otros Servicios:</label>";
-echo "<input type='number' id='otrosservicios2' name='otrosservicios2' value='" . htmlspecialchars($row['otrosservicios']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
-echo "<br>";
-
-echo "<label for='residencia2' style='display: inline-block; width:  225px;'>7.- Residencia:</label>";
-echo "<input type='number' id='residencia2' name='residencia2' value='" . htmlspecialchars($row['residencia']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
-echo "<br>";
-
-echo "<label for='publicaciones2' style='display: inline-block; width:  225px;'>8.- Publicaciones:</label>";
-echo "<input type='number' id='publicaciones2' name='publicaciones2' value='" . htmlspecialchars($row['publicaciones']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
-echo "<br>";
-
-echo "<label for='otrosantecedentes2' style='display: inline-block; width:  225px;'>9.- Otros Antecedentes:</label>";
-echo "<input type='number' id='otrosantecedentes2' name='otrosantecedentes2' value='" . htmlspecialchars($row['otrosantecedentes']) . "' step='0.01' size='5' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'>";
-echo "<br>";
-
-echo "</td></tr>";
-echo "</table>";
+echo "<h2 class=\"mov-section-title\">Carga de puntajes</h2>";
+echo "<div id=\"tablaComun\" style=\"display:none\"></div>";
+echo "<div id='tablaPermanenteConcursoInterino' class='mov-puntajes-panel' style='display:none;'>";
+echo "<div class='mov-puntajes-inner container-fluid'>";
+echo "<h3 class='mov-puntajes-heading'>Carga común</h3>";
+echo "<div class='mov-puntajes-grid2'>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='puntajetotal2'>Puntaje total</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='puntajetotal2' name='puntajetotal2' class='form-control mov-input-num' value='" . htmlspecialchars($row['puntajetotal']) . "' step='0.01' readonly></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='titulo2'>1.- Título</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='titulo2' name='titulo2' class='form-control mov-input-num' value='" . htmlspecialchars($row['titulo']) . "' step='0.01' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='otitulo2'>2.- Otros título</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='otitulo2' name='otitulo2' class='form-control mov-input-num' value='" . htmlspecialchars($row['otitulo']) . "' step='0.01' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='promedio2'>3.- Promedio</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='promedio2' name='promedio2' class='form-control mov-input-num' value='" . htmlspecialchars($row['promedio']) . "' step='0.01' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='antiguedadgestion2'>4.- Antigüedad gestión</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='antiguedadgestion2' name='antiguedadgestion2' class='form-control mov-input-num' value='" . htmlspecialchars($row['antiguedadgestion']) . "' step='0.01' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='antiguedadtitulo2'>5.- Antigüedad título</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='antiguedadtitulo2' name='antiguedadtitulo2' class='form-control mov-input-num' value='" . htmlspecialchars($row['antiguedadtitulo']) . "' step='0.01' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'></div></div>";
+echo "<div class='mov-puntajes-servicios-head'><span class='mov-field-label'>6.- Servicios</span></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='serviciosprovincia2'>6.1- En la provincia</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='serviciosprovincia2' name='serviciosprovincia2' class='form-control mov-input-num' value='" . htmlspecialchars($row['serviciosprovincia']) . "' step='0.01' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='otrosservicios2'>6.2- Otros servicios</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='otrosservicios2' name='otrosservicios2' class='form-control mov-input-num' value='" . htmlspecialchars($row['otrosservicios']) . "' step='0.01' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='residencia2'>7.- Residencia</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='residencia2' name='residencia2' class='form-control mov-input-num' value='" . htmlspecialchars($row['residencia']) . "' step='0.01' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='publicaciones2'>8.- Publicaciones</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='publicaciones2' name='publicaciones2' class='form-control mov-input-num' value='" . htmlspecialchars($row['publicaciones']) . "' step='0.01' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='otrosantecedentes2'>9.- Otros antecedentes</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='otrosantecedentes2' name='otrosantecedentes2' class='form-control mov-input-num' value='" . htmlspecialchars($row['otrosantecedentes']) . "' step='0.01' onchange='calcularPuntajeTotal()' onkeyup='calcularPuntajeTotal()'></div></div>";
+echo "</div></div></div>";
 
 
 
@@ -1285,269 +1418,167 @@ function calcularPuntajeTotal2() {
     }
 }
 </script>";
-// Tabla Titular
-echo "<table id='tablaTitular'>";
-echo "<tr><td>";
-echo "<h3><u>CARGA TITULAR</u> </h3>";
-echo "<br>";
-echo "<label for='puntajetotal' style='display: inline-block; width: 225px;'>Puntaje Total:</label>";
-echo "<input type='number' id='puntajetotal' name='puntajetotal' value='" . htmlspecialchars($row['puntajetotal']) . "' size='10' readonly>";
-echo "<br><br>";
-
-echo "<label for='titulo' style='display: inline-block; width: 225px;'>1.- Título:</label>";
-echo "<input type='number' id='titulo' name='titulo' value='" . htmlspecialchars($row['titulo']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='otrostit' style='display: inline-block; width:  225px;'>2.- Otros Título:</label>";
-echo "<input type='number' id='otrostit' name='otitulo' value='" . htmlspecialchars($row['otitulo']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='concepto' style='display: inline-block; width:  225px;'>3.- Conceptos:</label>";
-echo "<input type='number' id='concepto' name='concepto' value='" . htmlspecialchars($row['concepto']) . "'  size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='promedio' style='display: inline-block; width:  225px;'>4.- Promedio:</label>";
-echo "<input type='number' id='promedio' name='promedio' value='" . htmlspecialchars($row['promedio']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='ant_gestion' style='display: inline-block; width:  225px;'>5.- Antigüedad Gestión:</label>";
-echo "<input type='number' id='antiguedadgestion' name='antiguedadgestion' value='" . htmlspecialchars($row['antiguedadgestion']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='ant_titulo' style='display: inline-block; width:  225px;'>6.- Antigüedad Título:</label>";
-echo "<input type='number' id='antiguedadtitulo' name='antiguedadtitulo' value='" . htmlspecialchars($row['antiguedadtitulo']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='servicios' style='display: inline-block; width:  225px;'>7.- Servicios:</label>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 225px;'>7.1- En la Provincia:</label>";
-echo "<input type='text' id='serviciosprovincia' name='serviciosprovincia' value='" . htmlspecialchars($row['serviciosprovincia']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro de Sección:</label>";
-echo "<input type='number' id='t_m_seccion' name='t_m_seccion' value='" . htmlspecialchars($row['t_m_seccion']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro de Año:</label>";
-echo "<input type='number' id='t_m_anio' name='t_m_anio' value='" . htmlspecialchars($row['t_m_anio']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro de Grupo:</label>";
-echo "<input type='number' id='t_m_grupo' name='t_m_grupo' value='" . htmlspecialchars($row['t_m_grupo']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro de Ciclo:</label>";
-echo "<input type='number' id='t_m_ciclo' name='t_m_ciclo' value='" . htmlspecialchars($row['t_m_ciclo']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro Recuperado:</label>";
-echo "<input type='number' id='t_m_recupera' name='t_m_recupera' value='" . htmlspecialchars($row['t_m_recupera']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro Complementario:</label>";
-echo "<input type='number' id='t_m_comple' name='t_m_comple' value='" . htmlspecialchars($row['t_m_comple']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Maestro Bibliotecario:</label>";
-echo "<input type='number' id='t_m_biblio' name='t_m_biblio' value='" . htmlspecialchars($row['t_m_biblio']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Gabinete:</label>";
-echo "<input type='number' id='t_m_gabinete' name='t_m_gabinete' value='" . htmlspecialchars($row['t_m_gabinete']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<hr>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Secretaria 1º:</label>";
-echo "<input type='number' id='t_m_sec1' name='t_m_sec1' value='" . htmlspecialchars($row['t_m_sec1']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Secretaria 2º:</label>";
-echo "<input type='number' id='t_m_sec2' name='t_m_sec2' value='" . htmlspecialchars($row['t_m_sec2']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Vice-Director:</label>";
-echo "<input type='number' id='t_m_viced' name='t_m_viced' value='" . htmlspecialchars($row['t_m_viced']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<hr>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director Personal Único:</label>";
-echo "<input type='number' id='t_d_pu' name='t_d_pu' value='" . htmlspecialchars($row['t_d_pu']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director de 3º:</label>";
-echo "<input type='number' id='t_d_3' name='t_d_3' value='" . htmlspecialchars($row['t_d_3']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director de 2º:</label>";
-echo "<input type='number' id='t_d_2' name='t_d_2' value='" . htmlspecialchars($row['t_d_2']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director de 1º:</label>";
-echo "<input type='number' id='t_d_1' name='t_d_1' value='" . htmlspecialchars($row['t_d_1']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director de Biblioteca:</label>";
-echo "<input type='number' id='t_d_biblio' name='t_d_biblio' value='" . htmlspecialchars($row['t_d_biblio']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Director de Gabinete:</label>";
-echo "<input type='number' id='t_d_gabi' name='t_d_gabi' value='" . htmlspecialchars($row['t_d_gabi']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<hr>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Secretario Coord. Tec.:</label>";
-echo "<input type='number' id='t_d_seccoortec' name='t_d_seccoortec' value='" . htmlspecialchars($row['t_d_seccoortec']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Sup. Sec. Tec.:</label>";
-echo "<input type='number' id='t_d_supsectec' name='t_d_supsectec' value='" . htmlspecialchars($row['t_d_supsectec']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Sup. Escolar:</label>";
-echo "<input type='number' id='t_d_supesc' name='t_d_supesc' value='" . htmlspecialchars($row['t_d_supesc']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Sup. General:</label>";
-echo "<input type='number' id='t_d_supgral' name='t_d_supgral' value='" . htmlspecialchars($row['t_d_supgral']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='serv_prov' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Adic.:</label>";
-echo "<input type='number' id='t_d_adic' name='t_d_adic' value='" . htmlspecialchars($row['t_d_adic']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<hr>";
-
-echo "<label for='otrosservicios' style='display: inline-block; width:  225px;'>7.2- Otros Servicios:</label>";
-echo "<input type='text' id='otrosservicios' name='otrosservicios' value='" . htmlspecialchars($row['otrosservicios']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='o_g_a' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo A:</label>";
-echo "<input type='number' id='o_g_a' name='o_g_a' value='" . htmlspecialchars($row['o_g_a']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='o_g_b' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo B:</label>";
-echo "<input type='number' id='o_g_b' name='o_g_b' value='" . htmlspecialchars($row['o_g_b']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='o_g_c' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo C:</label>";
-echo "<input type='number' id='o_g_c' name='o_g_c' value='" . htmlspecialchars($row['o_g_c']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='o_g_d' style='display: inline-block; width: 208px;margin-left: 20px;color:#0000FF;'>Grupo D:</label>";
-echo "<input type='number' id='o_g_d' name='o_g_d' value='" . htmlspecialchars($row['o_g_d']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='residencia' style='display: inline-block; width:  225px;'>8.- Residencia:</label>";
-echo "<input type='number' id='residencia' name='residencia' value='" . htmlspecialchars($row['residencia']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='publicaciones' style='display: inline-block; width:  225px;'>9.- Publicaciones:</label>";
-echo "<input type='number' id='publicaciones' name='publicaciones' value='" . htmlspecialchars($row['publicaciones']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-
-echo "<label for='otrosantecedentes' style='display: inline-block; width:  225px;'>10.- Otros Antecedentes:</label>";
-echo "<input type='number' id='otrosantecedentes' name='otrosantecedentes' value='" . htmlspecialchars($row['otrosantecedentes']) . "' size='10' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'>";
-echo "<br>";
-echo "</td></tr>";
-
-echo "</table>";
+echo "<div id='tablaTitular' class='mov-puntajes-panel' style='display:none;'>";
+echo "<div class='mov-puntajes-inner container-fluid'>";
+echo "<h3 class='mov-puntajes-heading'>Carga titular</h3>";
+echo "<div class='mov-puntajes-grid2'>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='puntajetotal'>Puntaje total</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='puntajetotal' name='puntajetotal' class='form-control mov-input-num' value='" . htmlspecialchars($row['puntajetotal']) . "' readonly></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='titulo'>1.- Título</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='titulo' name='titulo' class='form-control mov-input-num' value='" . htmlspecialchars($row['titulo']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='otrostit'>2.- Otros título</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='otrostit' name='otitulo' class='form-control mov-input-num' value='" . htmlspecialchars($row['otitulo']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='concepto'>3.- Conceptos</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='concepto' name='concepto' class='form-control mov-input-num' value='" . htmlspecialchars($row['concepto']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='promedio'>4.- Promedio</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='promedio' name='promedio' class='form-control mov-input-num' value='" . htmlspecialchars($row['promedio']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='antiguedadgestion'>5.- Antigüedad gestión</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='antiguedadgestion' name='antiguedadgestion' class='form-control mov-input-num' value='" . htmlspecialchars($row['antiguedadgestion']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='antiguedadtitulo'>6.- Antigüedad título</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='antiguedadtitulo' name='antiguedadtitulo' class='form-control mov-input-num' value='" . htmlspecialchars($row['antiguedadtitulo']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-servicios-head'><span class='mov-field-label'>7.- Servicios</span></div>";
+echo "<p class='mov-puntajes-subsec'>Docencia — cargos en establecimientos</p>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='serviciosprovincia'>7.1- En la provincia</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='text' id='serviciosprovincia' name='serviciosprovincia' class='form-control mov-input-num' value='" . htmlspecialchars($row['serviciosprovincia']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_m_seccion'>Maestro de sección</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_m_seccion' name='t_m_seccion' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_m_seccion']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_m_anio'>Maestro de año</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_m_anio' name='t_m_anio' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_m_anio']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_m_grupo'>Maestro de grupo</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_m_grupo' name='t_m_grupo' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_m_grupo']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_m_ciclo'>Maestro de ciclo</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_m_ciclo' name='t_m_ciclo' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_m_ciclo']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_m_recupera'>Maestro recuperador</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_m_recupera' name='t_m_recupera' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_m_recupera']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_m_comple'>Maestro complementario</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_m_comple' name='t_m_comple' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_m_comple']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_m_biblio'>Maestro bibliotecario</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_m_biblio' name='t_m_biblio' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_m_biblio']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_m_gabinete'>Gabinete</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_m_gabinete' name='t_m_gabinete' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_m_gabinete']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<hr class='mov-puntajes-sep'>";
+echo "<p class='mov-puntajes-subsec'>Secretaría y vice</p>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_m_sec1'>Secretaría 1º</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_m_sec1' name='t_m_sec1' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_m_sec1']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_m_sec2'>Secretaría 2º</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_m_sec2' name='t_m_sec2' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_m_sec2']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_m_viced'>Vice-director</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_m_viced' name='t_m_viced' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_m_viced']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<hr class='mov-puntajes-sep'>";
+echo "<p class='mov-puntajes-subsec'>Dirección</p>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_d_pu'>Director personal único</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_d_pu' name='t_d_pu' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_d_pu']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_d_3'>Director de 3º</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_d_3' name='t_d_3' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_d_3']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_d_2'>Director de 2º</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_d_2' name='t_d_2' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_d_2']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_d_1'>Director de 1º</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_d_1' name='t_d_1' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_d_1']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_d_biblio'>Director de biblioteca</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_d_biblio' name='t_d_biblio' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_d_biblio']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_d_gabi'>Director de gabinete</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_d_gabi' name='t_d_gabi' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_d_gabi']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<hr class='mov-puntajes-sep'>";
+echo "<p class='mov-puntajes-subsec'>Supervisión</p>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_d_seccoortec'>Secretario coord. tec.</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_d_seccoortec' name='t_d_seccoortec' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_d_seccoortec']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_d_supsectec'>Sup. sec. tec.</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_d_supsectec' name='t_d_supsectec' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_d_supsectec']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_d_supesc'>Sup. escolar</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_d_supesc' name='t_d_supesc' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_d_supesc']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_d_supgral'>Sup. general</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_d_supgral' name='t_d_supgral' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_d_supgral']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='t_d_adic'>Adic.</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='t_d_adic' name='t_d_adic' class='form-control mov-input-num' value='" . htmlspecialchars($row['t_d_adic']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<hr class='mov-puntajes-sep'>";
+echo "<p class='mov-puntajes-subsec'>Otros servicios (grupos A–D)</p>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='otrosservicios'>7.2- Otros servicios</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='text' id='otrosservicios' name='otrosservicios' class='form-control mov-input-num' value='" . htmlspecialchars($row['otrosservicios']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='o_g_a'>Grupo A</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='o_g_a' name='o_g_a' class='form-control mov-input-num' value='" . htmlspecialchars($row['o_g_a']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='o_g_b'>Grupo B</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='o_g_b' name='o_g_b' class='form-control mov-input-num' value='" . htmlspecialchars($row['o_g_b']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='o_g_c'>Grupo C</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='o_g_c' name='o_g_c' class='form-control mov-input-num' value='" . htmlspecialchars($row['o_g_c']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row mov-puntajes-field-row--indent'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label mov-field-label-sec' for='o_g_d'>Grupo D</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='o_g_d' name='o_g_d' class='form-control mov-input-num' value='" . htmlspecialchars($row['o_g_d']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='residencia'>8.- Residencia</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='residencia' name='residencia' class='form-control mov-input-num' value='" . htmlspecialchars($row['residencia']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='publicaciones'>9.- Publicaciones</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='publicaciones' name='publicaciones' class='form-control mov-input-num' value='" . htmlspecialchars($row['publicaciones']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "<div class='mov-puntajes-field-row'><div class='mov-puntajes-label-col'><label class='mov-puntajes-inline-label' for='otrosantecedentes'>10.- Otros antecedentes</label></div>";
+echo "<div class='mov-puntajes-input-col'><input type='number' id='otrosantecedentes' name='otrosantecedentes' class='form-control mov-input-num' value='" . htmlspecialchars($row['otrosantecedentes']) . "' onchange='calcularPuntajeTotal2()' onkeyup='calcularPuntajeTotal2()'></div></div>";
+echo "</div></div></div>";
 
 echo "<br>";
 
 // JavaScript para mostrar u ocultar las tablas según el tipo seleccionado
 echo "<script>";
-echo "document.addEventListener('DOMContentLoaded', function() {";
+echo "function mostrarCamposAdicionales() {";
+echo "    var select = document.getElementById('tipo');";
+echo "    var titularesRow = document.getElementById('titularesRow');";
+echo "    var fechaRow = document.getElementById('fechaRow');";
+echo "    if (!select || !titularesRow || !fechaRow) return;";
+echo "    var v = (select.value || '').toLowerCase();";
+echo "    if (v === 'titulares') {";
+echo "        titularesRow.style.display = 'block';";
+echo "        fechaRow.style.display = 'none';";
+echo "    } else {";
+echo "        titularesRow.style.display = 'none';";
+echo "        fechaRow.style.display = (v === 'permanente') ? 'block' : 'none';";
+echo "    }";
+echo "}";
+echo "function mostrarTablaSegunTipo() {";
 echo "    var tipoSelect = document.getElementById('tipo');";
 echo "    var tablaPermanenteConcursoInterino = document.getElementById('tablaPermanenteConcursoInterino');";
 echo "    var tablaTitular = document.getElementById('tablaTitular');";
-echo "    var tablaComun = document.getElementById('tablaComun');"; // Agregar la tabla común
-echo "    function mostrarTablaSegunTipo() {";
-echo "        if (tipoSelect.value === 'Permanente' || tipoSelect.value === 'Concurso' || tipoSelect.value === 'transitorio') {";
-echo "            tablaPermanenteConcursoInterino.style.display = 'table';";
-echo "            tablaTitular.style.display = 'none';";
-echo "            tablaComun.style.display = 'none';"; // Ocultar la tabla común
-echo "        } else if (tipoSelect.value === 'Titulares') {";
-echo "            tablaPermanenteConcursoInterino.style.display = 'none';";
-echo "            tablaTitular.style.display = 'table';";
-echo "            tablaComun.style.display = 'none';"; // Ocultar la tabla común
-echo "        } else {";
-echo "            tablaPermanenteConcursoInterino.style.display = 'none';";
-echo "            tablaTitular.style.display = 'none';";
-echo "            tablaComun.style.display = 'table';"; // Mostrar la tabla común
-echo "        }";
+echo "    var tablaComun = document.getElementById('tablaComun');";
+echo "    if (!tipoSelect) return;";
+echo "    var v = (tipoSelect.value || '').toLowerCase();";
+echo "    var perm = (v === 'permanente' || v === 'concurso' || v === 'transitorio');";
+echo "    if (tablaPermanenteConcursoInterino) tablaPermanenteConcursoInterino.style.display = perm ? 'block' : 'none';";
+echo "    if (tablaTitular) tablaTitular.style.display = (v === 'titulares') ? 'block' : 'none';";
+echo "    if (tablaComun) tablaComun.style.display = (!perm && v !== 'titulares') ? 'block' : 'none';";
+echo "}";
+echo "function showTableBasedOnType() { mostrarTablaSegunTipo(); }";
+echo "document.addEventListener('DOMContentLoaded', function() {";
+echo "    var tipoSelect = document.getElementById('tipo');";
+echo "    if (tipoSelect) {";
+echo "        tipoSelect.addEventListener('change', function() {";
+echo "            mostrarCamposAdicionales();";
+echo "            mostrarTablaSegunTipo();";
+echo "        });";
 echo "    }";
-echo "    tipoSelect.addEventListener('change', mostrarTablaSegunTipo);"; // Escuchar el cambio en el select
-echo "    mostrarTablaSegunTipo();"; // Llamar a la función al cargar la página para mostrar la tabla correspondiente
+echo "    mostrarCamposAdicionales();";
+echo "    mostrarTablaSegunTipo();";
 echo "});";
 echo "</script>";
+?>
 
-           
-                echo"<br>";
-  
-               
-         // Script para mostrar u ocultar los campos adicionales según el tipo de inscripción seleccionado
-                    echo "<script>";
-                    echo "function mostrarCamposAdicionales() {";
-                    echo "var select = document.getElementById('tipo');";
-                    echo "var titularesRow = document.getElementById('titularesRow');";
-                    echo "var fechaRow = document.getElementById('fechaRow');";
-                    echo "if (select.value === 'titulares') {";
-                    echo "titularesRow.style.display = 'table-row';";
-                    echo "fechaRow.style.display = 'none';";
-                    echo "} else {";
-                    echo "titularesRow.style.display = 'none';";
-                    echo "fechaRow.style.display = 'table-row';";
-                    echo "}";
-                    echo "}";
-      // Llamar a la función para mostrar campos adicionales y tablas al cargar la página
-                    echo "mostrarCamposAdicionales();";
-                    echo "showTableBasedOnType();";
-                    echo "</script>";?>
-
-                
-              
-              <?php
-
-              echo " <input type='hidden' name='id2' id='id2' value='" . $_GET['id2'] . "'> ";
-             
-              echo "<button class='btn btn-warning' title='Duplicar Registro' type='submit'>
-              <i class='glyphicon glyphicon-copy'></i> Duplicar
-                </button>";
-              
-              echo "</form>";
-              echo "<center>";
-              echo" <a href='javascript:history.back()' class='btn btn-success' title='Volver'><i class='glyphicon glyphicon-arrow-left'></i> Volver atrás</a>";
-            echo "</center>";
-            $resultData = sqlsrv_query($conn, $queryData);
-
-// Suponiendo que solo hay un resultado en el query:
-$row = sqlsrv_fetch_array($resultData, SQLSRV_FETCH_ASSOC);
-
-// Ahora puedes pasar el valor de legdoc al campo oculto en el formulario
-$legdoc = $row['legdoc']; // El valor que obtienes de la consulta SQL
-
-echo '<input type="hidden" id="legdoc" name="legdoc" value="' . $legdoc . '">';
-         
-              
-             
-              ?>
+<?php
+$resultLeg = sqlsrv_query($conn, $queryData);
+$legdocVal = '';
+if ($resultLeg && ($rLeg = sqlsrv_fetch_array($resultLeg, SQLSRV_FETCH_ASSOC))) {
+    $legdocVal = isset($rLeg['legdoc']) ? (string) $rLeg['legdoc'] : '';
+}
+echo '<input type="hidden" id="legdoc" name="legdoc" value="' . htmlspecialchars($legdocVal, ENT_QUOTES, 'UTF-8') . '">';
+echo "<div class=\"mov-form-actions mov-form-actions--footer\">";
+echo "<button class=\"btn btn-warning\" title=\"Duplicar registro\" type=\"submit\"><i class=\"glyphicon glyphicon-copy\"></i> Duplicar</button>";
+echo "<a href=\"javascript:history.back()\" class=\"btn btn-default\" title=\"Volver atrás\"><i class=\"glyphicon glyphicon-arrow-left\"></i> Volver atrás</a>";
+echo "</div>";
+echo "</form>";
+?>
+                <?php $JUNTA_PIE_SESION_DIRECT = true; ?>
                 <?php include('footer2.php');?>
           
 
 <script>
-//funcion de guardar datos
 function myConfirmMov() {
-  var result = confirm("¿Desea actualizar el MOVIMIENTO?");
-  return result;
+  event.preventDefault();
+  var form = document.getElementById('formDuplicarMov');
+  juntaConfirm('¿Desea actualizar el MOVIMIENTO?', function() {
+    form.submit();
+  });
+  return false;
 }
-<script>
-
-
-
-</th>
-
-
+</script>

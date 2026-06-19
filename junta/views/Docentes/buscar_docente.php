@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../seguridad_requiere_login.php';
 // Conexión a la base de datos
 $serverName = "10.1.9.113";
 $connectionOptions = array(
@@ -47,39 +48,40 @@ if ($stmt === false) {
     die(print_r(sqlsrv_errors(), true));
 }
 
-// Construcción de la tabla con los resultados
-echo '<table class="table table-bordered">
-        <thead>
-            <tr>
-                
-            </tr>
-        </thead>
-        <tbody>';
-
+// Solo filas <tr> para insertar en #resultBody (evita tabla anidada y layout roto)
 if (sqlsrv_has_rows($stmt)) {
     while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        $id2 = htmlspecialchars($row['id2']);
+        $legajoVal = htmlspecialchars($row['Legajo']);
+        $lugarInsc = is_null($row['lugarinsc']) || trim($row['lugarinsc']) === ''
+            ? '<span style="color: red;">No disponible</span>'
+            : htmlspecialchars($row['lugarinsc']);
+
         echo '<tr>
-                <td><center style="font-size:1em">' . htmlspecialchars($row['Legajo']) . '</center></td>
-                <td><center style="font-size:1em">' . htmlspecialchars($row['dni']) . '</center></td>
-                <td><center style="font-size:1em">' . htmlspecialchars($row['ApellidoyNombre']) . '</center></td>
-                <td><center style="font-size:1em">' . (is_null($row['lugarinsc']) || trim($row['lugarinsc']) === '' ? '<span style="color: red;">No disponible</span>' : htmlspecialchars($row['lugarinsc'])) . '</center></td>
-                <td>
-                    <center>
-                        <a class="btn btn-sm btn-success" href="?action=editar&id2=' . htmlspecialchars($row['id2']) . '" title="Editar legajos"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                        <a class="btn btn-sm btn-danger" href="?action=eliminar&id2=' . htmlspecialchars($row['id2']) . '" title="Borrar legajo" onclick="return confirm(\'¿Seguro que deseas eliminar este registro?\');"><i class="glyphicon glyphicon-trash"></i> Borrar</a>
-                        <a class="btn btn-custom btn-sm" href="VerInscripciones.php?legajo=' . htmlspecialchars($row['Legajo']) . '" title="Ver Inscripcion legajos"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>
-                        <a class="btn btn-sm btn-primary" href="RegistroMovimiento.php?legajo=' . htmlspecialchars($row['Legajo']) . '" title="Agregar Inscripcion"><span class="glyphicon glyphicon-plus"></span> Agregar</a>
-                    </center>
+                <td class="text-center">' . htmlspecialchars($row['Legajo']) . '</td>
+                <td class="text-center">' . htmlspecialchars($row['dni']) . '</td>
+                <td class="text-center">' . htmlspecialchars($row['ApellidoyNombre']) . '</td>
+                <td class="text-center">' . $lugarInsc . '</td>
+                <td class="text-center acciones-docentes-cell">
+                    <div class="junta-acciones acciones-docentes">
+                        <a class="btn btn-sm btn-success" href="?action=editar&id2=' . $id2 . '" title="Editar legajos">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar
+                        </a>
+                        <a class="btn btn-sm btn-danger" href="?action=eliminar&id2=' . $id2 . '" title="Eliminar" onclick="event.preventDefault(); var url=this.href; juntaConfirmDanger(\'¿Seguro que deseas eliminar este registro?\', function(){ window.location.href=url; });">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Eliminar
+                        </a>
+                        <a class="btn btn-custom btn-sm" href="VerInscripciones.php?legajo=' . $legajoVal . '" title="Ver Inscripcion legajos">
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver
+                        </a>
+                        <a class="btn btn-sm btn-primary" href="RegistroMovimiento.php?legajo=' . $legajoVal . '" title="Agregar Inscripcion">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar
+                        </a>
+                    </div>
                 </td>
             </tr>';
     }
 } else {
-    // Si no se encontraron resultados, agregar una fila con un mensaje
     echo '<tr><td colspan="5" class="text-center" style="color:red;">No se encontraron resultados</td></tr>';
-    
 }
-
-echo '</tbody></table>';
-
 
 ?>

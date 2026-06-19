@@ -1,14 +1,23 @@
 <?php
 
+require_once __DIR__ . '/junta_config.php';
+
+if (!class_exists('User', false)) {
+
 class User {
-    private $dbHost     = "10.1.9.113";
-    private $dbUsername = "SA";
-    private $dbPassword = 'Davinci2024#';
-    private $dbName     = "Junta";
+    private $dbHost;
+    private $dbUsername;
+    private $dbPassword;
+    private $dbName;
     private $userTbl    = "usuarios";
     
 
     public function __construct() {
+        $this->dbHost     = JUNTA_DB_HOST;
+        $this->dbUsername = JUNTA_DB_USER;
+        $this->dbPassword = JUNTA_DB_PASS;
+        $this->dbName     = JUNTA_DB_NAME;
+
         if (!isset($this->db)) {
             // Conexión a la base de datos
             $connectionInfo = array(
@@ -55,7 +64,19 @@ class User {
         if(array_key_exists("return_type",$conditions) && $conditions['return_type'] != 'all'){
             switch($conditions['return_type']){
                 case 'count':
-                    $data = sqlsrv_num_rows($result);
+                    $countSql = 'SELECT COUNT(*) AS total FROM '.$this->userTbl;
+                    if(array_key_exists("where",$conditions)){
+                        $countSql .= ' WHERE ';
+                        $wi = 0;
+                        foreach($conditions['where'] as $key => $value){
+                            $pre = ($wi > 0)?' AND ':'';
+                            $countSql .= $pre.$key." = '".$value."'";
+                            $wi++;
+                        }
+                    }
+                    $countResult = sqlsrv_query($this->db, $countSql);
+                    $countRow = $countResult ? sqlsrv_fetch_array($countResult, SQLSRV_FETCH_ASSOC) : false;
+                    $data = $countRow ? (int) $countRow['total'] : 0;
                     break;
                 case 'single':
                     $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
@@ -78,34 +99,43 @@ class User {
      * Insertar datos a la database
      */
     public function insert($data){
-        if(!empty($data) && is_array($data)){
-            $columns = '';
-            $values  = '';
-            $i = 0;
-            if(!array_key_exists('creado',$data)){
-                $data['creado'] = date("Y-m-d H:i:s");
-            }
-            if(!array_key_exists('modificado',$data)){
-                $data['modificado'] = date("Y-m-d H:i:s");
-            }
-            foreach($data as $key=>$val){
-                $pre = ($i > 0)?', ':'';
-                $columns .= $pre.$key;
-                $values  .= $pre."'".$val."'";
-                $i++;
-            }
-            $query = "INSERT INTO ".$this->userTbl." (".$columns.") VALUES (".$values.")";
-            $insert = sqlsrv_query($this->db, $query);
-            if($insert){
-                sqlsrv_next_result($insert);
-                sqlsrv_fetch($insert);
-                return sqlsrv_get_field($insert, 0);
-            }else{
-                return false;
-            }
-        }else{
+        if(empty($data) || !is_array($data)){
             return false;
         }
+
+        if(!array_key_exists('creado',$data)){
+            $data['creado'] = date("Y-m-d H:i:s");
+        }
+        if(!array_key_exists('modificado',$data)){
+            $data['modificado'] = date("Y-m-d H:i:s");
+        }
+
+        $columnNames = array_keys($data);
+        $columns = implode(', ', $columnNames);
+        $placeholders = implode(', ', array_fill(0, count($data), '?'));
+        $params = array_values($data);
+
+        $query = "INSERT INTO ".$this->userTbl." (".$columns.") OUTPUT INSERTED.id AS id VALUES (".$placeholders.")";
+        $stmt = sqlsrv_query($this->db, $query, $params);
+
+        if($stmt === false){
+            error_log('User insert OUTPUT error: '.print_r(sqlsrv_errors(), true));
+            $querySimple = "INSERT INTO ".$this->userTbl." (".$columns.") VALUES (".$placeholders.")";
+            $stmt = sqlsrv_query($this->db, $querySimple, $params);
+            if($stmt === false){
+                error_log('User insert error: '.print_r(sqlsrv_errors(), true));
+                return false;
+            }
+            $idStmt = sqlsrv_query($this->db, "SELECT CAST(SCOPE_IDENTITY() AS INT) AS id");
+            if($idStmt === false){
+                return true;
+            }
+            $row = sqlsrv_fetch_array($idStmt, SQLSRV_FETCH_ASSOC);
+            return !empty($row['id']) ? (int) $row['id'] : true;
+        }
+
+        $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+        return !empty($row['id']) ? (int) $row['id'] : false;
     }
     
     /*
@@ -144,5 +174,7 @@ class User {
             return false;
         }
     }
+}
+
 }
 ?>

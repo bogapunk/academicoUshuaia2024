@@ -1,0 +1,21 @@
+﻿Optimizacion rendimiento P2/P3/P4 â€” Respaldo
+============================================
+Fecha: 2026-06-18 16:10:27
+Carpeta: D:\xampp\htdocs\Juntas2024\junta\backups\rendimiento-p234-20260618-161027-pre-implementacion
+
+Archivos incluidos:
+  - views/Docentes/VerInscripciones.php   (punto 2)
+  - views/Docentes/ListarDocentes.php     (punto 2)
+  - views/Modalidades/ListarModalidades.php (punto 3)
+  - _xampp_php.ini                        (punto 4, copia de D:\xampp\php\php.ini)
+
+Restaurar (PowerShell, desde la carpeta junta):
+  .\scripts\restore-rendimiento-p234.ps1 -Latest
+
+Restaurar (doble clic Windows):
+  .\scripts\Restaurar-Rendimiento-P234.bat
+
+Verificar integridad del respaldo:
+  .\scripts\verify-rendimiento-p234-backup.ps1 -Latest
+
+IMPORTANTE: Tras restaurar php.ini, reinicie Apache desde el Panel de Control XAMPP.

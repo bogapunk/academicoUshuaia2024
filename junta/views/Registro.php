@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . '/seguridad_requiere_admin.php';
+
 $sessData = !empty($_SESSION['sessData'])?$_SESSION['sessData']:'';
 if(!empty($sessData['estado']['msg'])){
     $statusMsg = $sessData['estado']['msg'];
@@ -8,381 +9,401 @@ if(!empty($sessData['estado']['msg'])){
 }
 
 include('header2.php');
-include("Usuarios.php");
+require_once __DIR__ . '/../Usuarios_Conexion_Sqlserver.php';
+require_once __DIR__ . '/seguridad_password.php';
 ?>
 <style type="text/css">
-    .nav>li>a {
-    position: relative;
-    display: block;
-    padding: 7px 15px;
-}
-body {
-    background-color: #FFFFFF;
-    color: #757575;
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
+.registro-user-page {
+  padding: 12px 0 32px;
 }
 
-body a {
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-    text-decoration: none;
+.registro-user-shell {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 12px;
+  box-sizing: border-box;
 }
 
-input[type="button"], input[type="submit"] {
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
+.registro-user-shell .form-container {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  padding: 22px 24px 26px;
 }
 
-h1 {
-    font-size: 40px;
-    margin: 50px auto;
-    letter-spacing: 3px;
+.registro-user-header {
+  text-align: center;
+  margin-bottom: 18px;
 }
 
-.container {
-    width: 40%;
-    margin: 0 auto;
-    background-color: #f7f7f7;
-    color: #757575;
-    font-family: 'Raleway', sans-serif;
-    text-align: left;
-    padding: 30px;
+.registro-user-title {
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 6px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(38, 152, 243, 0.35);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-h2 {
-    font-size: 30px;
-    font-weight: 600;
-    margin-bottom: 10px;
+.registro-user-subtitle {
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6b7280;
+  margin: 0;
 }
 
-.container p {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 20px;
-}
-.regisFrm input[type="text"], .regisFrm input[type="email"], .regisFrm input[type="password"] {
-    width: 94.5%;
-    padding: 10px;
-    margin: 10px 0;
-    outline: none;
-    color: #000;
-    font-weight: 500;
-    font-family: 'Roboto', sans-serif;
+.registro-user-shell .form-group {
+  margin-bottom: 16px;
 }
 
-.regisFrm textarea {
-    height: 100px;
+.registro-user-shell .form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  color: #374151;
+  margin-bottom: 6px;
 }
 
-.regisFrm ::-webkit-input-placeholder {
-    color: #666;
+.registro-user-shell .form-control,
+.registro-user-shell select.form-control {
+  width: 100%;
+  max-width: 100%;
+  min-height: 40px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  box-shadow: none;
+  font-size: 14px;
+  padding: 8px 12px;
+  box-sizing: border-box;
 }
 
-.regisFrm ::-moz-placeholder {
-    color: #666;
+.registro-user-shell .form-control:focus {
+  border-color: #2698f3;
+  box-shadow: 0 0 0 2px rgba(38, 152, 243, 0.18);
+  outline: none;
 }
 
-.regisFrm ::-moz-placeholder {
-    color: #666;
+.registro-user-shell select.form-control {
+  height: auto;
+  line-height: 1.35;
+  -webkit-appearance: menulist;
+  appearance: menulist;
 }
 
-.regisFrm ::-ms-input-placeholder {
-    color: #666;
+.registro-user-sec {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
 }
 
-.send-button {
-    text-align: center;
-    margin-top: 20px;
+.registro-user-sec-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1e40af;
+  margin: 0 0 14px;
 }
 
-.send-button input[type="submit"] {
-    padding: 10px 0;
-    width: 60%;
-    font-family: 'Roboto', sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    border: none;
-    outline: none;
-    color: #FFF;
-    background-color: #2196F3;
-    cursor: pointer;
+.registro-user-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid #e5e7eb;
 }
 
-.send-button input[type="submit"]:hover {
-    background-color: #e55916;
+.registro-user-actions .btn {
+  min-width: 140px;
+  border-radius: 6px;
+  font-weight: 600;
+  padding: 10px 18px;
 }
 
-a.logout{float: right;}
-p.success{color:#34A853;}
-p.error{color:#EA4335;}
-/* Responsive Code */
-
-@media screen and (max-width: 1920px) {
-    h1 {
-        margin: 75px auto;
-    }
-    .container {
-        width: 25%;
-    }
+.registro-user-actions .btn-success {
+  text-decoration: none;
 }
 
-@media screen and (max-width: 1680px) {
-    .container {
-        width: 30%;
-    }
+#password-error {
+  margin-top: 4px;
+  font-size: 13px;
 }
 
-@media screen and (max-width: 1600px) {
-    h1 {
-        margin: 50px auto;
-    }
+@media (max-width: 767px) {
+  .registro-user-shell .form-container {
+    padding: 16px 12px;
+  }
+  .registro-user-title {
+    font-size: 22px;
+  }
 }
 
-@media screen and (max-width: 1367px) {
-    .container {
-        width: 35%;
-    }
-}
-
-@media screen and (max-width: 1024px) {
-    .container {
-        width: 45%;
-    }
-}
-
-@media screen and (max-width: 966px) {
-    h1 {
-        letter-spacing: 2px;
-    }
-}
-
-@media screen and (max-width: 853px) {
-    .container {
-        width: 50%;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .container {
-        width: 55%;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .container {
-        width: 60%;
-    }
-}
-
-@media screen and (max-width: 736px) {
-    h1 {
-        letter-spacing: 0;
-    }
-}
-
-@media screen and (max-width: 667px) {
-    .container {
-        width: 65%;
-    }
-}
-
-@media screen and (max-width: 603px) {
-    h1 {
-        font-size: 35px;
-    }
-    .container {
-        width: 70%;
-    }
-}
-
-@media screen and (max-width: 568px) {
-    .container {
-        width: 75%;
-    }
-    h1 {
-        font-size: 30px;
-    }
-}
-
-@media screen and (max-width: 533px) {
-    h1 {
-        font-size: 30px;
-    }
-    .container {
-        width: 80%;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    h1 {
-        margin: 40px 0;
-    }
-    .container {
-        width: 85%;
-        padding: 20px;
-    }
-    h2 {
-        font-size: 25px;
-    }
-    .regisFrm input[type="text"], .regisFrm input[type="email"], .regisFrm input[type="password"] {
-        width: 93%;
-    }
-}
-
-@media screen and (max-width: 414px) {
-    h1 {
-        margin: 30px 0;
-    }
-    .social-icons ul li span.icons {
-        width: 30px;
-        height: 30px;
-    }
-    .regisFrm label {
-        font-size: 13px;
-    }
-    .regisFrm input[type="text"], .regisFrm input[type="email"], .regisFrm input[type="password"] {
-        width: 91.5%;
-        font-size: 12px;
-        margin: 5px 0 15px;
-    }
-}
-
-@media screen and (max-width: 384px) {
-    h1 {
-        font-size: 25px;
-        line-height: 35px;
-    }
-    .container {
-        width: 90%;
-        padding: 20px 10px;
-    }
-    .container p {
-        font-size: 16px;
-        margin-bottom: 15px;
-        line-height: 22px;
-    }
-    h2 {
-        font-size: 20px;
-    }
-}
-
-@media screen and (max-width: 360px) {
-    .send-button input[type="submit"] {
-        width: 75%;
-        font-size: 16px;
-    }
-}
-
-
-.form-control {
-    display: block;
-    width: 94%;
-    height: 34px
-px
-;
-    padding: 6px 12px;
-
-    }
-
-
+p.success { color: #34A853; }
+p.error { color: #EA4335; }
 </style>
-<div class="col-sm-3 r-form-1-box wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
 
-<div class="col-sm-6 r-form-1-box wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
-    <h2><b><u><FONT COLOR="Black">CREAR USUARIO</FONT></u></b></h2>
-        <h4>Nueva Cuenta</h4>
-        <?php echo !empty($statusMsg)?'<p class="'.$statusMsgType.'">'.$statusMsg.'</p>':''; ?>
-        <div class="regisFrm">
-            <form action="MiCuenta.php" method="post">
-                <center>
-                    <input style="margin: 7.5px" class="form-control" type="text" name="nombres" placeholder="Nombre" required="">
-                    <input style="margin: 7.5px" class="form-control" type="text" name="apellidos" placeholder="Apellido" required="">
-                    <input style="margin: 7.5px" class="form-control" type="text" name="email" placeholder="Email" required="">
-                    <input style="margin: 7.5px" class="form-control" type="text" name="telefono" placeholder="Telefono" required="">
-                </center>
-                    <?php 
+<?php
+$user = new User();
+$conditions['return_type'] = 'single';
+$userData = $user->getRows($conditions);
+?>
 
-                        $user = new User();
-                        
-                        $conditions['return_type'] = 'single';
+<div class="registro-user-page">
+<div class="registro-user-shell">
+  <div class="registro-user-header">
+    <h1 class="registro-user-title">Crear Usuario</h1>
+    <p class="registro-user-subtitle">Complete los datos de la nueva cuenta</p>
+  </div>
 
-                    $userData = $user->getRows($conditions); ?>
-            <center>     <select id="rol" class="form-control" name="rol"  >
-                                        <option value="admin" <?php if ($userData['rol'] == "admin") {
-                                                                            echo "selected";
-                                                                        } ?>>Administrador</option>
-                                        <option value="comun" <?php if ($userData['rol'] == "comun") {
-                                                                        echo "selected";
-                                                                    } ?>>Comun</option>
-                                                                         <option value="otro" <?php if ($userData['rol'] == "otro") {
-                                                                        echo "selected";
-                                                                    } ?>>Otro</option>
-                                                                         
-                                    </select>
-                 </center>
+  <?php echo !empty($statusMsg) ? '<p class="' . $statusMsgType . '">' . $statusMsg . '</p>' : ''; ?>
 
-            
-                        <center>
-                                <input type="password" class="form-control" id="password" name="password"  placeholder="Ingrese Password">
-                           
-                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Repita password" >
-                                <div id="password-error" class="text-danger"></div>
+  <div class="form-container">
+    <form action="MiCuenta.php" method="post" id="formCrearUsuario" data-junta-confirm-submit="1">
 
-                         </center>
-                           
-                           <!--- este script para validar los password de los dos uso de ajax -->
-                         
-                        <script>
-                            var passwordInput = document.getElementById("password");
-                            var repeatedPasswordInput = document.getElementById("confirm_password");
-                            var passwordError = document.getElementById("password-error");
+      <h2 class="registro-user-sec-title">Datos Personales</h2>
 
-                            repeatedPasswordInput.addEventListener("input", function() {
-                                validarContraseñas();
-                            });
+      <div class="form-group">
+        <label for="nombres">Nombre</label>
+        <input type="text" name="nombres" id="nombres" placeholder="Ingrese el nombre" required class="form-control">
+      </div>
 
-                            function validarContraseñas() {
-                                var password = passwordInput.value;
-                                var repeatedPassword = repeatedPasswordInput.value;
+      <div class="form-group">
+        <label for="apellidos">Apellido</label>
+        <input type="text" name="apellidos" id="apellidos" placeholder="Ingrese el apellido" required class="form-control">
+      </div>
 
-                                if (password !== repeatedPassword) {
-                                    passwordError.innerHTML = "Las contraseñas no coinciden. Por favor, inténtelo de nuevo.";
-                                } else {
-                                    passwordError.innerHTML = "";
-                                }
-                            }
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" placeholder="Ingrese el email" required class="form-control">
+      </div>
 
-                            function validarFormulario() {
-                                validarContraseñas();
+      <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input type="text" name="telefono" id="telefono" placeholder="Ingrese el teléfono" required class="form-control">
+      </div>
 
-                                if (passwordError.innerHTML !== "") {
-                                    return false;
-                                }
-                            }
-                        </script>
+      <div class="registro-user-sec">
+        <h2 class="registro-user-sec-title">Rol y Seguridad</h2>
 
-
-
-
-
-
-                <div class="send-button">
-                    <input type="submit" name="signupSubmit" value="CREAR CUENTA">
-                </div>
-            </form>
-             <center><a href="./Usuarios/ListarUsuarios.php"> <button type="submit" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
+        <div class="form-group">
+          <label for="rol">Rol</label>
+          <select id="rol" class="form-control" name="rol">
+            <option value="admin" <?php if (isset($userData['rol']) && $userData['rol'] == "admin") echo "selected"; ?>>Administrador</option>
+            <option value="comun" <?php if (isset($userData['rol']) && $userData['rol'] == "comun") echo "selected"; ?>>Comun</option>
+            <option value="otro" <?php if (isset($userData['rol']) && $userData['rol'] == "otro") echo "selected"; ?>>Otro</option>
+          </select>
         </div>
-    </div>
-    
-    
-<!--Inicia columna 7-->
-<div class="col-sm-3 text wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese la contraseña" required autocomplete="new-password">
+          <p class="text-muted" style="font-size:12px;margin-top:6px;margin-bottom:0;">
+            La contraseña debe cumplir: <?php echo htmlspecialchars(junta_password_requisitos_texto(), ENT_QUOTES, 'UTF-8'); ?>
+          </p>
+          <div id="password-policy-checklist"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirm_password">Confirmar Contraseña</label>
+          <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Repita la contraseña" required>
+          <div id="password-error" class="text-danger"></div>
+        </div>
+      </div>
+
+      <div class="registro-user-actions">
+        <button type="submit" name="signupSubmit" value="Crear Cuenta" class="btn btn-primary" id="btnSignupSubmit">Crear Cuenta</button>
+        <a href="./Usuarios/ListarUsuarios.php" class="btn btn-success">
+          <span class="glyphicon glyphicon-arrow-left"></span> Volver
+        </a>
+      </div>
+
+    </form>
+  </div>
 </div>
+</div>
+
+<script src="inc/junta-password-policy.js"></script>
+<script>
+var passwordInput = document.getElementById("password");
+var repeatedPasswordInput = document.getElementById("confirm_password");
+var passwordError = document.getElementById("password-error");
+var formCrearUsuario = document.getElementById("formCrearUsuario");
+var enviandoFormulario = false;
+var validarPoliticaPassword = null;
+
+if (window.JuntaPasswordPolicy) {
+    validarPoliticaPassword = JuntaPasswordPolicy.bindPolicy(
+        passwordInput,
+        document.getElementById("password-policy-checklist"),
+        false
+    );
+}
+
+repeatedPasswordInput.addEventListener("input", function() {
+    validarContraseñas();
+});
+
+passwordInput.addEventListener("input", function() {
+    validarContraseñas();
+});
+
+function validarContraseñas() {
+    var password = passwordInput.value;
+    var repeatedPassword = repeatedPasswordInput.value;
+    var errores = [];
+
+    if (validarPoliticaPassword) {
+        var resultadoPolitica = validarPoliticaPassword();
+        if (!resultadoPolitica.ok) {
+            errores = resultadoPolitica.errores;
+        }
+    }
+
+    if (password !== repeatedPassword) {
+        errores.push("Las contraseñas no coinciden.");
+    }
+
+    passwordError.innerHTML = errores.length
+        ? errores.map(function(e) { return "• " + e; }).join("<br>")
+        : "";
+}
+
+function validarFormulario() {
+    validarContraseñas();
+    return passwordError.innerHTML === "";
+}
+
+function obtenerEtiquetaRol() {
+    var rolSelect = document.getElementById("rol");
+    return rolSelect.options[rolSelect.selectedIndex].text;
+}
+
+function armarResumenUsuario() {
+    var nombres = document.getElementById("nombres").value.trim();
+    var apellidos = document.getElementById("apellidos").value.trim();
+    var email = document.getElementById("email").value.trim();
+    var telefono = document.getElementById("telefono").value.trim();
+    var rol = obtenerEtiquetaRol();
+
+    return "Nombre: " + nombres + " " + apellidos +
+        "\nEmail: " + email +
+        "\nTeléfono: " + telefono +
+        "\nRol: " + rol;
+}
+
+function enviarFormularioConfirmado() {
+    var btnSubmit = document.getElementById("btnSignupSubmit");
+    formCrearUsuario.setAttribute("data-junta-submit-confirmed", "1");
+    enviandoFormulario = true;
+
+    if (btnSubmit && typeof formCrearUsuario.requestSubmit === "function") {
+        formCrearUsuario.requestSubmit(btnSubmit);
+        return;
+    }
+
+    var hiddenFlag = document.getElementById("signupSubmitHidden");
+    if (!hiddenFlag) {
+        hiddenFlag = document.createElement("input");
+        hiddenFlag.type = "hidden";
+        hiddenFlag.name = "signupSubmit";
+        hiddenFlag.value = "Crear Cuenta";
+        hiddenFlag.id = "signupSubmitHidden";
+        formCrearUsuario.appendChild(hiddenFlag);
+    }
+
+    formCrearUsuario.submit();
+}
+
+formCrearUsuario.addEventListener("submit", function(event) {
+    if (enviandoFormulario) {
+        return;
+    }
+
+    event.preventDefault();
+
+    if (typeof juntaSpinnerHide === "function") {
+        juntaSpinnerHide();
+    }
+
+    if (!validarFormulario()) {
+        return;
+    }
+
+    if (typeof Swal === "undefined") {
+        enviarFormularioConfirmado();
+        return;
+    }
+
+    Swal.fire({
+        title: '¿Está seguro?',
+        text: '¿Está seguro de que desea crear este usuario?\n\n' + armarResumenUsuario(),
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#2698f3',
+        cancelButtonColor: '#6c757d',
+        reverseButtons: true
+    }).then(function(result) {
+        if (result.isConfirmed) {
+            enviarFormularioConfirmado();
+        }
+    });
+});
+</script>
+
+<?php if (!empty($statusMsg) && $statusMsgType === 'error') : ?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Swal === 'undefined') {
+        return;
+    }
+    Swal.fire({
+        title: 'No se pudo crear el usuario',
+        text: <?php echo json_encode($statusMsg, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>,
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#2698f3'
+    });
+});
+</script>
+<?php endif; ?>
+
+<?php
+if (isset($_SESSION['usuario_creado'])) {
+    $uc = $_SESSION['usuario_creado'];
+    unset($_SESSION['usuario_creado']);
+
+    $htmlUsuarioCreado = '<div style="text-align:left;font-size:15px;line-height:1.8;">';
+    if (!empty($uc['id'])) {
+        $htmlUsuarioCreado .= '<p><strong>ID:</strong> ' . htmlspecialchars((string) $uc['id'], ENT_QUOTES, 'UTF-8') . '</p>';
+    }
+    $htmlUsuarioCreado .= '<p><strong>Nombre:</strong> ' . htmlspecialchars($uc['nombres'] . ' ' . $uc['apellidos'], ENT_QUOTES, 'UTF-8') . '</p>';
+    $htmlUsuarioCreado .= '<p><strong>Email:</strong> ' . htmlspecialchars($uc['email'], ENT_QUOTES, 'UTF-8') . '</p>';
+    $htmlUsuarioCreado .= '<p><strong>Rol:</strong> ' . htmlspecialchars($uc['rol'], ENT_QUOTES, 'UTF-8') . '</p>';
+    $htmlUsuarioCreado .= '</div>';
+    ?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    Swal.fire({
+        title: 'Usuario creado exitosamente',
+        html: <?php echo json_encode($htmlUsuarioCreado, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>,
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#2698f3'
+    });
+});
+</script>
+    <?php
+}
+?>
+
 <?php include('footer2.php');?>

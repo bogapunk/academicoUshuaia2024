@@ -1,8 +1,12 @@
+﻿<?php
+require_once __DIR__ . '/../seguridad_rol.php';
+require_once __DIR__ . '/../seguridad_requiere_login.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Agencia de innovacion</title>
-
+<link rel="stylesheet" href="../../style.css" type="text/css" media="all" />
 <!-- Preload de la fuente Roboto -->
 <link rel="preload" href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" as="style" onload="this.rel='stylesheet'">
 <noscript>
@@ -22,23 +26,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style>
-
-   /* Preload styles */
-    #preload {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      font-size: 2em;
-      color: #337ab7;
-    }
-/* ... tu CSS personalizado ... */
 .btn-success {
   margin: 10px;
 }
@@ -158,6 +145,7 @@ body{
     background: #8AA9B8; 
 }
 </style>
+<link rel="stylesheet" href="../../aesthetic-polish.css" type="text/css" media="all" />
 
 <!--<link rel="icon" type="image/png" href="./imagenes/escudo-32x32.png">-->
 <link rel="shortcut icon" href="../../imagenes/favicon.svg" type="image/x-icon"/>  
@@ -165,11 +153,13 @@ body{
 </head>
 
 <!--<center><img src="../../imagenes/fondoCabecera.jpg"></center>-->
-<center><img src="../../imagenes/aif-logo.png" width="400" height="100"></center>
-
 <body>
-   <!-- PRELOAD -->
-<div id="preload">Cargando...</div>
+<?php include __DIR__ . '/../../spinner-global-include.php'; ?>
+<?php include __DIR__ . '/../../swal-global-include.php'; ?>
+<?php
+$JUNTA_CABECERA_IMG = '../../';
+include __DIR__ . '/../../cabecera_institucional.php';
+?>
 <div class="main">
 <div class="panel panel-default">
 
@@ -194,7 +184,7 @@ body{
       <a href="#" class="btn btn-primary">Legajos</a></div>
           <ul>
            <li><a href="../ListadoDeDocentes/ListarListadosDeDocentes.php"><font size="4">Listado de Docentes</font></a></li>
-          <li><a href="../Docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></a></li>
+          <li><a href="../Docentes/ListarDocentes.php"><font size="4">Docentes</font></a></li>
           <li><a href="../../controller/exportar_docentes_especiales.php"><font size="3">Listado Docentes Especial(Temp)</font></a></li>
           <li><a href="../../controller/exportar_docentes_especiales_SinTitulares.php"><font size="3">Listado Docentes de Esp. SIN TITULARES(Temporal)</font></a></li>
            <li><a href="../../controller/exportar_docentes_especiales_completos.php"><font size="3">Listado Docentes de Esp.(Interino,supl.y Titulares)</font></a></li>
@@ -209,12 +199,10 @@ body{
           <li><a href="../ConfiguracionListados/ListarConfiguracionListados.php"><font size="4">Configuracion Listados</font></a></li>
         </ul>
     </li>
-     <li>
-       <div class="card-body d-flex justify-content-between align-items-center">
-    <a href="../Usuarios/ListarUsuarios.php"   class="btn btn-primary" class="logout">Usuarios</a>
-</div>
-
-  </li>
+     <?php
+     $juntaNavRel = '../';
+     require __DIR__ . '/../inc/menu_usuario_nav.php';
+     ?>
   </ul>
 
 </nav>
@@ -224,19 +212,4 @@ body{
 </div>
 <div class="panel-body">
 <div class="row">
-
-<!-- CONTENIDO AQUÍ -->
-
-</div>
-</div>
-</div>
-</div>
-
-</body>
-<script>
-    // Ocultar el preload cuando la página termine de cargar
-    $(window).on('load', function () {
-      $('#preload').fadeOut('slow');
-    });
-  </script>
-</html>
+<!-- Contenido de la página a continuación -->

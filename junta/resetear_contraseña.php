@@ -27,6 +27,7 @@ if (isset($_GET['token'])) {
 <head>
     <meta charset="UTF-8">
     <title>Resetear Password - Sistema de Junta</title>
+    <link rel="stylesheet" href="style.css" type="text/css" media="all" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -92,9 +93,14 @@ if (isset($_GET['token'])) {
 
 <link rel="shortcut icon" href="./imagenes/favicon.svg" type="image/x-icon"/>  
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 <body>
+<?php
+$JUNTA_CABECERA_IMG = '';
+include __DIR__ . '/cabecera_institucional.php';
+?>
     <div class="container">
-    <center><img src="./imagenes/aif-logo.png" width="250" height="100"></center>
     <h2>Cambio de Password</h2>
     <h3>-Sistema de Junta-</h3>
 
@@ -119,7 +125,7 @@ if (isset($_GET['token'])) {
       <div class="e-con-inner">
                 <div class="elementor-element elementor-element-79dab63d elementor-widget elementor-widget-heading" data-id="79dab63d" data-element_type="widget" data-widget_type="heading.default">
                 <div class="elementor-widget-container">
-            <p class="elementor-heading-title elementor-size-default">© 2025 - Todos los derechos reservados | Las Islas Malvinas son argentinas.</p>       </div>
+            <p class="elementor-heading-title elementor-size-default">© <?php echo (int) date('Y'); ?> - Todos los derechos reservados | Las Islas Malvinas son argentinas.</p>       </div>
                 </div>  
     </div>
 
@@ -140,10 +146,15 @@ if (isset($_GET['token'])) {
 
         function validarCoincidencia() {
             const password = document.getElementById('password').value;
-            const confirm = document.getElementById('confirm_password').value;
+            const confirmPwd = document.getElementById('confirm_password').value;
 
-            if (password !== confirm) {
-                alert('Las contraseñas no coinciden');
+            if (password !== confirmPwd) {
+                Swal.fire({
+                    text: 'Las contraseñas no coinciden',
+                    icon: 'warning',
+                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: '#3498db'
+                });
                 return false;
             }
             return true;

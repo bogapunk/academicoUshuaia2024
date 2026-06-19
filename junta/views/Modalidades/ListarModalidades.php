@@ -195,6 +195,8 @@ tr:nth-child(even) {
 
 
 
+<?php readfile(__DIR__ . '/../css/junta-panel-polish.css'); ?>
+
 </style>
 <link rel="icon" type="./image/png" href="./imagenes/escudo-32x32.png">
 <!DOCTYPE html>
@@ -209,13 +211,15 @@ tr:nth-child(even) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
-      <!-- sweeteralert2 -->
-      <link rel="stylesheet" href="../Assets/swal2/sweetalert2.min.css" type="text/css" />
 
       <!--aca esta las extensiones para el paginado de la las tablas --->
   
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap.min.css">
 
   
     <!-- JS -->
@@ -251,8 +255,9 @@ tr:nth-child(even) {
             document.documentElement.scrollTop = 0;
         }
     </script>
-  <div class="container"> <center><h1><u><font face="
-    font-family: 'Open Sans', 'Sans-serif' COLOR="black">Modalidades</font></u></h1></center>
+<div class="cfg-listados-polish">
+  <div class="container">
+    <h1 class="cfg-page-title">Modalidades</h1>
     <br>
     <br>
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -304,11 +309,12 @@ try {
 <script type="text/javascript">
   
 </script>
+<div class="cfg-card">
 <center>
- <form action="?action=<?php echo $mod->id > 0 ? 'actualizar' : 'registrar'; ?>" method="post" class="pure-form pure-form-stacked" style="margin-bottom:30px;" id="formulario_transaccion"  >
+ <form action="?action=<?php echo $mod->id > 0 ? 'actualizar' : 'registrar'; ?>" method="post" class="pure-form pure-form-stacked" style="margin-bottom:0;" id="formulario_transaccion"  >
                     <input type="hidden" name="id" value="<?php echo $mod->__GET('id'); ?>" />
                     
-                    <table style="width:750px;" id="seleccion">
+                    <table class="cfg-form-table" style="max-width:760px;" id="seleccion">
                         <tr>
                             <th style="text-align:left;">Modalidad</th>
                             <td><input type="text" name="codmod" value="<?php echo $mod->__GET('codmod'); ?>"class="form-control" /></td>
@@ -338,16 +344,12 @@ try {
 
                         <tr>
 
-                            <td colspan="2">
-<br>
-                             <center>  <button type="submit" class="btn btn-success" onclick="return myConfirm2();"><i class="glyphicon glyphicon-floppy-saved"> Guardar </i></button>&nbsp&nbsp&nbsp&nbsp
-                                
-
-                                <button class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR"><i class="glyphicon glyphicon-erase"> Limpiar Formulario</i></button>
-                              &nbsp&nbsp&nbsp&nbsp
-                              <button class="btn btn-info">
-                                <a href="javascript:imprSelec('seleccion')" style="color: white;"><i class="glyphicon glyphicon-print"> Imprimir Modalalida </i></a></button>
-
+                            <td colspan="2" class="cfg-actions-cell">
+                             <div class="junta-btn-group">
+                             <button type="submit" class="btn btn-success" id="btnGuardarMod"><i class="glyphicon glyphicon-floppy-saved"></i> Guardar</button>
+                                <button type="button" class="btn btn-danger" name="vaciar" id="vaciar" value="VACIAR"><i class="glyphicon glyphicon-erase"></i> Limpiar Formulario</button>
+                                <button type="button" class="btn btn-info" onclick="imprSelec('seleccion')"><i class="glyphicon glyphicon-print"></i> Imprimir Modalidad</button>
+                             </div>
                             </td>
 
 
@@ -355,6 +357,7 @@ try {
                     </table>
                 </form>
               </center>
+              </div>
 
               <!--Script para la impresion de modalidad -->
               <script language="Javascript">
@@ -369,71 +372,55 @@ try {
               </script>
 
 
-<div class="container-fluid">
-<div class="input-group">
-  <b>Buscar:&nbsp</b> <div class="form-group pull-right">
-    <input type="text" class="search form-control" placeholder="¿Que Desea Buscar?">
-</div>
-</div>
-<a href="RegistroModalidad.php" class="btn btn-primary" > <span class="glyphicon glyphicon-plus"></span> Nueva Modalidad</a>&nbsp&nbsp
- <a href="../../controller/exportar_modalidades.php" class="btn btn-info btn-sm" onclick="return myConfirm3();" >
-          <span class="glyphicon glyphicon-download-alt"></span>  Descargar
-        </a>
+<div class="container-fluid cfg-card">
+<div class="cfg-toolbar">
+  <div class="cfg-search-wrap">
+    <b>Buscar:</b>
+    <input type="text" class="search form-control" placeholder="¿Qué desea buscar?">
+  </div>
+  <div>
+    <a href="RegistroModalidad.php" class="btn btn-primary" > <span class="glyphicon glyphicon-plus"></span> Nueva Modalidad</a>
+    <a href="../../controller/exportar_modalidades.php" class="btn btn-info btn-sm" id="btnDescargarMod">
+      <span class="glyphicon glyphicon-download-alt"></span>  Descargar
+    </a>
+  </div>
 </div>
 
 
-    <script>
-      $(document).ready(function(){
-  $("#example").DataTable({
-    // "sPaginationType": "bootstrap",
-  });
-});
-    </script>
-<div class="container-fluid">
+<div class="container-fluid cfg-card cfg-table-wrap">
 <table class="table table-hover table-bordered results" id="example">
-
-    <thead class="thead-dark" >
-        <thead class="buscar">
+    <thead class="thead-dark">
         <tr>
-            
-            <th><center style="font-size:2.0em"; onclick="sortTable(3)">MODALIDAD</center></th>
-            <th><center style="font-size:2.0em"; >DESCRIPCION</center></th>
-            <th><center style="font-size:2.0em";   onclick="sortTable(4)">TITULO</center></th>
-            <th><center style="font-size:2.0em";>TOPE</center></th>
-            <th><center style="font-size:2.3em";>ACCIONES</center></th>
+            <th><center>MODALIDAD</center></th>
+            <th><center>DESCRIPCION</center></th>
+            <th><center>TITULO</center></th>
+            <th><center>TOPE</center></th>
+            <th><center>ACCIONES</center></th>
         </tr>
-
     </thead>
-  </thead>
-
-<tbody>
+    <tbody>
  <?php foreach($model->Listar2() as $r): ?>
                         <tr>
-                            <td><center style="font-size:1.3em"><?php echo $r->__GET('codmod'); ?></center></td>
-                            <td><center style="font-size:1.3em"><?php echo $r->__GET('nommod'); ?></center></td>
-                            <td><center style="font-size:1.3em"><?php echo $r->__GET('titulo'); ?></center></td>
-                            <td><center style="font-size:1.3em"><?php echo $r->__GET('tope'); ?></center></td>
+                            <td><center><?php echo $r->__GET('codmod'); ?></center></td>
+                            <td><center><?php echo $r->__GET('nommod'); ?></center></td>
+                            <td><center><?php echo $r->__GET('titulo'); ?></center></td>
+                            <td><center><?php echo $r->__GET('tope'); ?></center></td>
                             <td>
-                              <center>     
-
+                              <center>
+                              <div class="junta-acciones">
                               <a class="btn btn-sm btn-success" id="modalidades"  href="?action=editar&id=<?php echo $r->id; ?>" title="Editar" data-id="<?php echo $id; ?>"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                                 <a class="btn btn-sm btn-danger" id="modalidadesBorrado"  href="?action=eliminar&id=<?php echo $r->id; ?>" title="Borrar" onclick="return myConfirm();"><i class="glyphicon glyphicon-trash" ></i> Borrar</a>
-
+                                 <a class="btn btn-sm btn-danger btn-eliminar-mod" href="?action=eliminar&id=<?php echo $r->id; ?>" title="Eliminar"><i class="glyphicon glyphicon-trash" ></i> Eliminar</a>
+                              </div>
                                </center>
                             </td>
                         </tr>
                     <?php endforeach; ?>
-
-</tbody>
-</div>
-</div>
-
+    </tbody>
 </table>
+</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap.min.js"></script>
 
 <script>
   $("#limpiar").click(function(event) {
@@ -447,37 +434,31 @@ try {
       .val("");
   });
 
-  // borrar datos de la modalidad
- function myConfirm() {
-  var result = confirm("¿Desea Eliminar Modalidad?");
-  if (result==true) {
-   return true;
+  document.getElementById('btnGuardarMod').addEventListener('click', function(e) {
+    e.preventDefault();
+    var form = document.getElementById('formulario_transaccion');
+    juntaConfirm('¿Desea guardar la modalidad?', function() {
+      form.submit();
+    });
+  });
 
-  } else {
-   return false;
-  }
-}
+  document.getElementById('btnDescargarMod').addEventListener('click', function(e) {
+    e.preventDefault();
+    var href = this.getAttribute('href');
+    juntaConfirm('¿Desea descargar a Excel las modalidades?', function() {
+      window.location.href = href;
+    });
+  });
 
-//funcion de guardar datos
-function myConfirm2() {
-  var result = confirm("¿Desea Guardar Modalidad?");
-  if (result==true) {
-   return true;
-
-  } else {
-   return false;
-  }
-}
-//funcion descargar excel 
-function myConfirm3() {
-  var result = confirm("¿Desea descragra a excel las Modalidad?");
-  if (result==true) {
-   return true;
-
-  } else {
-   return false;
-  }
-}
+  document.querySelectorAll('.btn-eliminar-mod').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var href = this.getAttribute('href');
+      juntaConfirmDanger('¿Desea eliminar la modalidad?', function() {
+        window.location.href = href;
+      });
+    });
+  });
 
 
 
@@ -485,107 +466,33 @@ function myConfirm3() {
 
   //*/
 </script>
-<ul class="pager">
-  <li class="previous disabled"><a href="#">&larr; Anterior</a></li>
-  <li class="next"><a href="#">Siguiente &rarr;</a></li>
-</ul>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="../bootstrap/js/bootstrap.min.js"></script>
-<script src="../Assets/swal2/sweetalert2.min.js"></script>
-   <script>
-function sortTable(n) {
-  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("myTable");
-  switching = true;
-  //Set the sorting direction to ascending:
-  dir = "asc"; 
-  /*Make a loop that will continue until
-  no switching has been done:*/
-  while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    rows = table.rows;
-    /*Loop through all table rows (except the
-    first, which contains table headers):*/
-    for (i = 1; i < (rows.length - 1); i++) {
-      //start by saying there should be no switching:
-      shouldSwitch = false;
-      /*Get the two elements you want to compare,
-      one from current row and one from the next:*/
-      x = rows[i].getElementsByTagName("TD")[n];
-      y = rows[i + 1].getElementsByTagName("TD")[n];
-      /*check if the two rows should switch place,
-      based on the direction, asc or desc:*/
-      if (dir == "asc") {
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch= true;
-          break;
-        }
-      } else if (dir == "desc") {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch = true;
-          break;
-        }
-      }
-    }
-    if (shouldSwitch) {
-      /*If a switch has been marked, make the switch
-      and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-      //Each time a switch is done, increase this count by 1:
-      switchcount ++;      
-    } else {
-      /*If no switching has been done AND the direction is "asc",
-      set the direction to "desc" and run the while loop again.*/
-      if (switchcount == 0 && dir == "asc") {
-        dir = "desc";
-        switching = true;
-      }
-    }
-  }
-}
-
+<script>
 $(document).ready(function() {
-  $(".search").keyup(function () {
-    var searchTerm = $(".search").val();
-    var listItem = $('.results tbody').children('tr');
-    var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
-    
-  $.extend($.expr[':'], {'containsi': function(elem, i, match, array){
-        return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+  var modalidadesTable = $("#example").DataTable({
+    dom: 'lrtip',
+    pageLength: 25,
+    lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
+    language: {
+      search: "Buscar:",
+      lengthMenu: "Mostrar _MENU_ registros",
+      info: "Mostrando _START_ a _END_ de _TOTAL_ modalidades",
+      paginate: { first: "Primero", last: "Ultimo", next: "Siguiente", previous: "Anterior" },
+      zeroRecords: "No se encontraron resultados",
+      emptyTable: "No hay modalidades registradas"
     }
   });
-    
-  $(".results tbody tr").not(":containsi('" + searchSplit + "')").each(function(e){
-    $(this).attr('visible','false');
+
+  $(".search").on("keyup", function () {
+    modalidadesTable.search(this.value).draw();
   });
-
-  $(".results tbody tr:containsi('" + searchSplit + "')").each(function(e){
-    $(this).attr('visible','true');
-  });
-
-  var jobCount = $('.results tbody tr[visible="true"]').length;
-    $('.counter').text(jobCount + ' item');
-
-  if(jobCount == '0') {$('.no-result').show();}
-    else {$('.no-result').hide();}
-      });
 });
 
 
 
 
 </script>
-
-</body>
-</html>
-<!-- < ?php include('AgregarModal.php'); ?>-->
-<script src="../js/jquery.min.js"></script>
-<script src="../bootstrap/js/bootstrap.min.js"></script>
+</div><!-- .cfg-listados-polish -->
 <?php include('footer2.php');?>
 
 <!--modal de Modalidades->

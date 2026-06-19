@@ -1,0 +1,42 @@
+﻿{
+    "paquete":  "rendimiento-p234",
+    "descripcion":  "Respaldo previo a puntos 2, 3 y 4 (conexiones BD, DataTables Modalidades, OPcache)",
+    "fecha":  "2026-06-18 16:10:27",
+    "carpeta":  "D:\\xampp\\htdocs\\Juntas2024\\junta\\backups\\rendimiento-p234-20260618-161027-pre-implementacion",
+    "juntaRoot":  "D:\\xampp\\htdocs\\Juntas2024\\junta",
+    "phpIniPath":  "D:\\xampp\\php\\php.ini",
+    "archivos":  [
+                     {
+                         "archivo":  "views\\Docentes\\VerInscripciones.php",
+                         "origen":  "D:\\xampp\\htdocs\\Juntas2024\\junta\\views\\Docentes\\VerInscripciones.php",
+                         "respaldo":  "D:\\xampp\\htdocs\\Juntas2024\\junta\\backups\\rendimiento-p234-20260618-161027-pre-implementacion\\views\\Docentes\\VerInscripciones.php",
+                         "sha256":  "E8E5C2AC2522AA3FAC24856C67291283227AB71E3B66D877C17F874DE7B9D2FA",
+                         "externo":  false,
+                         "fecha":  "2026-06-18 16:10:27"
+                     },
+                     {
+                         "archivo":  "views\\Docentes\\ListarDocentes.php",
+                         "origen":  "D:\\xampp\\htdocs\\Juntas2024\\junta\\views\\Docentes\\ListarDocentes.php",
+                         "respaldo":  "D:\\xampp\\htdocs\\Juntas2024\\junta\\backups\\rendimiento-p234-20260618-161027-pre-implementacion\\views\\Docentes\\ListarDocentes.php",
+                         "sha256":  "7021D04FA06DE13B6AE5CD5B1B1957A0CB4FB109457C045C33D057261DD36066",
+                         "externo":  false,
+                         "fecha":  "2026-06-18 16:10:27"
+                     },
+                     {
+                         "archivo":  "views\\Modalidades\\ListarModalidades.php",
+                         "origen":  "D:\\xampp\\htdocs\\Juntas2024\\junta\\views\\Modalidades\\ListarModalidades.php",
+                         "respaldo":  "D:\\xampp\\htdocs\\Juntas2024\\junta\\backups\\rendimiento-p234-20260618-161027-pre-implementacion\\views\\Modalidades\\ListarModalidades.php",
+                         "sha256":  "7822ABFA238C573E8ECBFC4B25CA94A8D2BF7154FDC0C2BE7D70E419C12222A0",
+                         "externo":  false,
+                         "fecha":  "2026-06-18 16:10:27"
+                     },
+                     {
+                         "archivo":  "_xampp_php.ini",
+                         "origen":  "D:\\xampp\\php\\php.ini",
+                         "respaldo":  "D:\\xampp\\htdocs\\Juntas2024\\junta\\backups\\rendimiento-p234-20260618-161027-pre-implementacion\\_xampp_php.ini",
+                         "sha256":  "A48BDFBA095DA7D6CC0306E75175451E0EB58C0DC518CA03FE23B2A08244FAD5",
+                         "externo":  true,
+                         "fecha":  "2026-06-18 16:10:27"
+                     }
+                 ]
+}

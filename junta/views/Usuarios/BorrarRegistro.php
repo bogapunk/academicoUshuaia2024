@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../seguridad_requiere_admin.php';
 
 // Include database connection
 include('dbconect.php');
@@ -43,7 +44,7 @@ if (isset($_GET['id'])) {
     // Check if the query was successful
     if ($stmt->rowCount() > 0) {
       // Set success message
-      $_SESSION['message'] = "Usuario eliminado correctamente.";
+      $_SESSION['message'] = "Usuario desactivado correctamente.";
     } else {
       // Set error message
       $_SESSION['message'] = "No se encontró el usuario con ID: " . $userId;

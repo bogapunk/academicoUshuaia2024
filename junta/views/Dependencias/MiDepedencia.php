@@ -1,20 +1,6 @@
 <?php
 session_start();
-
-define('DB_HOST', '10.1.9.113');
-define('DB_USER', 'SA');
-define('DB_PASS', 'Davinci2024#');
-define('DB_NAME', 'junta');
-
-try {
-    // Construir la cadena de conexión para SQL Server con TrustServerCertificate=true
-    $dsn = "sqlsrv:Server=" . DB_HOST . ";Database=" . DB_NAME . ";TrustServerCertificate=true";
-    $connect = new PDO($dsn, DB_USER, DB_PASS);
-    $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-   // echo "Conexión exitosa";
-} catch (PDOException $e) {
-    exit("Error de conexión: " . $e->getMessage());
-}
+include('header2.php');
 
 if (isset($_POST['insertar'])) {
     $nomdep = $_POST['nomdep'];
@@ -25,54 +11,85 @@ if (isset($_POST['insertar'])) {
     $interno = $_POST['interno'];
     $codniv = $_POST['codniv'];
 
-    $sql = "INSERT INTO _junta_dependencias (nomdep, coddep, domicilio, codloc, directo, interno, codniv) 
-            VALUES (:nomdep, :coddep, :domicilio, :codloc, :directo, :interno, :codniv)";
-
-    $stmt = $connect->prepare($sql);
-
-    $stmt->bindParam(':nomdep', $nomdep, PDO::PARAM_STR);
-    $stmt->bindParam(':coddep', $coddep, PDO::PARAM_INT);
-    $stmt->bindParam(':domicilio', $domicilio, PDO::PARAM_STR);
-    $stmt->bindParam(':codloc', $codloc, PDO::PARAM_STR);
-    $stmt->bindParam(':directo', $directo, PDO::PARAM_STR);
-    $stmt->bindParam(':interno', $interno, PDO::PARAM_STR);
-    $stmt->bindParam(':codniv', $codniv, PDO::PARAM_INT);
-    echo '<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-';
     try {
-        $stmt->execute();
-        $lastInsertId = $connect->lastInsertId();
-        
-        if ($lastInsertId > 0) {
-            // Alerta de éxito con Bootstrap
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';
-            echo '<strong>¡Éxito!</strong> Los datos se han insertado correctamente.';
-            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-            echo '</div>';
-    
-            // Redirección a RegistroDependencia.php después de 3 segundos
-            echo '<script>';
-            echo 'setTimeout(function() { window.location.href = "ListarDependencias.php"; }, 2000);'; // Redirige después de 2 segundos
-            echo '</script>';
+        $dsn = "sqlsrv:Server=10.1.9.113;Database=junta;TrustServerCertificate=true";
+        $connect = new PDO($dsn, 'SA', 'Davinci2024#');
+        $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "INSERT INTO _junta_dependencias (nomdep, coddep, domicilio, codloc, directo, interno, codniv) 
+                VALUES (:nomdep, :coddep, :domicilio, :codloc, :directo, :interno, :codniv)";
+
+        $stmt = $connect->prepare($sql);
+        $stmt->bindParam(':nomdep', $nomdep, PDO::PARAM_STR);
+        $stmt->bindParam(':coddep', $coddep, PDO::PARAM_INT);
+        $stmt->bindParam(':domicilio', $domicilio, PDO::PARAM_STR);
+        $stmt->bindParam(':codloc', $codloc, PDO::PARAM_STR);
+        $stmt->bindParam(':directo', $directo, PDO::PARAM_STR);
+        $stmt->bindParam(':interno', $interno, PDO::PARAM_STR);
+        $stmt->bindParam(':codniv', $codniv, PDO::PARAM_INT);
+
+        $result = $stmt->execute();
+
+        if ($result) {
+            $safeNombre = htmlspecialchars($nomdep, ENT_QUOTES, 'UTF-8');
+            $safeCodigo = htmlspecialchars($coddep, ENT_QUOTES, 'UTF-8');
+            $safeLoc = htmlspecialchars($codloc, ENT_QUOTES, 'UTF-8');
+            ?>
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: '¡Dependencia registrada exitosamente!',
+                    html: '<div style="text-align:left;font-size:15px;line-height:2;">' +
+                          '<p><strong>Código:</strong> <span style="font-size:20px;color:#2698f3;font-weight:700;"><?php echo $safeCodigo; ?></span></p>' +
+                          '<p><strong>Nombre:</strong> <?php echo $safeNombre; ?></p>' +
+                          '<p><strong>Localidad:</strong> <?php echo $safeLoc; ?></p>' +
+                          '</div>' +
+                          '<p style="margin-top:12px;font-size:13px;color:#6b7280;">Puede copiar esta información antes de continuar.</p>',
+                    icon: 'success',
+                    confirmButtonText: 'Continuar',
+                    confirmButtonColor: '#2698f3',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then(function() {
+                    window.location.href = 'ListarDependencias.php';
+                });
+            });
+            </script>
+            <?php
         } else {
-            // Mensaje de error utilizando Bootstrap
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
-            echo '<strong>Error:</strong> No se pueden agregar datos, comuníquese con el administrador.';
-            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-            echo '</div>';
-            print_r($stmt->errorInfo());
+            ?>
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                juntaError('Error al registrar', 'No se pudieron agregar los datos. Comuníquese con el administrador.').then(function() {
+                    window.location.href = 'RegistroDependencia.php';
+                });
+            });
+            </script>
+            <?php
         }
-    
     } catch (PDOException $e) {
-        // Error al ejecutar la consulta
-        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
-        echo '<strong>Error:</strong> ' . $e->getMessage();
-        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-        echo '</div>';
+        $errorMsg = htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
+        ?>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            juntaError('Error de conexión', '<?php echo addslashes($errorMsg); ?>').then(function() {
+                window.location.href = 'RegistroDependencia.php';
+            });
+        });
+        </script>
+        <?php
     }
-
-
-
-
+} else {
+    ?>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        juntaAlert('No se recibieron datos. Redirigiendo al formulario de registro...', 'warning').then(function() {
+            window.location.href = 'RegistroDependencia.php';
+        });
+    });
+    </script>
+    <?php
 }
+
+include('footer2.php');
 ?>

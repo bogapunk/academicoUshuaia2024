@@ -304,8 +304,7 @@ tr:nth-child(even) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
-      <!-- sweeteralert2 -->
-      <link rel="stylesheet" href="../Assets/swal2/sweetalert2.min.css" type="text/css" />
+      <!-- sweeteralert2 ya cargado globalmente desde header2.php -->
 
       <!--aca esta las extensiones para el paginado de la las tablas --->
   
@@ -490,22 +489,21 @@ function showDetails(legajo) {
 <script>
 $(document).ready(function() {
     $('#grabarBtn').click(function() {
-        alert('Se ha grabado la información.');
+        juntaSuccess('Grabado', 'Se ha grabado la información.');
     });
 
     $('#cancelarBtn').click(function() {
-        history.back(); // Volver a la página anterior
+        history.back();
     });
 
     $('#eliminarBtn').click(function() {
-        if (confirm('¿Estás seguro de que quieres eliminar esta inscripción?')) {
-            // Aquí puedes agregar la lógica para eliminar el elemento con el ID 'id2'
+        juntaConfirmDanger('¿Estás seguro de que quieres eliminar esta inscripción?', function() {
             var elementoEliminar = document.getElementById('id2');
             var padreElemento = elementoEliminar.parentNode;
             padreElemento.removeChild(elementoEliminar);
 
-            alert('La inscripción ha sido eliminada.');
-        }
+            juntaSuccess('Eliminado', 'La inscripción ha sido eliminada.');
+        });
     });
 });
 </script>
@@ -728,29 +726,25 @@ sqlsrv_close($conn);
 <script>
 jQuery(document).ready(function($) {
   $('.btn-danger').click(function(e) {
-      e.preventDefault(); // Previene el comportamiento predeterminado del enlace
+      e.preventDefault();
       
-      // Obtiene el ID2 del atributo de datos
       var id2 = $(this).data('id2');
       
-      // Pregunta al usuario si realmente desea eliminar el movimiento
-      if (confirm('¿Desea eliminar el movimiento?')) {
-          // Realiza la solicitud AJAX para eliminar el movimiento
+      juntaConfirmDanger('¿Desea eliminar el movimiento?', function() {
           jQuery.ajax({
               type: 'POST',
-              url: 'eliminar_movimiento.php', // Ruta al script PHP que maneja la eliminación
-              data: { id2: id2 }, // Envía el ID2 al servidor
+              url: 'eliminar_movimiento.php',
+              data: { id2: id2 },
               success: function(response) {
-                  alert('El movimiento ha sido eliminado exitosamente.');
-                  // Actualiza la página o realiza otras acciones si es necesario
-                  location.reload(); // Recarga la página para reflejar los cambios
+                  juntaSuccess('Eliminado', 'El movimiento ha sido eliminado exitosamente.');
+                  location.reload();
               },
               error: function(xhr, status, error) {
-                  alert('Error al intentar eliminar el movimiento. Por favor, inténtalo de nuevo.');
+                  juntaError('Error', 'Error al intentar eliminar el movimiento. Por favor, inténtalo de nuevo.');
                   console.error(xhr.responseText);
               }
           });
-      }
+      });
   });
 });
 </script>
@@ -1218,23 +1212,21 @@ echo "</script>";
           var datos = $('#miFormulario').serialize(); // Serializa los datos del formulario
           $.ajax({
               type: 'POST',
-              url: 'actualizarMovimientos.php', // Archivo PHP para procesar la actualización
+              url: 'actualizarMovimientos.php',
               data: datos,
               success: function(response) {
-                  // Maneja la respuesta del servidor aquí
-                  alert(response); // Muestra la respuesta del servidor (puedes ajustarla según tus necesidades)
+                  juntaSuccess('Actualizado', response);
               },
               error: function(xhr, status, error) {
-                  // Maneja errores de la solicitud AJAX
+                  juntaError('Error', 'Error al actualizar los datos.');
                   console.error(xhr.responseText);
               }
           });
       });
   });
   
-  // Función para confirmar movimiento
-  function myConfirmMov() {
-      return confirm("¿Desea actualizar el MOVIMIENTO?");
+  function myConfirmMov(callback) {
+      juntaConfirm('¿Desea actualizar el MOVIMIENTO?', callback);
   }
   </script>
 </th>

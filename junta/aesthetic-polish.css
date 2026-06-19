@@ -1,0 +1,571 @@
+@charset "UTF-8";
+/*
+ * Pulido estético (capa adicional, reversibile).
+ * REVERTIR: 1) Comentar la línea <link ... aesthetic-polish.css> en header(s),
+ *          2) y/o renombrar este archivo (p. ej. aesthetic-polish.css.bak)
+ * Unificación global de botones (referencia: Guardar / Limpiar Formulario en Modalidades).
+ * El resto del archivo suaviza render, sombras neutras y foco accesible sin cambiar HTML.
+ */
+@import url('views/css/junta-acciones-polish.css');
+
+/* Legibilidad en pantallas, sin tocar familias de fuente heredadas */
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+}
+
+/* Puntero coherente (no altera medidas) */
+button:not([disabled]),
+.btn:not([disabled]),
+[role="button"]:not([disabled]) {
+	cursor: pointer;
+}
+
+/*
+ * Foco accesible solo con teclado, usando el color de texto heredado (sin nueva paleta).
+ * Se excluyen .btn: Bootstrap ya define su propio anillo; evitar doble anillo.
+ */
+a:not(.btn):focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 2px;
+}
+
+/* Login y botones Bootstrap: el foco ya se estiliza allí; evitar doble anillo */
+.junta-login-shell .junta-input-wrap input:focus-visible,
+.btn:focus-visible,
+button.btn:focus-visible {
+	outline: none;
+}
+
+/* Profundidad más visible (sombra + borde neutro), sin tocar colores de marca */
+.panel,
+.well {
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+	border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Tablas con filas más legibles al pasar el cursor (no altera layout) */
+.table-hover > tbody > tr:hover {
+	background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Enlaces: transición un poco más nítida respetando el verde/azul existente */
+body a {
+	text-underline-offset: 0.15em;
+}
+
+/* Contenido principal: un poco de aire entre bloques (sin cambiar columnas) */
+.main {
+	border-radius: 4px;
+}
+
+/* Menu principal: evitar "achicamiento" al interactuar con botones */
+#menu_gral a.btn,
+#menu_gral button.btn,
+#menu_gral a.btn:active,
+#menu_gral button.btn:active,
+#menu_gral a.btn:focus,
+#menu_gral button.btn:focus,
+#menu_gral a.btn.active,
+#menu_gral button.btn.active {
+	-webkit-transform: none !important;
+	transform: none !important;
+}
+
+/* Menus desplegables: comportamiento estable, limpio y uniforme */
+#menu_gral,
+#menu_gral * {
+	transition: none !important;
+	animation: none !important;
+}
+
+#menu_gral {
+	width: 100% !important;
+	max-width: 1200px;
+	margin: 1rem auto !important;
+}
+
+#menu_gral > ul {
+	display: flex !important;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: stretch;
+	gap: 10px 14px;
+	margin: 0 !important;
+	padding: 0 !important;
+	list-style: none;
+	font-size: 16px !important;
+}
+
+#menu_gral > ul > li {
+	display: flex !important;
+	flex: 0 1 210px;
+	width: auto !important;
+	max-width: 240px;
+	min-width: 170px;
+	vertical-align: top;
+	background: transparent !important;
+}
+
+#menu_gral > ul > li > .card-body {
+	width: 100%;
+}
+
+#menu_gral > ul > li > a,
+#menu_gral > ul > li > .card-body > a,
+#menu_gral > ul > li > .card-body > button.btn {
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	width: 100% !important;
+	min-height: 46px;
+	padding: 10px 14px;
+	text-align: center;
+	line-height: 1.2 !important;
+}
+
+#menu_gral li {
+	position: relative;
+}
+
+#menu_gral li > ul {
+	display: none !important;
+	position: absolute !important;
+	top: 100% !important;
+	left: 0 !important;
+	width: 100% !important;
+	min-width: 260px;
+	margin: 0 !important;
+	padding: 0 !important;
+	overflow: visible !important;
+	z-index: 1000;
+}
+
+#menu_gral li:hover > ul,
+#menu_gral li:focus-within > ul {
+	display: block !important;
+}
+
+#menu_gral li > ul > li {
+	display: block !important;
+	width: 100% !important;
+}
+
+#menu_gral li > ul > li > a {
+	display: block;
+	line-height: 1.45 !important;
+	padding: 8px 12px;
+	font-size: 14px !important;
+	font-family: "Roboto", sans-serif !important;
+	white-space: normal;
+}
+
+@media (max-width: 992px) {
+	#menu_gral > ul > li {
+		flex: 1 1 200px;
+		max-width: none;
+	}
+}
+
+@media (max-width: 640px) {
+	#menu_gral > ul {
+		gap: 8px;
+	}
+
+	#menu_gral > ul > li {
+		flex: 1 1 100%;
+		min-width: 0;
+	}
+}
+
+/*
+ * Botones unificados (referencia: Listado de Inscripciones, views/Docentes/VerInscripciones.php).
+ * Variables y colores coherentes con .ins-list-shell / .ins-btn / acciones de tabla.
+ * Carga típica: style.css → Bootstrap → este archivo; se usa !important solo donde Bootstrap gana por orden o minificación.
+ */
+:root {
+	/* Paleta Agencia de Innovación (logo): primarios de interfaz */
+	--junta-brand-blue: #2196f3;
+	--junta-brand-blue-border: #1976d2;
+	--junta-brand-orange: #e55916;
+	--junta-brand-orange-border: #c9470f;
+	--junta-brand-orange-active: #d14a14;
+	--junta-ins-primary: #004481;
+	--junta-ins-primary-light: #2b8fd9;
+	--junta-ins-navy: #003366;
+	--junta-ins-success: #28a745;
+	--junta-ins-success-border: #218838;
+	--junta-ins-danger: #dc3545;
+	--junta-ins-warning: #fd7e14;
+	--junta-ins-warning-border: #e8590c;
+}
+
+/*
+ * Paleta logo Agencia de Innovación en #menu_gral: azul #2196F3, hover naranja #e55916.
+ * !important vence reglas en <style> de los headers PHP (p. ej. #2698f3 / grises en submenú).
+ */
+#menu_gral li a,
+#menu_gral .btn.btn-primary {
+	color: #fff !important;
+	background-color: var(--junta-brand-blue) !important;
+	background-image: none !important;
+	border-color: var(--junta-brand-blue-border) !important;
+}
+
+#menu_gral > ul > li:hover > .card-body > a.btn-primary,
+#menu_gral > ul > li:hover > .card-body > button.btn-primary,
+#menu_gral > ul > li > .card-body > a.btn-primary:hover,
+#menu_gral > ul > li > .card-body > button.btn-primary:hover,
+#menu_gral > ul > li > .card-body > a.btn-primary:focus,
+#menu_gral > ul > li > .card-body > button.btn-primary:focus {
+	background-color: var(--junta-brand-orange) !important;
+	border-color: var(--junta-brand-orange-border) !important;
+	color: #fff !important;
+}
+
+/* Submenú: ul como hijo de li (header2) o dentro de .card-body (p. ej. header1 — Cerrar sesión) */
+#menu_gral > ul > li:hover ul li > a,
+#menu_gral > ul > li:focus-within ul li > a,
+#menu_gral > ul > li:hover ul li > .btn.btn-primary,
+#menu_gral > ul > li:focus-within ul li > .btn.btn-primary {
+	background-color: var(--junta-brand-blue) !important;
+	border-color: var(--junta-brand-blue-border) !important;
+	color: #fff !important;
+}
+
+#menu_gral > ul > li ul li > a:hover,
+#menu_gral > ul > li ul li > a:focus,
+#menu_gral > ul > li ul li > .btn.btn-primary:hover,
+#menu_gral > ul > li ul li > .btn.btn-primary:focus {
+	background-color: var(--junta-brand-orange) !important;
+	border-color: var(--junta-brand-orange-border) !important;
+	color: #fff !important;
+}
+
+/*
+ * Menú principal — estados activos/seleccionados y submenú limpio.
+ * Vence reglas inline de header2.php (#menu_gral li:hover a, monospace, etc.).
+ */
+#menu_gral > ul > li > .card-body > a.btn-primary,
+#menu_gral > ul > li > .card-body > button.btn-primary {
+	border-radius: 6px !important;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12) !important;
+	outline: none !important;
+	text-decoration: none !important;
+}
+
+#menu_gral > ul > li > .card-body > a.btn-primary:hover,
+#menu_gral > ul > li > .card-body > a.btn-primary:focus,
+#menu_gral > ul > li > .card-body > a.btn-primary:active,
+#menu_gral > ul > li > .card-body > a.btn-primary.active,
+#menu_gral > ul > li:hover > .card-body > a.btn-primary,
+#menu_gral > ul > li:focus-within > .card-body > a.btn-primary,
+#menu_gral > ul > li > .card-body > button.btn-primary:hover,
+#menu_gral > ul > li > .card-body > button.btn-primary:focus,
+#menu_gral > ul > li > .card-body > button.btn-primary:active,
+#menu_gral > ul > li > .card-body > button.btn-primary.active,
+#menu_gral > ul > li:hover > .card-body > button.btn-primary,
+#menu_gral > ul > li:focus-within > .card-body > button.btn-primary {
+	background-color: var(--junta-brand-orange) !important;
+	background-image: none !important;
+	border-color: var(--junta-brand-orange-border) !important;
+	color: #fff !important;
+	outline: none !important;
+	box-shadow: 0 2px 8px rgba(229, 89, 22, 0.28) !important;
+	filter: none !important;
+}
+
+/* Submenú: no heredar el naranja del ítem padre al pasar el mouse */
+#menu_gral > ul > li:hover > ul a,
+#menu_gral > ul > li:focus-within > ul a,
+#menu_gral > ul > li:hover li a,
+#menu_gral > ul > li:focus-within li a,
+#menu_gral > ul > li:hover li a.btn,
+#menu_gral > ul > li:focus-within li a.btn {
+	background-color: var(--junta-brand-blue) !important;
+	background-image: none !important;
+	border-color: var(--junta-brand-blue-border) !important;
+	color: #fff !important;
+	font-family: "Roboto", sans-serif !important;
+	font-size: 14px !important;
+	line-height: 1.45 !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+#menu_gral > ul > li ul li > a:hover,
+#menu_gral > ul > li ul li > a:focus,
+#menu_gral > ul > li ul li > a:active,
+#menu_gral > ul > li ul li > .btn.btn-primary:hover,
+#menu_gral > ul > li ul li > .btn.btn-primary:focus {
+	background-color: var(--junta-brand-orange) !important;
+	border-color: var(--junta-brand-orange-border) !important;
+	color: #fff !important;
+}
+
+/* Submenú usuario: opciones uniformes (mismo tamaño, alineación y estilo) */
+#menu_gral > ul > li ul li > a,
+#menu_gral > ul > li ul li > .btn.btn-primary {
+	display: block !important;
+	width: 100% !important;
+	box-sizing: border-box;
+	min-height: 40px;
+	padding: 10px 14px !important;
+	margin: 0 !important;
+	border-radius: 0 !important;
+	font-family: "Roboto", sans-serif !important;
+	font-size: 14px !important;
+	font-weight: 600 !important;
+	line-height: 1.35 !important;
+	text-align: left !important;
+	white-space: normal;
+	border: none !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+#menu_gral font {
+	font-size: inherit !important;
+}
+
+#menu_gral > ul > li > ul {
+	border: 1px solid var(--junta-brand-blue-border);
+	border-top: none;
+	border-radius: 0 0 6px 6px;
+	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.btn {
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	gap: 0.35rem;
+	font-weight: 600 !important;
+	line-height: 1.25 !important;
+	box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+	transition: box-shadow 0.15s ease, filter 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+	text-decoration: none !important;
+}
+
+.btn .glyphicon {
+	position: static !important;
+	top: auto !important;
+	line-height: 1 !important;
+	flex-shrink: 0;
+}
+
+.btn:active {
+	box-shadow: 0 1px 4px rgba(15, 23, 42, 0.1);
+	filter: brightness(0.98);
+}
+
+.btn[disabled],
+.btn.disabled,
+fieldset[disabled] .btn {
+	opacity: 0.65;
+	filter: none;
+	box-shadow: none;
+	cursor: not-allowed;
+}
+
+a.btn,
+a.btn:hover,
+a.btn:focus {
+	text-decoration: none !important;
+}
+
+.btn-primary {
+	color: #fff !important;
+	background-color: var(--junta-brand-blue) !important;
+	background-image: none !important;
+	border-color: var(--junta-brand-blue-border) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus {
+	color: #fff !important;
+	background-color: var(--junta-brand-orange) !important;
+	background-image: none !important;
+	border-color: var(--junta-brand-orange-border) !important;
+	filter: none;
+}
+
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+	color: #fff !important;
+	background-color: var(--junta-brand-orange-active) !important;
+	background-image: none !important;
+	border-color: var(--junta-brand-orange-border) !important;
+	filter: none;
+}
+
+.btn-success {
+	color: #fff !important;
+	background-color: var(--junta-ins-success) !important;
+	border-color: var(--junta-ins-success-border) !important;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+	color: #fff !important;
+	background-color: #229542 !important;
+	border-color: #1c7430 !important;
+	filter: brightness(1.03);
+}
+
+.btn-danger {
+	color: #fff !important;
+	background-color: var(--junta-ins-danger) !important;
+	border-color: #c82333 !important;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+	color: #fff !important;
+	background-color: #c82333 !important;
+	border-color: #bd2130 !important;
+	filter: brightness(1.03);
+}
+
+.btn-warning {
+	color: #fff !important;
+	background-color: var(--junta-ins-warning) !important;
+	border-color: var(--junta-ins-warning-border) !important;
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+	color: #fff !important;
+	background-color: #ec6f0c !important;
+	border-color: #d35400 !important;
+	filter: brightness(1.03);
+}
+
+.btn-info {
+	color: #fff !important;
+	background-color: var(--junta-ins-primary-light) !important;
+	border-color: #1f7bb8 !important;
+}
+
+.btn-info:hover,
+.btn-info:focus {
+	color: #fff !important;
+	background-color: #2488c9 !important;
+	border-color: #1a6fa3 !important;
+	filter: brightness(1.03);
+}
+
+.btn-default {
+	color: #333 !important;
+	background-color: #fff !important;
+	border-color: #ccc !important;
+	box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.btn-default:hover,
+.btn-default:focus {
+	color: #333 !important;
+	background-color: #f5f5f5 !important;
+	border-color: #b3b3b3 !important;
+	filter: none;
+}
+
+/* "Ver" y similares que usaban .btn-custom en listados */
+.btn-custom {
+	color: #fff !important;
+	background-color: var(--junta-ins-primary-light) !important;
+	border-color: #1f7bb8 !important;
+}
+
+.btn-custom:hover,
+.btn-custom:focus {
+	color: #fff !important;
+	filter: brightness(1.05);
+}
+
+/* Envíos tipo panel de bienvenida / formularios legacy (no son .btn) */
+.send-button input[type="submit"],
+.panel-main-actions .send-button input[type="submit"] {
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	font-weight: 600 !important;
+	font-size: 16px !important;
+	line-height: 1.25 !important;
+	color: #fff !important;
+	background-color: var(--junta-brand-blue) !important;
+	background-image: none !important;
+	border: 1px solid var(--junta-brand-blue-border) !important;
+	border-radius: 10px !important;
+	box-shadow: 0 2px 10px rgba(15, 23, 42, 0.1);
+	padding: 10px 22px !important;
+	transition: box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.send-button input[type="submit"]:hover,
+.send-button input[type="submit"]:focus,
+.panel-main-actions .send-button input[type="submit"]:hover,
+.panel-main-actions .send-button input[type="submit"]:focus {
+	color: #fff !important;
+	background-color: var(--junta-brand-orange) !important;
+	border-color: var(--junta-brand-orange-border) !important;
+	filter: none;
+	box-shadow: 0 4px 14px rgba(229, 89, 22, 0.25);
+}
+
+/* Pie institucional: mismo primario que el resto del sistema */
+.junta-pie-boton-sesion .btn,
+.junta-pie-boton-sesion .btn-primary,
+.junta-pie-boton-sesion a.btn,
+.junta-pie-boton-sesion button.btn {
+	background-color: var(--junta-brand-blue) !important;
+	background-image: none !important;
+	border-color: var(--junta-brand-blue-border) !important;
+	color: #fff !important;
+}
+
+.junta-pie-boton-sesion .btn:hover,
+.junta-pie-boton-sesion .btn:focus,
+.junta-pie-boton-sesion .btn-primary:hover,
+.junta-pie-boton-sesion .btn-primary:focus,
+.junta-pie-boton-sesion a.btn:hover,
+.junta-pie-boton-sesion a.btn:focus,
+.junta-pie-boton-sesion button.btn:hover,
+.junta-pie-boton-sesion button.btn:focus {
+	background-color: var(--junta-brand-orange) !important;
+	background-image: none !important;
+	border-color: var(--junta-brand-orange-border) !important;
+	color: #fff !important;
+}
+
+/* Login: botón principal alineado al mismo esquema */
+.junta-login-shell .junta-form-actions .junta-login-btn,
+.junta-login-shell .junta-form-actions button[type="submit"] {
+	background-color: var(--junta-brand-blue) !important;
+	background-image: none !important;
+	border-color: var(--junta-brand-blue-border) !important;
+	color: #fff !important;
+}
+
+.junta-login-shell .junta-form-actions .junta-login-btn:hover,
+.junta-login-shell .junta-form-actions .junta-login-btn:focus,
+.junta-login-shell .junta-form-actions button[type="submit"]:hover,
+.junta-login-shell .junta-form-actions button[type="submit"]:focus {
+	background-color: var(--junta-brand-orange) !important;
+	background-image: none !important;
+	border-color: var(--junta-brand-orange-border) !important;
+	color: #fff !important;
+}
+
+/* Sistema global de botones operacionales (referencia: Modalidades Guardar / Limpiar) */
+@import url('views/css/junta-botones-polish.css');

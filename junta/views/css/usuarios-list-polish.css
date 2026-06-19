@@ -1,0 +1,86 @@
+/* ListarUsuarios — extiende junta-panel-polish.css */
+.cfg-listados-polish.usuarios-page .cfg-page-title {
+  text-decoration: none !important;
+}
+
+.cfg-listados-polish.usuarios-page .usuarios-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px 18px;
+  margin-bottom: 16px;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, #f8fafc 0%, #eef4fb 100%);
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+}
+
+.cfg-listados-polish.usuarios-page .cfg-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1 1 280px;
+}
+
+.cfg-listados-polish.usuarios-page .cfg-search-wrap .input-group-addon {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cfg-primary);
+  text-transform: uppercase;
+  padding: 0;
+}
+
+.cfg-listados-polish.usuarios-page .cfg-search-wrap .form-control {
+  height: 44px;
+  border-radius: 11px;
+  border: 1px solid #cbd5e1;
+}
+
+.cfg-listados-polish.usuarios-page .usuarios-toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.cfg-listados-polish.usuarios-page .cfg-table-wrap .table {
+  border: 1px solid #dbeafe !important;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.cfg-listados-polish.usuarios-page .cfg-table-wrap thead th {
+  background: linear-gradient(135deg, var(--cfg-primary) 0%, var(--cfg-navy) 100%) !important;
+  color: #fff !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: none !important;
+  padding: 12px 14px !important;
+  vertical-align: middle !important;
+}
+
+.cfg-listados-polish.usuarios-page .cfg-table-wrap tbody td {
+  font-size: 14px;
+  padding: 12px 14px !important;
+  vertical-align: middle !important;
+  border-color: #e8eef5 !important;
+}
+
+.cfg-listados-polish.usuarios-page .cfg-table-wrap tbody tr:nth-child(even) td {
+  background: #f8fafc !important;
+}
+
+.cfg-listados-polish.usuarios-page .cfg-table-wrap tbody tr:hover td {
+  background: #eff6ff !important;
+}
+
+.cfg-listados-polish.usuarios-page .alert-info {
+  border-radius: 12px;
+  border-left: 5px solid var(--cfg-primary-light);
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}

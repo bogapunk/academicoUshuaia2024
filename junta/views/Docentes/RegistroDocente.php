@@ -437,196 +437,361 @@ button:hover {
 
 
   .form-container {
-  background-color: #f5f5f5; /* Example background color */
-  padding: 20px;
-  border-radius: 5px;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
 }
 
+/* --- Panel Crear Docente: layout unificado (coherente con ListarDocentes) --- */
+.registro-docente-page {
+  padding: 12px 0 32px;
+}
 
+.registro-docente-shell {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
 
-materialize-date{
-    border: none;
-    border-bottom: 1px solid #ccc;
-    background-color: transparent;
-    padding: 0px 0px;
-    font-size: 15px;
-    outline: none;
-    height: 25px;
-    width: 15%;
-    cursor: pointer;
+.registro-docente-shell .form-container {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  padding: 22px 20px 26px;
+}
+
+.registro-docente-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.registro-docente-title {
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 6px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(38, 152, 243, 0.35);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.registro-docente-subtitle {
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6b4423;
+  margin: 0;
+}
+
+.registro-docente-sec {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.registro-docente-sec:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.registro-docente-sec-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1e40af;
+  margin: 0 0 14px;
+}
+
+.registro-docente-shell .form-group {
+  margin-bottom: 16px;
+}
+
+.registro-docente-shell .form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.registro-docente-shell .form-control,
+.registro-docente-shell select.form-control {
+  width: 100%;
+  max-width: 100%;
+  min-height: 38px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  box-shadow: none;
+  font-size: 14px;
+}
+
+.registro-docente-shell select.form-control {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  height: auto;
+  line-height: 1.35;
+  -webkit-appearance: menulist;
+}
+
+.registro-docente-shell textarea.form-control {
+  min-height: 100px;
+  max-width: 100%;
+  resize: vertical;
+}
+
+.registro-docente-verify-row {
+  margin: 14px 0 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.registro-docente-verify-row .btn-info {
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.registro-docente-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.registro-docente-actions .btn {
+  min-width: 140px;
+  border-radius: 6px;
+  font-weight: 600;
+  padding: 10px 18px;
+}
+
+.registro-docente-actions .btn-success {
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .registro-docente-shell .form-container {
+    padding: 16px 12px;
+  }
+  .registro-docente-title {
+    font-size: 22px;
+  }
+}
+
+/* Prioridad sobre reglas legacy .regisFrm y márgenes globales de h1/h2 */
+.registro-docente-header h1.registro-docente-title {
+  margin: 0 0 6px !important;
+}
+
+.registro-docente-shell h2.registro-docente-sec-title {
+  text-align: left;
+}
+
+.regisFrm .registro-docente-shell input.form-control,
+.regisFrm .registro-docente-shell select.form-control,
+.regisFrm .registro-docente-shell textarea.form-control {
+  width: 100% !important;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.registro-docente-actions.send-button {
+  text-align: inherit;
+  margin-top: 24px;
+}
+
+.registro-docente-actions.send-button input[type="submit"] {
+  width: auto;
+  padding: inherit;
+}
 </style>
 <!-- JavaScript -->
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
  <!-- Compiled and minified CSS -->
  
 
 
 
 
-<div class="col-sm-3 r-form-1-box wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
+<div class="col-sm-2 r-form-1-box wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
 
-<div class="col-sm-6 r-form-1-box wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
+<div class="col-sm-8 r-form-1-box wow fadeInLeft animated registro-docente-page" style="visibility: visible; animation-name: fadeInLeft;">
 
- 
-    <h2><b><u><FONT COLOR="Black">CREAR DOCENTE</FONT></u></b></h2>
-        <h4>Nueva Docente</h4>
+<div class="registro-docente-shell">
+    <div class="registro-docente-header">
+        <h1 class="registro-docente-title">Crear docente</h1>
+        <p class="registro-docente-subtitle">Nueva Docente</p>
+    </div>
         <?php echo !empty($statusMsg)?'<p class="'.$statusMsgType.'">'.$statusMsg.'</p>':''; ?>
         <div class="regisFrm">
 <div class="card" >
   <div class="form-container">
-       <form action="MiDocente.php" method="post" class="bs-example-navbar-collapse-1">
-                
-                 <?php 
-
-                        include 'Docentes.php';
-                        $docente = new Docente();
-                        
-                        $conditions['return_type'] = 'single';
-                      
-                       
-                            // Obtener el próximo legajo disponible
-                            $next_legajo = $docente->getNextLegajo();
-
-                            // Usar $next_legajo en tu formulario o aplicación
-                         //  echo "<div style='text-align: center; font-size: 20px;'> Legajo a Cargar---> $next_legajo</div>";
-
-
-
-
-                        $docenteData = $docente->getRowsDocente($conditions); ?>
- <div class="row">
-       <div class="row" class="col-12" >
-                  <div class="col col-sm-4">
-                  <label for="legajo">Legajo:</label>
-                    <input type="text" name="legajo" id="legajo" placeholder="Legajo" required="" class="materialize-input1"  style="width: 50%;">
-                  
-           
-                  </div>
-
-                  <div class="col col-sm-8">
-                    <input type="text" name="apellidoynombre" id="apellidoynombre" placeholder="Apellido y Nombre" required="" class="materialize-input1">
-                 
-                  </div>
-            </div>
-</div>      
-<button type="button" id="checkLegajo" class="btn btn-info">Verificar Legajo</button>
-<span id="legajoStatus" style="margin-left: 10px; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span>
-
-<div class="row">
-       <div class="row"  class="col-12">
-                <div class="col col-sm-3">
-                <input 
-    type="text" 
-    name="dni" 
-    id="dni" 
-    placeholder="DNI" 
-    required 
-    class="materialize-input1" 
-    maxlength="10" 
-    pattern="\d{1,10}" 
-    title="DNI debe tener hasta 10 dígitos" 
-    oninput="this.value = this.value.slice(0, 10);" 
->
-
-                 </div>
-            <div class="col col-sm-5">
-                   <input type="text" name="Domicilio" id="Domicilio" placeholder="Domicilio" required="" class="materialize-input2">
-            </div>
-     
-                  
-                                    <select id="lugarinsc" name="lugarinsc" class="materialize-select">
-                                      <option value="">Seleccione</option>
-                                      <option value="USH">Ushuaia</option>
-                                      <option value="RGD">Río Grande</option>
-                                      <option value="TOL">Tolhuin</option>
-                                      <option value="Ant">Antártida</option>
-                    </select>  
-          </div>    
-         
-</div>
-<br>
-     
-<div class="row">
-   
-  <div class="row col-12">
-    <div class="col col-sm-7">
-        <label for="fechanacim"><strong>Fecha de nacimiento:</strong></label>
-        <input type="date" id="fechanacim" name="fechanacim" placeholder="Fecha de nacimiento" required class="materialize-date">
-    </div>
-    
-    <div class="col col-sm-5">
-            
-                <label for="promedioT"><strong>Promedio:</strong></label>
-                <input type="number" id="promedioT" name="promedioT" placeholder="Promedio" required class="materialize-input1"  style="width: 50%;" step="0.01">
-            </div>
-     </div>
-
- </div>
- <div class="row">
-     <div class="row" class="col-12" >
-               <div class="col col-sm-3">
-                 <input type="text" name="telefonos" id="telefonos" placeholder="Telefonos" required="" class="materialize-input1">
-              </div>
-              <div class="col col-sm-9">
-              <input type="text" name="Titulobas" id="Titulobas" placeholder="Titulo Basico" required="" class="materialize-input-titulobasico" maxlength="200">
-             </div>
-     </div>
- </div>
-<div class="row">
-     <div class="row" class="col-12" >
-               <div class="col col-sm-6">
-                 <input type="text" name="otorgadopor" id="otorgadopor" placeholder="Otorgado por" required="" class="materialize-input1">
-               </div>
-          <div class="col col-sm-6">
-                <input type="text" name="otrostit"  id="otrostit" placeholder="Otros Titulos" required="" class="materialize-input1">
-              </div>
-      </div>
-</div>
-<br>
-<div class="row">
-     <div class="row" class="col-12" >
-               <div class="col col-sm-7">
-               <br>
-                 <label><strong>Residencia:&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong></label></strong>
-                 <input type="date" name="fingreso" id="fingreso" placeholder="Residencia" required="" class="materialize-date">
-               </div>
-               <div class="col col-sm-5">
-                 <input type="text" name="cargosdocentes" id="cargosdocentes" placeholder="Cargos Docentes" required="" class="materialize-input1">
-             </div>
-         </div>
-</div>
-<div class="row">
-     <div class="row" class="col-12" >
-               <div class="col col-sm-7">
-                 <br>
-                  <label><strong>Fecha apertura Legajo:<strong></label></strong>
-                 <input type="date" name="faperturaleg" id="faperturaleg" placeholder="Fec. apertura Leg." required="" class="materialize-date">
-             </div>
-             <div class="col col-sm-5">
-                 <input type="text" name="Nacionalidad" id="Nacionalidad" placeholder="Nacionalidad" required="" class="materialize-input1">
-             </div>
-      </div>
-</div>
-
-
-<div class="row">
-     <div class="row" class="col-12" >
-               <div class="col col-sm-6">
-                 <input type="email" name="email" id="email" placeholder="Ingrese email"  class="materialize-input1">
-               </div>
-          <div class="col col-sm-6">
-                <input type="text" name="obsdoc"  id="obsdoc" placeholder="Observaciones" required="" class="materialize-input1">
-              </div>
-      </div>
-</div>
- 
-        
-                <div class="send-button">
-                    <button name="insertar" type="submit"  onclick="return myConfirm();">Guardar</button>
+       <form action="MiDocente.php" method="post" class="registro-docente-form" data-junta-confirm-submit="1">
+    <div class="registro-docente-sec">
+        <h2 class="registro-docente-sec-title">Identificación</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="legajo">Legajo</label>
+                    <input type="text" name="legajo" id="legajo" placeholder="Número de legajo" required class="form-control" autocomplete="off">
                 </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="apellidoynombre">Apellido y nombre</label>
+                    <input type="text" name="apellidoynombre" id="apellidoynombre" placeholder="Apellido y nombre" required class="form-control" autocomplete="off">
+                </div>
+            </div>
+        </div>
+        <div class="registro-docente-verify-row">
+            <button type="button" id="checkLegajo" class="btn btn-info">Verificar legajo</button>
+            <span id="legajoStatus" style="flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span>
+        </div>
+    </div>
 
- 
+    <div class="registro-docente-sec">
+        <h2 class="registro-docente-sec-title">Datos personales</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="dni">DNI</label>
+                    <input type="text" name="dni" id="dni" placeholder="DNI" required class="form-control" maxlength="10" pattern="\d{1,10}" title="DNI debe tener hasta 10 dígitos" oninput="this.value = this.value.slice(0, 10);">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="Domicilio">Domicilio</label>
+                    <input type="text" name="Domicilio" id="Domicilio" placeholder="Domicilio" required class="form-control" autocomplete="street-address">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="lugarinsc">Lugar de inscripción</label>
+                    <select id="lugarinsc" name="lugarinsc" class="form-control">
+                        <option value="">Seleccione localidad</option>
+                        <option value="USH">Ushuaia</option>
+                        <option value="RGD">Río Grande</option>
+                        <option value="TOL">Tolhuin</option>
+                        <option value="Ant">Antártida</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="fechanacim">Fecha de nacimiento</label>
+                    <input type="date" id="fechanacim" name="fechanacim" required class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="promedioT">Promedio</label>
+                    <input type="number" id="promedioT" name="promedioT" placeholder="0,00" required class="form-control" step="0.01" min="0">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="registro-docente-sec">
+        <h2 class="registro-docente-sec-title">Datos académicos</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="telefonos">Teléfonos</label>
+                    <input type="text" name="telefonos" id="telefonos" placeholder="Teléfonos" required class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="Titulobas">Título básico</label>
+                    <input type="text" name="Titulobas" id="Titulobas" placeholder="Título básico" required class="form-control" maxlength="200">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="otorgadopor">Otorgado por</label>
+                    <input type="text" name="otorgadopor" id="otorgadopor" placeholder="Otorgado por" required class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="otrostit">Otros títulos</label>
+                    <input type="text" name="otrostit" id="otrostit" placeholder="Otros títulos" required class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="registro-docente-sec">
+        <h2 class="registro-docente-sec-title">Datos laborales y legajo</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="fingreso">Residencia (fecha)</label>
+                    <input type="date" name="fingreso" id="fingreso" required class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="cargosdocentes">Cargos docentes</label>
+                    <input type="text" name="cargosdocentes" id="cargosdocentes" placeholder="Cargos docentes" required class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="faperturaleg">Fecha apertura legajo</label>
+                    <input type="date" name="faperturaleg" id="faperturaleg" required class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="Nacionalidad">Nacionalidad</label>
+                    <input type="text" name="Nacionalidad" id="Nacionalidad" placeholder="Nacionalidad" required class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="registro-docente-sec">
+        <h2 class="registro-docente-sec-title">Contacto y observaciones</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" name="email" id="email" placeholder="Correo electrónico" class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="obsdoc">Observaciones</label>
+                    <textarea name="obsdoc" id="obsdoc" placeholder="Observaciones" required class="form-control" rows="4"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                <div class="registro-docente-actions send-button">
+                    <button name="insertar" type="submit" class="btn btn-primary">Guardar</button>
+                    <a href="./ListarDocentes.php" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a>
+                </div>
 
             </form>
        
@@ -718,7 +883,7 @@ materialize-date{
             }
 
             // Función para verificar si el legajo ya existe
-            $('#checkLegajo').click(function() {
+            function verifyLegajo() {
                 var legajo = $('#legajo').val();
 
                 if (legajo === '') {
@@ -726,73 +891,83 @@ materialize-date{
                     return;
                 }
 
-               
                 $.ajax({
-            url: 'check_legajo.php',
-            type: 'POST',
-            dataType: 'json',
-            data: { legajo: legajo },
-            success: function(response) {
-                if (response.status === 'exists') {
-                    $('#legajoStatus').html('<span style="color: red;">El legajo ya existe,El botón de guardar esta deshabilitado!</span>');
+                    url: 'check_legajo.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { legajo: legajo },
+                    success: function(response) {
+                        if (response.status === 'exists') {
+                            $('#legajoStatus').html('<span style="color: red;">El legajo ya existe,El botón de guardar esta deshabilitado!</span>');
 
-                    // Mostrar y completar los datos del docente si el legajo ya existe
-                    $('#docenteInfo').show();
-                    
-                    // Actualiza todos los campos con la información del docente
-                    $('#apellidoynombre').val(response.docente.ApellidoyNombre);
-                    $('#dni').val(response.docente.dni);
-                    $('#Domicilio').val(response.docente.Domicilio);
-                    $('#lugarinsc').val(response.docente.lugarinsc);
+                            // Mostrar y completar los datos del docente si el legajo ya existe
+                            $('#docenteInfo').show();
 
-                    var formattedDate = formatDate(response.docente.fechanacim);
-                    $('#fechanacim').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
-                    $('#promedioT').val(formatNumber(response.docente.promedioT));
-                    $('#telefonos').val(response.docente.telefonos);
-                    $('#Titulobas').val(response.docente.Titulobas);
+                            // Actualiza todos los campos con la información del docente
+                            $('#apellidoynombre').val(response.docente.ApellidoyNombre);
+                            $('#dni').val(response.docente.dni);
+                            $('#Domicilio').val(response.docente.Domicilio);
+                            $('#lugarinsc').val(response.docente.lugarinsc);
 
-                    formattedDate = formatDate(response.docente.fechatit);
-                    $('#otorgadopor').val(response.docente.otorgadopor);
+                            var formattedDate = formatDate(response.docente.fechanacim);
+                            $('#fechanacim').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
+                            $('#promedioT').val(formatNumber(response.docente.promedioT));
+                            $('#telefonos').val(response.docente.telefonos);
+                            $('#Titulobas').val(response.docente.Titulobas);
 
-                    formattedDate = formatDate(response.docente.finicio);
-                    $('#otrostit').val(response.docente.otrostit);
+                            formattedDate = formatDate(response.docente.fechatit);
+                            $('#otorgadopor').val(response.docente.otorgadopor);
 
-                    formattedDate = formatDate(response.docente.fingreso);
-                    $('#fingreso').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
-                    $('#cargosdocentes').val(response.docente.cargosdocentes);
+                            formattedDate = formatDate(response.docente.finicio);
+                            $('#otrostit').val(response.docente.otrostit);
 
-                    formattedDate = formatDate(response.docente.faperturaleg);
-                    $('#faperturaleg').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
-                    $('#Nacionalidad').val(response.docente.Nacionalidad);
-                    $('#email').val(response.docente.email);
-                    $('#obsdoc').val(response.docente.obsdoc);
+                            formattedDate = formatDate(response.docente.fingreso);
+                            $('#fingreso').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
+                            $('#cargosdocentes').val(response.docente.cargosdocentes);
 
-                    // Deshabilita los campos para que no se puedan editar
-                    disableFormFields();
+                            formattedDate = formatDate(response.docente.faperturaleg);
+                            $('#faperturaleg').val(formattedDate.split('-').reverse().join('-')); // Convierte de dd-MM-yyyy a yyyy-MM-dd
+                            $('#Nacionalidad').val(response.docente.Nacionalidad);
+                            $('#email').val(response.docente.email);
+                            $('#obsdoc').val(response.docente.obsdoc);
 
-                    // Deshabilita el botón de guardar
-                    disableSaveButton();
-                    showMessage('El legajo ya existe. El botón de guardar está deshabilitado.');
-                } else if (response.status === 'available') {
-                    $('#legajoStatus').html('<span style="color: green;">El legajo está disponible!!!.</span>');
-                    $('#docenteInfo').hide();
-                    
-                    // Limpia y habilita los campos si el legajo está disponible
-                    clearFormFields();
-                    enableFormFields();
+                            // Deshabilita los campos para que no se puedan editar
+                            disableFormFields();
 
-                    // Habilita el botón de guardar
-                    enableSaveButton();
-                    hideMessage();
-                } else {
-                    $('#legajoStatus').html('<span style="color: red;">Error al verificar el legajo.</span>');
-                }
-            },
-            error: function() {
-                $('#legajoStatus').html('<span style="color: red;">Error en la solicitud.</span>');
+                            // Deshabilita el botón de guardar
+                            disableSaveButton();
+                            showMessage('El legajo ya existe. El botón de guardar está deshabilitado.');
+                        } else if (response.status === 'available') {
+                            $('#legajoStatus').html('<span style="color: green;">El legajo está disponible!!!.</span>');
+                            $('#docenteInfo').hide();
+
+                            // Limpia y habilita los campos si el legajo está disponible
+                            clearFormFields();
+                            enableFormFields();
+
+                            // Habilita el botón de guardar
+                            enableSaveButton();
+                            hideMessage();
+                        } else {
+                            $('#legajoStatus').html('<span style="color: red;">Error al verificar el legajo.</span>');
+                        }
+                    },
+                    error: function() {
+                        $('#legajoStatus').html('<span style="color: red;">Error en la solicitud.</span>');
+                    }
+                });
             }
-        });
-    });
+
+            $('#checkLegajo').click(function() {
+                verifyLegajo();
+            });
+
+            $('#legajo').on('keydown', function(e) {
+                if (e.key === 'Enter' || e.keyCode === 13) {
+                    e.preventDefault();
+                    verifyLegajo();
+                }
+            });
 
     // Función para deshabilitar el botón de guardar
     function disableSaveButton() {
@@ -827,7 +1002,7 @@ materialize-date{
         var legajoStatus = $('#legajoStatus').text();
 
         if (legajoStatus.includes('El legajo ya existe')) {
-            alert('El legajo ingresado ya existe. Por favor, elija otro.');
+            juntaAlert('El legajo ingresado ya existe. Por favor, elija otro.', 'warning');
             return false;
         }
         return true;
@@ -835,30 +1010,105 @@ materialize-date{
 });
     </script>
 
-   </div>
-    <center><a href="./ListarDocentes.php"> <button type="submit"  class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i>Volver</button></a></center>
-
+  </div><!-- /.form-container -->
+  </div><!-- /.card -->
+  </div><!-- /.regisFrm -->
+</div><!-- /.registro-docente-shell -->
 
   <?php include('footer2.php');?>
+
+<?php if (!empty($statusMsg) && $statusMsgType === 'error') : ?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Swal === 'undefined') {
+        return;
+    }
+    Swal.fire({
+        title: 'No se pudo registrar el docente',
+        text: <?php echo json_encode($statusMsg, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>,
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#2698f3'
+    });
+});
+</script>
+<?php endif; ?>
+
+<?php
+if (isset($_SESSION['docente_creado'])) {
+    $dc = $_SESSION['docente_creado'];
+    unset($_SESSION['docente_creado']);
+    $htmlDocenteCreado = '<div style="text-align:left;font-size:15px;line-height:2;">'
+        . '<p><strong>Legajo N°:</strong> <span style="font-size:20px;color:#2698f3;font-weight:700;">'
+        . htmlspecialchars((string) $dc['legajo'], ENT_QUOTES, 'UTF-8') . '</span></p>'
+        . '<p><strong>Nombre:</strong> ' . htmlspecialchars($dc['apellidoynombre'], ENT_QUOTES, 'UTF-8') . '</p>'
+        . '<p><strong>DNI:</strong> ' . htmlspecialchars((string) $dc['dni'], ENT_QUOTES, 'UTF-8') . '</p>'
+        . '</div>'
+        . '<p style="margin-top:12px;font-size:13px;color:#6b7280;">Puede copiar esta información antes de continuar.</p>';
+    ?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    Swal.fire({
+        title: '¡Docente registrado exitosamente!',
+        html: <?php echo json_encode($htmlDocenteCreado, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>,
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#2698f3',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+    });
+});
+</script>
+    <?php
+}
+?>
  
     </div>
  
     
 <!--Inicia columna 7-->
-<div class="col-sm-3 text wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+<div class="col-sm-2 text wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
                 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
                 <script type="text/javascript">
-                function myConfirm() {
-                var result = confirm("¿Desea Cargar Los datos?");
-                if (result==true) {
-                return true;
+                var enviandoDocente = false;
 
-                } else {
-                return false;
-                }
-                }
+                document.querySelector('.registro-docente-form').addEventListener('submit', function(e) {
+                    if (enviandoDocente) {
+                        return;
+                    }
 
+                    e.preventDefault();
+                    var form = this;
+                    var legajoStatus = document.getElementById('legajoStatus');
+                    if (legajoStatus && legajoStatus.textContent.includes('El legajo ya existe')) {
+                        juntaAlert('El legajo ingresado ya existe. Por favor, elija otro.', 'warning');
+                        return;
+                    }
+                    if (!form.checkValidity()) {
+                        form.reportValidity();
+                        return;
+                    }
+                    if (typeof juntaSpinnerHide === 'function') {
+                        juntaSpinnerHide();
+                    }
+                    juntaConfirm('¿Desea Cargar Los datos?', function() {
+                        enviandoDocente = true;
+                        form.setAttribute('data-junta-submit-confirmed', '1');
+                        var btnGuardar = form.querySelector('button[name="insertar"]');
+                        if (btnGuardar && typeof form.requestSubmit === 'function') {
+                            form.requestSubmit(btnGuardar);
+                            return;
+                        }
+                        if (!form.querySelector('input[name="insertar"]')) {
+                            var h = document.createElement('input');
+                            h.type = 'hidden';
+                            h.name = 'insertar';
+                            h.value = '1';
+                            form.appendChild(h);
+                        }
+                        form.submit();
+                    });
+                });
            </script>
            
    </div>

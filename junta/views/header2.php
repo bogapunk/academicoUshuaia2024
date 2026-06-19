@@ -1,8 +1,12 @@
+﻿<?php
+require_once __DIR__ . '/seguridad_rol.php';
+require_once __DIR__ . '/seguridad_requiere_login.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Agencia de innovacion</title>
-<link rel="stylesheet" href="style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="../style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" type="text/css" media="all">
 <!-- Último minificado bootstrap css -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -131,48 +135,22 @@ body{
     background: #8AA9B8; 
 }
 
-/* Loader Styles */
-#preload-overlay {
-  display:none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(255,255,255,0.8);
-  z-index: 9999;
-  text-align: center;
-  padding-top: 20%;
-  font-size: 24px;
-  color: #333;
-}
-.loader {
-  border: 16px solid #f3f3f3;
-  border-top: 16px solid #3498db;
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  margin: auto;
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
 
 </style>
+<link rel="stylesheet" href="../aesthetic-polish.css" type="text/css" media="all" />
 <!--<link rel="icon" type="image/png" href="./imagenes/escudo-32x32.png"> anterior-->
 
 <link rel="shortcut icon" href="../imagenes/favicon.svg" type="image/x-icon"/>  
 </head>
 
 <body>
+<?php include __DIR__ . '/../spinner-global-include.php'; ?>
+<?php include __DIR__ . '/../swal-global-include.php'; ?>
 
-<!-- Preloader -->
-<div id="preload-overlay">
-  <div class="loader"></div>
-  <p>Cargando...</p>
-</div>
-
-<center><img src="../imagenes/aif-logo.png" width="400" height="100"></center>
+<?php
+$JUNTA_CABECERA_IMG = '../';
+include __DIR__ . '/../cabecera_institucional.php';
+?>
 
 <div class="main">
   <div class="panel panel-default">
@@ -198,7 +176,7 @@ body{
               <a href="#" class="btn btn-primary">Legajos</a></div>
                 <ul>
                    <li><a href="ListadoDeDocentes/ListarListadosDeDocentes.php" style="text-align:"><font size="4">Listado de Docentes</font></a></li>
-                  <li><a href="Docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></a></li>
+                  <li><a href="Docentes/ListarDocentes.php"><font size="4">Docentes</font></a></li>
                   <li><a href="../controller/exportar_docentes_especiales.php"><font size="4">Listado Docentes Especial(Temp)</font></a></li>
                   <li><a href="../controller/exportar_docentes_especiales_SinTitulares.php"><font size="3">Listado Docentes de Esp. SINTITULARES(Temporal)</font></a></li>
                    <li><a href="../controller/exportar_docentes_especiales_completos.php"><font size="3">Listado Docentes de Esp.(Interino,supl.y Titulares)</font></a></li>
@@ -213,11 +191,7 @@ body{
                   <li><a href="./ConfiguracionListados/ListarConfiguracionListados.php"><font size="4">Configuracion Listados</font></a></li>
                 </ul>
             </li>
-             <li>
-               <div class="card-body d-flex justify-content-between align-items-center">
-               <a href="./Usuarios/ListarUsuarios.php"   class="btn btn-primary" class="logout">Usuarios</a>
-               </div>
-            </li>
+            <?php require __DIR__ . '/inc/menu_usuario_nav.php'; ?>
            </ul>
         </nav>
 
@@ -227,27 +201,3 @@ body{
     <div class="panel-body">
       <div class="row">
       <!-- Aquí continúa el contenido -->
-      <script>
-$(document).ready(function(){
-  $('#menu_gral a').on('click', function(e) {
-    var url = $(this).attr('href');
-
-    // Ignorar si href es vacío o #
-    if(!url || url === '#') {
-      return;
-    }
-
-    e.preventDefault(); // Detiene la navegación inmediata
-
-    // Mostrar preloader
-    $('#preload-overlay').show();
-
-    // Redirigir después de un breve delay para que el preloader se vea
-    setTimeout(function(){
-      window.location.href = url;
-    }, 500); // 0.5 segundos, puedes ajustar el tiempo
-  });
-});
-</script>
-</body>
-</html>

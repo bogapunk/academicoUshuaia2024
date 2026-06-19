@@ -1,0 +1,396 @@
+/* Estilo compartido — paneles administrativos (Configuración, Dependencias, Modalidades) */
+.cfg-listados-polish {
+  --cfg-primary: #004481;
+  --cfg-primary-light: #2b8fd9;
+  --cfg-navy: #003366;
+  --cfg-accent: #2698f3;
+  --cfg-muted: #6b7280;
+  --cfg-surface: #eef2f7;
+  --cfg-card: #ffffff;
+  --cfg-radius: 16px;
+  --cfg-shadow: 0 14px 44px rgba(15, 23, 42, 0.11);
+  --cfg-border: rgba(15, 23, 42, 0.07);
+  font-family: 'Roboto', 'Segoe UI', 'Open Sans', sans-serif;
+  background: linear-gradient(180deg, #e8eef5 0%, var(--cfg-surface) 120px, var(--cfg-surface) 100%);
+  margin: 0 -15px;
+  padding: clamp(1.25rem, 2.5vw, 2rem) clamp(8px, 1.5vw, 18px) clamp(2rem, 3vw, 2.75rem);
+  box-sizing: border-box;
+}
+
+.cfg-listados-polish .container,
+.cfg-listados-polish .container-fluid {
+  max-width: min(1180px, 100%);
+}
+
+.cfg-listados-polish .cfg-page-title {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 clamp(1.25rem, 2.5vw, 1.75rem);
+  font-size: clamp(1.65rem, 2.8vw, 2.15rem);
+  font-weight: 700;
+  color: var(--cfg-primary);
+  text-align: center;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  padding-bottom: 0.65rem;
+  border-bottom: 5px solid var(--cfg-primary-light);
+}
+
+.cfg-listados-polish .container > br {
+  display: none;
+}
+
+.cfg-listados-polish .cfg-card {
+  position: relative;
+  background: var(--cfg-card);
+  border: 1px solid var(--cfg-border);
+  border-radius: var(--cfg-radius);
+  box-shadow: var(--cfg-shadow);
+  padding: clamp(1.35rem, 2.4vw, 1.85rem) clamp(1.25rem, 2.5vw, 1.75rem);
+  margin-bottom: clamp(1.1rem, 2vw, 1.5rem);
+  overflow: hidden;
+}
+
+.cfg-listados-polish .cfg-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--cfg-primary) 0%, var(--cfg-primary-light) 55%, var(--cfg-accent) 100%);
+}
+
+.cfg-listados-polish .alert-info {
+  border-radius: 12px;
+  border: 1px solid #7dd3fc;
+  border-left: 5px solid var(--cfg-primary-light);
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  color: #0c4a6e;
+  font-size: 15px;
+  font-weight: 500;
+  box-shadow: 0 4px 16px rgba(14, 116, 144, 0.08);
+}
+
+.cfg-listados-polish .cfg-form-table {
+  width: 100% !important;
+  max-width: 760px;
+  margin: 0 auto;
+  border: none;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  background: #f8fafc;
+  border-radius: 14px;
+  padding: 12px 18px 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.cfg-listados-polish .cfg-form-table th {
+  width: 32%;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cfg-primary);
+  vertical-align: middle;
+  white-space: nowrap;
+  padding: 10px 14px 10px 12px !important;
+  background: transparent !important;
+  border: none !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cfg-listados-polish .cfg-form-table th::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 14px;
+  margin-right: 8px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--cfg-primary-light), var(--cfg-primary));
+  vertical-align: middle;
+}
+
+.cfg-listados-polish .cfg-form-table td {
+  width: 68%;
+  padding: 6px 8px 6px 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.cfg-listados-polish .cfg-form-table tr {
+  background: transparent !important;
+}
+
+.cfg-listados-polish .cfg-form-table tr:nth-child(even) {
+  background: transparent !important;
+}
+
+.cfg-listados-polish .cfg-form-table .form-control {
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+  font-size: 15px;
+  color: #1f2937;
+  padding: 0 14px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+.cfg-listados-polish .cfg-form-table select.form-control {
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+  font-size: 15px;
+  color: #1f2937;
+  padding: 0 14px;
+}
+
+.cfg-listados-polish .cfg-form-table .form-control:focus,
+.cfg-listados-polish .cfg-form-table select.form-control:focus {
+  border-color: var(--cfg-primary-light);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(43, 143, 217, 0.16);
+  outline: none;
+}
+
+.cfg-listados-polish .cfg-form-table td.cfg-actions-cell {
+  display: table-cell !important;
+  width: 100% !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding: 18px 12px 14px !important;
+  box-sizing: border-box;
+}
+
+.cfg-listados-polish .cfg-form-table td.cfg-actions {
+  display: table-cell !important;
+  width: 100% !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding: 18px 12px 14px !important;
+  box-sizing: border-box;
+}
+
+.cfg-listados-polish .cfg-actions:not(td) {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-top: 0 !important;
+  text-align: center;
+}
+
+/* Botones en .cfg-actions: ver junta-botones-polish.css */
+
+.cfg-listados-polish .cfg-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px 18px;
+  margin-bottom: 16px;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, #f8fafc 0%, #eef4fb 100%);
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.cfg-listados-polish .cfg-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cfg-listados-polish .cfg-search-wrap b {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cfg-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.cfg-listados-polish .cfg-search-wrap .search {
+  min-width: 280px;
+  height: 44px;
+  border-radius: 11px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  font-size: 15px;
+  padding-left: 14px;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.cfg-listados-polish .cfg-search-wrap .search:focus {
+  border-color: var(--cfg-primary-light);
+  box-shadow: 0 0 0 4px rgba(43, 143, 217, 0.14);
+  outline: none;
+}
+
+.cfg-listados-polish .cfg-toolbar > div:last-child {
+  display: inline-flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px;
+}
+
+/* Botones en .cfg-toolbar: ver junta-botones-polish.css */
+
+.cfg-listados-polish .cfg-table-wrap {
+  padding-top: 0.5rem;
+}
+
+.cfg-listados-polish .cfg-table-wrap .table {
+  margin-bottom: 0;
+  border: 1px solid #dbeafe !important;
+  border-radius: 14px;
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.cfg-listados-polish .cfg-table-wrap thead th,
+.cfg-listados-polish .cfg-table-wrap .thead-dark th {
+  background: linear-gradient(135deg, var(--cfg-primary) 0%, var(--cfg-navy) 100%) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: none !important;
+  border-bottom: 3px solid var(--cfg-primary-light) !important;
+  padding: 11px 12px !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+  vertical-align: middle !important;
+}
+
+.cfg-listados-polish .cfg-table-wrap thead th center {
+  font-size: inherit !important;
+  line-height: 1.35;
+  display: block;
+}
+
+.cfg-listados-polish .cfg-table-wrap tbody td {
+  font-size: 15px;
+  vertical-align: middle !important;
+  padding: 12px 14px !important;
+  color: #1f2937;
+  border-color: #e8eef5 !important;
+  background: #fff !important;
+}
+
+.cfg-listados-polish .cfg-table-wrap tbody td center {
+  font-size: 15px !important;
+  line-height: 1.4;
+}
+
+.cfg-listados-polish .cfg-table-wrap tbody tr:nth-child(even) td {
+  background: #f8fafc !important;
+}
+
+.cfg-listados-polish .cfg-table-wrap tbody tr {
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cfg-listados-polish .cfg-table-wrap tbody tr:hover td {
+  background: #eff6ff !important;
+}
+
+.cfg-listados-polish .cfg-table-wrap td:last-child center,
+.cfg-listados-polish .cfg-table-wrap td:last-child {
+  text-align: center;
+}
+
+.cfg-listados-polish .cfg-table-wrap td:last-child {
+  min-width: 220px;
+  white-space: nowrap;
+}
+
+.cfg-listados-polish .btn {
+  position: static !important;
+}
+
+.cfg-listados-polish .btn .glyphicon {
+  position: static !important;
+  top: auto !important;
+}
+
+.btn-flotante {
+  border-radius: 999px !important;
+  background: linear-gradient(145deg, #2b8fd9, #004481) !important;
+  box-shadow: 0 6px 20px rgba(43, 143, 217, 0.35) !important;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .cfg-listados-polish {
+    margin: 0 -10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .cfg-listados-polish .cfg-page-title {
+    font-size: 1.45rem;
+  }
+
+  .cfg-listados-polish .cfg-form-table {
+    padding: 10px 12px 4px;
+  }
+
+  .cfg-listados-polish .cfg-form-table th,
+  .cfg-listados-polish .cfg-form-table td:not(.cfg-actions) {
+    display: block;
+    width: 100%;
+    text-align: left !important;
+    padding: 8px 6px;
+  }
+
+  .cfg-listados-polish .cfg-form-table td.cfg-actions,
+  .cfg-listados-polish .cfg-form-table td.cfg-actions-cell {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    padding: 14px 6px 8px !important;
+  }
+
+  .cfg-listados-polish .junta-btn-group {
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+  }
+
+  .cfg-listados-polish .cfg-form-table th::before {
+    margin-right: 6px;
+  }
+
+  .cfg-listados-polish .cfg-search-wrap {
+    width: 100%;
+  }
+
+  .cfg-listados-polish .cfg-search-wrap .search {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .cfg-listados-polish .cfg-toolbar > div:last-child {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .cfg-listados-polish .junta-btn-group .btn {
+    min-width: 110px !important;
+    flex: 0 1 auto !important;
+  }
+}

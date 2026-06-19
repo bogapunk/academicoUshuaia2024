@@ -1,61 +1,83 @@
 <?php
-ob_start();
-class Connection {
-    private $serverName = "10.1.9.113"; // o la dirección IP del servidor
-    private $database = "junta";
-    private $username = "SA"; // Reemplaza con tu usuario
-    private $password = 'Davinci2024#'; // Reemplaza con tu contraseña
-    private $conn;
+require_once __DIR__ . '/../seguridad_requiere_admin.php';
+require_once __DIR__ . '/../../junta_config.php';
+require_once __DIR__ . '/../seguridad_password.php';
 
-    public function open() {
-        try {
-            $this->conn = new PDO("sqlsrv:server=$this->serverName;Database=$this->database;TrustServerCertificate=true", $this->username, $this->password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $this->conn;
-        } catch (PDOException $e) {
-            echo "Error de conexión: " . $e->getMessage();
+if (isset($_POST['editar'])) {
+    try {
+        $db = new PDO(
+            'sqlsrv:server=' . JUNTA_DB_HOST . ';Database=' . JUNTA_DB_NAME . ';TrustServerCertificate=true;ConnectionPooling=1;LoginTimeout=5',
+            JUNTA_DB_USER,
+            JUNTA_DB_PASS,
+            array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+        );
+    } catch (PDOException $e) {
+        error_log('EditarRegistro conexión: ' . $e->getMessage());
+        $_SESSION['message'] = 'No se pudo conectar para actualizar el usuario.';
+        header('Location: ListarUsuarios.php');
+        exit;
+    }
+
+    try {
+        $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+        if ($id <= 0) {
+            $_SESSION['message'] = 'Identificador de usuario inválido.';
+            header('Location: ListarUsuarios.php');
+            exit;
         }
-    }
 
-    public function close() {
-        $this->conn = null;
+        $nombres = isset($_POST['nombres']) ? trim((string) $_POST['nombres']) : '';
+        $apellidos = isset($_POST['apellidos']) ? trim((string) $_POST['apellidos']) : '';
+        $email = isset($_POST['email']) ? trim((string) $_POST['email']) : '';
+        $telefono = isset($_POST['telefono']) ? trim((string) $_POST['telefono']) : '';
+        $rol = isset($_POST['rol']) ? trim((string) $_POST['rol']) : '';
+        $estado = isset($_POST['estado']) ? (string) (int) $_POST['estado'] : '1';
+        $passwordRaw = isset($_POST['password']) ? trim((string) $_POST['password']) : '';
+
+        $usuarioActualId = isset($_SESSION['sessData']['userID']) ? (int) $_SESSION['sessData']['userID'] : 0;
+        if ($id === $usuarioActualId && $estado === '0') {
+            $_SESSION['message'] = 'No puede desactivar su propia cuenta mientras está conectado.';
+            header('Location: ListarUsuarios.php');
+            exit;
+        }
+
+        if ($passwordRaw !== '') {
+            $validacionPassword = junta_password_validar($passwordRaw);
+            if ($validacionPassword !== true) {
+                $_SESSION['message'] = $validacionPassword;
+                header('Location: ListarUsuarios.php');
+                exit;
+            }
+        }
+
+        $params = array(
+            ':nombres'   => $nombres,
+            ':apellidos' => $apellidos,
+            ':email'     => $email,
+            ':telefono'  => $telefono,
+            ':rol'       => $rol,
+            ':estado'    => $estado,
+            ':id'        => $id,
+        );
+
+        if ($passwordRaw !== '') {
+            $sql = 'UPDATE usuarios SET nombres = :nombres, apellidos = :apellidos, email = :email, telefono = :telefono, rol = :rol, estado = :estado, password = :password WHERE id = :id';
+            $params[':password'] = junta_password_hash($passwordRaw);
+        } else {
+            $sql = 'UPDATE usuarios SET nombres = :nombres, apellidos = :apellidos, email = :email, telefono = :telefono, rol = :rol, estado = :estado WHERE id = :id';
+        }
+
+        $stmt = $db->prepare($sql);
+        $ok = $stmt->execute($params);
+        $_SESSION['message'] = $ok ? 'Usuario actualizado correctamente.' : 'No se pudo actualizar el usuario.';
+    } catch (PDOException $e) {
+        error_log('EditarRegistro: ' . $e->getMessage());
+        $_SESSION['message'] = 'No se pudo actualizar el usuario.';
     }
+} else {
+    $_SESSION['message'] = 'Complete el formulario de edición.';
 }
 
-	session_start();
-	include_once('dbconect.php');
-
-	if(isset($_POST['editar'])){
-		$database = new Connection();
-		$db = $database->open();
-		try{
-			$id = $_GET['id'];
-			$nombres = $_POST['nombres'];
-			$apellidos = $_POST['apellidos'];
-			$email = $_POST['email'];
-			$telefono = $_POST['telefono'];
-			$rol = $_POST['rol'];
-			$password = md5($_POST['password']);
-		
-
-			$sql = "UPDATE usuarios SET nombres = '$nombres', apellidos = '$apellidos', email = '$email', telefono = '$telefono', rol = '$rol', password ='$password'   WHERE id = '$id'";
-			//if-else statement in executing our query
-              
-               echo "se actualizo usuario!!!!!!!!";
-			$_SESSION['message'] = ( $db->exec($sql) ) ? 'Usuario actualizado correctamente!!!' : 'No se puso actualizar un usuario';
-           
-		}
-		catch(PDOException $e){
-			$_SESSION['message'] = $e->getMessage();
-		}
-
-		//Cerrar la conexión
-		$database->close();
-	}
-	else{
-		$_SESSION['message'] = 'Complete el formulario de edición';
-	}
-
-	header('location: ListarUsuarios.php');
-ob_end_flush();
-?>
+$filtro = isset($_POST['filtro_retorno']) ? preg_replace('/[^a-z]/', '', (string) $_POST['filtro_retorno']) : 'activos';
+header('Location: ListarUsuarios.php?filtro=' . urlencode($filtro));
+exit;

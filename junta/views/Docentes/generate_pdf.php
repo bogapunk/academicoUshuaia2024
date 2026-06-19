@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../seguridad_requiere_login.php';
 require('../ListadoDeDocentes/fpdf.php');
 
 // Crear una nueva instancia de FPDF
@@ -10,7 +11,7 @@ $pdf->SetTitle('Informacion del Docente');
 $pdf->SetFont('Arial', 'B', 18);
 
 // Agregar un título
-$pdf->Cell(190, 10, 'JUNTA DE CLASIFICACIONES 2025', 0, 1, 'C');
+$pdf->Cell(190, 10, 'JUNTA DE CLASIFICACIONES ' . (int) date('Y'), 0, 1, 'C');
 $pdf->Cell(190, 10, 'Informacion del Docente', 0, 1, 'C');
 
 // Espacio entre el título y la tabla

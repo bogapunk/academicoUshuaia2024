@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../seguridad_requiere_login.php';
 // Definir las constantes para la conexión a la base de datos
 define('BASE_URL', 'http://localhost/junta/'); // URL base de tu sistema
 define('HOST', '10.1.9.113'); // Host de la base de datos SQL Server

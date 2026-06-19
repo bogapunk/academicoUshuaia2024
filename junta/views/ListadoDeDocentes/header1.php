@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <title>Agencia de innovacion</title>
 
+<link rel="stylesheet" href="../../style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" 	type="text/css" media="all">
 <!-- Último minificado bootstrap css -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -120,12 +121,15 @@
 
 
 </style>
+<link rel="stylesheet" href="../../aesthetic-polish.css" type="text/css" media="all" />
 <link rel="shortcut icon" href="../../imagenes/favicon.svg" type="image/x-icon"/>  
 </head>
 
-<center><img src="../../imagenes/aif-logo.png" width="400" height="100"></center>
-
 <body>
+<?php
+$JUNTA_CABECERA_IMG = '../../';
+include __DIR__ . '/../../cabecera_institucional.php';
+?>
 <div class="main">
 <div class="panel panel-default">
 
@@ -150,7 +154,7 @@
       <a href="#" class="btn btn-primary">Legajos</a></div>
         <ul>
            <li><a href="#"><font size="4">Listado de Docentes</font></b></a></li>
-          <li><a href="../Docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></b></a></li>
+          <li><a href="../Docentes/ListarDocentes.php"><font size="4">Docentes</font></b></a></li>
           <li><a href="../../controller/exportar_docentes_especiales.php"><font size="3">Listado Docentes de Especial(Temporal)</font></a></li>
           <li><a href="../../controller/exportar_docentes_especiales_SinTitulares.php"><font size="2">Listado Docentes de Especial  SIN TITULARES (Temporal)</font></a></li>
            <li><a href="../../controller/exportar_docentes_especiales_completos.php"><font size="1">Listado Docentes de Especial(Interinos,suplentes y Titulares)</font></a></li>
@@ -167,7 +171,7 @@
     </li>
      <li>
         <div class="card-body d-flex justify-content-between align-items-left">
-           <a href="../MiCuenta.php?logoutSubmit=1"   class="btn btn-primary">Cerrar Sesion</a>
+           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#juntaModalCerrarSesion">Cerrar sesión</button>
       </li>
   </ul>
 
@@ -185,7 +189,7 @@
 <!-- 
 <li>
   <div class="card-body d-flex justify-content-between align-items-center">
-  <a href="../MiCuenta.php?logoutSubmit=1"   class="btn btn-primary" class="logout">Cerrar Sesion</a>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#juntaModalCerrarSesion">Cerrar sesión</button>
 </div>
 
 </li> 

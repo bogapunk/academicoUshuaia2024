@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Cambio de Password - Sistema de Junta</title>
+    <link rel="stylesheet" href="style.css" type="text/css" media="all" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -65,8 +66,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <body>
+<?php
+$JUNTA_CABECERA_IMG = '';
+include __DIR__ . '/cabecera_institucional.php';
+?>
     <div class="container">
-    <center><img src="./imagenes/aif-logo.png" width="250" height="100"></center>
         <h2>Cambio de Password </h2>
         <h3>-Sistema de Junta-</h3>
 
@@ -107,7 +111,7 @@
         <div class="e-con-inner">
                 <div class="elementor-element elementor-element-79dab63d elementor-widget elementor-widget-heading" data-id="79dab63d" data-element_type="widget" data-widget_type="heading.default">
                 <div class="elementor-widget-container">
-            <p class="elementor-heading-title elementor-size-default">© 2025 - Todos los derechos reservados | Las Islas Malvinas son argentinas.</p>       </div>
+            <p class="elementor-heading-title elementor-size-default">© <?php echo (int) date('Y'); ?> - Todos los derechos reservados | Las Islas Malvinas son argentinas.</p>       </div>
                 </div>
                     </div>
 </html>

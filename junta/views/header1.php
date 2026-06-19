@@ -1,8 +1,12 @@
+﻿<?php
+require_once __DIR__ . '/seguridad_rol.php';
+require_once __DIR__ . '/seguridad_requiere_login.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Agencia de innovacion</title>
-<link rel="stylesheet" href="style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="../style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" 	type="text/css" media="all">
 <!-- Último minificado bootstrap css -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -151,13 +155,19 @@ loader {
     
 
 </style>
+<link rel="stylesheet" href="../aesthetic-polish.css" type="text/css" media="all" />
 <!--<link rel="icon" type="image/png" href="./imagenes/escudo-32x32.png">-->
 <link rel="shortcut icon" href="../imagenes/favicon.svg" type="image/x-icon"/>  
 </head>
 
 <!--<center><img src="../imagenes/fondoCabecera.jpg"></center>-->
-<center><img src="../imagenes/aif-logo.png" width="400" height="100"></center>
 <body>
+<?php include __DIR__ . '/../spinner-global-include.php'; ?>
+<?php include __DIR__ . '/../swal-global-include.php'; ?>
+<?php
+$JUNTA_CABECERA_IMG = '../';
+include __DIR__ . '/../cabecera_institucional.php';
+?>
 <div class="main">
 <div class="panel panel-default">
 
@@ -182,7 +192,7 @@ loader {
                 <a href="#" class="btn btn-primary">Legajos</a></div>
                   <ul>
                     <li><a href="ListadoDeDocentes/ListarListadosDeDocentes.php"><font size="4">Listado de Docentes</font></b></a></li>
-                    <li><a href="Docentes/ListarDocentes.php"><font size="4">Editar Docentes</font></b></a></li>
+                    <li><a href="Docentes/ListarDocentes.php"><font size="4">Docentes</font></b></a></li>
                     <li><a href="../controller/exportar_docentes_especiales.php"><font size="3">Listado Docentes de Especial(Temporal)</font></a></li>
                     <li><a href="../controller/exportar_docentes_especiales_SinTitulares.php"><font size="2">Listado Docentes de Especial  SIN TITULARES (Temporal)</font></a></li>
                     <li><a href="../controller/exportar_docentes_especiales_completos.php"><font size="1">Listado Docentes de Especial(Interinos,suplentes y Titulares)</font></a></li>
@@ -197,47 +207,12 @@ loader {
                     <li><a href="./ConfiguracionListados/listarConfiguracionListados.php"><font size="4">Configuracion Listados</font></a></li>
                   </ul>
               </li>
-              <li>
-                  <div class="card-body d-flex justify-content-between align-items-left">
-                    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Cerrar Session
-                   </a>
-                   <ul>
-                      <li><a href="cambiar_password.php"><font size="4">Cambiar Clave</font></a></li>
-                      <li><a type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                      <span style="font-size: 1.25em; aling:left">Cerrar Sesión</span>
-                         </a></li>
-
-                    </ul>
-              </li>
+              <?php require __DIR__ . '/inc/menu_usuario_nav.php'; ?>
             </ul>
 
 </nav>
 
-
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                          <h4 class="modal-title" id="exampleModalLabel"><center>SALIR DEL SISTEMA</center></h4>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                        </div>
-                      <div class="modal-body"><center>
-                              ¿Desea Salir del Sistema de Junta?</center>
-                    </div>
-              
-                <div class="modal-footer">
-                    <a href="../MiCuenta.php?logoutSubmit=1" class="btn btn-danger">Salir</a>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-              </div>
-          
-</div>
-
-</ul>
-
-
+  </ul>
 </div>
 <div class="panel-body">
 <div class="row">

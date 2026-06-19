@@ -1,0 +1,122 @@
+/* Pantallas Registro — extiende junta-panel-polish.css */
+.cfg-listados-polish.registro-page .registro-user-shell,
+.cfg-listados-polish.registro-page .registro-dep-shell,
+.cfg-listados-polish.registro-page .registro-mod-shell,
+.cfg-listados-polish.registro-page .registro-conf-shell,
+.cfg-listados-polish.registro-page .registro-docente-shell,
+.cfg-listados-polish.registro-page .form-container,
+.cfg-listados-polish.registro-page .cfg-registro-card {
+  background: var(--cfg-card);
+  border: 1px solid var(--cfg-border);
+  border-radius: var(--cfg-radius);
+  box-shadow: var(--cfg-shadow);
+  padding: clamp(1.35rem, 2.4vw, 1.85rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.cfg-listados-polish.registro-page .registro-user-shell::before,
+.cfg-listados-polish.registro-page .registro-dep-shell::before,
+.cfg-listados-polish.registro-page .registro-mod-shell::before,
+.cfg-listados-polish.registro-page .registro-conf-shell::before,
+.cfg-listados-polish.registro-page .registro-docente-shell::before,
+.cfg-listados-polish.registro-page .form-container::before,
+.cfg-listados-polish.registro-page .cfg-registro-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--cfg-primary) 0%, var(--cfg-primary-light) 55%, var(--cfg-accent) 100%);
+}
+
+.cfg-listados-polish.registro-page .registro-user-title,
+.cfg-listados-polish.registro-page .registro-dep-title,
+.cfg-listados-polish.registro-page .registro-mod-title,
+.cfg-listados-polish.registro-page .registro-conf-title,
+.cfg-listados-polish.registro-page .registro-docente-title,
+.cfg-listados-polish.registro-page .cfg-registro-title {
+  display: inline-block;
+  width: 100%;
+  font-size: clamp(1.55rem, 2.6vw, 2rem);
+  font-weight: 700;
+  color: var(--cfg-primary);
+  text-align: center;
+  margin: 0 0 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 5px solid var(--cfg-primary-light);
+  text-decoration: none !important;
+  text-transform: none;
+  letter-spacing: -0.02em;
+}
+
+.cfg-listados-polish.registro-page .registro-user-subtitle,
+.cfg-listados-polish.registro-page .registro-dep-subtitle,
+.cfg-listados-polish.registro-page .registro-mod-subtitle,
+.cfg-listados-polish.registro-page .registro-conf-subtitle,
+.cfg-listados-polish.registro-page .registro-docente-subtitle {
+  color: var(--cfg-muted);
+  text-align: center;
+}
+
+.cfg-listados-polish.registro-page .form-group label,
+.cfg-listados-polish.registro-page .registro-user-shell label,
+.cfg-listados-polish.registro-page .registro-dep-shell label,
+.cfg-listados-polish.registro-page .registro-mod-shell label,
+.cfg-listados-polish.registro-page .registro-conf-shell label,
+.cfg-listados-polish.registro-page .registro-docente-shell label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cfg-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cfg-listados-polish.registro-page .registro-user-sec-title,
+.cfg-listados-polish.registro-page .registro-docente-sec-title {
+  color: var(--cfg-primary) !important;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cfg-listados-polish.registro-page .form-control,
+.cfg-listados-polish.registro-page select.form-control,
+.cfg-listados-polish.registro-page textarea.form-control {
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.cfg-listados-polish.registro-page .form-control:focus {
+  border-color: var(--cfg-primary-light);
+  box-shadow: 0 0 0 4px rgba(43, 143, 217, 0.14);
+}
+
+.cfg-listados-polish.registro-page .btn-primary,
+.cfg-listados-polish.registro-page input[type="submit"].btn,
+.cfg-listados-polish.registro-page .registro-user-actions .btn-primary,
+.cfg-listados-polish.registro-page .registro-docente-actions .btn-primary,
+.cfg-listados-polish.registro-page .registro-docente-actions input[type="submit"] {
+  min-height: 42px;
+  border-radius: 11px;
+  border: none !important;
+  font-weight: 600;
+  background: linear-gradient(145deg, var(--cfg-primary-light), var(--cfg-navy)) !important;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.12);
+}
+
+.cfg-listados-polish.registro-page .registro-user-actions .btn-success,
+.cfg-listados-polish.registro-page .registro-docente-actions .btn-success {
+  border-radius: 11px !important;
+  border: none !important;
+  background: linear-gradient(145deg, #22a06b, #15803d) !important;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.12);
+}
+
+.cfg-listados-polish.registro-page .alert {
+  border-radius: 12px;
+}

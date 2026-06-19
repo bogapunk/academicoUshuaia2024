@@ -12,42 +12,60 @@ include('header2.php');
 
 
 <style type="text/css">
-	
-.send-button input[type="submit"] {
-    padding: 10px 0;
-    width: 60%;
+.panel-main-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.panel-main-actions .send-button {
+    margin: 0;
+}
+
+.panel-main-actions .send-button form {
+    margin: 0;
+}
+
+.panel-main-actions .send-button input[type="submit"] {
+    min-width: 260px;
+    min-height: 52px;
+    padding: 12px 20px;
     font-family: 'Roboto', sans-serif;
-    font-size: 25px;
+    font-size: 21px;
     font-weight: 500;
-    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     outline: none;
     color: #FFF;
     background-color: #2196F3;
     cursor: pointer;
     border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-	.send-button input[type="submit"] {
-    padding: 10px 0;
-    width: 60%;
-    font-family: 'Roboto', sans-serif;
-    font-size: 25px;
-    font-weight: 500;
-    border: none;
-    outline: none;
-    color: #FFF;
-    background-color: #2196F3;
-    cursor: pointer;
-    border-radius: 8px;
-}
-
-.send-button input[type="submit"]:hover {
+.panel-main-actions .send-button input[type="submit"]:hover,
+.panel-main-actions .send-button input[type="submit"]:focus {
     background-color: #e55916;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
 }
 .nav>li>a {
     position: relative;
     display: block;
     padding: 7px 15px;
+}
+
+@media (max-width: 640px) {
+    .panel-main-actions {
+        gap: 10px;
+    }
+
+    .panel-main-actions .send-button input[type="submit"] {
+        min-width: 220px;
+        width: 100%;
+        font-size: 19px;
+    }
 }
 </style>
 
@@ -59,7 +77,9 @@ include('header2.php');
    
     <?php
 			if(!empty($sessData['userLoggedIn']) && !empty($sessData['userID'])){
-				include 'Usuarios.php';
+				if (!class_exists('User', false)) {
+					require_once 'Usuarios.php';
+				}
 				$user = new User();
 				$conditions['where'] = array(
 					'id' => $sessData['userID'],
@@ -76,19 +96,18 @@ include('header2.php');
 <br>
 
 <center>
-        <div class="send-button">
-					
-                 <form id="myForm" action="ListadoDeDocentes/ListarListadosDeDocentes.php">
+        <div class="panel-main-actions">
+            <div class="send-button">
+                 <form id="myForm" action="ListadoDeDocentes/ListarListadosDeDocentes.php" method="get">
                     <input type="submit" name="loginSubmit" value="Listado de Docentes">
                  </form>
-                </div>
-                  <br>
-				  <div class="send-button">
-					<form  id="myForm"  action= "Docentes/ListarDocentes.php" >
-                      <input type="submit" name="loginSubmit" value="Docentes">
-
-                    </form>
-				</div>
+            </div>
+            <div class="send-button">
+                <form id="myForm" action="Docentes/ListarDocentes.php" method="get">
+                    <input type="submit" name="loginSubmit" value="Docentes">
+                </form>
+            </div>
+        </div>
 
 			</center>
 			

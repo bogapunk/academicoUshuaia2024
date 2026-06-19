@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../seguridad_requiere_login.php';
 // Conexión a la base de datos
 $serverName = "10.1.9.113"; // Reemplaza con tu servidor
 $connectionOptions = array(

@@ -365,8 +365,7 @@ tr:nth-child(even) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
-      <!-- sweeteralert2 -->
-      <link rel="stylesheet" href="../Assets/swal2/sweetalert2.min.css" type="text/css" />
+      <!-- SweetAlert2 ahora se carga globalmente via header -->
 
       <!--aca esta las extensiones para el paginado de la las tablas --->
   
@@ -547,28 +546,29 @@ $(document).ready(function() {
   $('.movimientoBorrado').on('click', function(e) {
       e.preventDefault(); 
 
-      const id2 = $(this).data('id2');
-      const rowToDelete = $(this).closest('tr'); // Get the entire row to remove later
+      var id2 = $(this).data('id2');
+      var rowToDelete = $(this).closest('tr');
 
-      if (confirm('¿Desea eliminar el movimiento?')) {
+      juntaConfirmDanger('¿Desea eliminar el movimiento?', function() {
           $.ajax({
               type: 'POST',
               url: 'eliminar_movimiento.php', 
               data: { id2: id2 },
               success: function(response) {
-                  if (response.success) { // Check for success response from the PHP script
-                      alert('El movimiento ha sido eliminado exitosamente.');
-                      rowToDelete.remove(); // Remove the row from the table
+                  if (response.success) {
+                      juntaSuccess('Eliminado', 'El movimiento ha sido eliminado exitosamente.').then(function() {
+                          rowToDelete.remove();
+                      });
                   } else {
-                      alert('Error al eliminar el movimiento: ' + response.message); // Display error message from PHP
+                      juntaError('Error', 'Error al eliminar el movimiento: ' + response.message);
                   }
               },
               error: function(xhr, status, error) {
-                  alert('Error en la solicitud AJAX: ' + error);
+                  juntaError('Error', 'Error en la solicitud AJAX: ' + error);
                   console.error(xhr.responseText);
               }
           });
-      }
+      });
   });
 });
 </script>";
@@ -618,5 +618,3 @@ function determinarColor($tipo) {
 </center>
 
   <?php include('footer2.php');?>
-</body>
-</html>

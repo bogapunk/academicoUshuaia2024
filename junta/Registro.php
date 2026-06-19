@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . '/views/seguridad_requiere_admin.php';
+
 $sessData = !empty($_SESSION['sessData'])?$_SESSION['sessData']:'';
 if(!empty($sessData['estado']['msg'])){
     $statusMsg = $sessData['estado']['msg'];

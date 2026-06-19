@@ -7,6 +7,12 @@ require_once '../Modalidades/modalidades.model.php';
 
 include('header2.php');
 
+/**
+ * Diseño visual v2 (Pasos 1 y 2) — panel Configuración de Listado (PDF).
+ * Revertir: $LLD_CONFIG_UI_V2 = false (no afecta datos ni lógica).
+ */
+$LLD_CONFIG_UI_V2 = false;
+$LLD_V2_CSS_FILE = __DIR__ . DIRECTORY_SEPARATOR . 'listado-docentes-config-v2.css';
 
 // Logica 
 $mod = new Modalidad();
@@ -397,6 +403,9 @@ span {
   display: inline-block; /* Ensures inline behavior */
 }
 
+<?php readfile(__DIR__ . '/../css/junta-panel-polish.css'); ?>
+<?php readfile(__DIR__ . '/../css/listado-docentes-panel-polish.css'); ?>
+
 </style>
 <link rel="icon" type="./image/png" href="./imagenes/escudo-32x32.png">
 <!DOCTYPE html>
@@ -411,9 +420,11 @@ span {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
-      <!-- sweeteralert2 -->
-      <link rel="stylesheet" href="../Assets/swal2/sweetalert2.min.css" type="text/css" />
+      <!-- SweetAlert2 ahora se carga globalmente via header -->
 
       <!--aca esta las extensiones para el paginado de la las tablas --->
   
@@ -436,11 +447,13 @@ span {
      <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
+<?php if (!empty($LLD_CONFIG_UI_V2) && is_readable($LLD_V2_CSS_FILE)): ?>
+<style id="lld-config-v2-styles">
+<?php readfile($LLD_V2_CSS_FILE); ?>
+</style>
+<?php endif; ?>
 
 </head>
- <center><h1><u><font face="
-    font-family: 'Open Sans', 'Sans-serif'" >Configuracion de Listado </font></u></h1></center>
-
 <body>
   
 <!--<form action="Listados_Normales.php" method="POST" accept-charset="UTF-8">-->
@@ -466,27 +479,39 @@ span {
 <form class="form" style="max-width:"  >
   <div class="page-content bg-light"  >
 
+<?php if (empty($LLD_CONFIG_UI_V2)): ?>
+<div class="cfg-listados-polish lld-panel">
+  <div class="container">
+    <h1 class="cfg-page-title">Configuración de Listado</h1>
+  </div>
+<?php endif; ?>
 
-
-  <div class="container" > <center><h1><u><font face="
-    font-family: 'Open Sans', 'Sans-serif'" ></font></u></h1></center>
-    <br>
-
+<?php if (!empty($LLD_CONFIG_UI_V2)): ?>
+<div class="lld-v2-shell">
+  <div class="lld-v2-card">
+    <header class="lld-v2-header">
+      <h1 class="lld-v2-title">Configuración de Listado</h1>
+      <p class="lld-v2-subtitle">Complete los parámetros para generar listados en PDF según modalidad, localidad y tipo de inscripción.</p>
+    </header>
+    <section class="lld-v2-section">
+      <h2 class="lld-v2-section-title">Parámetros del listado</h2>
+      <div class="lld-v2-modalidad-wrap">
+<?php else: ?>
+<div class="cfg-card lld-section-modalidad">
       <center> 
-		      
-	<!-- Campo para ingresar el código de modalidad -->
-  <center>
-  <input type="text" id="codmod_input" class="centered-input" placeholder="Ingrese Codigo Modalidad" title="Ingrese el código de la modalidad aquí" />
-</center>
-    
+<?php endif; ?>
 
-<br>
-<br>
-<!-- Select para modalidades -->
- 
+  <input type="text" id="codmod_input" class="centered-input" placeholder="Ingrese Codigo Modalidad" title="Ingrese el código de la modalidad aquí" />
+<?php if (!empty($LLD_CONFIG_UI_V2)): ?></div><?php else: ?></center><?php endif; ?>
+
+<?php if (!empty($LLD_CONFIG_UI_V2)): ?><div class="lld-v2-select-wrap"><?php endif; ?>
 <select name="nommod"  id="modalidad_select" class="materialize-select2">
     <option value="" style="width: 300px;">Nombre De Modalidad</option>
 </select>
+<?php if (!empty($LLD_CONFIG_UI_V2)): ?>
+<p class="lld-v2-field-hint">Seleccione la modalidad o ingrese su código arriba.</p>
+</div>
+<?php endif; ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -532,19 +557,18 @@ $(document).ready(function() {
 });
 </script>
 
-</div>
+<?php if (empty($LLD_CONFIG_UI_V2)): ?></center></div><?php endif; ?>
 
-    <br>
-    <br>
-    <br>
+<?php if (empty($LLD_CONFIG_UI_V2)): ?><div class="cfg-card lld-section-params"><?php endif; ?>
+<?php if (!empty($LLD_CONFIG_UI_V2)): ?><div class="lld-v2-fields-panel"><h3 class="lld-v2-block-title">Datos principales</h3><?php endif; ?>
     <table class="responsive-table">
     	
- <tr>
-
- 	<td>
- 		
- 		<label for="localidad">Localidad:</label>
-				<select id="localidad" name="localidad1" class="materialize-select33">
+ <tr class="lld-row-filters">
+  <td colspan="3">
+    <div class="lld-inline-fields">
+      <div class="lld-field-item">
+        <label for="localidad" class="lld-field-label">Localidad:</label>
+        <select id="localidad" name="localidad1" class="materialize-select33">
 				  <option value="">Seleccione</option>
 				  <option value="USH">Ushuaia</option>
 				  <option value="RGD">Río Grande</option>
@@ -552,56 +576,59 @@ $(document).ready(function() {
 				  <option value="ANT">Antártida</option>
           <option value="PROVIN">Provincial</option>
 				</select>
- 
- 	</td>
-    
-
-    <td align="left"><b>Año:</b>
-    <input type="num" size="10" name="name" id='year'  class="materialize-input1" align="left" >
-     <b>Nota Nº:</b>
-    <input type="text" size="20" name="name2" id='nota' class="materialize-input1" align="left">
-     <input type="checkbox" id="chkexclu" class="form-check-input" align="left">
-    <label for="chkexclu" class="form-check-label" >Excluidos</label>
-  </td>
-
-
-  <td> <b>Tipo de Listado:</b>
-    <select name="tipoc" id="tipoc" class="materialize-select3" onchange="habilitarEstablecimiento(this.value)">
+      </div>
+      <div class="lld-field-item">
+        <label for="year" class="lld-field-label">Año:</label>
+        <input type="num" size="10" name="name" id="year" class="materialize-input1">
+      </div>
+      <div class="lld-field-item">
+        <label for="nota" class="lld-field-label">Nota Nº:</label>
+        <input type="text" size="20" name="name2" id="nota" class="materialize-input1">
+      </div>
+      <div class="lld-field-item lld-field-inline-check">
+        <input type="checkbox" id="chkexclu" class="form-check-input">
+        <label for="chkexclu" class="form-check-label">Excluidos</label>
+      </div>
+      <div class="lld-field-item lld-field-tipo">
+        <label for="tipoc" class="lld-field-label">Tipo de Listado:</label>
+        <select name="tipoc" id="tipoc" class="materialize-select3" onchange="habilitarEstablecimiento(this.value)">
        <option value="">Selecione</option>
       <option value="permanente">Permanente</option>
       <option value="titulares">Titulares</option>
       <option value="transitorio">Interinatos y Suplencias</option>
       <option value="Concurso">Concurso de Titularidad</option>
     </select>
-  
-  </td>
-
-</tr>
-
-<td colspan="3">&nbsp;
-
-<br>
-<tr>
-  <td colspan="2"><b>&nbsp;&nbsp;Título :</b>
-    <input type="text" size="50" name="name3" id='titulo' class="materialize-input3">
-  </td>
-  
-</tr>
-<td>&nbsp;</td>
-<td colspan="3">&nbsp;</td>
-<tr>
-  <td colspan="2"><b>Subtítulo:</b>
-    <input type="text" size="50" name="name4"  id='subtitulo' class="materialize-input3">
+      </div>
+    </div>
   </td>
 </tr>
-<td colspan="3">&nbsp;</td>
 
-<tr id="establecimiento_row"   colspan="3" style="display: none;">
-  <th class="text-center">
+<tr class="lld-row-full">
+  <td colspan="3">
+    <div class="lld-field-item lld-field-full">
+      <label for="titulo" class="lld-field-label">Título:</label>
+      <input type="text" size="50" name="name3" id="titulo" class="materialize-input3">
+    </div>
+  </td>
+</tr>
 
-<tr id="establecimiento_data"  style="display: none;">
-  <td><b>Establecimiento:</b>
-  
+<tr class="lld-row-full">
+  <td colspan="3">
+    <div class="lld-field-item lld-field-full">
+      <label for="subtitulo" class="lld-field-label">Subtítulo:</label>
+      <input type="text" size="50" name="name4" id="subtitulo" class="materialize-input3">
+    </div>
+  </td>
+</tr>
+
+<tr id="establecimiento_row" colspan="3" style="display: none;">
+  <th class="text-center"></th>
+</tr>
+
+<tr id="establecimiento_data" style="display: none;">
+  <td colspan="3">
+    <div class="lld-field-item lld-field-full">
+      <span class="lld-field-label">Establecimiento:</span>
 <?php
       $serverName = "10.1.9.113"; // Replace with your SQL Server hostname
       $connectionOptions = array(
@@ -666,36 +693,41 @@ ORDER BY
       // Free statement and close the connection
       sqlsrv_free_stmt($result);
       sqlsrv_close($conn);
- ?></td>
- </tr>
- <td colspan="3">&nbsp;</td> 
-  
+ ?>
+    </div>
+  </td>
+</tr>
+
 <tr id="disposicion_row" style="display: none;">
   <th colspan="2" class="text-center"></th>
 </tr>
 <tr id="disposicion_data" style="display: none;">
-  <td colspan="1" style="text-align: left;"><b>Disposición:</b>
-    <input type="text" name="name5" id="disposicion" class="materialize-input3">
+  <td colspan="3">
+    <div class="lld-field-item lld-field-full">
+      <label for="disposicion" class="lld-field-label">Disposición:</label>
+      <input type="text" name="name5" id="disposicion" class="materialize-input3">
+    </div>
   </td>
 </tr>
-
-
-  <td>&nbsp;</td>
-  <td colspan="3">&nbsp;</td>
 
 <tr id="anexo_row" style="display: none;">
-  <th   class="text-center"></th>
+  <th class="text-center"></th>
 </tr>
 <tr id="anexo_data" style="display: none;">
-  <td style="text-align: left;" ><b>&nbsp;&nbsp;&nbsp;&nbsp;Anexo :</b>
-    <input type="text" name="name6" class="materialize-input3"  id="anexo">
+  <td colspan="3">
+    <div class="lld-field-item lld-field-full">
+      <label for="anexo" class="lld-field-label">Anexo:</label>
+      <input type="text" name="name6" class="materialize-input3" id="anexo">
+    </div>
   </td>
-  </tr>
-</th>
+</tr>
   </table>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-<table>
+<?php if (empty($LLD_CONFIG_UI_V2)): ?></div><?php endif; ?>
+<?php if (!empty($LLD_CONFIG_UI_V2)): ?></div><?php endif; ?>
+<?php if (empty($LLD_CONFIG_UI_V2)): ?><div class="cfg-card lld-section-options"><?php endif; ?>
+<div class="lld-options-panel">
+<?php if (!empty($LLD_CONFIG_UI_V2)): ?><div class="lld-v2-options-block"><h3 class="lld-v2-block-title">Opciones de generación</h3><?php endif; ?>
+<div class="lld-options-list">
 <div class="form-check-group" align="left">
         <label class="form-check-label">
           <input type="checkbox" id="chkNormal" class="form-check-input">
@@ -726,10 +758,18 @@ ORDER BY
           Complementarios, por ciudad y sin establecimiento (titulares), una abajo de otra
         </label>
       </div>
+</div>
 
-<hr>
-<div class="form-check-group" align="left">
-<b>Listado Provinciales:</b>
+<hr class="lld-options-divider">
+<?php if (!empty($LLD_CONFIG_UI_V2)): ?>
+<div class="lld-v2-provincial-block">
+  <h3 class="lld-v2-block-title">Listados provinciales</h3>
+  <p class="lld-v2-field-hint">Seleccione un listado provincial configurado en el sistema (opcional).</p>
+  <div class="lld-field-item lld-field-full">
+<?php else: ?>
+<div class="lld-field-item lld-field-full lld-field-provincial">
+<label class="lld-field-label">Listado Provinciales:</label>
+<?php endif; ?>
 <?php
 $serverName = "10.1.9.113"; // Nombre del servidor SQL Server
 $connectionOptions = array(
@@ -783,13 +823,10 @@ sqlsrv_free_stmt($resultListados);
 sqlsrv_close($conn);
 ?>
 
-
-
-
-
 </div>
-
-</table>
+<?php if (!empty($LLD_CONFIG_UI_V2)): ?></div><?php endif; ?>
+</div>
+<?php if (empty($LLD_CONFIG_UI_V2)): ?></div><?php endif; ?>
 
 
   <script>
@@ -832,13 +869,6 @@ function habilitarEstablecimiento(selectedValue) {
     
 </script>
   
- 
-
-
-    
-          </div>
-
-</center>
  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>  
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>  
 
@@ -847,11 +877,18 @@ function habilitarEstablecimiento(selectedValue) {
     <!-- <center> <input type="button" id="create_pdf" value="Generar Informe" class="btn btn-info""> </center>-->
   
     
-   <center> <input type="submit" class="btn btn-info" value="Generar PDF" onclick="procesarFormulario(event)" title="Generar PDF"></center>
+<?php if (!empty($LLD_CONFIG_UI_V2)): ?>
+   <div class="lld-v2-submit-wrap">
+     <input type="submit" class="btn btn-info lld-v2-submit-btn" value="Generar PDF" onclick="procesarFormulario(event)" title="Generar PDF">
+   </div>
+    </section>
+  </div>
+</div>
+<?php else: ?>
+   <div class="lld-submit-wrap"><input type="submit" class="btn btn-info lld-submit-btn" value="Generar PDF" onclick="procesarFormulario(event)" title="Generar PDF"></div>
+<?php endif; ?>
 
-
-
-
+<?php if (empty($LLD_CONFIG_UI_V2)): ?></div><!-- .cfg-listados-polish.lld-panel --><?php endif; ?>
 
     </form>
 
@@ -1032,7 +1069,6 @@ function habilitarEstablecimiento(selectedValue) {
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
-<script src="../Assets/swal2/sweetalert2.min.js"></script>
    <script>
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -1232,11 +1268,9 @@ function procesarFormulario(event) {
 
 
 
-</body>
-</html>
-<!-- < ?php include('AgregarModal.php'); ?>-->
 <script src="../js/jquery.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
+<?php $JUNTA_PIE_SESION_DIRECT = true; ?>
 <?php include('footer2.php');?>
 
 <!--modal de Modalidades->

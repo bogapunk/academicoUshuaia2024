@@ -4,6 +4,7 @@ header('Content-Type: text/html; charset=UTF-8');
 
 ob_start();
 require('fpdf.php'); // Ajusta esta ruta según sea necesario
+require_once 'pdf_nombre_archivo.php';
 
 class Cconexion {
     private $host;
@@ -153,7 +154,7 @@ try {
         $pdf->Cell(343, 5, $textoT, 1, 1, 'C');
         
         ob_end_clean();
-        $pdf->Output('D', 'file.pdf');
+        $pdf->Output('D', generarNombreArchivoListadoPdf());
     }
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();

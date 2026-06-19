@@ -1,0 +1,229 @@
+/**
+ * Configuración de Listados — diseño v2 (Pasos 1 y 2)
+ * Para revertir: en ListarConfiguracionListados.php poner $CFG_LISTADOS_UI_V2 = false
+ * o comentar/eliminar la línea que carga este archivo. No afecta datos ni lógica.
+ */
+.cfg-v2-shell {
+  --cfg-primary: #004481;
+  --cfg-primary-light: #2698f3;
+  --cfg-muted: #6b7280;
+  --cfg-surface: #f3f5f9;
+  --cfg-card: #ffffff;
+  --cfg-border: rgba(15, 23, 42, 0.08);
+  --cfg-radius: 14px;
+  --cfg-shadow: 0 10px 36px rgba(15, 23, 42, 0.08);
+  background: var(--cfg-surface);
+  margin: 0 -15px 24px;
+  padding: clamp(1.25rem, 2.5vw, 2rem) clamp(8px, 1.5vw, 16px) clamp(2rem, 3vw, 2.5rem);
+  box-sizing: border-box;
+}
+
+.cfg-v2-shell .cfg-v2-card {
+  width: 100%;
+  max-width: min(960px, calc(100vw - 16px));
+  margin: 0 auto 1.25rem;
+  background: var(--cfg-card);
+  border: 1px solid var(--cfg-border);
+  border-radius: var(--cfg-radius);
+  box-shadow: var(--cfg-shadow);
+  padding: clamp(1.35rem, 2.5vw, 2rem) clamp(1.25rem, 2.8vw, 2rem);
+  box-sizing: border-box;
+}
+
+.cfg-v2-shell .cfg-v2-table-card {
+  max-width: min(1100px, calc(100vw - 16px));
+}
+
+.cfg-v2-shell .cfg-v2-form-section > .cfg-card {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cfg-v2-shell .cfg-v2-table-card > .container-fluid.cfg-card {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cfg-v2-shell .cfg-v2-table-card > .container-fluid.cfg-card > .cfg-table-wrap,
+.cfg-v2-shell .cfg-v2-table-card .cfg-table-wrap {
+  margin-top: 0;
+}
+
+.cfg-v2-header {
+  text-align: center;
+  margin-bottom: clamp(1.25rem, 2.2vw, 1.75rem);
+  padding-bottom: clamp(0.85rem, 1.5vw, 1.15rem);
+  border-bottom: 1px solid rgba(38, 152, 243, 0.2);
+}
+
+.cfg-v2-title {
+  display: inline-block;
+  margin: 0 0 0.5rem;
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-size: clamp(1.65rem, 3vw, 2.15rem);
+  font-weight: 700;
+  color: var(--cfg-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  padding-bottom: 0.45rem;
+  border-bottom: 4px solid var(--cfg-primary-light);
+}
+
+.cfg-v2-subtitle {
+  margin: 0.65rem auto 0;
+  max-width: 42rem;
+  font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+  color: var(--cfg-muted);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.cfg-v2-alert {
+  margin: 0 0 1.25rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid #bae6fd;
+  background: #f0f9ff;
+  color: #0c4a6e;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.cfg-v2-form-section {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.cfg-v2-section-title {
+  margin: 0 0 1rem;
+  padding-bottom: 0.45rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1e40af;
+  border-bottom: 2px solid rgba(38, 152, 243, 0.25);
+}
+
+.cfg-v2-shell .cfg-form-table {
+  width: 100% !important;
+  border: none !important;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.cfg-v2-shell .cfg-form-table th {
+  width: 32%;
+  padding: 10px 12px 10px 0 !important;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  vertical-align: middle;
+  background: transparent !important;
+  border: none !important;
+}
+
+.cfg-v2-shell .cfg-form-table td {
+  padding: 8px 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.cfg-v2-shell .cfg-form-table tr {
+  background: transparent !important;
+}
+
+.cfg-v2-shell .cfg-form-table .form-control {
+  width: 100%;
+  max-width: 100%;
+  min-height: 42px;
+  height: 42px;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-shadow: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cfg-v2-shell .cfg-form-table .form-control:focus {
+  border-color: var(--cfg-primary-light);
+  box-shadow: 0 0 0 3px rgba(38, 152, 243, 0.15);
+  outline: none;
+}
+
+.cfg-v2-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 0 4px;
+}
+
+.cfg-v2-form-actions .btn,
+.cfg-v2-form-actions a.btn,
+.cfg-v2-form-actions button.btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 130px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  margin: 0 !important;
+  padding: 0 16px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  gap: 6px !important;
+  box-sizing: border-box !important;
+  position: static !important;
+  top: auto !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+}
+
+.cfg-v2-form-actions .btn .glyphicon,
+.cfg-v2-form-actions .btn i.glyphicon {
+  position: static !important;
+  top: auto !important;
+  line-height: 1 !important;
+  font-size: 12px !important;
+  font-style: normal !important;
+  flex-shrink: 0;
+}
+
+.cfg-v2-shell .cfg-form-table tr:last-child td {
+  text-align: center !important;
+  padding-top: 6px !important;
+}
+
+@media (max-width: 768px) {
+  .cfg-v2-shell .cfg-form-table th,
+  .cfg-v2-shell .cfg-form-table td {
+    display: block;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .cfg-v2-shell .cfg-form-table th {
+    padding-bottom: 4px !important;
+  }
+
+  .cfg-v2-form-actions .btn,
+  .cfg-v2-form-actions a.btn,
+  .cfg-v2-form-actions button.btn {
+    flex: 1 1 calc(50% - 10px);
+    min-width: 120px !important;
+  }
+}

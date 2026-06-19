@@ -6,6 +6,8 @@ include 'Usuarios_Conexion_Sqlserver.php';
 $user = new User();
 
 if(isset($_POST['signupSubmit'])){
+    require_once __DIR__ . '/views/seguridad_requiere_admin.php';
+
     //check whether user details are empty
     if(!empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['email']) && !empty($_POST['telefono']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])){
         //password and confirm password comparison
@@ -65,6 +67,10 @@ if(isset($_POST['signupSubmit'])){
         if($userData){
             $sessData['userLoggedIn'] = TRUE;
             $sessData['userID'] = $userData['id'];
+            if (!empty($userData['rol'])) {
+                $sessData['userRol'] = $userData['rol'];
+            }
+            $sessData['lastActivity'] = time();
             $sessData['estado']['type'] = 'success';
         } else {
             $sessData['estado']['type'] = 'error';
@@ -77,7 +83,8 @@ if(isset($_POST['signupSubmit'])){
     //store login status into the session
     $_SESSION['sessData'] = $sessData;
     //redirect to the appropriate page based on role
-    if ($userData && $userData['rol'] == 'admin'){
+    $rolLogin = !empty($userData['rol']) ? strtolower(trim($userData['rol'])) : '';
+    if ($userData && ($rolLogin === 'admin' || $rolLogin === 'administrador')){
         header("Location: views/panel2.php");
     } else if ($userData && ($userData['rol'] == 'otro' || $userData['rol'] == 'comun')){
         header("Location: views/panel1.php");
@@ -192,6 +199,16 @@ if(isset($_POST['signupSubmit'])){
     $redirectURL = ($sessData['estado']['type'] == 'success') ? 'index.php' : 'ReiniciarPassword.php?fp_code='.$fp_code;
     //redirect to the login/reset password page
     header("Location:".$redirectURL);
+
+} elseif(!empty($_REQUEST['logoutInactividad'])){
+    unset($_SESSION['sessData']);
+    $_SESSION['sessData'] = array(
+        'estado' => array(
+            'type' => 'error',
+            'msg' => 'Su sesión finalizó por inactividad. Por favor inicie sesión nuevamente.',
+        ),
+    );
+    header("Location:index.php");
 
 } elseif(!empty($_REQUEST['logoutSubmit'])){
     //remove session data
