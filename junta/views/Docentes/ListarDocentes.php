@@ -1,4 +1,5 @@
 <?php 
+require_once __DIR__ . '/../seguridad_requiere_login.php';
 require_once 'docentes.entidad.php';
 require_once 'docentes.model.php';
 

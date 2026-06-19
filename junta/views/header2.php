@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once __DIR__ . '/seguridad_rol.php';
 require_once __DIR__ . '/seguridad_requiere_login.php';
 ?>

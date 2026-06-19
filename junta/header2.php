@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>Ministerio de Educación, Cultura, Ciencia y Tecnología</title>

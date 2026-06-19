@@ -43,7 +43,9 @@ if (!function_exists('junta_seguridad_denegar_no_autenticado')) {
             exit;
         }
 
-        header('Location: ' . junta_url_login_desde_script());
+        if (!headers_sent()) {
+            header('Location: ' . junta_url_login_desde_script());
+        }
         exit;
     }
 }
