@@ -1241,21 +1241,39 @@ function procesarFormulario(event) {
   // Obtener el valor de "item_select" (coddep)
   const item_select = document.querySelector("select[name='nomdep2']").value;
 
-  // Redirigir a la URL con los parámetros
-  window.location.href = url + '?modalidad=' + modalidadSelecionadaText + 
-                       '&codmod=' + codmod + 
-                       '&year=' + year + 
-                       '&localidad=' + localidad + 
-                       '&nota=' + nota + 
-                       '&titulo=' + titulo + 
+  const destUrl = url + '?modalidad=' + modalidadSelecionadaText +
+                       '&codmod=' + codmod +
+                       '&year=' + year +
+                       '&localidad=' + localidad +
+                       '&nota=' + nota +
+                       '&titulo=' + titulo +
                        '&subtitulo=' + subtitulo +
                        '&disposicion=' + disposicion +
                        '&anexo=' + anexo +
-                       '&item_select=' + item_select + 
-                       '&tipoc=' + tipoc+
-                       '&listado=' + listado + 
+                       '&item_select=' + item_select +
+                       '&tipoc=' + tipoc +
+                       '&listado=' + listado +
                        '&ciudad=' + ciudad +
-                       '&idmodalidad=' + idmodalidad ;
+                       '&idmodalidad=' + idmodalidad;
+
+  function iniciarDescargaPdf() {
+    if (typeof window.juntaSpinnerIniciarDescarga === 'function') {
+      window.juntaSpinnerIniciarDescarga(destUrl, false);
+    } else {
+      window.location.href = destUrl;
+    }
+  }
+
+  if (typeof window.juntaEsUrlGeneracionPdf === 'function' && window.juntaEsUrlGeneracionPdf(url)) {
+    if (typeof window.juntaConfirmDescargaPdf === 'function') {
+      window.juntaConfirmDescargaPdf(iniciarDescargaPdf);
+    } else if (window.confirm('¿Desea descargar el archivo PDF generado?')) {
+      iniciarDescargaPdf();
+    }
+    return;
+  }
+
+  window.location.href = destUrl;
 }
 
 

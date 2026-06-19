@@ -116,6 +116,14 @@
 
   }
 
+  function juntaSpinnerBaseUrl(url) {
+
+    if (!url) return '';
+
+    return String(url).split('?')[0].split('#')[0].toLowerCase();
+
+  }
+
   function juntaSpinnerEsUrlDescarga(url) {
 
     if (!url) return false;
@@ -126,9 +134,57 @@
 
       || u.indexOf('/controller/exportar') !== -1
 
-      || u.indexOf('content-disposition') !== -1;
+      || u.indexOf('content-disposition') !== -1
+
+      || juntaSpinnerEsUrlGeneracionPdf(url);
 
   }
+
+  function juntaSpinnerEsUrlGeneracionPdf(url) {
+
+    if (!url) return false;
+
+    var base = juntaSpinnerBaseUrl(url);
+
+    return base.indexOf('listados_') !== -1
+
+      || base.indexOf('listado_') !== -1
+
+      || base.indexOf('generate_pdf') !== -1
+
+      || base.indexOf('generar_informe') !== -1;
+
+  }
+
+  function juntaSpinnerEsUrlLegajosEspeciales(url) {
+
+    if (!url) return false;
+
+    return juntaSpinnerBaseUrl(url).indexOf('exportar_docentes_especiales') !== -1;
+
+  }
+
+  window.juntaEsUrlGeneracionPdf = juntaSpinnerEsUrlGeneracionPdf;
+
+  window.juntaSpinnerIniciarDescarga = function(url, nuevaPestana) {
+
+    if (!url) return;
+
+    juntaSpinnerShow('Generando archivo\u2026');
+
+    juntaSpinnerProgramarOcultarDescarga(8000);
+
+    if (nuevaPestana) {
+
+      window.open(url, '_blank', 'noopener,noreferrer');
+
+    } else {
+
+      window.location.href = url;
+
+    }
+
+  };
 
   var _downloadHideTimer = null;
 
@@ -352,6 +408,42 @@
       var url = link.getAttribute('href');
 
       if (!url || url === '#' || url.indexOf('javascript:') === 0) return;
+
+      var requiereConfirmDescarga = link.getAttribute('data-junta-confirm-pdf') === '1'
+
+        || link.getAttribute('data-junta-confirm-descarga') === '1'
+
+        || juntaSpinnerEsUrlGeneracionPdf(url)
+
+        || juntaSpinnerEsUrlLegajosEspeciales(url);
+
+      if (requiereConfirmDescarga) {
+
+        e.preventDefault();
+
+        e.stopPropagation();
+
+        var nuevaPestana = link.getAttribute('target') === '_blank';
+
+        var iniciar = function() {
+
+          window.juntaSpinnerIniciarDescarga(url, nuevaPestana);
+
+        };
+
+        if (typeof window.juntaConfirmDescargaPdf === 'function') {
+
+          window.juntaConfirmDescargaPdf(iniciar);
+
+        } else if (window.confirm('¿Desea descargar el archivo PDF generado?')) {
+
+          iniciar();
+
+        }
+
+        return;
+
+      }
 
       if (link.getAttribute('target') === '_blank') return;
 

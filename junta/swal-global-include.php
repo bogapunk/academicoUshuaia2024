@@ -92,6 +92,35 @@
     });
   };
 
+  window.juntaConfirmDescargaPdf = function(callbackSi, callbackNo) {
+    var mensaje = '¿Desea descargar el archivo PDF generado?';
+    if (typeof Swal === 'undefined') {
+      if (window.confirm(mensaje)) {
+        if (typeof callbackSi === 'function') callbackSi();
+      } else if (typeof callbackNo === 'function') {
+        callbackNo();
+      }
+      return;
+    }
+    Swal.fire({
+      title: 'Confirmar descarga',
+      text: mensaje,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      confirmButtonColor: defaultColors.confirm,
+      cancelButtonColor: defaultColors.cancel,
+      reverseButtons: true
+    }).then(function(result) {
+      if (result.isConfirmed) {
+        if (typeof callbackSi === 'function') callbackSi();
+      } else if (typeof callbackNo === 'function') {
+        callbackNo();
+      }
+    });
+  };
+
   window.juntaAbrirModalCerrarSesion = function(e) {
     if (e) {
       if (e.preventDefault) e.preventDefault();
