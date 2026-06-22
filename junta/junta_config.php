@@ -84,4 +84,6 @@ if (!defined('JUNTA_SESSION_DEBUG')) {
 
 }
 
+require_once __DIR__ . '/junta_encoding.php';
+junta_charset_init();
 

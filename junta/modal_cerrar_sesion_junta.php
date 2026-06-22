@@ -18,7 +18,10 @@ $urlSalirEsc = htmlspecialchars((string) $urlSalir, ENT_QUOTES, 'UTF-8');
  * No alterar .modal-backdrop: si queda por encima del .modal (1050 por defecto), la pantalla queda negra sin poder pulsar Salir/Cancelar.
  */
 #juntaModalCerrarSesion.modal {
-	z-index: 10600 !important;
+	z-index: 100001 !important;
+}
+body.junta-modal-salir-abierto .modal-backdrop {
+	z-index: 100000 !important;
 }
 #juntaModalCerrarSesion .junta-modal-salir-confirm {
 	background-color: #d9534f;
@@ -83,11 +86,23 @@ $urlSalirEsc = htmlspecialchars((string) $urlSalir, ENT_QUOTES, 'UTF-8');
 		var trigger = buscarDisparadorSalir(e.target);
 		if (!trigger) return;
 		if (trigger.getAttribute('data-toggle') === 'modal' || trigger.classList.contains('junta-menu-salir')) {
+			if (e.preventDefault) e.preventDefault();
 			if (typeof window.juntaAbrirModalCerrarSesion === 'function') {
 				window.juntaAbrirModalCerrarSesion(e);
 			}
 			if (e.stopImmediatePropagation) e.stopImmediatePropagation();
 		}
 	}, true);
+
+	if (el && typeof jQuery !== 'undefined' && jQuery.fn && jQuery.fn.modal) {
+		jQuery(el).on('show.bs.modal', function () {
+			document.body.classList.add('junta-modal-salir-abierto');
+			if (typeof window.juntaSpinnerHide === 'function') {
+				window.juntaSpinnerHide();
+			}
+		}).on('hidden.bs.modal', function () {
+			document.body.classList.remove('junta-modal-salir-abierto');
+		});
+	}
 })();
 </script>

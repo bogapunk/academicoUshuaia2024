@@ -3,8 +3,9 @@ require_once __DIR__ . '/seguridad_rol.php';
 require_once __DIR__ . '/seguridad_requiere_login.php';
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+<meta charset="UTF-8">
 <title>Agencia de innovacion</title>
 <link rel="stylesheet" href="../style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" 	type="text/css" media="all">

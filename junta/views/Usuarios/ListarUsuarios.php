@@ -164,10 +164,7 @@ try {
         "sqlsrv:server=" . JUNTA_DB_HOST . ";Database=" . JUNTA_DB_NAME . ";TrustServerCertificate=true;ConnectionPooling=1;LoginTimeout=5",
         JUNTA_DB_USER,
         JUNTA_DB_PASS,
-        [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_EMULATE_PREPARES => false
-        ]
+        junta_pdo_sqlsrv_options()
     );
 } catch (PDOException $e) {
     error_log("Error en la conexión: " . $e->getMessage());
@@ -216,7 +213,7 @@ try {
         title: '¡Usuario creado exitosamente!',
         html: '<div style="text-align:left;font-size:15px;line-height:1.8;">' +
               '<p><strong>ID de Usuario:</strong> <span style="font-size:18px;color:#2698f3;font-weight:700;"><?php echo htmlspecialchars($uc['id']); ?></span></p>' +
-              '<p><strong>Nombre:</strong> <?php echo htmlspecialchars($uc['nombres'] . ' ' . $uc['apellidos']); ?></p>' +
+              '<p><strong>Nombre:</strong> <?php echo junta_e($uc['nombres'] . ' ' . $uc['apellidos']); ?></p>' +
               '<p><strong>Email:</strong> <?php echo htmlspecialchars($uc['email']); ?></p>' +
               '<p><strong>Rol:</strong> <?php echo htmlspecialchars($uc['rol']); ?></p>' +
               '</div>' +
@@ -260,15 +257,16 @@ if ($filtroEstado === 'inactivos') {
 $sqlUsuarios .= ' ORDER BY id DESC';
 $stmtUsuarios = $link->query($sqlUsuarios);
 while ($row = $stmtUsuarios->fetch(PDO::FETCH_ASSOC)) {
+    $row = junta_normalizar_fila_utf8($row);
     $estadoActivo = ($row['estado'] == 1 || $row['estado'] === '1');
 ?>
 <tr class="<?php echo $estadoActivo ? '' : 'usuario-inactivo'; ?>">
     <td><center><?php echo (int) $row['id']; ?></center></td>
-    <td><center><?php echo htmlspecialchars($row['nombres'], ENT_QUOTES, 'UTF-8'); ?></center></td>
-    <td><center><?php echo htmlspecialchars($row['apellidos'], ENT_QUOTES, 'UTF-8'); ?></center></td>
-    <td><center><?php echo htmlspecialchars($row['email'], ENT_QUOTES, 'UTF-8'); ?></center></td>
-    <td><center><?php echo htmlspecialchars($row['telefono'], ENT_QUOTES, 'UTF-8'); ?></center></td>
-    <td><center><?php echo htmlspecialchars($row['rol'], ENT_QUOTES, 'UTF-8'); ?></center></td>
+    <td><center><?php echo junta_e($row['nombres']); ?></center></td>
+    <td><center><?php echo junta_e($row['apellidos']); ?></center></td>
+    <td><center><?php echo junta_e($row['email']); ?></center></td>
+    <td><center><?php echo junta_e($row['telefono']); ?></center></td>
+    <td><center><?php echo junta_e($row['rol']); ?></center></td>
     <td><center>
       <?php if ($estadoActivo) : ?>
         <span class="label label-success">Activo</span>

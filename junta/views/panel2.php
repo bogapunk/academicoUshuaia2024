@@ -88,7 +88,7 @@ include('header2.php');
 				$userData = $user->getRows($conditions);
 		?>
 
-  <center> <h2>Bienvenido: <?php echo $userData['apellidos'] . ', ' . $userData['nombres']; ?>!</h2>
+  <center> <h2>Bienvenido: <?php echo junta_e($userData['apellidos'] . ', ' . $userData['nombres']); ?>!</h2>
           <?php ?>
              
         <?php } ?>

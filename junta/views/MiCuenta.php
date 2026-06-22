@@ -80,14 +80,20 @@ if (isset($_POST['signupSubmit'])) {
         $conditions['return_type'] = 'single';
         $userData = $user->getRows($conditions);
 
-        // Validate credentials
-        if ($userData && password_verify($_POST['password'], $userData['password'])) {
+        // Validate credentials (bcrypt moderno o MD5 legacy)
+        if ($userData && junta_password_verificar_actual($userData['password'], $_POST['password'])) {
+            if (strlen((string) $userData['password']) === 32 && ctype_xdigit((string) $userData['password'])) {
+                $user->update(
+                    array('password' => junta_password_hash($_POST['password'])),
+                    array('id' => $userData['id'])
+                );
+            }
             $_SESSION['sessData']['userLoggedIn'] = TRUE;
             $_SESSION['sessData']['userID'] = $userData['id'];
             if (!empty($userData['rol'])) {
                 $_SESSION['sessData']['userRol'] = $userData['rol'];
             }
-            setSessionState('success', 'Bienvenido '.$userData['nombres'].'!');
+            setSessionState('success', 'Bienvenido '.junta_utf8_reparar($userData['nombres']).'!');
         } else {
             setSessionState('error', 'Email o contraseña incorrectos, por favor intente de nuevo.');
         }

@@ -46,10 +46,10 @@ include('header_login.php');
         }
     ?>
     <div class="junta-bienvenida-caja">
-        <h2 class="junta-secion-titulo">Bienvenido/a, <?php echo htmlspecialchars($userData['nombres'], ENT_QUOTES, 'UTF-8'); ?></h2>
+        <h2 class="junta-secion-titulo">Bienvenido/a, <?php echo junta_e($userData['nombres']); ?></h2>
         <p class="junta-datos-lead">Datos de tu cuenta (revisá que sean correctos antes de continuar):</p>
         <div class="junta-login-datos">
-        <p><b>Nombre y apellido: </b><?php echo htmlspecialchars($userData['nombres'] . ' ' . $userData['apellidos'], ENT_QUOTES, 'UTF-8'); ?></p>
+        <p><b>Nombre y apellido: </b><?php echo junta_e($userData['nombres'] . ' ' . $userData['apellidos']); ?></p>
         <p><b>Correo electrónico: </b><?php echo htmlspecialchars($userData['email'], ENT_QUOTES, 'UTF-8'); ?></p>
         <p><b>Teléfono: </b><?php echo htmlspecialchars($userData['telefono'] ?? '', ENT_QUOTES, 'UTF-8'); ?></p>
         </div>

@@ -202,6 +202,163 @@ function traenombremodalidad($cual) {
                 return $traepuntaje;
               }
 
+function junta_inscripcion_es_antartida($codloc) {
+    $c = strtoupper(trim((string) $codloc));
+    if ($c === '') {
+        return false;
+    }
+    return in_array($c, ['ANT', 'ANT1', 'ANTARTIDA'], true) || strpos($c, 'ANT') === 0;
+}
+
+function junta_inscripcion_es_excluido($row, $tipoNorm, $puntaje) {
+    if ($puntaje == 0) {
+        return true;
+    }
+    if (in_array($tipoNorm, ['excluido', 'excluidos'], true)) {
+        return true;
+    }
+    $ex = isset($row['excluido']) ? trim((string) $row['excluido']) : '';
+    if ($ex === '' || $ex === '23' || strcasecmp($ex, 'no') === 0) {
+        return false;
+    }
+    return true;
+}
+
+function junta_inscripcion_normalizar_tipo($tipoRaw) {
+    $tipo = strtolower(trim((string) $tipoRaw));
+    if ($tipo === 'listado permanentes' || $tipo === 'permanente') {
+        return 'permanente';
+    }
+    if ($tipo === 'titular' || $tipo === 'titulares') {
+        return 'titulares';
+    }
+    if (in_array($tipo, ['interino', 'interinos', 'suplente', 'suplencia', 'interino y suple.', 'transitorio'], true)) {
+        return 'transitorio';
+    }
+    if (strpos($tipo, 'concurso') !== false) {
+        return 'concurso';
+    }
+    if (in_array($tipo, ['excluido', 'excluidos'], true)) {
+        return 'excluido';
+    }
+    return $tipo;
+}
+
+function junta_inscripcion_clasificar_tipo($row) {
+    $tipoRaw = isset($row['tipo']) ? $row['tipo'] : '';
+    $tipoNorm = junta_inscripcion_normalizar_tipo($tipoRaw);
+
+    switch ($tipoNorm) {
+        case 'permanente':
+            return [
+                'label' => 'Permanentes',
+                'badge' => 'ins-badge ins-badge--permanente',
+                'row' => 'ins-row--permanente',
+                'accent' => '#10b981',
+                'filtro' => 'permanente',
+            ];
+        case 'titulares':
+            return [
+                'label' => 'Titulares',
+                'badge' => 'ins-badge ins-badge--titulares',
+                'row' => 'ins-row--titulares',
+                'accent' => '#ca8a04',
+                'filtro' => 'titulares',
+            ];
+        case 'transitorio':
+            return [
+                'label' => 'Interinatos y Suplencias',
+                'badge' => 'ins-badge ins-badge--transitorio',
+                'row' => 'ins-row--interino',
+                'accent' => '#22c55e',
+                'filtro' => 'transitorio',
+            ];
+        case 'concurso':
+            return [
+                'label' => 'Concurso de Titularidad',
+                'badge' => 'ins-badge ins-badge--concurso',
+                'row' => 'ins-row--concurso',
+                'accent' => '#0ea5e9',
+                'filtro' => 'concurso',
+            ];
+        case 'excluido':
+            return [
+                'label' => 'Excluidos',
+                'badge' => 'ins-badge ins-badge--default',
+                'row' => 'ins-row--default',
+                'accent' => '#94a3b8',
+                'filtro' => 'excluido_tipo',
+            ];
+        default:
+            return [
+                'label' => $tipoRaw !== '' ? (string) $tipoRaw : 'Sin categoría',
+                'badge' => 'ins-badge ins-badge--default',
+                'row' => 'ins-row--default',
+                'accent' => '#94a3b8',
+                'filtro' => $tipoNorm !== '' ? $tipoNorm : 'default',
+            ];
+    }
+}
+
+function junta_inscripcion_estado($row) {
+    $tipoNorm = junta_inscripcion_normalizar_tipo($row['tipo'] ?? '');
+    $puntaje = floatval($row['puntajetotal'] ?? 0);
+    if (junta_inscripcion_es_excluido($row, $tipoNorm, $puntaje)) {
+        return [
+            'label' => 'Excluido',
+            'badge' => 'ins-badge ins-badge--estado-excluido',
+            'filtro' => 'excluido',
+        ];
+    }
+    return [
+        'label' => 'Activo',
+        'badge' => 'ins-badge ins-badge--estado-activo',
+        'filtro' => 'activo',
+    ];
+}
+
+function junta_inscripcion_localidad($codloc) {
+    $c = strtoupper(trim((string) $codloc));
+    $map = [
+        'USH' => ['label' => 'Ushuaia', 'filtro' => 'ush', 'badge' => 'ins-badge ins-badge--loc-ush'],
+        'RGD' => ['label' => 'Río Grande', 'filtro' => 'rgd', 'badge' => 'ins-badge ins-badge--loc-rgd'],
+        'TOL' => ['label' => 'Tolhuin', 'filtro' => 'tol', 'badge' => 'ins-badge ins-badge--loc-tol'],
+        'ANT' => ['label' => 'Antártida', 'filtro' => 'ant', 'badge' => 'ins-badge ins-badge--loc-ant'],
+        'ANT1' => ['label' => 'Antártida', 'filtro' => 'ant', 'badge' => 'ins-badge ins-badge--loc-ant'],
+    ];
+    if (isset($map[$c])) {
+        return $map[$c];
+    }
+    if ($c !== '' && strpos($c, 'ANT') === 0) {
+        return $map['ANT'];
+    }
+    return [
+        'label' => $c !== '' ? $c : 'Sin asignar',
+        'filtro' => 'sin',
+        'badge' => 'ins-badge ins-badge--loc-sin',
+    ];
+}
+
+function junta_inscripcion_anterior($legvinc) {
+    $v = trim((string) $legvinc);
+    if ($v === '' || $v === '0' || $v === '0.0' || floatval($v) == 0) {
+        return [
+            'label' => 'No',
+            'badge' => 'ins-badge ins-badge--anterior-no',
+            'filtro' => 'no',
+        ];
+    }
+    return [
+        'label' => 'Sí',
+        'badge' => 'ins-badge ins-badge--anterior-si',
+        'filtro' => 'si',
+    ];
+}
+
+function junta_inscripcion_clasificar($row) {
+    return junta_inscripcion_clasificar_tipo($row);
+}
+
 ?>
 <!-- Begin Page Content -->
 
@@ -453,38 +610,48 @@ tr:nth-child(even) {
   gap: 12px;
 }
 .ins-toolbar-filter {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.55rem 0.85rem;
+  display: none;
 }
-.ins-toolbar-filter label {
+.ins-filters-panel {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem 1rem;
+  margin: 0 0 clamp(1rem, 2vw, 1.35rem);
+  padding: 1rem 1.1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid var(--ins-border);
+  border-radius: 12px;
+}
+.ins-filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+.ins-filter-item label {
   margin: 0;
   font-weight: 600;
   color: #374151;
-  font-size: clamp(1.08rem, 1.35vw, 1.18rem);
-  white-space: nowrap;
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
-/* Botones de barra (.ins-btn): ver junta-botones-polish.css */
-.ins-select-tipo {
-  width: auto !important;
-  min-width: 10.75rem;
-  max-width: 14rem;
-  flex: 0 0 auto;
+.ins-filter-select {
+  width: 100% !important;
+  min-width: 0;
   border-radius: 10px !important;
   border: 1px solid #d1d5db !important;
-  padding: 0.62rem 2.15rem 0.62rem 0.9rem !important;
-  min-height: 50px;
+  padding: 0.55rem 2rem 0.55rem 0.75rem !important;
+  min-height: 44px;
   height: auto !important;
-  font-size: clamp(1.24rem, 1.55vw, 1.38rem);
-  line-height: 1.35;
+  font-size: 0.95rem;
+  line-height: 1.3;
   font-weight: 500;
   color: #1f2937;
+  background-color: #fff;
 }
-.ins-select-tipo option {
-  font-size: 1.3rem;
-  line-height: 1.45;
-  padding: 0.45rem 0.6rem;
+.ins-filter-select option {
+  font-size: 0.95rem;
 }
 .ins-table-wrap {
   width: 100%;
@@ -496,53 +663,41 @@ tr:nth-child(even) {
 .ins-dashboard-table {
   table-layout: fixed;
   width: 100%;
-  min-width: 1120px;
+  min-width: 1280px;
   margin: 0;
   border-collapse: separate;
   border-spacing: 0;
   font-size: clamp(1.15rem, 1.5vw, 1.3rem);
   border: none !important;
 }
-/* Reparto de anchos (suma 100%); panel ancho para descripción, establecimiento y fechas */
+/* Reparto de anchos (11 columnas) */
 .ins-dashboard-table thead th:nth-child(1),
-.ins-dashboard-table tbody td:nth-child(1) {
-  width: 4%;
-}
+.ins-dashboard-table tbody td:nth-child(1) { width: 3.5%; }
 .ins-dashboard-table thead th:nth-child(2),
-.ins-dashboard-table tbody td:nth-child(2) {
-  width: 5.5%;
-}
+.ins-dashboard-table tbody td:nth-child(2) { width: 4.5%; }
 .ins-dashboard-table thead th:nth-child(3),
-.ins-dashboard-table tbody td:nth-child(3) {
-  width: 26%;
-  min-width: 0;
-}
+.ins-dashboard-table tbody td:nth-child(3) { width: 16%; min-width: 0; }
 .ins-dashboard-table thead th:nth-child(4),
-.ins-dashboard-table tbody td:nth-child(4) {
-  width: 19%;
-  min-width: 0;
-}
+.ins-dashboard-table tbody td:nth-child(4) { width: 13%; min-width: 0; }
 .ins-dashboard-table thead th:nth-child(5),
-.ins-dashboard-table tbody td:nth-child(5) {
-  width: 6%;
-}
+.ins-dashboard-table tbody td:nth-child(5) { width: 5%; }
 .ins-dashboard-table thead th:nth-child(6),
-.ins-dashboard-table tbody td:nth-child(6) {
-  width: 13%;
-  min-width: 0;
+.ins-dashboard-table tbody td:nth-child(6) { width: 11%; min-width: 0; }
+.ins-dashboard-table thead th:nth-child(7),
+.ins-dashboard-table tbody td:nth-child(7) { width: 7%; min-width: 0; }
+.ins-dashboard-table thead th:nth-child(8),
+.ins-dashboard-table tbody td:nth-child(8) { width: 8%; min-width: 0; }
+.ins-dashboard-table thead th:nth-child(9),
+.ins-dashboard-table tbody td:nth-child(9) { width: 6%; min-width: 0; }
+.ins-dashboard-table thead th:nth-child(10),
+.ins-dashboard-table tbody td:nth-child(10) { width: 7%; min-width: 0; }
+.ins-dashboard-table thead th:nth-child(11),
+.ins-dashboard-table tbody td:nth-child(11) {
+  width: 19%;
+  min-width: 210px;
 }
 .ins-dashboard-table thead th:nth-child(6) {
-  font-size: clamp(1.15rem, 1.4vw, 1.28rem);
-}
-.ins-dashboard-table thead th:nth-child(7),
-.ins-dashboard-table tbody td:nth-child(7) {
-  width: 7.5%;
-  min-width: 0;
-}
-.ins-dashboard-table thead th:nth-child(8),
-.ins-dashboard-table tbody td:nth-child(8) {
-  width: 19%;
-  min-width: 272px;
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
 }
 .ins-dashboard-table thead th {
   background: linear-gradient(180deg, #0f5494, #004481) !important;
@@ -605,9 +760,12 @@ tr:nth-child(even) {
 .ins-dashboard-table tbody tr.ins-row--interino td {
   background-color: #e8f5e9 !important;
 }
+.ins-dashboard-table tbody tr.ins-row--antartida td {
+  background-color: #e0f7fa !important;
+}
 .ins-dashboard-table tbody tr.ins-row--puntaje0 td,
 .ins-dashboard-table tbody tr.ins-row--excluido td {
-  background-color: #fff3e0 !important;
+  background-color: #fee2e2 !important;
 }
 .ins-dashboard-table tbody tr.ins-row--default td {
   background-color: #f8fafc !important;
@@ -628,9 +786,13 @@ tr:nth-child(even) {
   background-color: #c8e6c9 !important;
   box-shadow: none;
 }
+.ins-dashboard-table tbody tr.ins-row--antartida:hover td {
+  background-color: #b2ebf2 !important;
+  box-shadow: none;
+}
 .ins-dashboard-table tbody tr.ins-row--puntaje0:hover td,
 .ins-dashboard-table tbody tr.ins-row--excluido:hover td {
-  background-color: #ffe0b2 !important;
+  background-color: #fecaca !important;
   box-shadow: none;
 }
 .ins-dashboard-table tbody tr.ins-row--default:hover td {
@@ -682,7 +844,10 @@ tr:nth-child(even) {
   text-align: center !important;
   font-size: clamp(1.22rem, 1.55vw, 1.38rem);
 }
-.ins-dashboard-table .ins-cell-tipo .ins-badge {
+.ins-dashboard-table .ins-cell-tipo .ins-badge,
+.ins-dashboard-table .ins-cell-estado .ins-badge,
+.ins-dashboard-table .ins-cell-localidad .ins-badge,
+.ins-dashboard-table .ins-cell-anterior .ins-badge {
   max-width: 100%;
   white-space: normal;
   word-break: break-word;
@@ -691,11 +856,32 @@ tr:nth-child(even) {
   text-align: center;
   box-sizing: border-box;
   font-weight: 700;
-  font-size: clamp(1.12rem, 1.48vw, 1.22rem);
+  font-size: clamp(0.88rem, 1.1vw, 0.98rem);
+  padding: 0.25rem 0.55rem;
+}
+.ins-dashboard-table .acciones-inscripciones .btn,
+.ins-dashboard-table .acciones-inscripciones a.btn,
+.ins-dashboard-table .acciones-inscripciones button.btn {
+  height: 28px !important;
+  min-height: 28px !important;
+  max-height: 28px !important;
+  padding: 0 4px !important;
+  font-size: 10px !important;
+  gap: 3px !important;
+}
+.ins-dashboard-table .acciones-inscripciones .btn .acciones-inscripciones-label {
+  font-size: 10px !important;
+}
+.ins-dashboard-table .acciones-inscripciones .btn .glyphicon,
+.ins-dashboard-table .acciones-inscripciones .btn i.glyphicon {
+  font-size: 10px !important;
+}
+.ins-dashboard-table .acciones-inscripciones {
+  gap: 4px !important;
 }
 .ins-cell-acciones {
-  min-width: 228px !important;
-  width: 17% !important;
+  min-width: 210px !important;
+  width: 19% !important;
   white-space: normal !important;
   vertical-align: middle !important;
   position: sticky;
@@ -717,9 +903,12 @@ tr:nth-child(even) {
 .ins-dashboard-table tbody tr.ins-row--interino td.ins-cell-acciones {
   background: #e8f5e9 !important;
 }
+.ins-dashboard-table tbody tr.ins-row--antartida td.ins-cell-acciones {
+  background: #e0f7fa !important;
+}
 .ins-dashboard-table tbody tr.ins-row--puntaje0 td.ins-cell-acciones,
 .ins-dashboard-table tbody tr.ins-row--excluido td.ins-cell-acciones {
-  background: #fff3e0 !important;
+  background: #fee2e2 !important;
 }
 .ins-dashboard-table tbody tr.ins-row--default td.ins-cell-acciones {
   background: #f8fafc !important;
@@ -736,9 +925,12 @@ tr:nth-child(even) {
 .ins-dashboard-table tbody tr.ins-row--interino:hover td.ins-cell-acciones {
   background: #c8e6c9 !important;
 }
+.ins-dashboard-table tbody tr.ins-row--antartida:hover td.ins-cell-acciones {
+  background: #b2ebf2 !important;
+}
 .ins-dashboard-table tbody tr.ins-row--puntaje0:hover td.ins-cell-acciones,
 .ins-dashboard-table tbody tr.ins-row--excluido:hover td.ins-cell-acciones {
-  background: #ffe0b2 !important;
+  background: #fecaca !important;
 }
 .ins-dashboard-table tbody tr.ins-row--default:hover td.ins-cell-acciones {
   background: #e2e8f0 !important;
@@ -778,33 +970,165 @@ tr:nth-child(even) {
   line-height: 1.25;
 }
 .ins-badge--titulares {
-  background: #dbeafe;
-  color: #1e40af;
+  background: #fef9c3;
+  color: #854d0e;
+  border: 1px solid rgba(133, 77, 14, 0.12);
 }
 .ins-badge--permanente {
   background: #d1fae5;
   color: #065f46;
+  border: 1px solid rgba(6, 95, 70, 0.12);
 }
 .ins-badge--permanente-low {
   background: #ede9fe;
   color: #5b21b6;
+  border: 1px solid rgba(91, 33, 182, 0.12);
 }
 .ins-badge--concurso {
-  background: #e0f2fe;
-  color: #0369a1;
+  background: #dbeafe;
+  color: #1e40af;
+  border: 1px solid rgba(30, 64, 175, 0.12);
 }
 .ins-badge--transitorio {
   background: #dcfce7;
   color: #166534;
+  border: 1px solid rgba(22, 101, 52, 0.12);
+}
+.ins-badge--antartida {
+  background: #cffafe;
+  color: #0e7490;
+  border: 1px solid rgba(14, 116, 144, 0.18);
+  font-weight: 700;
 }
 .ins-badge--excluido,
 .ins-badge--puntaje0 {
-  background: #ffedd5;
-  color: #9a3412;
+  background: #fecaca;
+  color: #991b1b;
+  border: 1px solid rgba(153, 27, 27, 0.18);
+  font-weight: 800;
+}
+.ins-badge--estado-activo {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid rgba(6, 95, 70, 0.15);
+}
+.ins-badge--estado-excluido {
+  background: #fecaca;
+  color: #991b1b;
+  border: 1px solid rgba(153, 27, 27, 0.18);
+  font-weight: 700;
+}
+.ins-badge--loc-ush {
+  background: #e0e7ff;
+  color: #3730a3;
+  border: 1px solid rgba(55, 48, 163, 0.12);
+}
+.ins-badge--loc-rgd {
+  background: #fce7f3;
+  color: #9d174d;
+  border: 1px solid rgba(157, 23, 77, 0.12);
+}
+.ins-badge--loc-tol {
+  background: #f3e8ff;
+  color: #6b21a8;
+  border: 1px solid rgba(107, 33, 168, 0.12);
+}
+.ins-badge--loc-ant {
+  background: #cffafe;
+  color: #0e7490;
+  border: 1px solid rgba(14, 116, 144, 0.18);
+}
+.ins-badge--loc-sin {
+  background: #f3f4f6;
+  color: #6b7280;
+  border: 1px solid rgba(107, 114, 128, 0.12);
+}
+.ins-badge--anterior-si {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid rgba(146, 64, 14, 0.15);
+}
+.ins-badge--anterior-no {
+  background: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid rgba(75, 85, 99, 0.12);
 }
 .ins-badge--default {
   background: #f3f4f6;
   color: #4b5563;
+  border: 1px solid rgba(75, 85, 99, 0.12);
+}
+.ins-tipo-leyenda {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0 0 clamp(1rem, 2vw, 1.35rem);
+  padding: 0.85rem 1.1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid var(--ins-border);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+.ins-leyenda-grupo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.65rem;
+}
+.ins-leyenda-grupo-titulo {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ins-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  min-width: 7.5rem;
+}
+.ins-leyenda-titulo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ins-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 0.25rem;
+}
+.ins-leyenda-titulo .glyphicon {
+  font-size: 0.95em;
+  opacity: 0.9;
+}
+.ins-leyenda-lista {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ins-leyenda-lista li {
+  margin: 0;
+  padding: 0;
+}
+.ins-leyenda-lista button.ins-badge {
+  border: none;
+  font-family: inherit;
+}
+.ins-leyenda-lista .ins-badge {
+  font-size: 0.92rem;
+  padding: 0.28rem 0.72rem;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.ins-leyenda-lista .ins-badge:hover,
+.ins-leyenda-lista .ins-badge:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+  outline: none;
+}
+.ins-leyenda-lista .ins-badge.ins-leyenda-activa {
+  box-shadow: 0 0 0 2px var(--ins-primary-light);
 }
 .ins-list-card > p {
   margin: 0.85rem 0;
@@ -817,15 +1141,15 @@ tr:nth-child(even) {
 }
 
 @media (max-width: 1400px) {
-  .ins-dashboard-table thead th:nth-child(8),
-  .ins-dashboard-table tbody td:nth-child(8),
+  .ins-dashboard-table thead th:nth-child(11),
+  .ins-dashboard-table tbody td:nth-child(11),
   .ins-cell-acciones {
     min-width: 108px !important;
     width: 108px !important;
     max-width: 108px !important;
     vertical-align: middle !important;
   }
-  .ins-dashboard-table thead th:nth-child(8) {
+  .ins-dashboard-table thead th:nth-child(11) {
     white-space: normal;
     line-height: 1.2;
     font-size: clamp(0.95rem, 1.1vw, 1.05rem);
@@ -835,15 +1159,15 @@ tr:nth-child(even) {
 }
 
 @media (min-width: 1401px) and (max-width: 1799px) {
-  .ins-dashboard-table thead th:nth-child(8),
-  .ins-dashboard-table tbody td:nth-child(8),
+  .ins-dashboard-table thead th:nth-child(11),
+  .ins-dashboard-table tbody td:nth-child(11),
   .ins-cell-acciones {
-    min-width: 136px !important;
-    width: 136px !important;
-    max-width: 136px !important;
+    min-width: 120px !important;
+    width: 120px !important;
+    max-width: 120px !important;
     vertical-align: middle !important;
   }
-  .ins-dashboard-table thead th:nth-child(8) {
+  .ins-dashboard-table thead th:nth-child(11) {
     white-space: normal;
     line-height: 1.2;
     padding-top: 0.65rem !important;
@@ -863,9 +1187,15 @@ tr:nth-child(even) {
     align-items: stretch;
   }
   .ins-toolbar-actions,
-  .ins-toolbar-filter {
+  .ins-filters-panel {
+    grid-template-columns: 1fr 1fr;
+  }
+  .ins-tipo-leyenda {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ins-leyenda-lista {
     width: 100%;
-    justify-content: flex-start;
   }
   .ins-toolbar-actions,
   .ins-toolbar-actions.junta-btn-group {
@@ -885,15 +1215,12 @@ tr:nth-child(even) {
   .ins-btn .glyphicon {
     font-size: 11px !important;
   }
-  .ins-select-tipo {
-    width: auto !important;
-    max-width: min(100%, 16rem);
-    min-width: 10.5rem;
-    font-size: 1.28rem;
-    min-height: 48px;
+  .ins-filters-panel {
+    grid-template-columns: 1fr;
   }
-  .ins-select-tipo option {
-    font-size: 1.26rem;
+  .ins-filter-select {
+    font-size: 0.92rem;
+    min-height: 42px;
   }
   .ins-dashboard-table {
     min-width: 640px;
@@ -1013,17 +1340,59 @@ if (isset($_GET['legajo'])) {
               echo "<a href='RegistroMovimiento.php?legajo=" . urlencode($legajo) . "' class='btn ins-btn ins-btn-new' title='Nuevo movimiento'><i class='glyphicon glyphicon-plus'></i><span class='ins-btn-label'>Nuevo movimiento</span></a>";
               echo "<a href='./ListarDocentes.php' class='btn ins-btn ins-btn-back' title='Volver atrás'><i class='glyphicon glyphicon-arrow-left'></i><span class='ins-btn-label'>Volver atrás</span></a>";
               echo "</div>";
-              echo "<div class='ins-toolbar-filter'>";
-              echo "<label for='tipoFiltro'>Filtrar por tipo de inscripción</label>";
-              echo "<select id='tipoFiltro' class='form-control ins-select-tipo'>";
-              echo "<option value=''>Todos</option>";
-              echo "<option value='permanente'>Permanente</option>";
-              echo "<option value='concurso'>Concurso</option>";
-              echo "<option value='transitorio'>Interino</option>";
-              echo "<option value='titulares'>Titulares</option>";
-              echo "<option value='puntaje0'>Excluido</option>";
-              echo "</select>";
-              echo "</div></div>";
+              echo "</div>";
+
+              echo "<div class=\"ins-filters-panel\" role=\"search\" aria-label=\"Filtros de inscripciones\">";
+              echo "<div class=\"ins-filter-item\"><label for=\"filtroTipo\">Tipo de Inscripción</label>";
+              echo "<select id=\"filtroTipo\" class=\"form-control ins-filter-select\">";
+              echo "<option value=\"\">Todos los tipos</option>";
+              echo "<option value=\"permanente\">Permanentes</option>";
+              echo "<option value=\"titulares\">Titulares</option>";
+              echo "<option value=\"transitorio\">Interinatos y Suplencias</option>";
+              echo "<option value=\"concurso\">Concurso de Titularidad</option>";
+              echo "<option value=\"default\">Otros</option>";
+              echo "</select></div>";
+              echo "<div class=\"ins-filter-item\"><label for=\"filtroEstado\">Estado de Inscripción</label>";
+              echo "<select id=\"filtroEstado\" class=\"form-control ins-filter-select\">";
+              echo "<option value=\"\">Todos los estados</option>";
+              echo "<option value=\"activo\">Activo</option>";
+              echo "<option value=\"excluido\">Excluido</option>";
+              echo "</select></div>";
+              echo "<div class=\"ins-filter-item\"><label for=\"filtroLocalidad\">Localidad</label>";
+              echo "<select id=\"filtroLocalidad\" class=\"form-control ins-filter-select\">";
+              echo "<option value=\"\">Todas las localidades</option>";
+              echo "<option value=\"ush\">Ushuaia</option>";
+              echo "<option value=\"rgd\">Río Grande</option>";
+              echo "<option value=\"tol\">Tolhuin</option>";
+              echo "<option value=\"ant\">Antártida</option>";
+              echo "<option value=\"sin\">Sin asignar</option>";
+              echo "</select></div>";
+              echo "<div class=\"ins-filter-item\"><label for=\"filtroAnterior\">Inscripción Anterior</label>";
+              echo "<select id=\"filtroAnterior\" class=\"form-control ins-filter-select\">";
+              echo "<option value=\"\">Todas</option>";
+              echo "<option value=\"si\">Sí</option>";
+              echo "<option value=\"no\">No</option>";
+              echo "</select></div>";
+              echo "</div>";
+
+              echo "<div class=\"ins-tipo-leyenda\" role=\"note\" aria-label=\"Leyenda visual de inscripciones\">";
+              echo "<div class=\"ins-leyenda-grupo\"><span class=\"ins-leyenda-grupo-titulo\">Tipo</span>";
+              echo "<span class=\"ins-badge ins-badge--permanente\">Permanentes</span>";
+              echo "<span class=\"ins-badge ins-badge--titulares\">Titulares</span>";
+              echo "<span class=\"ins-badge ins-badge--transitorio\">Interinatos y Suplencias</span>";
+              echo "<span class=\"ins-badge ins-badge--concurso\">Concurso de Titularidad</span></div>";
+              echo "<div class=\"ins-leyenda-grupo\"><span class=\"ins-leyenda-grupo-titulo\">Estado</span>";
+              echo "<span class=\"ins-badge ins-badge--estado-activo\">Activo</span>";
+              echo "<span class=\"ins-badge ins-badge--estado-excluido\">Excluido</span></div>";
+              echo "<div class=\"ins-leyenda-grupo\"><span class=\"ins-leyenda-grupo-titulo\">Localidad</span>";
+              echo "<span class=\"ins-badge ins-badge--loc-ush\">Ushuaia</span>";
+              echo "<span class=\"ins-badge ins-badge--loc-rgd\">Río Grande</span>";
+              echo "<span class=\"ins-badge ins-badge--loc-tol\">Tolhuin</span>";
+              echo "<span class=\"ins-badge ins-badge--loc-ant\">Antártida</span></div>";
+              echo "<div class=\"ins-leyenda-grupo\"><span class=\"ins-leyenda-grupo-titulo\">Insc. anterior</span>";
+              echo "<span class=\"ins-badge ins-badge--anterior-si\">Sí</span>";
+              echo "<span class=\"ins-badge ins-badge--anterior-no\">No</span></div>";
+              echo "</div>";
           
       // Filtro por Tipo de Inscripción
          
@@ -1038,78 +1407,36 @@ if (isset($_GET['legajo'])) {
                   echo "<th scope='col'><i class='glyphicon glyphicon-home'></i> Establecimiento</th>";
                   echo "<th scope='col'><i class='glyphicon glyphicon-star'></i> Puntaje total</th>";
                   echo "<th scope='col'><i class='glyphicon glyphicon-tag'></i> Tipo inscripción</th>";
+                  echo "<th scope='col'><i class='glyphicon glyphicon-flag'></i> Estado</th>";
+                  echo "<th scope='col'><i class='glyphicon glyphicon-map-marker'></i> Localidad</th>";
+                  echo "<th scope='col'><i class='glyphicon glyphicon-link'></i> Insc. anterior</th>";
                   echo "<th scope='col'><i class='glyphicon glyphicon-calendar'></i> Fecha</th>";
                   echo "<th scope='col'><i class='glyphicon glyphicon-cog'></i> Acciones</th>";
                   echo "</tr></thead><tbody>";
 
-                  $odd = true;
-
                  while ($row = sqlsrv_fetch_array($resultData, SQLSRV_FETCH_ASSOC)) {
     $tipo = strtolower(trim($row['tipo']));
-    $puntaje = floatval($row['puntajetotal']);
-    $accent = '#94a3b8';
+    $insTipo = junta_inscripcion_clasificar_tipo($row);
+    $insEstado = junta_inscripcion_estado($row);
+    $codloc = isset($row['codloc']) ? $row['codloc'] : '';
+    $insLoc = junta_inscripcion_localidad($codloc);
+    $insAnt = junta_inscripcion_anterior($row['legvinc'] ?? '');
 
-    if ($puntaje == 0) {
-        $accent = '#f59e0b';
-    } elseif ($tipo == 'permanente' || $tipo == 'listado permanentes') {
-        $accent = '#10b981';
-    } elseif ($tipo == 'concurso') {
-        $accent = '#0ea5e9';
-    } elseif ($tipo == 'interino' || $tipo == 'interinos' || $tipo == 'suplente' || $tipo == 'suplencia' || $tipo == 'interino y suple.' || $tipo == 'transitorio') {
-        $accent = '#22c55e';
-    } elseif ($tipo == 'titulares' || $tipo == 'titular') {
-        $accent = '#6366f1';
-    } elseif ($tipo == 'excluidos' || $tipo == 'excluido') {
-        $accent = '#f97316';
-    } else {
-        $accent = $odd ? '#cbd5e1' : '#94a3b8';
+    $rowTipoClass = $insTipo['row'];
+    $accent = $insTipo['accent'];
+    $tipoFiltroAttr = $insTipo['filtro'];
+    if (!in_array($tipoFiltroAttr, ['permanente', 'titulares', 'transitorio', 'concurso'], true)) {
+        $tipoFiltroAttr = 'default';
     }
 
-                      $tipoDisplay = strcasecmp($row['tipo'], 'Transitorio') === 0 ? 'Interino' : $row['tipo'];
-                      $tipoDisplayEsc = htmlspecialchars((string) $tipoDisplay, ENT_QUOTES, 'UTF-8');
-                      if ($puntaje == 0) {
-                          $badgeClass = 'ins-badge ins-badge--puntaje0';
-                      } elseif ($tipo == 'titulares' || $tipo == 'titular') {
-                          $badgeClass = 'ins-badge ins-badge--titulares';
-                      } elseif ($tipo == 'permanente' || $tipo == 'listado permanentes') {
-                          $badgeClass = (strcasecmp(trim((string) $row['tipo']), 'Permanente') === 0)
-                              ? 'ins-badge ins-badge--permanente'
-                              : 'ins-badge ins-badge--permanente-low';
-                      } elseif ($tipo == 'concurso') {
-                          $badgeClass = 'ins-badge ins-badge--concurso';
-                      } elseif ($tipo == 'interino' || $tipo == 'interinos' || $tipo == 'suplente' || $tipo == 'suplencia' || $tipo == 'interino y suple.' || $tipo == 'transitorio') {
-                          $badgeClass = 'ins-badge ins-badge--transitorio';
-                      } elseif ($tipo == 'excluidos' || $tipo == 'excluido') {
-                          $badgeClass = 'ins-badge ins-badge--excluido';
-                      } else {
-                          $badgeClass = 'ins-badge ins-badge--default';
-                      }
-
-                      $rowTipoClass = 'ins-row--default';
-                      if ($puntaje == 0) {
-                          $rowTipoClass = 'ins-row--puntaje0';
-                      } elseif ($tipo == 'permanente' || $tipo == 'listado permanentes') {
-                          $rowTipoClass = 'ins-row--permanente';
-                      } elseif ($tipo == 'concurso') {
-                          $rowTipoClass = 'ins-row--concurso';
-                      } elseif ($tipo == 'interino' || $tipo == 'interinos' || $tipo == 'suplente' || $tipo == 'suplencia' || $tipo == 'interino y suple.' || $tipo == 'transitorio') {
-                          $rowTipoClass = 'ins-row--interino';
-                      } elseif ($tipo == 'titulares' || $tipo == 'titular') {
-                          $rowTipoClass = 'ins-row--titulares';
-                      } elseif ($tipo == 'excluidos' || $tipo == 'excluido') {
-                          $rowTipoClass = 'ins-row--excluido';
-                      }
-
-                      $tipoFiltroAttr = $tipo;
-                      if ($tipo === 'listado permanentes') {
-                          $tipoFiltroAttr = 'permanente';
-                      } elseif ($tipo === 'interino' || $tipo === 'interinos' || $tipo === 'suplente' || $tipo === 'suplencia' || $tipo === 'interino y suple.' || $tipo === 'transitorio') {
-                          $tipoFiltroAttr = 'transitorio';
-                      } elseif ($tipo === 'titular') {
-                          $tipoFiltroAttr = 'titulares';
-                      }
-
-                      echo "<tr class=\"tipoFila ins-row-accent " . $rowTipoClass . "\" data-tipo=\"" . htmlspecialchars($tipo, ENT_QUOTES, 'UTF-8') . "\" data-tipo-filtro=\"" . htmlspecialchars($tipoFiltroAttr, ENT_QUOTES, 'UTF-8') . "\" style=\"--accent: " . htmlspecialchars($accent, ENT_QUOTES, 'UTF-8') . ";\">";
+                      echo "<tr class=\"tipoFila ins-row-accent " . htmlspecialchars($rowTipoClass, ENT_QUOTES, 'UTF-8') . "\""
+                        . " data-tipo=\"" . htmlspecialchars($tipo, ENT_QUOTES, 'UTF-8') . "\""
+                        . " data-tipo-filtro=\"" . htmlspecialchars($tipoFiltroAttr, ENT_QUOTES, 'UTF-8') . "\""
+                        . " data-categoria-filtro=\"" . htmlspecialchars($tipoFiltroAttr, ENT_QUOTES, 'UTF-8') . "\""
+                        . " data-estado-filtro=\"" . htmlspecialchars($insEstado['filtro'], ENT_QUOTES, 'UTF-8') . "\""
+                        . " data-localidad-filtro=\"" . htmlspecialchars($insLoc['filtro'], ENT_QUOTES, 'UTF-8') . "\""
+                        . " data-anterior-filtro=\"" . htmlspecialchars($insAnt['filtro'], ENT_QUOTES, 'UTF-8') . "\""
+                        . " style=\"--accent: " . htmlspecialchars($accent, ENT_QUOTES, 'UTF-8') . ";\">";
                       echo "<td>" . htmlspecialchars((string) $row['anodoc'], ENT_QUOTES, 'UTF-8') . "</td>";
                       echo "<td>" . htmlspecialchars((string) $row['codmod'], ENT_QUOTES, 'UTF-8') . "</td>";
                       echo "<td class=\"ins-cell-desc\"><span class=\"ins-cell-desc-inner\">" . htmlspecialchars((string) $row['nommod'], ENT_QUOTES, 'UTF-8') . "</span></td>";
@@ -1117,7 +1444,10 @@ if (isset($_GET['legajo'])) {
                       $estText = $esSinEst ? 'No tiene establecimiento asignado' : (string) $row['nomdep'];
                       echo "<td class=\"ins-cell-establecimiento" . ($esSinEst ? ' ins-cell-muted' : '') . "\">" . htmlspecialchars($estText, ENT_QUOTES, 'UTF-8') . "</td>";
                       echo "<td>" . htmlspecialchars(number_format($row['puntajetotal'], 2, '.', ','), ENT_QUOTES, 'UTF-8') . "</td>";
-                      echo "<td class=\"ins-cell-tipo\"><span class=\"" . $badgeClass . "\">" . $tipoDisplayEsc . "</span></td>";
+                      echo "<td class=\"ins-cell-tipo\"><span class=\"" . htmlspecialchars($insTipo['badge'], ENT_QUOTES, 'UTF-8') . "\">" . htmlspecialchars($insTipo['label'], ENT_QUOTES, 'UTF-8') . "</span></td>";
+                      echo "<td class=\"ins-cell-estado\"><span class=\"" . htmlspecialchars($insEstado['badge'], ENT_QUOTES, 'UTF-8') . "\">" . htmlspecialchars($insEstado['label'], ENT_QUOTES, 'UTF-8') . "</span></td>";
+                      echo "<td class=\"ins-cell-localidad\"><span class=\"" . htmlspecialchars($insLoc['badge'], ENT_QUOTES, 'UTF-8') . "\">" . htmlspecialchars($insLoc['label'], ENT_QUOTES, 'UTF-8') . "</span></td>";
+                      echo "<td class=\"ins-cell-anterior\"><span class=\"" . htmlspecialchars($insAnt['badge'], ENT_QUOTES, 'UTF-8') . "\">" . htmlspecialchars($insAnt['label'], ENT_QUOTES, 'UTF-8') . "</span></td>";
 
                       echo "<td class=\"ins-fecha-cell\">";
                       if ($row['fecha'] !== null) {
@@ -1202,7 +1532,6 @@ if (isset($_GET['legajo'])) {
                 
 
                 echo "</tr>";
-                    $odd = !$odd;
             }
             echo "</tbody></table></div>";
         } else {
@@ -1218,23 +1547,27 @@ if (isset($_GET['legajo'])) {
 }
 echo "</div></div>";
 echo "<script>
-var _tipoFiltro = document.getElementById('tipoFiltro');
-if (_tipoFiltro) _tipoFiltro.addEventListener('change', function() {
-    var tipoSeleccionado = this.value.toLowerCase();
+function juntaAplicarFiltrosInscripciones() {
+    var filtroTipo = (document.getElementById('filtroTipo') || {}).value || '';
+    var filtroEstado = (document.getElementById('filtroEstado') || {}).value || '';
+    var filtroLocalidad = (document.getElementById('filtroLocalidad') || {}).value || '';
+    var filtroAnterior = (document.getElementById('filtroAnterior') || {}).value || '';
     var filas = document.querySelectorAll('.tipoFila');
 
     filas.forEach(function(fila) {
-        var tipoFilaNorm = fila.getAttribute('data-tipo-filtro') || fila.getAttribute('data-tipo');
-        var puntaje = parseFloat(fila.querySelector('td:nth-child(5)').innerText.replace(',', '.'));
-
-        if (tipoSeleccionado === '') {
-            fila.style.display = '';
-        } else if (tipoSeleccionado === 'puntaje0') {
-            fila.style.display = (puntaje === 0) ? '' : 'none';
-        } else {
-            fila.style.display = (tipoFilaNorm === tipoSeleccionado) ? '' : 'none';
-        }
+        var okTipo = !filtroTipo || fila.getAttribute('data-tipo-filtro') === filtroTipo;
+        var okEstado = !filtroEstado || fila.getAttribute('data-estado-filtro') === filtroEstado;
+        var okLocalidad = !filtroLocalidad || fila.getAttribute('data-localidad-filtro') === filtroLocalidad;
+        var okAnterior = !filtroAnterior || fila.getAttribute('data-anterior-filtro') === filtroAnterior;
+        fila.style.display = (okTipo && okEstado && okLocalidad && okAnterior) ? '' : 'none';
     });
+}
+
+['filtroTipo', 'filtroEstado', 'filtroLocalidad', 'filtroAnterior'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) {
+        el.addEventListener('change', juntaAplicarFiltrosInscripciones);
+    }
 });
 </script>";
 
@@ -1288,7 +1621,7 @@ function determinarColor($tipo) {
         case 'permanente':
             return '#E0E0E0'; // Gris claro pastel
         case 'excluidos':
-            return '#FFCCBC'; // Naranja pastel claro
+            return '#fecaca'; // Naranja pastel claro
         default:
             return '#FFFFFF'; // Blanco por defecto
     }

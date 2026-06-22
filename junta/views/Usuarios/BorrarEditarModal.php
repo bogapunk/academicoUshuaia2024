@@ -20,7 +20,7 @@ $filtroRetorno = isset($filtroEstado) ? $filtroEstado : 'activos';
 						<label class="control-label" style="position:relative; top:7px;">Nombres:</label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="nombres" value="<?php echo htmlspecialchars($row['nombres'], ENT_QUOTES, 'UTF-8'); ?>" required>
+						<input type="text" class="form-control" name="nombres" value="<?php echo junta_e($row['nombres']); ?>" required>
 					</div>
 				</div>
 				<div class="row form-group">
@@ -28,7 +28,7 @@ $filtroRetorno = isset($filtroEstado) ? $filtroEstado : 'activos';
 						<label class="control-label" style="position:relative; top:7px;">Apellidos:</label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="apellidos" value="<?php echo htmlspecialchars($row['apellidos'], ENT_QUOTES, 'UTF-8'); ?>" required>
+						<input type="text" class="form-control" name="apellidos" value="<?php echo junta_e($row['apellidos']); ?>" required>
 					</div>
 				</div>
 				<div class="row form-group">
@@ -104,7 +104,7 @@ $filtroRetorno = isset($filtroEstado) ? $filtroEstado : 'activos';
             </div>
             <div class="modal-body">	
             	<p class="text-center">¿Está seguro de desactivar este usuario?</p>
-				<h2 class="text-center"><?php echo htmlspecialchars($row['nombres'] . ' ' . $row['apellidos'], ENT_QUOTES, 'UTF-8'); ?></h2>
+				<h2 class="text-center"><?php echo junta_e($row['nombres'] . ' ' . $row['apellidos']); ?></h2>
                 <p class="text-center text-muted" style="font-size:13px;">El usuario no se elimina de la base de datos; solo dejará de poder iniciar sesión hasta que lo reactive.</p>
 			</div>
             <div class="modal-footer">
@@ -125,7 +125,7 @@ $filtroRetorno = isset($filtroEstado) ? $filtroEstado : 'activos';
             </div>
             <div class="modal-body">
                 <p class="text-center">¿Desea reactivar este usuario?</p>
-                <h2 class="text-center"><?php echo htmlspecialchars($row['nombres'] . ' ' . $row['apellidos'], ENT_QUOTES, 'UTF-8'); ?></h2>
+                <h2 class="text-center"><?php echo junta_e($row['nombres'] . ' ' . $row['apellidos']); ?></h2>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>

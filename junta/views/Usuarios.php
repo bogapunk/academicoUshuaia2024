@@ -20,7 +20,7 @@ class User{
 
         if(!isset($this->db)){
             // Connection to the database
-            $connectionInfo = array("Database"=>$this->dbName, "UID"=>$this->dbUsername, "PWD"=>$this->dbPassword,"TrustServerCertificate"=>true);
+            $connectionInfo = junta_sqlsrv_connection_info($this->dbName, $this->dbUsername, $this->dbPassword);
             $conn = sqlsrv_connect($this->dbHost, $connectionInfo);
             if($conn === false){
                 die(print_r(sqlsrv_errors(), true));
@@ -74,7 +74,7 @@ class User{
                     $data = $countRow ? (int) $countRow['total'] : 0;
                     break;
                 case 'single':
-                    $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+                    $data = junta_normalizar_fila_utf8(sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC));
                     break;
                 default:
                     $data = '';
@@ -83,7 +83,7 @@ class User{
             if(sqlsrv_has_rows($result)){
                 $data = array();
                 while($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)){
-                    $data[] = $row;
+                    $data[] = junta_normalizar_fila_utf8($row);
                 }
             }
         }

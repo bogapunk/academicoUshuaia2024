@@ -19,8 +19,8 @@ class Consulta{
 
         $consulta->execute();
 
-        while($row = $consulta->fetch(PDO::FETCH_OBJ)){
-            $this->lista_usuarios[] =$row;
+        while($row = $consulta->fetch(PDO::FETCH_ASSOC)){
+            $this->lista_usuarios[] = (object) junta_normalizar_fila_utf8($row);
         }
 
         $this->_db->desconectar();

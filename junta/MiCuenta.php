@@ -3,7 +3,29 @@
 session_start();
 //load and initialize user class
 include 'Usuarios_Conexion_Sqlserver.php';
+require_once __DIR__ . '/views/seguridad_password.php';
 $user = new User();
+
+function junta_login_actualizar_hash_si_corresponde($user, $userId, $hashAlmacenado, $passwordPlano) {
+    $hashAlmacenado = (string) $hashAlmacenado;
+    $debeActualizar = false;
+
+    if (strlen($hashAlmacenado) === 32 && ctype_xdigit($hashAlmacenado)) {
+        $debeActualizar = true;
+    } elseif ($hashAlmacenado !== '') {
+        $info = password_get_info($hashAlmacenado);
+        if (!empty($info['algo']) && password_needs_rehash($hashAlmacenado, PASSWORD_DEFAULT)) {
+            $debeActualizar = true;
+        }
+    }
+
+    if ($debeActualizar) {
+        $user->update(
+            array('password' => junta_password_hash($passwordPlano)),
+            array('id' => (int) $userId)
+        );
+    }
+}
 
 if(isset($_POST['signupSubmit'])){
     require_once __DIR__ . '/views/seguridad_requiere_admin.php';
@@ -55,16 +77,15 @@ if(isset($_POST['signupSubmit'])){
 } elseif(isset($_POST['loginSubmit'])){
     //check whether login details are empty
     if(!empty($_POST['email']) && !empty($_POST['password'])){
-        //get user data from user class
         $conditions['where'] = array(
             'email' => $_POST['email'],
-            'password' => md5($_POST['password']),
             'estado' => '1'
         );
         $conditions['return_type'] = 'single';
         $userData = $user->getRows($conditions);
-        //login credentials
-        if($userData){
+
+        if($userData && junta_password_verificar_actual($userData['password'], $_POST['password'])){
+            junta_login_actualizar_hash_si_corresponde($user, $userData['id'], $userData['password'], $_POST['password']);
             $sessData['userLoggedIn'] = TRUE;
             $sessData['userID'] = $userData['id'];
             if (!empty($userData['rol'])) {
@@ -73,10 +94,12 @@ if(isset($_POST['signupSubmit'])){
             $sessData['lastActivity'] = time();
             $sessData['estado']['type'] = 'success';
         } else {
+            $userData = false;
             $sessData['estado']['type'] = 'error';
             $sessData['estado']['msg'] = 'Email o contraseña incorrectos, por favor intente de nuevo.'; 
         }
     } else {
+        $userData = false;
         $sessData['estado']['type'] = 'error';
         $sessData['estado']['msg'] = 'Ingrese email y contraseña.'; 
     }
@@ -175,7 +198,8 @@ if(isset($_POST['signupSubmit'])){
                     'olvido_pass_iden' => $fp_code
                 );
                 $data = array(
-                    'password' => md5($_POST['password'])
+                    'password' => junta_password_hash($_POST['password']),
+                    'olvido_pass_iden' => ''
                 );
                 $update = $user->update($data, $conditions);
                 if($update){

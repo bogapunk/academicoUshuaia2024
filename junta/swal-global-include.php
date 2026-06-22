@@ -126,6 +126,9 @@
       if (e.preventDefault) e.preventDefault();
       if (e.stopPropagation) e.stopPropagation();
     }
+    if (typeof window.juntaSpinnerHide === 'function') {
+      window.juntaSpinnerHide();
+    }
     var modal = document.getElementById('juntaModalCerrarSesion');
     var urlSalir = window.JUNTA_URL_SALIR || '';
     if (modal) {

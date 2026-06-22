@@ -9,7 +9,7 @@ if (isset($_POST['editar'])) {
             'sqlsrv:server=' . JUNTA_DB_HOST . ';Database=' . JUNTA_DB_NAME . ';TrustServerCertificate=true;ConnectionPooling=1;LoginTimeout=5',
             JUNTA_DB_USER,
             JUNTA_DB_PASS,
-            array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+            junta_pdo_sqlsrv_options()
         );
     } catch (PDOException $e) {
         error_log('EditarRegistro conexión: ' . $e->getMessage());

@@ -458,41 +458,7 @@ tr:nth-child(even) {
 <?php readfile(__DIR__ . '/../css/docentes-list-polish.css'); ?>
 
 </style>
-<link rel="icon" type="./image/png" href="./imagenes/escudo-32x32.png">
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <title>Agencia de innovacion</title>
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<!--  esto son los archivos de exportacion -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
-      <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
-      <!-- SweetAlert2 ahora se carga globalmente via header -->
-
-      <!--aca esta las extensiones para el paginado de la las tablas --->
-  
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-
-  
-    <!-- JS -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
-    <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-
-</head>
-<body>
 <button class="btn-flotante" onclick="topFunction()" title='subir'>Subir</button>
 
   <div class="page-content bg-light">
@@ -908,5 +874,5 @@ $(document).ready(function () {
   });
 </script>
 
-<?php $JUNTA_PIE_SESION_DIRECT = true; ?>
+<?php $JUNTA_PIE_SESION_DIRECT = false; ?>
 <?php include('footer2.php');?>

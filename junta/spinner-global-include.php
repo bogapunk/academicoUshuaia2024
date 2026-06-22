@@ -403,6 +403,8 @@
 
       if (link.getAttribute('data-toggle') === 'modal') return;
 
+      if (link.getAttribute('data-target') === '#juntaModalCerrarSesion') return;
+
       if (link.classList && link.classList.contains('junta-menu-salir')) return;
 
       var url = link.getAttribute('href');
@@ -466,6 +468,8 @@
       links[i].addEventListener('click', function() {
 
         if (this.getAttribute('data-toggle') === 'modal') return;
+
+        if (this.getAttribute('data-target') === '#juntaModalCerrarSesion') return;
 
         if (this.classList && this.classList.contains('junta-menu-salir')) return;
 
