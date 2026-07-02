@@ -254,7 +254,7 @@ function junta_inscripcion_clasificar_tipo($row) {
                 'label' => 'Permanentes',
                 'badge' => 'ins-badge ins-badge--permanente',
                 'row' => 'ins-row--permanente',
-                'accent' => '#10b981',
+                'accent' => '#64748b',
                 'filtro' => 'permanente',
             ];
         case 'titulares':
@@ -270,7 +270,7 @@ function junta_inscripcion_clasificar_tipo($row) {
                 'label' => 'Interinatos y Suplencias',
                 'badge' => 'ins-badge ins-badge--transitorio',
                 'row' => 'ins-row--interino',
-                'accent' => '#22c55e',
+                'accent' => '#8b5cf6',
                 'filtro' => 'transitorio',
             ];
         case 'concurso':
@@ -353,6 +353,27 @@ function junta_inscripcion_anterior($legvinc) {
         'badge' => 'ins-badge ins-badge--anterior-si',
         'filtro' => 'si',
     ];
+}
+
+function junta_inscripcion_texto_establecimiento($row, $tipoFiltro = '')
+{
+    $tiposSinEstablecimiento = ['permanente', 'transitorio', 'concurso'];
+    if (in_array($tipoFiltro, $tiposSinEstablecimiento, true)) {
+        return ['texto' => '-', 'muted' => true];
+    }
+
+    $nomdep = isset($row['nomdep']) ? trim((string) $row['nomdep']) : '';
+    $establecimiento = isset($row['establecimiento']) ? $row['establecimiento'] : 0;
+
+    if ($nomdep === '' || $nomdep === '-' || $establecimiento == 0) {
+        return ['texto' => '-', 'muted' => true];
+    }
+
+    if (preg_match('/no\s+tiene\s+establecimiento/i', $nomdep)) {
+        return ['texto' => '-', 'muted' => true];
+    }
+
+    return ['texto' => $nomdep, 'muted' => false];
 }
 
 function junta_inscripcion_clasificar($row) {
@@ -758,7 +779,7 @@ tr:nth-child(even) {
   background-color: #fffde7 !important;
 }
 .ins-dashboard-table tbody tr.ins-row--interino td {
-  background-color: #e8f5e9 !important;
+  background-color: #f5f3ff !important;
 }
 .ins-dashboard-table tbody tr.ins-row--antartida td {
   background-color: #e0f7fa !important;
@@ -783,7 +804,7 @@ tr:nth-child(even) {
   box-shadow: none;
 }
 .ins-dashboard-table tbody tr.ins-row--interino:hover td {
-  background-color: #c8e6c9 !important;
+  background-color: #ddd6fe !important;
   box-shadow: none;
 }
 .ins-dashboard-table tbody tr.ins-row--antartida:hover td {
@@ -901,7 +922,7 @@ tr:nth-child(even) {
   background: #fffde7 !important;
 }
 .ins-dashboard-table tbody tr.ins-row--interino td.ins-cell-acciones {
-  background: #e8f5e9 !important;
+  background: #f5f3ff !important;
 }
 .ins-dashboard-table tbody tr.ins-row--antartida td.ins-cell-acciones {
   background: #e0f7fa !important;
@@ -923,7 +944,7 @@ tr:nth-child(even) {
   background: #fff9c4 !important;
 }
 .ins-dashboard-table tbody tr.ins-row--interino:hover td.ins-cell-acciones {
-  background: #c8e6c9 !important;
+  background: #ddd6fe !important;
 }
 .ins-dashboard-table tbody tr.ins-row--antartida:hover td.ins-cell-acciones {
   background: #b2ebf2 !important;
@@ -975,9 +996,9 @@ tr:nth-child(even) {
   border: 1px solid rgba(133, 77, 14, 0.12);
 }
 .ins-badge--permanente {
-  background: #d1fae5;
-  color: #065f46;
-  border: 1px solid rgba(6, 95, 70, 0.12);
+  background: #e2e8f0;
+  color: #334155;
+  border: 1px solid rgba(51, 65, 85, 0.12);
 }
 .ins-badge--permanente-low {
   background: #ede9fe;
@@ -990,9 +1011,9 @@ tr:nth-child(even) {
   border: 1px solid rgba(30, 64, 175, 0.12);
 }
 .ins-badge--transitorio {
-  background: #dcfce7;
-  color: #166534;
-  border: 1px solid rgba(22, 101, 52, 0.12);
+  background: #ede9fe;
+  color: #5b21b6;
+  border: 1px solid rgba(91, 33, 182, 0.12);
 }
 .ins-badge--antartida {
   background: #cffafe;
@@ -1338,7 +1359,7 @@ if (isset($_GET['legajo'])) {
               echo "<div class='ins-toolbar-actions junta-btn-group'>";
               echo "<a href='javascript:void(0);' onclick='history.go(-1); location.reload();' class='btn ins-btn ins-btn-refresh' title='Actualizar tabla'><i class='glyphicon glyphicon-refresh'></i><span class='ins-btn-label'>Actualizar tabla</span></a>";
               echo "<a href='RegistroMovimiento.php?legajo=" . urlencode($legajo) . "' class='btn ins-btn ins-btn-new' title='Nuevo movimiento'><i class='glyphicon glyphicon-plus'></i><span class='ins-btn-label'>Nuevo movimiento</span></a>";
-              echo "<a href='./ListarDocentes.php' class='btn ins-btn ins-btn-back' title='Volver atrás'><i class='glyphicon glyphicon-arrow-left'></i><span class='ins-btn-label'>Volver atrás</span></a>";
+              echo "<a href='./ListarDocentes.php?restaurar=1' class='btn ins-btn ins-btn-back' title='Volver atrás'><i class='glyphicon glyphicon-arrow-left'></i><span class='ins-btn-label'>Volver atrás</span></a>";
               echo "</div>";
               echo "</div>";
 
@@ -1440,9 +1461,9 @@ if (isset($_GET['legajo'])) {
                       echo "<td>" . htmlspecialchars((string) $row['anodoc'], ENT_QUOTES, 'UTF-8') . "</td>";
                       echo "<td>" . htmlspecialchars((string) $row['codmod'], ENT_QUOTES, 'UTF-8') . "</td>";
                       echo "<td class=\"ins-cell-desc\"><span class=\"ins-cell-desc-inner\">" . htmlspecialchars((string) $row['nommod'], ENT_QUOTES, 'UTF-8') . "</span></td>";
-                      $esSinEst = ($row['nomdep'] == '-' || empty($row['nomdep']) || $row['establecimiento'] == 0);
-                      $estText = $esSinEst ? 'No tiene establecimiento asignado' : (string) $row['nomdep'];
-                      echo "<td class=\"ins-cell-establecimiento" . ($esSinEst ? ' ins-cell-muted' : '') . "\">" . htmlspecialchars($estText, ENT_QUOTES, 'UTF-8') . "</td>";
+                      $insEst = junta_inscripcion_texto_establecimiento($row, $insTipo['filtro']);
+                      $estText = $insEst['texto'];
+                      echo "<td class=\"ins-cell-establecimiento" . ($insEst['muted'] ? ' ins-cell-muted' : '') . "\">" . htmlspecialchars($estText, ENT_QUOTES, 'UTF-8') . "</td>";
                       echo "<td>" . htmlspecialchars(number_format($row['puntajetotal'], 2, '.', ','), ENT_QUOTES, 'UTF-8') . "</td>";
                       echo "<td class=\"ins-cell-tipo\"><span class=\"" . htmlspecialchars($insTipo['badge'], ENT_QUOTES, 'UTF-8') . "\">" . htmlspecialchars($insTipo['label'], ENT_QUOTES, 'UTF-8') . "</span></td>";
                       echo "<td class=\"ins-cell-estado\"><span class=\"" . htmlspecialchars($insEstado['badge'], ENT_QUOTES, 'UTF-8') . "\">" . htmlspecialchars($insEstado['label'], ENT_QUOTES, 'UTF-8') . "</span></td>";
@@ -1613,7 +1634,7 @@ sqlsrv_close($conn);
 function determinarColor($tipo) {
     switch ($tipo) {
         case 'Interino y Suple.':
-            return '#C8E6C9'; // Verde pastel claro
+            return '#ede9fe'; // Violeta pastel claro
         case 'concurso':
             return '#B3E5FC'; // Celeste pastel claro
         case 'titulares':

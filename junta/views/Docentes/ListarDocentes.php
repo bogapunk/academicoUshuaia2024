@@ -606,7 +606,62 @@ $juntaPdfDocenteUrl = 'generate_pdf.php?legajo=' . urlencode((string) $doc->__GE
 
 <script>
 $(document).ready(function () {
-    function ejecutarBusquedaDocentes() {
+    var JUNTA_BUSQUEDA_DOC_KEY = 'junta_busqueda_docente';
+
+    function juntaGuardarBusquedaDocente() {
+        try {
+            sessionStorage.setItem(JUNTA_BUSQUEDA_DOC_KEY, JSON.stringify({
+                legajo: $('#legajo').val().trim(),
+                dni: $('#dni').val().trim(),
+                apellido: $('#apellido').val().trim()
+            }));
+        } catch (e) {
+            /* sessionStorage no disponible */
+        }
+    }
+
+    function juntaRestaurarBusquedaDocente() {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('restaurar') !== '1') {
+            return false;
+        }
+        if (params.get('action') === 'editar') {
+            return false;
+        }
+        try {
+            var raw = sessionStorage.getItem(JUNTA_BUSQUEDA_DOC_KEY);
+            if (!raw) {
+                return false;
+            }
+            var data = JSON.parse(raw);
+            if (!data) {
+                return false;
+            }
+            $('#legajo').val(data.legajo || '');
+            $('#dni').val(data.dni || '');
+            $('#apellido').val(data.apellido || '');
+            return !!(data.legajo || data.dni || data.apellido);
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function juntaLimpiarParamRestaurar() {
+        if (!window.history.replaceState) {
+            return;
+        }
+        var params = new URLSearchParams(window.location.search);
+        if (!params.has('restaurar')) {
+            return;
+        }
+        params.delete('restaurar');
+        var query = params.toString();
+        var nuevaUrl = window.location.pathname + (query ? '?' + query : '');
+        window.history.replaceState(null, '', nuevaUrl);
+    }
+
+    function ejecutarBusquedaDocentes(opciones) {
+        opciones = opciones || {};
         var legajo = $('#legajo').val().trim();
         var dni = $('#dni').val().trim();
         var apellido = $('#apellido').val().trim();
@@ -615,6 +670,8 @@ $(document).ready(function () {
             juntaAlert('Debe ingresar al menos un dato para realizar la búsqueda.', 'warning');
             return;
         }
+
+        juntaGuardarBusquedaDocente();
 
         var formData = $('#busquedaForm').serialize();
 
@@ -646,6 +703,12 @@ $(document).ready(function () {
                     $('#busquedaResultadoOk').hide();
                     $('#resultBody').html('<tr class="no-data"><td colspan="5" class="text-center" style="color:red;">No se encontraron resultados</td></tr>');
                 }
+
+                if (opciones.desplazarResultados && $('#resultTable').is(':visible')) {
+                    $('html, body').animate({
+                        scrollTop: $('#resultTable').offset().top - 80
+                    }, 300);
+                }
             },
 
             error: function () {
@@ -667,6 +730,11 @@ $(document).ready(function () {
         e.preventDefault();
         ejecutarBusquedaDocentes();
     });
+
+    if (juntaRestaurarBusquedaDocente()) {
+        ejecutarBusquedaDocentes({ desplazarResultados: true });
+        juntaLimpiarParamRestaurar();
+    }
 
     // Filtro en tiempo real dentro de la tabla
     $("#searchTable").on("keyup", function () {
