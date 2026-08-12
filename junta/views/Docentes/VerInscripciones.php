@@ -684,24 +684,24 @@ tr:nth-child(even) {
 .ins-dashboard-table {
   table-layout: fixed;
   width: 100%;
-  min-width: 1280px;
+  min-width: 1380px;
   margin: 0;
   border-collapse: separate;
   border-spacing: 0;
   font-size: clamp(1.15rem, 1.5vw, 1.3rem);
   border: none !important;
 }
-/* Reparto de anchos (11 columnas) */
+/* Reparto de anchos (11 columnas): títulos largos visibles (Cód. modalidad, Puntaje total, etc.) */
 .ins-dashboard-table thead th:nth-child(1),
-.ins-dashboard-table tbody td:nth-child(1) { width: 3.5%; }
+.ins-dashboard-table tbody td:nth-child(1) { width: 4%; min-width: 4.25rem; }
 .ins-dashboard-table thead th:nth-child(2),
-.ins-dashboard-table tbody td:nth-child(2) { width: 4.5%; }
+.ins-dashboard-table tbody td:nth-child(2) { width: 9%; min-width: 8.75rem; }
 .ins-dashboard-table thead th:nth-child(3),
-.ins-dashboard-table tbody td:nth-child(3) { width: 16%; min-width: 0; }
+.ins-dashboard-table tbody td:nth-child(3) { width: 14%; min-width: 0; }
 .ins-dashboard-table thead th:nth-child(4),
-.ins-dashboard-table tbody td:nth-child(4) { width: 13%; min-width: 0; }
+.ins-dashboard-table tbody td:nth-child(4) { width: 12%; min-width: 0; }
 .ins-dashboard-table thead th:nth-child(5),
-.ins-dashboard-table tbody td:nth-child(5) { width: 5%; }
+.ins-dashboard-table tbody td:nth-child(5) { width: 8.5%; min-width: 8rem; }
 .ins-dashboard-table thead th:nth-child(6),
 .ins-dashboard-table tbody td:nth-child(6) { width: 11%; min-width: 0; }
 .ins-dashboard-table thead th:nth-child(7),
@@ -709,14 +709,16 @@ tr:nth-child(even) {
 .ins-dashboard-table thead th:nth-child(8),
 .ins-dashboard-table tbody td:nth-child(8) { width: 8%; min-width: 0; }
 .ins-dashboard-table thead th:nth-child(9),
-.ins-dashboard-table tbody td:nth-child(9) { width: 6%; min-width: 0; }
+.ins-dashboard-table tbody td:nth-child(9) { width: 7%; min-width: 0; }
 .ins-dashboard-table thead th:nth-child(10),
 .ins-dashboard-table tbody td:nth-child(10) { width: 7%; min-width: 0; }
 .ins-dashboard-table thead th:nth-child(11),
 .ins-dashboard-table tbody td:nth-child(11) {
-  width: 19%;
+  width: 12.5%;
   min-width: 210px;
 }
+.ins-dashboard-table thead th:nth-child(2),
+.ins-dashboard-table thead th:nth-child(5),
 .ins-dashboard-table thead th:nth-child(6) {
   font-size: clamp(1rem, 1.25vw, 1.15rem);
 }
@@ -726,11 +728,14 @@ tr:nth-child(even) {
   font-weight: 700;
   text-align: center !important;
   vertical-align: middle !important;
-  padding: clamp(1.05rem, 1.6vw, 1.3rem) clamp(0.72rem, 1.28vw, 1.08rem) !important;
-  font-size: clamp(1.1rem, 1.3vw, 1.2rem);
-  line-height: 1.35;
+  padding: clamp(1.05rem, 1.6vw, 1.3rem) clamp(0.55rem, 1.1vw, 0.95rem) !important;
+  font-size: clamp(1.05rem, 1.25vw, 1.18rem);
+  line-height: 1.3;
   border: none !important;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+  overflow: visible;
   cursor: default;
 }
 .ins-dashboard-table thead th:first-child {
@@ -902,7 +907,7 @@ tr:nth-child(even) {
 }
 .ins-cell-acciones {
   min-width: 210px !important;
-  width: 19% !important;
+  width: 12.5% !important;
   white-space: normal !important;
   vertical-align: middle !important;
   position: sticky;
@@ -1244,7 +1249,7 @@ tr:nth-child(even) {
     min-height: 42px;
   }
   .ins-dashboard-table {
-    min-width: 640px;
+    min-width: 760px;
   }
   .ins-cell-acciones {
     min-width: 108px !important;
